@@ -1,0 +1,10 @@
+framework module LPMessagingSDK {
+  umbrella header "LPMessagingSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module LPMessagingSDK.Swift {
+    header "LPMessagingSDK-Swift.h"
+}
