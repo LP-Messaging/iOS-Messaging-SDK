@@ -1,0 +1,10 @@
+framework module LPAMS {
+  umbrella header "LPAMS.h"
+
+  export *
+  module * { export * }
+}
+
+module LPAMS.Swift {
+    header "LPAMS-Swift.h"
+}

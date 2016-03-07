@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BSMobileProvision.h"
 #import "TTTAttributedLabel.h"
 #import "UIRefreshControl+UITableView.h"
+
 //------ We are using 3rd party reachability class as well
 
 

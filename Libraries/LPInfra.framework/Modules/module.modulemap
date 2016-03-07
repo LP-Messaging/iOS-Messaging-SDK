@@ -1,0 +1,10 @@
+framework module LPInfra {
+  umbrella header "LPInfra.h"
+
+  export *
+  module * { export * }
+}
+
+module LPInfra.Swift {
+    header "LPInfra-Swift.h"
+}
