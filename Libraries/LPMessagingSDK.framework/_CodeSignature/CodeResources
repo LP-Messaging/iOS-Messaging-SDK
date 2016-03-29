@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		7mEn12mPQt8E+9iJum53etIATNI=
+		0GPB9/aImC0W4VQBcRWxZPP7zfs=
 		</data>
 		<key>Headers/LPMessagingSDK.h</key>
 		<data>
@@ -26,19 +26,19 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm.swiftdoc</key>
 		<data>
-		jBKFYfMOCEkH88ehfKwW2jAdwdQ=
+		MoiAeY6PhnTSaejPZvZ+5iyQ5ds=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm.swiftmodule</key>
 		<data>
-		3yCWpxCjOcTrk/3iRars0Ir1t0s=
+		DNDGZW1S1Jiz9S0LfPHvYdyE5Hc=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		4bk0kC8FU5Ll4XM3xKZXO3FNBow=
+		IFDnU7sV4nMVOmiNuJhIxV7HBaw=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		ekR8hdWy8m2QH7BgRtpuPNgQxkQ=
+		+mEl8LL04Rg5FRt1yYrjeXcXMnY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -49,7 +49,7 @@
 	<dict>
 		<key>Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		7mEn12mPQt8E+9iJum53etIATNI=
+		0GPB9/aImC0W4VQBcRWxZPP7zfs=
 		</data>
 		<key>Headers/LPMessagingSDK.h</key>
 		<data>
@@ -65,19 +65,19 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm.swiftdoc</key>
 		<data>
-		jBKFYfMOCEkH88ehfKwW2jAdwdQ=
+		MoiAeY6PhnTSaejPZvZ+5iyQ5ds=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm.swiftmodule</key>
 		<data>
-		3yCWpxCjOcTrk/3iRars0Ir1t0s=
+		DNDGZW1S1Jiz9S0LfPHvYdyE5Hc=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		4bk0kC8FU5Ll4XM3xKZXO3FNBow=
+		IFDnU7sV4nMVOmiNuJhIxV7HBaw=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		ekR8hdWy8m2QH7BgRtpuPNgQxkQ=
+		+mEl8LL04Rg5FRt1yYrjeXcXMnY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>

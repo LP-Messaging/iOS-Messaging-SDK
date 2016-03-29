@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/LPAMS-Swift.h</key>
 		<data>
-		hoYRtM33zp88vykFdy6SCCk0V5Q=
+		CCpDlhDhrDbU8IClphNGfawfedg=
 		</data>
 		<key>Headers/LPAMS.h</key>
 		<data>
@@ -14,7 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		tgY0sN+n5xtlvB8iu3rmi7aqn7Q=
+		FJe9xMLO4+Brh0Z8VHyCLEd7yt0=
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm.swiftdoc</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm.swiftmodule</key>
 		<data>
-		VKyYGBMcnKg8yPJLQgxBA090UmY=
+		UC+9cC2AwS33RLU2mariaQ2vaVI=
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		DV09SpFN0yo/JXFGM7GlcypNHx0=
+		ARj0CVcAt6a5xr5lIt5QZokRfLE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -41,7 +41,7 @@
 	<dict>
 		<key>Headers/LPAMS-Swift.h</key>
 		<data>
-		hoYRtM33zp88vykFdy6SCCk0V5Q=
+		CCpDlhDhrDbU8IClphNGfawfedg=
 		</data>
 		<key>Headers/LPAMS.h</key>
 		<data>
@@ -53,7 +53,7 @@
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm.swiftmodule</key>
 		<data>
-		VKyYGBMcnKg8yPJLQgxBA090UmY=
+		UC+9cC2AwS33RLU2mariaQ2vaVI=
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -61,7 +61,7 @@
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		DV09SpFN0yo/JXFGM7GlcypNHx0=
+		ARj0CVcAt6a5xr5lIt5QZokRfLE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>

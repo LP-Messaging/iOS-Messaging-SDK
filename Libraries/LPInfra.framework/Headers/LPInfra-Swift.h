@@ -149,8 +149,14 @@ SWIFT_CLASS("_TtC7LPInfra5Brand")
 @end
 
 
+SWIFT_PROTOCOL("_TtP7LPInfra22GeneralManagerProtocol_")
+@protocol GeneralManagerProtocol
+- (void)clearManager;
+@end
+
+
 SWIFT_CLASS("_TtC7LPInfra11CSDSManager")
-@interface CSDSManager : NSObject
+@interface CSDSManager : NSObject <GeneralManagerProtocol>
 + (CSDSManager * __nonnull)instance;
 - (void)clearManager;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -209,7 +215,9 @@ SWIFT_CLASS("_TtC7LPInfra12Conversation")
 - (BOOL)isActivityInIdle;
 - (NSArray<Message *> * __nonnull)getMessagesPage:(NSInteger)from pageSize:(NSInteger)pageSize;
 - (BOOL)isCurrentlyUrgent;
-- (BOOL)acceptSequence:(NSInteger)seq;
+
+/// If the sequence number is following to what we have, set it as the last one If not, save it in an array in order to set it as the last one in the future After words, it goes through self.currentlyAcceptedSequences and sets each object as the last one if it is following to the current last one
+- (void)acceptSequence:(NSInteger)seq;
 - (void)resolve;
 - (void)resolve:(BOOL)byAgent;
 - (NSString * __nonnull)getResolveDateString:(NSDate * __nonnull)date;
@@ -219,7 +227,7 @@ SWIFT_CLASS("_TtC7LPInfra12Conversation")
 @protocol LPDataManagerSDKDelegate;
 
 SWIFT_CLASS("_TtC7LPInfra11DataManager")
-@interface DataManager : NSObject
+@interface DataManager : NSObject <GeneralManagerProtocol>
 @property (nonatomic, weak) id <LPDataManagerSDKDelegate> __nullable SDKDelegate;
 + (DataManager * __nonnull)instance;
 - (void)handleKeychainPersistency;
@@ -231,6 +239,7 @@ SWIFT_CLASS("_TtC7LPInfra11DataManager")
 - (NSManagedObjectContext * __nonnull)getContext:(NSManagedObjectContext * __nullable)context;
 - (void)clearManager;
 @end
+
 
 @class NSDictionary;
 @class NSError;
@@ -249,7 +258,7 @@ SWIFT_CLASS("_TtC7LPInfra22GlobalTransportManager")
 @class UIImage;
 
 SWIFT_CLASS("_TtC7LPInfra13ImagesManager")
-@interface ImagesManager : NSObject
+@interface ImagesManager : NSObject <GeneralManagerProtocol>
 + (ImagesManager * __nonnull)instance;
 - (void)setImageByURL:(UIImage * __nonnull)image url:(NSString * __nonnull)url;
 - (UIImage * __nullable)getImageByURL:(NSString * __nonnull)url;
@@ -439,7 +448,7 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 @protocol NotificationManagerDelegate;
 
 SWIFT_CLASS("_TtC7LPInfra19NotificationManager")
-@interface NotificationManager : NSObject
+@interface NotificationManager : NSObject <GeneralManagerProtocol>
 @property (nonatomic, weak) id <NotificationManagerDelegate> __nullable delegate;
 + (NotificationManager * __nonnull)instance;
 - (void)didReceiveRemoteNotification:(NSDictionary * __nonnull)userInfo;
@@ -460,7 +469,7 @@ SWIFT_PROTOCOL("_TtP7LPInfra27NotificationManagerDelegate_")
 
 
 SWIFT_CLASS("_TtC7LPInfra13PusherManager")
-@interface PusherManager : NSObject
+@interface PusherManager : NSObject <GeneralManagerProtocol>
 @property (nonatomic, copy) NSSet<NSString *> * __nonnull registeredBrands;
 @property (nonatomic, copy) NSString * __nullable pushToken;
 + (PusherManager * __nonnull)instance;
@@ -558,7 +567,7 @@ SWIFT_CLASS("_TtC7LPInfra4User")
 
 
 SWIFT_CLASS("_TtC7LPInfra11UserManager")
-@interface UserManager : NSObject
+@interface UserManager : NSObject <GeneralManagerProtocol>
 @property (nonatomic, copy) NSString * __nullable myUserID;
 + (UserManager * __nonnull)instance;
 
@@ -605,6 +614,9 @@ SWIFT_CLASS("_TtC7LPInfra5Utils")
 + (NSInteger)minutesBetweenDates:(NSDate * __nonnull)startDate endDate:(NSDate * __nonnull)endDate;
 + (void)backgroundThread:(void (^ __nonnull)(void))job;
 + (void)mainThread:(void (^ __nonnull)(void))job;
+
+/// Returns a random Int number from min to max
++ (NSInteger)randWithMin:(NSInteger)min max:(NSInteger)max;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

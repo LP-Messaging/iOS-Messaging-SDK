@@ -146,13 +146,14 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingSDK")
 - (void)registerPushNotificationsWithToken:(NSData * __nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> __nullable)notificationDelegate;
 - (id <ConversationParamProtocol> __nonnull)getConversationBrandQuery:(NSString * __nonnull)brandID;
 - (id <ConversationParamProtocol> __nonnull)getConversationBrandAndSkillQuery:(NSString * __nonnull)brandID skillID:(NSString * __nonnull)skillID;
-- (id <ConversationParamProtocol> __nonnull)getConversationConsumerQuery:(NSString * __nonnull)consumerID brandID:(NSString * __nonnull)brandID agentToken:(NSString * __nonnull)agentToken;
+- (id <ConversationParamProtocol> __nonnull)getConversationConsumerQuery:(NSString * __nullable)consumerID brandID:(NSString * __nonnull)brandID agentToken:(NSString * __nonnull)agentToken;
 - (void)setCustomButton:(UIImage * __nullable)image;
 - (BOOL)isUrgent:(id <ConversationParamProtocol> __nonnull)conversationQuery;
 - (void)markAsUrgent:(id <ConversationParamProtocol> __nonnull)conversationQuery;
 - (void)dismissUrgent:(id <ConversationParamProtocol> __nonnull)conversationQuery;
 - (void)resolveConversation:(id <ConversationParamProtocol> __nonnull)conversationQuery;
 - (BOOL)isBrandReady:(NSString * __nonnull)brandID;
+- (NSString * __nullable)getSDKVersion;
 - (void)subscribeLogEvents:(enum LogLevel)logLevel logEvent:(void (^ __nonnull)(LPLog * __nonnull))logEvent;
 @end
 

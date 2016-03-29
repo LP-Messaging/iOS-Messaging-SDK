@@ -95,7 +95,7 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 @class Message;
 
 SWIFT_CLASS("_TtC5LPAMS22AMSConversationHandler")
-@interface AMSConversationHandler : NSObject
+@interface AMSConversationHandler : NSObject <GeneralManagerProtocol>
 + (AMSConversationHandler * __nonnull)instance;
 + (BOOL)shouldReloadData:(Message * __nonnull)message;
 - (void)clearManager;
@@ -124,7 +124,7 @@ SWIFT_CLASS("_TtC5LPAMS22AMSConversationHandler")
 @class NSError;
 
 SWIFT_CLASS("_TtC5LPAMS10AMSManager")
-@interface AMSManager : BaseConversationManager <NotificationManagerDelegate>
+@interface AMSManager : BaseConversationManager <NotificationManagerDelegate, GeneralManagerProtocol>
 @property (nonatomic, weak) id <AMSManagerDelegate> __nullable managerDelegate;
 + (AMSManager * __nonnull)instance;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
