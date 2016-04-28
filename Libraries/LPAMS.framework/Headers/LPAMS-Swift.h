@@ -124,14 +124,14 @@ SWIFT_CLASS("_TtC5LPAMS22AMSConversationHandler")
 @interface AMSConversationHandler (SWIFT_EXTENSION(LPAMS))
 @end
 
-@protocol AMSManagerDelegate;
 @protocol ConversationParamProtocol;
+@protocol AMSManagerDelegate;
 @class Conversation;
 @class Brand;
 @class NSError;
 
 SWIFT_CLASS("_TtC5LPAMS10AMSManager")
-@interface AMSManager : BaseConversationManager <NotificationManagerDelegate, GeneralManagerProtocol>
+@interface AMSManager : BaseConversationManager <GeneralManagerProtocol>
 @property (nonatomic, weak) id <AMSManagerDelegate> _Nullable managerDelegate;
 + (AMSManager * _Nonnull)instance;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -140,11 +140,9 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 - (void)reconnectToSocketAsConsumer:(NSString * _Nonnull)brandID readyCompletion:(void (^ _Nullable)(void))readyCompletion;
 - (void)reconnectToSocketAsBrand:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken readyCompletion:(void (^ _Nullable)(void))readyCompletion;
 - (void)disconnectSocket:(NSString * _Nonnull)brandID;
-- (void)addDelegateForHandlerID:(NSString * _Nonnull)handlerID delegate:(id <AMSManagerDelegate> _Nonnull)delegate;
-- (void)removeDelegateForHandlerID:(NSString * _Nonnull)handlerID delegate:(id <AMSManagerDelegate> _Nonnull)delegate;
-
-/// Removes all delegates from self.delegates that refer to the current dismissed conversationViewController
-- (void)removeAllDelegatesForConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+- (BOOL)clearHistory:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+- (void)setDelegate:(id <AMSManagerDelegate> _Nonnull)delegate;
+- (void)removeDelegate;
 
 /// Initialize new AMS Handler related paired with conversation.
 - (void)initializeConversation:(Conversation * _Nonnull)conversation;
@@ -161,8 +159,7 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 - (void)resolveConversation:(Conversation * _Nonnull)conversation;
 - (BOOL)requestUrgentResponse:(Conversation * _Nonnull)conversation urgent:(BOOL)urgent;
 - (void)retrieveNewMessagesForConversation:(Conversation * _Nonnull)conversation completion:(void (^ _Nullable)(void))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
-- (void)csatScoreSubmissionDidFinish:(Conversation * _Nonnull)conversation;
-- (void)pushNotificationRecieved:(Conversation * _Nonnull)conversation;
+- (void)csatScoreSubmissionDidFinish:(Conversation * _Nonnull)conversation rating:(NSInteger)rating;
 - (void)clearManager;
 @end
 
@@ -180,6 +177,9 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 
 
 @interface AMSManager (SWIFT_EXTENSION(LPAMS))
+
+/// Perform server request for unsubscribe exConversation
+- (void)unsubscribeConversationDetails:(NSString * _Nonnull)brandID subscriptionID:(NSString * _Nonnull)subscriptionID;
 - (void)saveSubscriptionID:(NSString * _Nonnull)subscriptionID brandID:(NSString * _Nonnull)brandID;
 - (NSString * _Nullable)getSubscriptionID:(NSString * _Nonnull)brandID;
 - (void)removeSubscription:(NSString * _Nonnull)brandID;
@@ -205,7 +205,7 @@ SWIFT_PROTOCOL("_TtP5LPAMS18AMSManagerDelegate_")
 @optional
 - (void)didReceiveTTRUpdate:(Conversation * _Nonnull)conversation date:(NSDate * _Nonnull)date;
 - (void)didUpdateProfile:(Conversation * _Nonnull)conversation userId:(NSString * _Nonnull)userId;
-- (void)csatScoreSubmissionDidFinish:(Conversation * _Nonnull)conversation;
+- (void)csatScoreSubmissionDidFinish:(Conversation * _Nonnull)conversation rating:(NSInteger)rating;
 - (void)csatScoreSubmissionDidFail:(Conversation * _Nonnull)conversation error:(NSError * _Nonnull)error;
 @required
 - (BOOL)isConversationVisible;
@@ -214,20 +214,6 @@ SWIFT_PROTOCOL("_TtP5LPAMS18AMSManagerDelegate_")
 @end
 
 @class NSDictionary;
-
-SWIFT_PROTOCOL("_TtP5LPAMS25ConversationParamProtocol_")
-@protocol ConversationParamProtocol
-- (NSArray<Conversation *> * _Nullable)getConversations;
-- (Conversation * _Nullable)getActiveConversation;
-- (NSArray<Conversation *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
-- (Conversation * _Nonnull)createNewConversation;
-- (NSString * _Nonnull)getQueryType;
-- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
-- (NSString * _Nonnull)getBrandID;
-- (NSString * _Nonnull)getQueryUID;
-- (NSDictionary * _Nonnull)getQueryProperties;
-@end
-
 
 SWIFT_CLASS("_TtC5LPAMS10BrandQuery")
 @interface BrandQuery : NSObject <ConversationParamProtocol>
@@ -238,6 +224,12 @@ SWIFT_CLASS("_TtC5LPAMS10BrandQuery")
 
 /// Get active conversation.
 - (Conversation * _Nullable)getActiveConversation;
+
+/// Get all closed conversation
+- (NSArray<Conversation *> * _Nullable)getClosedConversations;
+
+/// Get open conversation.
+- (Conversation * _Nullable)getOpenConversation;
 
 /// Get the latest closed conversation.
 - (NSArray<Conversation *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
@@ -276,6 +268,7 @@ SWIFT_CLASS("_TtC5LPAMS13ConsumerQuery")
 - (NSString * _Nonnull)getQueryUID;
 @end
 
+@class User;
 
 SWIFT_CLASS("_TtC5LPAMS22ConversationDataSource")
 @interface ConversationDataSource : NSObject
@@ -305,8 +298,10 @@ SWIFT_CLASS("_TtC5LPAMS22ConversationDataSource")
 - (Conversation * _Nonnull)createConversation:(id <ConversationParamProtocol> _Nonnull)query;
 
 /// Clear a dummy conversation and its assoicated messages. A dummy conversation is a conversation which is created and now only shows welcome message
-- (void)clearDummyConversation:(Conversation * _Nonnull)conversation;
-@end
+- (BOOL)clearDummyConversation:(Conversation * _Nonnull)conversation;
 
+/// Get the assigned agent of the recent open/closed conversation if exists.
+- (User * _Nullable)getAssignedAgent:(id <ConversationParamProtocol> _Nonnull)query;
+@end
 
 #pragma clang diagnostic pop

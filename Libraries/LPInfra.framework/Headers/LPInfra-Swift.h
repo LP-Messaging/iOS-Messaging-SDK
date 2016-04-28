@@ -182,6 +182,9 @@ SWIFT_CLASS("_TtC7LPInfra8Campaign")
 SWIFT_CLASS("_TtC7LPInfra20ConfigurationManager")
 @interface ConfigurationManager : NSObject
 + (ConfigurationManager * _Nonnull)instance;
+
+/// get all configuration attributes from memory. return null if no configuration was loaded initially.
+- (NSDictionary<NSString *, id> * _Nullable)getConfiguration;
 @end
 
 @class NSOrderedSet;
@@ -230,6 +233,23 @@ SWIFT_CLASS("_TtC7LPInfra12Conversation")
 @property (nonatomic, readonly) BOOL shouldQueryMessages;
 @end
 
+@class NSDictionary;
+
+SWIFT_PROTOCOL("_TtP7LPInfra25ConversationParamProtocol_")
+@protocol ConversationParamProtocol
+- (NSArray<Conversation *> * _Nullable)getConversations;
+- (NSArray<Conversation *> * _Nullable)getClosedConversations;
+- (Conversation * _Nullable)getActiveConversation;
+- (Conversation * _Nullable)getOpenConversation;
+- (NSArray<Conversation *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
+- (Conversation * _Nonnull)createNewConversation;
+- (NSString * _Nonnull)getQueryType;
+- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
+- (NSString * _Nonnull)getBrandID;
+- (NSString * _Nonnull)getQueryUID;
+- (NSDictionary * _Nonnull)getQueryProperties;
+@end
+
 @protocol LPDataManagerSDKDelegate;
 
 SWIFT_CLASS("_TtC7LPInfra11DataManager")
@@ -247,7 +267,6 @@ SWIFT_CLASS("_TtC7LPInfra11DataManager")
 @end
 
 
-@class NSDictionary;
 @class NSError;
 
 SWIFT_CLASS("_TtC7LPInfra22GlobalTransportManager")
@@ -307,7 +326,7 @@ SWIFT_CLASS("_TtC7LPInfra12LPSDKManager")
 + (LPSDKManager * _Nonnull)instance;
 
 /// <ul><li>Fetch the bundle - LPMessagingSDKModels.bundle</li><li>Return an NSBundle</li></ul>
-+ (NSBundle * _Nonnull)getBundle;
++ (NSBundle * _Nullable)getBundle;
 
 /// <ul><li>Fetch the SDKVersion from the current bundle</li><li>Return a String</li></ul>
 + (NSString * _Nullable)getSDKVersion;
@@ -426,11 +445,6 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 
 
 @interface NSDate (SWIFT_EXTENSION(LPInfra))
-- (NSDate * _Nonnull)roundToDay;
-@end
-
-
-@interface NSDate (SWIFT_EXTENSION(LPInfra))
 @property (nonatomic, readonly, copy) NSString * _Nonnull timeAgoSimple;
 @property (nonatomic, readonly, copy) NSString * _Nonnull messageTime;
 @property (nonatomic, readonly, copy) NSString * _Nullable timeDelta;
@@ -440,6 +454,10 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 - (BOOL)isToday;
 - (NSString * _Nonnull)serializeDate;
 + (NSDate * _Nullable)deserializeDate:(NSDictionary * _Nonnull)dict key:(NSString * _Nonnull)key;
+- (NSString * _Nonnull)localizedStringOfDate;
+- (NSString * _Nonnull)stringRepresentation;
+- (NSDate * _Nonnull)localizedDate;
+- (NSDate * _Nonnull)roundToDay;
 @end
 
 
@@ -472,11 +490,9 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 - (NSInteger)write:(NSString * _Nonnull)string encoding:(NSUInteger)encoding allowLossyConversion:(BOOL)allowLossyConversion;
 @end
 
-@protocol NotificationManagerDelegate;
 
 SWIFT_CLASS("_TtC7LPInfra19NotificationManager")
 @interface NotificationManager : NSObject <GeneralManagerProtocol>
-@property (nonatomic, weak) id <NotificationManagerDelegate> _Nullable delegate;
 + (NotificationManager * _Nonnull)instance;
 - (void)didReceiveRemoteNotification:(NSDictionary * _Nonnull)userInfo;
 - (void)sendLocalNotification:(NSString * _Nonnull)text uid:(NSString * _Nullable)uid;
@@ -486,21 +502,12 @@ SWIFT_CLASS("_TtC7LPInfra19NotificationManager")
 @end
 
 
-SWIFT_PROTOCOL("_TtP7LPInfra27NotificationManagerDelegate_")
-@protocol NotificationManagerDelegate
-@optional
-- (void)showLocalNotificationIfNeeded:(NSString * _Nonnull)text firstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName uid:(NSString * _Nonnull)uid;
-@required
-- (void)pushNotificationRecieved:(Conversation * _Nonnull)conversation;
-@end
-
-
 SWIFT_CLASS("_TtC7LPInfra13PusherManager")
 @interface PusherManager : NSObject <GeneralManagerProtocol>
 @property (nonatomic, copy) NSSet<NSString *> * _Nonnull registeredBrands;
 @property (nonatomic, copy) NSString * _Nullable pushToken;
 + (PusherManager * _Nonnull)instance;
-- (void)setPusherTokenWithToken:(NSData * _Nonnull)token;
+- (void)setPusherTokenWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
 - (NSString * _Nonnull)getAppIdentifier;
 
 /// Register pusher with push notification token received from APNS (Apple). Before registering the Pusher, we make sure have the following params:

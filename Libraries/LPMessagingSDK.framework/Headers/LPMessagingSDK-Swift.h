@@ -142,27 +142,71 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingSDK")
 @property (nonatomic, copy) NSString * _Nullable accountID;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 + (LPMessagingSDK * _Nonnull)instance;
-- (void)initialize:(NSString * _Nullable)brandID;
+
+/// Initialize the SDK and all of its components. Optional paramaters: <brandID> of the host app. This method throws an error/return false with with an error, in case the initialization failed.
+- (BOOL)initialize:(NSString * _Nullable)brandID error:(NSError * _Nullable * _Null_unspecified)error;
+
+/// Show conversation view for conversation query. This method starts the conversation and show all the existing messages it exist. Optional paramaters: <authenticationCode> to use an an authenticated users. <containerViewController> the containter which presents the conversation view as a child View Controller.
 - (void)showConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nullable)authenticationCode containerViewController:(UIViewController * _Nullable)containerViewController;
+
+/// Remove conversation view for conversation query from its container or window view. This method ends the conversation's connection.
 - (void)removeConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+
+/// This method reconnects the conversation's connection for conversation query. Reconnect open related webSockets and sync the converstion with its latest updates. Additional paramaters: <authenticationCode> to use an an authenticated users.
 - (void)reconnect:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nonnull)authenticationCode;
-- (void)toggleChatActions:(NSString * _Nonnull)accountID;
-- (void)setUserProfile:(LPUser * _Nonnull)lpuser accountID:(NSString * _Nonnull)accountID;
+
+/// This method changes the state of the action menu of the conversation for brandID.
+- (void)toggleChatActions:(NSString * _Nonnull)brandID;
+
+/// This method sets user details for the consumer of a brand. The user object is in Type of LPUser which includes all the user details. Additional paramaters: <brandID> is the brand of the related user.
+- (void)setUserProfile:(LPUser * _Nonnull)lpuser brandID:(NSString * _Nonnull)brandID;
+
+/// This method passes a user info of a remote push notification to be handled by the SDK.
 - (void)handlePush:(NSDictionary * _Nonnull)userInfo;
-- (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate;
+
+/// This method registers the host app in the SDK Pusher service in order to be able to receive push notification in messaging. Optional paramaters: <notificationDelegate> is the implementer of LPMessagingSDKNotificationDelegate. <alternateBundleID> is a value for using in order to let the Pusher service to identify the host app with this bundle identifier.
+- (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID;
+
+/// This method created ConversationParamProtocol of Brand query type.
 - (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID;
+
+/// This method created ConversationParamProtocol of Brand and Skill query type.
 - (id <ConversationParamProtocol> _Nonnull)getConversationBrandAndSkillQuery:(NSString * _Nonnull)brandID skillID:(NSString * _Nonnull)skillID;
+
+/// This method created ConversationParamProtocol of Consumer and Skill query type.
 - (id <ConversationParamProtocol> _Nonnull)getConversationConsumerQuery:(NSString * _Nullable)consumerID brandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken;
 
-/// Check for an active(Open/Created) conversation according to conversation query. Return value: True - there is an active conversation False - there is no active conversation
+/// This method checks for an active(Open/Created) conversation according to conversation query. Return value: True - there is an active conversation. False - there is no active conversation.
 - (BOOL)checkActiveConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+
+/// This method sets a custom image for the custom button in the conversation navigationBar.
 - (void)setCustomButton:(UIImage * _Nullable)image;
+
+/// This method checks if the active conversation of a conversation query marked as Urgent. Return value: True - conversation is marked as Urgent. False - conversation is not marked as Urgent.
 - (BOOL)isUrgent:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+
+/// This method marks the active conversation of a conversation query as Urgent.
 - (void)markAsUrgent:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+
+/// This method dismisses the active conversation from Urgent to Normal.
 - (void)dismissUrgent:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+
+/// This method ends the active conversation if exists.
 - (void)resolveConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+
+/// This methods returns the assigned agent of the active or the latest closed conversation, if exists.
+- (LPUser * _Nullable)getAssignedAgent:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+
+/// This method determines wether a brandID is Ready. Ready means that the brand is connected and conversation can be proccessed.
 - (BOOL)isBrandReady:(NSString * _Nonnull)brandID;
+
+/// This method returns the SDK version.
 - (NSString * _Nullable)getSDKVersion;
+
+/// This method deletes all the messages and closed conversation of the related conversation query. This method throws an error if the conversations history failed to cleared. Note: clear history is allowed only if there is no open/active conversation related to the passed conversation query.
+- (BOOL)clearHistory:(id <ConversationParamProtocol> _Nonnull)conversationQuery error:(NSError * _Nullable * _Null_unspecified)error;
+
+/// This method subscribes the host app to recieve log events from a specific log level and above. Optionl log levels: TRACE, DEBUG, INFO, WARNING and ERROR. The completion block will pass LPLog object which consists all the information for the log.
 - (void)subscribeLogEvents:(enum LogLevel)logLevel logEvent:(void (^ _Nonnull)(LPLog * _Nonnull))logEvent;
 @end
 
@@ -204,6 +248,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKObseleteVersion:(NSError * _Nonnull)error;
 - (void)LPMessagingSDKAuthenticationFailed:(NSError * _Nonnull)error;
 - (void)LPMessagingSDKTokenExpired:(NSString * _Nonnull)brandID;
+- (void)LPMessagingSDKError:(NSError * _Nonnull)error;
 @optional
 - (void)LPMessagingSDKAgentIsTypingStateChanged:(BOOL)isTyping;
 - (void)LPMessagingSDKConversationStarted:(NSString * _Nullable)conversationID;
