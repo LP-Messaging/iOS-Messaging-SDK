@@ -94,15 +94,18 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #if defined(__has_feature) && __has_feature(modules)
 @import ObjectiveC;
 @import LPInfra;
+@import Foundation;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
+@class Conversation;
 @class Message;
 
 SWIFT_CLASS("_TtC5LPAMS22AMSConversationHandler")
 @interface AMSConversationHandler : NSObject <GeneralManagerProtocol>
 + (AMSConversationHandler * _Nonnull)instance;
+- (void)sendPendingMessages:(Conversation * _Nonnull)conversation;
 + (BOOL)shouldReloadData:(Message * _Nonnull)message;
 - (void)clearManager;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -126,20 +129,29 @@ SWIFT_CLASS("_TtC5LPAMS22AMSConversationHandler")
 
 @protocol ConversationParamProtocol;
 @protocol AMSManagerDelegate;
-@class Conversation;
 @class Brand;
 @class NSError;
+@class NSDate;
 
 SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 @interface AMSManager : BaseConversationManager <GeneralManagerProtocol>
 @property (nonatomic, weak) id <AMSManagerDelegate> _Nullable managerDelegate;
 + (AMSManager * _Nonnull)instance;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (void)connectToSocketAsConsumer:(NSString * _Nonnull)brandID readyCompletion:(void (^ _Nullable)(void))readyCompletion;
-- (void)connectToSocketAsBrand:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken readyCompletion:(void (^ _Nullable)(void))readyCompletion;
-- (void)reconnectToSocketAsConsumer:(NSString * _Nonnull)brandID readyCompletion:(void (^ _Nullable)(void))readyCompletion;
-- (void)reconnectToSocketAsBrand:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken readyCompletion:(void (^ _Nullable)(void))readyCompletion;
-- (void)disconnectSocket:(NSString * _Nonnull)brandID;
+
+/// Perform connect to socket for conversationQuery @param:
+///
+/// <ul><li>optional ready completion which will be called after the socket is connected</li></ul>
+- (void)connectToSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery readyCompletion:(void (^ _Nullable)(void))readyCompletion;
+
+/// Perform reconnect to socket for conversationQuery:
+///
+/// <ul><li>Remove the websocket handler</li><li>connect to socket
+/// @param:</li><li>optional ready completion which will be called after the socket is connected</li></ul>
+- (void)reconnectToSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery readyCompletion:(void (^ _Nullable)(void))readyCompletion;
+
+/// Perform disconnect from socket for conversationQuery
+- (void)disconnectSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
 - (BOOL)clearHistory:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
 - (void)setDelegate:(id <AMSManagerDelegate> _Nonnull)delegate;
 - (void)removeDelegate;
@@ -152,7 +164,11 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 - (Conversation * _Nonnull)createConversation:(Brand * _Nonnull)brand;
 - (BOOL)shouldDisplayLocalNotificationForConversation:(Conversation * _Nonnull)conversation;
 - (BOOL)isBrandReady:(NSString * _Nonnull)brandID;
+
+/// Determines whether history query messages already fecthced
 - (BOOL)didFetchHistoryQueryMessages;
+
+/// Determines whether history query messages is now being fetched
 - (BOOL)isFetchingHistoryQueryMessages;
 - (void)sendMessageInConversation:(Conversation * _Nonnull)conversation message:(Message * _Nonnull)message completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 - (void)sendMessageInConversation:(Conversation * _Nonnull)conversation text:(NSString * _Nonnull)text completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
@@ -160,6 +176,8 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 - (BOOL)requestUrgentResponse:(Conversation * _Nonnull)conversation urgent:(BOOL)urgent;
 - (void)retrieveNewMessagesForConversation:(Conversation * _Nonnull)conversation completion:(void (^ _Nullable)(void))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 - (void)csatScoreSubmissionDidFinish:(Conversation * _Nonnull)conversation rating:(NSInteger)rating;
+- (void)sendResumeMessage:(Conversation * _Nonnull)conversation;
+- (void)sendResolveMessage:(Conversation * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nonnull)endTime;
 - (void)clearManager;
 @end
 
@@ -183,11 +201,20 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 - (void)saveSubscriptionID:(NSString * _Nonnull)subscriptionID brandID:(NSString * _Nonnull)brandID;
 - (NSString * _Nullable)getSubscriptionID:(NSString * _Nonnull)brandID;
 - (void)removeSubscription:(NSString * _Nonnull)brandID;
+
+/// <code>   Save the last subscription time of a brand in order to get from now on only new changes
+/// 
+/// </code>
+- (void)saveSubscriptionTime:(NSDate * _Nonnull)time brandID:(NSString * _Nonnull)brandID;
+
+/// Archive subcription times in NSUserDefaults in order to load it for next subscription. We perform the archive after a delay of 1.5 seconds and cacnel all the archive request in this interval in order to prevent over-flow of archeiving
+- (void)archiveSubscriptionTimeWithForceArchive:(BOOL)forceArchive;
 - (void)sendGetClock:(NSString * _Nonnull)brandID completion:(void (^ _Nullable)(int64_t))completion;
 - (void)saveClockDiff:(int64_t)clockDiff brandID:(NSString * _Nonnull)brandID;
+- (NSString * _Nullable)getBrandIDForSubscriptionID:(NSString * _Nonnull)subscriptionID;
 @end
 
-@class NSDate;
+@class TTRModel;
 
 SWIFT_PROTOCOL("_TtP5LPAMS18AMSManagerDelegate_")
 @protocol AMSManagerDelegate
@@ -203,7 +230,7 @@ SWIFT_PROTOCOL("_TtP5LPAMS18AMSManagerDelegate_")
 - (BOOL)isConversationRelatedToViewController:(Conversation * _Nonnull)conversation;
 - (void)conversationInitializedOnAMS:(Conversation * _Nonnull)conversation;
 @optional
-- (void)didReceiveTTRUpdate:(Conversation * _Nonnull)conversation date:(NSDate * _Nonnull)date;
+- (void)didReceiveTTRUpdate:(Conversation * _Nonnull)conversation ttr:(TTRModel * _Nonnull)ttr;
 - (void)didUpdateProfile:(Conversation * _Nonnull)conversation userId:(NSString * _Nonnull)userId;
 - (void)csatScoreSubmissionDidFinish:(Conversation * _Nonnull)conversation rating:(NSInteger)rating;
 - (void)csatScoreSubmissionDidFail:(Conversation * _Nonnull)conversation error:(NSError * _Nonnull)error;
@@ -268,12 +295,20 @@ SWIFT_CLASS("_TtC5LPAMS13ConsumerQuery")
 - (NSString * _Nonnull)getQueryUID;
 @end
 
+@class LPSections;
 @class User;
 
 SWIFT_CLASS("_TtC5LPAMS22ConversationDataSource")
 @interface ConversationDataSource : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 + (ConversationDataSource * _Nonnull)instance;
+- (LPSections * _Nullable)getLatestMessages:(id <ConversationParamProtocol> _Nonnull)query;
+- (LPSections * _Nonnull)getMessagesFromConversation:(Conversation * _Nonnull)conversation;
+
+/// Get messages for an older conversation if exists
+///
+/// <ul><li>Get all converstions for query</li><li>Sort by creation date (newest is first)</li><li>Find the current conversation index</li><li>Find the next (older) conversation index</li><li>If current and next are different:<ul><li>Update the current conversation ref</li><li>Get messages of the next conversation</li></ul></li></ul>
+- (LPSections * _Nullable)getMessagesFromOlderConversation:(id <ConversationParamProtocol> _Nonnull)query firstMessageOfCurrentConversation:(Message * _Nonnull)firstMessageOfCurrentConversation;
 
 /// Get messages for an older conversation if exists
 ///
@@ -302,6 +337,22 @@ SWIFT_CLASS("_TtC5LPAMS22ConversationDataSource")
 
 /// Get the assigned agent of the recent open/closed conversation if exists.
 - (User * _Nullable)getAssignedAgent:(id <ConversationParamProtocol> _Nonnull)query;
+@end
+
+
+SWIFT_CLASS("_TtC5LPAMS10LPSections")
+@interface LPSections : NSObject <NSCopying>
+@property (nonatomic, copy) NSDictionary<NSDate *, NSArray<Message *> *> * _Nonnull sections;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Null_unspecified)zone;
+- (NSArray<Message *> * _Nullable)objectForKeyedSubscript:(NSDate * _Nonnull)index;
+- (void)setObject:(NSArray<Message *> * _Nullable)newValue forKeyedSubscript:(NSDate * _Nonnull)index;
+@property (nonatomic, readonly) NSInteger count;
+@property (nonatomic, readonly) NSInteger countMessages;
+- (void)mergeWithMoreSections:(LPSections * _Nonnull)moreSections;
+- (LPSections * _Nonnull)initWithMessages:(NSArray<Message *> * _Nullable)messages;
+- (LPSections * _Nonnull)initWithMessage:(Message * _Nullable)message;
+- (void)removeAll;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #pragma clang diagnostic pop

@@ -96,10 +96,12 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 @import ObjectiveC;
 @import SystemConfiguration;
 @import Foundation;
-@import Dispatch;
 @import UIKit;
 @import CoreGraphics;
+@import Dispatch;
 #endif
+
+#import <LPInfra/LPInfra.h>
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
@@ -225,7 +227,7 @@ SWIFT_CLASS("_TtC7LPInfra12Conversation")
 - (NSArray<Message *> * _Nonnull)getMessagesPage:(NSInteger)from pageSize:(NSInteger)pageSize;
 - (BOOL)isCurrentlyUrgent;
 
-/// If the sequence number is following to what we have, set it as the last one If not, save it in an array in order to set it as the last one in the future After words, it goes through self.currentlyAcceptedSequences and sets each object as the last one if it is following to the current last one
+/// Sequence number is received from the QueryMessages or from OnlineEvent messages. Sequence number is increased by the server for both new message and accept status (ACCEPT/READ). If the sequence number is following to what we have, set it as the last one If not, save it in a temporary array in order to set it as the last one in the future After words, it goes through self.currentlyAcceptedSequences and sets each object as the last one if it is following to the current last one (and removes from the temporary array)
 - (void)acceptSequence:(NSInteger)seq;
 - (void)resolve;
 - (void)resolve:(BOOL)byAgent;
@@ -256,6 +258,7 @@ SWIFT_CLASS("_TtC7LPInfra11DataManager")
 @interface DataManager : NSObject <GeneralManagerProtocol>
 @property (nonatomic, weak) id <LPDataManagerSDKDelegate> _Nullable SDKDelegate;
 + (DataManager * _Nonnull)instance;
+- (BOOL)initialize;
 - (void)handleKeychainPersistency;
 - (void)saveData:(NSManagedObjectContext * _Nullable)givenContext;
 - (void)saveDataWithGetContextFrom:(NSManagedObject * _Nullable)obj;
@@ -323,6 +326,7 @@ SWIFT_CLASS("_TtC7LPInfra14LPReachability")
 
 SWIFT_CLASS("_TtC7LPInfra12LPSDKManager")
 @interface LPSDKManager : NSObject
+@property (nonatomic) BOOL isWindowMode;
 + (LPSDKManager * _Nonnull)instance;
 
 /// <ul><li>Fetch the bundle - LPMessagingSDKModels.bundle</li><li>Return an NSBundle</li></ul>
@@ -336,53 +340,14 @@ SWIFT_CLASS("_TtC7LPInfra12LPSDKManager")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class NSData;
 @class NSURL;
-@class NSStream;
-
-SWIFT_CLASS("_TtC7LPInfra9WebSocket")
-@interface WebSocket : NSObject <NSStreamDelegate>
-+ (NSString * _Nonnull)ErrorDomain;
-@property (nonatomic, strong) dispatch_queue_t _Null_unspecified queue;
-@property (nonatomic, copy) void (^ _Nullable onConnect)(void);
-@property (nonatomic, copy) void (^ _Nullable onDisconnect)(NSError * _Nullable);
-@property (nonatomic, copy) void (^ _Nullable onText)(NSString * _Nonnull);
-@property (nonatomic, copy) void (^ _Nullable onData)(NSData * _Nonnull);
-@property (nonatomic, copy) void (^ _Nullable onPong)(void);
-@property (nonatomic, copy) NSDictionary<NSString *, NSString *> * _Nonnull headers;
-@property (nonatomic) BOOL voipEnabled;
-@property (nonatomic) BOOL selfSignedSSL;
-@property (nonatomic, copy) NSString * _Nullable origin;
-@property (nonatomic, readonly) BOOL isConnected;
-@property (nonatomic, readonly, strong) NSURL * _Nonnull currentURL;
-- (nonnull instancetype)initWithUrl:(NSURL * _Nonnull)url protocols:(NSArray<NSString *> * _Nullable)protocols OBJC_DESIGNATED_INITIALIZER;
-
-/// Write a string to the websocket. This sends it as a text frame.
-///
-/// If you supply a non-nil completion block, I will perform it when the write completes.
-///
-/// \param str The string to write.
-///
-/// \param completion The (optional) completion handler.
-- (void)writeString:(NSString * _Nonnull)str completion:(void (^ _Nullable)(void))completion;
-
-/// Write binary data to the websocket. This sends it as a binary frame.
-///
-/// If you supply a non-nil completion block, I will perform it when the write completes.
-///
-/// \param data The data to write.
-///
-/// \param completion The (optional) completion handler.
-- (void)writeData:(NSData * _Nonnull)data completion:(void (^ _Nullable)(void))completion;
-- (void)writePing:(NSData * _Nonnull)data completion:(void (^ _Nullable)(void))completion;
-- (void)stream:(NSStream * _Nonnull)aStream handleEvent:(NSStreamEvent)eventCode;
-@end
-
 
 SWIFT_CLASS("_TtC7LPInfra11LPWebSocket")
-@interface LPWebSocket : WebSocket
+@interface LPWebSocket : SRWebSocket
 @property (nonatomic) NSInteger requestIndex;
+@property (nonatomic, readonly) BOOL isConnected;
 - (void)flushQueue;
+@property (nonatomic, strong) NSURL * _Null_unspecified socketURL;
 - (void)cancelRequest:(NSInteger)requestIndex;
 @end
 
@@ -452,12 +417,22 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 - (NSString * _Nonnull)stringFromFormat:(NSString * _Nonnull)format withValue:(NSInteger)value;
 - (NSString * _Nonnull)getLocaleFormatUnderscoresWithValue:(double)value;
 - (BOOL)isToday;
+- (BOOL)isTomorrow;
 - (NSString * _Nonnull)serializeDate;
 + (NSDate * _Nullable)deserializeDate:(NSDictionary * _Nonnull)dict key:(NSString * _Nonnull)key;
 - (NSString * _Nonnull)localizedStringOfDate;
+- (NSDate * _Nonnull)dateBySubstractingTimeInterval:(NSTimeInterval)timeInterval;
 - (NSString * _Nonnull)stringRepresentation;
 - (NSDate * _Nonnull)localizedDate;
 - (NSDate * _Nonnull)roundToDay;
+- (BOOL)isGreaterThanDate:(NSDate * _Nonnull)dateToCompare;
+- (BOOL)isLessThanDate:(NSDate * _Nonnull)dateToCompare;
+- (BOOL)equalToDate:(NSDate * _Nonnull)dateToCompare;
+- (NSString * _Nullable)nameDayOfWeek:(NSString * _Nullable)timezoneName;
+
+/// Get new Date from a different timezone
+- (NSDate * _Nonnull)dateFromTimezone:(NSString * _Nullable)timezoneName;
+- (NSString * _Nonnull)timeStringFromTimezone:(NSString * _Nullable)timezoneName;
 @end
 
 
@@ -501,6 +476,7 @@ SWIFT_CLASS("_TtC7LPInfra19NotificationManager")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSData;
 
 SWIFT_CLASS("_TtC7LPInfra13PusherManager")
 @interface PusherManager : NSObject <GeneralManagerProtocol>
@@ -541,8 +517,27 @@ SWIFT_CLASS("_TtC7LPInfra22SocketTransportManager")
 @property (nonatomic, copy) NSDictionary<NSString *, LPWebSocket *> * _Nonnull webSockets;
 + (SocketTransportManager * _Nonnull)instance;
 - (LPWebSocket * _Nullable)getSocket:(NSString * _Nonnull)brandID;
-- (void)disconnect;
+
+/// Open and reconnect each WebSocket in the web sockets map.
+- (void)openAllSockets;
+
+/// Open and reconnect single WebSocket and assign to web sockets map. This method creates new WebSocket instances based on the previous ones because we can't reuse WebSocket instances.
+- (void)openSocket:(LPWebSocket * _Nullable)webSocket;
+
+/// Close all sockets in the web sockets map We DON'T remove the web sockets from the map in order to be able to re-create web socket from a previous one
+- (void)closeAllSockets;
+
+/// Remove all sockets from web sockets map and clear their open requests
+- (void)removeSockets;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra8TTRModel")
+@interface TTRModel : NSObject
+@property (nonatomic, strong) NSDate * _Null_unspecified effectiveTTR;
+@property (nonatomic, strong) NSDate * _Nullable manualETTR;
+@property (nonatomic, strong) NSDate * _Nullable delay;
 @end
 
 
@@ -553,6 +548,19 @@ SWIFT_CLASS("_TtC7LPInfra22SocketTransportManager")
 
 @interface UIFont (SWIFT_EXTENSION(LPInfra))
 - (CGSize)sizeOfString:(NSString * _Nonnull)string constrainedToWidth:(double)width;
+@end
+
+
+@interface UIImage (SWIFT_EXTENSION(LPInfra))
+- (UIImage * _Nonnull)imageWithTint:(UIColor * _Nonnull)tint;
+@end
+
+@class UIViewController;
+
+@interface UIWindow (SWIFT_EXTENSION(LPInfra))
+
+/// Find the Top Most presented view controller on the UIWindow.
+- (UIViewController * _Nullable)topViewController;
 @end
 
 
@@ -634,6 +642,5 @@ SWIFT_CLASS("_TtC7LPInfra5Utils")
 + (NSInteger)randWithMin:(NSInteger)min max:(NSInteger)max;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
-
 
 #pragma clang diagnostic pop

@@ -129,6 +129,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK5LPLog")
 
 @protocol ConversationParamProtocol;
 @class UIViewController;
+@class UIBarButtonItem;
 @class LPUser;
 @class NSData;
 @protocol LPMessagingSDKNotificationDelegate;
@@ -156,7 +157,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingSDK")
 - (void)reconnect:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nonnull)authenticationCode;
 
 /// This method changes the state of the action menu of the conversation for brandID.
-- (void)toggleChatActions:(NSString * _Nonnull)brandID;
+- (void)toggleChatActions:(NSString * _Nonnull)accountID sender:(UIBarButtonItem * _Nullable)sender;
 
 /// This method sets user details for the consumer of a brand. The user object is in Type of LPUser which includes all the user details. Additional paramaters: <brandID> is the brand of the related user.
 - (void)setUserProfile:(LPUser * _Nonnull)lpuser brandID:(NSString * _Nonnull)brandID;
@@ -239,11 +240,12 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 @protocol LPMessagingSDKdelegate
 @optional
 - (void)LPMessagingSDKCustomButtonTapped;
-- (void)LPMessagingSDKAgentDetails:(LPUser * _Nonnull)agent;
+- (void)LPMessagingSDKAgentDetails:(LPUser * _Nullable)agent;
 - (void)LPMessagingSDKActionsMenuToggled:(BOOL)toggled;
 - (void)LPMessagingSDKHasConnectionError:(NSString * _Nullable)error;
 - (void)LPMessagingSDKDidReceiveEventLog:(NSString * _Nonnull)eventLog;
-- (void)LPMessagingSDKCSATScoreSubmissionDidFinish:(NSString * _Nonnull)accountID rating:(NSInteger)rating;
+- (void)LPMessagingSDKCSATScoreSubmissionDidFinish:(NSString * _Nonnull)brandID rating:(NSInteger)rating;
+- (UIView * _Nonnull)LPMessagingSDKCSATCustomTitleView:(NSString * _Nonnull)brandID;
 @required
 - (void)LPMessagingSDKObseleteVersion:(NSError * _Nonnull)error;
 - (void)LPMessagingSDKAuthenticationFailed:(NSError * _Nonnull)error;
@@ -254,6 +256,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKConversationStarted:(NSString * _Nullable)conversationID;
 - (void)LPMessagingSDKConversationEnded:(NSString * _Nullable)conversationID;
 - (void)LPMessagingSDKConnectionStateChanged:(BOOL)isReady brandID:(NSString * _Nonnull)brandID;
+- (void)LPMessagingSDKOffHoursStateChanged:(BOOL)isOffHours brandID:(NSString * _Nonnull)brandID;
 @end
 
 @class Message;

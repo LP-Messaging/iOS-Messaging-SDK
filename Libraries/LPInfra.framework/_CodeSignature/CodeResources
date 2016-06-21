@@ -10,31 +10,63 @@
 		</data>
 		<key>Headers/LPInfra-Swift.h</key>
 		<data>
-		G8pHTACEnchb6tyAD9JKL3VQ+M8=
+		ldQDEedrvGjn1hk+uqgA9uf0S0k=
 		</data>
 		<key>Headers/LPInfra.h</key>
 		<data>
-		x2nmwXicbeE68Rr+2Nfel/v8tkw=
+		irsMRoP3YRH8S6n7qgZlDF8RfRM=
+		</data>
+		<key>Headers/SRDelegateController.h</key>
+		<data>
+		2M02bswig+An+dZtg9+0xh5pPNY=
+		</data>
+		<key>Headers/SRError.h</key>
+		<data>
+		JQISUGc8dgVLOqwdjInU8yWJ3gI=
+		</data>
+		<key>Headers/SRHash.h</key>
+		<data>
+		Z5XJXZREyJRcpQx2XOPeXTjJT+k=
+		</data>
+		<key>Headers/SRIOConsumer.h</key>
+		<data>
+		uJrIjdcJvXDa93/Dpq9URfNhLBw=
+		</data>
+		<key>Headers/SRIOConsumerPool.h</key>
+		<data>
+		NQNxMQm/owmueTuGD7H3NLIjSYM=
+		</data>
+		<key>Headers/SRRunLoopThread.h</key>
+		<data>
+		GpQD5iccfDdMDhqBEcZKAZOMcP0=
+		</data>
+		<key>Headers/SRURLUtilities.h</key>
+		<data>
+		BoVToSNKMKY7SnUuPQI/pVudpUE=
+		</data>
+		<key>Headers/SRWebSocket.h</key>
+		<data>
+		msAJ4jLQS1RbaVqhAQSzSmgGzpo=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		WT4QbSuu979KHCX8sy/UbmrUtPk=
+		KklCWUtihvIZTUedbZgo1H5KS7o=
 		</data>
 		<key>Modules/LPInfra.swiftmodule/arm.swiftdoc</key>
 		<data>
-		LaeM7nrcSLRsz8nsF2/S25HoRKY=
+		E16PiB31oz9ErmebhjYyUeoKtt0=
 		</data>
 		<key>Modules/LPInfra.swiftmodule/arm.swiftmodule</key>
 		<data>
-		89VecvnLS7gT2NH5QnYMBd3OdeE=
+		AFOUIXZ+yjQkP70W0hhTqpgxL5c=
 		</data>
 		<key>Modules/LPInfra.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		Ma93t1bKXwL5XrhjqJE86lNKUz0=
+		ryh98qfj08aPJpMwmNY9mPAqhpo=
 		</data>
 		<key>Modules/LPInfra.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		NKJIMSadL+kMyZtuwpN+EsabSwo=
+		nz77Izujc96FsQaYmpLk+w3egE4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -58,66 +90,154 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G8pHTACEnchb6tyAD9JKL3VQ+M8=
+			ldQDEedrvGjn1hk+uqgA9uf0S0k=
 			</data>
 			<key>hash2</key>
 			<data>
-			B1jAgGOm5d7Rr5Md/SBfBXNjfrYEfyt9dpMyMSF0lfM=
+			VohX1ZBOYZRZ5hLUqPoDyJ2Pb6JuZOdP1F6Gf4+IJfQ=
 			</data>
 		</dict>
 		<key>Headers/LPInfra.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			x2nmwXicbeE68Rr+2Nfel/v8tkw=
+			irsMRoP3YRH8S6n7qgZlDF8RfRM=
 			</data>
 			<key>hash2</key>
 			<data>
-			8RoCk5R0vfyFGYdNmCM30M1yIHw/ZJjqMG+zGynD1Xc=
+			VkH40HTSYYByrb8eZ7WC9JVx0OH+6JHIQErE0vX7M8g=
+			</data>
+		</dict>
+		<key>Headers/SRDelegateController.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2M02bswig+An+dZtg9+0xh5pPNY=
+			</data>
+			<key>hash2</key>
+			<data>
+			HvyK9cZPx04BA+PIWPKIjTsYCXO4hSvzQn3Sl2Dk6oA=
+			</data>
+		</dict>
+		<key>Headers/SRError.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			JQISUGc8dgVLOqwdjInU8yWJ3gI=
+			</data>
+			<key>hash2</key>
+			<data>
+			K8q9hGTcHVBm4ypZWA5miB54kQboDjdrEY6NJlISaGY=
+			</data>
+		</dict>
+		<key>Headers/SRHash.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Z5XJXZREyJRcpQx2XOPeXTjJT+k=
+			</data>
+			<key>hash2</key>
+			<data>
+			ATRlWxSQwCjBC1/+/5DML1OjctEx1dh88zyNSePGXO4=
+			</data>
+		</dict>
+		<key>Headers/SRIOConsumer.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uJrIjdcJvXDa93/Dpq9URfNhLBw=
+			</data>
+			<key>hash2</key>
+			<data>
+			5RTaYhrYbnShuqz+9hmHv/9cJGP/DbCi+8bi8n79SFk=
+			</data>
+		</dict>
+		<key>Headers/SRIOConsumerPool.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NQNxMQm/owmueTuGD7H3NLIjSYM=
+			</data>
+			<key>hash2</key>
+			<data>
+			/sRgceH/GrsO9e6US+bBl9RJ1OCopC75jS3t91/u3/I=
+			</data>
+		</dict>
+		<key>Headers/SRRunLoopThread.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GpQD5iccfDdMDhqBEcZKAZOMcP0=
+			</data>
+			<key>hash2</key>
+			<data>
+			zYQ6urY1EZBCrR7Rz1p3wZsfRa9pYWTcrGLBT2yaxt4=
+			</data>
+		</dict>
+		<key>Headers/SRURLUtilities.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			BoVToSNKMKY7SnUuPQI/pVudpUE=
+			</data>
+			<key>hash2</key>
+			<data>
+			3mTF7IZ8TI354l/NEaC5wvO9RIP0ekX9Qb4HdXtvDpU=
+			</data>
+		</dict>
+		<key>Headers/SRWebSocket.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			msAJ4jLQS1RbaVqhAQSzSmgGzpo=
+			</data>
+			<key>hash2</key>
+			<data>
+			xSGN9U5nwqAUaqqxzMWuvy4C2L+s6DbrgB7QMzF3R8w=
 			</data>
 		</dict>
 		<key>Modules/LPInfra.swiftmodule/arm.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LaeM7nrcSLRsz8nsF2/S25HoRKY=
+			E16PiB31oz9ErmebhjYyUeoKtt0=
 			</data>
 			<key>hash2</key>
 			<data>
-			cR+z7mZHph7swOopaUTuvKdOghkPnNGMJSzDvP0uaM4=
+			wnNulA75stZ8ViV/x2X8PthlNTzSdZ7JPhIEhfquhU0=
 			</data>
 		</dict>
 		<key>Modules/LPInfra.swiftmodule/arm.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			89VecvnLS7gT2NH5QnYMBd3OdeE=
+			AFOUIXZ+yjQkP70W0hhTqpgxL5c=
 			</data>
 			<key>hash2</key>
 			<data>
-			Xg0dVNVaE9dThW2mI9IYrcEU8WeTnW8JFHRX1fXWfZM=
+			Vtv/LfGgzMVt3AVj97aW7IpPJCeyR0MEYczoW2klALY=
 			</data>
 		</dict>
 		<key>Modules/LPInfra.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Ma93t1bKXwL5XrhjqJE86lNKUz0=
+			ryh98qfj08aPJpMwmNY9mPAqhpo=
 			</data>
 			<key>hash2</key>
 			<data>
-			53Adan6wRzysvaunLw0lBE9OhjkBtgu2FEwivVwwOQ4=
+			4qtM0vuG9IUWYAVbzYqDnKHue5Sd1lQhgISqJeOL2h4=
 			</data>
 		</dict>
 		<key>Modules/LPInfra.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			NKJIMSadL+kMyZtuwpN+EsabSwo=
+			nz77Izujc96FsQaYmpLk+w3egE4=
 			</data>
 			<key>hash2</key>
 			<data>
-			G1zmrEgZtePlB7Mj1fd7aZnkXM/ZllIkMLjGbMmR/b0=
+			1gg1TIOXt1MW5XH4hiWwRTicIweHp8WduGr/yM1Oeg8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
