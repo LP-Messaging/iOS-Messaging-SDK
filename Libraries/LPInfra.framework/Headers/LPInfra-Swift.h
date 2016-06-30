@@ -156,6 +156,64 @@ SWIFT_CLASS("_TtC7LPInfra5Brand")
 - (BOOL)isAuthenticated;
 @end
 
+@class NSDictionary;
+
+SWIFT_PROTOCOL("_TtP7LPInfra25ConversationParamProtocol_")
+@protocol ConversationParamProtocol
+- (NSArray<Conversation *> * _Nullable)getConversations;
+- (NSArray<Conversation *> * _Nullable)getClosedConversations;
+- (Conversation * _Nullable)getActiveConversation;
+- (Conversation * _Nullable)getOpenConversation;
+- (NSArray<Conversation *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
+- (Conversation * _Nonnull)createNewConversation;
+- (NSString * _Nonnull)getQueryType;
+- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
+- (NSString * _Nonnull)getBrandID;
+- (NSString * _Nonnull)getQueryUID;
+- (NSDictionary * _Nonnull)getQueryProperties;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra10BrandQuery")
+@interface BrandQuery : NSObject <ConversationParamProtocol>
+- (nonnull instancetype)initWithBrandID:(NSString * _Nonnull)brandID OBJC_DESIGNATED_INITIALIZER;
+
+/// Get all conversation by brand.
+- (NSArray<Conversation *> * _Nullable)getConversations;
+
+/// Get active conversation.
+- (Conversation * _Nullable)getActiveConversation;
+
+/// Get all closed conversation
+- (NSArray<Conversation *> * _Nullable)getClosedConversations;
+
+/// Get open conversation.
+- (Conversation * _Nullable)getOpenConversation;
+
+/// Get the latest closed conversation.
+- (NSArray<Conversation *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
+- (Conversation * _Nonnull)createNewConversation;
+- (NSString * _Nonnull)getQueryType;
+- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
+- (NSString * _Nonnull)getBrandID;
+- (NSString * _Nonnull)getQueryUID;
+- (NSDictionary * _Nonnull)getQueryProperties;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra18BrandAndSkillQuery")
+@interface BrandAndSkillQuery : BrandQuery
+- (nonnull instancetype)initWithSkillID:(NSString * _Nonnull)skillID brandID:(NSString * _Nonnull)brandID OBJC_DESIGNATED_INITIALIZER;
+
+/// Get all conversation by brand and skill.
+- (NSArray<Conversation *> * _Nullable)getConversations;
+- (Conversation * _Nonnull)createNewConversation;
+- (NSString * _Nonnull)getQueryType;
+- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
+- (NSString * _Nonnull)getQueryUID;
+@end
+
+
 
 SWIFT_PROTOCOL("_TtP7LPInfra22GeneralManagerProtocol_")
 @protocol GeneralManagerProtocol
@@ -184,9 +242,19 @@ SWIFT_CLASS("_TtC7LPInfra8Campaign")
 SWIFT_CLASS("_TtC7LPInfra20ConfigurationManager")
 @interface ConfigurationManager : NSObject
 + (ConfigurationManager * _Nonnull)instance;
+@end
 
-/// get all configuration attributes from memory. return null if no configuration was loaded initially.
-- (NSDictionary<NSString *, id> * _Nullable)getConfiguration;
+
+SWIFT_CLASS("_TtC7LPInfra13ConsumerQuery")
+@interface ConsumerQuery : BrandQuery
+- (nonnull instancetype)initWithConsumerID:(NSString * _Nonnull)consumerID brandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken OBJC_DESIGNATED_INITIALIZER;
+
+/// Get all conversation by consumerID.
+- (NSArray<Conversation *> * _Nullable)getConversations;
+- (Conversation * _Nonnull)createNewConversation;
+- (NSString * _Nonnull)getQueryType;
+- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
+- (NSString * _Nonnull)getQueryUID;
 @end
 
 @class NSOrderedSet;
@@ -233,24 +301,9 @@ SWIFT_CLASS("_TtC7LPInfra12Conversation")
 - (void)resolve:(BOOL)byAgent;
 - (NSString * _Nonnull)getResolveDateString:(NSDate * _Nonnull)date;
 @property (nonatomic, readonly) BOOL shouldQueryMessages;
+@property (nonatomic, readonly) BOOL isOpen;
 @end
 
-@class NSDictionary;
-
-SWIFT_PROTOCOL("_TtP7LPInfra25ConversationParamProtocol_")
-@protocol ConversationParamProtocol
-- (NSArray<Conversation *> * _Nullable)getConversations;
-- (NSArray<Conversation *> * _Nullable)getClosedConversations;
-- (Conversation * _Nullable)getActiveConversation;
-- (Conversation * _Nullable)getOpenConversation;
-- (NSArray<Conversation *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
-- (Conversation * _Nonnull)createNewConversation;
-- (NSString * _Nonnull)getQueryType;
-- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
-- (NSString * _Nonnull)getBrandID;
-- (NSString * _Nonnull)getQueryUID;
-- (NSDictionary * _Nonnull)getQueryProperties;
-@end
 
 @protocol LPDataManagerSDKDelegate;
 
@@ -293,6 +346,208 @@ SWIFT_CLASS("_TtC7LPInfra13ImagesManager")
 - (void)loadImageFromURL:(NSString * _Nullable)imageUrl completion:(void (^ _Nonnull)(UIImage * _Null_unspecified))completion;
 - (void)clearManager;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class UIColor;
+
+SWIFT_CLASS("_TtC7LPInfra8LPConfig")
+@interface LPConfig : NSObject
+
+/// Color code for the background of the remote user bubble.
+@property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleBackgroundColor;
+
+/// Color code for the outline color.
+@property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleBorderColor;
+
+/// Color code for links in the text of the remote user bubble.
+@property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleLinkColor;
+
+/// Color code for the text of the remote user bubble.
+@property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleTextColor;
+
+/// Double number for the outline width.
+@property (nonatomic) double remoteUserBubbleBorderWidth;
+
+/// Color code for the timestamp of the remote user bubble.
+@property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleTimestampColor;
+
+/// Color of the remote user typing bubbles animation
+@property (nonatomic, strong) UIColor * _Nonnull remoteUserTypingTintColor;
+
+/// Color code for the background of the visitor bubble.
+@property (nonatomic, strong) UIColor * _Nonnull userBubbleBackgroundColor;
+
+/// Color code for links in the text of the visitor bubble.
+@property (nonatomic, strong) UIColor * _Nonnull userBubbleBorderColor;
+
+/// Color code for links in the text of the visitor bubble.
+@property (nonatomic, strong) UIColor * _Nonnull userBubbleLinkColor;
+
+/// Color code for the text of the visitor bubble.
+@property (nonatomic, strong) UIColor * _Nonnull userBubbleTextColor;
+
+/// Double number for the outline width.
+@property (nonatomic) double userBubbleBorderWidth;
+
+/// Color code for the timestamp of the visitor bubble.
+@property (nonatomic, strong) UIColor * _Nonnull userBubbleTimestampColor;
+
+/// Color code for the text of the system messages.
+@property (nonatomic, strong) UIColor * _Nonnull systemBubbleTextColor;
+
+/// Custom button icon filename without extension. This will be displayed on the navigation bar.
+@property (nonatomic, copy) NSString * _Nonnull customButtonIconName;
+
+/// Accessibility voiceover string for the custom button.
+@property (nonatomic, copy) NSString * _Nonnull customButtonDescription;
+
+/// Color of read indication signs
+@property (nonatomic, strong) UIColor * _Nonnull checkmarkColor;
+
+/// Text for sent indication
+@property (nonatomic, copy) NSString * _Nonnull readReceiptTextSent;
+
+/// Text for distributed indication
+@property (nonatomic, copy) NSString * _Nonnull readReceiptTextDistributed;
+
+/// Text for read indication
+@property (nonatomic, copy) NSString * _Nonnull readReceiptTextRead;
+
+/// Two options for read indication: Read receipt “mode text” Read receipt “mode icon”
+@property (nonatomic) BOOL isReadReceiptTextMode;
+
+/// Corner radius of the Submit button
+@property (nonatomic) double csatSubmitButtonCornerRadius;
+
+/// Background color of the Submit button
+@property (nonatomic, strong) UIColor * _Nonnull csatSubmitButtonBackgroundColor;
+
+/// Text color of the Submit button
+@property (nonatomic, strong) UIColor * _Nonnull csatSubmitButtonTextColor;
+
+/// Background Color of the rating buttons
+@property (nonatomic, strong) UIColor * _Nonnull csatRatingButtonSelectedColor;
+
+/// Color for the resolution confirmation buttons (YES/NO) when selected
+@property (nonatomic, strong) UIColor * _Nonnull csatResolutionButtonSelectedColor;
+
+/// Text for the feedback label
+@property (nonatomic, copy) NSString * _Nonnull csatResolutionFeedbackText;
+
+/// Text for the resolution confirmation question
+@property (nonatomic, copy) NSString * _Nonnull csatResolutionQuestionText;
+
+/// Titles text colors for all labels
+@property (nonatomic, strong) UIColor * _Nonnull csatAllTitlesTextColor;
+
+/// Hides the yes/no question
+@property (nonatomic) BOOL csatResolutionHidden;
+
+/// Background color of navigation bar in survey screen
+@property (nonatomic, strong) UIColor * _Nonnull csatNavigationBackgroundColor;
+
+/// Navigation title color in survey screen
+@property (nonatomic, strong) UIColor * _Nonnull csatNavigationTitleColor;
+
+/// Skip button color in survey screen
+@property (nonatomic, strong) UIColor * _Nonnull csatSkipButtonColor;
+
+/// Should display status bar of the survey screen in Light Content Mode (UIStatusBarStyle)
+@property (nonatomic) BOOL csatUIStatusBarStyleLightContent;
+
+/// The amount of conversations to fetch on loading
+@property (nonatomic) NSUInteger maxConversationToFetch;
+
+/// Amount of conversations to show in advance
+@property (nonatomic) NSUInteger maxPreviousConversationToPresent;
+
+/// Country code. If no value is provided, the SDK will use the country according to the device's locale.
+@property (nonatomic, copy) NSString * _Nonnull country;
+
+/// The language is defined by a two-letter ISO 639-1 language code, for example, “en” for English. If no value is provided, the SDK will use the language according to the device's locale.
+@property (nonatomic, copy) NSString * _Nonnull language;
+
+/// The brand name will be shown as a title on toolbar when there is no active conversation.
+@property (nonatomic, copy) NSString * _Nonnull brandName;
+
+/// Color for the entire view background.
+@property (nonatomic, strong) UIColor * _Nonnull conversationBackgroundColor;
+
+/// Background color of the title of the dates separator in the conversation screen
+@property (nonatomic, strong) UIColor * _Nonnull dateSeparatorTitleBackgroundColor;
+
+/// Title color of the dates separator in the conversation screen
+@property (nonatomic, strong) UIColor * _Nonnull dateSeparatorTextColor;
+
+/// Line color of the title of the dates separator in the conversation screen
+@property (nonatomic, strong) UIColor * _Nonnull dateSeparatorLineBackgroundColor;
+
+/// Send button color in disabled mode in the conversation screen
+@property (nonatomic, strong) UIColor * _Nonnull sendButtonDisabledTextColor;
+
+/// Send button color in enabled mode in the conversation screen
+@property (nonatomic, strong) UIColor * _Nonnull sendButtonEnabledTextColor;
+
+/// User text underline color
+@property (nonatomic, strong) UIColor * _Nonnull editTextUnderlineColor;
+
+/// A boolean which determines whether to retrieve the agent details from the last closed conversation in case there is no assigned agent. Agent details will be retrieved from API method: func getAssignedAgent(conversationQuery: ConversationParamProtocol)
+@property (nonatomic) BOOL retrieveAssignedAgentFromLastClosedConversation;
+
+/// The show duration of the local notifications view in the SDK
+@property (nonatomic) double notificationShowDurationInSeconds;
+
+/// TTR - Time To Respond Number of seconds before the first TTR notification appears
+@property (nonatomic) double ttrFirstTimeDelay;
+
+/// TTR - Time To Respond Enable: Shows a time stamp in the TTR notification. Disable: Shows: “An agent will respond shortly”
+@property (nonatomic) BOOL ttrShouldShowTimestamp;
+
+/// TTR - Time To Respond. Enable presentation of ‘Urgent’ button in the TTR notification
+@property (nonatomic) BOOL showUrgentButtonInTTRNotification;
+
+/// Should show Off Hours banner
+@property (nonatomic) BOOL showOffHoursBanner;
+
+/// Background color of TTR notification banner view
+@property (nonatomic, strong) UIColor * _Nonnull ttrBannerBackgroundColor;
+
+/// Text color of TTR notification banner view
+@property (nonatomic, strong) UIColor * _Nonnull ttrBannerTextColor;
+
+/// Opacity level of TTR  banner background (values: 0.0 - 1.0)
+@property (nonatomic) double ttrBannerOpacityAlpha;
+
+/// Off Hours banner timezone based on NSTimeZone names
+@property (nonatomic, copy) NSString * _Nonnull offHoursTimeZoneName;
+
+/// CSDS Domain URL.  For brands that need to control the URL that is the gateway for LivePerson services, use this key to set a URL of your choice.
+@property (nonatomic, copy) NSString * _Nonnull csdsDomain;
+
+/// Background color of default remoteUser avatar
+@property (nonatomic, strong) UIColor * _Nonnull remoteUserAvatarBackgroundColor;
+
+/// Icon color of default remoteUser avatar
+@property (nonatomic, strong) UIColor * _Nonnull remoteUserAvatarIconColor;
+
+/// Determines whether to enable using regular expression to control which part of the text to mask, all masked data will appear as asterisks, will be saved to local db masked and will be sent to the server unmasked. Default = false
+@property (nonatomic) BOOL enableClientOnlyMasking;
+
+/// Determines whether to enable using regular expression to control which part of the text to mask, all masked data will appear as asterisks, will be saved to local db masked and sent to the server masked. Default is false
+@property (nonatomic) BOOL enableRealTimeMasking;
+
+/// Regular expression string to control which part of the text to mask, all masked data will appear as asterisks, will be saved to local db masked and will be sent to the server unmasked. Default is empty, means no regex.
+@property (nonatomic, copy) NSString * _Nonnull clientOnlyMaskingRegex;
+
+/// Regular expression string to control which part of the text to mask, all masked data will appear as asterisks, will be saved to local db masked and will be sent to the server unmasked. Default is empty, means no regex.
+@property (nonatomic, copy) NSString * _Nonnull realTimeMaskingRegex;
++ (LPConfig * _Nonnull)defaultConfiguration;
+
+/// Resets LPConfig to default values.
+- (void)resetToDefaultConfiguration;
+
+/// Prints all the configurations keys of the SDK
++ (void)printAllConfigurations;
 @end
 
 
@@ -354,6 +609,12 @@ SWIFT_CLASS("_TtC7LPInfra11LPWebSocket")
 
 SWIFT_CLASS("_TtC7LPInfra16LanguagesManager")
 @interface LanguagesManager : NSObject
+
+/// Prints all localized strings keys
++ (void)printAllKeys;
+
+/// Prints the SDK supported languages
++ (void)printSupportedLanguages;
 @end
 
 enum LogLevel : NSInteger;
@@ -387,6 +648,7 @@ SWIFT_CLASS("_TtC7LPInfra7Message")
 @property (nonatomic, copy) NSString * _Nonnull messageType;
 @property (nonatomic, strong) Conversation * _Nonnull ownerConversation;
 @property (nonatomic, strong) User * _Nullable ownerUser;
+@property (nonatomic, copy) NSString * _Nullable maskedContent;
 - (NSString * _Nonnull)getMessageTimeLabel;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
@@ -538,6 +800,7 @@ SWIFT_CLASS("_TtC7LPInfra8TTRModel")
 @property (nonatomic, strong) NSDate * _Null_unspecified effectiveTTR;
 @property (nonatomic, strong) NSDate * _Nullable manualETTR;
 @property (nonatomic, strong) NSDate * _Nullable delay;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
 
 

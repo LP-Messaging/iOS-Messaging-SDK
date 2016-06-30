@@ -23,6 +23,12 @@
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
 
+//! Project version number for TTTAttributedLabel.
+FOUNDATION_EXPORT double TTTAttributedLabelVersionNumber;
+
+//! Project version string for TTTAttributedLabel.
+FOUNDATION_EXPORT const unsigned char TTTAttributedLabelVersionString[];
+
 @class TTTAttributedLabelLink;
 
 /**
@@ -68,7 +74,7 @@ extern NSString * const kTTTBackgroundCornerRadiusAttributeName;
 
 // Override UILabel @property to accept both NSString and NSAttributedString
 @protocol TTTAttributedLabel <NSObject>
-@property (nonatomic, copy) id text;
+@property (nonatomic, copy) IBInspectable id text;
 @end
 
 IB_DESIGNABLE
@@ -100,6 +106,12 @@ IB_DESIGNABLE
  */
 @interface TTTAttributedLabel : UILabel <TTTAttributedLabel, UIGestureRecognizerDelegate>
 
+/**
+ * The designated initializers are @c initWithFrame: and @c initWithCoder:.
+ * init will not properly initialize many required properties and other configuration.
+ */
+- (instancetype) init NS_UNAVAILABLE;
+
 ///-----------------------------
 /// @name Accessing the Delegate
 ///-----------------------------
@@ -114,11 +126,6 @@ IB_DESIGNABLE
 ///--------------------------------------------
 /// @name Detecting, Accessing, & Styling Links
 ///--------------------------------------------
-
-/**
- @deprecated Use `enabledTextCheckingTypes` property instead.
- */
-@property (nonatomic, assign) NSTextCheckingTypes dataDetectorTypes DEPRECATED_ATTRIBUTE;
 
 /**
  A bitmask of `NSTextCheckingType` which are used to automatically detect links in the label text.
@@ -157,7 +164,7 @@ IB_DESIGNABLE
 /**
  Indicates if links will be detected within an extended area around the touch
  to emulate the link detection behaviour of UIWebView. 
- Default value is YES. Disable to to improve performance on long labels.
+ Default value is NO. Enabling this may adversely impact performance.
  */
 @property (nonatomic, assign) BOOL extendsLinkTouchArea;
 
@@ -193,14 +200,11 @@ IB_DESIGNABLE
 ///--------------------------------------------
 
 /**
- The distance, in points, from the leading margin of a frame to the beginning of the paragraph's first line. This value is always nonnegative, and is 0.0 by default. 
+ The distance, in points, from the leading margin of a frame to the beginning of the 
+ paragraph's first line. This value is always nonnegative, and is 0.0 by default. 
+ This applies to the full text, rather than any specific paragraph metrics.
  */
 @property (nonatomic, assign) IBInspectable CGFloat firstLineIndent;
-
-/**
- @deprecated Use `lineSpacing` instead.
- */
-@property (nonatomic, assign) IBInspectable CGFloat leading DEPRECATED_ATTRIBUTE;
 
 /**
  The space in points added between lines within the paragraph. This value is always nonnegative and is 0.0 by default.
@@ -224,16 +228,8 @@ IB_DESIGNABLE
 
 /**
  The distance, in points, from the margin to the text container. This value is `UIEdgeInsetsZero` by default.
- 
- @discussion The `UIEdgeInset` members correspond to paragraph style properties rather than a particular geometry, and can change depending on the writing direction. 
- 
- ## `UIEdgeInset` Member Correspondence With `CTParagraphStyleSpecifier` Values:
- 
- - `top`: `kCTParagraphStyleSpecifierParagraphSpacingBefore`
- - `left`: `kCTParagraphStyleSpecifierHeadIndent`
- - `bottom`: `kCTParagraphStyleSpecifierParagraphSpacing`
- - `right`: `kCTParagraphStyleSpecifierTailIndent`
- 
+ sizeThatFits: will have its returned size increased by these margins.
+ drawTextInRect: will inset all drawn text by these margins.
  */
 @property (nonatomic, assign) IBInspectable UIEdgeInsets textInsets;
 
@@ -245,16 +241,6 @@ IB_DESIGNABLE
 ///--------------------------------------------
 /// @name Accessing Truncation Token Appearance
 ///--------------------------------------------
-
-/**
- @deprecated Use `attributedTruncationToken` instead.
- */
-@property (nonatomic, strong) NSString *truncationTokenString DEPRECATED_ATTRIBUTE;
-
-/**
- @deprecated Use `attributedTruncationToken` instead.
- */
-@property (nonatomic, strong) NSDictionary *truncationTokenStringAttributes DEPRECATED_ATTRIBUTE;
 
 /**
  The attributed string to apply to the truncation token at the end of a truncated line. Overrides `truncationTokenStringAttributes` and `truncationTokenString`. If unspecified, attributes will fallback to `truncationTokenStringAttributes` and `truncationTokenString`.
@@ -435,6 +421,15 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
  @param point The point inside the label.
  */
 - (BOOL)containslinkAtPoint:(CGPoint)point;
+
+/**
+ Returns the @c TTTAttributedLabelLink at the give point if it exists.
+ 
+ @discussion This can be used together with @c UIViewControllerPreviewingDelegate to peek into links.
+ 
+ @param point The point inside the label.
+ */
+- (TTTAttributedLabelLink *)linkAtPoint:(CGPoint)point;
 
 @end
 

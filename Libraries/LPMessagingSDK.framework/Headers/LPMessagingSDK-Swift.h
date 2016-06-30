@@ -209,6 +209,16 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingSDK")
 
 /// This method subscribes the host app to recieve log events from a specific log level and above. Optionl log levels: TRACE, DEBUG, INFO, WARNING and ERROR. The completion block will pass LPLog object which consists all the information for the log.
 - (void)subscribeLogEvents:(enum LogLevel)logLevel logEvent:(void (^ _Nonnull)(LPLog * _Nonnull))logEvent;
+
+/// Prints all localized string's keys
+- (void)printAllLocalizedKeys;
+
+/// Prints the SDK supported languages
+- (void)printSupportedLanguages;
+@end
+
+
+@interface LPMessagingSDK (SWIFT_EXTENSION(LPMessagingSDK))
 @end
 
 
@@ -243,7 +253,6 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKAgentDetails:(LPUser * _Nullable)agent;
 - (void)LPMessagingSDKActionsMenuToggled:(BOOL)toggled;
 - (void)LPMessagingSDKHasConnectionError:(NSString * _Nullable)error;
-- (void)LPMessagingSDKDidReceiveEventLog:(NSString * _Nonnull)eventLog;
 - (void)LPMessagingSDKCSATScoreSubmissionDidFinish:(NSString * _Nonnull)brandID rating:(NSInteger)rating;
 - (UIView * _Nonnull)LPMessagingSDKCSATCustomTitleView:(NSString * _Nonnull)brandID;
 @required

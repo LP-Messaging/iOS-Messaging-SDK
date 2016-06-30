@@ -131,7 +131,6 @@ SWIFT_CLASS("_TtC5LPAMS22AMSConversationHandler")
 @protocol AMSManagerDelegate;
 @class Brand;
 @class NSError;
-@class NSDate;
 
 SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 @interface AMSManager : BaseConversationManager <GeneralManagerProtocol>
@@ -162,22 +161,12 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 /// Create new AMSConversationHandler and attach it as delegate to its corresponding Web Socket Handler
 - (void)setupConversation:(Conversation * _Nonnull)conversation;
 - (Conversation * _Nonnull)createConversation:(Brand * _Nonnull)brand;
-- (BOOL)shouldDisplayLocalNotificationForConversation:(Conversation * _Nonnull)conversation;
-- (BOOL)isBrandReady:(NSString * _Nonnull)brandID;
-
-/// Determines whether history query messages already fecthced
-- (BOOL)didFetchHistoryQueryMessages;
-
-/// Determines whether history query messages is now being fetched
-- (BOOL)isFetchingHistoryQueryMessages;
-- (void)sendMessageInConversation:(Conversation * _Nonnull)conversation message:(Message * _Nonnull)message completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-- (void)sendMessageInConversation:(Conversation * _Nonnull)conversation text:(NSString * _Nonnull)text completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+- (void)sendMessageInConversation:(Conversation * _Nonnull)conversation message:(Message * _Nonnull)message completion:(void (^ _Nonnull)(Message * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+- (void)sendMessageInConversation:(Conversation * _Nonnull)conversation text:(NSString * _Nonnull)text completion:(void (^ _Nonnull)(Message * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 - (void)resolveConversation:(Conversation * _Nonnull)conversation;
 - (BOOL)requestUrgentResponse:(Conversation * _Nonnull)conversation urgent:(BOOL)urgent;
 - (void)retrieveNewMessagesForConversation:(Conversation * _Nonnull)conversation completion:(void (^ _Nullable)(void))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 - (void)csatScoreSubmissionDidFinish:(Conversation * _Nonnull)conversation rating:(NSInteger)rating;
-- (void)sendResumeMessage:(Conversation * _Nonnull)conversation;
-- (void)sendResolveMessage:(Conversation * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nonnull)endTime;
 - (void)clearManager;
 @end
 
@@ -193,6 +182,7 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 - (NSDictionary<NSString *, NSArray<Conversation *> *> * _Nonnull)getConversationsByConsumers;
 @end
 
+@class NSDate;
 
 @interface AMSManager (SWIFT_EXTENSION(LPAMS))
 
@@ -207,11 +197,35 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 /// </code>
 - (void)saveSubscriptionTime:(NSDate * _Nonnull)time brandID:(NSString * _Nonnull)brandID;
 
-/// Archive subcription times in NSUserDefaults in order to load it for next subscription. We perform the archive after a delay of 1.5 seconds and cacnel all the archive request in this interval in order to prevent over-flow of archeiving
+/// Archive subcription times in NSUserDefaults in order to load it for next subscription. We perform the archive after a delay of 20.0 seconds and cacnel all the archive request in this interval in order to prevent over-flow of archeiving
 - (void)archiveSubscriptionTimeWithForceArchive:(BOOL)forceArchive;
 - (void)sendGetClock:(NSString * _Nonnull)brandID completion:(void (^ _Nullable)(int64_t))completion;
 - (void)saveClockDiff:(int64_t)clockDiff brandID:(NSString * _Nonnull)brandID;
 - (NSString * _Nullable)getBrandIDForSubscriptionID:(NSString * _Nonnull)subscriptionID;
+@end
+
+
+@interface AMSManager (SWIFT_EXTENSION(LPAMS))
+- (BOOL)shouldDisplayLocalNotificationForConversation:(Conversation * _Nonnull)conversation;
+- (BOOL)isBrandReady:(NSString * _Nonnull)brandID;
+
+/// Determines whether history query messages already fecthced
+- (BOOL)didFetchHistoryQueryMessages;
+
+/// Determines whether history query messages is now being fetched
+- (BOOL)isFetchingHistoryQueryMessages;
+
+/// Determines the name of the assigned agent that should be presented in UI areas. If assigned agent exists and has a nickname - return it. Otherwise, return empty string. If the empty string is returned, it should be handled according to UI area
+- (NSString * _Nonnull)agentNameUIRepresentation:(Conversation * _Nullable)conversation;
+
+/// Create resumed system message for conversation
+- (void)sendResumeLocalMessage:(Conversation * _Nonnull)conversation;
+
+/// Create resolved system message for conversation, according to resolving side Timestamp - when agent resolved we take the timestamp from server, when consumer resolved we take now.
+- (void)sendResolveLocalMessage:(Conversation * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nonnull)endTime;
+
+/// Sends local system message for masked message according to the current masking type: RealTime or ClientOnly masking. Return value - local masked message, nil if failed
+- (Message * _Nullable)sendMessageMaskedLocalMessage:(Conversation * _Nonnull)conversation;
 @end
 
 @class TTRModel;
@@ -238,61 +252,6 @@ SWIFT_PROTOCOL("_TtP5LPAMS18AMSManagerDelegate_")
 - (BOOL)isConversationVisible;
 - (NSString * _Nullable)brandAccountID;
 - (void)didReceiveRingUpdate:(NSString * _Nonnull)conversationID ring:(Ring * _Nonnull)ring;
-@end
-
-@class NSDictionary;
-
-SWIFT_CLASS("_TtC5LPAMS10BrandQuery")
-@interface BrandQuery : NSObject <ConversationParamProtocol>
-- (nonnull instancetype)initWithBrandID:(NSString * _Nonnull)brandID OBJC_DESIGNATED_INITIALIZER;
-
-/// Get all conversation by brand.
-- (NSArray<Conversation *> * _Nullable)getConversations;
-
-/// Get active conversation.
-- (Conversation * _Nullable)getActiveConversation;
-
-/// Get all closed conversation
-- (NSArray<Conversation *> * _Nullable)getClosedConversations;
-
-/// Get open conversation.
-- (Conversation * _Nullable)getOpenConversation;
-
-/// Get the latest closed conversation.
-- (NSArray<Conversation *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
-- (Conversation * _Nonnull)createNewConversation;
-- (NSString * _Nonnull)getQueryType;
-- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
-- (NSString * _Nonnull)getBrandID;
-- (NSString * _Nonnull)getQueryUID;
-- (NSDictionary * _Nonnull)getQueryProperties;
-@end
-
-
-SWIFT_CLASS("_TtC5LPAMS18BrandAndSkillQuery")
-@interface BrandAndSkillQuery : BrandQuery
-- (nonnull instancetype)initWithSkillID:(NSString * _Nonnull)skillID brandID:(NSString * _Nonnull)brandID OBJC_DESIGNATED_INITIALIZER;
-
-/// Get all conversation by brand and skill.
-- (NSArray<Conversation *> * _Nullable)getConversations;
-- (Conversation * _Nonnull)createNewConversation;
-- (NSString * _Nonnull)getQueryType;
-- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
-- (NSString * _Nonnull)getQueryUID;
-@end
-
-
-
-SWIFT_CLASS("_TtC5LPAMS13ConsumerQuery")
-@interface ConsumerQuery : BrandQuery
-- (nonnull instancetype)initWithConsumerID:(NSString * _Nonnull)consumerID brandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken OBJC_DESIGNATED_INITIALIZER;
-
-/// Get all conversation by consumerID.
-- (NSArray<Conversation *> * _Nullable)getConversations;
-- (Conversation * _Nonnull)createNewConversation;
-- (NSString * _Nonnull)getQueryType;
-- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
-- (NSString * _Nonnull)getQueryUID;
 @end
 
 @class LPSections;
