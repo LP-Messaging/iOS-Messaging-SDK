@@ -16,6 +16,7 @@
 #import "SRRunLoopThread.h"
 #import "SRURLUtilities.h"
 #import "SRError.h"
+#import "BSMobileProvision.h"
 
 //! Project version number for Infra.
 FOUNDATION_EXPORT double InfraVersionNumber;

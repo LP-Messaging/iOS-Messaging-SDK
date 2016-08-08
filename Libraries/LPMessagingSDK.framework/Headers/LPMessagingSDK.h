@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TTTAttributedLabel.h"
 #import "UIRefreshControl+UITableView.h"
+#import "LPTTTAttributedLabel.h"
 
 //------ We are using 3rd party reachability class as well
 

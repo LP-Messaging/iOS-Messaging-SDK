@@ -92,23 +92,15 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 # endif
 #endif
 #if defined(__has_feature) && __has_feature(modules)
-@import UIKit;
-@import CoreGraphics;
 @import ObjectiveC;
+@import UIKit;
 @import LPInfra;
+@import CoreGraphics;
 @import Foundation;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
-@class NSCoder;
-
-SWIFT_CLASS("_TtC14LPMessagingSDK17AgentIsTypingView")
-@interface AgentIsTypingView : UIView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@end
-
 @protocol UIAdapterDelegate;
 
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")
@@ -118,15 +110,6 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")
 - (void)setUIAdapterDelegate:(id <UIAdapterDelegate> _Nonnull)delegate;
 @end
 
-
-SWIFT_CLASS("_TtC14LPMessagingSDK5LPLog")
-@interface LPLog : NSObject
-@property (nonatomic, copy) NSString * _Nullable timestamp;
-@property (nonatomic, copy) NSString * _Nullable className;
-@property (nonatomic, copy) NSString * _Nullable funcName;
-@property (nonatomic, copy) NSString * _Nullable text;
-@end
-
 @protocol ConversationParamProtocol;
 @class UIViewController;
 @class UIBarButtonItem;
@@ -134,6 +117,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK5LPLog")
 @class NSData;
 @protocol LPMessagingSDKNotificationDelegate;
 @class UIImage;
+@class LPLog;
 @protocol LPMessagingSDKdelegate;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingSDK")
@@ -141,7 +125,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingSDK")
 @property (nonatomic, weak) id <LPMessagingSDKdelegate> _Nullable delegate;
 @property (nonatomic, weak) id <LPMessagingSDKNotificationDelegate> _Nullable notificationDelegate;
 @property (nonatomic, copy) NSString * _Nullable accountID;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 + (LPMessagingSDK * _Nonnull)instance;
 
 /// Initialize the SDK and all of its components. Optional paramaters: <brandID> of the host app. This method throws an error/return false with with an error, in case the initialization failed.
@@ -160,6 +143,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingSDK")
 - (void)toggleChatActions:(NSString * _Nonnull)accountID sender:(UIBarButtonItem * _Nullable)sender;
 
 /// This method sets user details for the consumer of a brand. The user object is in Type of LPUser which includes all the user details. Additional paramaters: <brandID> is the brand of the related user.
+///
+/// If the SDK is not connected, it'll save the last user for each brand, until connected.
 - (void)setUserProfile:(LPUser * _Nonnull)lpuser brandID:(NSString * _Nonnull)brandID;
 
 /// This method passes a user info of a remote push notification to be handled by the SDK.
@@ -234,6 +219,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingSDK")
 @end
 
 @class LPNotification;
+@class UIView;
 
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK34LPMessagingSDKNotificationDelegate_")
 @protocol LPMessagingSDKNotificationDelegate
@@ -268,7 +254,6 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKOffHoursStateChanged:(BOOL)isOffHours brandID:(NSString * _Nonnull)brandID;
 @end
 
-@class Message;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK14LPNotification")
 @interface LPNotification : NSObject
@@ -278,26 +263,18 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPNotification")
 @property (nonatomic) BOOL isRemote;
 @property (nonatomic, readonly, copy) NSString * _Nonnull toString;
 - (nonnull instancetype)initWithText:(NSString * _Nonnull)text firstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName uid:(NSString * _Nullable)uid accountID:(NSString * _Nonnull)accountID isRemote:(BOOL)isRemote;
-- (nonnull instancetype)initWithMessage:(Message * _Nonnull)message isRemote:(BOOL)isRemote;
+- (nonnull instancetype)initWithMessage:(LPMessageEntity * _Nonnull)message isRemote:(BOOL)isRemote;
 - (nonnull instancetype)initWithText:(NSString * _Nonnull)text user:(LPUser * _Nonnull)user accountID:(NSString * _Nonnull)accountID isRemote:(BOOL)isRemote OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class User;
+@class NSCoder;
 
-SWIFT_CLASS("_TtC14LPMessagingSDK6LPUser")
-@interface LPUser : NSObject
-@property (nonatomic, copy) NSString * _Nullable firstName;
-@property (nonatomic, copy) NSString * _Nullable lastName;
-@property (nonatomic, copy) NSString * _Nullable nickName;
-@property (nonatomic, copy) NSString * _Nullable profileImageURL;
-@property (nonatomic, copy) NSString * _Nullable phoneNumber;
-@property (nonatomic, copy) NSString * _Nullable employeeID;
-@property (nonatomic, copy) NSString * _Nullable uid;
-- (nonnull instancetype)initWithUser:(User * _Nonnull)user;
-- (nonnull instancetype)initWithFirstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName nickName:(NSString * _Nullable)nickName uid:(NSString * _Nullable)uid profileImageURL:(NSString * _Nullable)profileImageURL phoneNumber:(NSString * _Nullable)phoneNumber employeeID:(NSString * _Nullable)employeeID OBJC_DESIGNATED_INITIALIZER;
+SWIFT_CLASS("_TtC14LPMessagingSDK22RemoteUserIsTypingView")
+@interface RemoteUserIsTypingView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class Conversation;
 @class UITableView;
 @class NSIndexPath;
 @class ConversationDataSource;
@@ -309,13 +286,13 @@ SWIFT_CLASS("_TtC14LPMessagingSDK6LPUser")
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK17UIAdapterDelegate_")
 @protocol UIAdapterDelegate
 @optional
-- (BOOL)sendClickedWithMessage:(NSString * _Nonnull)message inConversation:(Conversation * _Nonnull)inConversation;
+- (BOOL)sendClickedWithMessage:(NSString * _Nonnull)message inConversation:(LPConversationEntity * _Nonnull)inConversation;
 - (UITableViewCell * _Nullable)cellForRowAtIndexPath:(UITableView * _Nonnull)tableView indexPath:(NSIndexPath * _Nonnull)indexPath dataSource:(ConversationDataSource * _Nonnull)dataSource;
-- (void)executeActionAtIndex:(UIViewController * _Nonnull)viewController index:(NSInteger)index conversation:(Conversation * _Nullable)conversation complition:(void (^ _Nonnull)(void))complition;
-- (void)textViewDidBeginEditingWithConversation:(Conversation * _Nullable)conversation;
-- (void)textViewDidEndEditingWithConversation:(Conversation * _Nullable)conversation;
-- (BOOL)textView:(UITextView * _Nonnull)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString * _Nonnull)text conversation:(Conversation * _Nullable)conversation;
-- (BOOL)shouldSetUIReadOnly:(Conversation * _Nullable)conversation;
+- (void)executeActionAtIndex:(UIViewController * _Nonnull)viewController index:(NSInteger)index conversation:(LPConversationEntity * _Nullable)conversation complition:(void (^ _Nonnull)(void))complition;
+- (void)textViewDidBeginEditingWithConversation:(LPConversationEntity * _Nullable)conversation;
+- (void)textViewDidEndEditingWithConversation:(LPConversationEntity * _Nullable)conversation;
+- (BOOL)textView:(UITextView * _Nonnull)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString * _Nonnull)text conversation:(LPConversationEntity * _Nullable)conversation;
+- (BOOL)shouldSetUIReadOnly:(LPConversationEntity * _Nullable)conversation;
 - (UIColor * _Nonnull)getTableViewBackgroundColor:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
 - (UIImage * _Nonnull)getDefaultRecepientAvatarImage:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
 - (UIGestureRecognizer * _Nonnull)getTableViewCustomGestureRecognizer;

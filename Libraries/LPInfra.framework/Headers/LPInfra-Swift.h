@@ -92,8 +92,8 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 # endif
 #endif
 #if defined(__has_feature) && __has_feature(modules)
-@import CoreData;
 @import ObjectiveC;
+@import CoreData;
 @import SystemConfiguration;
 @import Foundation;
 @import UIKit;
@@ -105,69 +105,31 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
-@class Brand;
-@class NSEntityDescription;
-@class NSManagedObjectContext;
-
-SWIFT_CLASS("_TtC7LPInfra7Account")
-@interface Account : NSManagedObject
-@property (nonatomic, copy) NSString * _Nonnull accountId;
-@property (nonatomic, strong) Brand * _Nonnull brand;
-- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class Conversation;
-@class Message;
+@class LPConversationEntity;
+@class LPMessageEntity;
 
 SWIFT_CLASS("_TtC7LPInfra23BaseConversationManager")
 @interface BaseConversationManager : NSObject
-- (NSArray<Message *> * _Nonnull)getIncomingMessages:(Conversation * _Nullable)conversation;
-- (NSArray<Message *> * _Nonnull)getUnreadMessages:(Conversation * _Nullable)conversation;
-- (NSDictionary<Conversation *, NSNumber *> * _Nonnull)getUnreadConversations;
+- (NSArray<LPMessageEntity *> * _Nonnull)getIncomingMessages:(LPConversationEntity * _Nullable)conversation;
+- (NSArray<LPMessageEntity *> * _Nonnull)getUnreadMessages:(LPConversationEntity * _Nullable)conversation;
+- (NSDictionary<LPConversationEntity *, NSNumber *> * _Nonnull)getUnreadConversations;
 - (NSInteger)getTotalUnread;
-- (void)deleteConversation:(Conversation * _Nonnull)conv;
+- (void)deleteConversation:(LPConversationEntity * _Nonnull)conv;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class NSSet;
-@class NSDate;
-
-SWIFT_CLASS("_TtC7LPInfra5Brand")
-@interface Brand : NSManagedObject
-@property (nonatomic, copy) NSString * _Nonnull iconURL;
-@property (nonatomic, copy) NSString * _Nullable imageURL;
-@property (nonatomic, copy) NSString * _Nullable logoURL;
-@property (nonatomic, copy) NSString * _Nonnull name;
-@property (nonatomic, copy) NSString * _Nonnull uid;
-@property (nonatomic, copy) NSString * _Nonnull details;
-@property (nonatomic, strong) NSSet * _Nonnull brandCampaigns;
-@property (nonatomic, strong) NSSet * _Nonnull brandConversations;
-@property (nonatomic, strong) NSDate * _Nonnull dateJoined;
-@property (nonatomic) BOOL hidden;
-@property (nonatomic, strong) NSSet * _Nonnull accounts;
-@property (nonatomic, copy) NSString * _Nullable authenticationCode;
-- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface Brand (SWIFT_EXTENSION(LPInfra))
-- (NSArray<Conversation *> * _Nonnull)getConversations;
-- (NSDate * _Nonnull)getLastMessageTimeStamp;
-- (BOOL)isAuthenticated;
 @end
 
 @class NSDictionary;
 
 SWIFT_PROTOCOL("_TtP7LPInfra25ConversationParamProtocol_")
 @protocol ConversationParamProtocol
-- (NSArray<Conversation *> * _Nullable)getConversations;
-- (NSArray<Conversation *> * _Nullable)getClosedConversations;
-- (Conversation * _Nullable)getActiveConversation;
-- (Conversation * _Nullable)getOpenConversation;
-- (NSArray<Conversation *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
-- (Conversation * _Nonnull)createNewConversation;
+- (NSArray<LPConversationEntity *> * _Nullable)getConversations;
+- (NSArray<LPConversationEntity *> * _Nullable)getClosedConversations;
+- (LPConversationEntity * _Nullable)getActiveConversation;
+- (LPConversationEntity * _Nullable)getOpenConversation;
+- (NSArray<LPConversationEntity *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
+- (LPConversationEntity * _Nonnull)createNewConversation;
 - (NSString * _Nonnull)getQueryType;
-- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
+- (BOOL)isConversationRelatedToQuery:(LPConversationEntity * _Nonnull)conversation;
 - (NSString * _Nonnull)getBrandID;
 - (NSString * _Nonnull)getQueryUID;
 - (NSDictionary * _Nonnull)getQueryProperties;
@@ -179,22 +141,22 @@ SWIFT_CLASS("_TtC7LPInfra10BrandQuery")
 - (nonnull instancetype)initWithBrandID:(NSString * _Nonnull)brandID OBJC_DESIGNATED_INITIALIZER;
 
 /// Get all conversation by brand.
-- (NSArray<Conversation *> * _Nullable)getConversations;
+- (NSArray<LPConversationEntity *> * _Nullable)getConversations;
 
 /// Get active conversation.
-- (Conversation * _Nullable)getActiveConversation;
+- (LPConversationEntity * _Nullable)getActiveConversation;
 
 /// Get all closed conversation
-- (NSArray<Conversation *> * _Nullable)getClosedConversations;
+- (NSArray<LPConversationEntity *> * _Nullable)getClosedConversations;
 
 /// Get open conversation.
-- (Conversation * _Nullable)getOpenConversation;
+- (LPConversationEntity * _Nullable)getOpenConversation;
 
 /// Get the latest closed conversation.
-- (NSArray<Conversation *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
-- (Conversation * _Nonnull)createNewConversation;
+- (NSArray<LPConversationEntity *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount;
+- (LPConversationEntity * _Nonnull)createNewConversation;
 - (NSString * _Nonnull)getQueryType;
-- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
+- (BOOL)isConversationRelatedToQuery:(LPConversationEntity * _Nonnull)conversation;
 - (NSString * _Nonnull)getBrandID;
 - (NSString * _Nonnull)getQueryUID;
 - (NSDictionary * _Nonnull)getQueryProperties;
@@ -206,13 +168,20 @@ SWIFT_CLASS("_TtC7LPInfra18BrandAndSkillQuery")
 - (nonnull instancetype)initWithSkillID:(NSString * _Nonnull)skillID brandID:(NSString * _Nonnull)brandID OBJC_DESIGNATED_INITIALIZER;
 
 /// Get all conversation by brand and skill.
-- (NSArray<Conversation *> * _Nullable)getConversations;
-- (Conversation * _Nonnull)createNewConversation;
+- (NSArray<LPConversationEntity *> * _Nullable)getConversations;
+- (LPConversationEntity * _Nonnull)createNewConversation;
 - (NSString * _Nonnull)getQueryType;
-- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
+- (BOOL)isConversationRelatedToQuery:(LPConversationEntity * _Nonnull)conversation;
 - (NSString * _Nonnull)getQueryUID;
 @end
 
+
+
+SWIFT_CLASS("_TtC7LPInfra9CSATModel")
+@interface CSATModel : NSObject
+@property (nonatomic) BOOL skipped;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+@end
 
 
 SWIFT_PROTOCOL("_TtP7LPInfra22GeneralManagerProtocol_")
@@ -229,16 +198,6 @@ SWIFT_CLASS("_TtC7LPInfra11CSDSManager")
 @end
 
 
-SWIFT_CLASS("_TtC7LPInfra8Campaign")
-@interface Campaign : NSManagedObject
-@property (nonatomic, copy) NSString * _Nonnull uid;
-@property (nonatomic, copy) NSString * _Nonnull name;
-@property (nonatomic, copy) NSString * _Nonnull image;
-@property (nonatomic, strong) Brand * _Nonnull ownerBrand;
-- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
 SWIFT_CLASS("_TtC7LPInfra20ConfigurationManager")
 @interface ConfigurationManager : NSObject
 + (ConfigurationManager * _Nonnull)instance;
@@ -250,61 +209,16 @@ SWIFT_CLASS("_TtC7LPInfra13ConsumerQuery")
 - (nonnull instancetype)initWithConsumerID:(NSString * _Nonnull)consumerID brandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken OBJC_DESIGNATED_INITIALIZER;
 
 /// Get all conversation by consumerID.
-- (NSArray<Conversation *> * _Nullable)getConversations;
-- (Conversation * _Nonnull)createNewConversation;
+- (NSArray<LPConversationEntity *> * _Nullable)getConversations;
+- (LPConversationEntity * _Nonnull)createNewConversation;
 - (NSString * _Nonnull)getQueryType;
-- (BOOL)isConversationRelatedToQuery:(Conversation * _Nonnull)conversation;
+- (BOOL)isConversationRelatedToQuery:(LPConversationEntity * _Nonnull)conversation;
 - (NSString * _Nonnull)getQueryUID;
 @end
 
-@class NSOrderedSet;
-@class NSNumber;
-@class NSMutableSet;
 
-SWIFT_CLASS("_TtC7LPInfra12Conversation")
-@interface Conversation : NSManagedObject
-@property (nonatomic, copy) NSString * _Nullable uid;
-@property (nonatomic, strong) NSDate * _Nonnull creationDate;
-@property (nonatomic, copy) NSString * _Nonnull handlerId;
-@property (nonatomic, copy) NSString * _Nullable lastMessage;
-@property (nonatomic, strong) NSDate * _Nullable lastMessageDate;
-@property (nonatomic, strong) Brand * _Nonnull ownerBrand;
-@property (nonatomic, strong) NSSet * _Nonnull participants;
-@property (nonatomic, strong) NSOrderedSet * _Nonnull conversationMessages;
-@property (nonatomic, copy) NSString * _Nonnull stateRaw;
-@property (nonatomic, strong) NSNumber * _Nonnull lastReceivedSequence;
-@property (nonatomic) BOOL hidden;
-@property (nonatomic) BOOL resolved;
-@property (nonatomic, copy) NSString * _Nonnull ttrTypeRaw;
-@property (nonatomic, copy) NSString * _Nullable type;
-@property (nonatomic, copy) NSString * _Nullable assignedAgentId;
-@property (nonatomic, copy) NSString * _Nullable consumerId;
-@property (nonatomic, strong) NSMutableSet * _Nonnull currentlyAcceptedSequences;
-- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class User;
-
-@interface Conversation (SWIFT_EXTENSION(LPInfra))
-@property (nonatomic, readonly, copy) NSArray<Message *> * _Nonnull sortedMessages;
-@property (nonatomic, readonly, copy) NSArray<Message *> * _Nonnull unreadMessages;
-@property (nonatomic, readonly, strong) Message * _Nullable lastMessageObj;
-@property (nonatomic, readonly, strong) User * _Nullable lastMessageOriginator;
-@property (nonatomic, readonly, copy) NSString * _Nonnull relatedSocketID;
-- (BOOL)isActivityInIdle;
-- (NSArray<Message *> * _Nonnull)getMessagesPage:(NSInteger)from pageSize:(NSInteger)pageSize;
-- (BOOL)isCurrentlyUrgent;
-
-/// Sequence number is received from the QueryMessages or from OnlineEvent messages. Sequence number is increased by the server for both new message and accept status (ACCEPT/READ). If the sequence number is following to what we have, set it as the last one If not, save it in a temporary array in order to set it as the last one in the future After words, it goes through self.currentlyAcceptedSequences and sets each object as the last one if it is following to the current last one (and removes from the temporary array)
-- (void)acceptSequence:(NSInteger)seq;
-- (void)resolve;
-- (void)resolve:(BOOL)byAgent;
-- (NSString * _Nonnull)getResolveDateString:(NSDate * _Nonnull)date;
-@property (nonatomic, readonly) BOOL shouldQueryMessages;
-@property (nonatomic, readonly) BOOL isOpen;
-@end
-
-
+@class NSManagedObjectContext;
+@class NSManagedObject;
 @protocol LPDataManagerSDKDelegate;
 
 SWIFT_CLASS("_TtC7LPInfra11DataManager")
@@ -319,6 +233,7 @@ SWIFT_CLASS("_TtC7LPInfra11DataManager")
 - (BOOL)resetDatabase;
 - (void)saveContext;
 - (NSManagedObjectContext * _Nonnull)getContext:(NSManagedObjectContext * _Nullable)context;
+- (void)refresh;
 - (void)clearManager;
 @end
 
@@ -343,9 +258,56 @@ SWIFT_CLASS("_TtC7LPInfra13ImagesManager")
 + (ImagesManager * _Nonnull)instance;
 - (void)setImageByURL:(UIImage * _Nonnull)image url:(NSString * _Nonnull)url;
 - (UIImage * _Nullable)getImageByURL:(NSString * _Nonnull)url;
-- (void)loadImageFromURL:(NSString * _Nullable)imageUrl completion:(void (^ _Nonnull)(UIImage * _Null_unspecified))completion;
+- (void)loadImageFromURL:(NSString * _Nullable)imageUrl completion:(void (^ _Nonnull)(UIImage * _Null_unspecified, BOOL))completion;
 - (void)clearManager;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class LPBrandEntity;
+@class NSEntityDescription;
+
+SWIFT_CLASS("_TtC7LPInfra15LPAccountEntity")
+@interface LPAccountEntity : NSManagedObject
+@property (nonatomic, copy) NSString * _Nonnull accountId;
+@property (nonatomic, strong) LPBrandEntity * _Nonnull brand;
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSSet;
+@class NSDate;
+
+SWIFT_CLASS("_TtC7LPInfra13LPBrandEntity")
+@interface LPBrandEntity : NSManagedObject
+@property (nonatomic, copy) NSString * _Nonnull iconURL;
+@property (nonatomic, copy) NSString * _Nullable imageURL;
+@property (nonatomic, copy) NSString * _Nullable logoURL;
+@property (nonatomic, copy) NSString * _Nonnull name;
+@property (nonatomic, copy) NSString * _Nonnull uid;
+@property (nonatomic, copy) NSString * _Nonnull details;
+@property (nonatomic, strong) NSSet * _Nonnull brandCampaigns;
+@property (nonatomic, strong) NSSet * _Nonnull brandConversations;
+@property (nonatomic, strong) NSDate * _Nonnull dateJoined;
+@property (nonatomic) BOOL hidden;
+@property (nonatomic, strong) NSSet * _Nonnull accounts;
+@property (nonatomic, copy) NSString * _Nullable authenticationCode;
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface LPBrandEntity (SWIFT_EXTENSION(LPInfra))
+- (NSArray<LPConversationEntity *> * _Nonnull)getConversations;
+- (NSDate * _Nonnull)getLastMessageTimeStamp;
+- (BOOL)isAuthenticated;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra16LPCampaignEntity")
+@interface LPCampaignEntity : NSManagedObject
+@property (nonatomic, copy) NSString * _Nonnull uid;
+@property (nonatomic, copy) NSString * _Nonnull name;
+@property (nonatomic, copy) NSString * _Nonnull image;
+@property (nonatomic, strong) LPBrandEntity * _Nonnull ownerBrand;
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class UIColor;
@@ -455,11 +417,17 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// Should display status bar of the survey screen in Light Content Mode (UIStatusBarStyle)
 @property (nonatomic) BOOL csatUIStatusBarStyleLightContent;
 
+/// Hides the whole survey view
+@property (nonatomic) BOOL csatShowSurveyView;
+
 /// The amount of conversations to fetch on loading
 @property (nonatomic) NSUInteger maxConversationToFetch;
 
 /// Amount of conversations to show in advance
 @property (nonatomic) NSUInteger maxPreviousConversationToPresent;
+
+/// Upon SDK initialization, all closed conversation with end date older than X months, will get deleted from the database. Setting 0 will delete all closed conversation.
+@property (nonatomic) NSUInteger deleteClosedConversationOlderThanMonths;
 
 /// Country code. If no value is provided, the SDK will use the country according to the device's locale.
 @property (nonatomic, copy) NSString * _Nonnull country;
@@ -473,14 +441,17 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// Color for the entire view background.
 @property (nonatomic, strong) UIColor * _Nonnull conversationBackgroundColor;
 
-/// Background color of the title of the dates separator in the conversation screen
+/// Color code for date separator title background color
 @property (nonatomic, strong) UIColor * _Nonnull dateSeparatorTitleBackgroundColor;
 
-/// Title color of the dates separator in the conversation screen
+/// Color code for date separator text color
 @property (nonatomic, strong) UIColor * _Nonnull dateSeparatorTextColor;
 
 /// Line color of the title of the dates separator in the conversation screen
 @property (nonatomic, strong) UIColor * _Nonnull dateSeparatorLineBackgroundColor;
+
+/// Color code for date separator background color
+@property (nonatomic, strong) UIColor * _Nonnull dateSeparatorBackgroundColor;
 
 /// Send button color in disabled mode in the conversation screen
 @property (nonatomic, strong) UIColor * _Nonnull sendButtonDisabledTextColor;
@@ -496,6 +467,9 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 
 /// The show duration of the local notifications view in the SDK
 @property (nonatomic) double notificationShowDurationInSeconds;
+
+/// Should show TTR Shift banner ("An agent will respond...")
+@property (nonatomic) BOOL ttrShowShiftBanner;
 
 /// TTR - Time To Respond Number of seconds before the first TTR notification appears
 @property (nonatomic) double ttrFirstTimeDelay;
@@ -521,6 +495,12 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// Off Hours banner timezone based on NSTimeZone names
 @property (nonatomic, copy) NSString * _Nonnull offHoursTimeZoneName;
 
+/// Enable toast notifications such as offline notifications
+@property (nonatomic) BOOL toastNotificationsEnabled;
+
+/// Control the TTR frequency - Don’t show the TTR more than once in X seconds
+@property (nonatomic) NSUInteger ttrShowFrequencyInSeconds;
+
 /// CSDS Domain URL.  For brands that need to control the URL that is the gateway for LivePerson services, use this key to set a URL of your choice.
 @property (nonatomic, copy) NSString * _Nonnull csdsDomain;
 
@@ -529,6 +509,9 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 
 /// Icon color of default remoteUser avatar
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserAvatarIconColor;
+
+/// Default avatar image for Brand. If setting nil - default avatr image will be used.
+@property (nonatomic, strong) UIImage * _Nullable brandAvatarImage;
 
 /// Determines whether to enable using regular expression to control which part of the text to mask, all masked data will appear as asterisks, will be saved to local db masked and will be sent to the server unmasked. Default = false
 @property (nonatomic) BOOL enableClientOnlyMasking;
@@ -550,10 +533,90 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 + (void)printAllConfigurations;
 @end
 
+@class NSOrderedSet;
+@class NSNumber;
+@class NSMutableSet;
+
+SWIFT_CLASS("_TtC7LPInfra20LPConversationEntity")
+@interface LPConversationEntity : NSManagedObject
+@property (nonatomic, copy) NSString * _Nullable uid;
+@property (nonatomic, strong) NSDate * _Nonnull creationDate;
+@property (nonatomic, copy) NSString * _Nonnull handlerId;
+@property (nonatomic, copy) NSString * _Nullable lastMessage;
+@property (nonatomic, strong) NSDate * _Nullable lastMessageDate;
+@property (nonatomic, strong) LPBrandEntity * _Nonnull ownerBrand;
+@property (nonatomic, strong) NSSet * _Nonnull participants;
+@property (nonatomic, strong) NSOrderedSet * _Nonnull conversationMessages;
+@property (nonatomic, copy) NSString * _Nonnull stateRaw;
+@property (nonatomic, strong) NSNumber * _Nonnull lastReceivedSequence;
+@property (nonatomic) BOOL hidden;
+@property (nonatomic) BOOL resolved;
+@property (nonatomic, copy) NSString * _Nonnull ttrTypeRaw;
+@property (nonatomic, copy) NSString * _Nullable type;
+@property (nonatomic, copy) NSString * _Nullable assignedAgentId;
+@property (nonatomic, copy) NSString * _Nullable consumerId;
+@property (nonatomic, strong) NSMutableSet * _Nonnull currentlyAcceptedSequences;
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class LPUserEntity;
+
+@interface LPConversationEntity (SWIFT_EXTENSION(LPInfra))
+@property (nonatomic, readonly, copy) NSArray<LPMessageEntity *> * _Nonnull sortedMessages;
+@property (nonatomic, readonly, copy) NSArray<LPMessageEntity *> * _Nonnull unreadMessages;
+@property (nonatomic, readonly, strong) LPMessageEntity * _Nullable lastMessageObj;
+@property (nonatomic, readonly, strong) LPUserEntity * _Nullable lastMessageOriginator;
+@property (nonatomic, readonly, copy) NSString * _Nonnull relatedSocketID;
+- (BOOL)isActivityInIdle;
+- (NSArray<LPMessageEntity *> * _Nonnull)getMessagesPage:(NSInteger)from pageSize:(NSInteger)pageSize;
+- (BOOL)isCurrentlyUrgent;
+
+/// Sequence number is received from the QueryMessages or from OnlineEvent messages. Sequence number is increased by the server for both new message and accept status (ACCEPT/READ). If the sequence number is following to what we have, set it as the last one If not, save it in a temporary array in order to set it as the last one in the future After words, it goes through self.currentlyAcceptedSequences and sets each object as the last one if it is following to the current last one (and removes from the temporary array)
+- (void)acceptSequence:(NSInteger)seq;
+- (void)resolve;
+- (void)resolve:(BOOL)byAgent;
+- (NSString * _Nonnull)getResolveDateString:(NSDate * _Nonnull)date;
+@property (nonatomic, readonly) BOOL shouldQueryMessages;
+@property (nonatomic, readonly) BOOL isOpen;
+@end
+
 
 SWIFT_PROTOCOL("_TtP7LPInfra24LPDataManagerSDKDelegate_")
 @protocol LPDataManagerSDKDelegate
 - (void)LPMessagingSDKDataEncryptionFailed:(NSError * _Nonnull)error;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra5LPLog")
+@interface LPLog : NSObject
+@property (nonatomic, copy) NSString * _Nullable timestamp;
+@property (nonatomic, copy) NSString * _Nullable className;
+@property (nonatomic, copy) NSString * _Nullable funcName;
+@property (nonatomic, copy) NSString * _Nullable text;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra15LPMessageEntity")
+@interface LPMessageEntity : NSManagedObject
+@property (nonatomic, strong) NSDate * _Nonnull timestamp;
+@property (nonatomic, copy) NSString * _Nonnull content;
+@property (nonatomic, copy) NSString * _Nullable uid;
+@property (nonatomic, copy) NSString * _Nonnull statusRaw;
+@property (nonatomic, copy) NSString * _Nonnull contentType;
+@property (nonatomic, copy) NSString * _Nonnull messageType;
+@property (nonatomic, strong) LPConversationEntity * _Nonnull ownerConversation;
+@property (nonatomic, strong) LPUserEntity * _Nullable ownerUser;
+@property (nonatomic, copy) NSString * _Nullable eventId;
+@property (nonatomic, copy) NSString * _Nullable maskedContent;
+- (NSString * _Nonnull)getMessageTimeLabel;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+@end
+
+@class NSPredicate;
+
+@interface LPMessageEntity (SWIFT_EXTENSION(LPInfra))
++ (NSString * _Nonnull)buildUID:(NSString * _Nonnull)convUID sequence:(NSInteger)sequence;
++ (NSPredicate * _Nonnull)byDate:(NSDate * _Nonnull)date;
 @end
 
 @class NSNotificationCenter;
@@ -595,6 +658,55 @@ SWIFT_CLASS("_TtC7LPInfra12LPSDKManager")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+SWIFT_CLASS("_TtC7LPInfra6LPUser")
+@interface LPUser : NSObject
+@property (nonatomic, copy) NSString * _Nullable firstName;
+@property (nonatomic, copy) NSString * _Nullable lastName;
+@property (nonatomic, copy) NSString * _Nullable nickName;
+@property (nonatomic, copy) NSString * _Nullable profileImageURL;
+@property (nonatomic, copy) NSString * _Nullable phoneNumber;
+@property (nonatomic, copy) NSString * _Nullable employeeID;
+@property (nonatomic, copy) NSString * _Nullable uid;
+- (nonnull instancetype)initWithUser:(LPUserEntity * _Nonnull)user;
+- (nonnull instancetype)initWithFirstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName nickName:(NSString * _Nullable)nickName uid:(NSString * _Nullable)uid profileImageURL:(NSString * _Nullable)profileImageURL phoneNumber:(NSString * _Nullable)phoneNumber employeeID:(NSString * _Nullable)employeeID OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra12LPUserEntity")
+@interface LPUserEntity : NSManagedObject
+@property (nonatomic, copy) NSString * _Nonnull uid;
+@property (nonatomic, copy) NSString * _Nonnull firstName;
+@property (nonatomic, copy) NSString * _Nonnull lastName;
+@property (nonatomic, copy) NSString * _Nullable nickName;
+@property (nonatomic, copy) NSString * _Nullable profileImageURL;
+@property (nonatomic, copy) NSString * _Nullable coverImageURL;
+@property (nonatomic, copy) NSString * _Nullable phoneNumber;
+@property (nonatomic, copy) NSString * _Nonnull typeRaw;
+@property (nonatomic, copy) NSString * _Nullable bio;
+@property (nonatomic, strong) NSSet * _Nonnull userMessages;
+@property (nonatomic) BOOL isSaved;
+@property (nonatomic, strong) NSDate * _Nullable lastUpdated;
+@property (nonatomic, copy) NSString * _Nullable employeeID;
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface LPUserEntity (SWIFT_EXTENSION(LPInfra))
+@property (nonatomic, readonly, copy) NSString * _Nonnull fullName;
+@property (nonatomic, readonly) BOOL isMe;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra19LPUserProfileEntity")
+@interface LPUserProfileEntity : LPUserEntity
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface LPUserProfileEntity (SWIFT_EXTENSION(LPInfra))
+@end
+
 @class NSURL;
 
 SWIFT_CLASS("_TtC7LPInfra11LPWebSocket")
@@ -609,6 +721,7 @@ SWIFT_CLASS("_TtC7LPInfra11LPWebSocket")
 
 SWIFT_CLASS("_TtC7LPInfra16LanguagesManager")
 @interface LanguagesManager : NSObject
++ (LanguagesManager * _Nonnull)instance;
 
 /// Prints all localized strings keys
 + (void)printAllKeys;
@@ -638,35 +751,11 @@ typedef SWIFT_ENUM(NSInteger, LogLevel) {
 };
 
 
-SWIFT_CLASS("_TtC7LPInfra7Message")
-@interface Message : NSManagedObject
-@property (nonatomic, strong) NSDate * _Nonnull timestamp;
-@property (nonatomic, copy) NSString * _Nonnull content;
-@property (nonatomic, copy) NSString * _Nullable uid;
-@property (nonatomic, copy) NSString * _Nonnull statusRaw;
-@property (nonatomic, copy) NSString * _Nonnull contentType;
-@property (nonatomic, copy) NSString * _Nonnull messageType;
-@property (nonatomic, strong) Conversation * _Nonnull ownerConversation;
-@property (nonatomic, strong) User * _Nullable ownerUser;
-@property (nonatomic, copy) NSString * _Nullable maskedContent;
-- (NSString * _Nonnull)getMessageTimeLabel;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class NSPredicate;
-
-@interface Message (SWIFT_EXTENSION(LPInfra))
-+ (NSString * _Nonnull)buildUID:(NSString * _Nonnull)convUID sequence:(NSInteger)sequence;
-+ (NSPredicate * _Nonnull)byDate:(NSDate * _Nonnull)date;
-@end
-
-
 SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 @interface MessagingServiceEvent : NSObject
-@property (nonatomic, readonly, strong) Conversation * _Null_unspecified conversation;
-@property (nonatomic, readonly, strong) User * _Nullable sender;
-@property (nonatomic) BOOL shouldHandleConsumerMessages;
+@property (nonatomic, readonly, copy) NSString * _Nullable eventId;
+@property (nonatomic, readonly, strong) LPConversationEntity * _Null_unspecified conversation;
+@property (nonatomic, readonly, strong) LPUserEntity * _Nullable sender;
 - (nullable instancetype)initWithFailure OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -695,6 +784,14 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 /// Get new Date from a different timezone
 - (NSDate * _Nonnull)dateFromTimezone:(NSString * _Nullable)timezoneName;
 - (NSString * _Nonnull)timeStringFromTimezone:(NSString * _Nullable)timezoneName;
+- (NSInteger)yearsFrom:(NSDate * _Nonnull)date;
+- (NSInteger)monthsFrom:(NSDate * _Nonnull)date;
+- (NSInteger)weeksFrom:(NSDate * _Nonnull)date;
+- (NSInteger)daysFrom:(NSDate * _Nonnull)date;
+- (NSInteger)hoursFrom:(NSDate * _Nonnull)date;
+- (NSInteger)minutesFrom:(NSDate * _Nonnull)date;
+- (NSInteger)secondsFrom:(NSDate * _Nonnull)date;
+- (NSDate * _Nonnull)addMonths:(NSInteger)numberOfMonths;
 @end
 
 
@@ -733,7 +830,7 @@ SWIFT_CLASS("_TtC7LPInfra19NotificationManager")
 + (NotificationManager * _Nonnull)instance;
 - (void)didReceiveRemoteNotification:(NSDictionary * _Nonnull)userInfo;
 - (void)sendLocalNotification:(NSString * _Nonnull)text uid:(NSString * _Nullable)uid;
-- (void)postLocalNotification:(Message * _Nonnull)message;
+- (void)postLocalNotification:(LPMessageEntity * _Nonnull)message;
 - (void)clearManager;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -752,13 +849,13 @@ SWIFT_CLASS("_TtC7LPInfra13PusherManager")
 ///
 /// <ul><li>Consumer UserID</li><li>Push Token from Apple</li><li>CSDS Domain for Pusher</li><li>Account (brand account)
 /// When all params availble - peform register</li></ul>
-- (void)registerPusher:(Brand * _Nonnull)brand;
+- (void)registerPusher:(LPBrandEntity * _Nonnull)brand;
 
 /// Unregister pusher. Before unregistering the Pusher, we make sure we have the following params:
 ///
 /// <ul><li>Consumer UserID</li><li>CSDS Domain for Pusher</li><li>Account (brand account)
 /// When all params availble - peform unregister</li></ul>
-- (void)unregisterPusher:(Brand * _Nonnull)brand;
+- (void)unregisterPusher:(LPBrandEntity * _Nonnull)brand;
 - (void)clearManager;
 @end
 
@@ -803,9 +900,50 @@ SWIFT_CLASS("_TtC7LPInfra8TTRModel")
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
 
+@class UIGestureRecognizer;
+@class NSCoder;
+
+SWIFT_CLASS("_TtC7LPInfra5Toast")
+@interface Toast : UIView <UIGestureRecognizerDelegate>
+
+/// Calls the ToastManager to manage the showing of the notification. If we're already show a notification it will wait and show right afterwards.
+- (void)showWithDidShow:(void (^ _Nullable)(void))didShow didDismiss:(void (^ _Nullable)(void))didDismiss;
+
+/// Calls the animateOut function
+- (void)dismiss;
+
+/// This makes sure the pan gesture is only for vertical swiping
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer * _Nonnull)gestureRecognizer;
+
+/// Sets colors to the view properties
+- (void)setColorScheme:(UIColor * _Nonnull)backgroundColor textColor:(UIColor * _Nonnull)textColor alpha:(CGFloat)alpha;
+
+/// Sets text to the label
+- (void)setText:(NSString * _Nonnull)text;
+- (void)removeFromSuperview;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra12ToastManager")
+@interface ToastManager : NSObject
++ (ToastManager * _Nonnull)instance;
+- (void)add:(Toast * _Nonnull)toast;
+- (void)next;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 @interface UIColor (SWIFT_EXTENSION(LPInfra))
 - (nonnull instancetype)initWithRgba:(NSString * _Nonnull)rgba;
+@end
+
+
+@interface UIDevice (SWIFT_EXTENSION(LPInfra))
+
+/// Get the model name of device. For example, will appear as iPhone8,1 which means iPhone 6s. Each known model name can include several machine names. For example: for "iPad 2" can be returned one of the following: "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4" http://stackoverflow.com/questions/26028918/ios-how-to-determine-iphone-model-in-swift
+@property (nonatomic, readonly, copy) NSString * _Nonnull modelName;
 @end
 
 
@@ -827,31 +965,6 @@ SWIFT_CLASS("_TtC7LPInfra8TTRModel")
 @end
 
 
-SWIFT_CLASS("_TtC7LPInfra4User")
-@interface User : NSManagedObject
-@property (nonatomic, copy) NSString * _Nonnull uid;
-@property (nonatomic, copy) NSString * _Nonnull firstName;
-@property (nonatomic, copy) NSString * _Nonnull lastName;
-@property (nonatomic, copy) NSString * _Nullable nickName;
-@property (nonatomic, copy) NSString * _Nullable profileImageURL;
-@property (nonatomic, copy) NSString * _Nullable coverImageURL;
-@property (nonatomic, copy) NSString * _Nullable phoneNumber;
-@property (nonatomic, copy) NSString * _Nonnull typeRaw;
-@property (nonatomic, copy) NSString * _Nullable bio;
-@property (nonatomic, strong) NSSet * _Nonnull userMessages;
-@property (nonatomic) BOOL isSaved;
-@property (nonatomic, strong) NSDate * _Nullable lastUpdated;
-@property (nonatomic, copy) NSString * _Nullable employeeID;
-- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface User (SWIFT_EXTENSION(LPInfra))
-@property (nonatomic, readonly, copy) NSString * _Nonnull fullName;
-@property (nonatomic, readonly) BOOL isMe;
-@end
-
-
 SWIFT_CLASS("_TtC7LPInfra11UserManager")
 @interface UserManager : NSObject <GeneralManagerProtocol>
 @property (nonatomic, copy) NSString * _Nullable myUserID;
@@ -860,22 +973,22 @@ SWIFT_CLASS("_TtC7LPInfra11UserManager")
 /// This method fetch user profile from the server.
 ///
 /// <ul><li>Fetch user data from server</li><li>Save to DB</li><li>Return User to completion block</li></ul>
-- (void)fetchUser:(NSString * _Nonnull)brandID userID:(NSString * _Nonnull)userID isMe:(BOOL)isMe completion:(void (^ _Nullable)(User * _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
+- (void)fetchUser:(NSString * _Nonnull)brandID userID:(NSString * _Nonnull)userID isMe:(BOOL)isMe completion:(void (^ _Nullable)(LPUserEntity * _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 
 /// Attach completion block which is being invoken when the Consumer (My) User is retrieved
-- (void)attachMyUserCompletion:(void (^ _Nonnull)(User * _Nonnull))completion;
+- (void)attachMyUserCompletion:(void (^ _Nonnull)(LPUserEntity * _Nonnull))completion;
 
 /// This method fetch user from the database.
 ///
 /// <ul><li>Fetch user data from database</li><li>If user does not exist, a nil will be returned</li></ul>
-- (User * _Nullable)getUserFromDatabase:(NSString * _Nonnull)userID;
+- (LPUserEntity * _Nullable)getUserFromDatabase:(NSString * _Nonnull)userID;
 
 /// If Needed, fetching the user profile from server and update in database If the user was not updated for 24Hrs
-- (void)refreshUserProfile:(NSString * _Nonnull)brandID user:(User * _Nonnull)user;
+- (void)refreshUserProfile:(NSString * _Nonnull)brandID user:(LPUserEntity * _Nonnull)user;
 
 /// Set user profile in database with details of user
 - (void)setUserProfileWithDetails:(NSString * _Nonnull)brandID firstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName profileImageURL:(NSString * _Nullable)profileImageURL phoneNumber:(NSString * _Nullable)phoneNumber;
-- (User * _Nonnull)getDefaultAgentUserFromDB:(NSString * _Nonnull)senderId;
+- (LPUserEntity * _Nonnull)getDefaultAgentUserFromDB:(NSString * _Nonnull)senderId;
 - (void)clearManager;
 @end
 

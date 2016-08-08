@@ -99,14 +99,12 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
-@class Conversation;
-@class Message;
 
 SWIFT_CLASS("_TtC5LPAMS22AMSConversationHandler")
 @interface AMSConversationHandler : NSObject <GeneralManagerProtocol>
 + (AMSConversationHandler * _Nonnull)instance;
-- (void)sendPendingMessages:(Conversation * _Nonnull)conversation;
-+ (BOOL)shouldReloadData:(Message * _Nonnull)message;
+- (void)sendPendingMessages:(LPConversationEntity * _Nonnull)conversation;
++ (BOOL)shouldReloadData:(LPMessageEntity * _Nonnull)message;
 - (void)clearManager;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -127,10 +125,14 @@ SWIFT_CLASS("_TtC5LPAMS22AMSConversationHandler")
 @interface AMSConversationHandler (SWIFT_EXTENSION(LPAMS))
 @end
 
+
+@interface AMSConversationHandler (SWIFT_EXTENSION(LPAMS))
+@end
+
 @protocol ConversationParamProtocol;
 @protocol AMSManagerDelegate;
-@class Brand;
 @class NSError;
+@class CSATModel;
 
 SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 @interface AMSManager : BaseConversationManager <GeneralManagerProtocol>
@@ -152,34 +154,37 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 /// Perform disconnect from socket for conversationQuery
 - (void)disconnectSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
 - (BOOL)clearHistory:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+- (void)deleteOldConversations;
 - (void)setDelegate:(id <AMSManagerDelegate> _Nonnull)delegate;
 - (void)removeDelegate;
 
 /// Initialize new AMS Handler related paired with conversation.
-- (void)initializeConversation:(Conversation * _Nonnull)conversation;
+- (void)initializeConversation:(LPConversationEntity * _Nonnull)conversation;
 
 /// Create new AMSConversationHandler and attach it as delegate to its corresponding Web Socket Handler
-- (void)setupConversation:(Conversation * _Nonnull)conversation;
-- (Conversation * _Nonnull)createConversation:(Brand * _Nonnull)brand;
-- (void)sendMessageInConversation:(Conversation * _Nonnull)conversation message:(Message * _Nonnull)message completion:(void (^ _Nonnull)(Message * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-- (void)sendMessageInConversation:(Conversation * _Nonnull)conversation text:(NSString * _Nonnull)text completion:(void (^ _Nonnull)(Message * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-- (void)resolveConversation:(Conversation * _Nonnull)conversation;
-- (BOOL)requestUrgentResponse:(Conversation * _Nonnull)conversation urgent:(BOOL)urgent;
-- (void)retrieveNewMessagesForConversation:(Conversation * _Nonnull)conversation completion:(void (^ _Nullable)(void))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
-- (void)csatScoreSubmissionDidFinish:(Conversation * _Nonnull)conversation rating:(NSInteger)rating;
+- (void)setupConversation:(LPConversationEntity * _Nonnull)conversation;
+
+/// Create new conversation instance
+- (LPConversationEntity * _Nonnull)createConversation:(LPBrandEntity * _Nonnull)brand;
+- (void)sendMessageInConversation:(LPConversationEntity * _Nonnull)conversation message:(LPMessageEntity * _Nonnull)message completion:(void (^ _Nonnull)(LPMessageEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+- (void)sendMessageInConversation:(LPConversationEntity * _Nonnull)conversation text:(NSString * _Nonnull)text completion:(void (^ _Nonnull)(LPMessageEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+- (void)resolveConversation:(LPConversationEntity * _Nonnull)conversation;
+- (BOOL)requestUrgentResponse:(LPConversationEntity * _Nonnull)conversation urgent:(BOOL)urgent;
+- (void)retrieveNewMessagesForConversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nullable)(void))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
+- (void)sendCSATRate:(LPConversationEntity * _Nonnull)conversation csat:(CSATModel * _Nonnull)csat;
 - (void)clearManager;
 @end
 
 @class Ring;
 
 @interface AMSManager (SWIFT_EXTENSION(LPAMS))
-- (void)takeConversation:(Ring * _Nonnull)ring agentToken:(NSString * _Nonnull)agentToken completion:(void (^ _Nonnull)(Conversation * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-- (void)backToQueue:(NSString * _Nonnull)userID conversation:(Conversation * _Nonnull)conversation;
-- (void)subscribeAgentState:(NSString * _Nonnull)agentID conversation:(Conversation * _Nonnull)conversation;
-- (void)setAgentState:(NSString * _Nonnull)agentUserId channels:(NSArray<NSString *> * _Nonnull)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description conversation:(Conversation * _Nonnull)conversation;
-- (void)agentRequestConversation:(NSDictionary<NSString *, NSString *> * _Nonnull)context ttrDefName:(NSString * _Nonnull)ttrDefName channelType:(NSString * _Nonnull)channelType consumerId:(NSString * _Nonnull)consumerId conversation:(Conversation * _Nonnull)conversation;
+- (void)takeConversation:(Ring * _Nonnull)ring agentToken:(NSString * _Nonnull)agentToken completion:(void (^ _Nonnull)(LPConversationEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+- (void)backToQueue:(NSString * _Nonnull)userID conversation:(LPConversationEntity * _Nonnull)conversation;
+- (void)subscribeAgentState:(NSString * _Nonnull)agentID conversation:(LPConversationEntity * _Nonnull)conversation;
+- (void)setAgentState:(NSString * _Nonnull)agentUserId channels:(NSArray<NSString *> * _Nonnull)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description conversation:(LPConversationEntity * _Nonnull)conversation;
+- (void)agentRequestConversation:(NSDictionary<NSString *, NSString *> * _Nonnull)context ttrDefName:(NSString * _Nonnull)ttrDefName channelType:(NSString * _Nonnull)channelType consumerId:(NSString * _Nonnull)consumerId conversation:(LPConversationEntity * _Nonnull)conversation;
 - (NSArray<NSString *> * _Nonnull)getAllConsumersID;
-- (NSDictionary<NSString *, NSArray<Conversation *> *> * _Nonnull)getConversationsByConsumers;
+- (NSDictionary<NSString *, NSArray<LPConversationEntity *> *> * _Nonnull)getConversationsByConsumers;
 @end
 
 @class NSDate;
@@ -206,7 +211,7 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 
 
 @interface AMSManager (SWIFT_EXTENSION(LPAMS))
-- (BOOL)shouldDisplayLocalNotificationForConversation:(Conversation * _Nonnull)conversation;
+- (BOOL)shouldDisplayLocalNotificationForConversation:(LPConversationEntity * _Nonnull)conversation;
 - (BOOL)isBrandReady:(NSString * _Nonnull)brandID;
 
 /// Determines whether history query messages already fecthced
@@ -216,38 +221,38 @@ SWIFT_CLASS("_TtC5LPAMS10AMSManager")
 - (BOOL)isFetchingHistoryQueryMessages;
 
 /// Determines the name of the assigned agent that should be presented in UI areas. If assigned agent exists and has a nickname - return it. Otherwise, return empty string. If the empty string is returned, it should be handled according to UI area
-- (NSString * _Nonnull)agentNameUIRepresentation:(Conversation * _Nullable)conversation;
-
-/// Create resumed system message for conversation
-- (void)sendResumeLocalMessage:(Conversation * _Nonnull)conversation;
+- (NSString * _Nonnull)agentNameUIRepresentation:(LPConversationEntity * _Nullable)conversation;
 
 /// Create resolved system message for conversation, according to resolving side Timestamp - when agent resolved we take the timestamp from server, when consumer resolved we take now.
-- (void)sendResolveLocalMessage:(Conversation * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nonnull)endTime;
+- (void)sendResolveLocalMessage:(LPConversationEntity * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nonnull)endTime;
 
 /// Sends local system message for masked message according to the current masking type: RealTime or ClientOnly masking. Return value - local masked message, nil if failed
-- (Message * _Nullable)sendMessageMaskedLocalMessage:(Conversation * _Nonnull)conversation;
+- (LPMessageEntity * _Nullable)sendMessageMaskedLocalMessage:(LPConversationEntity * _Nonnull)conversation;
+
+/// Get client properties to be sent to AMS using predefiend AMS parameters. This method is used for sending information to AMS
++ (NSString * _Nonnull)clientPropertiesString;
 @end
 
 @class TTRModel;
 
 SWIFT_PROTOCOL("_TtP5LPAMS18AMSManagerDelegate_")
 @protocol AMSManagerDelegate
-- (void)didSendMessages:(Conversation * _Nonnull)conversation messages:(NSArray<Message *> * _Nonnull)messages;
-- (void)didReceiveMessages:(Conversation * _Nonnull)conversation messages:(NSArray<Message *> * _Nonnull)messages;
-- (void)resolveConvesationDidFail:(Conversation * _Nonnull)conversation error:(NSError * _Nonnull)error;
-- (void)resolveConvesationRequestDidFinish:(Conversation * _Nonnull)conversation;
-- (void)conversationDidResolve:(Conversation * _Nonnull)conversation;
-- (void)newConversationCreated:(Conversation * _Nonnull)conversation;
-- (void)urgentRequestDidFail:(Conversation * _Nonnull)conversation error:(NSError * _Nonnull)error;
-- (void)chatStateChanged:(Conversation * _Nonnull)conversation state:(NSString * _Nonnull)state;
-- (void)didChangeMessagesStatus:(Conversation * _Nonnull)conversation messages:(NSArray<Message *> * _Nonnull)messages;
-- (BOOL)isConversationRelatedToViewController:(Conversation * _Nonnull)conversation;
-- (void)conversationInitializedOnAMS:(Conversation * _Nonnull)conversation;
+- (void)didSendMessages:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
+- (void)didReceiveMessages:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
+- (void)resolveConvesationDidFail:(LPConversationEntity * _Nonnull)conversation error:(NSError * _Nonnull)error;
+- (void)resolveConvesationRequestDidFinish:(LPConversationEntity * _Nonnull)conversation;
+- (void)conversationDidResolve:(LPConversationEntity * _Nonnull)conversation;
+- (void)newConversationCreated:(LPConversationEntity * _Nonnull)conversation;
+- (void)urgentRequestDidFail:(LPConversationEntity * _Nonnull)conversation error:(NSError * _Nonnull)error;
+- (void)chatStateChanged:(LPConversationEntity * _Nonnull)conversation state:(NSString * _Nonnull)state;
+- (void)didChangeMessagesStatus:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
+- (BOOL)isConversationRelatedToViewController:(LPConversationEntity * _Nonnull)conversation;
+- (void)conversationInitializedOnAMS:(LPConversationEntity * _Nonnull)conversation;
 @optional
-- (void)didReceiveTTRUpdate:(Conversation * _Nonnull)conversation ttr:(TTRModel * _Nonnull)ttr;
-- (void)didUpdateProfile:(Conversation * _Nonnull)conversation userId:(NSString * _Nonnull)userId;
-- (void)csatScoreSubmissionDidFinish:(Conversation * _Nonnull)conversation rating:(NSInteger)rating;
-- (void)csatScoreSubmissionDidFail:(Conversation * _Nonnull)conversation error:(NSError * _Nonnull)error;
+- (void)didReceiveTTRUpdate:(LPConversationEntity * _Nonnull)conversation ttr:(TTRModel * _Nonnull)ttr;
+- (void)didUpdateProfile:(LPConversationEntity * _Nonnull)conversation userId:(NSString * _Nonnull)userId;
+- (void)csatScoreSubmissionDidFinish:(LPConversationEntity * _Nonnull)conversation csat:(CSATModel * _Nonnull)csat;
+- (void)csatScoreSubmissionDidFail:(LPConversationEntity * _Nonnull)conversation error:(NSError * _Nonnull)error;
 @required
 - (BOOL)isConversationVisible;
 - (NSString * _Nullable)brandAccountID;
@@ -255,61 +260,59 @@ SWIFT_PROTOCOL("_TtP5LPAMS18AMSManagerDelegate_")
 @end
 
 @class LPSections;
-@class User;
 
 SWIFT_CLASS("_TtC5LPAMS22ConversationDataSource")
 @interface ConversationDataSource : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 + (ConversationDataSource * _Nonnull)instance;
 - (LPSections * _Nullable)getLatestMessages:(id <ConversationParamProtocol> _Nonnull)query;
-- (LPSections * _Nonnull)getMessagesFromConversation:(Conversation * _Nonnull)conversation;
+- (LPSections * _Nonnull)getMessagesFromConversation:(LPConversationEntity * _Nonnull)conversation;
 
 /// Get messages for an older conversation if exists
 ///
 /// <ul><li>Get all converstions for query</li><li>Sort by creation date (newest is first)</li><li>Find the current conversation index</li><li>Find the next (older) conversation index</li><li>If current and next are different:<ul><li>Update the current conversation ref</li><li>Get messages of the next conversation</li></ul></li></ul>
-- (LPSections * _Nullable)getMessagesFromOlderConversation:(id <ConversationParamProtocol> _Nonnull)query firstMessageOfCurrentConversation:(Message * _Nonnull)firstMessageOfCurrentConversation;
+- (LPSections * _Nullable)getMessagesFromOlderConversation:(id <ConversationParamProtocol> _Nonnull)query firstMessageOfCurrentConversation:(LPMessageEntity * _Nonnull)firstMessageOfCurrentConversation;
 
 /// Get messages for an older conversation if exists
 ///
 /// <ul><li>Get all converstions for query</li><li>Sort by creation date (newest is first)</li><li>Find the current conversation index</li><li>Find the next (older) conversation index</li><li>If current and next are different:</li><li>Update the current conversation ref</li><li>Get messages of the next conversation</li></ul>
-- (Conversation * _Nullable)getOlderConversationForQueryMessagesIfExists:(id <ConversationParamProtocol> _Nonnull)query firstMessageOfCurrentConversation:(Message * _Nonnull)firstMessageOfCurrentConversation;
+- (LPConversationEntity * _Nullable)getOlderConversationForQueryMessagesIfExists:(id <ConversationParamProtocol> _Nonnull)query firstMessageOfCurrentConversation:(LPMessageEntity * _Nonnull)firstMessageOfCurrentConversation;
 
 /// <code>   Get all conversations per query and params.
 ///    - QueryParamProtocol: protocol of the current requested type
 /// 
 /// </code>
-- (NSArray<Conversation *> * _Nullable)getConversations:(id <ConversationParamProtocol> _Nonnull)query;
+- (NSArray<LPConversationEntity *> * _Nullable)getConversations:(id <ConversationParamProtocol> _Nonnull)query;
 
 /// Get all active conversations per query and params.
 ///
 /// <ul><li>QueryParamProtocol: protocol of the current requested type</li></ul>
-- (Conversation * _Nullable)getActiveConversation:(id <ConversationParamProtocol> _Nonnull)query;
+- (LPConversationEntity * _Nullable)getActiveConversation:(id <ConversationParamProtocol> _Nonnull)query;
 
 /// Get the newest (latest) close conversation if exists
 ///
 /// <ul><li>QueryParamProtocol: protocol of the current requested type</li></ul>
-- (NSArray<Conversation *> * _Nullable)getLatestClosedConversations:(id <ConversationParamProtocol> _Nonnull)query conversationsCount:(NSInteger)conversationsCount;
-- (Conversation * _Nonnull)createConversation:(id <ConversationParamProtocol> _Nonnull)query;
+- (NSArray<LPConversationEntity *> * _Nullable)getLatestClosedConversations:(id <ConversationParamProtocol> _Nonnull)query conversationsCount:(NSInteger)conversationsCount;
+- (LPConversationEntity * _Nonnull)createConversation:(id <ConversationParamProtocol> _Nonnull)query;
 
 /// Clear a dummy conversation and its assoicated messages. A dummy conversation is a conversation which is created and now only shows welcome message
-- (BOOL)clearDummyConversation:(Conversation * _Nonnull)conversation;
+- (BOOL)clearDummyConversation:(LPConversationEntity * _Nonnull)conversation;
 
 /// Get the assigned agent of the recent open/closed conversation if exists.
-- (User * _Nullable)getAssignedAgent:(id <ConversationParamProtocol> _Nonnull)query;
+- (LPUserEntity * _Nullable)getAssignedAgent:(id <ConversationParamProtocol> _Nonnull)query;
 @end
 
 
 SWIFT_CLASS("_TtC5LPAMS10LPSections")
 @interface LPSections : NSObject <NSCopying>
-@property (nonatomic, copy) NSDictionary<NSDate *, NSArray<Message *> *> * _Nonnull sections;
+@property (nonatomic, copy) NSDictionary<NSDate *, NSArray<LPMessageEntity *> *> * _Nonnull sections;
 - (id _Nonnull)copyWithZone:(struct _NSZone * _Null_unspecified)zone;
-- (NSArray<Message *> * _Nullable)objectForKeyedSubscript:(NSDate * _Nonnull)index;
-- (void)setObject:(NSArray<Message *> * _Nullable)newValue forKeyedSubscript:(NSDate * _Nonnull)index;
+- (NSArray<LPMessageEntity *> * _Nullable)objectForKeyedSubscript:(NSDate * _Nonnull)index;
+- (void)setObject:(NSArray<LPMessageEntity *> * _Nullable)newValue forKeyedSubscript:(NSDate * _Nonnull)index;
 @property (nonatomic, readonly) NSInteger count;
 @property (nonatomic, readonly) NSInteger countMessages;
 - (void)mergeWithMoreSections:(LPSections * _Nonnull)moreSections;
-- (LPSections * _Nonnull)initWithMessages:(NSArray<Message *> * _Nullable)messages;
-- (LPSections * _Nonnull)initWithMessage:(Message * _Nullable)message;
+- (LPSections * _Nonnull)initWithMessages:(NSArray<LPMessageEntity *> * _Nullable)messages;
+- (LPSections * _Nonnull)initWithMessage:(LPMessageEntity * _Nullable)message;
 - (void)removeAll;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end

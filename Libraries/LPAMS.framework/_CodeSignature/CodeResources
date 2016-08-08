@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/LPAMS-Swift.h</key>
 		<data>
-		4Rd/bNNKYgec/LBgtP1Ft3SQcOA=
+		bDvdjwMET5vqBfTMW1Eeolsf+jk=
 		</data>
 		<key>Headers/LPAMS.h</key>
 		<data>
@@ -14,23 +14,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ref/i1orq+3Mm0s+xwruY/Zhdfc=
+		DVZR4gMm+k6koBiSQ98BjpiJnVI=
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm.swiftdoc</key>
 		<data>
-		OfsuYwj85jqJ4trlPUEVx2djF/E=
+		T3TVwA6SQVV5/NYVeo5FQOvDbec=
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm.swiftmodule</key>
 		<data>
-		cWbAOojErfhpL2mtlMXBcyVGGco=
+		cYMn2XduWu+CBg46tP9FW2JHsgY=
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		4bWd9lcLJ6q14s7ekc4VKjwUZkg=
+		KqTRec0DK5u4Hm0FksWYE4513vM=
 		</data>
 		<key>Modules/LPAMS.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		g1IeivgG4Be3SDSeY3aIaaqTuPU=
+		KP59tV3XeeGBulP5OOyEY3or0qA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,11 +43,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4Rd/bNNKYgec/LBgtP1Ft3SQcOA=
+			bDvdjwMET5vqBfTMW1Eeolsf+jk=
 			</data>
 			<key>hash2</key>
 			<data>
-			NsO0Db6DLdEJekkiUtnZTg9Vw+7K+kR4Bu7LCaD6nro=
+			83A3a6qKvaI0hos5KSGh0SInW4n83zSgBqSFxxE+8Lo=
 			</data>
 		</dict>
 		<key>Headers/LPAMS.h</key>
@@ -65,44 +65,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OfsuYwj85jqJ4trlPUEVx2djF/E=
+			T3TVwA6SQVV5/NYVeo5FQOvDbec=
 			</data>
 			<key>hash2</key>
 			<data>
-			1civ3tl1x/M0xD+yoHiQQWqzPZ/GWyQo/xSR1fW+GYw=
+			9c9aUthR5zWIxDKmF6Z3q0OHKjuVmD2aPjC1uxx5B98=
 			</data>
 		</dict>
 		<key>Modules/LPAMS.swiftmodule/arm.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			cWbAOojErfhpL2mtlMXBcyVGGco=
+			cYMn2XduWu+CBg46tP9FW2JHsgY=
 			</data>
 			<key>hash2</key>
 			<data>
-			NlML6kKGc092XYkNDeo0wWwdN5oDo0pBYI2qsRP1uJ8=
+			Bx/XabH0bzGgm1EjCAIVeMJkL3wGJ+EBNoA+uEzsEIc=
 			</data>
 		</dict>
 		<key>Modules/LPAMS.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4bWd9lcLJ6q14s7ekc4VKjwUZkg=
+			KqTRec0DK5u4Hm0FksWYE4513vM=
 			</data>
 			<key>hash2</key>
 			<data>
-			CWkCcIq/XrKeIEL+Q/OSl66dfO6VJD4rm31bf6S18RI=
+			+8/R4OYgLSpKYG7DpNmx7KkgLGzaVj5Bv04JGK0TY3E=
 			</data>
 		</dict>
 		<key>Modules/LPAMS.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			g1IeivgG4Be3SDSeY3aIaaqTuPU=
+			KP59tV3XeeGBulP5OOyEY3or0qA=
 			</data>
 			<key>hash2</key>
 			<data>
-			EPV6WiHDPu9WLuFQgE17y3W+XYoaieUV95x8cT+VGvc=
+			Tl5qQEUGRWKZQu0/UlSxVI/M4ajCeq3af4aNuhRqNi8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

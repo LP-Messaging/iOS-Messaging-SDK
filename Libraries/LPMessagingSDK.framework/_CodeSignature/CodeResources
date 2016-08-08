@@ -6,15 +6,15 @@
 	<dict>
 		<key>Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		n6I9CUeOf+5D3i1/lBLDNk7fqCE=
+		dY119u2sOJTM5eA7lzjjhVgWiNQ=
 		</data>
 		<key>Headers/LPMessagingSDK.h</key>
 		<data>
-		pnWW1gn6NdzSGZmahQ0hio+fMtQ=
+		P20mwCGCwiz9jr3A1vxyFrlhD6E=
 		</data>
-		<key>Headers/TTTAttributedLabel.h</key>
+		<key>Headers/LPTTTAttributedLabel.h</key>
 		<data>
-		9XienzdXfPD+JYRuLA1gjoEk7JI=
+		6qmvoCNyPKSatacQg1CYAQCjoSo=
 		</data>
 		<key>Headers/UIRefreshControl+UITableView.h</key>
 		<data>
@@ -26,19 +26,19 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm.swiftdoc</key>
 		<data>
-		eB0zcvsNeeJ4xLOa924oeKRUiMU=
+		RJIGuS6dlQTGERdcmkddQU/pduY=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm.swiftmodule</key>
 		<data>
-		OOA8dR+RtyFUwBYThMbvCtsHztQ=
+		/SDIB2+p2xgOSI7xbg0fRCtcJEY=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		LlLmwq7gGCsYxFmuZ1jQIzpEqy4=
+		uJXdRcOdqB7bQg7Q89a767GzFS0=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		umZnioWB3B/mLplnwNZMRGaYE/M=
+		cuu8LQzxk/G4eJR5ipNlKhIxjWo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -51,33 +51,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			n6I9CUeOf+5D3i1/lBLDNk7fqCE=
+			dY119u2sOJTM5eA7lzjjhVgWiNQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			eume1wmUyVf+ftAbIDlDPV8el+ANLRvkZIjF3SlYQ2o=
+			Qdf/BeMBw5O5yA9/DLDvZAvvSsdWLgom/zdVNQYLEHA=
 			</data>
 		</dict>
 		<key>Headers/LPMessagingSDK.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pnWW1gn6NdzSGZmahQ0hio+fMtQ=
+			P20mwCGCwiz9jr3A1vxyFrlhD6E=
 			</data>
 			<key>hash2</key>
 			<data>
-			0a73isuik+BLuXQRFLGTdKgJ0wiEZnumXz/kU1cHa8M=
+			ZdB6HQk3OGa1UsEx6LQgH2LF9hFvdhbEH0EPxf1KbWc=
 			</data>
 		</dict>
-		<key>Headers/TTTAttributedLabel.h</key>
+		<key>Headers/LPTTTAttributedLabel.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9XienzdXfPD+JYRuLA1gjoEk7JI=
+			6qmvoCNyPKSatacQg1CYAQCjoSo=
 			</data>
 			<key>hash2</key>
 			<data>
-			gotDHluU/gDn3f0QNe7m/tHQrCiH0HXO7yTv05C65+I=
+			8Dfcsemy9cdtKjlqqwWGoL9DK+CHre0OdwYLMOqRCJ0=
 			</data>
 		</dict>
 		<key>Headers/UIRefreshControl+UITableView.h</key>
@@ -95,44 +95,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			eB0zcvsNeeJ4xLOa924oeKRUiMU=
+			RJIGuS6dlQTGERdcmkddQU/pduY=
 			</data>
 			<key>hash2</key>
 			<data>
-			IsD+RO6wxuSlyoFARoEZ8k07GLJ7oL4TjPznCYRk6KE=
+			73KMQu/LJNLkfiIRCWAjDzubfzLpWEZAwFCJfsLRy44=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OOA8dR+RtyFUwBYThMbvCtsHztQ=
+			/SDIB2+p2xgOSI7xbg0fRCtcJEY=
 			</data>
 			<key>hash2</key>
 			<data>
-			VSOEYCAEwYnEGSgwaCGY9lOaBsanweOWGXBC0l64hdk=
+			0I29WNSKrxynPWGe0lEf/nS+6wQaMpvHpUk5cUy/zWY=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LlLmwq7gGCsYxFmuZ1jQIzpEqy4=
+			uJXdRcOdqB7bQg7Q89a767GzFS0=
 			</data>
 			<key>hash2</key>
 			<data>
-			HbuBK5KMwm52MpgiAB2KfAqImULMurttiGEoPkTmAOQ=
+			yovRjTd8mXaWOXLz5Z7zr9xXECc0E33U/bz01YC5J1c=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			umZnioWB3B/mLplnwNZMRGaYE/M=
+			cuu8LQzxk/G4eJR5ipNlKhIxjWo=
 			</data>
 			<key>hash2</key>
 			<data>
-			qlS1d9lgqh0/yjHgxvCUxZquqEmJ+UIxaUqeOyAPJZg=
+			SV1ibcojdDA43lTIUJeVYDxUw3Szdfs7clEv+h1dk7s=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
