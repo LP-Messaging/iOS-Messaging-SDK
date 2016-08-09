@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/LPInfra-Swift.h</key>
 		<data>
-		ZpHVNBITKCJOuHx3Hbtkcb5CJ9g=
+		LXHiCPylE3yrLHzAdUrKqFWeVsU=
 		</data>
 		<key>Headers/LPInfra.h</key>
 		<data>
@@ -48,9 +48,9 @@
 		<data>
 		msAJ4jLQS1RbaVqhAQSzSmgGzpo=
 		</data>
-		<key>LPInfra</key>
+		<key>Info.plist</key>
 		<data>
-		KGCQdReULk2FlrSXlpenFTe9vAs=
+		Vdpqxx4dZem5KHE6yIS8o2hsZLo=
 		</data>
 		<key>Modules/LPInfra.swiftmodule/arm.swiftdoc</key>
 		<data>
@@ -58,7 +58,7 @@
 		</data>
 		<key>Modules/LPInfra.swiftmodule/arm.swiftmodule</key>
 		<data>
-		mCUbNAYvJSgS7tcXbb8TRFAbF/4=
+		3w5ZFFUgDzcArLIUVfkD7I+rOhE=
 		</data>
 		<key>Modules/LPInfra.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Modules/LPInfra.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		c/0H6w+NkLRc2qlW+ocM0XfxXBM=
+		47YYOxEew5+fO9gIZ3sGyOpFfQU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -90,11 +90,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZpHVNBITKCJOuHx3Hbtkcb5CJ9g=
+			LXHiCPylE3yrLHzAdUrKqFWeVsU=
 			</data>
 			<key>hash2</key>
 			<data>
-			BD/ykO1hDW4dPYIPz2yz6kCFc+0bsD7ltkZP64ulapQ=
+			M60BBdIMkyHOAmYblZl3wfcmLYAl1zkMsJg2uGpq8PA=
 			</data>
 		</dict>
 		<key>Headers/LPInfra.h</key>
@@ -196,17 +196,6 @@
 			xSGN9U5nwqAUaqqxzMWuvy4C2L+s6DbrgB7QMzF3R8w=
 			</data>
 		</dict>
-		<key>LPInfra</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			KGCQdReULk2FlrSXlpenFTe9vAs=
-			</data>
-			<key>hash2</key>
-			<data>
-			GRFCD22ojGSqSC0Gt425DOMiKKdNRVNSBu+CjpV5n44=
-			</data>
-		</dict>
 		<key>Modules/LPInfra.swiftmodule/arm.swiftdoc</key>
 		<dict>
 			<key>hash</key>
@@ -222,11 +211,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			mCUbNAYvJSgS7tcXbb8TRFAbF/4=
+			3w5ZFFUgDzcArLIUVfkD7I+rOhE=
 			</data>
 			<key>hash2</key>
 			<data>
-			yrVP4AekO9q8QkaVkj1irL/teRjpnDIHWxZcP3fCteo=
+			mTzpxLYVIi4glc0d+D/7++/NN9msRvBgt/G/6bkjRMQ=
 			</data>
 		</dict>
 		<key>Modules/LPInfra.swiftmodule/arm64.swiftdoc</key>
@@ -244,11 +233,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			c/0H6w+NkLRc2qlW+ocM0XfxXBM=
+			47YYOxEew5+fO9gIZ3sGyOpFfQU=
 			</data>
 			<key>hash2</key>
 			<data>
-			0UtMcNi2eXpssehya8+1HDp/ETqinrsWNahtto6VHNU=
+			DCzTQz0ydZ9zGT+bJwGL0aJ0f7OpKT+OGBUzq+EsuHk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
