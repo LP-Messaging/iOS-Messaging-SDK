@@ -7,38 +7,13 @@ Find the full documentation, including Objective-C guide in the integration guid
 * Copy the files into the project, including the bundle file
 In project settings, navigate to the General tab, and add all Framework files to the Embedded Binaries section.
 
+* If you are using Xcode 8 with iOS 10 (or later): In project setting, navigate to Capabilities and enable Keychain Sharing. LiveEngage iOS SDK uses keychain to store sensitive settings and data. This step is a workaround for an open Apple’s bug that fails to use keychain store in Xcode 8 and iOS 10: https://openradar.appspot.com/27422249
 
-* In project settings, navigate to the Build Phases tab, and add with the ‘+’ button “New      Run Script Phase”. Add the following script in order to  loop through the frameworks embedded in the application and remove unused architectures.
+* In project settings, navigate to the Build Phases tab, and click the + button to add a New Run Script Phase. Add the following script in order to loop through the frameworks embedded in the application and remove unused architectures (used for simulator). This step is a workaround for a known iOS issue http://www.openradar.me/radar?id=6409498411401216 and is necessary for archiving your app before publishing it to the App Store.
 
 ```
-APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
+bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/LPInfra.framework/frameworks-strip.sh"
 
-# This script loops through the frameworks embedded in the application and
-# removes unused architectures.
-find "$APP_PATH" -name '*.framework' -type d | while read -r FRAMEWORK
-do
-    FRAMEWORK_EXECUTABLE_NAME=$(defaults read "$FRAMEWORK/Info.plist" CFBundleExecutable)
-    FRAMEWORK_EXECUTABLE_PATH="$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME"
-    echo "Executable is $FRAMEWORK_EXECUTABLE_PATH"
-
-    EXTRACTED_ARCHS=()
-
-    for ARCH in $ARCHS
-    do
-        echo "Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME"
-        lipo -extract "$ARCH" "$FRAMEWORK_EXECUTABLE_PATH" -o "$FRAMEWORK_EXECUTABLE_PATH-$ARCH"
-        EXTRACTED_ARCHS+=("$FRAMEWORK_EXECUTABLE_PATH-$ARCH")
-    done
-
-    echo "Merging extracted architectures: ${ARCHS}"
-    lipo -o "$FRAMEWORK_EXECUTABLE_PATH-merged" -create "${EXTRACTED_ARCHS[@]}"
-    rm "${EXTRACTED_ARCHS[@]}"
-
-    echo "Replacing original executable with thinned version"
-    rm "$FRAMEWORK_EXECUTABLE_PATH"
-    mv "$FRAMEWORK_EXECUTABLE_PATH-merged" "$FRAMEWORK_EXECUTABLE_PATH"
-
-done
 ```
 
 ### Initialization
