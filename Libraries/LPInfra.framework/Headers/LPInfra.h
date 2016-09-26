@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BSMobileProvision.h"
 #import "SRWebSocket.h"
 #import "SRDelegateController.h"
 #import "SRIOConsumer.h"
@@ -16,7 +15,8 @@
 #import "SRRunLoopThread.h"
 #import "SRURLUtilities.h"
 #import "SRError.h"
-#import "BSMobileProvision.h"
+#import "LPBSMobileProvision.h"
+#import "LPNetworkHelper.h"
 
 //! Project version number for Infra.
 FOUNDATION_EXPORT double InfraVersionNumber;
