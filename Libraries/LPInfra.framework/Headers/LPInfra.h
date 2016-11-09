@@ -17,6 +17,8 @@
 #import "SRError.h"
 #import "LPBSMobileProvision.h"
 #import "LPNetworkHelper.h"
+#import "ExceptionCatcher.h"
+#import "CIContext+Workaround.h"
 
 //! Project version number for Infra.
 FOUNDATION_EXPORT double InfraVersionNumber;
