@@ -9,5 +9,5 @@
 #import <CoreImage/CoreImage.h>
 
 @interface CIContext (Workaround)
-+ (nonnull CIContext *)lp_contextWithOptions:(NSDictionary<NSString *, id> *)options;
++ (nonnull CIContext *)lp_contextWithOptions:(nullable NSDictionary<NSString *, id> *)options;
 @end

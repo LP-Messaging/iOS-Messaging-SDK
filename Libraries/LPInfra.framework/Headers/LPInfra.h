@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SRWebSocket.h"
 #import "SRDelegateController.h"
+#import "SRSecurityPolicy.h"
 #import "SRIOConsumer.h"
 #import "SRIOConsumerPool.h"
 #import "SRHash.h"
