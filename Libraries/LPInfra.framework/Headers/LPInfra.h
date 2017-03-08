@@ -20,6 +20,19 @@
 #import "LPNetworkHelper.h"
 #import "ExceptionCatcher.h"
 #import "CIContext+Workaround.h"
+#import "NSRunLoop+SRWebSocket.h"
+#import "NSRunLoop+SRWebSocketPrivate.h"
+#import "NSURLRequest+SRWebSocket.h"
+#import "NSURLRequest+SRWebSocketPrivate.h"
+#import "SRConstants.h"
+#import "SRHTTPConnectMessage.h"
+#import "SRLog.h"
+#import "SRMutex.h"
+#import "SRPinningSecurityPolicy.h"
+#import "SRProxyConnect.h"
+#import "SRRandom.h"
+#import "SRSIMDHelpers.h"
+
 
 //! Project version number for Infra.
 FOUNDATION_EXPORT double InfraVersionNumber;

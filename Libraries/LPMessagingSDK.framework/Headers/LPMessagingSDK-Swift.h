@@ -335,7 +335,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
   Create resolved system message for conversation, according to resolving side
   Timestamp - when agent resolved we take the timestamp from server, when consumer resolved we take now.
 */
-+ (LPMessageEntity * _Nullable)createResolveLocalMessage:(LPConversationEntity * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nonnull)endTime;
++ (LPMessageEntity * _Nullable)createResolveLocalMessage:(LPConversationEntity * _Nonnull)conversation endTime:(NSDate * _Nonnull)endTime;
 /**
   Creates local system message for masked message according to the current masking type:
   \param conversation conversation that the message will be added to
@@ -791,6 +791,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKAgentIsTypingStateChanged:(BOOL)isTyping;
 - (void)LPMessagingSDKConversationStarted:(NSString * _Nullable)conversationID;
 - (void)LPMessagingSDKConversationEnded:(NSString * _Nullable)conversationID;
+- (void)LPMessagingSDKConversationEnded:(NSString * _Nullable)conversationID closeReason:(enum LPConversationCloseReason)closeReason;
 - (void)LPMessagingSDKConversationCSATDismissedOnSubmittion:(NSString * _Nullable)conversationID;
 - (void)LPMessagingSDKConnectionStateChanged:(BOOL)isReady brandID:(NSString * _Nonnull)brandID;
 - (void)LPMessagingSDKOffHoursStateChanged:(BOOL)isOffHours brandID:(NSString * _Nonnull)brandID;

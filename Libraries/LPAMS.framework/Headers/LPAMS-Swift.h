@@ -281,7 +281,7 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
   Create resolved system message for conversation, according to resolving side
   Timestamp - when agent resolved we take the timestamp from server, when consumer resolved we take now.
 */
-+ (LPMessageEntity * _Nullable)createResolveLocalMessage:(LPConversationEntity * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nonnull)endTime;
++ (LPMessageEntity * _Nullable)createResolveLocalMessage:(LPConversationEntity * _Nonnull)conversation endTime:(NSDate * _Nonnull)endTime;
 /**
   Creates local system message for masked message according to the current masking type:
   \param conversation conversation that the message will be added to

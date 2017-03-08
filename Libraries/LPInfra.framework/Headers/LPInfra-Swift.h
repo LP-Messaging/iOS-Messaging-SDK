@@ -535,6 +535,10 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 */
 @property (nonatomic, strong) UIColor * _Nonnull conversationSeparatorTextColor;
 /**
+  Toggle vibration sound when a new message from a remote user received
+*/
+@property (nonatomic) BOOL enableVibrationOnMessageFromRemoteUser;
+/**
   Scroll to bottom button background color of the whole button
 */
 @property (nonatomic, strong) UIColor * _Nonnull scrollToBottomButtonBackgroundColor;
@@ -715,7 +719,7 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 */
 @property (nonatomic, copy) NSString * _Nonnull offHoursTimeZoneName;
 /**
-  Enable toast notifications such as offline notifications
+  Enable toast notifications such as offline and TTR notifications
 */
 @property (nonatomic) BOOL toastNotificationsEnabled;
 /**
@@ -817,7 +821,7 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 */
 @property (nonatomic) UIStatusBarStyle conversationStatusBarStyle;
 /**
-  Enable or disable photo sharing feature
+  Enable or disable real time link preview feature when the consumer is typing a url
 */
 @property (nonatomic) BOOL enableRealTimeLinkPreview;
 /**
@@ -826,6 +830,10 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
   large - Large preview space with a large image, a title and a description
 */
 @property (nonatomic) enum LPUrlPreviewStyle urlPreviewStyle;
+/**
+  urlPreview will also use non og tags to parse urls instead of using only og tags if useNonOGTagsForLinkPreview is true
+*/
+@property (nonatomic) BOOL useNonOGTagsForLinkPreview;
 /**
   urlRealTimePreviewBackgroundColor is the color of the background color of the main view
 */
@@ -867,6 +875,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPConfig * _
 + (void)printAllConfigurations;
 @end
 
+typedef SWIFT_ENUM(NSInteger, LPConversationCloseReason) {
+  LPConversationCloseReasonAgent = 0,
+  LPConversationCloseReasonConsumer = 1,
+  LPConversationCloseReasonSystem = 2,
+};
+
 @class NSOrderedSet;
 @class NSNumber;
 @class NSMutableSet;
@@ -886,6 +900,7 @@ SWIFT_CLASS("_TtC7LPInfra20LPConversationEntity")
 @property (nonatomic) BOOL hidden;
 @property (nonatomic) BOOL resolved;
 @property (nonatomic) BOOL isResolvedByRemoteUser;
+@property (nonatomic, copy) NSString * _Nullable closeReason;
 @property (nonatomic, copy) NSString * _Nonnull ttrTypeRaw;
 @property (nonatomic, copy) NSString * _Nullable type;
 @property (nonatomic, copy) NSString * _Nullable assignedAgentId;
@@ -907,6 +922,7 @@ SWIFT_CLASS("_TtC7LPInfra20LPConversationEntity")
 - (BOOL)isActivityInIdle;
 - (NSArray<LPMessageEntity *> * _Nonnull)getMessagesPage:(NSInteger)from pageSize:(NSInteger)pageSize;
 - (BOOL)isCurrentlyUrgent;
+@property (nonatomic, readonly) BOOL isResolvedAutomatically;
 /**
   Sequence number is received from the QueryMessages or from OnlineEvent messages. Sequence number is increased by the server for both new message and accept status (ACCEPT/READ).
   If the sequence number is following to what we have, set it as the last one
@@ -915,7 +931,7 @@ SWIFT_CLASS("_TtC7LPInfra20LPConversationEntity")
 */
 - (void)acceptSequence:(NSInteger)seq;
 - (void)resolve;
-- (void)resolve:(BOOL)byAgent;
+- (void)resolve:(NSString * _Nonnull)closeReason;
 /**
   TODO:
   Move this function to UITimestampsFormatter once the new system messages will be implemented and the timestamp will not be saved to DB.
@@ -1782,6 +1798,7 @@ SWIFT_CLASS("_TtC7LPInfra8TTRModel")
 
 SWIFT_CLASS("_TtC7LPInfra5Toast")
 @interface Toast : UIView
+@property (nonatomic, copy) NSString * _Nullable name;
 @property (nonatomic, copy) void (^ _Nullable didShow)(void);
 @property (nonatomic, copy) void (^ _Nullable didDismiss)(void);
 @property (nonatomic, copy) void (^ _Nullable didTap)(void);
@@ -1813,6 +1830,12 @@ SWIFT_CLASS("_TtC7LPInfra7Toaster")
 
 */
 - (void)dismissWithToast:(Toast * _Nonnull)toast;
+/**
+  Dismisses all toasts of a specific type
+  \param type A type of toast to dismiss
+
+*/
+- (void)dismissToastByName:(NSString * _Nonnull)name;
 /**
   Dissmis all toasts
 */
@@ -1906,6 +1929,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) OS_dispatch_
   Show Local iOS notification
 */
 + (void)showLocalNotification:(NSString * _Nonnull)text uid:(NSString * _Nullable)uid;
+/**
+  Play vibration sound based on iOS system vibration method
+*/
++ (void)playVibrationSound;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
