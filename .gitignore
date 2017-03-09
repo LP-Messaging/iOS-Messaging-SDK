@@ -1,0 +1,14 @@
+.idea
+LPMessagingSDKMaker.xcodeproj/project.xcworkspace/xcuserdata/
+LPMessagingSDKMaker.xcodeproj/xcuserdata/
+.DS_Store
+
+LPResources/LPMessagingSDKiOS
+
+LPMessagingSDKMaker.xcworkspace/xcshareddata/LPMessagingSDKMaker.xcscmblueprint
+LPMessagingSDKMaker.xcworkspace/contents.xcworkspacedata
+LPMessagingSDKMaker.xcworkspace/xcuserdata
+LPMessagingSDKMaker.xcworkspace/xcuserdata/nirla.xcuserdatad/UserInterfaceState.xcuserstate
+
+Pods
+Podfile.lock
