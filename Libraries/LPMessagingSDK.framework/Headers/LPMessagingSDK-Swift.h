@@ -162,10 +162,12 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")
 @class CSATModel;
 @class LPFileEntity;
 @class UIImage;
+@class RequestSwiftURL;
 @class Ring;
+@class LPFormEntity;
+@class LPCustomItemEntity;
 @class LPWebSocket;
 @class LPUserEntity;
-@class LPCustomItemEntity;
 
 /// An public API for all messaging capabilities
 SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
@@ -243,7 +245,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 ///   </li>
 /// </ul>
 + (void)reconnectToSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nullable)authenticationCode readyCompletion:(void (^ _Nullable)(void))readyCompletion;
-/// Perform disconnect from socket for conversationQuery
+/// Perform disconnect from socket for conversationQuery.
+/// You can choose to disconnect the socket aftet delay of predefined time
+/// \param conversationQuery conversationQuery where to socket belongs to
+///
+/// \param shouldUseDelay determines whether to keep socket open for delay
+///
 + (void)disconnectSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
 /// Clear history of all closed conversations and their messages from the database.
 /// This method is allowed only if there is no active/open conversation.
@@ -302,6 +309,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 + (void)uploadFileFromDiskWithMessage:(LPMessageEntity * _Nonnull)message conversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Downloads a file from Swift server and returns an image to show
 + (void)downloadFileWithConversation:(LPConversationEntity * _Nonnull)conversation file:(LPFileEntity * _Nonnull)file completion:(void (^ _Nonnull)(UIImage * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Requests the AMS for an upload url for swift server
++ (void)requestUploadURLWithConversation:(LPConversationEntity * _Nonnull)conversation fileSize:(double)fileSize fileExtention:(NSString * _Nonnull)fileExtention completion:(void (^ _Nonnull)(RequestSwiftURL * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Requests the AMS for a download url from swift server
++ (void)requestDownloadURLWithConversation:(LPConversationEntity * _Nonnull)conversation file:(LPFileEntity * _Nonnull)file completion:(void (^ _Nonnull)(RequestSwiftURL * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Clear all singleton managers with their properties from memory.
 /// This method will release any data objects and data structures.
 + (void)clearManagers;
@@ -316,13 +327,32 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// returns:
 /// Dictionary of ConversationId:Conversation
 + (NSDictionary<NSString *, NSArray<LPConversationEntity *> *> * _Nonnull)getConversationsByConsumers SWIFT_WARN_UNUSED_RESULT;
+/// Prepare secure form to be open in a webview
+/// This method generates read and write OTK from UMS and build URL to be used for PCI GW
+/// \param form form object to get the url for
+///
+/// \param completion completion block when the form is ready - url and token are valid
+///
+/// \param failure failure block with error
+///
++ (void)prepareSecureFormWithForm:(LPFormEntity * _Nonnull)form completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Gets structure content messages with a state of “loading”
+///
+/// returns:
+/// Optional array of messages
++ (NSArray<LPMessageEntity *> * _Nullable)getLoadingStructureContentMessages SWIFT_WARN_UNUSED_RESULT;
+/// Gets structure content boards with a state of “loading”
+///
+/// returns:
+/// Optional array of custom boards
++ (NSArray<LPCustomItemEntity *> * _Nullable)getLoadingStructureContentCustomItems SWIFT_WARN_UNUSED_RESULT;
 /// Get current WebSocket (LPWebSocket) for brand if exists
 + (LPWebSocket * _Nullable)getSocket:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
 /// Open and reconnect each WebSocket in the web sockets map.
 + (void)openAllSockets;
 /// Open and reconnect single WebSocket and assign to web sockets map.
 /// This method creates new WebSocket instances based on the previous ones because we can’t reuse WebSocket instances.
-+ (void)openSocket:(LPWebSocket * _Nullable)webSocket;
++ (void)openSocket:(LPWebSocket * _Nonnull)webSocket;
 /// Close all sockets in the web sockets map
 /// We DON’T remove the web sockets from the map in order to be able to re-create web socket from a previous one
 + (void)closeAllSockets;
@@ -405,6 +435,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// Set token for Pusher service in order to be able to receive remote push notifications
 /// Optional - alternateBundleID, set custom bundle ID for Pusher with for the token
 + (void)setPusherTokenWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
+/// Set token for VoIP Pusher service in order to be able to receive remote calls
+/// Optional - alternateBundleID, set custom bundle ID for Pusher with for the token
++ (void)setPusherVoipTokenWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
 /// Register pusher with push notification token received from APNS (Apple).
 /// Before registering the Pusher, we make sure have the following params:
 /// <ul>
@@ -447,16 +480,11 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// Determine if network is reachable using reachability framework
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReachable;)
 + (BOOL)isNetworkReachable SWIFT_WARN_UNUSED_RESULT;
-/// Gets structure content messages with a state of “loading”
+/// Get open conversation from DB
 ///
 /// returns:
-/// Optional array of messages
-+ (NSArray<LPMessageEntity *> * _Nullable)getLoadingStructureContentMessages SWIFT_WARN_UNUSED_RESULT;
-/// Gets structure content boards with a state of “loading”
-///
-/// returns:
-/// Optional array of custom boards
-+ (NSArray<LPCustomItemEntity *> * _Nullable)getLoadingStructureContentCustomItems SWIFT_WARN_UNUSED_RESULT;
+/// an open conversation if exists - if none, returns nil
++ (LPConversationEntity * _Nullable)getOpenConveration SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -512,6 +540,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 /// <notificationDelegate> is the implementer of LPMessagingSDKNotificationDelegate.
 /// <alternateBundleID> is a value for using in order to let the Pusher service to identify the host app with this bundle identifier.
 - (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID;
+- (void)registerVoipPushNotificationsWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
 /// This method created ConversationParamProtocol of Brand query type.
 - (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
 /// This method created ConversationParamProtocol of Brand and Skill query type.
@@ -663,6 +692,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK22RemoteUserIsTypingView")
 @interface RemoteUserIsTypingView : UIView
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (void)awakeFromNib;
 @end
 
 @class UITextView;

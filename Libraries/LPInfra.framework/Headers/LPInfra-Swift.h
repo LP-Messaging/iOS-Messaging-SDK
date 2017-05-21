@@ -144,6 +144,23 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
+
+SWIFT_CLASS("_TtC7LPInfra15GeneralResponse")
+@interface GeneralResponse : NSObject
+@property (nonatomic, copy) NSString * _Nullable kind;
+@property (nonatomic, copy) NSString * _Nullable reqId;
+@property (nonatomic, copy) NSString * _Nullable type;
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSString * _Nonnull responseDescription;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra22AgentStateNotification")
+@interface AgentStateNotification : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class LPConversationEntity;
 @class NSPredicate;
 
@@ -228,10 +245,48 @@ SWIFT_CLASS("_TtC7LPInfra13ConsumerQuery")
 @end
 
 
+SWIFT_CLASS("_TtC7LPInfra30ConversationChangeNotification")
+@interface ConversationChangeNotification : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+SWIFT_CLASS("_TtC7LPInfra13ErrorResponse")
+@interface ErrorResponse : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra32ExConversationChangeNotification")
+@interface ExConversationChangeNotification : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 SWIFT_PROTOCOL("_TtP7LPInfra22GeneralManagerProtocol_")
 @protocol GeneralManagerProtocol
 - (void)clearManager;
+@end
+
+
+
+SWIFT_CLASS("_TtC7LPInfra15GetBrandProfile")
+@interface GetBrandProfile : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra8GetClock")
+@interface GetClock : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra14GetUserProfile")
+@interface GetUserProfile : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithAcCdnDictionary:(NSDictionary<NSString *, id> * _Nonnull)acCdnDictionary OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class LPBrandEntity;
@@ -594,6 +649,30 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull urlRealTimePreviewTitleTextColor;
 /// urlRealTimePreviewDescriptionTextColor is the color of the description at the bottom of the main view
 @property (nonatomic, strong) UIColor * _Nonnull urlRealTimePreviewDescriptionTextColor;
+/// Back button color in secure form screen
+@property (nonatomic, strong) UIColor * _Nonnull secureFormBackButtonColor;
+/// Should display status bar of the secure form screen in Light Content Mode (UIStatusBarStyle)
+@property (nonatomic) BOOL secureFormUIStatusBarStyleLightContent;
+/// Background color of navigation bar in secure form screen
+@property (nonatomic, strong) UIColor * _Nonnull secureFormNavigationBackgroundColor;
+/// Navigation title color in secure form screen
+@property (nonatomic, strong) UIColor * _Nonnull secureFormNavigationTitleColor;
+/// Secure form bubble background color
+@property (nonatomic, strong) UIColor * _Nonnull secureFormBubbleBackgroundColor;
+/// Secure form bubble border color
+@property (nonatomic, strong) UIColor * _Nonnull secureFormBubbleBorderColor;
+/// Secure form bubble border width in pixels
+@property (nonatomic) double secureFormBubbleBorderWidth;
+/// Secure form bubble form title color
+@property (nonatomic, strong) UIColor * _Nonnull secureFormBubbleTitleColor;
+/// Secure form bubble form description color
+@property (nonatomic, strong) UIColor * _Nonnull secureFormBubbleDescriptionColor;
+/// Secure form bubble fill form button text color
+@property (nonatomic, strong) UIColor * _Nonnull secureFormBubbleFillFormButtonTextColor;
+/// Secure form bubble fill form button background color
+@property (nonatomic, strong) UIColor * _Nonnull secureFormBubbleFillFormButtonBackgroundColor;
+/// Secure form bubble form image tint color
+@property (nonatomic, strong) UIColor * _Nonnull secureFormBubbleFormImageTintColor;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPConfig * _Nonnull defaultConfiguration;)
 + (LPConfig * _Nonnull)defaultConfiguration SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -763,6 +842,29 @@ SWIFT_CLASS("_TtC7LPInfra12LPFileEntity")
 @property (nonatomic, readonly) BOOL isTransferring;
 @end
 
+
+SWIFT_CLASS("_TtC7LPInfra12LPFormEntity")
+@interface LPFormEntity : NSManagedObject
+@property (nonatomic, copy) NSString * _Nonnull formID;
+@property (nonatomic, copy) NSString * _Nonnull invitationID;
+@property (nonatomic, copy) NSString * _Nonnull state;
+@property (nonatomic, copy) NSString * _Nullable title;
+@property (nonatomic, copy) NSString * _Nullable submissionID;
+@property (nonatomic, strong) NSOrderedSet * _Nonnull ownerMessages;
+@property (nonatomic, copy) NSString * _Nullable readOTK;
+@property (nonatomic, copy) NSString * _Nullable writeOTK;
+@property (nonatomic, copy) NSURL * _Nullable url;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface LPFormEntity (SWIFT_EXTENSION(LPInfra))
+/// Create new File instance with UID
++ (LPFormEntity * _Nonnull)createNewFormWithFormID:(NSString * _Nonnull)formID invitationID:(NSString * _Nonnull)invitationID title:(NSString * _Nullable)title ownerMessage:(LPMessageEntity * _Nonnull)ownerMessage SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly, strong) LPConversationEntity * _Nonnull ownerConversation;
+@end
+
 @class LPWebSocket;
 @class LPUser;
 
@@ -782,7 +884,7 @@ SWIFT_CLASS("_TtC7LPInfra13LPInfraFacade")
 + (void)openAllSockets;
 /// Open and reconnect single WebSocket and assign to web sockets map.
 /// This method creates new WebSocket instances based on the previous ones because we can’t reuse WebSocket instances.
-+ (void)openSocket:(LPWebSocket * _Nullable)webSocket;
++ (void)openSocket:(LPWebSocket * _Nonnull)webSocket;
 /// Close all sockets in the web sockets map
 /// We DON’T remove the web sockets from the map in order to be able to re-create web socket from a previous one
 + (void)closeAllSockets;
@@ -851,6 +953,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 /// returns:
 /// If conversation doens’t exist in DB nil will be returned
 + (LPConversationEntity * _Nullable)getConversationByHandlerID:(NSString * _Nonnull)handlerID SWIFT_WARN_UNUSED_RESULT;
+/// Get open conversation from DB
+///
+/// returns:
+/// an open conversation if exists - if none, returns nil
++ (LPConversationEntity * _Nullable)getOpenConveration SWIFT_WARN_UNUSED_RESULT;
 /// This method fetch user profile from the server.
 /// <ul>
 ///   <li>
@@ -912,9 +1019,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 + (UIImage * _Nullable)getImageByURL:(NSString * _Nonnull)url SWIFT_WARN_UNUSED_RESULT;
 /// Send local notification (from type: UILocalNotification) in iOS notification center
 + (void)sendLocalNotification:(NSString * _Nonnull)text uid:(NSString * _Nullable)uid;
-/// Set token for Pusher service in order to be able to receive remote push notifications
-/// Optional - alternateBundleID, set custom bundle ID for Pusher with for the token
-+ (void)setPusherTokenWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
 + (NSString * _Nonnull)getAppIdentifier SWIFT_WARN_UNUSED_RESULT;
 /// Register pusher with push notification token received from APNS (Apple).
 /// Before registering the Pusher, we make sure have the following params:
@@ -1001,10 +1105,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 /// </ul>
 + (NSArray<LPConversationEntity *> * _Nullable)getLatestClosedConversations:(id <ConversationParamProtocol> _Nonnull)query conversationsCount:(NSInteger)conversationsCount SWIFT_WARN_UNUSED_RESULT;
 + (LPConversationEntity * _Nonnull)createConversation:(id <ConversationParamProtocol> _Nonnull)query SWIFT_WARN_UNUSED_RESULT;
-/// Clear a dummy conversation and its assoicated messages.
-/// A dummy conversation is a conversation which is created and now only shows welcome message
+/// Clear a initial created conversation and its assoicated messages.
+/// An initial created conversation is a conversation which is created and now only shows welcome message
 /// Before removing the conversation, we are checking that there is no multiple messages which are still not sent to prevent cases when new conversation with messages still not synced with server and may be deleted
-+ (BOOL)clearDummyConversation:(LPConversationEntity * _Nonnull)conversation SWIFT_WARN_UNUSED_RESULT;
+/// \param conversation initial conversation to delete from DB
+///
+///
+/// returns:
+/// true if deleted from DB, else false
++ (BOOL)clearInitialCreatedConversation:(LPConversationEntity * _Nonnull)conversation SWIFT_WARN_UNUSED_RESULT;
 /// Get the assigned agent of the recent open/closed conversation if exists.
 + (LPUserEntity * _Nullable)getAssignedAgent:(id <ConversationParamProtocol> _Nonnull)query SWIFT_WARN_UNUSED_RESULT;
 /// Returns the message boards if exist.
@@ -1082,6 +1191,7 @@ SWIFT_CLASS("_TtC7LPInfra15LPMessageEntity")
 @property (nonatomic, strong) LPConversationEntity * _Nonnull ownerConversation;
 @property (nonatomic, strong) LPUserEntity * _Nullable ownerUser;
 @property (nonatomic, strong) LPFileEntity * _Nullable file;
+@property (nonatomic, strong) LPFormEntity * _Nullable form;
 @property (nonatomic, copy) NSString * _Nullable eventId;
 @property (nonatomic, strong) NSOrderedSet * _Nullable customBoards;
 @property (nonatomic, copy) NSString * _Nullable structureContentState;
@@ -1169,7 +1279,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPSDKManager
 ///
 /// \param completion a boolean in a completion block. The SDK is applicable if the current version is greater or euqal to the fetched value
 ///
-+ (void)isVersionApplicableWithBrandID:(NSString * _Nonnull)brandID completion:(void (^ _Nonnull)(BOOL))completion;
++ (void)isVersionApplicableWithBrandID:(NSString * _Nonnull)brandID configurationKey:(NSString * _Nullable)configurationKey completion:(void (^ _Nonnull)(BOOL))completion;
 /// Determines if a feature is enabled for account
 /// <ol>
 ///   <li>
@@ -1258,10 +1368,13 @@ SWIFT_CLASS("_TtC7LPInfra19LPUserProfileEntity")
 SWIFT_CLASS("_TtC7LPInfra11LPWebSocket")
 @interface LPWebSocket : SRWebSocket
 @property (nonatomic, copy) NSString * _Nonnull requestIndex;
-@property (nonatomic, readonly) BOOL isConnected;
+@property (nonatomic, readonly) BOOL isOpen;
+@property (nonatomic, readonly) BOOL isClosed;
+@property (nonatomic, readonly) BOOL isReadyToOpen;
 - (void)flushQueue;
 @property (nonatomic, copy) NSURL * _Null_unspecified socketURL;
 - (void)cancelRequest:(NSString * _Nonnull)requestIndex;
+- (void)open;
 - (nonnull instancetype)initWithURLRequest:(NSURLRequest * _Nonnull)request protocols:(NSArray<NSString *> * _Nullable)protocols securityPolicy:(SRSecurityPolicy * _Nonnull)securityPolicy SWIFT_UNAVAILABLE;
 @end
 
@@ -1346,12 +1459,42 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 @end
 
 
+SWIFT_CLASS("_TtC7LPInfra23OnlineEventDistribution")
+@interface OnlineEventDistribution : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 @interface NSOperationQueue (SWIFT_EXTENSION(LPInfra))
 + (NSOperationQueue * _Nonnull)sharedOperationQueue SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
 @interface NSOutputStream (SWIFT_EXTENSION(LPInfra))
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra12PublishEvent")
+@interface PublishEvent : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra13QueryMessages")
+@interface QueryMessages : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra19RequestConversation")
+@interface RequestConversation : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra15RequestSwiftURL")
+@interface RequestSwiftURL : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1364,6 +1507,36 @@ SWIFT_CLASS("_TtC7LPInfra4Ring")
 @property (nonatomic, copy) NSString * _Nullable skillId;
 @property (nonatomic, copy) NSDate * _Nullable ringExpiration;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra11RingUpdated")
+@interface RingUpdated : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra23RoutingTaskNotification")
+@interface RoutingTaskNotification : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra25SecureFormReadOTKResponse")
+@interface SecureFormReadOTKResponse : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra22SubscribeConversations")
+@interface SubscribeConversations : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra24SubscribeExConversations")
+@interface SubscribeExConversations : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
 @end
 
 

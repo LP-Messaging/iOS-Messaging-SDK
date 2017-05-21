@@ -150,6 +150,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 enum SocketType : NSInteger;
 @class LPFileEntity;
 @class UIImage;
+@class RequestSwiftURL;
+@class LPFormEntity;
+@class WKWebView;
 @class Ring;
 @class LPCustomItemEntity;
 
@@ -184,7 +187,12 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 ///   </li>
 /// </ul>
 + (void)reconnectToSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nullable)authenticationCode readyCompletion:(void (^ _Nullable)(void))readyCompletion;
-/// Perform disconnect from socket for conversationQuery
+/// Perform disconnect from socket for conversationQuery.
+/// You can choose to disconnect the socket aftet delay of predefined time
+/// \param conversationQuery conversationQuery where to socket belongs to
+///
+/// \param shouldUseDelay determines whether to keep socket open for delay
+///
 + (void)disconnectSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
 /// Clear history of all closed conversations and their messages from the database.
 /// This method is allowed only if there is no active/open conversation.
@@ -267,6 +275,10 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 + (void)uploadFileFromDiskWithMessage:(LPMessageEntity * _Nonnull)message conversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Downloads a file from Swift server and returns an image to show
 + (void)downloadFileWithConversation:(LPConversationEntity * _Nonnull)conversation file:(LPFileEntity * _Nonnull)file completion:(void (^ _Nonnull)(UIImage * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Requests the AMS for an upload url for swift server
++ (void)requestUploadURLWithConversation:(LPConversationEntity * _Nonnull)conversation fileSize:(double)fileSize fileExtention:(NSString * _Nonnull)fileExtention completion:(void (^ _Nonnull)(RequestSwiftURL * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Requests the AMS for a download url from swift server
++ (void)requestDownloadURLWithConversation:(LPConversationEntity * _Nonnull)conversation file:(LPFileEntity * _Nonnull)file completion:(void (^ _Nonnull)(RequestSwiftURL * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Searches for a structured content url in the message content. If the StructuredContent feature is disabled, will return nil
 /// This method ignores email links!
 /// \param messageContent message content to search URL from
@@ -275,6 +287,29 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 /// returns:
 /// If StructuredContent feature enabled and link exist - returns the first link URL, else returns nil.
 + (NSURL * _Nullable)structuredContentUrlFrom:(NSString * _Nonnull)messageContent SWIFT_WARN_UNUSED_RESULT;
+/// Prepare secure form URL which allows to open a form to read
+/// This method generates read and write OTK from UMS and build URL to be used for PCI GW
+/// \param form form object to get the url for
+///
+/// \param completion completion block when the form is ready - url and token are valid
+///
+/// \param failure failure block with error
+///
++ (void)prepareSecureFormWithForm:(LPFormEntity * _Nonnull)form completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Determine whether a form has already been loaded in the webview before and can be re-used
+/// \param form the form the check for
+///
+///
+/// returns:
+/// true if form has been loaded, else false
++ (BOOL)hasSecureFormAlreadyLoadedInWebViewWithForm:(LPFormEntity * _Nonnull)form SWIFT_WARN_UNUSED_RESULT;
+/// Get shared instance of secure form web view which loaded with a form url
+/// \param form form to be shown in the webview
+///
+///
+/// returns:
+/// an optional instance of the webview with the form loaded
++ (WKWebView * _Nullable)getPreparedSecureFormWebViewWithForm:(LPFormEntity * _Nonnull)form SWIFT_WARN_UNUSED_RESULT;
 + (void)takeConversation:(Ring * _Nonnull)ring agentToken:(NSString * _Nonnull)agentToken completion:(void (^ _Nonnull)(LPConversationEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 + (void)backToQueue:(NSString * _Nonnull)userID conversation:(LPConversationEntity * _Nonnull)conversation;
 + (void)subscribeAgentState:(NSString * _Nonnull)agentID conversation:(LPConversationEntity * _Nonnull)conversation;
@@ -285,6 +320,11 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 /// returns:
 /// Optional array of messages
 + (NSArray<LPMessageEntity *> * _Nullable)getLoadingStructureContentMessages SWIFT_WARN_UNUSED_RESULT;
+/// Get the latest batch of unread messages
+///
+/// returns:
+/// array of unread messages or nil
++ (NSArray<LPMessageEntity *> * _Nullable)getLatestUnreadMessages SWIFT_WARN_UNUSED_RESULT;
 /// Gets custom items with image state of “downloading”
 ///
 /// returns:
