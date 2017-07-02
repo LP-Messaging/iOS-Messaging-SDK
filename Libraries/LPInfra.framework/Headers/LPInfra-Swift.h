@@ -558,6 +558,12 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic) double notificationShowDurationInSeconds;
 /// Maximum number of minutes to send the message
 @property (nonatomic) NSUInteger sendingMessageTimeoutInMinutes;
+/// Custom font name for conversation feed. This font will affect all Messages, Timestamp and Separators.
+/// Fonts that are not part of the iOS families, must be defined in App’s Info.plist
+@property (nonatomic, copy) NSString * _Nullable customFontNameConversationFeed;
+/// Custom font name for all non conversation feed controls. Such as: Buttons, Alerts, Banners, Menu and External Windows.
+/// Fonts that are not part of the iOS families, must be defined in App’s Info.plist
+@property (nonatomic, copy) NSString * _Nullable customFontNameNonConversationFeed;
 /// Should show TTR Shift banner (“An agent will respond…”)
 @property (nonatomic) BOOL ttrShowShiftBanner;
 /// TTR - Time To Respond Number of seconds before the first TTR notification appears
@@ -589,6 +595,9 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserAvatarBackgroundColor;
 /// Icon color of default remoteUser avatar
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserAvatarIconColor;
+/// Default Avatar image of the remote user. When assigned, this image will disable remoteUserAvatarBackgroundColor and remoteUserAvatarIconColor configurations.
+/// If remote user has an avatar image in his profile, this attribute will be ignored
+@property (nonatomic, strong) UIImage * _Nullable remoteUserDefaultAvatarImage;
 /// Default avatar image for Brand.
 /// If setting nil - default avatr image will be used.
 @property (nonatomic, strong) UIImage * _Nullable brandAvatarImage;
@@ -611,6 +620,10 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// Max number of allowed saved files on disk. This refers only to full photo files
 /// The validation of allowed max number of files will be when showing and removing conversation
 @property (nonatomic) NSUInteger maxNumberOfSavedFilesOnDisk;
+/// Camera button color in enabled mode in the conversation screen. Will be presented only if photo sharing feature is enabled
+@property (nonatomic, strong) UIColor * _Nonnull cameraButtonEnabledColor;
+/// Camera button color in disabled mode in the conversation screen. Will be presented only if photo sharing feature is enabled
+@property (nonatomic, strong) UIColor * _Nonnull cameraButtonDisabledColor;
 /// File Cell Loader fill color
 @property (nonatomic, strong) UIColor * _Nonnull fileCellLoaderFillColor;
 /// Color of the loader progress line
@@ -1122,6 +1135,20 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 + (void)getMessageBoardsWithUrl:(NSURL * _Nonnull)url completion:(void (^ _Nonnull)(NSArray<LPCustomBoardEntity *> * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nullable))failure;
 /// Delete preview images directory from disk and all its content
 + (void)deleteAllPreviewImagesFromDisk;
+/// Get expiration token of a JWT from a token string
+/// \param jwtToken JWT string to extract the expiration from
+///
+///
+/// returns:
+/// expiration Data instance or nil incase JWT failed to be decoded
++ (NSDate * _Nullable)getExpirationDateFromJWT:(NSString * _Nonnull)jwtToken SWIFT_WARN_UNUSED_RESULT;
+/// Get UserID of a JWT from a token string
+/// \param jwtToken jwtToken: JWT string to extract the userID from
+///
+///
+/// returns:
+/// userID String or nil incase JWT failed to be decoded
++ (NSString * _Nullable)getUserIDFromJWT:(NSString * _Nonnull)jwtToken SWIFT_WARN_UNUSED_RESULT;
 @end
 
 /// All SDK supported languages
@@ -1279,7 +1306,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPSDKManager
 ///
 /// \param completion a boolean in a completion block. The SDK is applicable if the current version is greater or euqal to the fetched value
 ///
-+ (void)isVersionApplicableWithBrandID:(NSString * _Nonnull)brandID configurationKey:(NSString * _Nullable)configurationKey completion:(void (^ _Nonnull)(BOOL))completion;
++ (void)isVersionApplicableWithBrandID:(NSString * _Nonnull)brandID configurationKey:(NSString * _Nullable)configurationKey useCacheIfExists:(BOOL)useCacheIfExists completion:(void (^ _Nonnull)(BOOL, BOOL))completion;
 /// Determines if a feature is enabled for account
 /// <ol>
 ///   <li>
@@ -1294,7 +1321,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPSDKManager
 ///
 /// \param completion completion with boolean that shows if feature is enabled/disabled which calucluated using LPConfig, LPCDN and ACCDN
 ///
-+ (void)isFeatureEnabledWithFeature:(enum LPMessagingSDKFeature)feature brandID:(NSString * _Nonnull)brandID completion:(void (^ _Nonnull)(BOOL))completion;
++ (void)isFeatureEnabledWithFeature:(enum LPMessagingSDKFeature)feature brandID:(NSString * _Nonnull)brandID useCacheIfExists:(BOOL)useCacheIfExists completion:(void (^ _Nonnull)(BOOL))completion;
 - (void)clearManager;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -1375,6 +1402,7 @@ SWIFT_CLASS("_TtC7LPInfra11LPWebSocket")
 @property (nonatomic, copy) NSURL * _Null_unspecified socketURL;
 - (void)cancelRequest:(NSString * _Nonnull)requestIndex;
 - (void)open;
+- (void)close;
 - (nonnull instancetype)initWithURLRequest:(NSURLRequest * _Nonnull)request protocols:(NSArray<NSString *> * _Nullable)protocols securityPolicy:(SRSecurityPolicy * _Nonnull)securityPolicy SWIFT_UNAVAILABLE;
 @end
 
@@ -1557,6 +1585,7 @@ SWIFT_CLASS("_TtC7LPInfra5Toast")
 @property (nonatomic, copy) void (^ _Nullable didShow)(void);
 @property (nonatomic, copy) void (^ _Nullable didDismiss)(void);
 @property (nonatomic, copy) void (^ _Nullable didTap)(void);
+- (void)awakeFromNib;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
@@ -1605,6 +1634,14 @@ SWIFT_CLASS("_TtC7LPInfra7Toaster")
 
 
 @interface UIFont (SWIFT_EXTENSION(LPInfra))
+/// Get Size of a String for a label size and constraints
+/// \param string string/text to get the size for
+///
+/// \param width max width of the label
+///
+///
+/// returns:
+/// CGSize instance of the text
 - (CGSize)sizeOfStringWithString:(NSString * _Nonnull)string constrainedToWidth:(double)width SWIFT_WARN_UNUSED_RESULT;
 @end
 
@@ -1618,6 +1655,15 @@ SWIFT_CLASS("_TtC7LPInfra7Toaster")
 /// Gets an image, blur and return it
 /// if process failed it will return a nil
 - (UIImage * _Nullable)blurImageWithRadius:(CGFloat)radius size:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+@interface UINavigationController (SWIFT_EXTENSION(LPInfra))
+/// Get font of the navigation bar title
+///
+/// returns:
+/// UIFont instance if exist, nil if no title is set
+- (UIFont * _Nullable)getNavigationBarTitleFont SWIFT_WARN_UNUSED_RESULT;
 @end
 
 

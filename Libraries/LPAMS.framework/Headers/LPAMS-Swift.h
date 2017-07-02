@@ -364,6 +364,7 @@ SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
 - (void)didReceiveRingUpdate:(NSString * _Nonnull)conversationID ring:(Ring * _Nonnull)ring;
 - (NSString * _Nullable)brandAccountID SWIFT_WARN_UNUSED_RESULT;
 - (void)sdkFeatureToggledWithFeature:(enum LPMessagingSDKFeature)feature toggle:(BOOL)toggle;
+- (id <ConversationParamProtocol> _Nullable)getCurrentConversationQuery SWIFT_WARN_UNUSED_RESULT;
 @end
 
 /// Used to set the socket type as consumer aor brand. The URI for opening the socket is different between the two.

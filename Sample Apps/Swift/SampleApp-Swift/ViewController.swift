@@ -36,7 +36,7 @@ class ViewController: UIViewController, LPMessagingSDKdelegate {
         self.authenticationSwitch.isOn = authenticationSwitch;
 
         do {
-            try LPMessagingSDK.instance.initialize(self.accountTextField.text)
+            try LPMessagingSDK.instance.initialize()
         } catch let error as NSError {
             print("initialize error: \(error)")
             return

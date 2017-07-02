@@ -34,7 +34,7 @@
     self.authenticationSwitch.on = authenticationSwitch;
     
     NSError *error = nil;
-    [[LPMessagingSDK instance] initialize:self.accountTextField.text error:&error];
+    [[LPMessagingSDK instance] initialize:nil error:&error];
     if (error) {
         NSLog(@"LPMessagingSDK Initialize Error: %@",error);
         return;
