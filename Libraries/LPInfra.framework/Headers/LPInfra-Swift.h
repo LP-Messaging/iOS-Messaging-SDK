@@ -1047,7 +1047,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 ///   </li>
 ///   <li>
 ///     Account (brand account)
-///     When all params availble - peform register
+///     When all params availble - perform register
 ///   </li>
 /// </ul>
 + (void)registerPusher:(LPBrandEntity * _Nonnull)brand;
@@ -1062,7 +1062,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 ///   </li>
 ///   <li>
 ///     Account (brand account)
-///     When all params availble - peform unregister
+///     When all params availble - perform unregister
 ///   </li>
 /// </ul>
 + (void)unregisterPusher:(LPBrandEntity * _Nonnull)brand;

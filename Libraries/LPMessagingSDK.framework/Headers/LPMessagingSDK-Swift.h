@@ -471,6 +471,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 ///   </li>
 /// </ul>
 + (void)unregisterPusher:(LPBrandEntity * _Nonnull)brand;
+/// Get CSDS domain for accountID and service name
+/// This method get all the CSDS domains and look for the specific domain per service
++ (void)getCSDSDomain:(NSString * _Nonnull)accountID serviceName:(NSString * _Nonnull)serviceName completion:(void (^ _Nonnull)(NSString * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Load image from URL from a server or from the images cache manager
 + (void)loadImageFromURLWithImageUrl:(NSString * _Nullable)imageUrl completion:(void (^ _Nonnull)(UIImage * _Nullable, BOOL))completion failure:(void (^ _Nullable)(void))failure;
 /// Set image for URL in images cache
