@@ -15,14 +15,14 @@ let WINDOW_SWITCH = "WindowSwitch"
 let AUTHENTIACTION_SWITCH = "AuthenticationSwitch"
 
 class ViewController: UIViewController, LPMessagingSDKdelegate {
-
+    
     var conversationQuery: ConversationParamProtocol?
     var conversationViewController: ConversationViewController?
     
     @IBOutlet var accountTextField: UITextField!
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
-
+    
     @IBOutlet var windowSwitch: UISwitch!
     @IBOutlet var authenticationSwitch: UISwitch!
     
@@ -31,10 +31,10 @@ class ViewController: UIViewController, LPMessagingSDKdelegate {
         
         let windowSwitch = UserDefaults.standard.bool(forKey: WINDOW_SWITCH)
         self.windowSwitch.isOn = windowSwitch;
-
+        
         let authenticationSwitch = UserDefaults.standard.bool(forKey: AUTHENTIACTION_SWITCH)
-        self.authenticationSwitch.isOn = authenticationSwitch;
-
+        self.authenticationSwitch.isOn = authenticationSwitch
+        
         do {
             try LPMessagingSDK.instance.initialize()
         } catch let error as NSError {
@@ -48,17 +48,17 @@ class ViewController: UIViewController, LPMessagingSDKdelegate {
             print("LPMessagingSDK log: \(String(describing: log.text))")
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     /**
-        This method sets the SDK configurations.
-        For example: 
-        Change background color of remote user (such as Agent)
-        Change background color of user (such as Consumer)
+     This method sets the SDK configurations.
+     For example:
+     Change background color of remote user (such as Agent)
+     Change background color of user (such as Consumer)
      */
     func setSDKConfigurations() {
         let configurations = LPConfig.defaultConfiguration
@@ -68,35 +68,35 @@ class ViewController: UIViewController, LPMessagingSDKdelegate {
     }
     
     /**
-    This method sets the user details such as first name, last name, profile image and phone number.
-    */
+     This method sets the user details such as first name, last name, profile image and phone number.
+     */
     func setUserDetails() {
         let user = LPUser(firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, nickName: "my nick name", uid: nil, profileImageURL: "http://www.mrbreakfast.com/ucp/342_6053_ucp.jpg", phoneNumber: nil, employeeID: "1111-1111")
         LPMessagingSDK.instance.setUserProfile(user, brandID: self.accountTextField.text!)
     }
     
     /**
-    This method lets you enter a UIBarButton to the navigation bar (in window mode).
-    When the button is pressed it will call the following delegate method: LPMessagingSDKCustomButtonTapped
-    */
+     This method lets you enter a UIBarButton to the navigation bar (in window mode).
+     When the button is pressed it will call the following delegate method: LPMessagingSDKCustomButtonTapped
+     */
     func setCustomButton() {
         LPConfig.defaultConfiguration.customButtonImage = UIImage(named: "phone_icon")
     }
-
+    
     //MARK:- IBActions
     
     /**
-    This method shows the conversation screen. It considers different modes:
-    
-    Window Mode:
-    - Window           - Shows the conversation screen in a new window created by the SDK. Navigation bar is included.
-    - View controller  - Shows the conversation screen in a view controller of your choice.
-    
-    Authentication Mode:
-    - Authenticated    - Conversation history is saved and shown.
-    - Unauthenticated  - Conversation starts clean every time.
-    
-    */
+     This method shows the conversation screen. It considers different modes:
+     
+     Window Mode:
+     - Window           - Shows the conversation screen in a new window created by the SDK. Navigation bar is included.
+     - View controller  - Shows the conversation screen in a view controller of your choice.
+     
+     Authentication Mode:
+     - Authenticated    - Conversation history is saved and shown.
+     - Unauthenticated  - Conversation starts clean every time.
+     
+     */
     @IBAction func showConversation() {
         let account = self.accountTextField.text
         
@@ -104,17 +104,20 @@ class ViewController: UIViewController, LPMessagingSDKdelegate {
         guard self.conversationQuery != nil else {
             return
         }
-            
+        
         if self.windowSwitch.isOn {
             if self.authenticationSwitch.isOn {
-                LPMessagingSDK.instance.showConversation(self.conversationQuery!, authenticationCode: "zcKZeImY5h7xOVPj")
+                let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: nil, isViewOnly: false)
+                let authenticationParams = LPAuthenticationParams(authenticationCode: "zcKZeImY5h7xOVPj", jwt: nil, redirectURI: nil)
+                LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
             } else {
-                LPMessagingSDK.instance.showConversation(self.conversationQuery!)
+                let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: nil, isViewOnly: false)
+                LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: nil)
             }
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             self.conversationViewController = storyboard.instantiateViewController(withIdentifier: "ConversationViewController") as? ConversationViewController
-
+            
             guard self.conversationViewController != nil || self.conversationQuery != nil else {
                 return
             }
@@ -122,53 +125,56 @@ class ViewController: UIViewController, LPMessagingSDKdelegate {
             self.conversationViewController!.account = account
             self.conversationViewController!.conversationQuery = self.conversationQuery!
             if self.authenticationSwitch.isOn {
-                LPMessagingSDK.instance.showConversation(self.conversationQuery!, authenticationCode: account, containerViewController: conversationViewController)
+                let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: conversationViewController, isViewOnly: false)
+                let authenticationParams = LPAuthenticationParams(authenticationCode: account, jwt: nil, redirectURI: nil)
+                LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
             } else {
-                LPMessagingSDK.instance.showConversation(self.conversationQuery!, containerViewController: conversationViewController)
+                let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: conversationViewController, isViewOnly: false)
+                LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: nil)
             }
             self.navigationController?.pushViewController(self.conversationViewController!, animated: true)
         }
-
+        
         self.setUserDetails()
         self.view.endEditing(true)
     }
-
+    
     
     @IBAction func windowSwitchChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: WINDOW_SWITCH)
         UserDefaults.standard.synchronize()
     }
-
+    
     @IBAction func authenticationSwitchChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: AUTHENTIACTION_SWITCH)
         UserDefaults.standard.synchronize()
     }
-
+    
     //MARK:- LPMessagingSDKDelegate
     
     /**
-    This delegate method is required.
-    It is called when authentication process fails
-    */
+     This delegate method is required.
+     It is called when authentication process fails
+     */
     func LPMessagingSDKAuthenticationFailed(_ error: NSError) {
         NSLog("Error: \(error)");
     }
     
     /**
-    This delegate method is required.
-    It is called when the SDK version you're using is obselete and needs an update.
-    */
+     This delegate method is required.
+     It is called when the SDK version you're using is obselete and needs an update.
+     */
     func LPMessagingSDKObseleteVersion(_ error: NSError) {
         NSLog("Error: \(error)");
     }
     
     /**
-    This delegate method is optional.
-    It is called each time the SDK receives info about the agent on the other side.
-    
-    Example:
-    You can use this data to show the agent details on your navigation bar (in view controller mode)
-    */
+     This delegate method is optional.
+     It is called each time the SDK receives info about the agent on the other side.
+     
+     Example:
+     You can use this data to show the agent details on your navigation bar (in view controller mode)
+     */
     func LPMessagingSDKAgentDetails(_ agent: LPUser?) {
         guard self.conversationViewController != nil else {
             return
@@ -190,53 +196,53 @@ class ViewController: UIViewController, LPMessagingSDKdelegate {
     }
     
     /**
-    This delegate method is optional.
-    It is called each time the SDK menu is opened/closed.
-    */
+     This delegate method is optional.
+     It is called each time the SDK menu is opened/closed.
+     */
     func LPMessagingSDKActionsMenuToggled(_ toggled: Bool) {
         
     }
     
     /**
-    This delegate method is optional.
-    It is called each time the agent typing state changes.
-    */
+     This delegate method is optional.
+     It is called each time the agent typing state changes.
+     */
     func LPMessagingSDKAgentIsTypingStateChanged(_ isTyping: Bool) {
         
     }
     
     /**
-    This delegate method is optional.
-    It is called after the customer satisfaction page is submitted with a score.
-    */
+     This delegate method is optional.
+     It is called after the customer satisfaction page is submitted with a score.
+     */
     func LPMessagingSDKCSATScoreSubmissionDidFinish(_ accountID: String, rating: Int) {
-    
+        
     }
     
     /**
-    This delegate method is optional.
-    If you set a custom button, this method will be called when the custom button is clicked.
-    */
+     This delegate method is optional.
+     If you set a custom button, this method will be called when the custom button is clicked.
+     */
     func LPMessagingSDKCustomButtonTapped() {
         
     }
     
     /**
-    This delegate method is optional.
-    It is called whenever an event log is received.
-    */
+     This delegate method is optional.
+     It is called whenever an event log is received.
+     */
     func LPMessagingSDKDidReceiveEventLog(_ eventLog: String) {
         
     }
     
     /**
-    This delegate method is optional.
-    It is called when the SDK has connections issues.
-    */
+     This delegate method is optional.
+     It is called when the SDK has connections issues.
+     */
     func LPMessagingSDKHasConnectionError(_ error: String?) {
         
     }
-
+    
     /**
      This delegate method is required.
      It is called when the token which used for authentication is expired
@@ -301,6 +307,31 @@ class ViewController: UIViewController, LPMessagingSDKdelegate {
     func LPMessagingSDKAgentAvatarTapped(_ agent: LPUser?) {
         
     }
+    
+    /**
+     This delegate method is optional.
+     It is called when the Conversation CSAT did load
+     */
+    func LPMessagingSDKConversationCSATDidLoad(_ conversationID: String?) {
+        
+    }
+    
+    /**
+     This delegate method is optional.
+     It is called when the Conversation CSAT skipped by the consumer
+     */
+    func LPMessagingSDKConversationCSATSkipped(_ conversationID: String?) {
+        
+    }
+    
+    /**
+     This delegate method is optional.
+     It is called when the user is opening photo sharing gallery/camera and the persmissions denied
+     */
+    func LPMessagingSDKUserDeniedPermission(_ permissionType: LPPermissionTypes) {
+        
+    }
+    
     
     @IBAction func resignKeyboard() {
         self.view.endEditing(true)

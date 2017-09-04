@@ -155,6 +155,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")
 @class LPUser;
 @protocol LPMessagingSDKNotificationDelegate;
 @protocol ConversationParamProtocol;
+@class LPAuthenticationParams;
 @class LPBrandEntity;
 @class LPConversationEntity;
 @class LPMessageEntity;
@@ -165,7 +166,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")
 @class RequestSwiftURL;
 @class Ring;
 @class LPFormEntity;
-@class LPCustomItemEntity;
+@class LPLinkPreviewEntity;
 @class LPWebSocket;
 @class LPUserEntity;
 
@@ -241,10 +242,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 ///     optional ready completion which will be called after the socket is connected
 ///   </li>
 ///   <li>
-///     optional authenticationCode to use an an authenticated users.
+///     optional an LPAuthenticationParams object to determine the properties of an authenticated connection. LPAuthenticationParams supports Code Flow login or Implicit Flow login.
 ///   </li>
 /// </ul>
-+ (void)reconnectToSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nullable)authenticationCode readyCompletion:(void (^ _Nullable)(void))readyCompletion;
++ (void)reconnectToSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationParams:(LPAuthenticationParams * _Nonnull)authenticationParams readyCompletion:(void (^ _Nullable)(void))readyCompletion;
 /// Perform disconnect from socket for conversationQuery.
 /// You can choose to disconnect the socket aftet delay of predefined time
 /// \param conversationQuery conversationQuery where to socket belongs to
@@ -336,16 +337,16 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// \param failure failure block with error
 ///
 + (void)prepareSecureFormWithForm:(LPFormEntity * _Nonnull)form completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-/// Gets structure content messages with a state of “loading”
+/// Gets link preview messages with a state of “loading”
 ///
 /// returns:
 /// Optional array of messages
-+ (NSArray<LPMessageEntity *> * _Nullable)getLoadingStructureContentMessages SWIFT_WARN_UNUSED_RESULT;
-/// Gets structure content boards with a state of “loading”
++ (NSArray<LPMessageEntity *> * _Nullable)getLoadingStructuredContentMessages SWIFT_WARN_UNUSED_RESULT;
+/// Gets link preview boards with a state of “loading”
 ///
 /// returns:
 /// Optional array of custom boards
-+ (NSArray<LPCustomItemEntity *> * _Nullable)getLoadingStructureContentCustomItems SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<LPLinkPreviewEntity *> * _Nullable)getLoadingStructuredContentCustomItems SWIFT_WARN_UNUSED_RESULT;
 /// Get current WebSocket (LPWebSocket) for brand if exists
 + (LPWebSocket * _Nullable)getSocket:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
 /// Open and reconnect each WebSocket in the web sockets map.
@@ -498,6 +499,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingAPIDelegate_")
 
 @protocol LPMessagingSDKdelegate;
 @class UIViewController;
+@class LPConversationViewParams;
 @class UIBarButtonItem;
 @class LPLog;
 
@@ -514,20 +516,32 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 /// <brandID> of the host app.
 /// This method throws an error/return false with with an error, in case the initialization failed.
 - (BOOL)initialize:(NSString * _Nullable)brandID error:(NSError * _Nullable * _Nullable)error;
-/// Show conversation view for conversation query.
-/// This method starts the conversation and show all the existing messages it exist.
-/// Optional paramaters:
-/// <authenticationCode> to use an an authenticated users.
-/// <containerViewController> the containter which presents the conversation view as a child View Controller.
 - (void)showConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nullable)authenticationCode containerViewController:(UIViewController * _Nullable)containerViewController;
+/// Show Conversation view and starts the conversation and show all the existing messages it exist.
+/// \param conversationViewParams an LPConversationViewParams object to determine the properties of the views. Such as Container or Window or if ViewOnly.
+///
+/// \param authenticationParams an optional LPAuthenticationParams object to determine the properties of an authenticated connection. If using authenticate connection, this paramater must
+/// be passed. LPAuthenticationParams supports Code Flow login or Implicit Flow login.
+///
+- (void)showConversation:(LPConversationViewParams * _Nonnull)conversationViewParams authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
 /// Remove conversation view for conversation query from its container or window view.
 /// This method ends the conversation’s connection.
 - (void)removeConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+- (void)reconnect:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nonnull)authenticationCode;
 /// This method reconnects the conversation’s connection for conversation query.
 /// Reconnect open related webSockets and sync the converstion with its latest updates.
-/// Additional paramaters:
-/// <authenticationCode> to use an an authenticated users.
-- (void)reconnect:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nonnull)authenticationCode;
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     conversationQuery: conversationQuery of ConversationParamProtocol
+///   </li>
+///   <li>
+///     authenticationParams: an LPAuthenticationParams object to determine the properties of an authenticated connection. LPAuthenticationParams supports Code Flow login or Implicit Flow login.
+///   </li>
+/// </ul>
+- (void)reconnect:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationParams:(LPAuthenticationParams * _Nonnull)authenticationParams;
 /// This method changes the state of the action menu of the conversation for brandID.
 - (void)toggleChatActions:(NSString * _Nonnull)accountID sender:(UIBarButtonItem * _Nullable)sender;
 /// This method sets user details for the consumer of a brand.
@@ -601,7 +615,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 
 @interface LPMessagingSDK (SWIFT_EXTENSION(LPMessagingSDK))
 - (void)initSocketForBrandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken readyCompletion:(void (^ _Nullable)(void))readyCompletion SWIFT_METHOD_FAMILY(none);
-- (id <ConversationViewControllerAgentDelegate> _Nonnull)showAgentConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nullable)authenticationCode containerViewController:(UIViewController * _Nonnull)containerViewController SWIFT_WARN_UNUSED_RESULT;
+- (id <ConversationViewControllerAgentDelegate> _Nonnull)showAgentConversationWithConversationViewParams:(LPConversationViewParams * _Nonnull)conversationViewParams SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -610,7 +624,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 
 
 @interface LPMessagingSDK (SWIFT_EXTENSION(LPMessagingSDK))
+/// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or just to logs the current user out.
+/// This method conducts the following:
+/// Unregisters from the push notification service.
+/// Clears all SDK persistent data.
+/// Cleans running operations (see <a href="consumer-experience-ios-sdk-destruct.html">destruct</a>{:target=”_blank”}).
+/// Invocation of destruct() method
 - (void)logout;
+/// This method is a destructive method that is typically used stop and clear all the metadata of the SDK.
+/// This method conducts the following:
+/// Clears all SDK non-persistent data.
+/// Stops all connections.
+/// Remove Conversation View Controller
 - (void)destruct;
 @end
 
@@ -637,6 +662,8 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKHasConnectionError:(NSString * _Nullable)error;
 - (void)LPMessagingSDKCSATScoreSubmissionDidFinish:(NSString * _Nonnull)brandID rating:(NSInteger)rating;
 - (UIView * _Nonnull)LPMessagingSDKCSATCustomTitleView:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
+- (void)LPMessagingSDKConversationCSATSkipped:(NSString * _Nullable)conversationID;
+- (void)LPMessagingSDKUserDeniedPermission:(enum LPPermissionTypes)permissionType;
 @required
 - (void)LPMessagingSDKObseleteVersion:(NSError * _Nonnull)error;
 - (void)LPMessagingSDKAuthenticationFailed:(NSError * _Nonnull)error;
@@ -648,6 +675,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKConversationEnded:(NSString * _Nullable)conversationID;
 - (void)LPMessagingSDKConversationEnded:(NSString * _Nullable)conversationID closeReason:(enum LPConversationCloseReason)closeReason;
 - (void)LPMessagingSDKConversationCSATDismissedOnSubmittion:(NSString * _Nullable)conversationID;
+- (void)LPMessagingSDKConversationCSATDidLoad:(NSString * _Nullable)conversationID;
 - (void)LPMessagingSDKConnectionStateChanged:(BOOL)isReady brandID:(NSString * _Nonnull)brandID;
 - (void)LPMessagingSDKOffHoursStateChanged:(BOOL)isOffHours brandID:(NSString * _Nonnull)brandID;
 - (void)LPMessagingSDKConversationViewControllerDidDismiss;
@@ -716,7 +744,24 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK17UIAdapterDelegate_")
 @end
 
 
+@interface UIButton (SWIFT_EXTENSION(LPMessagingSDK))
+- (void)actionHandleWithControlEvents:(UIControlEvents)control ForAction:(void (^ _Nonnull)(void))action;
+@end
+
+
+@interface UIGestureRecognizer (SWIFT_EXTENSION(LPMessagingSDK))
+@end
+
+
 @interface UIImageView (SWIFT_EXTENSION(LPMessagingSDK))
+@end
+
+
+@interface UIPanGestureRecognizer (SWIFT_EXTENSION(LPMessagingSDK))
+/// Initializes a pan gesture recognizer with the specificed handler
+/// \param handler completion
+///
+- (nonnull instancetype)initWithHandler:(void (^ _Nonnull)(UIPanGestureRecognizer * _Nonnull))handler;
 @end
 
 
@@ -742,6 +787,8 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK17UIAdapterDelegate_")
 /// \param repeatCount Number of times to rotate (Float.infinity for forever)
 ///
 - (void)rotateWithDuration:(double)duration repeatCount:(float)repeatCount;
+/// Stop rotation if image by removing all animations
+- (void)stopRotate;
 @end
 
 

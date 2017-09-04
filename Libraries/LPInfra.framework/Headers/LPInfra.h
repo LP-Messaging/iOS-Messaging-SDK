@@ -32,7 +32,7 @@
 #import "SRProxyConnect.h"
 #import "SRRandom.h"
 #import "SRSIMDHelpers.h"
-
+#import "LPRNCryptor.h"
 
 //! Project version number for Infra.
 FOUNDATION_EXPORT double InfraVersionNumber;

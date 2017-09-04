@@ -53,10 +53,10 @@
 }
 
 /**
-     This method sets the SDK configurations.
-     For example:
-     Change background color of remote user (such as Agent)
-     Change background color of user (such as Consumer)
+ This method sets the SDK configurations.
+ For example:
+ Change background color of remote user (such as Agent)
+ Change background color of user (such as Consumer)
  */
 - (void)setSDKConfigurations {
     LPConfig *configurations = [LPConfig defaultConfiguration];
@@ -86,7 +86,7 @@
 
 /**
  This method shows the conversation screen. It considers different modes:
-
+ 
  Window Mode:
  - Window           - Shows the conversation screen in a new window created by the SDK. Navigation bar is included.
  - View controller  - Shows the conversation screen in a view controller of your choice.
@@ -102,20 +102,35 @@
     
     if (self.windowSwitch.on) {
         if (self.authenticationSwitch.on) {
-            [[LPMessagingSDK instance] showConversation:self.conversationQuery authenticationCode:@"zcKZeImY5h7xOVPj" containerViewController:nil];
+            LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:self.conversationQuery
+                                                                                                   containerViewController:nil isViewOnly:NO];
+            LPAuthenticationParams *authenticationParmas = [[LPAuthenticationParams alloc] initWithAuthenticationCode:@"zcKZeImY5h7xOVPj"
+                                                                                                                  jwt:nil
+                                                                                                          redirectURI:nil];
+            [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:authenticationParmas];
         } else {
-            [[LPMessagingSDK instance] showConversation:self.conversationQuery authenticationCode:nil containerViewController:nil];
+            LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:self.conversationQuery
+                                                                                                   containerViewController:nil isViewOnly:NO];
+            [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:nil];
         }
     } else {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         self.conversationViewController = [storyBoard instantiateViewControllerWithIdentifier:@"ConversationViewController"];
         self.conversationViewController.account = account;
         self.conversationViewController.conversationQuery = self.conversationQuery;
-
+        
         if (self.authenticationSwitch.on) {
-            [[LPMessagingSDK instance] showConversation:self.conversationQuery authenticationCode:account containerViewController:self.conversationViewController];
+            LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:self.conversationQuery
+                                                                                                   containerViewController:self.conversationViewController isViewOnly:NO];
+            LPAuthenticationParams *authenticationParmas = [[LPAuthenticationParams alloc] initWithAuthenticationCode:account
+                                                                                                                  jwt:nil
+                                                                                                          redirectURI:nil];
+            [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:authenticationParmas];
+            
         } else {
-            [[LPMessagingSDK instance] showConversation:self.conversationQuery authenticationCode:nil containerViewController:self.conversationViewController];
+            LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:self.conversationQuery
+                                                                                                   containerViewController:self.conversationViewController isViewOnly:NO];
+            [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:nil];
         }
         [[self navigationController] pushViewController:self.conversationViewController animated:true];
     }
@@ -160,7 +175,7 @@
 /**
  This delegate method is optional.
  It is called each time the SDK receives info about the agent on the other side.
-
+ 
  Example:
  You can use this data to show the agent details on your navigation bar (in view controller mode)
  */
@@ -282,6 +297,30 @@
  It is called when the user tapped on the agent’s avatar in the conversation and also in the navigation bar within window mode.
  */
 - (void)LPMessagingSDKAgentAvatarTapped:(LPUser *)agent {
+    
+}
+
+/**
+ This delegate method is optional.
+ It is called when the Conversation CSAT did load
+ */
+- (void)LPMessagingSDKConversationCSATDidLoad:(NSString *)conversationID {
+    
+}
+
+/**
+ This delegate method is optional.
+ It is called when the Conversation CSAT skipped by the consumer
+ */
+- (void)LPMessagingSDKConversationCSATSkipped:(NSString *)conversationID {
+    
+}
+
+/**
+ This delegate method is optional.
+ It is called when the user is opening photo sharing gallery/camera and the persmissions denied
+ */
+- (void)LPMessagingSDKUserDeniedPermission:(enum LPPermissionTypes)permissionType {
     
 }
 
