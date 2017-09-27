@@ -8,7 +8,7 @@
 
 import UIKit
 import LPMessagingSDK
-
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, LPMessagingSDKNotificationDelegate {
@@ -18,8 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LPMessagingSDKNotificatio
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         // Override point for customization after application launch.
         // Register for push remote push notifications
-        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
-        UIApplication.shared.registerForRemoteNotifications()
+        if #available(iOS 10, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
+        }
+            // iOS 9 support
+        else if #available(iOS 9, *) {
+            application.registerUserNotificationSettings(UIUserNotificationSettings(types: [UIUserNotificationType.sound, UIUserNotificationType.alert, UIUserNotificationType.badge], categories: nil))
+        }
+        application.registerForRemoteNotifications()
         return true
     }
 

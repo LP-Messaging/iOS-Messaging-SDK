@@ -7,4 +7,5 @@ framework module LPInfra {
 
 module LPInfra.Swift {
     header "LPInfra-Swift.h"
+    requires objc
 }

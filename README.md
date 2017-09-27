@@ -1,4 +1,4 @@
-# LiveEngage In-App Messaging iOS SDK
+# LiveEngage In-App Messaging iOS SDK - Supported for XCode 9, Swift 4.0 and iOS11
 This read.me include the quick start guide for LiveEngage In-App Messaging iOS SDK in Swift and Objective-C.
 
 
