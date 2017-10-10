@@ -139,7 +139,17 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
+
+SWIFT_CLASS("_TtC5LPAMS22ConnectionStateManager")
+@interface ConnectionStateManager : NSObject <GeneralManagerProtocol>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ConnectionStateManager * _Nonnull instance;)
++ (ConnectionStateManager * _Nonnull)instance SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+- (void)clearManager;
+@end
+
 @protocol ConversationParamProtocol;
+@class LPAuthenticationParams;
 @protocol LPAMSFacadeDelegate;
 @class LPBrandEntity;
 @class LPConversationEntity;
@@ -154,7 +164,7 @@ enum SocketType : NSInteger;
 @class LPFormEntity;
 @class WKWebView;
 @class Ring;
-@class LPCustomItemEntity;
+@class LPLinkPreviewEntity;
 
 /// Full API to UMS protocol, Used is to control and send applicative events
 SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
@@ -185,8 +195,11 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 ///   <li>
 ///     optional ready completion which will be called after the socket is connected
 ///   </li>
+///   <li>
+///     optional an LPAuthenticationParams object to determine the properties of an authenticated connection. LPAuthenticationParams supports Code Flow login or Implicit Flow login.
+///   </li>
 /// </ul>
-+ (void)reconnectToSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nullable)authenticationCode readyCompletion:(void (^ _Nullable)(void))readyCompletion;
++ (void)reconnectToSocket:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationParams:(LPAuthenticationParams * _Nonnull)authenticationParams readyCompletion:(void (^ _Nullable)(void))readyCompletion;
 /// Perform disconnect from socket for conversationQuery.
 /// You can choose to disconnect the socket aftet delay of predefined time
 /// \param conversationQuery conversationQuery where to socket belongs to
@@ -279,14 +292,14 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 + (void)requestUploadURLWithConversation:(LPConversationEntity * _Nonnull)conversation fileSize:(double)fileSize fileExtention:(NSString * _Nonnull)fileExtention completion:(void (^ _Nonnull)(RequestSwiftURL * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Requests the AMS for a download url from swift server
 + (void)requestDownloadURLWithConversation:(LPConversationEntity * _Nonnull)conversation file:(LPFileEntity * _Nonnull)file completion:(void (^ _Nonnull)(RequestSwiftURL * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-/// Searches for a structured content url in the message content. If the StructuredContent feature is disabled, will return nil
+/// Searches for a link preview url in the message content. If the LinkPreview feature is disabled, will return nil
 /// This method ignores email links!
 /// \param messageContent message content to search URL from
 ///
 ///
 /// returns:
-/// If StructuredContent feature enabled and link exist - returns the first link URL, else returns nil.
-+ (NSURL * _Nullable)structuredContentUrlFrom:(NSString * _Nonnull)messageContent SWIFT_WARN_UNUSED_RESULT;
+/// If LinkPreview feature enabled and link exist - returns the first link URL, else returns nil.
++ (NSURL * _Nullable)linkPreviewUrlFrom:(NSString * _Nonnull)messageContent SWIFT_WARN_UNUSED_RESULT;
 /// Prepare secure form URL which allows to open a form to read
 /// This method generates read and write OTK from UMS and build URL to be used for PCI GW
 /// \param form form object to get the url for
@@ -315,11 +328,11 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 + (void)subscribeAgentState:(NSString * _Nonnull)agentID conversation:(LPConversationEntity * _Nonnull)conversation;
 + (void)setAgentState:(NSString * _Nonnull)agentUserId channels:(NSArray<NSString *> * _Nonnull)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description conversation:(LPConversationEntity * _Nonnull)conversation;
 + (void)agentRequestConversation:(NSDictionary<NSString *, NSString *> * _Nonnull)context ttrDefName:(NSString * _Nonnull)ttrDefName channelType:(NSString * _Nonnull)channelType consumerId:(NSString * _Nonnull)consumerId conversation:(LPConversationEntity * _Nonnull)conversation;
-/// Gets messages with structureContentState of “loading”
+/// Gets messages with linkPreviewState of “loading”
 ///
 /// returns:
 /// Optional array of messages
-+ (NSArray<LPMessageEntity *> * _Nullable)getLoadingStructureContentMessages SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<LPMessageEntity *> * _Nullable)getLoadingStructuredContentMessages SWIFT_WARN_UNUSED_RESULT;
 /// Get the latest batch of unread messages
 ///
 /// returns:
@@ -329,7 +342,7 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 ///
 /// returns:
 /// Optional array of custom items
-+ (NSArray<LPCustomItemEntity *> * _Nullable)getLoadingStructureContentCustomItems SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<LPLinkPreviewEntity *> * _Nullable)getLoadingStructuredContentCustomItems SWIFT_WARN_UNUSED_RESULT;
 + (NSArray<NSString *> * _Nonnull)getAllConsumersID SWIFT_WARN_UNUSED_RESULT;
 + (NSDictionary<NSString *, NSArray<LPConversationEntity *> *> * _Nonnull)getConversationsByConsumers SWIFT_WARN_UNUSED_RESULT;
 /// Clear all singleton managers with their properties from memory.
@@ -347,6 +360,7 @@ SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
 - (void)retrieveHistoryQueryMessagesDidProgressWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery completed:(float)completed total:(float)total;
 - (void)retrieveHistoryQueryMessagesStateDidChangeWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery isFinished:(BOOL)isFinished fetchedConversationCount:(NSInteger)fetchedConversationCount fetchedMessages:(NSArray<LPMessageEntity *> * _Nullable)fetchedMessages;
 - (void)didSendMessages:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
+- (void)willReceiveMessages;
 - (void)didReceiveMessages:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
 - (void)resolveConvesationDidFail:(LPConversationEntity * _Nonnull)conversation error:(NSError * _Nonnull)error;
 - (void)resolveConvesationRequestDidFinish:(LPConversationEntity * _Nonnull)conversation;
