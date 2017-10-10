@@ -7,5 +7,4 @@ framework module LPAMS {
 
 module LPAMS.Swift {
     header "LPAMS-Swift.h"
-    requires objc
 }
