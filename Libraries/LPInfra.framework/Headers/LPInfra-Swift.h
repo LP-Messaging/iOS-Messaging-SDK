@@ -1814,8 +1814,8 @@ SWIFT_CLASS("_TtC7LPInfra26StructuredContentImageItem")
 @property (nonatomic, copy) NSString * _Nullable relativeImagePath SWIFT_DEPRECATED_OBJC("Swift property 'StructuredContentImageItem.relativeImagePath' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, copy) NSString * _Nullable imageState SWIFT_DEPRECATED_OBJC("Swift property 'StructuredContentImageItem.imageState' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, copy) NSString * _Nullable imageCaption SWIFT_DEPRECATED_OBJC("Swift property 'StructuredContentImageItem.imageCaption' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, copy) void (^ _Nullable imageDownloadCompleted)(UIImage * _Nullable) SWIFT_DEPRECATED_OBJC("Swift property 'StructuredContentImageItem.imageDownloadCompleted' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, copy) void (^ _Nullable imageDownloadFailed)(NSError * _Nonnull) SWIFT_DEPRECATED_OBJC("Swift property 'StructuredContentImageItem.imageDownloadFailed' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) void (^ _Nullable imageLoadingCompleted)(UIImage * _Nullable) SWIFT_DEPRECATED_OBJC("Swift property 'StructuredContentImageItem.imageLoadingCompleted' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) void (^ _Nullable imageLoadingFailed)(NSError * _Nonnull) SWIFT_DEPRECATED_OBJC("Swift property 'StructuredContentImageItem.imageLoadingFailed' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Decodes the image item, stored in core data
 /// \param aCoder aCoder
 ///
