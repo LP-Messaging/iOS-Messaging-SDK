@@ -1,8 +1,56 @@
-framework module LPInfra {
-  umbrella header "LPInfra.h"
+/*
+ This is the private module which is used to make private ObjC headers available to Swift code.
+ Note how all header files need to be specified with paths relative to this file.
 
-  export *
-  module * { export * }
+ This file lives inside a folder, and that folder is the actual module. In Xcode the SWIFT_INCLUDE_PATHS needs to include the partent directory to that folder.
+ */
+//module LPInfraPrivates {
+//    header "../ExternalLibs/RNCryptor/LPRNCryptor.h"
+//    header "../ExternalLibs/ExceptionCatcher/ExceptionCatcher.h"
+//    header "../ExternalLibs/BSMobileProvision/LPBSMobileProvision.h"
+//    header "../ExternalLibs/CIContextWorkaround/CIContext+Workaround.h"
+//    export *
+//}
+
+framework module LPInfra {
+    
+    umbrella header "LPInfra.h"
+    
+    export *
+    module * {export *}
+    
+    header "ExceptionCatcher.h"
+    header "LPBSMobileProvision.h"
+    header "CIContext+Workaround.h"
+    
+    header "SRWebSocket.h"
+    header "SRDelegateController.h"
+    header "SRSecurityPolicy.h"
+    header "SRIOConsumer.h"
+    header "SRIOConsumerPool.h"
+    header "SRHash.h"
+    header "SRRunLoopThread.h"
+    header "SRURLUtilities.h"
+    header "SRError.h"
+    header "NSRunLoop+SRWebSocket.h"
+    header "NSRunLoop+SRWebSocketPrivate.h"
+    header "NSURLRequest+SRWebSocket.h"
+    header "NSURLRequest+SRWebSocketPrivate.h"
+    header "SRConstants.h"
+    header "SRHTTPConnectMessage.h"
+    header "SRLog.h"
+    header "SRMutex.h"
+    header "SRPinningSecurityPolicy.h"
+    header "SRProxyConnect.h"
+    header "SRRandom.h"
+    header "SRSIMDHelpers.h"
+    
+    module CommonCrypto [system] {
+        header "LPRNCryptor.h"
+        export *
+    }
+    
+
 }
 
 module LPInfra.Swift {
