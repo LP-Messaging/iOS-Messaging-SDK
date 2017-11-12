@@ -1,4 +1,4 @@
-# LiveEngage In-App Messaging iOS SDK - Supported for XCode 9, Swift 4.0 and iOS11
+# LiveEngage In-App Messaging iOS SDK
 This read.me include the quick start guide for LiveEngage In-App Messaging iOS SDK in Swift and Objective-C.
 
 
@@ -10,8 +10,8 @@ https://developers.liveperson.com/consumer-experience-ios-sdk-quick-start.html
 
 To use the LivePerson In-App Messaging SDK, the following are required:
 
-* XCode 9.0 or later
-* Swift 4.0 (sample compiler as 3.2) or later, or Objective-C
+* XCode 9.1 or later
+* Swift 4.0.2 or later, or Objective-C
 
 Note: For information on supported operating systems and devices, refer to [System Requirements](https://s3-eu-west-1.amazonaws.com/ce-sr/CA/Admin/Sys+req/System+requirements.pdf)
 
