@@ -492,6 +492,8 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// Custom button image. This will be displayed on the navigation bar.
 @property (nonatomic, strong) UIImage * _Nullable customButtonImage;
 @property (nonatomic, copy) NSString * _Nonnull customButtonDescription;
+/// If true, accessibility will announce when agent is typing
+@property (nonatomic) BOOL announceAgentTyping;
 /// Checkmark visibility of the following options (type CheckmarksState):
 /// SentOnly - Show checkmarks for only Sent messages.
 /// SentAndAccepted - Show checkmarks for only Sent and Accepted messages.
