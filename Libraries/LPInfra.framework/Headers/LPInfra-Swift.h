@@ -2104,7 +2104,7 @@ SWIFT_CLASS("_TtC7LPInfra7Toaster")
 /// For example, will appear as iPhone8,1 which means iPhone 6s.
 /// Each known model name can include several machine names. For example: for “iPad 2” can be returned one of the following: “iPad2,1”, “iPad2,2”, “iPad2,3”, “iPad2,4”
 /// http://stackoverflow.com/questions/26028918/ios-how-to-determine-iphone-model-in-swift
-@property (nonatomic, readonly, copy) NSString * _Nonnull modelName SWIFT_DEPRECATED_OBJC("Swift property 'UIDevice.modelName' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, copy) NSString * _Nonnull modelNameIdentifier SWIFT_DEPRECATED_OBJC("Swift property 'UIDevice.modelNameIdentifier' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @end
 
 
