@@ -273,6 +273,8 @@ SWIFT_CLASS("_TtC7LPInfra13ConsumerQuery")
 - (nonnull instancetype)initWithConsumerID:(NSString * _Nonnull)consumerID brandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken OBJC_DESIGNATED_INITIALIZER;
 /// Get all conversations by consumerID.
 - (NSArray<LPConversationEntity *> * _Nullable)getConversations SWIFT_WARN_UNUSED_RESULT;
+/// Get active conversation based on state and consumerID
+- (LPConversationEntity * _Nullable)getActiveConversation SWIFT_WARN_UNUSED_RESULT;
 /// Get all conversations by consumerID, filtered with predicate
 - (NSArray<LPConversationEntity *> * _Nullable)getConversations:(NSPredicate * _Nullable)predicate SWIFT_WARN_UNUSED_RESULT;
 - (LPConversationEntity * _Nonnull)createNewConversation SWIFT_WARN_UNUSED_RESULT;
@@ -350,7 +352,19 @@ SWIFT_CLASS("_TtC7LPInfra22LPAuthenticationParams")
 @property (nonatomic, copy) NSString * _Nullable authenticationCode;
 @property (nonatomic, copy) NSString * _Nullable jwt;
 @property (nonatomic, copy) NSString * _Nullable redirectURI;
-- (nonnull instancetype)initWithAuthenticationCode:(NSString * _Nullable)authenticationCode jwt:(NSString * _Nullable)jwt redirectURI:(NSString * _Nullable)redirectURI OBJC_DESIGNATED_INITIALIZER;
+/// will hold the Cert pining validation public keys
+@property (nonatomic, copy) NSArray<NSString *> * _Nullable certPinningPublicKeys;
+/// LPAuthenticationParams initialization with params
+/// \param authenticationCode an optional authCode which is used for ‘Code Flow’ authentication. If passing JWT - authenticationCode will be ignored
+///
+/// \param jwt an optional JWT which is used for ‘Implicit Flow’ authentication. If passing JWT - authenticationCode will be ignored
+///
+/// \param redirectURI IDP redirect URI
+///
+/// \param certPinningPublicKeys Set the certificate public key hash this API can get multiple public key hashes for the ability to support more then one key and if the certificate leaf change his public key we will still be able to validate the keys of the others certificate leaf
+/// if nil the Cert Pinning is disable
+///
+- (nonnull instancetype)initWithAuthenticationCode:(NSString * _Nullable)authenticationCode jwt:(NSString * _Nullable)jwt redirectURI:(NSString * _Nullable)redirectURI certPinningPublicKeys:(NSArray<NSString *> * _Nullable)certPinningPublicKeys OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
@@ -486,8 +500,6 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic, copy) NSString * _Nullable bubblePhoneLinksRegex;
 /// Color code for the text of the system messages.
 @property (nonatomic, strong) UIColor * _Nonnull systemBubbleTextColor;
-/// DEPRECATED - Custom button icon filename without extension. This will be displayed on the navigation bar.
-/// Use customButtonImage instead
 @property (nonatomic, copy) NSString * _Nonnull customButtonIconName;
 /// Custom button image. This will be displayed on the navigation bar.
 @property (nonatomic, strong) UIImage * _Nullable customButtonImage;
@@ -505,8 +517,6 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull checkmarkDistributedColor;
 /// Color of checkmark indication signs of Read messages
 @property (nonatomic, strong) UIColor * _Nonnull checkmarkReadColor;
-/// DEPRECATED - Color of checkmark indication signs of Read messages
-/// Use checkmarkReadColor instead
 @property (nonatomic, strong) UIColor * _Nonnull checkmarkColor;
 @property (nonatomic, copy) NSString * _Nonnull readReceiptTextSent;
 @property (nonatomic, copy) NSString * _Nonnull readReceiptTextDistributed;
@@ -525,8 +535,6 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull csatRatingButtonSelectedColor;
 /// Color for the resolution confirmation buttons (YES/NO) when selected
 @property (nonatomic, strong) UIColor * _Nonnull csatResolutionButtonSelectedColor;
-@property (nonatomic, copy) NSString * _Nonnull csatResolutionFeedbackText;
-@property (nonatomic, copy) NSString * _Nonnull csatResolutionQuestionText;
 /// Titles text colors for all labels
 @property (nonatomic, strong) UIColor * _Nonnull csatAllTitlesTextColor;
 /// Hides the yes/no question
@@ -553,9 +561,6 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic) BOOL csatUIStatusBarStyleLightContent;
 /// Hides the whole survey view
 @property (nonatomic) BOOL csatShowSurveyView;
-/// DEPRECATED - number of fetched conversations is defined by maxPreviousConversationToPresent + 1
-/// The amount of conversations to fetch on loading
-@property (nonatomic) NSUInteger maxConversationToFetch;
 /// Amount of conversations to show in advance
 @property (nonatomic) NSUInteger maxPreviousConversationToPresent;
 /// Upon SDK initialization, all closed conversation with end date older than X months, will get deleted from the database. Setting 0 will delete all closed conversation.
@@ -720,6 +725,8 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic) NSUInteger ttrShowFrequencyInSeconds;
 /// CSDS Domain URL.  For brands that need to control the URL that is the gateway for LivePerson services, use this key to set a URL of your choice.
 @property (nonatomic, copy) NSString * _Nonnull csdsDomain;
+/// lpTag Domain URL.  For brands that need to control the URL that is the gateway for LivePerson services, use this key to set a URL of your choice.
+@property (nonatomic, copy) NSString * _Nonnull lpTagDomain;
 /// Background color of default remoteUser avatar
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserAvatarBackgroundColor;
 /// Icon color of default remoteUser avatar
@@ -866,6 +873,9 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// custom refresh controller speed animation define the full images loop time
 /// Smaller value will create high speed animation
 @property (nonatomic) float customRefreshControllerAnimationSpeed;
+/// The maximum height of the input text field in pixels. Default is 100 pixels.
+/// Cannot be smaller than 50 pixels
+@property (nonatomic) CGFloat inputTextViewMaxHeight;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPConfig * _Nonnull defaultConfiguration;)
 + (LPConfig * _Nonnull)defaultConfiguration SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -879,6 +889,33 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPConfig * _
 - (void)setValue:(id _Nullable)value forUndefinedKey:(NSString * _Nonnull)key;
 /// Prints all the configurations keys of the SDK
 + (void)printAllConfigurations;
+@end
+
+@class LPUserEntity;
+
+SWIFT_CLASS("_TtC7LPInfra12LPConnection")
+@interface LPConnection : NSObject
+@property (nonatomic, strong) LPUserEntity * _Null_unspecified consumer SWIFT_DEPRECATED_OBJC("Swift property 'LPConnection.consumer' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSArray<LPConversationEntity *> * _Null_unspecified conversations SWIFT_DEPRECATED_OBJC("Swift property 'LPConnection.conversations' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) NSInteger hashValue;
+- (nonnull instancetype)initWithConsumer:(LPUserEntity * _Nonnull)consumer conversations:(NSArray<LPConversationEntity *> * _Nonnull)conversations OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_OBJC("Swift initializer 'LPConnection.init(consumer:conversations:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+/// Return last conversation from connection conversations
+/// \param connection Connection from which we want to get last (most new) conversation
+///
+///
+/// returns:
+/// Conversation or nil
+@property (nonatomic, readonly, strong) LPConversationEntity * _Nullable lastConversation SWIFT_DEPRECATED_OBJC("Swift property 'LPConnection.lastConversation' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
+
+@interface LPConnection (SWIFT_EXTENSION(LPInfra))
+@property (nonatomic, readonly) NSInteger numberOfUnreadMessages SWIFT_DEPRECATED_OBJC("Swift property 'LPConnection.numberOfUnreadMessages' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Get title label with the following priorities:
+/// Fullname > Phone Number > Consumer ID
+@property (nonatomic, readonly, copy) NSString * _Nonnull titleLabel SWIFT_DEPRECATED_OBJC("Swift property 'LPConnection.titleLabel' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @end
 
 typedef SWIFT_ENUM(NSInteger, LPConversationCloseReason) {
@@ -911,13 +948,13 @@ SWIFT_CLASS("_TtC7LPInfra20LPConversationEntity")
 @property (nonatomic, copy) NSString * _Nullable type;
 @property (nonatomic, copy) NSString * _Nullable assignedAgentId;
 @property (nonatomic, copy) NSString * _Nullable consumerId;
+@property (nonatomic, copy) NSDate * _Nullable effectiveTTR;
 @property (nonatomic, strong) NSMutableSet * _Nonnull currentlyAcceptedSequences;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class LPMessageEntity;
-@class LPUserEntity;
 
 @interface LPConversationEntity (SWIFT_EXTENSION(LPInfra))
 @property (nonatomic, readonly, copy) NSArray<LPMessageEntity *> * _Nonnull sortedMessages;
@@ -1128,19 +1165,24 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 /// returns:
 /// an open conversation if exists - if none, returns nil
 + (LPConversationEntity * _Nullable)getOpenConveration SWIFT_WARN_UNUSED_RESULT;
-/// This method fetch user profile from the server.
-/// <ul>
-///   <li>
-///     Fetch user data from server
-///   </li>
-///   <li>
-///     Save to DB
-///   </li>
-///   <li>
-///     Return User to completion block
-///   </li>
-/// </ul>
-+ (void)fetchUser:(NSString * _Nonnull)brandID userID:(NSString * _Nonnull)userID isMe:(BOOL)isMe completion:(void (^ _Nullable)(LPUserEntity * _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
+/// Get array of consumer ids that are related to messages that contain a certain string
+/// This method iterates all messages in the database and returns the consumer id of those containing the wanted string
+/// \param text The string that the messages should contain
+///
+///
+/// returns:
+/// Array of consumer ids or nil if none found
++ (NSArray<NSString *> * _Nullable)getConsumerIdsRelatedToMessagesThatContainsWithText:(NSString * _Nonnull)text SWIFT_WARN_UNUSED_RESULT;
+/// Get user details from ACCDN
+/// \param brandID brandID of the user
+///
+/// \param userID user ID to get details for
+///
+/// \param completion comepltion block with User instance
+///
+/// \param failure failure block
+///
++ (void)getUserDetailsFromACCDN:(NSString * _Nonnull)brandID userID:(NSString * _Nonnull)userID completion:(void (^ _Nullable)(LPUserEntity * _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 /// Attach completion block which is being invoken when the Consumer (My) User is retrieved
 + (void)attachMyUserCompletion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 /// This method fetch user from the database.
@@ -1172,7 +1214,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 /// Get MY user ID from memory if exists
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nullable myUserID;)
 + (NSString * _Nullable)myUserID SWIFT_WARN_UNUSED_RESULT;
-+ (void)myUserIDFetchedFromJWTWithMyUserID:(NSString * _Nonnull)myUserID;
+/// Get MY ALTERNATIVE user ID from memory if exists
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nullable myAlternativeUserID;)
++ (NSString * _Nullable)myAlternativeUserID SWIFT_WARN_UNUSED_RESULT;
 /// Handle agent details that fetched and notifiy for fetched user
 /// User details can be nil incase there should be notify for no assigned agent
 + (void)agentDetailsDidFetchWithUser:(LPUserEntity * _Nullable)user;
@@ -1498,6 +1542,7 @@ typedef SWIFT_ENUM(NSInteger, LPPermissionTypes) {
 
 SWIFT_CLASS("_TtC7LPInfra12LPSDKManager")
 @interface LPSDKManager : NSObject <GeneralManagerProtocol>
+@property (nonatomic, strong) id <ConversationParamProtocol> _Nullable conversationQuery;
 @property (nonatomic) BOOL isWindowMode;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPSDKManager * _Nonnull instance;)
 + (LPSDKManager * _Nonnull)instance SWIFT_WARN_UNUSED_RESULT;
@@ -1595,6 +1640,7 @@ SWIFT_CLASS("_TtC7LPInfra12LPUserEntity")
 
 
 @interface LPUserEntity (SWIFT_EXTENSION(LPInfra))
+@property (nonatomic, readonly) BOOL isConsumer;
 @property (nonatomic, readonly, copy) NSString * _Nonnull fullName;
 @property (nonatomic, readonly) BOOL isMe;
 @property (nonatomic, readonly) BOOL isController;
@@ -2041,6 +2087,12 @@ SWIFT_CLASS("_TtC7LPInfra24SubscribeExConversations")
 @end
 
 
+SWIFT_CLASS("_TtC7LPInfra21SubscribeRoutingTasks")
+@interface SubscribeRoutingTasks : SubscribeExConversations
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC7LPInfra8TTRModel")
 @interface TTRModel : NSObject
 @property (nonatomic, copy) NSDate * _Null_unspecified effectiveTTR SWIFT_DEPRECATED_OBJC("Swift property 'TTRModel.effectiveTTR' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
@@ -2057,6 +2109,7 @@ SWIFT_CLASS("_TtC7LPInfra5Toast")
 @property (nonatomic, copy) void (^ _Nullable didShow)(void) SWIFT_DEPRECATED_OBJC("Swift property 'Toast.didShow' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, copy) void (^ _Nullable didDismiss)(void) SWIFT_DEPRECATED_OBJC("Swift property 'Toast.didDismiss' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, copy) void (^ _Nullable didTap)(void) SWIFT_DEPRECATED_OBJC("Swift property 'Toast.didTap' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) BOOL showAboveStatusBar SWIFT_DEPRECATED_OBJC("Swift property 'Toast.showAboveStatusBar' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (void)awakeFromNib;
 /// Changes text of toast (even on runtime when the toast is showing)
 /// \param text text to show
@@ -2073,6 +2126,7 @@ SWIFT_CLASS("_TtC7LPInfra7Toaster")
 @property (nonatomic, readonly, strong) Toast * _Nullable current SWIFT_DEPRECATED_OBJC("Swift property 'Toaster.current' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Inits the toast object with container view controller
 - (nonnull instancetype)initWithContainerViewController:(UIViewController * _Nonnull)containerViewController SWIFT_DEPRECATED_OBJC("Swift initializer 'Toaster.init(containerViewController:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nonnull instancetype)initWithContainerView:(UIView * _Nonnull)containerView SWIFT_DEPRECATED_OBJC("Swift initializer 'Toaster.init(containerView:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Receives a toast and puts it at the correct index inside the toasts array
 /// \param toast toast object
 ///

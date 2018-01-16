@@ -195,6 +195,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ConnectionSt
 - (void)clearManager;
 @end
 
+
+SWIFT_CLASS("_TtC5LPAMS24EngagementHistoryManager")
+@interface EngagementHistoryManager : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @protocol ConversationParamProtocol;
 @class LPAuthenticationParams;
 @protocol LPAMSFacadeDelegate;
@@ -263,7 +269,7 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 /// Set AMSManagerDelegate implementor
 + (void)setDelegate:(id <LPAMSFacadeDelegate> _Nonnull)delegate;
 /// Remove AMSManagerDelegate implementor
-+ (void)removeDelegate;
++ (void)removeDelegate:(id <LPAMSFacadeDelegate> _Nonnull)delegate;
 /// Create new conversation instance
 + (LPConversationEntity * _Nonnull)createConversation:(LPBrandEntity * _Nonnull)brand SWIFT_WARN_UNUSED_RESULT;
 /// Send message from a Message instance related to an owner conversation
@@ -291,6 +297,16 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 + (void)subscribeConversationNotifications:(NSString * _Nonnull)brandID userID:(NSString * _Nonnull)userID socketType:(enum SocketType)socketType completion:(void (^ _Nullable)(NSString * _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 /// Unsubscribe from exConversation notifications per brandID for subscriptionID
 + (void)unsubscribeConversationNotifications:(NSString * _Nonnull)brandID subscriptionID:(NSString * _Nonnull)subscriptionID;
+/// Subscribe to routing tasks notification in order to get new rings for Agent
+/// \param brandID brandID to subscribe for
+///
+/// \param agentID agentID to get new rings for
+///
+/// \param completion completion with subscriptionID
+///
+/// \param failure failure
+///
++ (void)subscribeRoutingTasks:(NSString * _Nonnull)brandID agentID:(NSString * _Nonnull)agentID completion:(void (^ _Nullable)(NSString * _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 /// This method determines wether a brandID is Ready.
 /// Ready means that the brand is connected and conversation can be proccessed.
 + (BOOL)isBrandReady:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
@@ -370,11 +386,11 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 /// returns:
 /// an optional instance of the webview with the form loaded
 + (WKWebView * _Nullable)getPreparedSecureFormWebViewWithForm:(LPFormEntity * _Nonnull)form SWIFT_WARN_UNUSED_RESULT;
-+ (void)takeConversation:(Ring * _Nonnull)ring agentToken:(NSString * _Nonnull)agentToken completion:(void (^ _Nonnull)(LPConversationEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-+ (void)backToQueue:(NSString * _Nonnull)userID conversation:(LPConversationEntity * _Nonnull)conversation;
-+ (void)subscribeAgentState:(NSString * _Nonnull)agentID conversation:(LPConversationEntity * _Nonnull)conversation;
-+ (void)setAgentState:(NSString * _Nonnull)agentUserId channels:(NSArray<NSString *> * _Nonnull)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description conversation:(LPConversationEntity * _Nonnull)conversation;
-+ (void)agentRequestConversation:(NSDictionary<NSString *, NSString *> * _Nonnull)context ttrDefName:(NSString * _Nonnull)ttrDefName channelType:(NSString * _Nonnull)channelType consumerId:(NSString * _Nonnull)consumerId conversation:(LPConversationEntity * _Nonnull)conversation;
++ (void)acceptRing:(Ring * _Nonnull)ring agentToken:(NSString * _Nonnull)agentToken completion:(void (^ _Nonnull)(LPConversationEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
++ (void)backToQueue:(NSString * _Nonnull)userID conversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
++ (void)subscribeAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID;
++ (void)setAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID channels:(NSArray<NSString *> * _Nullable)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description;
++ (void)agentRequestConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery context:(NSDictionary<NSString *, NSString *> * _Nonnull)context ttrDefName:(NSString * _Nonnull)ttrDefName channelType:(NSString * _Nonnull)channelType consumerId:(NSString * _Nonnull)consumerId completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Gets messages with linkPreviewState of “loading”
 ///
 /// returns:
@@ -398,19 +414,20 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 /// true if active else false
 + (BOOL)hasActiveController:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
 + (NSArray<NSString *> * _Nonnull)getAllConsumersID SWIFT_WARN_UNUSED_RESULT;
-+ (NSDictionary<NSString *, NSArray<LPConversationEntity *> *> * _Nonnull)getConversationsByConsumers SWIFT_WARN_UNUSED_RESULT;
 /// Clear all singleton managers with their properties from memory.
 /// This method will release any data objects and data structures.
 + (void)clearManagers;
 @end
 
 @class TTRModel;
+@class LPUserEntity;
 
 /// UMS protocol delegate to receive events about the lifecycle of conversaion, messages, CSAT etc.
 SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
 @protocol LPAMSFacadeDelegate
 @optional
 - (void)conversationDidResolve:(LPConversationEntity * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nullable)endTime;
+- (void)conversationWasSentToQueueRemotely:(LPConversationEntity * _Nonnull)conversation;
 - (void)retrieveHistoryQueryMessagesDidProgressWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery completed:(float)completed total:(float)total;
 - (void)retrieveHistoryQueryMessagesStateDidChangeWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery isFinished:(BOOL)isFinished fetchedConversationCount:(NSInteger)fetchedConversationCount fetchedMessages:(NSArray<LPMessageEntity *> * _Nullable)fetchedMessages;
 - (void)didSendMessages:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
@@ -421,7 +438,7 @@ SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
 - (void)newConversationCreated:(LPConversationEntity * _Nonnull)conversation;
 - (void)urgentRequestDidFinish:(LPConversationEntity * _Nonnull)conversation;
 - (void)urgentRequestDidFail:(LPConversationEntity * _Nonnull)conversation error:(NSError * _Nonnull)error;
-- (void)chatStateDidChange:(LPConversationEntity * _Nonnull)conversation state:(NSString * _Nonnull)state;
+- (void)chatStateDidChange:(LPConversationEntity * _Nonnull)conversation state:(NSString * _Nonnull)state userID:(NSString * _Nonnull)userID;
 - (void)messagesStatusDidChange:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
 - (void)conversationInitializedOnAMS:(LPConversationEntity * _Nonnull)conversation;
 - (void)didReceiveTTRUpdate:(LPConversationEntity * _Nonnull)conversation ttr:(TTRModel * _Nonnull)ttr;
@@ -429,10 +446,12 @@ SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
 - (void)csatScoreSubmissionDidFinish:(LPConversationEntity * _Nonnull)conversation csat:(CSATModel * _Nonnull)csat;
 - (void)csatScoreSubmissionDidFail:(LPConversationEntity * _Nonnull)conversation error:(NSError * _Nonnull)error;
 - (BOOL)isConversationVisible SWIFT_WARN_UNUSED_RESULT;
-- (void)didReceiveRingUpdate:(NSString * _Nonnull)conversationID ring:(Ring * _Nonnull)ring;
 - (NSString * _Nullable)brandAccountID SWIFT_WARN_UNUSED_RESULT;
 - (void)sdkFeatureToggledWithFeature:(enum LPMessagingSDKFeature)feature toggle:(BOOL)toggle;
 - (id <ConversationParamProtocol> _Nullable)getCurrentConversationQuery SWIFT_WARN_UNUSED_RESULT;
+- (void)didReceiveRingUpdate:(NSString * _Nonnull)conversationID ring:(Ring * _Nonnull)ring;
+- (void)didAcceptRingWithConversation:(LPConversationEntity * _Nonnull)conversation;
+- (void)agentStateDidChange:(LPUserEntity * _Nonnull)agent state:(NSString * _Nonnull)state;
 @end
 
 /// Used to set the socket type as consumer aor brand. The URI for opening the socket is different between the two.
@@ -446,7 +465,7 @@ SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
 /// </ul>
 typedef SWIFT_ENUM(NSInteger, SocketType) {
   SocketTypeConsumer = 0,
-  SocketTypeBrand = 1,
+  SocketTypeAgent = 1,
 };
 
 SWIFT_MODULE_NAMESPACE_POP

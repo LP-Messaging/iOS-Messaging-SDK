@@ -226,9 +226,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// Bool if initialization is successful
 + (BOOL)initializeAPI SWIFT_WARN_UNUSED_RESULT;
 /// Set LPMessagingAPIDelegate implementor
-+ (void)setDelegateWithDelegate:(id <LPMessagingAPIDelegate> _Nonnull)delegate;
++ (void)setDelegate:(id <LPMessagingAPIDelegate> _Nonnull)delegate;
 /// Remove LPMessagingAPIDelegate implementor
-+ (void)removeDelegate;
++ (void)removeDelegate:(id <LPMessagingAPIDelegate> _Nonnull)delegate;
 /// This method sets user details for the consumer of a brand.
 /// The user object is in Type of LPUser which includes all the user details.
 /// Additional paramaters:
@@ -265,6 +265,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 + (BOOL)isBrandReady:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
 /// This method returns the SDK version.
 + (NSString * _Nullable)getSDKVersion SWIFT_WARN_UNUSED_RESULT;
+/// Reset last saved scroll poistion of the conversation screen
++ (void)resetConversationScreenSavedScrollPosition;
 /// Get inActive time in second from the user last touch on screen
 ///
 /// returns:
@@ -331,6 +333,16 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 + (void)subscribeConversationNotifications:(NSString * _Nonnull)brandID userID:(NSString * _Nonnull)userID socketType:(enum SocketType)socketType completion:(void (^ _Nullable)(NSString * _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 /// Unsubscribe from exConversation notifications per brandID for subscriptionID
 + (void)unsubscribeConversationNotifications:(NSString * _Nonnull)brandID subscriptionID:(NSString * _Nonnull)subscriptionID;
+/// Subscribe to routing tasks notification in order to get new rings for Agent
+/// \param brandID brandID to subscribe for
+///
+/// \param agentID agentID to get new rings for
+///
+/// \param completion completion with subscriptionID
+///
+/// \param failure failure
+///
++ (void)subscribeRoutingTasks:(NSString * _Nonnull)brandID agentID:(NSString * _Nonnull)agentID completion:(void (^ _Nullable)(NSString * _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 /// Determines whether history query messages already fecthced
 + (BOOL)didFetchHistoryQueryMessages SWIFT_WARN_UNUSED_RESULT;
 /// Determines whether history query messages is now being fetched
@@ -366,17 +378,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// Clear all singleton managers with their properties from memory.
 /// This method will release any data objects and data structures.
 + (void)clearManagers;
-+ (void)takeConversation:(Ring * _Nonnull)ring agentToken:(NSString * _Nonnull)agentToken completion:(void (^ _Nonnull)(LPConversationEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-+ (void)backToQueue:(NSString * _Nonnull)userID conversation:(LPConversationEntity * _Nonnull)conversation;
-+ (void)subscribeAgentState:(NSString * _Nonnull)agentID conversation:(LPConversationEntity * _Nonnull)conversation;
-+ (void)setAgentState:(NSString * _Nonnull)agentUserId channels:(NSArray<NSString *> * _Nonnull)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description conversation:(LPConversationEntity * _Nonnull)conversation;
-+ (void)agentRequestConversation:(NSDictionary<NSString *, NSString *> * _Nonnull)context ttrDefName:(NSString * _Nonnull)ttrDefName channelType:(NSString * _Nonnull)channelType consumerId:(NSString * _Nonnull)consumerId conversation:(LPConversationEntity * _Nonnull)conversation;
++ (void)acceptRing:(Ring * _Nonnull)ring agentToken:(NSString * _Nonnull)agentToken completion:(void (^ _Nonnull)(LPConversationEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
++ (void)backToQueue:(NSString * _Nonnull)userID conversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
++ (void)subscribeAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID;
++ (void)setAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID channels:(NSArray<NSString *> * _Nullable)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description;
++ (void)agentRequestConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery context:(NSDictionary<NSString *, NSString *> * _Nonnull)context ttrDefName:(NSString * _Nonnull)ttrDefName channelType:(NSString * _Nonnull)channelType consumerId:(NSString * _Nonnull)consumerId completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 + (NSArray<NSString *> * _Nonnull)getAllConsumersID SWIFT_WARN_UNUSED_RESULT;
-/// Get all the conversations fetched from the DB by userId query
-///
-/// returns:
-/// Dictionary of ConversationId:Conversation
-+ (NSDictionary<NSString *, NSArray<LPConversationEntity *> *> * _Nonnull)getConversationsByConsumers SWIFT_WARN_UNUSED_RESULT;
 /// Prepare secure form to be open in a webview
 /// This method generates read and write OTK from UMS and build URL to be used for PCI GW
 /// \param form form object to get the url for
@@ -447,19 +454,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// Get all conversations from DB sorted by creation date (first object is the latest conversation)
 /// If includeQueriedOnly parameter is false, only new conversations or conversations which messages should not be queried, will be returned
 + (NSArray<LPConversationEntity *> * _Nonnull)getConversationsSortedByDate:(id <ConversationParamProtocol> _Nonnull)query includeQueriedOnly:(BOOL)includeQueriedOnly SWIFT_WARN_UNUSED_RESULT;
-/// This method fetch user profile from the server.
-/// <ul>
-///   <li>
-///     Fetch user data from server
-///   </li>
-///   <li>
-///     Save to DB
-///   </li>
-///   <li>
-///     Return User to completion block
-///   </li>
-/// </ul>
-+ (void)fetchUser:(NSString * _Nonnull)brandID userID:(NSString * _Nonnull)userID isMe:(BOOL)isMe completion:(void (^ _Nullable)(LPUserEntity * _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 /// Attach completion block which is being invoken when the Consumer (My) User is retrieved
 + (void)attachMyUserCompletion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 /// This method fetch user from the database.
@@ -559,6 +553,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 /// returns:
 /// an open conversation if exists - if none, returns nil
 + (LPConversationEntity * _Nullable)getOpenConveration SWIFT_WARN_UNUSED_RESULT;
+/// Get array of consumer ids that are related to messages that contain a certain string
+/// \param text The string that the messages should contain
+///
+///
+/// returns:
+/// Array of consumer ids or nil if none found
++ (NSArray<NSString *> * _Nullable)getConsumerIdsRelatedToMessagesThatContains:(NSString * _Nonnull)text SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -640,6 +641,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 /// DEPRECATED - This method sets a custom image for the custom button in the conversation navigationBar.
 /// Use customButtonImage instead
 - (void)setCustomButton:(UIImage * _Nullable)image;
+/// Appends content to the message text field
+/// \param text Text to append
+///
+- (void)addContentToMessageWithText:(NSString * _Nonnull)text;
 /// This method checks if the active conversation of a conversation query marked as Urgent.
 /// Return value:
 /// True - conversation is marked as Urgent.
@@ -772,6 +777,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKConnectionStateChanged:(BOOL)isReady brandID:(NSString * _Nonnull)brandID;
 - (void)LPMessagingSDKOffHoursStateChanged:(BOOL)isOffHours brandID:(NSString * _Nonnull)brandID;
 - (void)LPMessagingSDKConversationViewControllerDidDismiss;
+- (void)LPMessagingSDKCertPinningFailed:(NSError * _Nonnull)error;
 @end
 
 
