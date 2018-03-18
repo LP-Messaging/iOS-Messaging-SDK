@@ -195,9 +195,25 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ConnectionSt
 - (void)clearManager;
 @end
 
+@class EngagementHistoryRequest;
+@class LPMessageEntity;
+@class EngagementHistoryConsumerMessagesResponse;
 
 SWIFT_CLASS("_TtC5LPAMS24EngagementHistoryManager")
 @interface EngagementHistoryManager : NSObject
+/// Get conversation histroy from Engagement History API for consumers.
+/// Method of request will be based on the request param that passed to this method.
+/// \param request EngagementHistoryRequest request to detemine which type of request history and which details
+///
+/// \param completion completion block with EngagementHistoryResponseForConsumer object including all data
+///
+/// \param failure failure block with error
+///
++ (void)getConsumerMessagesForConversationWithRequest:(EngagementHistoryRequest * _Nonnull)request completion:(void (^ _Nonnull)(NSArray<LPMessageEntity *> * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_DEPRECATED_OBJC("Swift method 'EngagementHistoryManager.getConsumerMessagesForConversation(request:completion:failure:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Handle history response for all related conversations and messages
+/// \param response EngagementHistoryResponse
+///
++ (NSArray<LPMessageEntity *> * _Nonnull)handleConsumerMessagesResponse:(EngagementHistoryConsumerMessagesResponse * _Nonnull)response SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'EngagementHistoryManager.handleConsumerMessagesResponse(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -206,7 +222,6 @@ SWIFT_CLASS("_TtC5LPAMS24EngagementHistoryManager")
 @protocol LPAMSFacadeDelegate;
 @class LPBrandEntity;
 @class LPConversationEntity;
-@class LPMessageEntity;
 @class NSError;
 @class LPUser;
 @class CSATModel;
@@ -321,9 +336,9 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 /// False - there is no active conversation.
 + (BOOL)checkActiveConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_WARN_UNUSED_RESULT;
 /// Determines whether history query messages already fecthced
-+ (BOOL)didFetchHistoryQueryMessages SWIFT_WARN_UNUSED_RESULT;
++ (BOOL)didFetchHistoryMessagingEventNotifications SWIFT_WARN_UNUSED_RESULT;
 /// Determines whether history query messages is now being fetched
-+ (BOOL)isFetchingHistoryQueryMessages SWIFT_WARN_UNUSED_RESULT;
++ (BOOL)isFetchingHistoryMessages SWIFT_WARN_UNUSED_RESULT;
 /// Determines the name of the assigned agent that should be presented in UI areas.
 /// If assigned agent exists and has a nickname - return it. Otherwise, return nil.
 /// If nil is returned, it should be handled according to UI area
@@ -420,6 +435,7 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 @end
 
 @class TTRModel;
+@class LPConnection;
 @class LPUserEntity;
 
 /// UMS protocol delegate to receive events about the lifecycle of conversaion, messages, CSAT etc.
@@ -428,8 +444,9 @@ SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
 @optional
 - (void)conversationDidResolve:(LPConversationEntity * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nullable)endTime;
 - (void)conversationWasSentToQueueRemotely:(LPConversationEntity * _Nonnull)conversation;
-- (void)retrieveHistoryQueryMessagesDidProgressWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery completed:(float)completed total:(float)total;
-- (void)retrieveHistoryQueryMessagesStateDidChangeWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery isFinished:(BOOL)isFinished fetchedConversationCount:(NSInteger)fetchedConversationCount fetchedMessages:(NSArray<LPMessageEntity *> * _Nullable)fetchedMessages;
+- (void)retrieveHistoryMessagingEventNotificationsDidProgressWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery completed:(NSInteger)completed total:(NSInteger)total;
+- (void)retrieveHistoryEngagementHistoryDidProgressWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery completed:(NSInteger)completed total:(NSInteger)total;
+- (void)retrieveHistoryMessagingEventNotificationStateDidChangeWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery isFinished:(BOOL)isFinished fetchedConversationCount:(NSInteger)fetchedConversationCount fetchedMessages:(NSArray<LPMessageEntity *> * _Nullable)fetchedMessages increaseNumberOfPresentedConversationsBy:(NSInteger)increaseNumberOfPresentedConversationsBy;
 - (void)didSendMessages:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
 - (void)willReceiveMessages;
 - (void)didReceiveMessages:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
@@ -445,12 +462,13 @@ SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
 - (void)didUpdateUserProfile:(LPConversationEntity * _Nonnull)conversation userID:(NSString * _Nonnull)userID;
 - (void)csatScoreSubmissionDidFinish:(LPConversationEntity * _Nonnull)conversation csat:(CSATModel * _Nonnull)csat;
 - (void)csatScoreSubmissionDidFail:(LPConversationEntity * _Nonnull)conversation error:(NSError * _Nonnull)error;
-- (BOOL)isConversationVisible SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isConversationViewControllerPresentedWithForceTopConversation:(BOOL)forceTopConversation SWIFT_WARN_UNUSED_RESULT;
 - (NSString * _Nullable)brandAccountID SWIFT_WARN_UNUSED_RESULT;
 - (void)sdkFeatureToggledWithFeature:(enum LPMessagingSDKFeature)feature toggle:(BOOL)toggle;
 - (id <ConversationParamProtocol> _Nullable)getCurrentConversationQuery SWIFT_WARN_UNUSED_RESULT;
+- (void)historyCleared;
 - (void)didReceiveRingUpdate:(NSString * _Nonnull)conversationID ring:(Ring * _Nonnull)ring;
-- (void)didAcceptRingWithConversation:(LPConversationEntity * _Nonnull)conversation;
+- (void)didAcceptRingWithConversation:(LPConversationEntity * _Nonnull)conversation connection:(LPConnection * _Nonnull)connection;
 - (void)agentStateDidChange:(LPUserEntity * _Nonnull)agent state:(NSString * _Nonnull)state;
 @end
 

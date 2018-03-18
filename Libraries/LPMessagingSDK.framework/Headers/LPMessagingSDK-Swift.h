@@ -201,6 +201,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")
 @protocol LPMessagingAPIDelegate;
 @class LPUser;
 @protocol LPMessagingSDKNotificationDelegate;
+@class LPCampaignInfo;
 @protocol ConversationParamProtocol;
 @class LPAuthenticationParams;
 @class LPBrandEntity;
@@ -215,6 +216,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")
 @class LPFormEntity;
 @class LPLinkPreviewEntity;
 @class LPWebSocket;
+@class LPConversationHistoryControlParam;
 @class LPUserEntity;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
@@ -241,7 +243,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// <alternateBundleID> is a value for using in order to let the Pusher service to identify the host app with this bundle identifier.
 + (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID;
 /// This method created ConversationParamProtocol of Brand query type.
-+ (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
++ (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo SWIFT_WARN_UNUSED_RESULT;
 /// This method created ConversationParamProtocol of Consumer and Skill query type.
 + (id <ConversationParamProtocol> _Nonnull)getConversationConsumerQuery:(NSString * _Nullable)consumerID brandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken SWIFT_WARN_UNUSED_RESULT;
 /// This method checks for an active(Open/Created) conversation according to conversation query.
@@ -344,9 +346,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 ///
 + (void)subscribeRoutingTasks:(NSString * _Nonnull)brandID agentID:(NSString * _Nonnull)agentID completion:(void (^ _Nullable)(NSString * _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 /// Determines whether history query messages already fecthced
-+ (BOOL)didFetchHistoryQueryMessages SWIFT_WARN_UNUSED_RESULT;
++ (BOOL)didFetchHistoryMessagingEventNotifications SWIFT_WARN_UNUSED_RESULT;
 /// Determines whether history query messages is now being fetched
-+ (BOOL)isFetchingHistoryQueryMessages SWIFT_WARN_UNUSED_RESULT;
++ (BOOL)isFetchingHistoryMessages SWIFT_WARN_UNUSED_RESULT;
 /// Determines the name of the assigned agent that should be presented in UI areas.
 /// If assigned agent exists and has a nickname - return it. Otherwise, return nil.
 /// If nil is returned, it should be handled according to UI area
@@ -453,7 +455,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 + (NSArray<LPConversationEntity *> * _Nullable)getAllClosedConversations:(NSDate * _Nullable)olderThanDate SWIFT_WARN_UNUSED_RESULT;
 /// Get all conversations from DB sorted by creation date (first object is the latest conversation)
 /// If includeQueriedOnly parameter is false, only new conversations or conversations which messages should not be queried, will be returned
-+ (NSArray<LPConversationEntity *> * _Nonnull)getConversationsSortedByDate:(id <ConversationParamProtocol> _Nonnull)query includeQueriedOnly:(BOOL)includeQueriedOnly SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<LPConversationEntity *> * _Nonnull)getConversationsSortedByDate:(id <ConversationParamProtocol> _Nonnull)query conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nullable)conversationHistoryControlParam SWIFT_WARN_UNUSED_RESULT;
 /// Attach completion block which is being invoken when the Consumer (My) User is retrieved
 + (void)attachMyUserCompletion:(void (^ _Nonnull)(NSString * _Nonnull))completion;
 /// This method fetch user from the database.
@@ -569,6 +571,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingAPIDelegate_")
 @end
 
 @protocol LPMessagingSDKdelegate;
+@class LPMonitoringInitParams;
 @class UIViewController;
 @class LPConversationViewParams;
 @class UIBarButtonItem;
@@ -578,7 +581,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingSDK")
 @interface LPMessagingSDK : NSObject <UINavigationControllerDelegate>
 @property (nonatomic, weak) id <LPMessagingSDKdelegate> _Nullable delegate;
 @property (nonatomic, weak) id <LPMessagingSDKNotificationDelegate> _Nullable notificationDelegate;
-@property (nonatomic, copy) NSString * _Nullable accountID;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingSDK * _Nonnull instance;)
 + (LPMessagingSDK * _Nonnull)instance SWIFT_WARN_UNUSED_RESULT;
@@ -586,7 +588,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 /// Optional paramaters:
 /// <brandID> of the host app.
 /// This method throws an error/return false with with an error, in case the initialization failed.
-- (BOOL)initialize:(NSString * _Nullable)brandID error:(NSError * _Nullable * _Nullable)error;
+- (BOOL)initialize:(NSString * _Nullable)brandID monitoringInitParams:(LPMonitoringInitParams * _Nullable)monitoringInitParams error:(NSError * _Nullable * _Nullable)error;
 - (void)showConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nullable)authenticationCode containerViewController:(UIViewController * _Nullable)containerViewController;
 /// Show Conversation view and starts the conversation and show all the existing messages it exist.
 /// \param conversationViewParams an LPConversationViewParams object to determine the properties of the views. Such as Container or Window or if ViewOnly.
@@ -630,8 +632,26 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 - (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID;
 - (void)registerVoipPushNotificationsWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
 /// This method created ConversationParamProtocol of Brand query type.
-- (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
+/// ConversationParamProtocol represents a ’filter’ for the conversation screen, determining which of the conversations will be displayed in the following screens.
+/// \param brandID brandID to request the conversation query for
+///
+/// \param campaignInfo an optional campaign info (LPCampaignInfo) to use advanced routing for the consumer. This object based on campaignID and engagementID
+///
+///
+/// returns:
+/// a new ConversationParamProtocol by type of BrandQuery
+- (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo SWIFT_WARN_UNUSED_RESULT;
 /// This method created ConversationParamProtocol of Consumer and Skill query type.
+/// ConversationParamProtocol represents a ’filter’ for the conversation screen, determining which of the conversations will be displayed in the following screens.
+/// \param consumerID consumerID to request the conversation query for
+///
+/// \param brandID brandID to request the conversation query for
+///
+/// \param agentToken a unique token for agent aka Agent Bearer
+///
+///
+/// returns:
+/// a new ConversationParamProtocol by type of ConsumerQuery
 - (id <ConversationParamProtocol> _Nonnull)getConversationConsumerQuery:(NSString * _Nullable)consumerID brandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken SWIFT_WARN_UNUSED_RESULT;
 /// This method checks for an active(Open/Created) conversation according to conversation query.
 /// Return value:
@@ -858,6 +878,8 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK17UIAdapterDelegate_")
 ///
 - (nonnull instancetype)initWithHandler:(void (^ _Nonnull)(UIPanGestureRecognizer * _Nonnull))handler SWIFT_DEPRECATED_OBJC("Swift initializer 'UIPanGestureRecognizer.init(handler:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @end
+
+
 
 
 

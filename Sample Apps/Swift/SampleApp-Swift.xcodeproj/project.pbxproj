@@ -7,8 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB51C89A205E73D60060AD07 /* LPMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C895205E73D60060AD07 /* LPMonitoring.framework */; };
+		CB51C89B205E73D60060AD07 /* LPMessagingSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C896205E73D60060AD07 /* LPMessagingSDK.framework */; };
+		CB51C89C205E73D60060AD07 /* LPAMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C897205E73D60060AD07 /* LPAMS.framework */; };
+		CB51C89D205E73D60060AD07 /* LPInfra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C898205E73D60060AD07 /* LPInfra.framework */; };
+		CB51C89E205E73D60060AD07 /* LPMessagingSDKModels.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB51C899205E73D60060AD07 /* LPMessagingSDKModels.bundle */; };
+		CB51C89F205E73ED0060AD07 /* LPAMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C897205E73D60060AD07 /* LPAMS.framework */; };
+		CB51C8A0205E73ED0060AD07 /* LPAMS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C897205E73D60060AD07 /* LPAMS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB51C8A1205E73ED0060AD07 /* LPInfra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C898205E73D60060AD07 /* LPInfra.framework */; };
+		CB51C8A2205E73ED0060AD07 /* LPInfra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C898205E73D60060AD07 /* LPInfra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB51C8A3205E73ED0060AD07 /* LPMessagingSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C896205E73D60060AD07 /* LPMessagingSDK.framework */; };
+		CB51C8A4205E73ED0060AD07 /* LPMessagingSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C896205E73D60060AD07 /* LPMessagingSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB51C8A5205E73F00060AD07 /* LPMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C895205E73D60060AD07 /* LPMonitoring.framework */; };
+		CB51C8A6205E73F00060AD07 /* LPMonitoring.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C895205E73D60060AD07 /* LPMonitoring.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CD8C6B2A2031B6E8008EB94B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C6B292031B6E8008EB94B /* MainViewController.swift */; };
+		CD8C6B2C2031B811008EB94B /* MonitoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */; };
 		D62EC5AC1C7C427B0001C0D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5AB1C7C427B0001C0D4 /* AppDelegate.swift */; };
-		D62EC5AE1C7C427B0001C0D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5AD1C7C427B0001C0D4 /* ViewController.swift */; };
+		D62EC5AE1C7C427B0001C0D4 /* MessagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5AD1C7C427B0001C0D4 /* MessagingViewController.swift */; };
 		D62EC5B11C7C427B0001C0D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D62EC5AF1C7C427B0001C0D4 /* Main.storyboard */; };
 		D62EC5B41C7C427B0001C0D4 /* SampleApp_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5B21C7C427B0001C0D4 /* SampleApp_Swift.xcdatamodeld */; };
 		D62EC5B61C7C427B0001C0D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D62EC5B51C7C427B0001C0D4 /* Assets.xcassets */; };
@@ -17,12 +32,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CDD8F35C1D5774580097DF8E /* Embed Frameworks */ = {
+		CD8C6B4A2031C6A7008EB94B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CB51C8A6205E73F00060AD07 /* LPMonitoring.framework in Embed Frameworks */,
+				CB51C8A4205E73ED0060AD07 /* LPMessagingSDK.framework in Embed Frameworks */,
+				CB51C8A0205E73ED0060AD07 /* LPAMS.framework in Embed Frameworks */,
+				CB51C8A2205E73ED0060AD07 /* LPInfra.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -30,10 +49,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CB51C895205E73D60060AD07 /* LPMonitoring.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPMonitoring.framework; sourceTree = "<group>"; };
+		CB51C896205E73D60060AD07 /* LPMessagingSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPMessagingSDK.framework; sourceTree = "<group>"; };
+		CB51C897205E73D60060AD07 /* LPAMS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPAMS.framework; sourceTree = "<group>"; };
+		CB51C898205E73D60060AD07 /* LPInfra.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPInfra.framework; sourceTree = "<group>"; };
+		CB51C899205E73D60060AD07 /* LPMessagingSDKModels.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LPMessagingSDKModels.bundle; sourceTree = "<group>"; };
 		CD3B9B371D97EA45008FF2BE /* SampleApp-Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SampleApp-Swift.entitlements"; sourceTree = "<group>"; };
+		CD8C6B292031B6E8008EB94B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoringViewController.swift; sourceTree = "<group>"; };
 		D62EC5A81C7C427B0001C0D4 /* SampleApp-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SampleApp-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D62EC5AB1C7C427B0001C0D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D62EC5AD1C7C427B0001C0D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D62EC5AD1C7C427B0001C0D4 /* MessagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingViewController.swift; sourceTree = "<group>"; };
 		D62EC5B01C7C427B0001C0D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D62EC5B31C7C427B0001C0D4 /* SampleApp_Swift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SampleApp_Swift.xcdatamodel; sourceTree = "<group>"; };
 		D62EC5B51C7C427B0001C0D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -47,17 +73,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB51C8A3205E73ED0060AD07 /* LPMessagingSDK.framework in Frameworks */,
+				CB51C89B205E73D60060AD07 /* LPMessagingSDK.framework in Frameworks */,
+				CB51C8A1205E73ED0060AD07 /* LPInfra.framework in Frameworks */,
+				CB51C89F205E73ED0060AD07 /* LPAMS.framework in Frameworks */,
+				CB51C8A5205E73F00060AD07 /* LPMonitoring.framework in Frameworks */,
+				CB51C89D205E73D60060AD07 /* LPInfra.framework in Frameworks */,
+				CB51C89C205E73D60060AD07 /* LPAMS.framework in Frameworks */,
+				CB51C89A205E73D60060AD07 /* LPMonitoring.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BFD69218A1BBBE7F350550D3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB51C897205E73D60060AD07 /* LPAMS.framework */,
+				CB51C898205E73D60060AD07 /* LPInfra.framework */,
+				CB51C896205E73D60060AD07 /* LPMessagingSDK.framework */,
+				CB51C899205E73D60060AD07 /* LPMessagingSDKModels.bundle */,
+				CB51C895205E73D60060AD07 /* LPMonitoring.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D62EC59F1C7C427B0001C0D4 = {
 			isa = PBXGroup;
 			children = (
 				D62EC5AA1C7C427B0001C0D4 /* SampleApp-Swift */,
 				D62EC5A91C7C427B0001C0D4 /* Products */,
+				BFD69218A1BBBE7F350550D3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,7 +121,9 @@
 			children = (
 				CD3B9B371D97EA45008FF2BE /* SampleApp-Swift.entitlements */,
 				D62EC5AB1C7C427B0001C0D4 /* AppDelegate.swift */,
-				D62EC5AD1C7C427B0001C0D4 /* ViewController.swift */,
+				CD8C6B292031B6E8008EB94B /* MainViewController.swift */,
+				D62EC5AD1C7C427B0001C0D4 /* MessagingViewController.swift */,
+				CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */,
 				D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */,
 				D62EC5AF1C7C427B0001C0D4 /* Main.storyboard */,
 				D62EC5B51C7C427B0001C0D4 /* Assets.xcassets */,
@@ -95,8 +144,7 @@
 				D62EC5A41C7C427B0001C0D4 /* Sources */,
 				D62EC5A51C7C427B0001C0D4 /* Frameworks */,
 				D62EC5A61C7C427B0001C0D4 /* Resources */,
-				CDD8F35C1D5774580097DF8E /* Embed Frameworks */,
-				CD5D54591D62F31200C65291 /* ShellScript */,
+				CD8C6B4A2031C6A7008EB94B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -119,8 +167,8 @@
 				TargetAttributes = {
 					D62EC5A71C7C427B0001C0D4 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = M6C39UG9M8;
-						LastSwiftMigration = 0800;
+						DevelopmentTeam = 85Y2L4AQ49;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -156,26 +204,11 @@
 				D62EC5B91C7C427B0001C0D4 /* LaunchScreen.storyboard in Resources */,
 				D62EC5B61C7C427B0001C0D4 /* Assets.xcassets in Resources */,
 				D62EC5B11C7C427B0001C0D4 /* Main.storyboard in Resources */,
+				CB51C89E205E73D60060AD07 /* LPMessagingSDKModels.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		CD5D54591D62F31200C65291 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D62EC5A41C7C427B0001C0D4 /* Sources */ = {
@@ -183,9 +216,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D62EC5B41C7C427B0001C0D4 /* SampleApp_Swift.xcdatamodeld in Sources */,
-				D62EC5AE1C7C427B0001C0D4 /* ViewController.swift in Sources */,
+				D62EC5AE1C7C427B0001C0D4 /* MessagingViewController.swift in Sources */,
+				CD8C6B2C2031B811008EB94B /* MonitoringViewController.swift in Sources */,
 				D62EC5D01C7C469D0001C0D4 /* ConversationViewController.swift in Sources */,
 				D62EC5AC1C7C427B0001C0D4 /* AppDelegate.swift in Sources */,
+				CD8C6B2A2031B6E8008EB94B /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +359,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "SampleApp-Swift/SampleApp-Swift.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = M6C39UG9M8;
+				DEVELOPMENT_TEAM = 85Y2L4AQ49;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -348,7 +383,7 @@
 				CODE_SIGN_ENTITLEMENTS = "SampleApp-Swift/SampleApp-Swift.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = M6C39UG9M8;
+				DEVELOPMENT_TEAM = 85Y2L4AQ49;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

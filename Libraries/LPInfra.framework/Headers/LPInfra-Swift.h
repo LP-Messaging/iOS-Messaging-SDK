@@ -228,10 +228,11 @@ SWIFT_PROTOCOL("_TtP7LPInfra25ConversationParamProtocol_")
 - (NSDictionary<NSString *, id> * _Nonnull)getQueryProperties SWIFT_WARN_UNUSED_RESULT;
 @end
 
+@class LPCampaignInfo;
 
 SWIFT_CLASS("_TtC7LPInfra10BrandQuery")
 @interface BrandQuery : NSObject <ConversationParamProtocol>
-- (nonnull instancetype)initWithBrandID:(NSString * _Nonnull)brandID OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithBrandID:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo OBJC_DESIGNATED_INITIALIZER;
 /// Get all conversations by brand.
 - (NSArray<LPConversationEntity *> * _Nullable)getConversations SWIFT_WARN_UNUSED_RESULT;
 /// Get all conversations by brand, filtered with predicate
@@ -249,6 +250,7 @@ SWIFT_CLASS("_TtC7LPInfra10BrandQuery")
 - (BOOL)isConversationRelatedToQuery:(LPConversationEntity * _Nonnull)conversation SWIFT_WARN_UNUSED_RESULT;
 - (NSString * _Nonnull)getBrandID SWIFT_WARN_UNUSED_RESULT;
 - (NSString * _Nonnull)getQueryUID SWIFT_WARN_UNUSED_RESULT;
+- (LPCampaignInfo * _Nullable)getCampaignInfo SWIFT_WARN_UNUSED_RESULT;
 - (NSDictionary<NSString *, id> * _Nonnull)getQueryProperties SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
@@ -281,7 +283,7 @@ SWIFT_CLASS("_TtC7LPInfra13ConsumerQuery")
 - (NSString * _Nonnull)getQueryType SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isConversationRelatedToQuery:(LPConversationEntity * _Nonnull)conversation SWIFT_WARN_UNUSED_RESULT;
 - (NSString * _Nonnull)getQueryUID SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWithBrandID:(NSString * _Nonnull)brandID SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithBrandID:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo SWIFT_UNAVAILABLE;
 @end
 
 
@@ -290,6 +292,30 @@ SWIFT_CLASS("_TtC7LPInfra30ConversationChangeNotification")
 - (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
+SWIFT_CLASS("_TtC7LPInfra41EngagementHistoryConsumerMessagesResponse")
+@interface EngagementHistoryConsumerMessagesResponse : GeneralResponse
+@property (nonatomic, copy) NSString * _Nullable ownerConversationID;
+@property (nonatomic, copy) NSString * _Nullable brandID;
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra24EngagementHistoryRequest")
+@interface EngagementHistoryRequest : NSObject
+@property (nonatomic, copy) NSString * _Nonnull brandID SWIFT_DEPRECATED_OBJC("Swift property 'EngagementHistoryRequest.brandID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable agentBearer SWIFT_DEPRECATED_OBJC("Swift property 'EngagementHistoryRequest.agentBearer' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable jwt SWIFT_DEPRECATED_OBJC("Swift property 'EngagementHistoryRequest.jwt' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable consumerID SWIFT_DEPRECATED_OBJC("Swift property 'EngagementHistoryRequest.consumerID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSArray<NSString *> * _Nullable conversationsStatus SWIFT_DEPRECATED_OBJC("Swift property 'EngagementHistoryRequest.conversationsStatus' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable sortKeyword SWIFT_DEPRECATED_OBJC("Swift property 'EngagementHistoryRequest.sortKeyword' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable searchKeyword SWIFT_DEPRECATED_OBJC("Swift property 'EngagementHistoryRequest.searchKeyword' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, strong) LPConversationEntity * _Nullable conversation SWIFT_DEPRECATED_OBJC("Swift property 'EngagementHistoryRequest.conversation' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable url SWIFT_DEPRECATED_OBJC("Swift property 'EngagementHistoryRequest.url' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
 
 
 SWIFT_CLASS("_TtC7LPInfra13ErrorResponse")
@@ -309,6 +335,18 @@ SWIFT_PROTOCOL("_TtP7LPInfra22GeneralManagerProtocol_")
 - (void)clearManager;
 @end
 
+
+
+SWIFT_CLASS("_TtC7LPInfra24SubscribeExConversations")
+@interface SubscribeExConversations : GeneralResponse
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra24GenericSubscribeResponse")
+@interface GenericSubscribeResponse : SubscribeExConversations
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
 
 
 SWIFT_CLASS("_TtC7LPInfra15GetBrandProfile")
@@ -393,7 +431,7 @@ SWIFT_CLASS("_TtC7LPInfra13LPBrandEntity")
 - (LPConversationEntity * _Nullable)getCreatedConversation SWIFT_WARN_UNUSED_RESULT;
 - (NSArray<LPConversationEntity *> * _Nonnull)getConversations SWIFT_WARN_UNUSED_RESULT;
 - (NSArray<LPConversationEntity *> * _Nonnull)getConversations:(NSPredicate * _Nullable)predicate SWIFT_WARN_UNUSED_RESULT;
-- (NSDate * _Nonnull)getLastMessageTimeStamp SWIFT_WARN_UNUSED_RESULT;
+- (NSDate * _Nullable)getLastMessageTimeStamp SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isAuthenticated SWIFT_WARN_UNUSED_RESULT;
 @end
 
@@ -405,6 +443,18 @@ SWIFT_CLASS("_TtC7LPInfra16LPCampaignEntity")
 @property (nonatomic, copy) NSString * _Nonnull image;
 @property (nonatomic, strong) LPBrandEntity * _Nonnull ownerBrand;
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra14LPCampaignInfo")
+@interface LPCampaignInfo : NSObject
+@property (nonatomic) NSInteger campaignId;
+@property (nonatomic) NSInteger engagementId;
+@property (nonatomic, copy) NSString * _Nullable sessionId;
+@property (nonatomic, copy) NSString * _Nullable visitorId;
+@property (nonatomic, copy) NSString * _Nonnull contextId;
+- (nonnull instancetype)initWithCampaignId:(NSInteger)campaignId engagementId:(NSInteger)engagementId contextId:(NSString * _Nonnull)contextId sessionId:(NSString * _Nullable)sessionId visitorId:(NSString * _Nullable)visitorId OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
 
 @class UIColor;
@@ -426,7 +476,7 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic) double remoteUserBubbleBorderWidth;
 /// Color code for the timestamp of the remote user bubble.
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleTimestampColor;
-/// Color of the remote user typing bubbles animation
+@property (nonatomic) BOOL messageStatusNumericTimestampOnly;
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserTypingTintColor;
 /// Color of the remote user’s bubble overlay when user use long press gesture on the bubble. Overlay will appear as long as the menu controller appears on the bubble, when the menu dismissed, overlay will disappear too. In order to show overlay enableBubblesOverlayOnLongPress should be true.
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleLongPressOverlayColor;
@@ -525,8 +575,10 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// Read receipt “text mode”
 /// Read receipt “icon mode”
 @property (nonatomic) BOOL isReadReceiptTextMode;
-/// Corner radius of the Submit button
+/// Submit buttons corner radius for CSAT view controller’s resolution buttons
 @property (nonatomic) double csatSubmitButtonCornerRadius;
+/// Yes/No buttons corner radius for CSAT view controller’s resolution buttons
+@property (nonatomic) double csatYesNoButtonsCornerRadius;
 /// Background color of the Submit button
 @property (nonatomic, strong) UIColor * _Nonnull csatSubmitButtonBackgroundColor;
 /// Text color of the Submit button
@@ -580,6 +632,8 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic) BOOL enableVibrationOnMessageFromRemoteUser;
 /// Enable bubbles overlay when user performing a long press gesture on messaging bubbles.
 @property (nonatomic) BOOL enableBubblesOverlayOnLongPress;
+/// Color code for the empty state label.
+@property (nonatomic, strong) UIColor * _Nonnull conversationEmptyStateTextColor;
 /// Scroll to bottom button background color of the whole button
 @property (nonatomic, strong) UIColor * _Nonnull scrollToBottomButtonBackgroundColor;
 /// Scroll to bottom button text color of the last unread message preview
@@ -764,6 +818,14 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull cameraButtonEnabledColor;
 /// Camera button color in disabled mode in the conversation screen. Will be presented only if photo sharing feature is enabled
 @property (nonatomic, strong) UIColor * _Nonnull cameraButtonDisabledColor;
+/// Custom Camera image in the photo Sharing Menu.
+@property (nonatomic, strong) UIImage * _Nullable photoSharingMenuCameraImage;
+/// Custom Library image in the photo Sharing Menu.
+@property (nonatomic, strong) UIImage * _Nullable photoSharingMenuLibraryImage;
+/// photo sharing open menu custom button.
+@property (nonatomic, strong) UIImage * _Nullable photoSharingOpenMenuImageButton;
+/// photo sharing close menu custom button.
+@property (nonatomic, strong) UIImage * _Nullable photoSharingCloseMenuImageButton;
 /// File Cell Loader fill color
 @property (nonatomic, strong) UIColor * _Nonnull fileCellLoaderFillColor;
 /// Color of the loader progress line
@@ -907,6 +969,7 @@ SWIFT_CLASS("_TtC7LPInfra12LPConnection")
 /// returns:
 /// Conversation or nil
 @property (nonatomic, readonly, strong) LPConversationEntity * _Nullable lastConversation SWIFT_DEPRECATED_OBJC("Swift property 'LPConnection.lastConversation' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, copy) NSDate * _Nullable effectiveTtr SWIFT_DEPRECATED_OBJC("Swift property 'LPConnection.effectiveTtr' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
 
@@ -926,6 +989,7 @@ typedef SWIFT_ENUM(NSInteger, LPConversationCloseReason) {
 
 @class NSOrderedSet;
 @class NSNumber;
+@class TTRModel;
 @class NSMutableSet;
 
 SWIFT_CLASS("_TtC7LPInfra20LPConversationEntity")
@@ -948,8 +1012,10 @@ SWIFT_CLASS("_TtC7LPInfra20LPConversationEntity")
 @property (nonatomic, copy) NSString * _Nullable type;
 @property (nonatomic, copy) NSString * _Nullable assignedAgentId;
 @property (nonatomic, copy) NSString * _Nullable consumerId;
-@property (nonatomic, copy) NSDate * _Nullable effectiveTTR;
-@property (nonatomic, strong) NSMutableSet * _Nonnull currentlyAcceptedSequences;
+@property (nonatomic, strong) TTRModel * _Nullable ttrModel;
+@property (nonatomic, strong) NSMutableSet * _Nonnull currentlyAcceptedSequences SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.currentlyAcceptedSequences' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) BOOL isHistoryFilterEnable SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.isHistoryFilterEnable' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) BOOL presented SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.presented' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -957,32 +1023,53 @@ SWIFT_CLASS("_TtC7LPInfra20LPConversationEntity")
 @class LPMessageEntity;
 
 @interface LPConversationEntity (SWIFT_EXTENSION(LPInfra))
-@property (nonatomic, readonly, copy) NSArray<LPMessageEntity *> * _Nonnull sortedMessages;
-@property (nonatomic, readonly, copy) NSArray<LPMessageEntity *> * _Nonnull unreadMessages;
-@property (nonatomic, readonly, strong) LPMessageEntity * _Nullable lastMessageObj;
-@property (nonatomic, readonly, strong) LPUserEntity * _Nullable lastMessageOriginator;
-@property (nonatomic, readonly, copy) NSString * _Nonnull relatedSocketID;
-- (BOOL)isActivityInIdle SWIFT_WARN_UNUSED_RESULT;
-- (NSArray<LPMessageEntity *> * _Nonnull)getMessagesPage:(NSInteger)from pageSize:(NSInteger)pageSize SWIFT_WARN_UNUSED_RESULT;
-- (BOOL)isCurrentlyUrgent SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly) BOOL isResolvedAutomatically;
+@property (nonatomic, readonly, copy) NSArray<LPMessageEntity *> * _Nonnull sortedMessages SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.sortedMessages' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, copy) NSArray<LPMessageEntity *> * _Nonnull unreadMessages SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.unreadMessages' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, strong) LPMessageEntity * _Nullable lastMessageObj SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.lastMessageObj' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, strong) LPUserEntity * _Nullable lastMessageOriginator SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.lastMessageOriginator' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, copy) NSString * _Nonnull relatedSocketID SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.relatedSocketID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (BOOL)isActivityInIdle SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.isActivityInIdle()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (NSArray<LPMessageEntity *> * _Nonnull)getMessagesPage:(NSInteger)from pageSize:(NSInteger)pageSize SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.getMessagesPage(_:pageSize:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (BOOL)isCurrentlyUrgent SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.isCurrentlyUrgent()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) BOOL isResolvedAutomatically SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.isResolvedAutomatically' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Sequence number is received from the QueryMessages or from OnlineEvent messages. Sequence number is increased by the server for both new message and accept status (ACCEPT/READ).
 /// If the sequence number is following to what we have, set it as the last one
 /// If not, save it in a temporary array in order to set it as the last one in the future
 /// After words, it goes through self.currentlyAcceptedSequences and sets each object as the last one if it is following to the current last one (and removes from the temporary array)
-- (void)acceptSequence:(NSInteger)seq;
-- (void)resolve;
-- (void)resolve:(NSString * _Nonnull)closeReason;
+- (void)acceptSequence:(NSInteger)seq SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.acceptSequence(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)resolve SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.resolve()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)resolve:(NSString * _Nonnull)closeReason SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.resolve(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// TODO:
 /// Move this function to UITimestampsFormatter once the new system messages will be implemented and the timestamp will not be saved to DB.
-- (NSString * _Nonnull)getResolveDateString:(NSDate * _Nonnull)date SWIFT_WARN_UNUSED_RESULT;
-+ (LPConversationEntity * _Nonnull)createNewConversation:(LPBrandEntity * _Nonnull)brand SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getResolveDateString:(NSDate * _Nonnull)date SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.getResolveDateString(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
++ (LPConversationEntity * _Nonnull)createNewConversation:(LPBrandEntity * _Nonnull)brand SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.createNewConversation(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, readonly) BOOL shouldQueryMessages;
-@property (nonatomic, readonly) BOOL isOpen;
+@property (nonatomic, readonly) BOOL isOpen SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.isOpen' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Determines if CSAT should be displayed for the conversation based on
 /// Configuation, agent details and previous CSAT submission
-@property (nonatomic, readonly) BOOL canShowCSAT;
+@property (nonatomic, readonly) BOOL canShowCSAT SWIFT_DEPRECATED_OBJC("Swift property 'LPConversationEntity.canShowCSAT' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Update existing effectiveTTR for conversation
+/// This method will update the effectiveTTR with calculation of the current time and saved params from the last ttr notification which recevied
+/// in the last exConversationChangeNotification.
+/// In case manualETTR is set - effectiveTTR will be equal
+/// \param reset reset effectiveTTR which will be applied only if there’s no manualETTR. Reset usuall should be sent upon agent’s messages
+///
+- (void)updateTTRModelWithReset:(BOOL)reset SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.updateTTRModel(reset:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @end
+
+
+SWIFT_CLASS("_TtC7LPInfra33LPConversationHistoryControlParam")
+@interface LPConversationHistoryControlParam : NSObject
+@property (nonatomic, readonly) BOOL isEnable;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
+/// control if filter the max dayes by conversation start date or by conversation close date
+typedef SWIFT_ENUM(NSInteger, LPConversationHistoryMaxDaysDateType) {
+  LPConversationHistoryMaxDaysDateTypeStartConversationDate = 0,
+  LPConversationHistoryMaxDaysDateTypeEndConversationDate = 1,
+};
 
 @class UIViewController;
 
@@ -991,9 +1078,17 @@ SWIFT_CLASS("_TtC7LPInfra24LPConversationViewParams")
 @property (nonatomic, strong) id <ConversationParamProtocol> _Nonnull conversationQuery;
 @property (nonatomic, strong) UIViewController * _Nullable containerViewController;
 @property (nonatomic) BOOL isViewOnly;
-- (nonnull instancetype)initWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery containerViewController:(UIViewController * _Nullable)containerViewController isViewOnly:(BOOL)isViewOnly OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, strong) LPConversationHistoryControlParam * _Nullable conversationHistoryControlParam;
+- (nonnull instancetype)initWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery containerViewController:(UIViewController * _Nullable)containerViewController isViewOnly:(BOOL)isViewOnly conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nullable)conversationHistoryControlParam OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
+
+/// control what kind of conversation to show
+typedef SWIFT_ENUM(NSInteger, LPConversationsHistoryStateToDisplay) {
+  LPConversationsHistoryStateToDisplayOpen = 0,
+  LPConversationsHistoryStateToDisplayClose = 1,
+};
 
 
 SWIFT_CLASS("_TtC7LPInfra19LPCustomBoardEntity")
@@ -1048,12 +1143,14 @@ SWIFT_CLASS("_TtC7LPInfra12LPFileEntity")
 - (UIImage * _Nullable)getThumbnailImage SWIFT_WARN_UNUSED_RESULT;
 /// Determines if the file is currently being tranffering (download/upload)
 @property (nonatomic, readonly) BOOL isTransferring;
+/// Clears blocks handlers
+- (void)clearFileBlocks;
 @end
 
 
 SWIFT_CLASS("_TtC7LPInfra12LPFormEntity")
 @interface LPFormEntity : NSManagedObject
-@property (nonatomic, copy) NSString * _Nonnull formID;
+@property (nonatomic, copy) NSString * _Nullable formID;
 @property (nonatomic, copy) NSString * _Nonnull invitationID;
 @property (nonatomic, copy) NSString * _Nonnull state;
 @property (nonatomic, copy) NSString * _Nullable title;
@@ -1069,7 +1166,7 @@ SWIFT_CLASS("_TtC7LPInfra12LPFormEntity")
 
 @interface LPFormEntity (SWIFT_EXTENSION(LPInfra))
 /// Create new File instance with UID
-+ (LPFormEntity * _Nonnull)createNewFormWithFormID:(NSString * _Nonnull)formID invitationID:(NSString * _Nonnull)invitationID title:(NSString * _Nullable)title ownerMessage:(LPMessageEntity * _Nonnull)ownerMessage SWIFT_WARN_UNUSED_RESULT;
++ (LPFormEntity * _Nonnull)createNewFormWithFormID:(NSString * _Nullable)formID invitationID:(NSString * _Nonnull)invitationID title:(NSString * _Nullable)title ownerMessage:(LPMessageEntity * _Nonnull)ownerMessage SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly, strong) LPConversationEntity * _Nonnull ownerConversation;
 @end
 
@@ -1081,7 +1178,7 @@ SWIFT_CLASS("_TtC7LPInfra13LPInfraFacade")
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (BOOL)initializeInfra SWIFT_WARN_UNUSED_RESULT;
 /// This method created ConversationParamProtocol of Brand query type.
-+ (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
++ (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo SWIFT_WARN_UNUSED_RESULT;
 /// This method created ConversationParamProtocol of Consumer and Skill query type.
 + (id <ConversationParamProtocol> _Nonnull)getConversationConsumerQuery:(NSString * _Nullable)consumerID brandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken SWIFT_WARN_UNUSED_RESULT;
 /// Get current WebSocket (LPWebSocket) for brand if exists
@@ -1152,7 +1249,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 + (NSArray<LPConversationEntity *> * _Nullable)getAllClosedConversations:(NSDate * _Nullable)olderThanDate SWIFT_WARN_UNUSED_RESULT;
 /// Get all conversations from DB sorted by creation date (first object is the latest conversation)
 /// If includeQueriedOnly parameter is false, only new conversations or conversations which messages should not be queried, will be returned
-+ (NSArray<LPConversationEntity *> * _Nonnull)getConversationsSortedByDate:(id <ConversationParamProtocol> _Nonnull)query includeQueriedOnly:(BOOL)includeQueriedOnly SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<LPConversationEntity *> * _Nonnull)getConversationsSortedByDate:(id <ConversationParamProtocol> _Nonnull)query conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nullable)conversationHistoryControlParam SWIFT_WARN_UNUSED_RESULT;
 /// Get conversation by handlerID from DB.
 /// \param handlerID conversation handlerID
 ///
@@ -1215,8 +1312,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nullable myUserID;)
 + (NSString * _Nullable)myUserID SWIFT_WARN_UNUSED_RESULT;
 /// Get MY ALTERNATIVE user ID from memory if exists
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nullable myAlternativeUserID;)
-+ (NSString * _Nullable)myAlternativeUserID SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nullable myAgentVepUserID;)
++ (NSString * _Nullable)myAgentVepUserID SWIFT_WARN_UNUSED_RESULT;
 /// Handle agent details that fetched and notifiy for fetched user
 /// User details can be nil incase there should be notify for no assigned agent
 + (void)agentDetailsDidFetchWithUser:(LPUserEntity * _Nullable)user;
@@ -1306,6 +1403,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 + (BOOL)removeAllKeychainObjects SWIFT_WARN_UNUSED_RESULT;
 + (NSArray<LPMessageEntity *> * _Nullable)getMessagesOfLatestConversation:(id <ConversationParamProtocol> _Nonnull)query SWIFT_WARN_UNUSED_RESULT;
 + (NSArray<LPMessageEntity *> * _Nonnull)getMessagesFromConversationWithConversation:(LPConversationEntity * _Nonnull)conversation SWIFT_WARN_UNUSED_RESULT;
++ (NSDate * _Nullable)getLastMessageTimeStamp:(id <ConversationParamProtocol> _Nonnull)query SWIFT_WARN_UNUSED_RESULT;
 /// Get next conversation which messages need to query.
 /// Calculating of next conversation is done by gathering all the conversations that needs to be queried, and the one with the latest creationDate
 + (LPConversationEntity * _Nullable)getNextConversationForQueryMessagesIfExists:(id <ConversationParamProtocol> _Nonnull)query SWIFT_WARN_UNUSED_RESULT;
@@ -1426,6 +1524,7 @@ SWIFT_CLASS("_TtC7LPInfra19LPLinkPreviewEntity")
 @property (nonatomic, strong) LPCustomBoardEntity * _Nonnull ownerCustomBoard;
 @property (nonatomic, copy) void (^ _Nullable imageDownloadCompleted)(UIImage * _Nullable);
 @property (nonatomic, copy) void (^ _Nullable imageDownloadFailed)(NSError * _Nonnull);
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -1467,12 +1566,13 @@ SWIFT_CLASS("_TtC7LPInfra15LPMessageEntity")
 @property (nonatomic, strong) NSOrderedSet * _Nullable customBoards;
 @property (nonatomic, copy) NSString * _Nullable linkPreviewState;
 @property (nonatomic, strong) StructuredContentItemContainer * _Nullable structuredContentItemContainer;
-@property (nonatomic, copy) void (^ _Nullable boardsBuildCompleted)(NSArray<LPCustomBoardEntity *> * _Nonnull);
-@property (nonatomic, copy) void (^ _Nullable boardsBuildFailed)(NSError * _Nonnull);
+@property (nonatomic) BOOL presented;
+@property (nonatomic, copy) void (^ _Nullable boardsBuildCompleted)(NSArray<LPCustomBoardEntity *> * _Nonnull) SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.boardsBuildCompleted' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) void (^ _Nullable boardsBuildFailed)(NSError * _Nonnull) SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.boardsBuildFailed' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// time when UI requested to show ‘Sending’ text
-@property (nonatomic, copy) NSDate * _Nullable requestedToShowSendingState;
-@property (nonatomic, copy) NSDate * _Nonnull lastSendingTimestamp;
-@property (nonatomic, copy) NSString * _Nullable maskedContent;
+@property (nonatomic, copy) NSDate * _Nullable requestedToShowSendingState SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.requestedToShowSendingState' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSDate * _Nonnull lastSendingTimestamp SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.lastSendingTimestamp' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable maskedContent SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.maskedContent' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Migration for older agent messages types to new messages RemoteUser type
 /// NOTE: JUNE 2016 - THIS METHOD CAN BE REMOVED AFTER THE NEXT 2-3 SDK RELEASES ARE OUT
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context SWIFT_UNAVAILABLE;
@@ -1481,19 +1581,19 @@ SWIFT_CLASS("_TtC7LPInfra15LPMessageEntity")
 
 
 @interface LPMessageEntity (SWIFT_EXTENSION(LPInfra))
-@property (nonatomic, readonly) BOOL isSystemMessage;
-@property (nonatomic, readonly) BOOL isRemoteMessage;
-@property (nonatomic, readonly) BOOL isUserMessage;
-@property (nonatomic, readonly) BOOL isControllerMessage;
-@property (nonatomic, readonly) BOOL isLinkPreview;
-@property (nonatomic, readonly) BOOL isStructuredContent;
-+ (NSString * _Nonnull)buildUID:(NSString * _Nonnull)convUID sequence:(NSInteger)sequence SWIFT_WARN_UNUSED_RESULT;
-+ (NSPredicate * _Nonnull)byDate:(NSDate * _Nonnull)date SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly) BOOL isSystemMessage SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.isSystemMessage' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) BOOL isRemoteMessage SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.isRemoteMessage' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) BOOL isUserMessage SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.isUserMessage' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) BOOL isControllerMessage SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.isControllerMessage' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) BOOL isLinkPreview SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.isLinkPreview' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) BOOL isStructuredContent SWIFT_DEPRECATED_OBJC("Swift property 'LPMessageEntity.isStructuredContent' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
++ (NSString * _Nonnull)buildUID:(NSString * _Nonnull)convUID sequence:(NSInteger)sequence SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'LPMessageEntity.buildUID(_:sequence:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
++ (NSPredicate * _Nonnull)byDate:(NSDate * _Nonnull)date SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'LPMessageEntity.byDate(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Get messages boards from message
 /// If boards already exist, return it, else pending to boards build completion
 /// \param completion completion with array of board. Array can be empty if there are no boards
 ///
-- (void)getBoardsWithCompletion:(void (^ _Nonnull)(NSArray<LPCustomBoardEntity *> * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+- (void)getBoardsWithCompletion:(void (^ _Nonnull)(NSArray<LPCustomBoardEntity *> * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_DEPRECATED_OBJC("Swift method 'LPMessageEntity.getBoards(completion:failure:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @end
 
 /// ENUM to list major features to control from config.
@@ -1659,6 +1759,7 @@ SWIFT_CLASS("_TtC7LPInfra19LPUserProfileEntity")
 SWIFT_CLASS("_TtC7LPInfra11LPWebSocket")
 @interface LPWebSocket : SRWebSocket
 @property (nonatomic, copy) NSString * _Nonnull requestIndex SWIFT_DEPRECATED_OBJC("Swift property 'LPWebSocket.requestIndex' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSDictionary<NSString *, NSString *> * _Nullable headers SWIFT_DEPRECATED_OBJC("Swift property 'LPWebSocket.headers' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, readonly) BOOL isOpen SWIFT_DEPRECATED_OBJC("Swift property 'LPWebSocket.isOpen' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, readonly) BOOL isClosed SWIFT_DEPRECATED_OBJC("Swift property 'LPWebSocket.isClosed' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, readonly) BOOL isReadyToOpen SWIFT_DEPRECATED_OBJC("Swift property 'LPWebSocket.isReadyToOpen' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
@@ -1730,6 +1831,13 @@ typedef SWIFT_ENUM(NSInteger, LogLevel) {
 };
 
 
+SWIFT_CLASS("_TtC7LPInfra26MessagingEventNotification")
+@interface MessagingEventNotification : GeneralResponse
+@property (nonatomic, copy) NSString * _Nullable conversationID;
+- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 @interface MessagingServiceEvent : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nullable eventId;
@@ -1760,12 +1868,6 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 @end
 
 
-SWIFT_CLASS("_TtC7LPInfra23OnlineEventDistribution")
-@interface OnlineEventDistribution : GeneralResponse
-- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
 @interface NSOperationQueue (SWIFT_EXTENSION(LPInfra))
 + (NSOperationQueue * _Nonnull)sharedOperationQueue SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'OperationQueue.sharedOperationQueue()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @end
@@ -1775,12 +1877,6 @@ SWIFT_CLASS("_TtC7LPInfra23OnlineEventDistribution")
 
 SWIFT_CLASS("_TtC7LPInfra12PublishEvent")
 @interface PublishEvent : GeneralResponse
-- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC7LPInfra13QueryMessages")
-@interface QueryMessages : GeneralResponse
 - (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -2081,24 +2177,25 @@ SWIFT_CLASS("_TtC7LPInfra22SubscribeConversations")
 @end
 
 
-SWIFT_CLASS("_TtC7LPInfra24SubscribeExConversations")
-@interface SubscribeExConversations : GeneralResponse
-- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC7LPInfra21SubscribeRoutingTasks")
-@interface SubscribeRoutingTasks : SubscribeExConversations
-- (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
-@end
-
 
 SWIFT_CLASS("_TtC7LPInfra8TTRModel")
-@interface TTRModel : NSObject
+@interface TTRModel : NSObject <NSCoding>
 @property (nonatomic, copy) NSDate * _Null_unspecified effectiveTTR SWIFT_DEPRECATED_OBJC("Swift property 'TTRModel.effectiveTTR' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, copy) NSDate * _Nullable manualETTR SWIFT_DEPRECATED_OBJC("Swift property 'TTRModel.manualETTR' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) NSInteger ttrValue SWIFT_DEPRECATED_OBJC("Swift property 'TTRModel.ttrValue' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, copy) NSDate * _Nullable delay SWIFT_DEPRECATED_OBJC("Swift property 'TTRModel.delay' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nonnull instancetype)initWithEffectiveTTR:(NSDate * _Nonnull)effectiveTTR manualETTR:(NSDate * _Nullable)manualETTR ttrValue:(NSInteger)ttrValue delay:(NSDate * _Nullable)delay OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_OBJC("Swift initializer 'TTRModel.init(effectiveTTR:manualETTR:ttrValue:delay:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// Compare two TTRModels based on the values of:
+/// ttrValue, manualETTR and delay
+/// \param other other TTRModel to compare
+///
+///
+/// returns:
+/// true if same, else false
+- (BOOL)compareWithOther:(TTRModel * _Nonnull)other SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'TTRModel.compare(other:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
 
@@ -2197,8 +2294,12 @@ SWIFT_CLASS("_TtC7LPInfra7Toaster")
 
 
 @interface UIWindow (SWIFT_EXTENSION(LPInfra))
-/// Find the Top Most presented view controller on the UIWindow.
-- (UIViewController * _Nullable)topViewController SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIWindow.topViewController()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Find the Top Most presented root view controller on the UIWindow.
+- (UIViewController * _Nullable)topRootPresentedViewController SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIWindow.topRootPresentedViewController()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Find the Top Most view controller on the UIWindow.
+/// \param base view controller to check for
+///
+- (UIViewController * _Nullable)topViewControllerWithBase:(UIViewController * _Nullable)base SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIWindow.topViewController(base:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @end
 
 
@@ -2213,7 +2314,7 @@ SWIFT_CLASS("_TtC7LPInfra5Utils")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) dispatch_queue_t _Nonnull backgroundQueue;)
 + (dispatch_queue_t _Nonnull)backgroundQueue SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nullable)JSONStringify:(NSDictionary<NSString *, id> * _Nonnull)value prettyPrinted:(BOOL)prettyPrinted SWIFT_WARN_UNUSED_RESULT;
-+ (NSDictionary<NSString *, id> * _Nullable)JSONDictionaryFromString:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
++ (id _Nullable)JSONDictionaryFromString:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)formatDate:(NSDate * _Nonnull)date SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)trim:(NSString * _Nonnull)str SWIFT_WARN_UNUSED_RESULT;
 + (BOOL)isValidEmail:(NSString * _Nonnull)testStr SWIFT_WARN_UNUSED_RESULT;
