@@ -129,7 +129,7 @@
         self.conversationViewController.conversationQuery = self.conversationQuery;
         
         LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:self.conversationQuery
-                                                                                               containerViewController:nil
+                                                                                               containerViewController:self.conversationViewController
                                                                                                             isViewOnly:NO
                                                                                        conversationHistoryControlParam:nil];
         if (self.authenticationSwitch.on) {
