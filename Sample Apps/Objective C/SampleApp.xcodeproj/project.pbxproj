@@ -7,19 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB51C8AC205E751C0060AD07 /* LPMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8A7205E751B0060AD07 /* LPMonitoring.framework */; };
-		CB51C8AD205E751C0060AD07 /* LPAMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8A8205E751B0060AD07 /* LPAMS.framework */; };
-		CB51C8AE205E751C0060AD07 /* LPInfra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8A9205E751B0060AD07 /* LPInfra.framework */; };
-		CB51C8AF205E751C0060AD07 /* LPMessagingSDKModels.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB51C8AA205E751B0060AD07 /* LPMessagingSDKModels.bundle */; };
-		CB51C8B0205E751C0060AD07 /* LPMessagingSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8AB205E751B0060AD07 /* LPMessagingSDK.framework */; };
-		CB51C8B1205E752C0060AD07 /* LPAMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8A8205E751B0060AD07 /* LPAMS.framework */; };
-		CB51C8B2205E752C0060AD07 /* LPAMS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8A8205E751B0060AD07 /* LPAMS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CB51C8B3205E752C0060AD07 /* LPInfra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8A9205E751B0060AD07 /* LPInfra.framework */; };
-		CB51C8B4205E752C0060AD07 /* LPInfra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8A9205E751B0060AD07 /* LPInfra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CB51C8B5205E752C0060AD07 /* LPMessagingSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8AB205E751B0060AD07 /* LPMessagingSDK.framework */; };
-		CB51C8B6205E752C0060AD07 /* LPMessagingSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8AB205E751B0060AD07 /* LPMessagingSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CB51C8B7205E75300060AD07 /* LPMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8A7205E751B0060AD07 /* LPMonitoring.framework */; };
-		CB51C8B8205E75300060AD07 /* LPMonitoring.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C8A7205E751B0060AD07 /* LPMonitoring.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD8C6B5A2031D427008EB94B /* MonitoringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C6B592031D427008EB94B /* MonitoringViewController.m */; };
 		CD8C6B5D2031D471008EB94B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C6B5C2031D471008EB94B /* MainViewController.m */; };
 		D65EA33D1C70C6F60087FC53 /* SampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA33C1C70C6F60087FC53 /* SampleAppTests.swift */; };
@@ -50,10 +37,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CB51C8B8205E75300060AD07 /* LPMonitoring.framework in Embed Frameworks */,
-				CB51C8B6205E752C0060AD07 /* LPMessagingSDK.framework in Embed Frameworks */,
-				CB51C8B2205E752C0060AD07 /* LPAMS.framework in Embed Frameworks */,
-				CB51C8B4205E752C0060AD07 /* LPInfra.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,11 +44,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CB51C8A7205E751B0060AD07 /* LPMonitoring.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPMonitoring.framework; sourceTree = "<group>"; };
-		CB51C8A8205E751B0060AD07 /* LPAMS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPAMS.framework; sourceTree = "<group>"; };
-		CB51C8A9205E751B0060AD07 /* LPInfra.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPInfra.framework; sourceTree = "<group>"; };
-		CB51C8AA205E751B0060AD07 /* LPMessagingSDKModels.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LPMessagingSDKModels.bundle; sourceTree = "<group>"; };
-		CB51C8AB205E751B0060AD07 /* LPMessagingSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPMessagingSDK.framework; sourceTree = "<group>"; };
 		CD81FE4C1D939274008F26CE /* SampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SampleApp.entitlements; sourceTree = "<group>"; };
 		CD8C6B582031D427008EB94B /* MonitoringViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonitoringViewController.h; sourceTree = "<group>"; };
 		CD8C6B592031D427008EB94B /* MonitoringViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonitoringViewController.m; sourceTree = "<group>"; };
@@ -101,14 +79,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB51C8B5205E752C0060AD07 /* LPMessagingSDK.framework in Frameworks */,
-				CB51C8B0205E751C0060AD07 /* LPMessagingSDK.framework in Frameworks */,
-				CB51C8B3205E752C0060AD07 /* LPInfra.framework in Frameworks */,
-				CB51C8B1205E752C0060AD07 /* LPAMS.framework in Frameworks */,
-				CB51C8B7205E75300060AD07 /* LPMonitoring.framework in Frameworks */,
-				CB51C8AD205E751C0060AD07 /* LPAMS.framework in Frameworks */,
-				CB51C8AE205E751C0060AD07 /* LPInfra.framework in Frameworks */,
-				CB51C8AC205E751C0060AD07 /* LPMonitoring.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,11 +100,6 @@
 				D6A928FF1C6CBB2400B8355B /* SampleApp */,
 				D65EA33B1C70C6F60087FC53 /* SampleAppTests */,
 				D6A928FE1C6CBB2400B8355B /* Products */,
-				CB51C8A8205E751B0060AD07 /* LPAMS.framework */,
-				CB51C8A9205E751B0060AD07 /* LPInfra.framework */,
-				CB51C8AB205E751B0060AD07 /* LPMessagingSDK.framework */,
-				CB51C8AA205E751B0060AD07 /* LPMessagingSDKModels.bundle */,
-				CB51C8A7205E751B0060AD07 /* LPMonitoring.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -281,7 +246,6 @@
 				D6A929131C6CBB2400B8355B /* LaunchScreen.storyboard in Resources */,
 				D6A929101C6CBB2400B8355B /* Assets.xcassets in Resources */,
 				D6A9290B1C6CBB2400B8355B /* Main.storyboard in Resources */,
-				CB51C8AF205E751C0060AD07 /* LPMessagingSDKModels.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
