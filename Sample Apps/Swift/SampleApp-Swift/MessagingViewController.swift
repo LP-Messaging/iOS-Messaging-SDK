@@ -192,20 +192,9 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
         guard self.conversationViewController != nil else {
             return
         }
-        if agent != nil {
-            var name: String = ""
-            if agent!.firstName != nil {
-                name = agent!.firstName!
-            }
-            if agent!.lastName != nil {
-                name = "\(name) \(agent!.lastName!)"
-            }
-            if name != "" {
-                self.conversationViewController?.title = name
-            }
-        } else {
-            self.conversationViewController?.title = ""
-        }
+
+        let name: String = agent?.nickName ?? ""
+        self.conversationViewController?.title = name
     }
     
     /**

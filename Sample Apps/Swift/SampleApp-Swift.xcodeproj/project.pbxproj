@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB51C89F205E73ED0060AD07 /* LPAMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C897205E73D60060AD07 /* LPAMS.framework */; };
+		CB51C8A0205E73ED0060AD07 /* LPAMS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C897205E73D60060AD07 /* LPAMS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB51C8A2205E73ED0060AD07 /* LPInfra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C898205E73D60060AD07 /* LPInfra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB51C8A4205E73ED0060AD07 /* LPMessagingSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C896205E73D60060AD07 /* LPMessagingSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CB51C8A6205E73F00060AD07 /* LPMonitoring.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C895205E73D60060AD07 /* LPMonitoring.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD8C6B2A2031B6E8008EB94B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C6B292031B6E8008EB94B /* MainViewController.swift */; };
 		CD8C6B2C2031B811008EB94B /* MonitoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */; };
 		D62EC5AC1C7C427B0001C0D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5AB1C7C427B0001C0D4 /* AppDelegate.swift */; };
@@ -19,12 +24,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CD3B332B205FA98300E1D569 /* Embed Frameworks */ = {
+		CD8C6B4A2031C6A7008EB94B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CB51C8A6205E73F00060AD07 /* LPMonitoring.framework in Embed Frameworks */,
+				CB51C8A4205E73ED0060AD07 /* LPMessagingSDK.framework in Embed Frameworks */,
+				CB51C8A0205E73ED0060AD07 /* LPAMS.framework in Embed Frameworks */,
+				CB51C8A2205E73ED0060AD07 /* LPInfra.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB51C89F205E73ED0060AD07 /* LPAMS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,7 +129,7 @@
 				D62EC5A41C7C427B0001C0D4 /* Sources */,
 				D62EC5A51C7C427B0001C0D4 /* Frameworks */,
 				D62EC5A61C7C427B0001C0D4 /* Resources */,
-				CD3B332B205FA98300E1D569 /* Embed Frameworks */,
+				CD8C6B4A2031C6A7008EB94B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -137,7 +147,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = LivePerson;
 				TargetAttributes = {
 					D62EC5A71C7C427B0001C0D4 = {
@@ -232,12 +242,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -288,12 +300,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

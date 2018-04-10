@@ -190,7 +190,7 @@
  */
 - (void)LPMessagingSDKAgentDetails:(LPUser *)agent {
     if (agent != nil) {
-        self.title = [NSString stringWithFormat:@"%@ %@",agent.firstName, agent.lastName];
+        self.title = [NSString stringWithFormat:@"%@",agent.nickName];
     } else {
         self.title = @"";
     }
