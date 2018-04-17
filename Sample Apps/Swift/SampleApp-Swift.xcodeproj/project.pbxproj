@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB51C89F205E73ED0060AD07 /* LPAMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C897205E73D60060AD07 /* LPAMS.framework */; };
-		CB51C8A0205E73ED0060AD07 /* LPAMS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C897205E73D60060AD07 /* LPAMS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CB51C8A2205E73ED0060AD07 /* LPInfra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C898205E73D60060AD07 /* LPInfra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CB51C8A4205E73ED0060AD07 /* LPMessagingSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C896205E73D60060AD07 /* LPMessagingSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CB51C8A6205E73F00060AD07 /* LPMonitoring.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB51C895205E73D60060AD07 /* LPMonitoring.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD8C6B2A2031B6E8008EB94B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C6B292031B6E8008EB94B /* MainViewController.swift */; };
 		CD8C6B2C2031B811008EB94B /* MonitoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */; };
 		D62EC5AC1C7C427B0001C0D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5AB1C7C427B0001C0D4 /* AppDelegate.swift */; };
@@ -22,23 +17,6 @@
 		D62EC5B91C7C427B0001C0D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D62EC5B71C7C427B0001C0D4 /* LaunchScreen.storyboard */; };
 		D62EC5D01C7C469D0001C0D4 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		CD8C6B4A2031C6A7008EB94B /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				CB51C8A6205E73F00060AD07 /* LPMonitoring.framework in Embed Frameworks */,
-				CB51C8A4205E73ED0060AD07 /* LPMessagingSDK.framework in Embed Frameworks */,
-				CB51C8A0205E73ED0060AD07 /* LPAMS.framework in Embed Frameworks */,
-				CB51C8A2205E73ED0060AD07 /* LPInfra.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CB51C895205E73D60060AD07 /* LPMonitoring.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPMonitoring.framework; sourceTree = "<group>"; };
@@ -65,7 +43,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB51C89F205E73ED0060AD07 /* LPAMS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,7 +106,6 @@
 				D62EC5A41C7C427B0001C0D4 /* Sources */,
 				D62EC5A51C7C427B0001C0D4 /* Frameworks */,
 				D62EC5A61C7C427B0001C0D4 /* Resources */,
-				CD8C6B4A2031C6A7008EB94B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
