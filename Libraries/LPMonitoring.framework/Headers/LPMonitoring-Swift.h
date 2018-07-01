@@ -188,6 +188,7 @@ SWIFT_CLASS("_TtC12LPMonitoring19LPEngagementDetails")
 @property (nonatomic) NSInteger campaignId;
 @property (nonatomic) NSInteger engagementId;
 @property (nonatomic, copy) NSString * _Nullable conversationId;
+@property (nonatomic) NSInteger connectorId;
 @property (nonatomic, copy) NSString * _Nullable status;
 @property (nonatomic, copy) NSString * _Nullable contextId;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -205,6 +206,7 @@ SWIFT_CLASS("_TtC12LPMonitoring23LPGetEngagementResponse")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class LPMonitoringIdentity;
 @class LPMonitoringParams;
 @class NSError;
 @class LPSendSDEResponse;
@@ -217,7 +219,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMonitoring
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 /// Use this API to get an engagement for a consumer in an appInstallationId context. When calculating eligibility the decision is based on the SDEs and other parameters. Based on messaging campaign concept.
 /// As an optional parameter, you can pass SDE Data which includes Entry Points and Engagement Attributes for routing the conversation.
-/// \param consumerID an optional brand app consumer ID to get the engagement for
+/// \param identities Mandatory array of identity objects of type LPMonitoringIdentity which includes the details on the consumer and issuer
 ///
 /// \param monitoringParams an instance of includes optional Array of Entry Points and an optional dictionary of Engagement Attributes
 ///
@@ -225,16 +227,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMonitoring
 ///
 /// \param failure failure block with an error in case the request fails
 ///
+- (void)getEngagementWithIdentities:(NSArray<LPMonitoringIdentity *> * _Nonnull)identities monitoringParams:(LPMonitoringParams * _Nullable)monitoringParams completion:(void (^ _Nonnull)(LPGetEngagementResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 - (void)getEngagementWithConsumerID:(NSString * _Nullable)consumerID monitoringParams:(LPMonitoringParams * _Nullable)monitoringParams completion:(void (^ _Nonnull)(LPGetEngagementResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Use this API to report an engagement attributes (SDEs) for a consumer in an appInstallationId context including show and accept impression.
-/// \param consumerID brand app consumer ID to sendSDE for
+/// \param identities Mandatory array of identity objects of type LPMonitoringIdentity which includes the details on the consumer and issuer
 ///
-/// \param monitoringParams an instance of LPMonitoringParams includes optional Array of Entry Points and an optional dictionary of Engagement Attributes. Additional optioanl parameter is PageID which is used for Page identification for sending events on the current engagement. PageID will be received in LPSendSDEResponse and in LPGetEngagementResponse
+/// \param monitoringParams an instance of LPMonitoringParams includes optional Array of Entry Points and an optional dictionary of Engagement Attributes. Additional optional parameter is PageID which is used for Page identification for sending events on the current engagement. PageID will be received in LPSendSDEResponse and in LPGetEngagementResponse
 ///
 /// \param completion completion block with response of type LPSendSDEResponse. This response includes sessionID and visitorID and pageID for future use.
 ///
 /// \param failure failure block with an error in case the request fails
 ///
+- (void)sendSDEWithIdentities:(NSArray<LPMonitoringIdentity *> * _Nonnull)identities monitoringParams:(LPMonitoringParams * _Nonnull)monitoringParams completion:(void (^ _Nonnull)(LPSendSDEResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 - (void)sendSDEWithConsumerID:(NSString * _Nonnull)consumerID monitoringParams:(LPMonitoringParams * _Nonnull)monitoringParams completion:(void (^ _Nonnull)(LPSendSDEResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 @end
 
@@ -254,6 +258,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMonitoring
 ///
 - (void)initializeWithAccountId:(NSString * _Nonnull)accountId monitoringInitParms:(LPMonitoringInitParams * _Nonnull)monitoringInitParms SWIFT_DEPRECATED_OBJC("Swift method 'LPMonitoringDataManager.initialize(accountId:monitoringInitParms:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (void)clearManager;
+@end
+
+
+SWIFT_CLASS("_TtC12LPMonitoring20LPMonitoringIdentity")
+@interface LPMonitoringIdentity : NSObject
+/// Init LPMonitoringInitParams with mandatory params
+/// \param appInstallID App Install ID of the Mobile Campaign of the Brand
+///
+- (nonnull instancetype)initWithConsumerID:(NSString * _Nullable)consumerID issuer:(NSString * _Nullable)issuer OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
 

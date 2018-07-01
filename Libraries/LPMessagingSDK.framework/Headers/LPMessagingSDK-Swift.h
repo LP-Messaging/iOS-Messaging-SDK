@@ -206,13 +206,14 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")
 @class LPMessageEntity;
 @class NSError;
 @class CSATModel;
+@class UploadInfo;
 @class LPFileEntity;
-@class UIImage;
 @class RequestSwiftURL;
 @class Ring;
 @class LPFormEntity;
 @class LPLinkPreviewEntity;
 @class LPWebSocket;
+@class UIImage;
 @class LPConversationHistoryControlParam;
 @class LPUserEntity;
 
@@ -272,6 +273,16 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// returns:
 /// TimeInterval (Double)
 + (NSTimeInterval)getInactiveUserInteractionTimeInterval:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_WARN_UNUSED_RESULT;
+/// Appends content to the message text field
+/// \param text Text to append
+///
++ (void)addContentToMessageWithText:(NSString * _Nonnull)text;
+/// This method overrides the state of the AMS state machine for a conversation query
+/// \param conversationQuery used to identify the related brand
+///
+/// \param state the new state to be updated
+///
++ (void)updateAMSState:(id <ConversationParamProtocol> _Nonnull)conversationQuery state:(enum AMSState)state;
 /// Perform connect to socket for conversationQuery
 /// @param:
 /// <ul>
@@ -365,12 +376,20 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 + (LPMessageEntity * _Nullable)createMessageMaskedLocalMessage:(LPConversationEntity * _Nonnull)conversation isRealTimeMasking:(BOOL)isRealTimeMasking SWIFT_WARN_UNUSED_RESULT;
 /// Create welcome local system message for conversation
 + (LPMessageEntity * _Nullable)createWelcomeLocalMessage:(LPConversationEntity * _Nonnull)conversation SWIFT_WARN_UNUSED_RESULT;
-/// Upload and send messge with file from gallery or camera based on image info which retrieved in UIImagePickerDelegate
-+ (void)uploadFileFromImageInfoWithImageInfo:(NSDictionary<NSString *, id> * _Nonnull)imageInfo caption:(NSString * _Nonnull)caption conversation:(LPConversationEntity * _Null_unspecified)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Upload file from upload info object
+/// \param uploadInfo Includes all necessary info about required file to upload
+///
+/// \param conversation conversation that the file will be added to
+///
+/// \param completion complition handler
+///
+/// \param failure failure handler
+///
++ (void)uploadFileFromInfoWithUploadInfo:(UploadInfo * _Nonnull)uploadInfo conversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Upload file that is saved on disk and send message (mainly for failed messages)
 + (void)uploadFileFromDiskWithMessage:(LPMessageEntity * _Nonnull)message conversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Downloads a file from Swift server and returns an image to show
-+ (void)downloadFileWithConversation:(LPConversationEntity * _Nonnull)conversation file:(LPFileEntity * _Nonnull)file completion:(void (^ _Nonnull)(UIImage * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
++ (void)downloadFileWithConversation:(LPConversationEntity * _Nonnull)conversation file:(LPFileEntity * _Nonnull)file completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Requests the AMS for an upload url for swift server
 + (void)requestUploadURLWithConversation:(LPConversationEntity * _Nonnull)conversation fileSize:(double)fileSize fileExtention:(NSString * _Nonnull)fileExtention completion:(void (^ _Nonnull)(RequestSwiftURL * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Requests the AMS for a download url from swift server
@@ -380,8 +399,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 + (void)clearManagers;
 + (void)acceptRing:(Ring * _Nonnull)ring agentToken:(NSString * _Nonnull)agentToken completion:(void (^ _Nonnull)(LPConversationEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 + (void)backToQueue:(NSString * _Nonnull)userID conversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-+ (void)subscribeAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID;
-+ (void)setAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID channels:(NSArray<NSString *> * _Nullable)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description;
++ (void)subscribeAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID completion:(void (^ _Nullable)(id _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
++ (void)setAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID channels:(NSArray<NSString *> * _Nullable)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description completion:(void (^ _Nullable)(id _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 + (void)agentRequestConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery context:(NSDictionary<NSString *, NSString *> * _Nonnull)context ttrDefName:(NSString * _Nonnull)ttrDefName channelType:(NSString * _Nonnull)channelType consumerId:(NSString * _Nonnull)consumerId completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 + (NSArray<NSString *> * _Nonnull)getAllConsumersID SWIFT_WARN_UNUSED_RESULT;
 /// Prepare secure form to be open in a webview
@@ -420,6 +439,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// Close all sockets in the web sockets map
 /// We DON’T remove the web sockets from the map in order to be able to re-create web socket from a previous one
 + (void)closeAllSockets;
+/// Create file from UploadInfo and return when ready if succeeded, invoke error otherwise.
+/// Using GeneratePhotoOperation
++ (void)prepareFileWithUploadInfo:(UploadInfo * _Nonnull)uploadInfo fileReadyCompletion:(void (^ _Nonnull)(LPFileEntity * _Nonnull))fileReadyCompletion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Upload File to Swift server and AMS using file operation
 + (void)uploadFileWithFile:(LPFileEntity * _Nonnull)file uploadRelativePath:(NSString * _Nonnull)uploadRelativePath tempURLSig:(NSString * _Nonnull)tempURLSig tempURLExpiry:(NSString * _Nonnull)tempURLExpiry completion:(void (^ _Nonnull)(LPFileEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Download file/photo from swift server
@@ -433,6 +455,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 + (UIImage * _Nullable)getThumbnailFromFileWithFile:(LPFileEntity * _Nonnull)file SWIFT_WARN_UNUSED_RESULT;
 /// Returns a base64 string representation of the file’s thumbnail
 + (void)getBase64ThumbnailStringWithFile:(LPFileEntity * _Nonnull)file completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nonnull))completion failure:(SWIFT_NOESCAPE void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Returns a base64 string representation of blank thumbnail file
++ (void)getBase64BlankThumbnailStringWithCompletion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nonnull))completion failure:(SWIFT_NOESCAPE void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Deletes file and thumbnail from disk
 + (void)deleteFileFromDiskWithFile:(LPFileEntity * _Nonnull)file;
 /// Deleting the main directory with all files in it from the disk
@@ -539,6 +563,16 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPMessagingAPI")
 /// Get CSDS domain for accountID and service name
 /// This method get all the CSDS domains and look for the specific domain per service
 + (void)getCSDSDomain:(NSString * _Nonnull)accountID serviceName:(NSString * _Nonnull)serviceName completion:(void (^ _Nonnull)(NSString * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Get All CSDS Service Domains
+/// This method uses cache to store and fetch services domains. For every new app session, the CSDS cache will get updated from server
+/// Completion blocks will be invoked once there is a stored cache or after the request from the server completed
+/// \param accountID accountID to get all services for
+///
+/// \param completion completion block with the response domains from server
+///
+/// \param failure failure block with error which will be invoked if server request failed
+///
++ (void)getAllCSDSDomains:(NSString * _Nonnull)accountID completion:(void (^ _Nonnull)(NSArray<NSDictionary<NSString *, id> *> * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Load image from URL from a server or from the images cache manager
 + (void)loadImageFromURLWithImageUrl:(NSString * _Nullable)imageUrl completion:(void (^ _Nonnull)(UIImage * _Nullable, BOOL))completion failure:(void (^ _Nullable)(void))failure;
 /// Set image for URL in images cache
@@ -625,10 +659,16 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 /// This method passes a user info of a remote push notification to be handled by the SDK.
 - (void)handlePush:(NSDictionary * _Nonnull)userInfo;
 /// This method registers the host app in the SDK Pusher service in order to be able to receive push notification in messaging.
-/// Optional paramaters:
-/// <notificationDelegate> is the implementer of LPMessagingSDKNotificationDelegate.
-/// <alternateBundleID> is a value for using in order to let the Pusher service to identify the host app with this bundle identifier.
-- (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID;
+/// If passing authentication params, this method will register immediately to Pusher, the registration will be performed when calling showConversation
+/// \param token push device token data
+///
+/// \param notificationDelegate implementer of LPMessagingSDKNotificationDelegate.
+///
+/// \param alternateBundleID a value for using in order to let the Pusher service to identify the host app with this bundle identifier
+///
+/// \param authenticationParams an optional authentication param (LPAuthenticationParams) to be used for immediate Pusher registration
+///
+- (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
 - (void)registerVoipPushNotificationsWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
 /// This method created ConversationParamProtocol of Brand query type.
 /// ConversationParamProtocol represents a ’filter’ for the conversation screen, determining which of the conversations will be displayed in the following screens.
@@ -660,10 +700,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 /// DEPRECATED - This method sets a custom image for the custom button in the conversation navigationBar.
 /// Use customButtonImage instead
 - (void)setCustomButton:(UIImage * _Nullable)image;
-/// Appends content to the message text field
-/// \param text Text to append
-///
-- (void)addContentToMessageWithText:(NSString * _Nonnull)text;
 /// This method checks if the active conversation of a conversation query marked as Urgent.
 /// Return value:
 /// True - conversation is marked as Urgent.
@@ -796,7 +832,21 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKConnectionStateChanged:(BOOL)isReady brandID:(NSString * _Nonnull)brandID;
 - (void)LPMessagingSDKOffHoursStateChanged:(BOOL)isOffHours brandID:(NSString * _Nonnull)brandID;
 - (void)LPMessagingSDKConversationViewControllerDidDismiss;
+/// Called when the Cert pinning mechanism failed. The server trust was successfully evaluated but did not contain any of the configured public keys pins. or The server trust’s evaluation failed: the server’s certificate chain is not trusted.
+/// \param error failure error reason
+///
 - (void)LPMessagingSDKCertPinningFailed:(NSError * _Nonnull)error;
+/// Called the SDK registration for  LP Pusher service has been succeeded.
+/// Pusher is the service that responsible for Remote Push Notifications routing and delivering from and to APNS.
+- (void)LPMessagingSDKPushRegistrationDidFinish;
+/// Called when the SDK registration for LP Pusher service has been failed with error.
+/// Pusher is the service that responsible for Remote Push Notifications routing and delivering from and to APNS.
+/// \param error failure error reason
+///
+- (void)LPMessagingSDKPushRegistrationDidFail:(NSError * _Nonnull)error;
+/// Called when an Unauthenticated user expired and can no longer be in used.
+/// When this callback is invoked, the previous open conversation will be closed locally.
+- (void)LPMessagingSDKUnauthenticatedUserExpired;
 @end
 
 
@@ -865,11 +915,17 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK17UIAdapterDelegate_")
 
 @interface UIButton (SWIFT_EXTENSION(LPMessagingSDK))
 - (void)actionHandleWithControlEvents:(UIControlEvents)control ForAction:(void (^ _Nonnull)(void))action SWIFT_DEPRECATED_OBJC("Swift method 'UIButton.actionHandle(controlEvents:ForAction:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)setBackgroundColorWithColor:(UIColor * _Nonnull)color forState:(UIControlState)forState SWIFT_DEPRECATED_OBJC("Swift method 'UIButton.setBackgroundColor(color:forState:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @end
 
 
 
 
+
+
+@interface UIImageView (SWIFT_EXTENSION(LPMessagingSDK)) <UIGestureRecognizerDelegate>
+- (BOOL)gestureRecognizer:(UIGestureRecognizer * _Nonnull)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer * _Nonnull)otherGestureRecognizer SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 @interface UIPanGestureRecognizer (SWIFT_EXTENSION(LPMessagingSDK))
@@ -878,6 +934,10 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK17UIAdapterDelegate_")
 ///
 - (nonnull instancetype)initWithHandler:(void (^ _Nonnull)(UIPanGestureRecognizer * _Nonnull))handler SWIFT_DEPRECATED_OBJC("Swift initializer 'UIPanGestureRecognizer.init(handler:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @end
+
+
+
+
 
 
 

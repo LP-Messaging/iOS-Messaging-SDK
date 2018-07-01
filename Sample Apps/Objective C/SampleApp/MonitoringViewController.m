@@ -65,7 +65,9 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
                                                                       engagementAttributes:engagementAttributes
                                                                                     pageId:@"pageId"];
     __weak MonitoringViewController *weakSelf = self;
-      [[LPMonitoringAPI instance] getEngagementWithConsumerID:consumerID monitoringParams:monitoringParams completion:^(LPGetEngagementResponse * _Nonnull getEngagementResponse) {
+      LPMonitoringIdentity *identity = [[LPMonitoringIdentity alloc] initWithConsumerID:consumerID
+                                                                                 issuer:@"BrandIssuer"];
+      [[LPMonitoringAPI instance] getEngagementWithIdentities:@[identity] monitoringParams:monitoringParams completion:^(LPGetEngagementResponse * _Nonnull getEngagementResponse) {
           weakSelf.pageId = getEngagementResponse.pageId;
           if (getEngagementResponse.engagementDetails.count > 0) {
               weakSelf.pageId = getEngagementResponse.pageId;
@@ -108,7 +110,9 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
     LPMonitoringParams *monitoringParams = [[LPMonitoringParams alloc] initWithEntryPoints:entryPoints
                                                                       engagementAttributes:engagementAttributes
                                                                                     pageId:@"pageId"];
-    [[LPMonitoringAPI instance] sendSDEWithConsumerID:consumerID monitoringParams:monitoringParams completion:^(LPSendSDEResponse * _Nonnull sendSdeResponse) {
+    LPMonitoringIdentity *identity = [[LPMonitoringIdentity alloc] initWithConsumerID:consumerID
+                                                                               issuer:@"BrandIssuer"];
+    [[LPMonitoringAPI instance] sendSDEWithIdentities:@[identity] monitoringParams:monitoringParams completion:^(LPSendSDEResponse * _Nonnull sendSdeResponse) {
         weakSelf.pageId = sendSdeResponse.pageId;
     } failure:^(NSError * _Nonnull error) {
         weakSelf.campaignInfo = nil;

@@ -117,7 +117,8 @@
             LPAuthenticationParams *authenticationParmas = [[LPAuthenticationParams alloc] initWithAuthenticationCode:@"zcKZeImY5h7xOVPj"
                                                                                                                   jwt:nil
                                                                                                           redirectURI:nil
-                                                                                                certPinningPublicKeys:nil];
+                                                                                                certPinningPublicKeys:nil
+                                                                                                   authenticationType:LPAuthenticationTypeAuthenticated];
             [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:authenticationParmas];
         } else {
             [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:nil];
@@ -136,7 +137,8 @@
             LPAuthenticationParams *authenticationParmas = [[LPAuthenticationParams alloc] initWithAuthenticationCode:account
                                                                                                                   jwt:nil
                                                                                                           redirectURI:nil
-                                                                                                certPinningPublicKeys:nil];
+                                                                                                certPinningPublicKeys:nil
+                                                                                                   authenticationType:LPAuthenticationTypeAuthenticated];
             [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:authenticationParmas];
         } else {
             [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:nil];

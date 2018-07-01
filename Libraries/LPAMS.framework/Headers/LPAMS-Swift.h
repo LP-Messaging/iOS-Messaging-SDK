@@ -224,13 +224,14 @@ SWIFT_CLASS("_TtC5LPAMS24EngagementHistoryManager")
 @class LPUser;
 @class CSATModel;
 enum SocketType : NSInteger;
+@class UploadInfo;
 @class LPFileEntity;
-@class UIImage;
 @class RequestSwiftURL;
 @class LPFormEntity;
 @class WKWebView;
 @class Ring;
 @class LPLinkPreviewEntity;
+@class QuickReplyItem;
 
 /// Full API to UMS protocol, Used is to control and send applicative events
 SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
@@ -242,6 +243,11 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 /// returns:
 /// [bool] : true if all initializations are successful.
 + (BOOL)initializeAMS SWIFT_WARN_UNUSED_RESULT;
+/// A methods to update the AMS state
+///
+/// returns:
+/// [bool] : true if all initializations are successful.
++ (void)updateAMSState:(id <ConversationParamProtocol> _Nonnull)conversationQuery state:(enum AMSState)state;
 /// Perform connect to socket for conversationQuery
 /// @param:
 /// <ul>
@@ -359,12 +365,20 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 /// Get client properties to be sent to AMS using predefiend AMS parameters.
 /// This method is used for sending information to AMS
 + (NSString * _Nonnull)clientPropertiesString SWIFT_WARN_UNUSED_RESULT;
-/// Sends a new messge with file from gallery or camera
-+ (void)uploadFileFromImageInfoWithImageInfo:(NSDictionary<NSString *, id> * _Nonnull)imageInfo caption:(NSString * _Nonnull)caption conversation:(LPConversationEntity * _Null_unspecified)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Upload file from file info object
+/// \param uploadInfo upload info object. Includes all necessary info about required file to upload
+///
+/// \param conversation conversation that the file will be added to
+///
+/// \param completion complition handler
+///
+/// \param failure failure handler
+///
++ (void)uploadFileFromInfoWithUploadInfo:(UploadInfo * _Nonnull)uploadInfo conversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Uploading file that is saved on disk (mainly for failed messages)
 + (void)uploadFileFromDiskWithMessage:(LPMessageEntity * _Nonnull)message conversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Downloads a file from Swift server and returns an image to show
-+ (void)downloadFileWithConversation:(LPConversationEntity * _Nonnull)conversation file:(LPFileEntity * _Nonnull)file completion:(void (^ _Nonnull)(UIImage * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
++ (void)downloadFileWithConversation:(LPConversationEntity * _Nonnull)conversation file:(LPFileEntity * _Nonnull)file completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Requests the AMS for an upload url for swift server
 + (void)requestUploadURLWithConversation:(LPConversationEntity * _Nonnull)conversation fileSize:(double)fileSize fileExtention:(NSString * _Nonnull)fileExtention completion:(void (^ _Nonnull)(RequestSwiftURL * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Requests the AMS for a download url from swift server
@@ -402,8 +416,8 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 + (WKWebView * _Nullable)getPreparedSecureFormWebViewWithForm:(LPFormEntity * _Nonnull)form SWIFT_WARN_UNUSED_RESULT;
 + (void)acceptRing:(Ring * _Nonnull)ring agentToken:(NSString * _Nonnull)agentToken completion:(void (^ _Nonnull)(LPConversationEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 + (void)backToQueue:(NSString * _Nonnull)userID conversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-+ (void)subscribeAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID;
-+ (void)setAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID channels:(NSArray<NSString *> * _Nullable)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description;
++ (void)subscribeAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID completion:(void (^ _Nullable)(id _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
++ (void)setAgentState:(id <ConversationParamProtocol> _Nonnull)conversationQuery agentID:(NSString * _Nonnull)agentID channels:(NSArray<NSString *> * _Nullable)channels availability:(NSString * _Nonnull)availability description:(NSString * _Nonnull)description completion:(void (^ _Nullable)(id _Nonnull))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 + (void)agentRequestConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery context:(NSDictionary<NSString *, NSString *> * _Nonnull)context ttrDefName:(NSString * _Nonnull)ttrDefName channelType:(NSString * _Nonnull)channelType consumerId:(NSString * _Nonnull)consumerId completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Gets messages with linkPreviewState of “loading”
 ///
@@ -431,11 +445,21 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 /// Clear all singleton managers with their properties from memory.
 /// This method will release any data objects and data structures.
 + (void)clearManagers;
+/// If we have the last quick reply item saved in the RAM:
+/// We’ll return it from the RAM
+/// If not, we’ll take it from the LPUserDefaults
+/// If there is no saved quuck reply item, we’ll return nil
++ (QuickReplyItem * _Nullable)loadLastSavedQuickReplyItem SWIFT_WARN_UNUSED_RESULT;
+/// Saves a quickReplyItem to LPUserDefaults and to the RAM
+/// \param quickReplyItem item to be saved
+///
++ (void)saveQuickReplyItemWithQuickReplyItem:(QuickReplyItem * _Nonnull)quickReplyItem;
++ (void)clearLastSavedQuickReplyItem;
++ (void)registerPusherWithLoginFlowWithBrand:(LPBrandEntity * _Nonnull)brand;
 @end
 
 @class TTRModel;
 @class LPConnection;
-@class LPUserEntity;
 
 /// UMS protocol delegate to receive events about the lifecycle of conversaion, messages, CSAT etc.
 SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
@@ -443,12 +467,14 @@ SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
 @optional
 - (void)conversationDidResolve:(LPConversationEntity * _Nonnull)conversation isAgentSide:(BOOL)isAgentSide endTime:(NSDate * _Nullable)endTime;
 - (void)conversationWasSentToQueueRemotely:(LPConversationEntity * _Nonnull)conversation;
+- (void)conversationWasDeleted:(LPConversationEntity * _Nullable)conversation;
 - (void)retrieveHistoryMessagingEventNotificationsDidProgressWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery completed:(NSInteger)completed total:(NSInteger)total;
 - (void)retrieveHistoryEngagementHistoryDidProgressWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery completed:(NSInteger)completed total:(NSInteger)total;
 - (void)retrieveHistoryMessagingEventNotificationStateDidChangeWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery isFinished:(BOOL)isFinished fetchedConversationCount:(NSInteger)fetchedConversationCount fetchedMessages:(NSArray<LPMessageEntity *> * _Nullable)fetchedMessages increaseNumberOfPresentedConversationsBy:(NSInteger)increaseNumberOfPresentedConversationsBy;
 - (void)didSendMessages:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
 - (void)willReceiveMessages;
 - (void)didReceiveMessages:(LPConversationEntity * _Nonnull)conversation messages:(NSArray<LPMessageEntity *> * _Nonnull)messages;
+- (void)didReceiveMessagingEvent;
 - (void)resolveConvesationDidFail:(LPConversationEntity * _Nonnull)conversation error:(NSError * _Nonnull)error;
 - (void)resolveConvesationRequestDidFinish:(LPConversationEntity * _Nonnull)conversation;
 - (void)newConversationCreated:(LPConversationEntity * _Nonnull)conversation;
@@ -467,8 +493,8 @@ SWIFT_PROTOCOL("_TtP5LPAMS19LPAMSFacadeDelegate_")
 - (id <ConversationParamProtocol> _Nullable)getCurrentConversationQuery SWIFT_WARN_UNUSED_RESULT;
 - (void)historyCleared;
 - (void)didReceiveRingUpdate:(NSString * _Nonnull)conversationID ring:(Ring * _Nonnull)ring;
+- (void)didReceiveNoPendingRingsNotification;
 - (void)didAcceptRingWithConversation:(LPConversationEntity * _Nonnull)conversation connection:(LPConnection * _Nonnull)connection;
-- (void)agentStateDidChange:(LPUserEntity * _Nonnull)agent state:(NSString * _Nonnull)state;
 @end
 
 /// Used to set the socket type as consumer aor brand. The URI for opening the socket is different between the two.

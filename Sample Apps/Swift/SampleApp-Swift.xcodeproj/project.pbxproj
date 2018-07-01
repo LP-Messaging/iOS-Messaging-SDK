@@ -18,12 +18,20 @@
 		D62EC5D01C7C469D0001C0D4 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CD0BC43C20BD615400BCA4AD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		CB51C895205E73D60060AD07 /* LPMonitoring.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPMonitoring.framework; sourceTree = "<group>"; };
-		CB51C896205E73D60060AD07 /* LPMessagingSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPMessagingSDK.framework; sourceTree = "<group>"; };
-		CB51C897205E73D60060AD07 /* LPAMS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPAMS.framework; sourceTree = "<group>"; };
-		CB51C898205E73D60060AD07 /* LPInfra.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LPInfra.framework; sourceTree = "<group>"; };
-		CB51C899205E73D60060AD07 /* LPMessagingSDKModels.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LPMessagingSDKModels.bundle; sourceTree = "<group>"; };
 		CD3B9B371D97EA45008FF2BE /* SampleApp-Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SampleApp-Swift.entitlements"; sourceTree = "<group>"; };
 		CD8C6B292031B6E8008EB94B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoringViewController.swift; sourceTree = "<group>"; };
@@ -52,11 +60,6 @@
 		BFD69218A1BBBE7F350550D3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CB51C897205E73D60060AD07 /* LPAMS.framework */,
-				CB51C898205E73D60060AD07 /* LPInfra.framework */,
-				CB51C896205E73D60060AD07 /* LPMessagingSDK.framework */,
-				CB51C899205E73D60060AD07 /* LPMessagingSDKModels.bundle */,
-				CB51C895205E73D60060AD07 /* LPMonitoring.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -106,6 +109,7 @@
 				D62EC5A41C7C427B0001C0D4 /* Sources */,
 				D62EC5A51C7C427B0001C0D4 /* Frameworks */,
 				D62EC5A61C7C427B0001C0D4 /* Resources */,
+				CD0BC43C20BD615400BCA4AD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

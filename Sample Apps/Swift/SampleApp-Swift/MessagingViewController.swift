@@ -121,7 +121,7 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
         if self.windowSwitch.isOn {
             if self.authenticationSwitch.isOn {
                 let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: nil, isViewOnly: false)
-                let authenticationParams = LPAuthenticationParams(authenticationCode: "zcKZeImY5h7xOVPj", jwt: nil, redirectURI: nil)
+                let authenticationParams = LPAuthenticationParams(authenticationCode: "zcKZeImY5h7xOVPj", jwt: nil, redirectURI: nil, authenticationType: .authenticated)
                 LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
             } else {
                 let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: nil, isViewOnly: false)
@@ -139,7 +139,7 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
             self.conversationViewController!.conversationQuery = self.conversationQuery!
             if self.authenticationSwitch.isOn {
                 let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: conversationViewController, isViewOnly: false)
-                let authenticationParams = LPAuthenticationParams(authenticationCode: accountNumber, jwt: nil, redirectURI: nil)
+                let authenticationParams = LPAuthenticationParams(authenticationCode: accountNumber, jwt: nil, redirectURI: nil, authenticationType: .authenticated)
                 LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
             } else {
                 let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: conversationViewController, isViewOnly: false)

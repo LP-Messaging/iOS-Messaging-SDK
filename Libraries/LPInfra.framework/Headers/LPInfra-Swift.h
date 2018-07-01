@@ -189,6 +189,28 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+typedef SWIFT_ENUM(NSInteger, AMSState) {
+  AMSStateIN_PROCESS = 0,
+  AMSStateNETWORK_REACHABLE = 1,
+  AMSStateCSDS_REACHABLE = 2,
+  AMSStateVALID_TOKEN = 3,
+  AMSStateOPENING_SOCKET = 4,
+  AMSStateVALID_SOCKET = 5,
+  AMSStateVALID_USERID = 6,
+  AMSStateREADY = 7,
+  AMSStateREADY_WITH_DATA = 8,
+  AMSStateSDK_ERROR = -1,
+  AMSStateGENERAL_ERROR = -2,
+  AMSStateNETWORK_UNREACHABLE = -3,
+  AMSStateCSDS_UNREACHABLE = -4,
+  AMSStateNO_TOKEN = -5,
+  AMSStateCLOSING_SOCKET = -6,
+  AMSStateSOCKET_UNREACHABLE = -7,
+  AMSStateNO_USERID = -8,
+  AMSStateNO_SUBSCRIPTION = -9,
+  AMSStateCERT_PINNING_FAILED = -10,
+};
+
 
 SWIFT_CLASS("_TtC7LPInfra15GeneralResponse")
 @interface GeneralResponse : NSObject
@@ -217,7 +239,7 @@ SWIFT_PROTOCOL("_TtP7LPInfra25ConversationParamProtocol_")
 - (NSArray<LPConversationEntity *> * _Nullable)getClosedConversations SWIFT_WARN_UNUSED_RESULT;
 - (LPConversationEntity * _Nullable)getActiveConversation SWIFT_WARN_UNUSED_RESULT;
 - (LPConversationEntity * _Nullable)getOpenConversation SWIFT_WARN_UNUSED_RESULT;
-- (NSArray<LPConversationEntity *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<LPConversationEntity *> * _Nullable)getLatestClosedConversations:(NSInteger)conversationsCount SWIFT_WARN_UNUSED_RESULT;
 - (LPConversationEntity * _Nonnull)createNewConversation SWIFT_WARN_UNUSED_RESULT;
 - (NSString * _Nonnull)getQueryType SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isConversationRelatedToQuery:(LPConversationEntity * _Nonnull)conversation SWIFT_WARN_UNUSED_RESULT;
@@ -242,7 +264,7 @@ SWIFT_CLASS("_TtC7LPInfra10BrandQuery")
 /// Get open conversation.
 - (LPConversationEntity * _Nullable)getOpenConversation SWIFT_WARN_UNUSED_RESULT;
 /// Get the latest closed conversation.
-- (NSArray<LPConversationEntity *> * _Nullable)getLatestClosedConversation:(NSInteger)conversationsCount SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<LPConversationEntity *> * _Nullable)getLatestClosedConversations:(NSInteger)conversationsCount SWIFT_WARN_UNUSED_RESULT;
 - (LPConversationEntity * _Nonnull)createNewConversation SWIFT_WARN_UNUSED_RESULT;
 - (NSString * _Nonnull)getQueryType SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isConversationRelatedToQuery:(LPConversationEntity * _Nonnull)conversation SWIFT_WARN_UNUSED_RESULT;
@@ -385,6 +407,31 @@ typedef SWIFT_ENUM(NSInteger, LPAccountEnviroment) {
   LPAccountEnviromentQa = 2,
 };
 
+@class NSCoder;
+
+/// Base class for file metadata container attribute
+SWIFT_CLASS("_TtC7LPInfra23LPFileMetaDataContainer")
+@interface LPFileMetaDataContainer : NSObject <NSCoding>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra28LPAudioFileMetaDataContainer")
+@interface LPAudioFileMetaDataContainer : LPFileMetaDataContainer
+@property (nonatomic, copy) void (^ _Nullable audioPlayerDidStart)(NSString * _Nonnull) SWIFT_DEPRECATED_OBJC("Swift property 'LPAudioFileMetaDataContainer.audioPlayerDidStart' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) void (^ _Nullable audioPlayerDidFail)(NSString * _Nonnull, NSError * _Nonnull) SWIFT_DEPRECATED_OBJC("Swift property 'LPAudioFileMetaDataContainer.audioPlayerDidFail' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) void (^ _Nullable audioPlayerProgress)(NSString * _Nonnull, NSTimeInterval, NSTimeInterval) SWIFT_DEPRECATED_OBJC("Swift property 'LPAudioFileMetaDataContainer.audioPlayerProgress' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) BOOL isPlaying SWIFT_DEPRECATED_OBJC("Swift property 'LPAudioFileMetaDataContainer.isPlaying' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFileDuration:(NSInteger)fileDuration OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_OBJC("Swift initializer 'LPAudioFileMetaDataContainer.init(fileDuration:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)updateFrom:(LPAudioFileMetaDataContainer * _Nonnull)container SWIFT_DEPRECATED_OBJC("Swift method 'LPAudioFileMetaDataContainer.updateFrom(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+enum LPAuthenticationType : NSInteger;
 
 SWIFT_CLASS("_TtC7LPInfra22LPAuthenticationParams")
 @interface LPAuthenticationParams : NSObject
@@ -393,6 +440,7 @@ SWIFT_CLASS("_TtC7LPInfra22LPAuthenticationParams")
 @property (nonatomic, copy) NSString * _Nullable redirectURI;
 /// will hold the Cert pining validation public keys
 @property (nonatomic, copy) NSArray<NSString *> * _Nullable certPinningPublicKeys;
+@property (nonatomic) enum LPAuthenticationType type;
 /// LPAuthenticationParams initialization with params
 /// \param authenticationCode an optional authCode which is used for ‘Code Flow’ authentication. If passing JWT - authenticationCode will be ignored
 ///
@@ -403,11 +451,21 @@ SWIFT_CLASS("_TtC7LPInfra22LPAuthenticationParams")
 /// \param certPinningPublicKeys Set the certificate public key hash this API can get multiple public key hashes for the ability to support more then one key and if the certificate leaf change his public key we will still be able to validate the keys of the others certificate leaf
 /// if nil the Cert Pinning is disable
 ///
-- (nonnull instancetype)initWithAuthenticationCode:(NSString * _Nullable)authenticationCode jwt:(NSString * _Nullable)jwt redirectURI:(NSString * _Nullable)redirectURI certPinningPublicKeys:(NSArray<NSString *> * _Nullable)certPinningPublicKeys OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithAuthenticationCode:(NSString * _Nullable)authenticationCode jwt:(NSString * _Nullable)jwt redirectURI:(NSString * _Nullable)redirectURI certPinningPublicKeys:(NSArray<NSString *> * _Nullable)certPinningPublicKeys authenticationType:(enum LPAuthenticationType)authenticationType OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
+
+/// This enum is used for determine the authentication type with the following options:
+/// signup (default) // old unauthenticated method
+/// unauthenticated
+/// authenticated
+typedef SWIFT_ENUM(NSInteger, LPAuthenticationType) {
+  LPAuthenticationTypeSignup = 0,
+  LPAuthenticationTypeUnauthenticated = 1,
+  LPAuthenticationTypeAuthenticated = 2,
+};
 
 @class NSSet;
 
@@ -424,7 +482,6 @@ SWIFT_CLASS("_TtC7LPInfra13LPBrandEntity")
 @property (nonatomic, copy) NSDate * _Nonnull dateJoined;
 @property (nonatomic) BOOL hidden;
 @property (nonatomic, strong) NSSet * _Nonnull accounts;
-@property (nonatomic, strong) LPAuthenticationParams * _Nullable authenticationParams;
 - (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -452,10 +509,10 @@ SWIFT_CLASS("_TtC7LPInfra14LPCampaignInfo")
 @interface LPCampaignInfo : NSObject
 @property (nonatomic) NSInteger campaignId;
 @property (nonatomic) NSInteger engagementId;
+@property (nonatomic, copy) NSString * _Nullable contextId;
 @property (nonatomic, copy) NSString * _Nullable sessionId;
 @property (nonatomic, copy) NSString * _Nullable visitorId;
-@property (nonatomic, copy) NSString * _Nonnull contextId;
-- (nonnull instancetype)initWithCampaignId:(NSInteger)campaignId engagementId:(NSInteger)engagementId contextId:(NSString * _Nonnull)contextId sessionId:(NSString * _Nullable)sessionId visitorId:(NSString * _Nullable)visitorId OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithCampaignId:(NSInteger)campaignId engagementId:(NSInteger)engagementId contextId:(NSString * _Nullable)contextId sessionId:(NSString * _Nullable)sessionId visitorId:(NSString * _Nullable)visitorId OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
@@ -553,12 +610,18 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic, copy) NSString * _Nullable bubblePhoneLinksRegex;
 /// Color code for the text of the system messages.
 @property (nonatomic, strong) UIColor * _Nonnull systemBubbleTextColor;
+/// When true, user and remote user messages containing one or two emojies will be enlarged in chat. Messages with one emoji will be the largest, two emojis will be large, and 3 or more will be displayed as normal text.
+@property (nonatomic) BOOL enableEnlargeEmojies;
 @property (nonatomic, copy) NSString * _Nonnull customButtonIconName;
 /// Custom button image. This will be displayed on the navigation bar.
 @property (nonatomic, strong) UIImage * _Nullable customButtonImage;
 @property (nonatomic, copy) NSString * _Nonnull customButtonDescription;
-/// If true, accessibility will announce when agent is typing
+/// If true, show agent is typing indicator. In accessibility mode, announce when agent is typing
+/// When false will not show any indication that the agent is typing, and will not announce when agent is typing in accessibility
 @property (nonatomic) BOOL announceAgentTyping;
+/// When true, shows agent  is typing indicator in a message bubble. When false, show indicator under Agent label in navigator bar.
+/// When announceAgentTyping is false, will not show any “is typing” indicator regardless of current value.
+@property (nonatomic) BOOL showAgentTypingInMessageBubble;
 /// Checkmark visibility of the following options (type CheckmarksState):
 /// SentOnly - Show checkmarks for only Sent messages.
 /// SentAndAccepted - Show checkmarks for only Sent and Accepted messages.
@@ -692,6 +755,8 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic) enum LPLanguage language;
 /// The brand name will be shown as a title on toolbar when there is no active conversation.
 @property (nonatomic, copy) NSString * _Nonnull brandName;
+/// Allow URL Protocol sniffing via the use of HTTP request with URLSession shared instance. NOTE: When setting this configuration TRUE - Cert Pinning option will be disabled!
+@property (nonatomic) BOOL allowURLProtocolSniffing;
 /// Color for the entire view background.
 @property (nonatomic, strong) UIColor * _Nonnull conversationBackgroundColor;
 /// Color code for date separator title background color
@@ -755,8 +820,17 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// Fonts that are not part of the iOS families, must be defined in App’s Info.plist
 @property (nonatomic, copy) NSString * _Nullable customFontNameNonConversationFeed;
 @property (nonatomic) enum LPAccountEnviroment accountEnvironment;
+/// When not nil, will be used as the conversation portrait background image
+@property (nonatomic, strong) UIImage * _Nullable conversationBackgroundPortraitImage;
+/// When not nil, will be used as the conversation landscape background image
+@property (nonatomic, strong) UIImage * _Nullable conversationBackgroundLandscapeImage;
+/// Decides the content mode of the conversation background image
+@property (nonatomic) UIViewContentMode conversationBackgroundImageContentMode;
 /// Should show TTR Shift banner (“An agent will respond…”)
 @property (nonatomic) BOOL ttrShowShiftBanner;
+/// Toggling this on will show TTR notifications including off hours. When the auto messages feature is enabled, TTR notifications will not be displayed regardless of this
+/// parameter
+@property (nonatomic) BOOL ttrShouldShow;
 /// TTR - Time To Respond Number of seconds before the first TTR notification appears
 @property (nonatomic) double ttrFirstTimeDelay;
 /// TTR - Time To Respond
@@ -795,6 +869,10 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic) float remoteUserAvatarLeadingPadding;
 /// Define the remote avatar Trailing padding (Avatar to bubble)
 @property (nonatomic) float remoteUserAvatarTrailingPadding;
+/// Define the remote avatar icon border width
+@property (nonatomic) CGFloat remoteUserAvatarIconBorderWidth;
+/// Define the remote avatar icon border color
+@property (nonatomic, strong) UIColor * _Nullable remoteUserAvatarIconBorderColor;
 /// Default avatar image for Brand.
 /// If setting nil - default avatr image will be used.
 @property (nonatomic, strong) UIImage * _Nullable brandAvatarImage;
@@ -901,6 +979,14 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic) double structuredContentBubbleBorderWidth;
 /// Structured Content bubble border color
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentBubbleBorderColor;
+/// Structured Content bubble top left corner radius
+@property (nonatomic) float structuredContentBubbleTopLeftCornerRadius;
+/// Structured Content bubble bottom left corner radius
+@property (nonatomic) float structuredContentBubbleBottomLeftCornerRadius;
+/// Structured Content bubble top right corner radius
+@property (nonatomic) float structuredContentBubbleTopRightCornerRadius;
+/// Structured Content bubble bottom right corner radius
+@property (nonatomic) float structuredContentBubbleBottomRightCornerRadius;
 /// Structured Content Latitude Delta Span. Used to determine which area of the map to focus. If you set this attribute, you must set structuredContentMapLongitudeDeltaSpan as well. This parameter is used to create an MKCoordinateSpan.
 /// For more info: https://developer.apple.com/documentation/mapkit/mkcoordinatespan
 @property (nonatomic) double structuredContentMapLatitudeDeltaDeltaSpan;
@@ -909,6 +995,16 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 @property (nonatomic) double structuredContentMapLongitudeDeltaSpan;
 /// Enable or Disable toggle for Structured Content feature in conversations
 @property (nonatomic) BOOL enableStrucutredContent;
+/// Distance between the bottom and top edges of the button to the bottom and top edges of the text
+@property (nonatomic) CGFloat quickReplyButtonVerticalPadding;
+/// Distance between the right and left edges of the button to the right and left edges of the text
+@property (nonatomic) CGFloat quickReplyButtonHorizontalPadding;
+/// Vertical margin between quick reply buttons
+@property (nonatomic) CGFloat quickReplyVerticalMargin;
+/// Horizontal padding between quick reply buttons
+@property (nonatomic) CGFloat quickReplyHorizontalMargin;
+/// Border size of Quick Reply buttons
+@property (nonatomic) CGFloat quickReplyButtonBorderWidth;
 /// Connection status toast (connecting) background color
 /// Hex color can include alpha factor (two last digits)
 @property (nonatomic, strong) UIColor * _Nonnull connectionStatusConnectingBackgroundColor;
@@ -938,6 +1034,13 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// custom refresh controller speed animation define the full images loop time
 /// Smaller value will create high speed animation
 @property (nonatomic) float customRefreshControllerAnimationSpeed;
+/// MARK: Audio
+/// Recording duration limit
+@property (nonatomic) NSTimeInterval recordingDurationLimit;
+/// Enable or disable audio sharing feature
+@property (nonatomic) BOOL enableAudioSharing;
+/// Max number of allowed saved audio files on disk
+@property (nonatomic) NSUInteger maxNumberOfSavedAudioFilesOnDisk;
 /// The maximum height of the input text field in pixels. Default is 100 pixels.
 /// Cannot be smaller than 50 pixels
 @property (nonatomic) CGFloat inputTextViewMaxHeight;
@@ -1044,6 +1147,10 @@ SWIFT_CLASS("_TtC7LPInfra20LPConversationEntity")
 - (void)acceptSequence:(NSInteger)seq SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.acceptSequence(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (void)resolve SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.resolve()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (void)resolve:(NSString * _Nonnull)closeReason SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.resolve(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Takes pending messages from a conversation that is about to be closed and pass them to a new converation to be sent at
+/// \param resolvingConversation The conversation that is about to be closed
+///
+- (void)passPendingMessagesToNewConversationWithResolvingConversation:(LPConversationEntity * _Nonnull)resolvingConversation SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.passPendingMessagesToNewConversation(resolvingConversation:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// TODO:
 /// Move this function to UITimestampsFormatter once the new system messages will be implemented and the timestamp will not be saved to DB.
 - (NSString * _Nonnull)getResolveDateString:(NSDate * _Nonnull)date SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'LPConversationEntity.getResolveDateString(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
@@ -1136,6 +1243,7 @@ SWIFT_CLASS("_TtC7LPInfra12LPFileEntity")
 @property (nonatomic, strong) NSDate * _Nullable creationDate;
 @property (nonatomic, strong) LPMessageEntity * _Nullable ownerMessage;
 @property (nonatomic, copy) NSString * _Nullable swiftRelativePath;
+@property (nonatomic, strong) LPFileMetaDataContainer * _Nullable metaDataContainer;
 @property (nonatomic, strong) UIImage * _Nullable thumbnailImage;
 @property (nonatomic, copy) void (^ _Nullable completion)(void);
 @property (nonatomic, copy) void (^ _Nullable failure)(NSError * _Nonnull);
@@ -1157,9 +1265,12 @@ SWIFT_CLASS("_TtC7LPInfra12LPFileEntity")
 - (UIImage * _Nullable)getThumbnailImage SWIFT_WARN_UNUSED_RESULT;
 /// Determines if the file is currently being tranffering (download/upload)
 @property (nonatomic, readonly) BOOL isTransferring;
+/// Determine if the file is audio file
+- (BOOL)isAudioFile SWIFT_WARN_UNUSED_RESULT;
 /// Clears blocks handlers
 - (void)clearFileBlocks;
 @end
+
 
 
 SWIFT_CLASS("_TtC7LPInfra12LPFormEntity")
@@ -1185,6 +1296,7 @@ SWIFT_CLASS("_TtC7LPInfra12LPFormEntity")
 @end
 
 @class LPWebSocket;
+@class UploadInfo;
 @class LPUser;
 
 SWIFT_CLASS("_TtC7LPInfra13LPInfraFacade")
@@ -1214,10 +1326,12 @@ SWIFT_CLASS("_TtC7LPInfra13LPInfraFacade")
 + (void)saveDataWithGetContextFrom:(NSManagedObject * _Nullable)obj;
 + (BOOL)deleteManagedObject:(NSManagedObject * _Nonnull)object context:(NSManagedObjectContext * _Nullable)givenContext SWIFT_WARN_UNUSED_RESULT;
 + (void)resetDatabaseWithCompletion:(void (^ _Nonnull)(BOOL))completion;
-+ (void)refreshDatabase;
 /// Clear all singleton managers with their properties from memory.
 /// This method will release any data objects and data structures.
 + (void)clearManagers;
+/// Create file from UploadInfo and return when ready if succeeded, invoke error otherwise.
+/// Using GeneratePhotoOperation
++ (void)prepareFileWithUploadInfo:(UploadInfo * _Nonnull)uploadInfo fileReadyCompletion:(void (^ _Nonnull)(LPFileEntity * _Nonnull))fileReadyCompletion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Upload File to Swift server and AMS using file operation
 + (void)uploadFileWithFile:(LPFileEntity * _Nonnull)file uploadRelativePath:(NSString * _Nonnull)uploadRelativePath tempURLSig:(NSString * _Nonnull)tempURLSig tempURLExpiry:(NSString * _Nonnull)tempURLExpiry completion:(void (^ _Nonnull)(LPFileEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Download file/photo from swift server
@@ -1231,6 +1345,8 @@ SWIFT_CLASS("_TtC7LPInfra13LPInfraFacade")
 + (UIImage * _Nullable)getThumbnailFromFileWithFile:(LPFileEntity * _Nonnull)file SWIFT_WARN_UNUSED_RESULT;
 /// Returns a base64 string representation of the file’s thumbnail
 + (void)getBase64ThumbnailStringWithFile:(LPFileEntity * _Nonnull)file completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nonnull))completion failure:(SWIFT_NOESCAPE void (^ _Nonnull)(NSError * _Nonnull))failure;
+///
++ (void)getBase64BlankThumbnailStringWithCompletion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nonnull))completion failure:(SWIFT_NOESCAPE void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Deletes file and thumbnail from disk
 + (void)deleteFileFromDiskWithFile:(LPFileEntity * _Nonnull)file;
 /// Deleting the main directory with all files in it.
@@ -1244,9 +1360,24 @@ SWIFT_CLASS("_TtC7LPInfra13LPInfraFacade")
 /// Get root path where all SDK files are stored
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull filesDirectoryPath;)
 + (NSString * _Nonnull)filesDirectoryPath SWIFT_WARN_UNUSED_RESULT;
+/// Get temporary folder path for storing temporary files
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull filesTemporaryDirectoryPath;)
++ (NSString * _Nonnull)filesTemporaryDirectoryPath SWIFT_WARN_UNUSED_RESULT;
+/// Check if image extension
+/// \param text text to check for image extension
+///
++ (BOOL)isImageExtension:(NSString * _Nonnull)text SWIFT_WARN_UNUSED_RESULT;
+/// Check if audio extension
+/// \param text text to check for audio extension
+///
++ (BOOL)isAudioExtension:(NSString * _Nonnull)text SWIFT_WARN_UNUSED_RESULT;
 /// Get Brand object for account ID
 /// If there is no brand object for the account ID, a new brand will be created in DB
 + (LPBrandEntity * _Nonnull)getOrCreateBrandByAccountID:(NSString * _Nonnull)accountID SWIFT_WARN_UNUSED_RESULT;
+/// Set authentication params for brand
++ (void)setAuthenticationParams:(LPAuthenticationParams * _Nullable)params brandId:(NSString * _Nonnull)brandId;
+/// Get authentication params for brand
++ (LPAuthenticationParams * _Nullable)authenticationParamsForBrandWithBrandId:(NSString * _Nonnull)brandId SWIFT_WARN_UNUSED_RESULT;
 /// Clear a single conversation and its assoicated messages and files.
 /// Return TRUE if the conversation and its messages was deleted.
 /// Return FALSE if the conversation or one if its messages were failed to delete.
@@ -1391,6 +1522,16 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 ///   </li>
 /// </ul>
 + (void)unregisterPusher:(LPBrandEntity * _Nonnull)brand completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Get All CSDS Service Domains
+/// This method uses cache to store and fetch services domains. For every new app session, the CSDS cache will get updated from server
+/// Completion blocks will be invoked once there is a stored cache or after the request from the server completed
+/// \param accountID accountID to get all services for
+///
+/// \param completion completion block with the response domains from server
+///
+/// \param failure failure block with error which will be invoked if server request failed
+///
++ (void)getAllCSDSDomains:(NSString * _Nonnull)accountID completion:(void (^ _Nonnull)(NSArray<NSDictionary<NSString *, id> *> * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Returns a string value for a specified key.
 /// \param keyName The key to lookup data for.
 ///
@@ -1460,7 +1601,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 /// built from the html meta data of the source url
 + (void)getMessageBoardsWithUrl:(NSURL * _Nonnull)url completion:(void (^ _Nonnull)(NSArray<LPCustomBoardEntity *> * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nullable))failure;
 /// Delete preview images directory from disk and all its content
-+ (void)deleteAllPreviewImagesFromDiskWithCompletion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
++ (void)deleteAllPreviewImagesFromDiskWithCompletion:(void (^ _Nullable)(void))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
 /// Get expiration token of a JWT from a token string
 /// \param jwtToken JWT string to extract the expiration from
 ///
@@ -1620,6 +1761,7 @@ SWIFT_CLASS("_TtC7LPInfra15LPMessageEntity")
 /// </ul>
 typedef SWIFT_ENUM(NSInteger, LPMessagingSDKFeature) {
   LPMessagingSDKFeaturePhotoSharing = 0,
+  LPMessagingSDKFeatureAudioSharing = 1,
 };
 
 
@@ -1702,6 +1844,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPSDKManager
 /// \param completion completion with boolean that shows if feature is enabled/disabled which calucluated using LPConfig, LPCDN and ACCDN
 ///
 + (void)isFeatureEnabledWithFeature:(enum LPMessagingSDKFeature)feature brandID:(NSString * _Nonnull)brandID useCacheIfExists:(BOOL)useCacheIfExists completion:(void (^ _Nonnull)(BOOL))completion;
+/// Check if the current brand of the conversation query is using cert pinning
+/// If there’s no available brand or conversation query this method will return false
+///
+/// returns:
+/// true for cert pinnig for the brand
+- (BOOL)isUsingCertPinning SWIFT_WARN_UNUSED_RESULT;
 - (void)clearManager;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -1872,7 +2020,13 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 
 
 @interface NSManagedObject (SWIFT_EXTENSION(LPInfra))
-- (void)saveContext SWIFT_DEPRECATED_OBJC("Swift method 'NSManagedObject.saveContext()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Save changes in managed object context
+/// <ul>
+///   <li>
+///     Parameter: completion - optional completion handler
+///   </li>
+/// </ul>
+- (void)saveContextWithCompletion:(void (^ _Nullable)(BOOL))completion SWIFT_DEPRECATED_OBJC("Swift method 'NSManagedObject.saveContext(completion:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Determines whether the object was delete or it still exists in its managedObjectContext
 @property (nonatomic, readonly) BOOL isValid SWIFT_DEPRECATED_OBJC("Swift property 'NSManagedObject.isValid' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Returns objectID string representation if the object is not temporary. Otherwise returns nil
@@ -1886,6 +2040,7 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 /// keys = properties names
 /// values = properties values
 - (NSDictionary<NSString *, id> * _Nonnull)serializeToDictionary SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'NSObject.serializeToDictionary()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (NSDictionary<NSString *, NSString *> * _Nonnull)serializeToDictionaryOfStrings SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'NSObject.serializeToDictionaryOfStrings()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @end
 
 
@@ -1899,6 +2054,156 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 SWIFT_CLASS("_TtC7LPInfra12PublishEvent")
 @interface PublishEvent : GeneralResponse
 - (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra16QuickReplyAction")
+@interface QuickReplyAction : NSObject <NSCoding>
+@property (nonatomic, copy) NSString * _Nonnull ID SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyAction.ID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nonnull type SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyAction.type' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Decodes the base content item, stored in core data
+/// \param aCoder aCoder
+///
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// Encodes the base content item, will be used for storing in core data
+/// \param aCoder aCoder
+///
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+@class QuickReplyButtonDetails;
+
+SWIFT_CLASS("_TtC7LPInfra16QuickReplyButton")
+@interface QuickReplyButton : UIButton
+@property (nonatomic, strong) QuickReplyButtonDetails * _Nullable details SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyButton.details' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithQuickReplyButtonDetails:(QuickReplyButtonDetails * _Nonnull)quickReplyButtonDetails SWIFT_DEPRECATED_OBJC("Swift initializer 'QuickReplyButton.init(quickReplyButtonDetails:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)drawRect:(CGRect)rect;
+@end
+
+@class QuickReplyClick;
+@class QuickReplyStyle;
+
+SWIFT_CLASS("_TtC7LPInfra23QuickReplyButtonDetails")
+@interface QuickReplyButtonDetails : NSObject <NSCoding>
+@property (nonatomic, copy) NSString * _Nonnull ID SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyButtonDetails.ID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable text SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyButtonDetails.text' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable tooltip SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyButtonDetails.tooltip' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, strong) QuickReplyClick * _Nullable click SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyButtonDetails.click' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, strong) QuickReplyStyle * _Nullable style SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyButtonDetails.style' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Decodes the base content item, stored in core data
+/// \param aCoder aCoder
+///
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// Encodes the base content item, will be used for storing in core data
+/// \param aCoder aCoder
+///
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra15QuickReplyClick")
+@interface QuickReplyClick : NSObject <NSCoding>
+@property (nonatomic, copy) NSString * _Nonnull ID SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyClick.ID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSArray<NSDictionary<NSString *, id> *> * _Nullable metadata SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyClick.metadata' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSArray<QuickReplyAction *> * _Nullable actions SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyClick.actions' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Decodes the base content item, stored in core data
+/// \param aCoder aCoder
+///
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// Encodes the base content item, will be used for storing in core data
+/// \param aCoder aCoder
+///
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra14QuickReplyItem")
+@interface QuickReplyItem : NSObject <NSCoding>
+@property (nonatomic) NSInteger sequence SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyItem.sequence' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable ownerMessageUID SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyItem.ownerMessageUID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSArray<QuickReplyButtonDetails *> * _Nullable buttonsDetails SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyItem.buttonsDetails' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nonnull instancetype)initWithSequence:(NSInteger)sequence OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_OBJC("Swift initializer 'QuickReplyItem.init(sequence:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Decodes the base content item, stored in core data
+/// \param aCoder aCoder
+///
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// Encodes the base content item, will be used for storing in core data
+/// \param aCoder aCoder
+///
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra20QuickReplyLinkAction")
+@interface QuickReplyLinkAction : QuickReplyAction
+@property (nonatomic, copy) NSString * _Nonnull uri SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyLinkAction.uri' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable deepLinkUri SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyLinkAction.deepLinkUri' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Decodes the base content item, stored in core data
+/// \param aCoder aCoder
+///
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// Encodes the base content item, will be used for storing in core data
+/// \param aCoder aCoder
+///
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra24QuickReplyNavigateAction")
+@interface QuickReplyNavigateAction : QuickReplyAction
+@property (nonatomic) CLLocationDegrees latitude SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyNavigateAction.latitude' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) CLLocationDegrees longitude SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyNavigateAction.longitude' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Decodes the base content item, stored in core data
+/// \param aCoder aCoder
+///
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// Encodes the base content item, will be used for storing in core data
+/// \param aCoder aCoder
+///
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra27QuickReplyPublishTextAction")
+@interface QuickReplyPublishTextAction : QuickReplyAction
+@property (nonatomic, copy) NSString * _Nonnull text SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyPublishTextAction.text' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Decodes the base content item, stored in core data
+/// \param aCoder aCoder
+///
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// Encodes the base content item, will be used for storing in core data
+/// \param aCoder aCoder
+///
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+@end
+
+
+SWIFT_CLASS("_TtC7LPInfra15QuickReplyStyle")
+@interface QuickReplyStyle : NSObject <NSCoding>
+@property (nonatomic, strong) UIColor * _Nullable color SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyStyle.color' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, strong) UIColor * _Nullable borderColor SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyStyle.borderColor' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, strong) UIColor * _Nullable backgroundColor SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyStyle.backgroundColor' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable size SWIFT_DEPRECATED_OBJC("Swift property 'QuickReplyStyle.size' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Decodes the base content item, stored in core data
+/// \param aCoder aCoder
+///
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// Encodes the base content item, will be used for storing in core data
+/// \param aCoder aCoder
+///
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
 
@@ -1944,7 +2249,6 @@ SWIFT_CLASS("_TtC7LPInfra25SecureFormReadOTKResponse")
 - (nonnull instancetype)initWithJsonDict:(NSDictionary<NSString *, id> * _Nonnull)jsonDict OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class NSCoder;
 
 SWIFT_CLASS("_TtC7LPInfra23StructuredContentAction")
 @interface StructuredContentAction : NSObject <NSCoding>
@@ -2049,6 +2353,7 @@ SWIFT_CLASS("_TtC7LPInfra30StructuredContentItemContainer")
 @interface StructuredContentItemContainer : NSObject <NSCoding>
 @property (nonatomic, copy) NSString * _Nonnull ID SWIFT_DEPRECATED_OBJC("Swift property 'StructuredContentItemContainer.ID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, strong) StructuredContentItem * _Nullable item SWIFT_DEPRECATED_OBJC("Swift property 'StructuredContentItemContainer.item' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) BOOL shouldScrollToBottomOnLoad SWIFT_DEPRECATED_OBJC("Swift property 'StructuredContentItemContainer.shouldScrollToBottomOnLoad' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (nonnull instancetype)initWithStructuredContentItem:(StructuredContentItem * _Nonnull)structuredContentItem OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_OBJC("Swift initializer 'StructuredContentItemContainer.init(structuredContentItem:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Decodes the StructuredContentItamsContainer, stored in core data
 /// \param aCoder aCoder
@@ -2331,6 +2636,17 @@ SWIFT_CLASS("_TtC7LPInfra7Toaster")
 @end
 
 
+SWIFT_CLASS("_TtC7LPInfra10UploadInfo")
+@interface UploadInfo : NSObject
+@property (nonatomic, copy) NSDictionary<NSString *, id> * _Nonnull fileInfo SWIFT_DEPRECATED_OBJC("Swift property 'UploadInfo.fileInfo' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nonnull brandID SWIFT_DEPRECATED_OBJC("Swift property 'UploadInfo.brandID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Update fileInfo object for audio file
+- (BOOL)setAudioFileInfoFrom:(NSURL * _Nonnull)url error:(NSError * _Nullable * _Nullable)error SWIFT_DEPRECATED_OBJC("Swift method 'UploadInfo.setAudioFileInfo(from:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
 @interface NSUserDefaults (SWIFT_EXTENSION(LPInfra))
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) NSUserDefaults * _Nonnull lpStandard SWIFT_DEPRECATED_OBJC("Swift property 'UserDefaults.lpStandard' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");)
 + (NSUserDefaults * _Nonnull)lpStandard SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift property 'UserDefaults.lpStandard' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
@@ -2360,6 +2676,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) dispatch_que
 + (void)showLocalNotification:(NSString * _Nonnull)text uid:(NSString * _Nullable)uid;
 /// Play vibration sound based on iOS system vibration method
 + (void)playVibrationSound;
+/// This method returns true if the device is landscape (it ignores states such as flat, face or back)
++ (BOOL)isLandscape SWIFT_WARN_UNUSED_RESULT;
+/// This method returns true if the device is portrait (it ignores states such as flat, face or back)
++ (BOOL)isProtrait SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

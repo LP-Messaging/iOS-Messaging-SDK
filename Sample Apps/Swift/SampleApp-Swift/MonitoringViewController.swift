@@ -71,7 +71,8 @@ class MonitoringViewController: UIViewController {
         ]
 
         let monitoringParams = LPMonitoringParams(entryPoints: entryPoints, engagementAttributes: engagementAttributes)
-        LPMonitoringAPI.instance.getEngagement(consumerID: consumerID, monitoringParams: monitoringParams, completion: { [weak self] (getEngagementResponse) in
+        let identity = LPMonitoringIdentity(consumerID: consumerID, issuer: "BrandIssuer")
+        LPMonitoringAPI.instance.getEngagement(identities: [identity], monitoringParams: monitoringParams, completion: { [weak self] (getEngagementResponse) in
             print("received get engagement response with pageID: \(String(describing: getEngagementResponse.pageId)), campaignID: \(String(describing: getEngagementResponse.engagementDetails?.first?.campaignId)), engagementID: \(String(describing: getEngagementResponse.engagementDetails?.first?.engagementId))")
             // Save PageId for future reference
             self?.pageId = getEngagementResponse.pageId
@@ -106,7 +107,8 @@ class MonitoringViewController: UIViewController {
         ]
 
         let monitoringParams = LPMonitoringParams(entryPoints: entryPoints, engagementAttributes: engagementAttributes, pageId: self.pageId)
-        LPMonitoringAPI.instance.sendSDE(consumerID: consumerID, monitoringParams: monitoringParams, completion: { [weak self] (sendSdeResponse) in
+        let identity = LPMonitoringIdentity(consumerID: consumerID, issuer: "BrandIssuer")
+        LPMonitoringAPI.instance.sendSDE(identities: [identity], monitoringParams: monitoringParams, completion: { [weak self] (sendSdeResponse) in
             print("received send sde response with pageID: \(String(describing: sendSdeResponse.pageId))")
             // Save PageId for future reference
             self?.pageId = sendSdeResponse.pageId
