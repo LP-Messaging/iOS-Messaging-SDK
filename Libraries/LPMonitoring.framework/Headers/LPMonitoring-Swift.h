@@ -185,10 +185,11 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_CLASS("_TtC12LPMonitoring19LPEngagementDetails")
 @interface LPEngagementDetails : NSObject
-@property (nonatomic) NSInteger campaignId;
-@property (nonatomic) NSInteger engagementId;
+@property (nonatomic, readonly) NSInteger campaignId;
+@property (nonatomic, readonly) NSInteger engagementId;
+@property (nonatomic, readonly) NSInteger connectorId;
+@property (nonatomic, readonly) NSInteger engagementRevision;
 @property (nonatomic, copy) NSString * _Nullable conversationId;
-@property (nonatomic) NSInteger connectorId;
 @property (nonatomic, copy) NSString * _Nullable status;
 @property (nonatomic, copy) NSString * _Nullable contextId;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
