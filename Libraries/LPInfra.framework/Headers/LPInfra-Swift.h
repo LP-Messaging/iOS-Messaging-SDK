@@ -2553,6 +2553,7 @@ SWIFT_CLASS("_TtC7LPInfra5Toast")
 
 SWIFT_CLASS("_TtC7LPInfra7Toaster")
 @interface Toaster : UIView
+@property (nonatomic, weak) UIViewController * _Nullable containerViewController SWIFT_DEPRECATED_OBJC("Swift property 'Toaster.containerViewController' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, readonly, strong) Toast * _Nullable current SWIFT_DEPRECATED_OBJC("Swift property 'Toaster.current' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Inits the toast object with container view controller
 - (nonnull instancetype)initWithContainerViewController:(UIViewController * _Nonnull)containerViewController SWIFT_DEPRECATED_OBJC("Swift initializer 'Toaster.init(containerViewController:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
