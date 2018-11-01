@@ -1,0 +1,46 @@
+
+framework module LPInfra {
+    
+    umbrella header "LPInfra.h"
+    
+    export *
+    module * {export *}
+    
+    header "ExceptionCatcher.h"
+    header "LPBSMobileProvision.h"
+    header "CIContext+Workaround.h"
+    
+    header "SRWebSocket.h"
+    header "SRDelegateController.h"
+    header "SRSecurityPolicy.h"
+    header "SRIOConsumer.h"
+    header "SRIOConsumerPool.h"
+    header "SRHash.h"
+    header "SRRunLoopThread.h"
+    header "SRURLUtilities.h"
+    header "SRError.h"
+    header "NSRunLoop+SRWebSocket.h"
+    header "NSRunLoop+SRWebSocketPrivate.h"
+    header "NSURLRequest+SRWebSocket.h"
+    header "NSURLRequest+SRWebSocketPrivate.h"
+    header "SRConstants.h"
+    header "SRHTTPConnectMessage.h"
+    header "SRLog.h"
+    header "SRMutex.h"
+    header "SRPinningSecurityPolicy.h"
+    header "SRProxyConnect.h"
+    header "SRRandom.h"
+    header "SRSIMDHelpers.h"
+    
+    module CommonCrypto [system] {
+        header "LPRNCryptor.h"
+        export *
+    }
+    
+
+}
+
+module LPInfra.Swift {
+    header "LPInfra-Swift.h"
+    requires objc
+}
