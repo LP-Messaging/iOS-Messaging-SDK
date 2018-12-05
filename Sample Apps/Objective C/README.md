@@ -21,7 +21,7 @@ The Podfile in the project is ready for used and already includes  LPMessagingSD
  To integrate Liveperson Messaging SDK into your Xcode project using CocoaPods, specify it in your Podfile:
 
     ```
-      # platform :ios, ‘8.0’
+      # platform :ios, ‘10.0’
       use_frameworks!
       source 'https://github.com/LivePersonInc/iOSPodSpecs.git' #LiveEngage Pod Repository
 

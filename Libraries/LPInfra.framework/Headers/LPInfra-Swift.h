@@ -1663,6 +1663,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 + (void)getMessageBoardsWithUrl:(NSURL * _Nonnull)url completion:(void (^ _Nonnull)(NSArray<LPCustomBoardEntity *> * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nullable))failure;
 /// Delete preview images directory from disk and all its content
 + (void)deleteAllPreviewImagesFromDiskWithCompletion:(void (^ _Nullable)(void))completion failure:(void (^ _Nullable)(NSError * _Nonnull))failure;
+/// Get expiration token of a JWT from a token string
+/// \param jwtToken JWT string to extract the expiration from
+///
+///
+/// returns:
+/// expiration Data instance or nil incase JWT failed to be decoded
++ (NSDate * _Nullable)getExpirationDateFromJWT:(NSString * _Nonnull)jwtToken SWIFT_WARN_UNUSED_RESULT;
 /// Get UserID of a JWT from a token string
 /// \param jwtToken jwtToken: JWT string to extract the userID from
 ///
@@ -2728,6 +2735,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) dispatch_que
 + (void)delay:(double)delay closure:(void (^ _Nonnull)(void))closure;
 + (NSInteger)minutesBetweenDates:(NSDate * _Nonnull)startDate endDate:(NSDate * _Nonnull)endDate SWIFT_WARN_UNUSED_RESULT;
 + (void)backgroundThread:(void (^ _Nonnull)(void))job;
++ (BOOL)isJWTExpired:(NSString * _Nonnull)jwtToken SWIFT_WARN_UNUSED_RESULT;
 + (void)mainThread:(void (^ _Nonnull)(void))job;
 /// Returns a random Int number from min to max
 + (NSInteger)randWithMin:(NSInteger)min max:(NSInteger)max SWIFT_WARN_UNUSED_RESULT;
