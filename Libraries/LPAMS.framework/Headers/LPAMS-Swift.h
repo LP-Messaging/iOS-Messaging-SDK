@@ -468,7 +468,7 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 ///
 + (void)saveQuickReplyItemWithQuickReplyItem:(QuickReplyItem * _Nonnull)quickReplyItem;
 + (void)clearLastSavedQuickReplyItem;
-+ (void)registerPusherWithLoginFlowWithBrand:(LPBrandEntity * _Nonnull)brand;
++ (void)registerPusherWithLoginFlowWithBrand:(LPBrandEntity * _Nonnull)brand authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
 @end
 
 @class TTRModel;

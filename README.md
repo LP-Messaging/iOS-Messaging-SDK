@@ -11,8 +11,12 @@ https://developers.liveperson.com/consumer-experience-ios-sdk-quick-start.html
 ### Prerequisites
 
 To use the LivePerson In-App Messaging SDK, the following are required:
+# Version 3.3.0 and above
+* XCode 10 or later
+* Swift 4.2 or later, or Objective-C
 
-# Version 3.1.1 and above
+
+# Version 3.1.1 - 3.3.0
 * XCode 9.3 or later
 * Swift 4.1 or later, or Objective-C
 
