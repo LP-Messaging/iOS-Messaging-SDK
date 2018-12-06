@@ -6,6 +6,9 @@ This read.me include the quick start guide for LiveEngage In-App Messaging iOS S
 Integration guide, API Documentation and Configurations can be found in Livepersons Developers Portal:
 https://developers.liveperson.com/consumer-experience-ios-sdk-quick-start.html
 
+Latest Release notes can be found: 
+https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-latest-release-notes.html
+
 ### Prerequisites
 
 To use the LivePerson In-App Messaging SDK, the following are required:
