@@ -71,7 +71,7 @@ class MonitoringViewController: UIViewController {
         ]
 
         let monitoringParams = LPMonitoringParams(entryPoints: entryPoints, engagementAttributes: engagementAttributes)
-        let identity = LPMonitoringIdentity(consumerID: consumerID, issuer: "BrandIssuer")
+        let identity = LPMonitoringIdentity(consumerID: consumerID, issuer: "")
         LPMonitoringAPI.instance.getEngagement(identities: [identity], monitoringParams: monitoringParams, completion: { [weak self] (getEngagementResponse) in
             print("received get engagement response with pageID: \(String(describing: getEngagementResponse.pageId)), campaignID: \(String(describing: getEngagementResponse.engagementDetails?.first?.campaignId)), engagementID: \(String(describing: getEngagementResponse.engagementDetails?.first?.engagementId))")
             // Save PageId for future reference
