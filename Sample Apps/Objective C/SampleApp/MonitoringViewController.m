@@ -61,12 +61,11 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
                                       @{@"type": @"lead", @"lead": @{@"topic": @"luxury car test drive 2015", @"value": @22.22, @"leadId": @"xyz123"}},
                                       ];
     
-    LPMonitoringParams *monitoringParams = [[LPMonitoringParams alloc] initWithEntryPoints:entryPoints
-                                                                      engagementAttributes:engagementAttributes
-                                                                                    pageId:@"pageId"];
+    LPMonitoringParams *monitoringParams = [[LPMonitoringParams alloc] initWithEntryPoints:entryPoints engagementAttributes:engagementAttributes pageId:NULL];
+
     __weak MonitoringViewController *weakSelf = self;
       LPMonitoringIdentity *identity = [[LPMonitoringIdentity alloc] initWithConsumerID:consumerID
-                                                                                 issuer:@"BrandIssuer"];
+                                                                                 issuer:@""];
       [[LPMonitoringAPI instance] getEngagementWithIdentities:@[identity] monitoringParams:monitoringParams completion:^(LPGetEngagementResponse * _Nonnull getEngagementResponse) {
           weakSelf.pageId = getEngagementResponse.pageId;
           if (getEngagementResponse.engagementDetails.count > 0) {
