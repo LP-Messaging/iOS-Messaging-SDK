@@ -166,6 +166,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import Foundation;
 @import LPInfra;
 @import ObjectiveC;
+@import UIKit;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -523,6 +524,8 @@ typedef SWIFT_ENUM(NSInteger, SocketType, closed) {
   SocketTypeConsumer = 0,
   SocketTypeAgent = 1,
 };
+
+
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop

@@ -653,20 +653,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 /// <brandID> is the brand of the related user.
 /// If the SDK is not connected, it’ll save the last user for each brand, until connected.
 - (void)setUserProfile:(LPUser * _Nonnull)lpuser brandID:(NSString * _Nonnull)brandID;
-/// This method passes a user info of a remote push notification to be handled by the SDK.
-- (void)handlePush:(NSDictionary * _Nonnull)userInfo;
-/// This method registers the host app in the SDK Pusher service in order to be able to receive push notification in messaging.
-/// If passing authentication params, this method will register immediately to Pusher, the registration will be performed when calling showConversation
-/// \param token push device token data
-///
-/// \param notificationDelegate implementer of LPMessagingSDKNotificationDelegate.
-///
-/// \param alternateBundleID a value for using in order to let the Pusher service to identify the host app with this bundle identifier
-///
-/// \param authenticationParams an optional authentication param (LPAuthenticationParams) to be used for immediate Pusher registration
-///
-- (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
-- (void)registerVoipPushNotificationsWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
 /// This method created ConversationParamProtocol of Brand query type.
 /// ConversationParamProtocol represents a ’filter’ for the conversation screen, determining which of the conversations will be displayed in the following screens.
 /// \param brandID brandID to request the conversation query for
@@ -721,23 +707,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 /// returns:
 /// Inactive TimeInterval (Double)
 - (NSTimeInterval)getInactiveUserInteractionTimeInterval:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_WARN_UNUSED_RESULT;
-/// Get unread message badge counter
-/// There are two options to get this counter:
-/// <ol>
-///   <li>
-///     If the time condition is met we are prefoming a REST request to get it from pusher
-///   </li>
-///   <li>
-///     otherwise, return the cached number we have
-///   </li>
-/// </ol>
-/// \param conversationQuery conversationQuery: used to identify the related brand
-///
-/// \param completion called once the operation ends sucessfully
-///
-/// \param failure called once the operation failed
-///
-+ (void)getUnreadMessagesCount:(id <ConversationParamProtocol> _Nonnull)conversationQuery completion:(void (^ _Nonnull)(NSInteger))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// This method deletes all the messages and closed conversation of the related conversation query.
 /// This method throws an error if the conversations history failed to cleared.
 /// Note: clear history is allowed only if there is no open/active conversation related to the passed conversation query.
@@ -765,9 +734,80 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 @end
 
 
+@interface LPMessagingSDK (SWIFT_EXTENSION(LPMessagingSDK))
+/// This method registers the host app in the SDK Pusher service in order to be able to receive push notification in messaging.
+/// note:
+/// If passing authentication params, this method will register immediately to Pusher, the registration will be performed when calling showConversation
+/// \param token push device token data
+///
+/// \param notificationDelegate implementer of LPMessagingSDKNotificationDelegate.
+///
+/// \param alternateBundleID a value for using in order to let the Pusher service to identify the host app with this bundle identifier
+///
+/// \param authenticationParams an optional authentication param (LPAuthenticationParams) to be used for immediate Pusher registration
+///
+- (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
+/// This method registers Voip the host app to SDK Pusher service
+/// \param token push device token data
+///
+/// \param alternateBundleID a value for using in order to let the Pusher service to identify the host app with this bundle identifier
+///
+- (void)registerVoipPushNotificationsWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
+/// This method unregisters the host app from SDK Pusher service
+/// \param brandId brand/account Identifier
+///
+- (void)unregisterPusherWithBrandId:(NSString * _Nonnull)brandId completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Set token for Pusher service in order to be able to receive remote push notifications
+/// \param token Data
+///
+/// \param alternateBundleID String? a custom bundle ID for Pusher with for the token
+///
++ (void)setPusherTokenWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
+/// Set token for VoIP Pusher service in order to be able to receive remote calls
+/// \param token Data
+///
+/// \param alternateBundleID String? a custom bundle ID for Pusher with for the token
+///
++ (void)setPusherVoipTokenWithToken:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID;
+/// Get unread message badge counter
+/// There are two options to get this counter:
+/// <ol>
+///   <li>
+///     If the time condition is met we are prefoming a REST request to get it from pusher
+///   </li>
+///   <li>
+///     otherwise, return the cached number we have
+///   </li>
+/// </ol>
+/// \param conversationQuery conversationQuery: used to identify the related brand
+///
+/// \param completion called once the operation ends sucessfully
+///
+/// \param failure called once the operation failed
+///
++ (void)getUnreadMessagesCount:(id <ConversationParamProtocol> _Nonnull)conversationQuery completion:(void (^ _Nonnull)(NSInteger))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// This method passes a user info of a remote push notification to be handled by the SDK.
+/// <ul>
+///   <li>
+///     Paramaters:
+///     <ul>
+///       <li>
+///         userInfo: Dictionary
+///       </li>
+///     </ul>
+///   </li>
+/// </ul>
+- (void)handlePush:(NSDictionary * _Nonnull)userInfo;
+@end
 
 
 @interface LPMessagingSDK (SWIFT_EXTENSION(LPMessagingSDK))
+/// This method is a destructive method that is typically used stop and clear all the metadata of the SDK.
+/// This method conducts the following:
+/// Clears all SDK non-persistent data.
+/// Stops all connections.
+/// Remove Conversation View Controller
+- (void)destruct;
 - (void)logout;
 /// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or just to logs the current user out.
 /// This method conducts the following:
@@ -775,17 +815,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessagingS
 /// Clears all SDK persistent data.
 /// Cleans running operations (see <a href="consumer-experience-ios-sdk-destruct.html">destruct</a>{:target=”_blank”}).
 /// Invocation of destruct() method
+/// note:
+/// this method should be called before any persistent clean up tasks are performed on host app
 /// \param completion A completion block for successfully logout. Completion block will be invoked only if all logout steps succeeded.
 ///
 /// \param failure A failure block with a specified error for logout failure. Failure block will be invoked if at least one of the logout steps has failed.
 ///
 - (void)logoutWithCompletion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-/// This method is a destructive method that is typically used stop and clear all the metadata of the SDK.
-/// This method conducts the following:
-/// Clears all SDK non-persistent data.
-/// Stops all connections.
-/// Remove Conversation View Controller
-- (void)destruct;
 @end
 
 @class LPNotification;
@@ -888,6 +924,52 @@ SWIFT_CLASS("_TtC14LPMessagingSDK22RemoteUserIsTypingView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)awakeFromNib;
+@end
+
+
+SWIFT_CLASS("_TtC14LPMessagingSDK5Toast")
+@interface Toast : UIView
+@property (nonatomic, copy) NSString * _Nullable name SWIFT_DEPRECATED_OBJC("Swift property 'Toast.name' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) void (^ _Nullable didShow)(void) SWIFT_DEPRECATED_OBJC("Swift property 'Toast.didShow' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) void (^ _Nullable didDismiss)(void) SWIFT_DEPRECATED_OBJC("Swift property 'Toast.didDismiss' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) void (^ _Nullable didTap)(void) SWIFT_DEPRECATED_OBJC("Swift property 'Toast.didTap' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) BOOL showAboveStatusBar SWIFT_DEPRECATED_OBJC("Swift property 'Toast.showAboveStatusBar' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)awakeFromNib;
+/// Changes text of toast (even on runtime when the toast is showing)
+/// \param text text to show
+///
+- (void)changeTextWithText:(NSString * _Nonnull)text SWIFT_DEPRECATED_OBJC("Swift method 'Toast.changeText(text:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC14LPMessagingSDK7Toaster")
+@interface Toaster : UIView
+@property (nonatomic, weak) UIViewController * _Nullable containerViewController SWIFT_DEPRECATED_OBJC("Swift property 'Toaster.containerViewController' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, strong) Toast * _Nullable current SWIFT_DEPRECATED_OBJC("Swift property 'Toaster.current' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Inits the toast object with container view controller
+- (nonnull instancetype)initWithContainerViewController:(UIViewController * _Nonnull)containerViewController SWIFT_DEPRECATED_OBJC("Swift initializer 'Toaster.init(containerViewController:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nonnull instancetype)initWithContainerView:(UIView * _Nonnull)containerView SWIFT_DEPRECATED_OBJC("Swift initializer 'Toaster.init(containerView:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Receives a toast and puts it at the correct index inside the toasts array
+/// \param toast toast object
+///
+- (void)addWithToast:(Toast * _Nonnull)toast SWIFT_DEPRECATED_OBJC("Swift method 'Toaster.add(toast:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Dissmisses a specific toast instance
+/// If the toast is showing, it animates it out, if not, it just removes it from the list
+/// If it doesn’t exist, nothing will happen
+/// \param toast toast instance
+///
+- (void)dismissWithToast:(Toast * _Nonnull)toast SWIFT_DEPRECATED_OBJC("Swift method 'Toaster.dismiss(toast:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Dismisses all toasts of a specific type
+/// \param type A type of toast to dismiss
+///
+- (void)dismissToastByName:(NSString * _Nonnull)name SWIFT_DEPRECATED_OBJC("Swift method 'Toaster.dismissToast(byName:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+/// Dissmis all toasts
+- (void)dismissAll SWIFT_DEPRECATED_OBJC("Swift method 'Toaster.dismissAll()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class UITextView;

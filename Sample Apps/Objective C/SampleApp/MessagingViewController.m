@@ -147,6 +147,7 @@
     }
     
     [self setUserDetails];
+    [[self view] endEditing:YES];
 }
 
 - (IBAction)windowSwitchChanged:(UISwitch *)sender {

@@ -1437,6 +1437,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 + (LPBrandEntity * _Nonnull)getOrCreateBrandByAccountID:(NSString * _Nonnull)accountID SWIFT_WARN_UNUSED_RESULT;
 /// Set authentication params for brand
 + (void)setAuthenticationParams:(LPAuthenticationParams * _Nullable)params brandId:(NSString * _Nonnull)brandId;
++ (NSArray<NSString *> * _Nonnull)getCacheBrandByAccountIDs SWIFT_WARN_UNUSED_RESULT;
 /// Get authentication params for brand
 + (LPAuthenticationParams * _Nullable)authenticationParamsForBrandWithBrandId:(NSString * _Nonnull)brandId SWIFT_WARN_UNUSED_RESULT;
 /// Clear a single conversation and its assoicated messages and files.
@@ -1583,6 +1584,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isNetworkReacha
 ///   </li>
 /// </ul>
 + (void)unregisterPusher:(LPBrandEntity * _Nonnull)brand completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Unregister pusher.
+/// <ul>
+///   <li>
+///     Account (brand account)
+///   </li>
+/// </ul>
++ (void)unregisterPusherFor:(NSString * _Nonnull)brandId completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Get All CSDS Service Domains
 /// This method uses cache to store and fetch services domains. For every new app session, the CSDS cache will get updated from server
 /// Completion blocks will be invoked once there is a stored cache or after the request from the server completed
@@ -1836,6 +1844,8 @@ SWIFT_CLASS("_TtC7LPInfra11LPOperation")
 - (void)start;
 - (void)finishOperation SWIFT_DEPRECATED_OBJC("Swift method 'LPOperation.finishOperation()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (void)cancel;
+@property (nonatomic, readonly, getter=isReady) BOOL ready;
+@property (nonatomic, readonly, getter=isCancelled) BOOL cancelled;
 /// Cleaning operation when canceled
 /// It is recommended to implement this method in sublclass and nullify blocks
 - (void)clearOperationOnCancel SWIFT_DEPRECATED_OBJC("Swift method 'LPOperation.clearOperationOnCancel()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
@@ -1903,7 +1913,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPSDKManager
 /// </ol>
 /// \param brandID brand/account id of the desired request
 ///
-/// \param completion completion with boolean that shows if feature is enabled/disabled which calucluated using LPConfig, LPCDN and ACCDN
+/// \param completion completion with boolean that shows if feature is enabled/disabled which calculated using LPConfig, LPCDN and ACCDN
 ///
 + (void)isFeatureEnabledWithFeature:(enum LPMessagingSDKFeature)feature brandID:(NSString * _Nonnull)brandID useCacheIfExists:(BOOL)useCacheIfExists completion:(void (^ _Nonnull)(BOOL))completion;
 /// Check if the current brand of the conversation query is using cert pinning
@@ -2079,6 +2089,8 @@ SWIFT_CLASS("_TtC7LPInfra21MessagingServiceEvent")
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
+
+
 
 
 @interface NSManagedObject (SWIFT_EXTENSION(LPInfra))
@@ -2592,52 +2604,6 @@ SWIFT_CLASS("_TtC7LPInfra8TTRModel")
 - (BOOL)compareWithOther:(TTRModel * _Nonnull)other SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'TTRModel.compare(other:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-@end
-
-
-SWIFT_CLASS("_TtC7LPInfra5Toast")
-@interface Toast : UIView
-@property (nonatomic, copy) NSString * _Nullable name SWIFT_DEPRECATED_OBJC("Swift property 'Toast.name' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, copy) void (^ _Nullable didShow)(void) SWIFT_DEPRECATED_OBJC("Swift property 'Toast.didShow' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, copy) void (^ _Nullable didDismiss)(void) SWIFT_DEPRECATED_OBJC("Swift property 'Toast.didDismiss' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, copy) void (^ _Nullable didTap)(void) SWIFT_DEPRECATED_OBJC("Swift property 'Toast.didTap' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic) BOOL showAboveStatusBar SWIFT_DEPRECATED_OBJC("Swift property 'Toast.showAboveStatusBar' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-- (void)awakeFromNib;
-/// Changes text of toast (even on runtime when the toast is showing)
-/// \param text text to show
-///
-- (void)changeTextWithText:(NSString * _Nonnull)text SWIFT_DEPRECATED_OBJC("Swift method 'Toast.changeText(text:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC7LPInfra7Toaster")
-@interface Toaster : UIView
-@property (nonatomic, weak) UIViewController * _Nullable containerViewController SWIFT_DEPRECATED_OBJC("Swift property 'Toaster.containerViewController' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly, strong) Toast * _Nullable current SWIFT_DEPRECATED_OBJC("Swift property 'Toaster.current' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-/// Inits the toast object with container view controller
-- (nonnull instancetype)initWithContainerViewController:(UIViewController * _Nonnull)containerViewController SWIFT_DEPRECATED_OBJC("Swift initializer 'Toaster.init(containerViewController:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-- (nonnull instancetype)initWithContainerView:(UIView * _Nonnull)containerView SWIFT_DEPRECATED_OBJC("Swift initializer 'Toaster.init(containerView:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-/// Receives a toast and puts it at the correct index inside the toasts array
-/// \param toast toast object
-///
-- (void)addWithToast:(Toast * _Nonnull)toast SWIFT_DEPRECATED_OBJC("Swift method 'Toaster.add(toast:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-/// Dissmisses a specific toast instance
-/// If the toast is showing, it animates it out, if not, it just removes it from the list
-/// If it doesn’t exist, nothing will happen
-/// \param toast toast instance
-///
-- (void)dismissWithToast:(Toast * _Nonnull)toast SWIFT_DEPRECATED_OBJC("Swift method 'Toaster.dismiss(toast:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-/// Dismisses all toasts of a specific type
-/// \param type A type of toast to dismiss
-///
-- (void)dismissToastByName:(NSString * _Nonnull)name SWIFT_DEPRECATED_OBJC("Swift method 'Toaster.dismissToast(byName:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-/// Dissmis all toasts
-- (void)dismissAll SWIFT_DEPRECATED_OBJC("Swift method 'Toaster.dismissAll()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
