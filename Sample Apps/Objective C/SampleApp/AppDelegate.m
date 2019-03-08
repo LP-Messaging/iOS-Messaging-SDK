@@ -35,10 +35,6 @@
 }
 
 //MARK: - LPMessagingSDKNotificationDelegate
-/*
- For more information on `LPMessagingSDKNotificationDelegate` see:
-     https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-customizing-toast-notifications.html
- */
 -(BOOL)LPMessagingSDKNotificationWithShouldShowPushNotification:(LPNotification *)notification {
     return false;
 }
