@@ -76,7 +76,11 @@ class MonitoringViewController: UIViewController {
             print("received get engagement response with pageID: \(String(describing: getEngagementResponse.pageId)), campaignID: \(String(describing: getEngagementResponse.engagementDetails?.first?.campaignId)), engagementID: \(String(describing: getEngagementResponse.engagementDetails?.first?.engagementId))")
             // Save PageId for future reference
             self?.pageId = getEngagementResponse.pageId
-            if let campaignID = getEngagementResponse.engagementDetails?.first?.campaignId, let engagementID = getEngagementResponse.engagementDetails?.first?.engagementId, let contextID = getEngagementResponse.engagementDetails?.first?.contextId, let sessionID = getEngagementResponse.sessionId, let visitorID = getEngagementResponse.visitorId {
+            if let campaignID = getEngagementResponse.engagementDetails?.first?.campaignId,
+                let engagementID = getEngagementResponse.engagementDetails?.first?.engagementId,
+                let contextID = getEngagementResponse.engagementDetails?.first?.contextId,
+                let sessionID = getEngagementResponse.sessionId,
+                let visitorID = getEngagementResponse.visitorId {
                 self?.campaignInfo = LPCampaignInfo(campaignId: campaignID, engagementId: engagementID, contextId: contextID, sessionId: sessionID, visitorId: visitorID)
             }
         }) { [weak self] (error) in
