@@ -310,8 +310,10 @@ SWIFT_CLASS("_TtC5LPAMS11LPAMSFacade")
 /// Messages might be masked depending on regex and masking from LPConfig
 + (void)sendMessageInDialog:(LPDialogEntity * _Nonnull)dialog text:(NSString * _Nonnull)text metadata:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)metadata completion:(void (^ _Nonnull)(LPMessageEntity * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Resolve/End a conversation from the user side
-+ (void)resolveConversation:(LPConversationEntity * _Nonnull)conversation;
-+ (void)resolveConversationForConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
++ (void)resolveConversation:(LPConversationEntity * _Nonnull)conversation completion:(void (^ _Nullable)(void))completion;
++ (void)resolveConversation:(LPConversationEntity * _Nonnull)conversation SWIFT_AVAILABILITY(ios,deprecated=3.6.0,message="Use resolveConversation(_ conversation: Conversation, completion: (() -> Void)? = {()}) instead");
++ (void)resolveConversationForConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery completion:(void (^ _Nullable)(void))completion;
++ (void)resolveConversationForConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_AVAILABILITY(ios,deprecated=3.6.0,message="Use resolveConversationForConversationQuery(_ conversationQuery: ConversationParamProtocol, completion: (() -> Void)? = {()}) instead");
 /// Resolve/End a Dialog from the user side
 + (void)closeDialog:(LPDialogEntity * _Nonnull)dialog;
 /// This methods returns the assigned agent of the active or the latest closed conversation, if exists.

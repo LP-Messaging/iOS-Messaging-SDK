@@ -106,43 +106,44 @@
  */
 - (IBAction)showConversation:(id)sender {
     NSString *account = self.accountTextField.text;
+    
+    //ConversationParamProtocol
     self.conversationQuery = [[LPMessagingSDK instance] getConversationBrandQuery:account campaignInfo:nil];
     
-    if (self.windowSwitch.on) {
-        LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:self.conversationQuery
-                                                                                               containerViewController:nil
-                                                                                                            isViewOnly:NO
-                                                                                       conversationHistoryControlParam:nil];
-        if (self.authenticationSwitch.on) {
-            LPAuthenticationParams *authenticationParmas = [[LPAuthenticationParams alloc] initWithAuthenticationCode:@"zcKZeImY5h7xOVPj"
-                                                                                                                  jwt:nil
-                                                                                                          redirectURI:nil
-                                                                                                certPinningPublicKeys:nil
-                                                                                                   authenticationType:LPAuthenticationTypeAuthenticated];
-            [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:authenticationParmas];
-        } else {
-            [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:nil];
-        }
-    } else {
+    //LPConversationHistoryControlParam
+    LPConversationHistoryControlParam * controlParam = [[LPConversationHistoryControlParam alloc] initWithHistoryConversationsStateToDisplay: LPConversationsHistoryStateToDisplayNone
+                                                                                                                 historyConversationsMaxDays:-1
+                                                                                                                          historyMaxDaysType:LPConversationHistoryMaxDaysDateTypeStartConversationDate];
+    //ConversationViewController
+    self.conversationViewController = nil;
+    
+    //needed for ViewController Mode (Non-Window mode)
+    if (self.windowSwitch.on == false) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         self.conversationViewController = [storyBoard instantiateViewControllerWithIdentifier:@"ConversationViewController"];
         self.conversationViewController.account = account;
         self.conversationViewController.conversationQuery = self.conversationQuery;
-        
-        LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:self.conversationQuery
-                                                                                               containerViewController:self.conversationViewController
-                                                                                                            isViewOnly:NO
-                                                                                       conversationHistoryControlParam:nil];
-        if (self.authenticationSwitch.on) {
-            LPAuthenticationParams *authenticationParmas = [[LPAuthenticationParams alloc] initWithAuthenticationCode:account
-                                                                                                                  jwt:nil
-                                                                                                          redirectURI:nil
-                                                                                                certPinningPublicKeys:nil
-                                                                                                   authenticationType:LPAuthenticationTypeAuthenticated];
-            [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:authenticationParmas];
-        } else {
-            [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:nil];
-        }
+    }
+    
+    //LPConversationViewParams
+    LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:self.conversationQuery
+                                                                                           containerViewController:self.conversationViewController
+                                                                                                        isViewOnly:NO
+                                                                                   conversationHistoryControlParam:controlParam];
+    //LPAuthenticationParams
+    LPAuthenticationParams *authenticationParams = nil;
+    if (self.authenticationSwitch.on) {
+        authenticationParams = [[LPAuthenticationParams alloc] initWithAuthenticationCode:@"ENTER_AUTH_CODE"
+                                                                                      jwt:nil
+                                                                              redirectURI:nil
+                                                                    certPinningPublicKeys:nil
+                                                                       authenticationType:LPAuthenticationTypeAuthenticated];
+    }
+    
+    [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:authenticationParams];
+    
+    //needed for ViewController Mode (Non-Window mode)
+    if (self.conversationViewController != nil) {
         [[self navigationController] pushViewController:self.conversationViewController animated:true];
     }
     

@@ -265,6 +265,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMonitoring
 @end
 
 
+/// This object contains details about the consumer to LiveEngage.   LPMonitoringIdentity is used to get an Engagement or an SDE to LiveEngage.
+/// -Version 3.2.0
 SWIFT_CLASS("_TtC12LPMonitoring20LPMonitoringIdentity")
 @interface LPMonitoringIdentity : NSObject
 /// Init LPMonitoringInitParams with mandatory params
@@ -277,6 +279,10 @@ SWIFT_CLASS("_TtC12LPMonitoring20LPMonitoringIdentity")
 @end
 
 
+/// <h1>LPMonitoringInitParams</h1>
+/// An initialization parameter of type LPMonitoringInitParams. This object contains all relevant parameters for initialization of the SDK for an account, including app install id.
+/// note:
+/// App install ID or ‘appInstallId’ is generated when setting up LiveEngage Site for Unauthenticated messaging. Please see Support for more details.
 SWIFT_CLASS("_TtC12LPMonitoring22LPMonitoringInitParams")
 @interface LPMonitoringInitParams : NSObject
 /// Init LPMonitoringInitParams with mandatory params
@@ -289,8 +295,26 @@ SWIFT_CLASS("_TtC12LPMonitoring22LPMonitoringInitParams")
 @end
 
 
+/// <h1>LPMonitoringParams</h1>
+/// An array of information passed from the SDK to LiveEngage used to obtain an Engagement or to send an SDE.
+/// <ul>
+///   <li>
+///     Version 3.2.0
+///   </li>
+/// </ul>
 SWIFT_CLASS("_TtC12LPMonitoring18LPMonitoringParams")
 @interface LPMonitoringParams : NSObject
+/// <h2>entryPoints</h2>
+/// An array of Strings used to target a particular Engagement in LiveEngage.
+/// The following strings must be attached to an Engagement or SDE in LiveEngage site for the entry points to link to the engagement.
+/// example1
+/// example2
+/// test
+/// \code
+/// entrypoints = ["example1","example2","example2"]
+///
+///
+/// \endcode
 @property (nonatomic, copy) NSArray<NSString *> * _Nullable entryPoints;
 @property (nonatomic, copy) NSArray<NSDictionary<NSString *, id> *> * _Nullable engagementAttributes;
 @property (nonatomic, copy) NSString * _Nullable pageId;
