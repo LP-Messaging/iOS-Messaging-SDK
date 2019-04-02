@@ -437,6 +437,8 @@ SWIFT_CLASS("_TtC7LPInfra28LPAudioFileMetaDataContainer")
 
 enum LPAuthenticationType : NSInteger;
 
+/// #LPAuthenticationParams
+/// This class represents an object to determine the properties of an authenticated connection. If using an authenticated connection, this parameter must be passed: LPAuthenticationParams supports Code Flow login, Implicit Flow login, or Unauthenticated login. See Constructor for details.
 SWIFT_CLASS("_TtC7LPInfra22LPAuthenticationParams")
 @interface LPAuthenticationParams : NSObject
 @property (nonatomic, copy) NSString * _Nullable authenticationCode;
@@ -454,6 +456,8 @@ SWIFT_CLASS("_TtC7LPInfra22LPAuthenticationParams")
 ///
 /// \param certPinningPublicKeys Set the certificate public key hash this API can get multiple public key hashes for the ability to support more then one key and if the certificate leaf change his public key we will still be able to validate the keys of the others certificate leaf
 /// if nil the Cert Pinning is disable
+///
+/// \param authenticationType .authenticated for Code Flow or Implicit, .unauthenticated for Unauthenticated.  If left as nil will default to .signup flow.
 ///
 - (nonnull instancetype)initWithAuthenticationCode:(NSString * _Nullable)authenticationCode jwt:(NSString * _Nullable)jwt redirectURI:(NSString * _Nullable)redirectURI certPinningPublicKeys:(NSArray<NSString *> * _Nullable)certPinningPublicKeys authenticationType:(enum LPAuthenticationType)authenticationType OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -1070,7 +1074,7 @@ SWIFT_CLASS("_TtC7LPInfra12LPConnection")
 @interface LPConnection : NSObject
 @property (nonatomic, strong) LPUserEntity * _Null_unspecified consumer SWIFT_DEPRECATED_OBJC("Swift property 'LPConnection.consumer' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, copy) NSArray<LPConversationEntity *> * _Null_unspecified conversations SWIFT_DEPRECATED_OBJC("Swift property 'LPConnection.conversations' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly) NSInteger hashValue;
+@property (nonatomic, readonly) NSUInteger hash;
 - (nonnull instancetype)initWithConsumer:(LPUserEntity * _Nonnull)consumer conversations:(NSArray<LPConversationEntity *> * _Nonnull)conversations OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_OBJC("Swift initializer 'LPConnection.init(consumer:conversations:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 /// Return last conversation from connection conversations
@@ -1212,13 +1216,24 @@ typedef SWIFT_ENUM(NSInteger, LPConversationHistoryMaxDaysDateType, closed) {
 
 @class UIViewController;
 
+/// <h1>LPConversationViewParams</h1>
+/// Represents an object to determine on conversation mode, filter and container. Such as Container or Window or if ViewOnly.
 SWIFT_CLASS("_TtC7LPInfra24LPConversationViewParams")
 @interface LPConversationViewParams : NSObject
 @property (nonatomic, strong) id <ConversationParamProtocol> _Nonnull conversationQuery;
 @property (nonatomic, strong) UIViewController * _Nullable containerViewController;
-@property (nonatomic) BOOL isViewOnly;
-@property (nonatomic, strong) LPConversationHistoryControlParam * _Nullable conversationHistoryControlParam;
-- (nonnull instancetype)initWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery containerViewController:(UIViewController * _Nullable)containerViewController isViewOnly:(BOOL)isViewOnly conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nullable)conversationHistoryControlParam OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly) BOOL isViewOnly;
+@property (nonatomic, readonly, strong) LPConversationHistoryControlParam * _Nonnull conversationHistoryControlParam;
+/// <h1>LPConversationViewParams</h1>
+/// \param conversationQuery Type ConversationParamProtocol which ties this object to the brand.
+///
+/// \param containerViewController Type UIViewController used as a reference if embedding the view.
+///
+/// \param isViewOnly Bool is the request pertaining to obtaining a single view (true) to embed or a whole view stack (false).
+///
+/// \param conversationHistoryControlParam LPConversationHistoryControlParam object related to displaying history within a conversation.
+///
+- (nonnull instancetype)initWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery containerViewController:(UIViewController * _Nullable)containerViewController isViewOnly:(BOOL)isViewOnly conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nonnull)conversationHistoryControlParam OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
@@ -1992,10 +2007,10 @@ SWIFT_CLASS("_TtC7LPInfra19LPUserProfileEntity")
 
 
 
-@class SRSecurityPolicy;
+@class LPSRSecurityPolicy;
 
 SWIFT_CLASS("_TtC7LPInfra11LPWebSocket")
-@interface LPWebSocket : SRWebSocket
+@interface LPWebSocket : LPSRWebSocket
 @property (nonatomic, copy) NSString * _Nonnull requestIndex SWIFT_DEPRECATED_OBJC("Swift property 'LPWebSocket.requestIndex' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, copy) NSDictionary<NSString *, NSString *> * _Nullable headers SWIFT_DEPRECATED_OBJC("Swift property 'LPWebSocket.headers' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 @property (nonatomic, readonly) BOOL isOpen SWIFT_DEPRECATED_OBJC("Swift property 'LPWebSocket.isOpen' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
@@ -2006,7 +2021,7 @@ SWIFT_CLASS("_TtC7LPInfra11LPWebSocket")
 - (void)cancelRequest:(NSString * _Nonnull)requestIndex SWIFT_DEPRECATED_OBJC("Swift method 'LPWebSocket.cancelRequest(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 - (void)open;
 - (void)close;
-- (nonnull instancetype)initWithURLRequest:(NSURLRequest * _Nonnull)request protocols:(NSArray<NSString *> * _Nullable)protocols securityPolicy:(SRSecurityPolicy * _Nonnull)securityPolicy SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithURLRequest:(NSURLRequest * _Nonnull)request protocols:(NSArray<NSString *> * _Nullable)protocols securityPolicy:(LPSRSecurityPolicy * _Nonnull)securityPolicy SWIFT_UNAVAILABLE;
 @end
 
 

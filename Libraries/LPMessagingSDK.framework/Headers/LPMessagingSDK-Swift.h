@@ -979,7 +979,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK17UIAdapterDelegate_")
 @protocol UIAdapterDelegate
 @optional
 - (BOOL)sendClickedWithMessage:(NSString * _Nonnull)message inConversation:(LPConversationEntity * _Nonnull)inConversation metadata:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)metadata SWIFT_WARN_UNUSED_RESULT;
-- (void)executeActionAtIndex:(UIViewController * _Nonnull)viewController index:(NSInteger)index conversation:(LPConversationEntity * _Nullable)conversation complition:(void (^ _Nonnull)(void))complition;
+- (void)executeActionAtIndex:(UIViewController * _Nonnull)viewController index:(NSInteger)index conversation:(LPConversationEntity * _Nullable)conversation completion:(void (^ _Nonnull)(void))completion;
 - (void)textViewDidBeginEditingWithConversation:(LPDialogEntity * _Nullable)dialog;
 - (void)textViewDidEndEditingWithConversation:(LPDialogEntity * _Nullable)dialog;
 - (BOOL)textView:(UITextView * _Nonnull)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString * _Nonnull)text dialog:(LPDialogEntity * _Nullable)dialog SWIFT_WARN_UNUSED_RESULT;

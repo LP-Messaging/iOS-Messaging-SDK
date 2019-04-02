@@ -113,41 +113,51 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
             return
         }
         
+        //ConversationParamProtocol
         self.conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(accountNumber)
-        guard self.conversationQuery != nil else {
-            return
-        }
+        guard self.conversationQuery != nil else { return }
 
-        if self.windowSwitch.isOn {
-            if self.authenticationSwitch.isOn {
-                let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: nil, isViewOnly: false)
-                let authenticationParams = LPAuthenticationParams(authenticationCode: "zcKZeImY5h7xOVPj", jwt: nil, redirectURI: nil, authenticationType: .authenticated)
-                LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
-            } else {
-                let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: nil, isViewOnly: false)
-                LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: nil)
-            }
-        } else {
+        //LPConversationHistoryControlParam
+        let controlParam = LPConversationHistoryControlParam(historyConversationsStateToDisplay: .none,
+                                                             historyConversationsMaxDays: -1,
+                                                             historyMaxDaysType: .startConversationDate)
+        
+        //ConversationViewController
+        self.conversationViewController = nil
+        
+        //needed for ViewController Mode (Non-Window mode)
+        if self.windowSwitch.isOn == false {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             self.conversationViewController = storyboard.instantiateViewController(withIdentifier: "ConversationViewController") as? ConversationViewController
 
-            guard self.conversationViewController != nil || self.conversationQuery != nil else {
-                return
-            }
+            guard self.conversationViewController != nil else { return }
             
             self.conversationViewController!.account = accountNumber
             self.conversationViewController!.conversationQuery = self.conversationQuery!
-            if self.authenticationSwitch.isOn {
-                let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: conversationViewController, isViewOnly: false)
-                let authenticationParams = LPAuthenticationParams(authenticationCode: accountNumber, jwt: nil, redirectURI: nil, authenticationType: .authenticated)
-                LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
-            } else {
-                let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!, containerViewController: conversationViewController, isViewOnly: false)
-                LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: nil)
-            }
+        }
+        
+        //LPConversationViewParams
+        let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!,
+                                                              containerViewController: self.conversationViewController,
+                                                              isViewOnly: false,
+                                                              conversationHistoryControlParam: controlParam)
+        
+        //LPAuthenticationParams
+        var authenticationParams: LPAuthenticationParams? = nil
+        if self.authenticationSwitch.isOn {
+            authenticationParams = LPAuthenticationParams(authenticationCode: "ENTER_AUTH_CODE",
+                                                          jwt: nil,
+                                                          redirectURI: nil,
+                                                          authenticationType: .authenticated)
+        }
+        
+        LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
+        
+        //needed for ViewController Mode (Non-Window mode)
+        if self.conversationViewController != nil {
             self.navigationController?.pushViewController(self.conversationViewController!, animated: true)
         }
-
+        
         self.setUserDetails()
         self.view.endEditing(true)
     }
