@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="abs-7c-Atn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="abs-7c-Atn">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Messaging View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MessagingViewController" customModule="SampleApp_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MessagingViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,125 +22,126 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="#Account Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j3F-z1-bXJ">
-                                <rect key="frame" x="73" y="287" width="230" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YVz-GX-sQV">
+                                <rect key="frame" x="24" y="62" width="327" height="328"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yJa-bc-pBc">
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="fgT-UW-AnW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="2je-Re-ZAd"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nP4-dT-STk">
+                                        <rect key="frame" x="0.0" y="38" width="327" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Rh4-Mu-wRZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="AFw-p1-sPh"/>
+                                        </connections>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AhW-by-kN3">
+                                        <rect key="frame" x="0.0" y="76" width="327" height="70"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="FaJ-JH-4o0">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authentication mode" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0x-8A-dIF">
+                                                        <rect key="frame" x="0.0" y="0.0" width="256" height="31"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gma-Qu-mNz">
+                                                        <rect key="frame" x="278" y="0.0" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="authenticationSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="lVe-7j-edo"/>
+                                                        </connections>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="mWe-Rq-dgw">
+                                                <rect key="frame" x="0.0" y="39" width="327" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Window mode" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdE-Eb-2jH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="256" height="31"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBJ-LC-ltR">
+                                                        <rect key="frame" x="278" y="0.0" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="windowSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Pbr-EM-SWL"/>
+                                                        </connections>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Account Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j3F-z1-bXJ">
+                                        <rect key="frame" x="0.0" y="154" width="327" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="6G9-TU-ZVd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="CEg-zp-UIQ"/>
+                                        </connections>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bPh-qY-lBG">
+                                        <rect key="frame" x="0.0" y="192" width="327" height="136"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzr-2u-epR">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="33c-ec-yTW"/>
+                                                </constraints>
+                                                <state key="normal" title="Init SDK"/>
+                                                <connections>
+                                                    <action selector="initSDKsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0U2-Zz-Mdm"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WR6-xR-rjw">
+                                                <rect key="frame" x="0.0" y="48" width="327" height="40"/>
+                                                <state key="normal" title="Show Conversation"/>
+                                                <connections>
+                                                    <action selector="showConversation" destination="BYZ-38-t0r" eventType="touchUpInside" id="ciE-jz-Dgo"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATJ-yI-ifF">
+                                                <rect key="frame" x="0.0" y="96" width="327" height="40"/>
+                                                <state key="normal" title="Logout"/>
+                                                <connections>
+                                                    <action selector="logoutClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GXd-NW-UbL"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="6G9-TU-ZVd"/>
-                                    <constraint firstAttribute="width" constant="230" id="Rv9-iA-8zI"/>
+                                    <constraint firstItem="j3F-z1-bXJ" firstAttribute="width" secondItem="YVz-GX-sQV" secondAttribute="width" id="6lu-vb-dne"/>
+                                    <constraint firstItem="nP4-dT-STk" firstAttribute="width" secondItem="YVz-GX-sQV" secondAttribute="width" id="Efm-x1-BpG"/>
+                                    <constraint firstItem="AhW-by-kN3" firstAttribute="width" secondItem="YVz-GX-sQV" secondAttribute="width" id="Fi0-Oy-cS0"/>
+                                    <constraint firstItem="yJa-bc-pBc" firstAttribute="width" secondItem="YVz-GX-sQV" secondAttribute="width" id="Gp5-Ep-KiG"/>
+                                    <constraint firstItem="bPh-qY-lBG" firstAttribute="width" secondItem="YVz-GX-sQV" secondAttribute="width" id="xXh-EN-hGN"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="CEg-zp-UIQ"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WR6-xR-rjw">
-                                <rect key="frame" x="73" y="384" width="230" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="ZnA-c9-UmQ"/>
-                                </constraints>
-                                <state key="normal" title="Show Conversation"/>
-                                <connections>
-                                    <action selector="showConversation" destination="BYZ-38-t0r" eventType="touchUpInside" id="ciE-jz-Dgo"/>
-                                </connections>
-                            </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBJ-LC-ltR">
-                                <rect key="frame" x="254" y="239" width="51" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="49" id="I2I-GX-8an"/>
-                                    <constraint firstAttribute="height" constant="31" id="pDR-rv-ci2"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="windowSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Pbr-EM-SWL"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Window mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdE-Eb-2jH">
-                                <rect key="frame" x="73" y="244" width="159" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="159" id="gyh-Km-a6a"/>
-                                    <constraint firstAttribute="height" constant="21" id="rIt-S4-1GP"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gma-Qu-mNz">
-                                <rect key="frame" x="254" y="189" width="51" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="20z-Mh-1Pc"/>
-                                    <constraint firstAttribute="width" constant="49" id="wdr-g5-WK2"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="authenticationSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="lVe-7j-edo"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authentication mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0x-8A-dIF">
-                                <rect key="frame" x="73" y="194" width="159" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="159" id="4Wb-mr-Wpz"/>
-                                    <constraint firstAttribute="height" constant="21" id="fRP-WJ-qCB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nP4-dT-STk">
-                                <rect key="frame" x="73" y="150" width="230" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Rh4-Mu-wRZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="AFw-p1-sPh"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yJa-bc-pBc">
-                                <rect key="frame" x="73" y="105" width="230" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="fgT-UW-AnW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="2je-Re-ZAd"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzr-2u-epR">
-                                <rect key="frame" x="73" y="335" width="230" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="gcc-TL-PvE"/>
-                                </constraints>
-                                <state key="normal" title="Init SDK"/>
-                                <connections>
-                                    <action selector="initSDKsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0U2-Zz-Mdm"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="j3F-z1-bXJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="4hT-GF-bAw"/>
-                            <constraint firstItem="nP4-dT-STk" firstAttribute="top" secondItem="yJa-bc-pBc" secondAttribute="bottom" constant="15" id="6D2-iH-lqy"/>
-                            <constraint firstItem="TBJ-LC-ltR" firstAttribute="trailing" secondItem="j3F-z1-bXJ" secondAttribute="trailing" id="DGq-5v-KtW"/>
-                            <constraint firstItem="WR6-xR-rjw" firstAttribute="trailing" secondItem="j3F-z1-bXJ" secondAttribute="trailing" id="Kpb-H1-S31"/>
-                            <constraint firstItem="bzr-2u-epR" firstAttribute="leading" secondItem="WR6-xR-rjw" secondAttribute="leading" id="L00-Nc-BYN"/>
-                            <constraint firstItem="G0x-8A-dIF" firstAttribute="leading" secondItem="fdE-Eb-2jH" secondAttribute="leading" id="LnB-xa-B19"/>
-                            <constraint firstItem="fdE-Eb-2jH" firstAttribute="leading" secondItem="j3F-z1-bXJ" secondAttribute="leading" id="OEo-oY-PeC"/>
-                            <constraint firstItem="j3F-z1-bXJ" firstAttribute="top" secondItem="fdE-Eb-2jH" secondAttribute="bottom" constant="22" id="OYg-hh-9gt"/>
-                            <constraint firstItem="j3F-z1-bXJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SMH-4w-pI1"/>
-                            <constraint firstItem="Gma-Qu-mNz" firstAttribute="trailing" secondItem="TBJ-LC-ltR" secondAttribute="trailing" id="T1O-qO-2FL"/>
-                            <constraint firstItem="bzr-2u-epR" firstAttribute="top" secondItem="j3F-z1-bXJ" secondAttribute="bottom" constant="18" id="UD0-Rg-vwX"/>
-                            <constraint firstItem="Gma-Qu-mNz" firstAttribute="top" secondItem="nP4-dT-STk" secondAttribute="bottom" constant="9" id="USw-sx-Yr1"/>
-                            <constraint firstItem="yJa-bc-pBc" firstAttribute="leading" secondItem="nP4-dT-STk" secondAttribute="leading" id="V7N-nx-Vbt"/>
-                            <constraint firstItem="nP4-dT-STk" firstAttribute="trailing" secondItem="Gma-Qu-mNz" secondAttribute="trailing" id="XL2-Hl-qtT"/>
-                            <constraint firstItem="nP4-dT-STk" firstAttribute="leading" secondItem="G0x-8A-dIF" secondAttribute="leading" id="YrO-dI-nOR"/>
-                            <constraint firstItem="fdE-Eb-2jH" firstAttribute="top" secondItem="G0x-8A-dIF" secondAttribute="bottom" constant="29" id="bJN-pq-n0k"/>
-                            <constraint firstItem="j3F-z1-bXJ" firstAttribute="top" secondItem="TBJ-LC-ltR" secondAttribute="bottom" constant="17" id="dZd-So-51d"/>
-                            <constraint firstItem="WR6-xR-rjw" firstAttribute="leading" secondItem="j3F-z1-bXJ" secondAttribute="leading" id="k7q-66-OfE"/>
-                            <constraint firstItem="yJa-bc-pBc" firstAttribute="trailing" secondItem="nP4-dT-STk" secondAttribute="trailing" id="n9R-pp-wUh"/>
-                            <constraint firstItem="bzr-2u-epR" firstAttribute="trailing" secondItem="WR6-xR-rjw" secondAttribute="trailing" id="qML-pP-uVA"/>
-                            <constraint firstItem="WR6-xR-rjw" firstAttribute="top" secondItem="j3F-z1-bXJ" secondAttribute="bottom" constant="67.5" id="s3e-a6-sMr"/>
-                            <constraint firstItem="TBJ-LC-ltR" firstAttribute="top" secondItem="Gma-Qu-mNz" secondAttribute="bottom" constant="19" id="wor-Zx-V7q"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YVz-GX-sQV" secondAttribute="trailing" constant="8" id="O8m-lX-7RX"/>
+                            <constraint firstItem="YVz-GX-sQV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.75" id="Pf7-zq-O3t"/>
+                            <constraint firstItem="YVz-GX-sQV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pL6-79-WyZ"/>
+                            <constraint firstItem="YVz-GX-sQV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="yjB-Fr-BVU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pYA-fs-yn5"/>
@@ -159,7 +160,7 @@
         <!--Conversation View Controller-->
         <scene sceneID="8W8-tX-9ba">
             <objects>
-                <viewController storyboardIdentifier="ConversationViewController" id="rq2-Ie-c8f" customClass="ConversationViewController" customModule="SampleApp_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConversationViewController" id="rq2-Ie-c8f" customClass="ConversationViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WSH-xR-F46"/>
                         <viewControllerLayoutGuide type="bottom" id="JSF-I8-LON"/>
@@ -209,7 +210,7 @@
         <!--Main View Controller-->
         <scene sceneID="S0G-GT-yjg">
             <objects>
-                <viewController id="nhu-yH-hqQ" customClass="MainViewController" customModule="SampleApp_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nhu-yH-hqQ" customClass="MainViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mcF-Xo-aC2"/>
                         <viewControllerLayoutGuide type="bottom" id="N4q-Lq-g6g"/>
@@ -218,24 +219,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SML-m8-HUN">
-                                <rect key="frame" x="106" y="201" width="162" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Messaging"/>
-                                <connections>
-                                    <action selector="messagingClicked:" destination="nhu-yH-hqQ" eventType="touchUpInside" id="kr0-SN-wCJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FI2-yw-E4J">
-                                <rect key="frame" x="106" y="257" width="162" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Monitoring"/>
-                                <connections>
-                                    <action selector="monitoringClicked:" destination="nhu-yH-hqQ" eventType="touchUpInside" id="Qr3-Rm-UbQ"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="kvw-DM-8ry">
+                                <rect key="frame" x="24" y="258.5" width="327" height="86"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SML-m8-HUN">
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Zhc-hm-17s"/>
+                                        </constraints>
+                                        <state key="normal" title="Messaging"/>
+                                        <connections>
+                                            <action selector="messagingClicked:" destination="nhu-yH-hqQ" eventType="touchUpInside" id="kr0-SN-wCJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FI2-yw-E4J">
+                                        <rect key="frame" x="0.0" y="56" width="327" height="30"/>
+                                        <state key="normal" title="Monitoring"/>
+                                        <connections>
+                                            <action selector="monitoringClicked:" destination="nhu-yH-hqQ" eventType="touchUpInside" id="Qr3-Rm-UbQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kvw-DM-8ry" firstAttribute="leading" secondItem="fKd-CA-pqj" secondAttribute="leadingMargin" constant="8" id="8DE-OU-DgB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kvw-DM-8ry" secondAttribute="trailing" constant="8" id="ZQ6-K9-bbt"/>
+                            <constraint firstItem="kvw-DM-8ry" firstAttribute="centerX" secondItem="fKd-CA-pqj" secondAttribute="centerX" id="eIW-VO-uHa"/>
+                            <constraint firstItem="kvw-DM-8ry" firstAttribute="centerY" secondItem="fKd-CA-pqj" secondAttribute="centerY" id="hny-4h-W97"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zy8-gK-cs7"/>
                     <connections>
@@ -250,66 +263,97 @@
         <!--Monitoring View Controller-->
         <scene sceneID="wsq-6s-GtC">
             <objects>
-                <viewController id="n2p-dL-jnf" customClass="MonitoringViewController" customModule="SampleApp_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="n2p-dL-jnf" customClass="MonitoringViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XWq-tj-M8F">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="#Account Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EoT-GL-mUm">
-                                <rect key="frame" x="74" y="29" width="230" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="xQ3-PS-SFU"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uK4-Id-7zp">
-                                <rect key="frame" x="130" y="123" width="115" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Get Engagement"/>
-                                <connections>
-                                    <action selector="getEngagementClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="xKk-uD-Syx"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iak-2k-tiA">
-                                <rect key="frame" x="161" y="70" width="55" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Init SDK"/>
-                                <connections>
-                                    <action selector="initSDKsClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="s1B-SW-EM5"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVV-Sw-iuk">
-                                <rect key="frame" x="153" y="180" width="68" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send SDE"/>
-                                <connections>
-                                    <action selector="sendSDEClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="UB7-6h-jc9"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaC-KN-zpf">
-                                <rect key="frame" x="67" y="235" width="241" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Show Conversation With Campaign"/>
-                                <connections>
-                                    <action selector="showConversationWithCampaignClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="OfW-cn-zKj"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzB-AR-Mo7">
-                                <rect key="frame" x="163" y="361" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Logout"/>
-                                <connections>
-                                    <action selector="logoutClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="NMb-At-uYx"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="w2L-KI-Bfl">
+                                <rect key="frame" x="8" y="78" width="359" height="296"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Account Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EoT-GL-mUm">
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="xQ3-PS-SFU"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="App Install Identifier" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9B0-gI-7qR">
+                                        <rect key="frame" x="0.0" y="41" width="359" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="Tgl-cx-ikZ"/>
+                                        </connections>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="TSf-PC-Bgx">
+                                        <rect key="frame" x="0.0" y="82" width="359" height="214"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iak-2k-tiA">
+                                                <rect key="frame" x="0.0" y="0.0" width="359" height="30"/>
+                                                <state key="normal" title="Init SDK"/>
+                                                <connections>
+                                                    <action selector="initSDKsClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="s1B-SW-EM5"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uK4-Id-7zp">
+                                                <rect key="frame" x="0.0" y="46" width="359" height="30"/>
+                                                <state key="normal" title="Get Engagement"/>
+                                                <connections>
+                                                    <action selector="getEngagementClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="xKk-uD-Syx"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVV-Sw-iuk">
+                                                <rect key="frame" x="0.0" y="92" width="359" height="30"/>
+                                                <state key="normal" title="Send SDE"/>
+                                                <connections>
+                                                    <action selector="sendSDEClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="UB7-6h-jc9"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaC-KN-zpf">
+                                                <rect key="frame" x="0.0" y="138" width="359" height="30"/>
+                                                <state key="normal" title="Show Conversation With Campaign"/>
+                                                <connections>
+                                                    <action selector="showConversationWithCampaignClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="OfW-cn-zKj"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzB-AR-Mo7">
+                                                <rect key="frame" x="0.0" y="184" width="359" height="30"/>
+                                                <state key="normal" title="Logout"/>
+                                                <connections>
+                                                    <action selector="logoutClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="NMb-At-uYx"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="lVV-Sw-iuk" firstAttribute="width" secondItem="TSf-PC-Bgx" secondAttribute="width" id="IO5-os-tBu"/>
+                                            <constraint firstItem="Iak-2k-tiA" firstAttribute="width" secondItem="TSf-PC-Bgx" secondAttribute="width" id="MWD-Xy-rZP"/>
+                                            <constraint firstItem="XzB-AR-Mo7" firstAttribute="width" secondItem="TSf-PC-Bgx" secondAttribute="width" id="NMO-e0-LDO"/>
+                                            <constraint firstItem="uK4-Id-7zp" firstAttribute="width" secondItem="TSf-PC-Bgx" secondAttribute="width" id="Psk-aV-CF3"/>
+                                            <constraint firstItem="MaC-KN-zpf" firstAttribute="width" secondItem="TSf-PC-Bgx" secondAttribute="width" id="q49-mO-Pnh"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="TSf-PC-Bgx" firstAttribute="width" secondItem="w2L-KI-Bfl" secondAttribute="width" id="Dlg-Uf-VWA"/>
+                                    <constraint firstItem="EoT-GL-mUm" firstAttribute="width" secondItem="w2L-KI-Bfl" secondAttribute="width" id="LXX-rd-7To"/>
+                                    <constraint firstItem="9B0-gI-7qR" firstAttribute="width" secondItem="w2L-KI-Bfl" secondAttribute="width" id="pIY-ZZ-bk9"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="w2L-KI-Bfl" firstAttribute="centerY" secondItem="XWq-tj-M8F" secondAttribute="centerY" multiplier="0.75" id="DrJ-U7-Vv2"/>
+                            <constraint firstItem="w2L-KI-Bfl" firstAttribute="leading" secondItem="JcV-ep-2Ol" secondAttribute="leading" constant="8" id="MJw-GT-RIr"/>
+                            <constraint firstItem="JcV-ep-2Ol" firstAttribute="trailing" secondItem="w2L-KI-Bfl" secondAttribute="trailing" constant="8" id="f0n-vk-Msd"/>
+                            <constraint firstItem="w2L-KI-Bfl" firstAttribute="centerX" secondItem="XWq-tj-M8F" secondAttribute="centerX" id="zu0-Mc-vA0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JcV-ep-2Ol"/>
                     </view>
                     <connections>
                         <outlet property="accountTextField" destination="EoT-GL-mUm" id="eVF-YG-ARQ"/>
+                        <outlet property="appInstallIdentifierTextField" destination="9B0-gI-7qR" id="lPZ-YK-mk1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFK-Jq-zB3" sceneMemberID="firstResponder"/>

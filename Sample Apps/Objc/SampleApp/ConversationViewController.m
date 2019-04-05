@@ -16,10 +16,16 @@
 }
 
 - (IBAction)menuButtonPressed:(id)sender {
+    UIAlertControllerStyle style = UIAlertControllerStyleActionSheet;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        style = UIAlertControllerStyleAlert;
+    }
+    
     UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:@"Menu"
                                           message:@"Choose an option"
-                                          preferredStyle:UIAlertControllerStyleActionSheet];
+                                          preferredStyle:style];
     
     /**
      This is how to resolve a conversation

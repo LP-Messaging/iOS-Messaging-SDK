@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MonitoringViewController : UIViewController
+    
 @property (weak, nonatomic) IBOutlet UITextField *accountTextField;
 
 @end

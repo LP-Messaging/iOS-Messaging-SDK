@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <UserNotifications/UserNotifications.h>
+
 #import <LPMessagingSDK/LPMessagingSDK.h>
 #import <LPInfra/LPInfra.h>
 #import <LPAMS/LPAMS.h>
@@ -20,9 +22,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     // Register for push remote push notifications
-    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+
+        }];
+    }
+    
     [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
     return YES;
 }
 

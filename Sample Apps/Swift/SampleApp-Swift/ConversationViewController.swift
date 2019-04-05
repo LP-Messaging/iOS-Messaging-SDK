@@ -27,7 +27,13 @@ class ConversationViewController: UIViewController {
     }
     
     @IBAction func menuButtonPressed() {
-        let alertController = UIAlertController(title: "Menu", message: "Choose an option", preferredStyle: .actionSheet)
+        var style = UIAlertController.Style.actionSheet
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            style = .alert
+        }
+        
+        let alertController = UIAlertController(title: "Menu", message: "Choose an option", preferredStyle: style)
         
         /**
         is how to resolve a conversation
