@@ -11,30 +11,49 @@ import LPMessagingSDK
 import LPAMS
 import LPInfra
 
-let WINDOW_SWITCH = "WindowSwitch"
-let AUTHENTIACTION_SWITCH = "AuthenticationSwitch"
+class MessagingViewController: UIViewController {
 
-class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
-
-    var conversationQuery: ConversationParamProtocol?
-    var conversationViewController: ConversationViewController?
-    
+    //MARK: - UI Properties
     @IBOutlet var accountTextField: UITextField!
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
-
     @IBOutlet var windowSwitch: UISwitch!
     @IBOutlet var authenticationSwitch: UISwitch!
     
+    //MARK: - Properties
+    private var windowSwitchValue: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "WindowSwitch")
+            UserDefaults.standard.synchronize()
+        }
+        get { return UserDefaults.standard.bool(forKey: "WindowSwitch") }
+    }
+    
+    private var authenticationSwitchValue: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "AuthenticationSwitch")
+            UserDefaults.standard.synchronize()
+        }
+        get { return UserDefaults.standard.bool(forKey: "AuthenticationSwitch") }
+    }
+    
+    private var conversationViewController: ConversationViewController?
+    
+    // Enter Your Code if using Autherization type 'Code'
+    private let authenticationCode: String? = "ENTER_AUTH_CODE"
+    
+    // Enter Your JWT if using Autherization type 'Implicit'
+    private let authenticationJWT: String? = nil
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let windowSwitch = UserDefaults.standard.bool(forKey: WINDOW_SWITCH)
-        self.windowSwitch.isOn = windowSwitch;
-
-        let authenticationSwitch = UserDefaults.standard.bool(forKey: AUTHENTIACTION_SWITCH)
-        self.authenticationSwitch.isOn = authenticationSwitch
-
+        // Enter Your Account Number
+        self.accountTextField.text = "ENTER_ACCOUNT_NUMBER"
+        
+        self.windowSwitch.isOn = windowSwitchValue
+        self.authenticationSwitch.isOn = authenticationSwitchValue
         
         LPMessagingSDK.instance.delegate = self
         self.setSDKConfigurations()
@@ -43,144 +62,193 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /**
-        This method sets the SDK configurations.
-        For example: 
-        Change background color of remote user (such as Agent)
-        Change background color of user (such as Consumer)
-     */
-    func setSDKConfigurations() {
-        let configurations = LPConfig.defaultConfiguration
-        configurations.remoteUserBubbleBackgroundColor = UIColor.blue
-        configurations.userBubbleBackgroundColor = UIColor.lightGray
-        self.setCustomButton()
+    //MARK: - IBActions
+    @IBAction func resignKeyboard() {
+        self.view.endEditing(true)
     }
     
-    /**
-    This method sets the user details such as first name, last name, profile image and phone number.
-    */
-    func setUserDetails() {
-        let user = LPUser(firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, nickName: "my nick name", uid: nil, profileImageURL: "http://www.mrbreakfast.com/ucp/342_6053_ucp.jpg", phoneNumber: nil, employeeID: "1111-1111")
-        LPMessagingSDK.instance.setUserProfile(user, brandID: self.accountTextField.text!)
+    @IBAction func windowSwitchChanged(_ sender: UISwitch) {
+        windowSwitchValue = sender.isOn
     }
     
-    /**
-    This method lets you enter a UIBarButton to the navigation bar (in window mode).
-    When the button is pressed it will call the following delegate method: LPMessagingSDKCustomButtonTapped
-    */
-    func setCustomButton() {
-        LPConfig.defaultConfiguration.customButtonImage = UIImage(named: "phone_icon")
+    @IBAction func authenticationSwitchChanged(_ sender: UISwitch) {
+        authenticationSwitchValue = sender.isOn
     }
-
-    //MARK:- IBActions
-    /// Init Monitoring and Messaging SDKs
+    
     @IBAction func initSDKsClicked(_ sender: Any) {
-        defer {
-            self.view.endEditing(true)
-        }
+        defer { self.view.endEditing(true) }
         
         guard let accountNumber = self.accountTextField.text, !accountNumber.isEmpty else {
+            print("missing account number!")
             return
         }
         
+        initLPSDKwith(accountNumber: accountNumber)
+    }
+
+    @IBAction func showConversation() {
+        defer { self.view.endEditing(true) }
+        
+        guard let accountNumber = self.accountTextField.text, !accountNumber.isEmpty else {
+            print("missing account number!")
+            return
+        }
+        
+        //Window Mode
+        if windowSwitchValue {
+            self.conversationViewController = nil
+        } else {
+            //for ViewController Mode ONLY
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "ConversationViewController")
+            guard let convoViewController = controller as? ConversationViewController else { return }
+            self.conversationViewController = convoViewController
+        }
+ 
+        showConversationFor(accountNumber: accountNumber, authenticatedMode: authenticationSwitchValue)
+        
+        //do not forget to push the controller (for ViewController Mode ONLY)
+        if self.conversationViewController != nil {
+            self.navigationController?.pushViewController(self.conversationViewController!, animated: true)
+        }
+    }
+    
+    @IBAction func logoutClicked(_ sender: Any) {
+        logoutLPSDK()
+    }
+}
+
+// MARK: - LPMessagingSDK Helpers
+extension MessagingViewController {
+    /**
+     This method sets the SDK configurations.
+     
+     For example:
+         Change background color of remote user (such as Agent)
+         Change background color of user (such as Consumer)
+     
+    for more information on `defaultConfiguration` see: https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-customization-and-branding-customizing-the-sdk.html
+     */
+    private func setSDKConfigurations() {
+        let configurations = LPConfig.defaultConfiguration
+        configurations.remoteUserBubbleBackgroundColor = UIColor.blue
+        configurations.userBubbleBackgroundColor = UIColor.lightGray
+        
+        /* the below  lets you enter a UIBarButton to the navigation bar (in window mode).
+         When the button is pressed it will call the following delegate method: LPMessagingSDKCustomButtonTapped */
+        LPConfig.defaultConfiguration.customButtonImage = UIImage(named: "phone_icon")
+    }
+    
+    /**
+     This method initialize the messaging SDK
+     
+     for more information on `initialize` see:
+         https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-apis-messaging-api.html#initialize
+     */
+    private func initLPSDKwith(accountNumber: String){
         do {
             try LPMessagingSDK.instance.initialize(accountNumber)
         } catch let error as NSError {
             print("initialize error: \(error)")
-            return
         }
     }
     
     /**
-    This method shows the conversation screen. It considers different modes:
-    
-    Window Mode:
-    - Window           - Shows the conversation screen in a new window created by the SDK. Navigation bar is included.
-    - View controller  - Shows the conversation screen in a view controller of your choice.
-    
-    Authentication Mode:
-    - Authenticated    - Conversation history is saved and shown.
-    - Unauthenticated  - Conversation starts clean every time.
-    
-    */
-    @IBAction func showConversation() {
-        guard let accountNumber = self.accountTextField.text, !accountNumber.isEmpty else {
-            return
-        }
-        
+     This method shows the conversation screen. It considers different modes:
+     
+     Window Mode:
+     - Window           - Shows the conversation screen in a new window created by the SDK. Navigation bar is included.
+     - View controller  - Shows the conversation screen in a view controller of your choice.
+     
+     Authentication Mode:
+     - Authenticated    - Conversation history is saved and shown.
+     - Unauthenticated  - Conversation starts clean every time.
+     
+     for more information on `showconversation` see:
+         https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-apis-messaging-api.html#showconversation
+     */
+    private func showConversationFor(accountNumber: String, authenticatedMode: Bool) {
         //ConversationParamProtocol
-        self.conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(accountNumber)
-        guard self.conversationQuery != nil else { return }
-
+        let conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(accountNumber)
+        
         //LPConversationHistoryControlParam
         let controlParam = LPConversationHistoryControlParam(historyConversationsStateToDisplay: .none,
                                                              historyConversationsMaxDays: -1,
                                                              historyMaxDaysType: .startConversationDate)
-        
-        //ConversationViewController
-        self.conversationViewController = nil
-        
-        //needed for ViewController Mode (Non-Window mode)
-        if self.windowSwitch.isOn == false {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            self.conversationViewController = storyboard.instantiateViewController(withIdentifier: "ConversationViewController") as? ConversationViewController
 
-            guard self.conversationViewController != nil else { return }
-            
-            self.conversationViewController!.account = accountNumber
-            self.conversationViewController!.conversationQuery = self.conversationQuery!
+        //LPAuthenticationParams
+        var authenticationParams: LPAuthenticationParams?
+        if authenticatedMode {
+            authenticationParams = LPAuthenticationParams(authenticationCode: authenticationCode,
+                                                          jwt: authenticationJWT,
+                                                          redirectURI: nil,
+                                                          certPinningPublicKeys: nil,
+                                                          authenticationType: .authenticated)
+        }
+        
+        // update Account number and ConversationQuery (for ViewController Mode ONLY)
+        if self.conversationViewController != nil {
+            self.conversationViewController?.account = accountNumber
+            self.conversationViewController?.conversationQuery = conversationQuery
         }
         
         //LPConversationViewParams
-        let conversationViewParams = LPConversationViewParams(conversationQuery: self.conversationQuery!,
+        let conversationViewParams = LPConversationViewParams(conversationQuery: conversationQuery,
                                                               containerViewController: self.conversationViewController,
                                                               isViewOnly: false,
                                                               conversationHistoryControlParam: controlParam)
         
-        //LPAuthenticationParams
-        var authenticationParams: LPAuthenticationParams? = nil
-        if self.authenticationSwitch.isOn {
-            authenticationParams = LPAuthenticationParams(authenticationCode: "ENTER_AUTH_CODE",
-                                                          jwt: nil,
-                                                          redirectURI: nil,
-                                                          authenticationType: .authenticated)
-        }
-        
         LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
-        
-        //needed for ViewController Mode (Non-Window mode)
-        if self.conversationViewController != nil {
-            self.navigationController?.pushViewController(self.conversationViewController!, animated: true)
-        }
-        
+
         self.setUserDetails()
-        self.view.endEditing(true)
     }
-
     
-    @IBAction func windowSwitchChanged(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: WINDOW_SWITCH)
-        UserDefaults.standard.synchronize()
+    /**
+     This method sets the user details such as first name, last name, profile image and phone number.
+     
+     for more info on `setUserProfile` see:
+         https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-apis-messaging-api.html#setuserprofile
+     */
+    private func setUserDetails() {
+        let user = LPUser(firstName: self.firstNameTextField.text!,
+                          lastName: self.lastNameTextField.text!,
+                          nickName: "my nick name",
+                          uid: nil,
+                          profileImageURL: "http://www.mrbreakfast.com/ucp/342_6053_ucp.jpg",
+                          phoneNumber: nil,
+                          employeeID: "1111-1111")
+        LPMessagingSDK.instance.setUserProfile(user, brandID: self.accountTextField.text!)
     }
-
-    @IBAction func authenticationSwitchChanged(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: AUTHENTIACTION_SWITCH)
-        UserDefaults.standard.synchronize()
+    
+    /**
+     This method logouts from Monitoring and Messaging SDKs - all the data will be cleared
+     
+     for more info on `logout` see:
+         https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-methods-logout.html
+     */
+    private func logoutLPSDK() {
+        LPMessagingSDK.instance.logout(completion: {
+            print("successfully logout from MessagingSDK")
+        }) { (error) in
+            print("failed to logout from MessagingSDK - error: \(error.localizedDescription)")
+        }
     }
+}
 
-    //MARK:- LPMessagingSDKDelegate
+//MARK: - LPMessagingSDKdelegate
+
+/**
+ for more info on `LPMessagingSDKdelegate` see:
+     https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-apis-callbacks-index.html#lpmessagingsdkdelegate
+ */
+extension MessagingViewController: LPMessagingSDKdelegate {
     
     /**
     This delegate method is required.
     It is called when authentication process fails
     */
     func LPMessagingSDKAuthenticationFailed(_ error: NSError) {
-        NSLog("Error: \(error)");
+        NSLog("Error: \(error)")
     }
     
     /**
@@ -188,7 +256,7 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
     It is called when the SDK version you're using is obselete and needs an update.
     */
     func LPMessagingSDKObseleteVersion(_ error: NSError) {
-        NSLog("Error: \(error)");
+        NSLog("Error: \(error)")
     }
     
     /**
@@ -199,9 +267,7 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
     You can use this data to show the agent details on your navigation bar (in view controller mode)
     */
     func LPMessagingSDKAgentDetails(_ agent: LPUser?) {
-        guard self.conversationViewController != nil else {
-            return
-        }
+        guard self.conversationViewController != nil else { return }
 
         let name: String = agent?.nickName ?? ""
         self.conversationViewController?.title = name
@@ -252,7 +318,7 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
     It is called when the SDK has connections issues.
     */
     func LPMessagingSDKHasConnectionError(_ error: String?) {
-        
+        NSLog("Error: \(String(describing: error))")
     }
 
     /**
@@ -260,7 +326,7 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
      It is called when the token which used for authentication is expired
      */
     func LPMessagingSDKTokenExpired(_ brandID: String) {
-        
+        NSLog("LPMessagingSDKTokenExpired")
     }
     
     /**
@@ -268,7 +334,7 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
      It lets you know if there is an error with the sdk and what this error is
      */
     func LPMessagingSDKError(_ error: NSError) {
-        
+        NSLog("Error: \(error)")
     }
     
     /**
@@ -343,10 +409,4 @@ class MessagingViewController: UIViewController, LPMessagingSDKdelegate {
     func LPMessagingSDKUserDeniedPermission(_ permissionType: LPPermissionTypes) {
         
     }
-    
-    
-    @IBAction func resignKeyboard() {
-        self.view.endEditing(true)
-    }
 }
-

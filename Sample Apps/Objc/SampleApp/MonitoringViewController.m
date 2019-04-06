@@ -25,11 +25,6 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 // MARK: IBAction
 /// Init Messaging SDK with brandID (account number) and LPMonitoringInitParams (For monitoring)
 - (IBAction)initSdkClicked:(id)sender {
@@ -56,6 +51,7 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
                              @"http://www.liveperson.com",
                              @"sec://Sport",
                              @"lang://Eng"];
+    
     NSArray *engagementAttributes = @[
                                       @{@"type": @"purchase", @"total": @20.0},
                                       @{@"type": @"lead", @"lead": @{@"topic": @"luxury car test drive 2015", @"value": @22.22, @"leadId": @"xyz123"}},
@@ -83,7 +79,11 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
                                                                            contextId:contextId
                                                                            sessionId:sessionId
                                                                            visitorId:visitorId];
+              } else {
+                  NSLog(@"missing campaignInfo!");
               }
+          } else {
+              NSLog(@"missing engagementDetails!");
           }
       } failure:^(NSError * _Nonnull error) {
           weakSelf.campaignInfo = nil;
@@ -101,6 +101,7 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
                              @"http://www.liveperson.com",
                              @"sec://Sport",
                              @"lang://Eng"];
+    
     NSArray *engagementAttributes = @[
                                       @{@"type": @"purchase", @"total": @20.0},
                                       @{@"type": @"lead", @"lead": @{@"topic": @"luxury car test drive 2015", @"value": @22.22, @"leadId": @"xyz123"}},
@@ -126,12 +127,23 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
     [[self view] endEditing:YES];
     
     if (self.campaignInfo != nil && self.accountTextField.text.length > 0) {
+        //LPConversationHistoryControlParam
+        LPConversationHistoryControlParam * controlParam = [[LPConversationHistoryControlParam alloc] initWithHistoryConversationsStateToDisplay: LPConversationsHistoryStateToDisplayNone
+                                                                                                                     historyConversationsMaxDays:-1
+                                                                                                                              historyMaxDaysType:LPConversationHistoryMaxDaysDateTypeStartConversationDate];
+        
+        //ConversationParamProtocol
         id <ConversationParamProtocol> conversationQuery = [[LPMessagingSDK instance] getConversationBrandQuery:self.accountTextField.text campaignInfo:self.campaignInfo];
+        
+        //LPConversationViewParams
         LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:conversationQuery
                                                                                                containerViewController:nil
                                                                                                             isViewOnly:NO
-                                                                                       conversationHistoryControlParam:nil];
+                                                                                       conversationHistoryControlParam:controlParam];
+        
         [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:nil];
+    } else {
+        NSLog(@"can not start coversation without campaignInfo and account number!");
     }
 }
 
@@ -140,9 +152,9 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
 - (IBAction)logoutClicked:(id)sender {
     [[self view] endEditing:YES];
     [[LPMessagingSDK instance] logoutWithCompletion:^{
-        
+        NSLog(@"logout from SDK");
     } failure:^(NSError * _Nonnull error) {
-        
+        NSLog(@"Error: %@",error);
     }];
 }
 

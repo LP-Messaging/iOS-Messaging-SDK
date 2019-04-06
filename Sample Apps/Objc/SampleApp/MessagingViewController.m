@@ -13,7 +13,7 @@
 
 
 #define WINDOW_SWITCH @"windowSwitch"
-#define AUTHENTIACTION_SWITCH @"authenticationSwitch"
+#define AUTHENTICATION_SWITCH @"authenticationSwitch"
 
 
 @interface MessagingViewController ()<LPMessagingSDKdelegate>
@@ -27,10 +27,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.accountTextField.text = @"ENTER_ACCOUNT_NUMBER";
+    
     BOOL windowSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:WINDOW_SWITCH];
     self.windowSwitch.on = windowSwitch;
     
-    BOOL authenticationSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:AUTHENTIACTION_SWITCH];
+    BOOL authenticationSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:AUTHENTICATION_SWITCH];
     self.authenticationSwitch.on = authenticationSwitch;
     
     [LPMessagingSDK instance].delegate = self;
@@ -39,12 +41,7 @@
         NSLog(@"LPMessaging Log: %@", log.text);
     }];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
+    
 /**
  This method sets the SDK configurations.
  For example:
@@ -62,7 +59,14 @@
  This method sets the user details such as first name, last name, profile image and phone number.
  */
 - (void)setUserDetails {
-    LPUser *user = [[LPUser alloc] initWithFirstName:self.firstNameTextField.text lastName:self.lastNametextField.text nickName:@"my nickname" uid:nil profileImageURL:@"http://www.mrbreakfast.com/ucp/342_6053_ucp.jpg" phoneNumber:@"000-0000000" employeeID:@"1111-11111"];
+    LPUser *user = [[LPUser alloc]
+                    initWithFirstName:self.firstNameTextField.text
+                    lastName:self.lastNametextField.text
+                    nickName:@"my nickname"
+                    uid:nil
+                    profileImageURL:@"http://www.mrbreakfast.com/ucp/342_6053_ucp.jpg"
+                    phoneNumber:@"000-0000000"
+                    employeeID:@"1111-11111"];
     [[LPMessagingSDK instance] setUserProfile:user brandID:self.accountTextField.text];
 }
 
@@ -80,6 +84,7 @@
 - (IBAction)initSDKClicked:(id)sender {
     NSString *account = self.accountTextField.text;
     if (account.length == 0) {
+        NSLog(@"need account number!");
         return;
     }
     
@@ -106,6 +111,10 @@
  */
 - (IBAction)showConversation:(id)sender {
     NSString *account = self.accountTextField.text;
+    if (account.length == 0) {
+        NSLog(@"need account number!");
+        return;
+    }
     
     //ConversationParamProtocol
     self.conversationQuery = [[LPMessagingSDK instance] getConversationBrandQuery:account campaignInfo:nil];
@@ -150,13 +159,17 @@
     [self setUserDetails];
 }
 
+- (IBAction)resignKeyboard {
+    [self.view endEditing:true];
+}
+    
 - (IBAction)windowSwitchChanged:(UISwitch *)sender {
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:WINDOW_SWITCH];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)authenticationSwitchChanged:(UISwitch *)sender {
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:AUTHENTIACTION_SWITCH];
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:AUTHENTICATION_SWITCH];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -243,7 +256,7 @@
  It is called when the SDK has connections issues.
  */
 - (void)LPMessagingSDKHasConnectionError:(NSString *)error {
-    
+    NSLog(@"Error: %@",error);
 }
 
 /**
@@ -259,7 +272,7 @@
  It lets you know if there is an error with the SDK and what the error is
  */
 - (void)LPMessagingSDKError:(NSError *)error {
-    
+    NSLog(@"Error: %@",error);
 }
 
 /**
@@ -333,10 +346,6 @@
  */
 - (void)LPMessagingSDKUserDeniedPermission:(enum LPPermissionTypes)permissionType {
     
-}
-
-- (IBAction)resignKeyboard {
-    [self.view endEditing:true];
 }
 
 @end

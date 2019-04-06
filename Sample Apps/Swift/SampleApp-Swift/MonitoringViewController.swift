@@ -12,56 +12,52 @@ import LPInfra
 import LPMonitoring
 
 class MonitoringViewController: UIViewController {
-    @IBOutlet var accountTextField: UITextField!
-    let consumerID = "CONSUMER_ID" // REPLACE THIS!
-    let appInstallID = "APP_INSTALL_ID" // REPLACE THIS!
-    var pageId: String?
-    var campaignInfo: LPCampaignInfo?
     
+    //MARK: - UI Properties
+    @IBOutlet var accountTextField: UITextField!
+    @IBOutlet var appInstallIdentifierTextField: UITextField!
+    
+    //MARK: - Properties
+    private var pageId: String?
+    private var campaignInfo: LPCampaignInfo?
+    
+    // Enter Your Consumer Identifier
+    private let consumerID: String? = nil
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Enter Your Account Number
+        self.accountTextField.text = nil
+        
+        // Enter Your App Install Identifier
+        self.appInstallIdentifierTextField.text = nil
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: IBActions
-    
-    /// Init Messaging SDK with brandID (account number) and LPMonitoringInitParams (For monitoring)
+
+    // MARK: - IBActions
     @IBAction func initSDKsClicked(_ sender: Any) {
-        defer {
-            self.view.endEditing(true)
-        }
+        defer { self.view.endEditing(true) }
         
         guard let accountNumber = self.accountTextField.text, !accountNumber.isEmpty else {
+            print("missing account number!")
             return
         }
         
-        let monitoringInitParams = LPMonitoringInitParams(appInstallID: appInstallID)
-
-        do {
-            try LPMessagingSDK.instance.initialize(accountNumber, monitoringInitParams: monitoringInitParams)
-        } catch let error as NSError {
-            print("initialize error: \(error)")
+        guard let appInstallID = self.appInstallIdentifierTextField.text, !appInstallID.isEmpty  else {
+            print("missing app install Identifier")
             return
         }
+        
+        initLPSDKwith(accountNumber: accountNumber, appInstallIdentifier: appInstallID)
     }
     
-    /// Get Engagement clicked selector
-    /// Send new Get Engagement using LPMonitoringAPI
-    /// CampaignInfo will be saved in the response in order to be able to use routed conversation in Messaging, using the MessagingSDK
     @IBAction func getEngagementClicked(_ sender: Any) {
-        defer {
-            self.view.endEditing(true)
-        }
-
         let entryPoints = ["tel://972737004000",
                            "http://www.liveperson.com",
                            "sec://Sport",
                            "lang://Eng"]
+        
         let engagementAttributes = [
             ["type": "purchase", "total": 20.0],
             ["type": "lead",
@@ -70,36 +66,14 @@ class MonitoringViewController: UIViewController {
                       "leadId": "xyz123"]]
         ]
 
-        let monitoringParams = LPMonitoringParams(entryPoints: entryPoints, engagementAttributes: engagementAttributes)
-        let identity = LPMonitoringIdentity(consumerID: consumerID, issuer: "")
-        LPMonitoringAPI.instance.getEngagement(identities: [identity], monitoringParams: monitoringParams, completion: { [weak self] (getEngagementResponse) in
-            print("received get engagement response with pageID: \(String(describing: getEngagementResponse.pageId)), campaignID: \(String(describing: getEngagementResponse.engagementDetails?.first?.campaignId)), engagementID: \(String(describing: getEngagementResponse.engagementDetails?.first?.engagementId))")
-            // Save PageId for future reference
-            self?.pageId = getEngagementResponse.pageId
-            if let campaignID = getEngagementResponse.engagementDetails?.first?.campaignId,
-                let engagementID = getEngagementResponse.engagementDetails?.first?.engagementId,
-                let contextID = getEngagementResponse.engagementDetails?.first?.contextId,
-                let sessionID = getEngagementResponse.sessionId,
-                let visitorID = getEngagementResponse.visitorId {
-                self?.campaignInfo = LPCampaignInfo(campaignId: campaignID, engagementId: engagementID, contextId: contextID, sessionId: sessionID, visitorId: visitorID)
-            }
-        }) { [weak self] (error) in
-            self?.campaignInfo = nil
-            print("get engagement error: \(error.userInfo.description)")
-        }
+        getEngagement(entryPoints: entryPoints, engagementAttributes: engagementAttributes)
     }
     
-    /// Send SDE clicked selector
-    /// Send new SDE using LPMonitoringAPI
-    /// PageID in the response will be saved for future request for SDE
     @IBAction func sendSDEClicked(_ sender: Any) {
-        defer {
-            self.view.endEditing(true)
-        }
-
         let entryPoints = ["http://www.liveperson-test.com",
                            "sec://Food",
                            "lang://De"]
+        
         let engagementAttributes = [
             ["type": "purchase",
              "total": 11.7,
@@ -110,8 +84,90 @@ class MonitoringViewController: UIViewController {
                       "leadId": "xyz123"]]
         ]
 
+        sendSDEwith(entryPoints: entryPoints, engagementAttributes: engagementAttributes)
+    }
+    
+    @IBAction func showConversationWithCampaignClicked(_ sender: Any) {
+        defer { self.view.endEditing(true) }
+        
+        guard let accountNumber = self.accountTextField.text, !accountNumber.isEmpty  else {
+            print("Can't show conversation without valid account number")
+            return
+        }
+        
+        guard let campaignInfo = self.campaignInfo  else {
+            print("Can't show conversation without valid campaignInfo")
+            return
+        }
+
+        showConversationWith(accountNumber: accountNumber, campaignInfo: campaignInfo)
+    }
+    
+    @IBAction func logoutClicked(_ sender: Any) {
+        logoutLPSDK()
+    }
+}
+
+// MARK: - LPMessagingSDK Helpers
+extension MonitoringViewController {
+    /**
+     This method initialize with brandID (account number) and LPMonitoringInitParams (For monitoring)
+     
+     for more information on `initialize` see:
+         https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-apis-messaging-api.html#initialize
+     */
+    private func initLPSDKwith(accountNumber: String, appInstallIdentifier: String) {
+        let monitoringInitParams = LPMonitoringInitParams(appInstallID: appInstallIdentifier)
+        
+        do {
+            try LPMessagingSDK.instance.initialize(accountNumber, monitoringInitParams: monitoringInitParams)
+        } catch let error as NSError {
+            print("initialize error: \(error)")
+        }
+    }
+    
+    /**
+     This method gets an engagement using LPMonitoingAPI
+     - NOTE: CampaignInfo will be saved in the response in order to start a conversation later (showConversation method from LPMessagingSDK)
+     
+     for more information on `showconversation` see:
+        https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-apis-monitoring-api.html#getengagement
+    */
+    private func getEngagement(entryPoints: [String], engagementAttributes: [[String:Any]]) {
+        //resetting pageId and campaignInfo
+        self.pageId = nil
+        self.campaignInfo = nil
+        
+        let monitoringParams = LPMonitoringParams(entryPoints: entryPoints, engagementAttributes: engagementAttributes)
+        let identity = LPMonitoringIdentity(consumerID: consumerID, issuer: nil)
+        LPMonitoringAPI.instance.getEngagement(identities: [identity], monitoringParams: monitoringParams, completion: { [weak self] (getEngagementResponse) in
+            print("received get engagement response with pageID: \(String(describing: getEngagementResponse.pageId)), campaignID: \(String(describing: getEngagementResponse.engagementDetails?.first?.campaignId)), engagementID: \(String(describing: getEngagementResponse.engagementDetails?.first?.engagementId))")
+            // Save PageId for future reference
+            self?.pageId = getEngagementResponse.pageId
+            if let campaignID = getEngagementResponse.engagementDetails?.first?.campaignId,
+                let engagementID = getEngagementResponse.engagementDetails?.first?.engagementId,
+                let contextID = getEngagementResponse.engagementDetails?.first?.contextId,
+                let sessionID = getEngagementResponse.sessionId,
+                let visitorID = getEngagementResponse.visitorId {
+                self?.campaignInfo = LPCampaignInfo(campaignId: campaignID, engagementId: engagementID, contextId: contextID, sessionId: sessionID, visitorId: visitorID)
+            } else {
+                print("no campaign info found!")
+            }
+        }) { (error) in
+            print("get engagement error: \(error.userInfo.description)")
+        }
+    }
+    
+    /**
+     This method sends a new SDE using LPMonitoringAPI
+     - NOTE: PageID in the response will be saved for future request for SDE
+     
+     for more information on `showconversation` see:
+        https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-apis-monitoring-api.html#sendsde
+     */
+    private func sendSDEwith(entryPoints: [String], engagementAttributes: [[String:Any]]) {
         let monitoringParams = LPMonitoringParams(entryPoints: entryPoints, engagementAttributes: engagementAttributes, pageId: self.pageId)
-        let identity = LPMonitoringIdentity(consumerID: consumerID, issuer: "BrandIssuer")
+        let identity = LPMonitoringIdentity(consumerID: consumerID, issuer: nil)
         LPMonitoringAPI.instance.sendSDE(identities: [identity], monitoringParams: monitoringParams, completion: { [weak self] (sendSdeResponse) in
             print("received send sde response with pageID: \(String(describing: sendSdeResponse.pageId))")
             // Save PageId for future reference
@@ -122,28 +178,29 @@ class MonitoringViewController: UIViewController {
         }
     }
     
-    /// Show Conversation clicked selector
-    /// Show conversation in MessagingSDK will use the saved CampaignInfo, if received, from the Get Engagement Request
-    @IBAction func showConversationWithCampaignClicked(_ sender: Any) {
-        guard let campaignInfo = self.campaignInfo, let accountNumber = self.accountTextField.text, !accountNumber.isEmpty  else {
-            print("Can't show conversation without valid campaignInfo")
-            return
-        }
-
+    /**
+     This method starts a new messaging conversation with account number and CampaignInfo (which was obtain from getEngagement)
+     
+     for more information on `showconversation` see:
+         https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-apis-messaging-api.html#showconversation
+     */
+    private func showConversationWith(accountNumber: String, campaignInfo: LPCampaignInfo) {
         let conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(accountNumber, campaignInfo: campaignInfo)
         let conversationViewParam = LPConversationViewParams(conversationQuery: conversationQuery, isViewOnly: false)
         LPMessagingSDK.instance.showConversation(conversationViewParam)
     }
     
-    /// Logout clicked selector
-    /// Logout Monitoring and Messaging SDKs - all the data will be cleared
-    @IBAction func logoutClicked(_ sender: Any) {
+    /**
+     This method logouts from Monitoring and Messaging SDKs - all the data will be cleared
+     
+     for more information on `logout` see:
+        https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-methods-logout.html
+     */
+    private func logoutLPSDK() {
         LPMessagingSDK.instance.logout(completion: {
-            
+            print("successfully logout from MessagingSDK")
         }) { (error) in
-            
+            print("failed to logout from MessagingSDK - error: \(error.localizedDescription)")
         }
     }
 }
-
-
