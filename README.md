@@ -13,26 +13,41 @@ https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-latest-releas
 
 To use the LivePerson In-App Messaging SDK, the following are required:
 
-# Version 3.5.1 and above
-* XCode 10 or later
-* Swift 4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1), or Objective-C
+# Version 3.7.1 and above
+* XCode 10.2 or later
+* Swift version 5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3), or Objective-C
 
-# Version ~3.4 
-* Xcode 10 or later
-* Swift version 4.2 (swiftlang-1000.11.37.1 clang-1000.11.45.1) or Objective-C
+# Version 3.7.0
+* XCode 10.1 or later
+* Swift version 4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1), or Objective-C
 
-# Version ~3.3
+# Version 3.6.1
+* XCode 10.1 or later
+* Swift version 4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1), or Objective-C
+
+# Version 3.6.0
+* XCode 10.1 or later
+* Swift version 4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1), or Objective-C
+
+# Version 3.5.0
 * XCode 10 or later
 * Swift version 4.2 (swiftlang-1000.11.37.1 clang-1000.11.45.1), or Objective-C
 
+# Version ~3.4 
+* Xcode 10 or later
+* Swift  version 4.2 (swiftlang-1000.11.37.1 clang-1000.11.45.1) or Objective-C
+
+# Version ~3.3
+* XCode 10 or later
+* Swift  version 4.2 (swiftlang-1000.11.37.1 clang-1000.11.45.1), or Objective-C
 
 # Version 3.1.1 - 3.3.0
 * XCode 9.3 or later
-* Swift 4.1 or later, or Objective-C
+* Swift version 4.1 or later, or Objective-C
 
 # Version 3.1 and below
 * XCode 9.2 or lower
-* Swift 4.0 or lower, or Objective-C
+* Swift version 4.0 or lower, or Objective-C
 
 Note: For information on supported operating systems and devices, refer to [System Requirements](https://s3-eu-west-1.amazonaws.com/ce-sr/CA/Admin/Sys+req/System+requirements.pdf)
 
