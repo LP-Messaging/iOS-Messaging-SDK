@@ -3,4 +3,4 @@
   #import "LPMessagingSDK-Simulator-Swift.h"
 #else
   #import "LPMessagingSDK-Device-Swift.h"
-endif
+#endif
