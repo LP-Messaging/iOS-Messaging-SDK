@@ -13,6 +13,14 @@ https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-latest-releas
 
 To use the LivePerson In-App Messaging SDK, the following are required:
 
+# Version 3.8.2 and above
+* XCode 10.2.1 or later
+* Swift version 5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5), or Objective-C
+
+# Version 3.8.1 and above
+* XCode 10.2 or later
+* Swift version 5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3), or Objective-C
+
 # Version 3.7.1 and above
 * XCode 10.2 or later
 * Swift version 5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3), or Objective-C
