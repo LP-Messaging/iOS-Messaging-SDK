@@ -17,15 +17,6 @@
 		D62EC5B91C7C427B0001C0D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D62EC5B71C7C427B0001C0D4 /* LaunchScreen.storyboard */; };
 		D62EC5D01C7C469D0001C0D4 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */; };
 		F729790C2257C770006716A5 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F729790B2257C770006716A5 /* UserNotifications.framework */; };
-		F74A9CB522A1C00F00C73837 /* LPMessagingSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74A9CB022A1C00F00C73837 /* LPMessagingSDK.framework */; };
-		F74A9CB622A1C00F00C73837 /* LPMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74A9CB122A1C00F00C73837 /* LPMonitoring.framework */; };
-		F74A9CB722A1C00F00C73837 /* LPInfra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74A9CB222A1C00F00C73837 /* LPInfra.framework */; };
-		F74A9CB822A1C00F00C73837 /* LPMessagingSDKModels.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F74A9CB322A1C00F00C73837 /* LPMessagingSDKModels.bundle */; };
-		F74A9CB922A1C00F00C73837 /* LPAMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74A9CB422A1C00F00C73837 /* LPAMS.framework */; };
-		F74A9CBA22A1C03500C73837 /* LPAMS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F74A9CB422A1C00F00C73837 /* LPAMS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F74A9CBB22A1C03500C73837 /* LPInfra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F74A9CB222A1C00F00C73837 /* LPInfra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F74A9CBC22A1C03500C73837 /* LPMessagingSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F74A9CB022A1C00F00C73837 /* LPMessagingSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F74A9CBD22A1C03500C73837 /* LPMonitoring.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F74A9CB122A1C00F00C73837 /* LPMonitoring.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,10 +26,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F74A9CBA22A1C03500C73837 /* LPAMS.framework in Embed Frameworks */,
-				F74A9CBB22A1C03500C73837 /* LPInfra.framework in Embed Frameworks */,
-				F74A9CBC22A1C03500C73837 /* LPMessagingSDK.framework in Embed Frameworks */,
-				F74A9CBD22A1C03500C73837 /* LPMonitoring.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,11 +46,6 @@
 		D62EC5BA1C7C427B0001C0D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		F729790B2257C770006716A5 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
-		F74A9CB022A1C00F00C73837 /* LPMessagingSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LPMessagingSDK.framework; path = ../../../Libraries/LPMessagingSDK.framework; sourceTree = "<group>"; };
-		F74A9CB122A1C00F00C73837 /* LPMonitoring.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LPMonitoring.framework; path = ../../../Libraries/LPMonitoring.framework; sourceTree = "<group>"; };
-		F74A9CB222A1C00F00C73837 /* LPInfra.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LPInfra.framework; path = ../../../Libraries/LPInfra.framework; sourceTree = "<group>"; };
-		F74A9CB322A1C00F00C73837 /* LPMessagingSDKModels.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = LPMessagingSDKModels.bundle; path = ../../../Libraries/LPMessagingSDKModels.bundle; sourceTree = "<group>"; };
-		F74A9CB422A1C00F00C73837 /* LPAMS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LPAMS.framework; path = ../../../Libraries/LPAMS.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,10 +53,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F74A9CB522A1C00F00C73837 /* LPMessagingSDK.framework in Frameworks */,
-				F74A9CB922A1C00F00C73837 /* LPAMS.framework in Frameworks */,
-				F74A9CB722A1C00F00C73837 /* LPInfra.framework in Frameworks */,
-				F74A9CB622A1C00F00C73837 /* LPMonitoring.framework in Frameworks */,
 				F729790C2257C770006716A5 /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,11 +80,6 @@
 		D62EC5AA1C7C427B0001C0D4 /* SampleApp-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				F74A9CB422A1C00F00C73837 /* LPAMS.framework */,
-				F74A9CB222A1C00F00C73837 /* LPInfra.framework */,
-				F74A9CB022A1C00F00C73837 /* LPMessagingSDK.framework */,
-				F74A9CB322A1C00F00C73837 /* LPMessagingSDKModels.bundle */,
-				F74A9CB122A1C00F00C73837 /* LPMonitoring.framework */,
 				D62EC5AB1C7C427B0001C0D4 /* AppDelegate.swift */,
 				D62EC5B51C7C427B0001C0D4 /* Assets.xcassets */,
 				D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */,
@@ -203,7 +176,6 @@
 				D62EC5B91C7C427B0001C0D4 /* LaunchScreen.storyboard in Resources */,
 				D62EC5B61C7C427B0001C0D4 /* Assets.xcassets in Resources */,
 				D62EC5B11C7C427B0001C0D4 /* Main.storyboard in Resources */,
-				F74A9CB822A1C00F00C73837 /* LPMessagingSDKModels.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
