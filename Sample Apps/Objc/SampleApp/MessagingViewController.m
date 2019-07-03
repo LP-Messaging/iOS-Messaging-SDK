@@ -134,20 +134,40 @@
         self.conversationViewController.conversationQuery = self.conversationQuery;
     }
     
-    //LPConversationViewParams
-    LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:self.conversationQuery
-                                                                                           containerViewController:self.conversationViewController
-                                                                                                        isViewOnly:NO
-                                                                                   conversationHistoryControlParam:controlParam];
     //LPAuthenticationParams
     LPAuthenticationParams *authenticationParams = nil;
     if (self.authenticationSwitch.on) {
-        authenticationParams = [[LPAuthenticationParams alloc] initWithAuthenticationCode:@"ENTER_AUTH_CODE"
+        authenticationParams = [[LPAuthenticationParams alloc] initWithAuthenticationCode:nil
                                                                                       jwt:nil
                                                                               redirectURI:nil
                                                                     certPinningPublicKeys:nil
                                                                        authenticationType:LPAuthenticationTypeAuthenticated];
     }
+    
+    //LPWelcomeMessageParam
+    LPWelcomeMessage * welcomeMessageParam = [[LPWelcomeMessage alloc] initWithMessage:@"How may i help you today?"
+                                                                             frequency:MessageFrequencyFirstTimeConversation];
+//
+//    LPWelcomeMessageOption * billOption = [[LPWelcomeMessageOption alloc] initWithValue:@"My latest bill statement" displayName:@"1️⃣ Bill"];
+//    LPWelcomeMessageOption * orderOption = [[LPWelcomeMessageOption alloc] initWithValue:@"A recent order placed" displayName:@"2️⃣ Orders"];
+//    LPWelcomeMessageOption * supportOption = [[LPWelcomeMessageOption alloc] initWithValue:@"Technical support" displayName:@"3️⃣ Support"];
+//    LPWelcomeMessageOption * accountOption = [[LPWelcomeMessageOption alloc] initWithValue:@"Account information" displayName:@"4️⃣ Account"];
+//    NSArray *optionsArray = [[NSArray alloc] initWithObjects:billOption, orderOption, supportOption, accountOption, nil];
+//
+//    NSError * error = nil;
+//    [welcomeMessageParam setWithOptions:optionsArray error:&error];
+//    if (error) {
+//        NSLog(@"welcome message - Error: %@",error);
+//    }
+//
+//    [welcomeMessageParam setWithNumberOfOptionsPerRow:2];
+    
+    //LPConversationViewParams
+    LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:self.conversationQuery
+                                                                                           containerViewController:self.conversationViewController
+                                                                                                        isViewOnly:NO
+                                                                                   conversationHistoryControlParam:controlParam
+                                                                                                    welcomeMessage: welcomeMessageParam];
     
     [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:authenticationParams];
     

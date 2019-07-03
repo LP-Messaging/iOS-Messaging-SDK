@@ -15,11 +15,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.9.1</string>
+	<string>3.9.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>17</string>
+	<string>18</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -29,12 +29,16 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera Privacy Setting for LiveEngage iOS SDK</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Photo Library add access to write to Photos App</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo Library Privacy Setting for LiveEngage iOS SDK</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
