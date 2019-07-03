@@ -40,7 +40,7 @@ class MessagingViewController: UIViewController {
     private var conversationViewController: ConversationViewController?
     
     // Enter Your Code if using Autherization type 'Code'
-    private let authenticationCode: String? = "ENTER_AUTH_CODE"
+    private let authenticationCode: String? = nil
     
     // Enter Your JWT if using Autherization type 'Implicit'
     private let authenticationJWT: String? = nil
@@ -192,11 +192,31 @@ extension MessagingViewController {
             self.conversationViewController?.conversationQuery = conversationQuery
         }
         
+        //LPWelcomeMessageParam
+        let welcomeMessageParam = LPWelcomeMessage(message: "How can i help you today?", frequency: .FirstTimeConversation)
+        
+//        let welcomeMessageOptions = [
+//            LPWelcomeMessageOption(value: "My latest bill statement", displayName: "1️⃣ Bill"),
+//            LPWelcomeMessageOption(value: "A recent order placed", displayName: "2️⃣ Orders"),
+//            LPWelcomeMessageOption(value: "Technical support", displayName: "3️⃣ Support"),
+//            LPWelcomeMessageOption(value: "Account information", displayName: "4️⃣ Account")
+//        ]
+//
+//        do {
+//            try welcomeMessageParam.set(options: welcomeMessageOptions)
+//        }
+//        catch {
+//            print("cannot set welcome message options | error: \(error.localizedDescription)")
+//        }
+//
+//        welcomeMessageParam.set(NumberOfOptionsPerRow: 2)
+        
         //LPConversationViewParams
         let conversationViewParams = LPConversationViewParams(conversationQuery: conversationQuery,
                                                               containerViewController: self.conversationViewController,
                                                               isViewOnly: false,
-                                                              conversationHistoryControlParam: controlParam)
+                                                              conversationHistoryControlParam: controlParam,
+                                                              welcomeMessage: welcomeMessageParam)
         
         LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
 
