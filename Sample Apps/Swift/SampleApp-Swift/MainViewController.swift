@@ -9,12 +9,22 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    // MARK: IBActions
+    
+    //MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.title = "Messaging and Monitoring"
+    }
+    
+    // MARK: - IBActions
     @IBAction func messagingClicked(_ sender: Any) {
-       self.performSegue(withIdentifier: "showMessaging", sender: self)
+        let vc = MessagingViewController()
+       self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func monitoringClicked(_ sender: Any) {
-        self.performSegue(withIdentifier: "showMonitoring", sender: self)
+        let vc = MonitoringViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

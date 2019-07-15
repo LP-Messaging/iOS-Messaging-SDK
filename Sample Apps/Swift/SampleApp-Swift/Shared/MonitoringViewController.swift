@@ -28,11 +28,13 @@ class MonitoringViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Monitoring"
+        
         // Enter Your Account Number
-        self.accountTextField.text = nil
+        self.accountTextField.text = "ENTER_ACCOUNT_NUMBER"
         
         // Enter Your App Install Identifier
-        self.appInstallIdentifierTextField.text = nil
+        self.appInstallIdentifierTextField.text = "ENTER_APP_ID"
     }
 
     // MARK: - IBActions

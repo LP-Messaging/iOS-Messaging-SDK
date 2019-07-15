@@ -15,8 +15,17 @@ class ConversationViewController: UIViewController {
 
     var account: String? = nil
     var conversationQuery: ConversationParamProtocol?
+   
+    //MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonPressed))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Menu", style: .plain, target: self, action: #selector(menuButtonPressed))
+    }
     
-    @IBAction func backButtonPressed() {
+    //MARK: - Actions
+    @objc func backButtonPressed() {
         if self.account != nil {
             self.conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(self.account!)
             if self.conversationQuery != nil {
@@ -26,7 +35,7 @@ class ConversationViewController: UIViewController {
         }
     }
     
-    @IBAction func menuButtonPressed() {
+    @objc func menuButtonPressed() {
         var style = UIAlertController.Style.actionSheet
         
         if UIDevice.current.userInterfaceIdiom == .pad {

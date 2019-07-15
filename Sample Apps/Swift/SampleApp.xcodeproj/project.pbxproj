@@ -16,7 +16,22 @@
 		D62EC5B61C7C427B0001C0D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D62EC5B51C7C427B0001C0D4 /* Assets.xcassets */; };
 		D62EC5B91C7C427B0001C0D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D62EC5B71C7C427B0001C0D4 /* LaunchScreen.storyboard */; };
 		D62EC5D01C7C469D0001C0D4 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */; };
+		F70CF8C522A99D95009F2D54 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70CF8C422A99D95009F2D54 /* StartViewController.swift */; };
 		F729790C2257C770006716A5 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F729790B2257C770006716A5 /* UserNotifications.framework */; };
+		F7E7DECD22A85C3B00A176E5 /* LPMessagingSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E7DECC22A85C3B00A176E5 /* LPMessagingSDK.framework */; };
+		F7E7DECE22A85C3B00A176E5 /* LPMessagingSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F7E7DECC22A85C3B00A176E5 /* LPMessagingSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F7E7DED022A85C3B00A176E5 /* LPInfra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E7DECF22A85C3B00A176E5 /* LPInfra.framework */; };
+		F7E7DED122A85C3B00A176E5 /* LPInfra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F7E7DECF22A85C3B00A176E5 /* LPInfra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F7E7DED322A85C3B00A176E5 /* LPAMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E7DED222A85C3B00A176E5 /* LPAMS.framework */; };
+		F7E7DED422A85C3B00A176E5 /* LPAMS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F7E7DED222A85C3B00A176E5 /* LPAMS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F7E7DED622A85C3B00A176E5 /* LPMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E7DED522A85C3B00A176E5 /* LPMonitoring.framework */; };
+		F7E7DED722A85C3B00A176E5 /* LPMonitoring.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F7E7DED522A85C3B00A176E5 /* LPMonitoring.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F7E7DEDD22A85C7900A176E5 /* LPMessagingSDKModels.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7E7DEDC22A85C7900A176E5 /* LPMessagingSDKModels.bundle */; };
+		F7E7DEEF22A8695000A176E5 /* MessagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7E7DEEE22A8695000A176E5 /* MessagingViewController.xib */; };
+		F7E7DEF622A874E400A176E5 /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E7DEF422A874E400A176E5 /* HomeTabBarViewController.swift */; };
+		F7E7DEF722A874E400A176E5 /* HomeTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7E7DEF522A874E400A176E5 /* HomeTabBarViewController.xib */; };
+		F7E7DEF922A8795C00A176E5 /* MonitoringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7E7DEF822A8795C00A176E5 /* MonitoringViewController.xib */; };
+		F7E7DEFB22A87C8000A176E5 /* ConversationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7E7DEFA22A87C8000A176E5 /* ConversationViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +41,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F7E7DED722A85C3B00A176E5 /* LPMonitoring.framework in Embed Frameworks */,
+				F7E7DECE22A85C3B00A176E5 /* LPMessagingSDK.framework in Embed Frameworks */,
+				F7E7DED422A85C3B00A176E5 /* LPAMS.framework in Embed Frameworks */,
+				F7E7DED122A85C3B00A176E5 /* LPInfra.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,7 +64,18 @@
 		D62EC5B81C7C427B0001C0D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D62EC5BA1C7C427B0001C0D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		F70CF8C422A99D95009F2D54 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		F729790B2257C770006716A5 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		F7E7DECC22A85C3B00A176E5 /* LPMessagingSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LPMessagingSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7E7DECF22A85C3B00A176E5 /* LPInfra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LPInfra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7E7DED222A85C3B00A176E5 /* LPAMS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LPAMS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7E7DED522A85C3B00A176E5 /* LPMonitoring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LPMonitoring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7E7DEDC22A85C7900A176E5 /* LPMessagingSDKModels.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = LPMessagingSDKModels.bundle; path = ../LPMessagingSDKiOS/Output/LPMessagingSDKModels.bundle; sourceTree = "<group>"; };
+		F7E7DEEE22A8695000A176E5 /* MessagingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagingViewController.xib; sourceTree = "<group>"; };
+		F7E7DEF422A874E400A176E5 /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
+		F7E7DEF522A874E400A176E5 /* HomeTabBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTabBarViewController.xib; sourceTree = "<group>"; };
+		F7E7DEF822A8795C00A176E5 /* MonitoringViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonitoringViewController.xib; sourceTree = "<group>"; };
+		F7E7DEFA22A87C8000A176E5 /* ConversationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +83,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7E7DED322A85C3B00A176E5 /* LPAMS.framework in Frameworks */,
+				F7E7DECD22A85C3B00A176E5 /* LPMessagingSDK.framework in Frameworks */,
+				F7E7DED622A85C3B00A176E5 /* LPMonitoring.framework in Frameworks */,
+				F7E7DED022A85C3B00A176E5 /* LPInfra.framework in Frameworks */,
 				F729790C2257C770006716A5 /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,6 +97,11 @@
 		D62EC59F1C7C427B0001C0D4 = {
 			isa = PBXGroup;
 			children = (
+				F7E7DEDC22A85C7900A176E5 /* LPMessagingSDKModels.bundle */,
+				F7E7DED522A85C3B00A176E5 /* LPMonitoring.framework */,
+				F7E7DED222A85C3B00A176E5 /* LPAMS.framework */,
+				F7E7DECF22A85C3B00A176E5 /* LPInfra.framework */,
+				F7E7DECC22A85C3B00A176E5 /* LPMessagingSDK.framework */,
 				D62EC5AA1C7C427B0001C0D4 /* SampleApp-Swift */,
 				D62EC5A91C7C427B0001C0D4 /* Products */,
 				F729790A2257C770006716A5 /* Frameworks */,
@@ -82,17 +121,39 @@
 			children = (
 				D62EC5AB1C7C427B0001C0D4 /* AppDelegate.swift */,
 				D62EC5B51C7C427B0001C0D4 /* Assets.xcassets */,
-				D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */,
 				D62EC5BA1C7C427B0001C0D4 /* Info.plist */,
 				D62EC5B71C7C427B0001C0D4 /* LaunchScreen.storyboard */,
-				D62EC5AF1C7C427B0001C0D4 /* Main.storyboard */,
 				CD8C6B292031B6E8008EB94B /* MainViewController.swift */,
-				D62EC5AD1C7C427B0001C0D4 /* MessagingViewController.swift */,
-				CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */,
+				F70CF8C422A99D95009F2D54 /* StartViewController.swift */,
+				D62EC5AF1C7C427B0001C0D4 /* Main.storyboard */,
 				D62EC5B21C7C427B0001C0D4 /* SampleApp_Swift.xcdatamodeld */,
 				CD3B9B371D97EA45008FF2BE /* SampleApp-Swift.entitlements */,
+				F70CF8C722A9A507009F2D54 /* Shared */,
+				F70CF8C822A9A541009F2D54 /* TabBar */,
 			);
 			path = "SampleApp-Swift";
+			sourceTree = "<group>";
+		};
+		F70CF8C722A9A507009F2D54 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */,
+				F7E7DEFA22A87C8000A176E5 /* ConversationViewController.xib */,
+				D62EC5AD1C7C427B0001C0D4 /* MessagingViewController.swift */,
+				F7E7DEEE22A8695000A176E5 /* MessagingViewController.xib */,
+				CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */,
+				F7E7DEF822A8795C00A176E5 /* MonitoringViewController.xib */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		F70CF8C822A9A541009F2D54 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				F7E7DEF422A874E400A176E5 /* HomeTabBarViewController.swift */,
+				F7E7DEF522A874E400A176E5 /* HomeTabBarViewController.xib */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		F729790A2257C770006716A5 /* Frameworks */ = {
@@ -173,9 +234,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7E7DEDD22A85C7900A176E5 /* LPMessagingSDKModels.bundle in Resources */,
+				F7E7DEFB22A87C8000A176E5 /* ConversationViewController.xib in Resources */,
+				F7E7DEF722A874E400A176E5 /* HomeTabBarViewController.xib in Resources */,
 				D62EC5B91C7C427B0001C0D4 /* LaunchScreen.storyboard in Resources */,
 				D62EC5B61C7C427B0001C0D4 /* Assets.xcassets in Resources */,
+				F7E7DEF922A8795C00A176E5 /* MonitoringViewController.xib in Resources */,
 				D62EC5B11C7C427B0001C0D4 /* Main.storyboard in Resources */,
+				F7E7DEEF22A8695000A176E5 /* MessagingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,9 +252,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7E7DEF622A874E400A176E5 /* HomeTabBarViewController.swift in Sources */,
 				D62EC5B41C7C427B0001C0D4 /* SampleApp_Swift.xcdatamodeld in Sources */,
 				D62EC5AE1C7C427B0001C0D4 /* MessagingViewController.swift in Sources */,
 				CD8C6B2C2031B811008EB94B /* MonitoringViewController.swift in Sources */,
+				F70CF8C522A99D95009F2D54 /* StartViewController.swift in Sources */,
 				D62EC5D01C7C469D0001C0D4 /* ConversationViewController.swift in Sources */,
 				D62EC5AC1C7C427B0001C0D4 /* AppDelegate.swift in Sources */,
 				CD8C6B2A2031B6E8008EB94B /* MainViewController.swift in Sources */,
@@ -332,7 +400,6 @@
 		D62EC5BE1C7C427B0001C0D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "SampleApp-Swift/SampleApp-Swift.entitlements";
@@ -356,7 +423,6 @@
 		D62EC5BF1C7C427B0001C0D4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "SampleApp-Swift/SampleApp-Swift.entitlements";

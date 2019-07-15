@@ -14,11 +14,11 @@ import LPInfra
 class MessagingViewController: UIViewController {
 
     //MARK: - UI Properties
-    @IBOutlet var accountTextField: UITextField!
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
-    @IBOutlet var windowSwitch: UISwitch!
     @IBOutlet var authenticationSwitch: UISwitch!
+    @IBOutlet var windowSwitch: UISwitch!
+    @IBOutlet var accountTextField: UITextField!
     
     //MARK: - Properties
     private var windowSwitchValue: Bool {
@@ -39,15 +39,21 @@ class MessagingViewController: UIViewController {
     
     private var conversationViewController: ConversationViewController?
     
-    // Enter Your Code if using Autherization type 'Code'
+    //
+    //  - NOTE:
+    //      Only one authentication property should be provided
+    //        - `authenticationCode`
+    //      OR
+    //        - `authenticationJWT`
+    //
     private let authenticationCode: String? = nil
-    
-    // Enter Your JWT if using Autherization type 'Implicit'
     private let authenticationJWT: String? = nil
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Messaging"
         
         // Enter Your Account Number
         self.accountTextField.text = "ENTER_ACCOUNT_NUMBER"
@@ -67,12 +73,12 @@ class MessagingViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    @IBAction func windowSwitchChanged(_ sender: UISwitch) {
-        windowSwitchValue = sender.isOn
-    }
-    
     @IBAction func authenticationSwitchChanged(_ sender: UISwitch) {
         authenticationSwitchValue = sender.isOn
+    }
+    
+    @IBAction func windowSwitchChanged(_ sender: UISwitch) {
+        windowSwitchValue = sender.isOn
     }
     
     @IBAction func initSDKsClicked(_ sender: Any) {
@@ -99,17 +105,18 @@ class MessagingViewController: UIViewController {
             self.conversationViewController = nil
         } else {
             //for ViewController Mode ONLY
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "ConversationViewController")
-            guard let convoViewController = controller as? ConversationViewController else { return }
-            self.conversationViewController = convoViewController
+            self.conversationViewController = ConversationViewController()
         }
  
         showConversationFor(accountNumber: accountNumber, authenticatedMode: authenticationSwitchValue)
         
         //do not forget to push the controller (for ViewController Mode ONLY)
-        if self.conversationViewController != nil {
-            self.navigationController?.pushViewController(self.conversationViewController!, animated: true)
+        if let conversationVC = self.conversationViewController {
+            if let navVC = self.navigationController {
+                navVC.pushViewController(conversationVC, animated: true)
+            } else {
+                self.present(conversationVC, animated: true, completion: nil)
+            }
         }
     }
     
@@ -192,31 +199,11 @@ extension MessagingViewController {
             self.conversationViewController?.conversationQuery = conversationQuery
         }
         
-        //LPWelcomeMessageParam
-        let welcomeMessageParam = LPWelcomeMessage(message: "How can i help you today?", frequency: .FirstTimeConversation)
-        
-//        let welcomeMessageOptions = [
-//            LPWelcomeMessageOption(value: "My latest bill statement", displayName: "1️⃣ Bill"),
-//            LPWelcomeMessageOption(value: "A recent order placed", displayName: "2️⃣ Orders"),
-//            LPWelcomeMessageOption(value: "Technical support", displayName: "3️⃣ Support"),
-//            LPWelcomeMessageOption(value: "Account information", displayName: "4️⃣ Account")
-//        ]
-//
-//        do {
-//            try welcomeMessageParam.set(options: welcomeMessageOptions)
-//        }
-//        catch {
-//            print("cannot set welcome message options | error: \(error.localizedDescription)")
-//        }
-//
-//        welcomeMessageParam.set(NumberOfOptionsPerRow: 2)
-        
         //LPConversationViewParams
         let conversationViewParams = LPConversationViewParams(conversationQuery: conversationQuery,
                                                               containerViewController: self.conversationViewController,
                                                               isViewOnly: false,
-                                                              conversationHistoryControlParam: controlParam,
-                                                              welcomeMessage: welcomeMessageParam)
+                                                              conversationHistoryControlParam: controlParam)
         
         LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
 

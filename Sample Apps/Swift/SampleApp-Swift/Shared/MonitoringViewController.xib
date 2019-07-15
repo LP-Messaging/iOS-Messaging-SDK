@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MonitoringViewController" customModule="SampleApp" customModuleProvider="target">
+            <connections>
+                <outlet property="accountTextField" destination="sYX-yT-3Uc" id="RMN-Gn-tJ2"/>
+                <outlet property="appInstallIdentifierTextField" destination="vI2-0N-ssy" id="RZI-L6-0aN"/>
+                <outlet property="view" destination="iN0-l3-epB" id="R4X-AP-xsD"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X93-Oc-Lu0">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7x-3K-GKa">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="328"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="HMG-jX-6tm">
+                                    <rect key="frame" x="16" y="16" width="382" height="296"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Account Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sYX-yT-3Uc">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="App Install Identifier" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vI2-0N-ssy">
+                                            <rect key="frame" x="0.0" y="41" width="382" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DcP-Pz-Yj0">
+                                            <rect key="frame" x="0.0" y="82" width="382" height="214"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iw9-cY-xKc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
+                                                    <state key="normal" title="Init SDK"/>
+                                                    <connections>
+                                                        <action selector="initSDKsClicked:" destination="-1" eventType="touchUpInside" id="Vfc-7Z-veZ"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybB-kJ-ZCr">
+                                                    <rect key="frame" x="0.0" y="46" width="382" height="30"/>
+                                                    <state key="normal" title="Get Engagement"/>
+                                                    <connections>
+                                                        <action selector="getEngagementClicked:" destination="-1" eventType="touchUpInside" id="SNA-A4-jbM"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XN8-xn-uob">
+                                                    <rect key="frame" x="0.0" y="92" width="382" height="30"/>
+                                                    <state key="normal" title="Send SDE"/>
+                                                    <connections>
+                                                        <action selector="sendSDEClicked:" destination="-1" eventType="touchUpInside" id="HLY-NX-byv"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSW-fX-UbV">
+                                                    <rect key="frame" x="0.0" y="138" width="382" height="30"/>
+                                                    <state key="normal" title="Show Conversation With Campaign"/>
+                                                    <connections>
+                                                        <action selector="showConversationWithCampaignClicked:" destination="-1" eventType="touchUpInside" id="6Vs-af-erL"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoU-r2-5gJ">
+                                                    <rect key="frame" x="0.0" y="184" width="382" height="30"/>
+                                                    <state key="normal" title="Logout"/>
+                                                    <connections>
+                                                        <action selector="logoutClicked:" destination="-1" eventType="touchUpInside" id="nCV-2I-AZ5"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ybB-kJ-ZCr" firstAttribute="width" secondItem="DcP-Pz-Yj0" secondAttribute="width" id="6kW-RN-cac"/>
+                                                <constraint firstItem="HoU-r2-5gJ" firstAttribute="width" secondItem="DcP-Pz-Yj0" secondAttribute="width" id="UfM-Rk-amv"/>
+                                                <constraint firstItem="Iw9-cY-xKc" firstAttribute="width" secondItem="DcP-Pz-Yj0" secondAttribute="width" id="lIO-br-3hu"/>
+                                                <constraint firstItem="XN8-xn-uob" firstAttribute="width" secondItem="DcP-Pz-Yj0" secondAttribute="width" id="vKq-C9-sWK"/>
+                                                <constraint firstItem="FSW-fX-UbV" firstAttribute="width" secondItem="DcP-Pz-Yj0" secondAttribute="width" id="zEX-zw-4VE"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="DcP-Pz-Yj0" firstAttribute="width" secondItem="HMG-jX-6tm" secondAttribute="width" id="74X-MM-svv"/>
+                                        <constraint firstItem="vI2-0N-ssy" firstAttribute="width" secondItem="HMG-jX-6tm" secondAttribute="width" id="7KQ-SE-rwP"/>
+                                        <constraint firstItem="sYX-yT-3Uc" firstAttribute="width" secondItem="HMG-jX-6tm" secondAttribute="width" id="Ujq-Ju-xJE"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="HMG-jX-6tm" firstAttribute="leading" secondItem="I7x-3K-GKa" secondAttribute="leading" constant="16" id="SJZ-nN-XCz"/>
+                                <constraint firstAttribute="trailing" secondItem="HMG-jX-6tm" secondAttribute="trailing" constant="16" id="fnC-ix-8aC"/>
+                                <constraint firstItem="HMG-jX-6tm" firstAttribute="top" secondItem="I7x-3K-GKa" secondAttribute="top" constant="16" id="mTQ-MB-cyy"/>
+                                <constraint firstAttribute="bottom" secondItem="HMG-jX-6tm" secondAttribute="bottom" constant="16" id="zOD-Eo-Dqn"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="I7x-3K-GKa" secondAttribute="bottom" id="3P4-pQ-3U0"/>
+                        <constraint firstItem="I7x-3K-GKa" firstAttribute="top" secondItem="X93-Oc-Lu0" secondAttribute="top" id="gqH-qd-6JZ"/>
+                        <constraint firstItem="I7x-3K-GKa" firstAttribute="leading" secondItem="X93-Oc-Lu0" secondAttribute="leading" id="rky-VX-ZkR"/>
+                        <constraint firstAttribute="trailing" secondItem="I7x-3K-GKa" secondAttribute="trailing" id="sZF-jJ-fjI"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="X93-Oc-Lu0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Dr3-93-Ux8"/>
+                <constraint firstItem="X93-Oc-Lu0" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="TrZ-2n-hPR"/>
+                <constraint firstItem="I7x-3K-GKa" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="i5V-8J-Use"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="X93-Oc-Lu0" secondAttribute="trailing" id="pvf-2h-wWw"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="X93-Oc-Lu0" secondAttribute="bottom" id="ufx-Wn-fcL"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>
+        </view>
+    </objects>
+</document>
