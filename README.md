@@ -1,17 +1,20 @@
 # LiveEngage In-App Messaging iOS SDK
-This read.me include the quick start guide for LiveEngage In-App Messaging iOS SDK in Swift and Objective-C.
-
 
 ## SDK Documentation
-Integration guide, API Documentation and Configurations can be found in Livepersons Developers Portal
+Integration guide, API Documentation and Configurations can be found in [Livepersons Developers Portal](https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-overview.html).
 
-[Quick Start Guide](https://developers.liveperson.com/consumer-experience-ios-sdk-quick-start.html)
+* [Quick Start Guide](https://developers.liveperson.com/consumer-experience-ios-sdk-quick-start.html)
 
-[Latest Release notes](https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-latest-release-notes.html)
+* [Release notes](https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-latest-release-notes.html)
 
-[SDK Attributes](https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-attributes-attributes.html)
+* [Attributes](https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-attributes-attributes.html)
 
 Note: For information on supported operating systems and devices, refer to [System Requirements](https://s3-eu-west-1.amazonaws.com/ce-sr/CA/Admin/Sys+req/System+requirements.pdf)
+
+## Installation
+* [CocoaPods](https://github.com/LivePersonInc/iOSPodSpecs)
+
+* [Quick Start Guide](https://developers.liveperson.com/consumer-experience-ios-sdk-quick-start.html)
 
 ## License
 
