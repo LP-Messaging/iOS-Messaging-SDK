@@ -1385,7 +1385,7 @@ SWIFT_CLASS("_TtC7LPInfra12LPFormEntity")
 @interface LPFormEntity (SWIFT_EXTENSION(LPInfra))
 /// Create new File instance with UID
 + (LPFormEntity * _Nonnull)createNewFormWithFormID:(NSString * _Nullable)formID invitationID:(NSString * _Nonnull)invitationID title:(NSString * _Nullable)title ownerMessage:(LPMessageEntity * _Nonnull)ownerMessage SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly, strong) LPDialogEntity * _Nonnull ownerDialog;
+@property (nonatomic, readonly, strong) LPDialogEntity * _Nullable ownerDialog;
 @end
 
 @class LPWebSocket;
@@ -1976,12 +1976,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPSDKManager
 /// \param completion completion with boolean that shows if feature is enabled/disabled which calculated using LPConfig, LPCDN and ACCDN
 ///
 + (void)isFeatureEnabledWithFeature:(enum LPMessagingSDKFeature)feature brandID:(NSString * _Nonnull)brandID useCacheIfExists:(BOOL)useCacheIfExists completion:(void (^ _Nonnull)(BOOL))completion;
-/// Check if the current brand of the conversation query is using cert pinning
-/// If there’s no available brand or conversation query this method will return false
-///
-/// returns:
-/// true for cert pinnig for the brand
-- (BOOL)isUsingCertPinning SWIFT_WARN_UNUSED_RESULT;
 - (void)clearManager;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -2113,7 +2107,8 @@ SWIFT_CLASS("_TtC7LPInfra22LPWelcomeMessageOption")
 
 
 SWIFT_CLASS("_TtC7LPInfra16LanguagesManager")
-@interface LanguagesManager : NSObject
+@interface LanguagesManager : NSObject <GeneralManagerProtocol>
+@property (nonatomic, copy) NSString * _Nullable c4mLanguage;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSDictionary<NSString *, NSString *> * _Nonnull supportedLanguages;)
 + (NSDictionary<NSString *, NSString *> * _Nonnull)supportedLanguages SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -2148,6 +2143,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LanguagesMan
 ///   </li>
 /// </ol>
 + (NSString * _Nonnull)sdkLanguageFromLocalePreferredLanguage SWIFT_WARN_UNUSED_RESULT;
+- (void)clearManager;
 @end
 
 enum LogLevel : NSInteger;
@@ -2737,9 +2733,9 @@ SWIFT_CLASS("_TtC7LPInfra8TTRModel")
 
 
 @interface UIImage (SWIFT_EXTENSION(LPInfra))
-- (UIImage * _Nonnull)imageWithTint:(UIColor * _Nonnull)tint SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIImage.imageWithTint(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (UIImage * _Nullable)imageWithTint:(UIColor * _Nonnull)tint SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIImage.imageWithTint(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Get UIImage resized by provided size
-- (UIImage * _Nonnull)resizeImageWithTargetSize:(CGSize)targetSize scale:(CGFloat)scale opaque:(BOOL)opaque SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIImage.resizeImage(targetSize:scale:opaque:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (UIImage * _Nullable)resizeImageWithTargetSize:(CGSize)targetSize scale:(CGFloat)scale opaque:(BOOL)opaque SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIImage.resizeImage(targetSize:scale:opaque:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Returns resized image size with a condition of a max height and max width
 + (CGSize)getResizedImageSizeWithImage:(UIImage * _Nonnull)image maxHeight:(CGFloat)maxHeight maxWidth:(CGFloat)maxWidth SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIImage.getResizedImageSize(image:maxHeight:maxWidth:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Gets an image, blur and return it
@@ -4212,7 +4208,7 @@ SWIFT_CLASS("_TtC7LPInfra12LPFormEntity")
 @interface LPFormEntity (SWIFT_EXTENSION(LPInfra))
 /// Create new File instance with UID
 + (LPFormEntity * _Nonnull)createNewFormWithFormID:(NSString * _Nullable)formID invitationID:(NSString * _Nonnull)invitationID title:(NSString * _Nullable)title ownerMessage:(LPMessageEntity * _Nonnull)ownerMessage SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly, strong) LPDialogEntity * _Nonnull ownerDialog;
+@property (nonatomic, readonly, strong) LPDialogEntity * _Nullable ownerDialog;
 @end
 
 @class LPWebSocket;
@@ -4803,12 +4799,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPSDKManager
 /// \param completion completion with boolean that shows if feature is enabled/disabled which calculated using LPConfig, LPCDN and ACCDN
 ///
 + (void)isFeatureEnabledWithFeature:(enum LPMessagingSDKFeature)feature brandID:(NSString * _Nonnull)brandID useCacheIfExists:(BOOL)useCacheIfExists completion:(void (^ _Nonnull)(BOOL))completion;
-/// Check if the current brand of the conversation query is using cert pinning
-/// If there’s no available brand or conversation query this method will return false
-///
-/// returns:
-/// true for cert pinnig for the brand
-- (BOOL)isUsingCertPinning SWIFT_WARN_UNUSED_RESULT;
 - (void)clearManager;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -4940,7 +4930,8 @@ SWIFT_CLASS("_TtC7LPInfra22LPWelcomeMessageOption")
 
 
 SWIFT_CLASS("_TtC7LPInfra16LanguagesManager")
-@interface LanguagesManager : NSObject
+@interface LanguagesManager : NSObject <GeneralManagerProtocol>
+@property (nonatomic, copy) NSString * _Nullable c4mLanguage;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSDictionary<NSString *, NSString *> * _Nonnull supportedLanguages;)
 + (NSDictionary<NSString *, NSString *> * _Nonnull)supportedLanguages SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -4975,6 +4966,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LanguagesMan
 ///   </li>
 /// </ol>
 + (NSString * _Nonnull)sdkLanguageFromLocalePreferredLanguage SWIFT_WARN_UNUSED_RESULT;
+- (void)clearManager;
 @end
 
 enum LogLevel : NSInteger;
@@ -5564,9 +5556,9 @@ SWIFT_CLASS("_TtC7LPInfra8TTRModel")
 
 
 @interface UIImage (SWIFT_EXTENSION(LPInfra))
-- (UIImage * _Nonnull)imageWithTint:(UIColor * _Nonnull)tint SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIImage.imageWithTint(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (UIImage * _Nullable)imageWithTint:(UIColor * _Nonnull)tint SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIImage.imageWithTint(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Get UIImage resized by provided size
-- (UIImage * _Nonnull)resizeImageWithTargetSize:(CGSize)targetSize scale:(CGFloat)scale opaque:(BOOL)opaque SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIImage.resizeImage(targetSize:scale:opaque:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (UIImage * _Nullable)resizeImageWithTargetSize:(CGSize)targetSize scale:(CGFloat)scale opaque:(BOOL)opaque SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIImage.resizeImage(targetSize:scale:opaque:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Returns resized image size with a condition of a max height and max width
 + (CGSize)getResizedImageSizeWithImage:(UIImage * _Nonnull)image maxHeight:(CGFloat)maxHeight maxWidth:(CGFloat)maxWidth SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'UIImage.getResizedImageSize(image:maxHeight:maxWidth:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
 /// Gets an image, blur and return it
