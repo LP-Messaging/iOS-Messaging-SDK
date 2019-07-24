@@ -212,6 +212,14 @@ SWIFT_CLASS("_TtC12LPMonitoring23LPGetEngagementResponse")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+SWIFT_CLASS("_TtC12LPMonitoring23LPGetLECampaignResponse")
+@interface LPGetLECampaignResponse : NSObject
+@property (nonatomic, copy) NSString * _Nullable language;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class LPMonitoringIdentity;
 @class LPMonitoringParams;
 @class NSError;
@@ -553,6 +561,14 @@ SWIFT_CLASS("_TtC12LPMonitoring23LPGetEngagementResponse")
 @property (nonatomic, copy) NSString * _Nullable sessionId;
 @property (nonatomic, copy) NSString * _Nullable visitorId;
 @property (nonatomic, copy) NSString * _Nullable pageId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC12LPMonitoring23LPGetLECampaignResponse")
+@interface LPGetLECampaignResponse : NSObject
+@property (nonatomic, copy) NSString * _Nullable language;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
