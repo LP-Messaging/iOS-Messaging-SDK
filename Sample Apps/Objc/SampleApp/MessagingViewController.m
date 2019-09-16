@@ -76,7 +76,30 @@
  */
 - (void)setCustomButton {
     UIImage *customButtonImage = [UIImage imageNamed:@"phone_icon"];
-    [[LPMessagingSDK instance] setCustomButton: customButtonImage];
+    [LPConfig defaultConfiguration].customButtonImage = customButtonImage;
+}
+
+-(void)getUnreadMessageCount {
+    NSString *account = self.accountTextField.text;
+    if (account.length == 0) {
+        NSLog(@"need account number!");
+        return;
+    }
+    
+    //NOTE: Before SDK version 4.1.0
+    id<ConversationParamProtocol> conversationQueryParam = [[LPMessagingSDK instance] getConversationBrandQuery:account campaignInfo:nil];
+    [LPMessagingSDK getUnreadMessagesCount:conversationQueryParam completion:^(NSInteger count) {
+        NSLog(@"unread message count: %ld", (long)count);
+    } failure:^(NSError * _Nonnull error) {
+        NSLog(@"unread message count - error: %@", error.localizedDescription);
+    }];
+    
+    //NOTE: After SDK version 4.1.0
+//    [LPMessagingSDK getUnreadMessagesCountWithBrandID:account completion:^(NSInteger count) {
+//        NSLog(@"unread message count: %ld", (long)count);
+//    } failure:^(NSError * _Nonnull error) {
+//        NSLog(@"unread message count - error: %@", error.localizedDescription);
+//    }];
 }
 
 #pragma mark - IBActions

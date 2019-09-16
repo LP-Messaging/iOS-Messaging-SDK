@@ -136,7 +136,29 @@ extension MessagingViewController {
         
         /* the below  lets you enter a UIBarButton to the navigation bar (in window mode).
          When the button is pressed it will call the following delegate method: LPMessagingSDKCustomButtonTapped */
-        LPConfig.defaultConfiguration.customButtonImage = UIImage(named: "phone_icon")
+        configurations.customButtonImage = UIImage(named: "phone_icon")
+    }
+    
+    private func getUnreadMessageCount() {
+        guard let accountNumber = self.accountTextField.text, !accountNumber.isEmpty else {
+            print("missing account number!")
+            return
+        }
+        
+        //NOTE: After SDK version 4.1.0
+//        LPMessagingSDK.getUnreadMessagesCount(brandID: accountNumber, completion: { (count) in
+//            print("unread message count: \(count)")
+//        }) { (error) in
+//            print("unread message count - error: \(error.localizedDescription)")
+//        }
+        
+        //NOTE: Before SDK version 4.1.0
+        let conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(accountNumber)
+        LPMessagingSDK.getUnreadMessagesCount(conversationQuery, completion: { (count) in
+            print("unread message count: \(count)")
+        }) { (error) in
+            print("unread message count - error: \(error.localizedDescription)")
+        }
     }
     
     /**
