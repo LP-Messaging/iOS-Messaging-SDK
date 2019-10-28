@@ -50,7 +50,7 @@ class MessagingViewController: UIViewController {
         super.viewDidLoad()
         
         // Enter Your Account Number
-        self.accountTextField.text = "14800077"
+        self.accountTextField.text = "ENTER_ACCOUNT_NUMBER"
         
         self.windowSwitch.isOn = windowSwitchValue
         self.authenticationSwitch.isOn = authenticationSwitchValue
@@ -203,7 +203,7 @@ extension MessagingViewController {
                                                           jwt: authenticationJWT,
                                                           redirectURI: nil,
                                                           certPinningPublicKeys: nil,
-                                                          authenticationType: .signup)
+                                                          authenticationType: .authenticated)
         }
         
         // update Account number and ConversationQuery (for ViewController Mode ONLY)
