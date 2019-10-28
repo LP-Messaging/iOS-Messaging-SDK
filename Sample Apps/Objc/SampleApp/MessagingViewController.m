@@ -50,9 +50,14 @@
  */
 - (void)setSDKConfigurations {
     LPConfig *configurations = [LPConfig defaultConfiguration];
-    configurations.remoteUserBubbleBackgroundColor = [UIColor blueColor];
-    configurations.userBubbleBackgroundColor = [UIColor lightGrayColor];
-    [self setCustomButton];
+    
+    
+    /**
+     This method lets you enter a UIBarButton to the navigation bar (in window mode).
+     When the button is pressed it will call the following delegate method: LPMessagingSDKCustomButtonTapped
+     */
+    UIImage *customButtonImage = [UIImage imageNamed:@"phone_icon"];
+    configurations.customButtonImage = customButtonImage;
 }
 
 /**
@@ -68,15 +73,6 @@
                     phoneNumber:@"000-0000000"
                     employeeID:@"1111-11111"];
     [[LPMessagingSDK instance] setUserProfile:user brandID:self.accountTextField.text];
-}
-
-/**
- This method lets you enter a UIBarButton to the navigation bar (in window mode).
- When the button is pressed it will call the following delegate method: LPMessagingSDKCustomButtonTapped
- */
-- (void)setCustomButton {
-    UIImage *customButtonImage = [UIImage imageNamed:@"phone_icon"];
-    [LPConfig defaultConfiguration].customButtonImage = customButtonImage;
 }
 
 -(void)getUnreadMessageCount {
@@ -323,14 +319,6 @@
  It is called when a new conversation has started, from the agent or from the consumer side.
  */
 - (void)LPMessagingSDKConversationStarted:(NSString *)conversationID {
-    
-}
-
-/**
- This delegate method is optional.
- It is called when a conversation has ended, from the agent or from the consumer side.
- */
-- (void)LPMessagingSDKConversationEnded:(NSString *)conversationID {
     
 }
 

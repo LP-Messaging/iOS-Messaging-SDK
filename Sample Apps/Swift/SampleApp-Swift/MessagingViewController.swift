@@ -50,7 +50,7 @@ class MessagingViewController: UIViewController {
         super.viewDidLoad()
         
         // Enter Your Account Number
-        self.accountTextField.text = "ENTER_ACCOUNT_NUMBER"
+        self.accountTextField.text = "14800077"
         
         self.windowSwitch.isOn = windowSwitchValue
         self.authenticationSwitch.isOn = authenticationSwitchValue
@@ -131,8 +131,6 @@ extension MessagingViewController {
      */
     private func setSDKConfigurations() {
         let configurations = LPConfig.defaultConfiguration
-        configurations.remoteUserBubbleBackgroundColor = UIColor.blue
-        configurations.userBubbleBackgroundColor = UIColor.lightGray
         
         /* the below  lets you enter a UIBarButton to the navigation bar (in window mode).
          When the button is pressed it will call the following delegate method: LPMessagingSDKCustomButtonTapped */
@@ -205,7 +203,7 @@ extension MessagingViewController {
                                                           jwt: authenticationJWT,
                                                           redirectURI: nil,
                                                           certPinningPublicKeys: nil,
-                                                          authenticationType: .authenticated)
+                                                          authenticationType: .signup)
         }
         
         // update Account number and ConversationQuery (for ViewController Mode ONLY)
