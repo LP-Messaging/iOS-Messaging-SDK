@@ -131,8 +131,6 @@ extension MessagingViewController {
      */
     private func setSDKConfigurations() {
         let configurations = LPConfig.defaultConfiguration
-        configurations.remoteUserBubbleBackgroundColor = UIColor.blue
-        configurations.userBubbleBackgroundColor = UIColor.lightGray
         
         /* the below  lets you enter a UIBarButton to the navigation bar (in window mode).
          When the button is pressed it will call the following delegate method: LPMessagingSDKCustomButtonTapped */
