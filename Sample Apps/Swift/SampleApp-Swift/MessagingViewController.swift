@@ -213,7 +213,7 @@ extension MessagingViewController {
         }
         
         //LPWelcomeMessageParam
-        let welcomeMessageParam = LPWelcomeMessage(message: "How can i help you today?", frequency: .FirstTimeConversation)
+        let welcomeMessageParam = LPWelcomeMessage(message: LanguagesManager.localizedStringForKey(LPLanguagesKeys.hiMessage), frequency: .FirstTimeConversation)
         
 //        let welcomeMessageOptions = [
 //            LPWelcomeMessageOption(value: "My latest bill statement", displayName: "1️⃣ Bill"),
