@@ -128,7 +128,7 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
     
     if (self.campaignInfo != nil && self.accountTextField.text.length > 0) {
         //LPConversationHistoryControlParam
-        LPConversationHistoryControlParam * controlParam = [[LPConversationHistoryControlParam alloc] initWithHistoryConversationsStateToDisplay: LPConversationsHistoryStateToDisplayNone
+        LPConversationHistoryControlParam * controlParam = [[LPConversationHistoryControlParam alloc] initWithHistoryConversationsStateToDisplay: LPConversationsHistoryStateToDisplayAll
                                                                                                                      historyConversationsMaxDays:-1
                                                                                                                               historyMaxDaysType:LPConversationHistoryMaxDaysDateTypeStartConversationDate];
         
