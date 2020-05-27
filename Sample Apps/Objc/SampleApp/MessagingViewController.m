@@ -37,9 +37,7 @@
     
     [LPMessagingSDK instance].delegate = self;
     [self setSDKConfigurations];
-    [[LPMessagingSDK instance] subscribeLogEvents:LogLevelInfo logEvent:^(LPLog *log) {
-        NSLog(@"LPMessaging Log: %@", log.text);
-    }];
+    [LPInfraFacade setLoggingLevelWithLevel:LPLoggingLevelINFO];
 }
     
 /**
@@ -139,7 +137,7 @@
     self.conversationQuery = [[LPMessagingSDK instance] getConversationBrandQuery:account campaignInfo:nil];
     
     //LPConversationHistoryControlParam
-    LPConversationHistoryControlParam * controlParam = [[LPConversationHistoryControlParam alloc] initWithHistoryConversationsStateToDisplay: LPConversationsHistoryStateToDisplayNone
+    LPConversationHistoryControlParam * controlParam = [[LPConversationHistoryControlParam alloc] initWithHistoryConversationsStateToDisplay: LPConversationsHistoryStateToDisplayAll
                                                                                                                  historyConversationsMaxDays:-1
                                                                                                                           historyMaxDaysType:LPConversationHistoryMaxDaysDateTypeStartConversationDate];
     //ConversationViewController
