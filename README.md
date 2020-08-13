@@ -5,7 +5,7 @@ Integration guide, API Documentation and Configurations can be found in [Liveper
 
 * [Quick Start Guide](https://developers.liveperson.com/consumer-experience-ios-sdk-quick-start.html)
 
-* [Release notes](https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-latest-release-notes.html)
+* [Release notes](https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-release-notes-all-releases.html)
 
 * [Attributes](https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-attributes-attributes.html)
 
