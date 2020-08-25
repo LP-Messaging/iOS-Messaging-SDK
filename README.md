@@ -21,7 +21,7 @@ Note: For information on supported operating systems and devices, refer to [Syst
 ## Installation
 * [CocoaPods](https://github.com/LivePersonInc/iOSPodSpecs)
 
-> :warning:  **SDK 6.0 uses XCFrameworks for distribution, this are only supported on CocoaPod version 1.9.0 and greater.**
+> :warning:  **SDK 6.0 or above uses XCFrameworks for distribution, this are only supported on CocoaPod version 1.9.0 and greater.**
 
 ## License
 
