@@ -8,8 +8,6 @@
 
 import UIKit
 import LPMessagingSDK
-import LPAMS
-import LPInfra
 
 class MessagingViewController: UIViewController {
 
@@ -50,14 +48,14 @@ class MessagingViewController: UIViewController {
         super.viewDidLoad()
         
         // Enter Your Account Number
-        self.accountTextField.text = "ENTER_ACCOUNT_NUMBER"
+        self.accountTextField.text = "14800077"
         
         self.windowSwitch.isOn = windowSwitchValue
         self.authenticationSwitch.isOn = authenticationSwitchValue
         
-        LPMessagingSDK.instance.delegate = self
+        LPMessaging.instance.delegate = self
         self.setSDKConfigurations()
-        LPInfraFacade.setLoggingLevel(level: .INFO)
+        LPMessaging.instance.setLoggingLevel(level: .INFO)
     }
 
     //MARK: - IBActions
@@ -141,16 +139,8 @@ extension MessagingViewController {
             return
         }
         
-        //NOTE: After SDK version 4.1.0
-//        LPMessagingSDK.getUnreadMessagesCount(brandID: accountNumber, completion: { (count) in
-//            print("unread message count: \(count)")
-//        }) { (error) in
-//            print("unread message count - error: \(error.localizedDescription)")
-//        }
-        
-        //NOTE: Before SDK version 4.1.0
-        let conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(accountNumber)
-        LPMessagingSDK.getUnreadMessagesCount(conversationQuery, completion: { (count) in
+        let conversationQuery = LPMessaging.instance.getConversationBrandQuery(accountNumber)
+        LPMessaging.instance.getUnreadMessagesCount(conversationQuery, completion: { (count) in
             print("unread message count: \(count)")
         }) { (error) in
             print("unread message count - error: \(error.localizedDescription)")
@@ -165,7 +155,7 @@ extension MessagingViewController {
      */
     private func initLPSDKwith(accountNumber: String){
         do {
-            try LPMessagingSDK.instance.initialize(accountNumber)
+            try LPMessaging.instance.initialize(accountNumber)
         } catch let error as NSError {
             print("initialize error: \(error)")
         }
@@ -187,7 +177,7 @@ extension MessagingViewController {
      */
     private func showConversationFor(accountNumber: String, authenticatedMode: Bool) {
         //ConversationParamProtocol
-        let conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(accountNumber)
+        let conversationQuery = LPMessaging.instance.getConversationBrandQuery(accountNumber)
         
         //LPConversationHistoryControlParam
         let controlParam = LPConversationHistoryControlParam(historyConversationsStateToDisplay: .all,
@@ -201,7 +191,7 @@ extension MessagingViewController {
                                                           jwt: authenticationJWT,
                                                           redirectURI: nil,
                                                           certPinningPublicKeys: nil,
-                                                          authenticationType: .authenticated)
+                                                          authenticationType: .signup)
         }
         
         // update Account number and ConversationQuery (for ViewController Mode ONLY)
@@ -211,8 +201,8 @@ extension MessagingViewController {
         }
         
         //LPWelcomeMessageParam
-        let welcomeMessageParam = LPWelcomeMessage(message: LanguagesManager.localizedStringForKey(LPLanguagesKeys.hiMessage), frequency: .FirstTimeConversation)
-        
+        let welcomeMessageParam = LPWelcomeMessage(message: "Hi", frequency: .FirstTimeConversation)
+
 //        let welcomeMessageOptions = [
 //            LPWelcomeMessageOption(value: "My latest bill statement", displayName: "1️⃣ Bill"),
 //            LPWelcomeMessageOption(value: "A recent order placed", displayName: "2️⃣ Orders"),
@@ -236,7 +226,7 @@ extension MessagingViewController {
                                                               conversationHistoryControlParam: controlParam,
                                                               welcomeMessage: welcomeMessageParam)
         
-        LPMessagingSDK.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
+        LPMessaging.instance.showConversation(conversationViewParams, authenticationParams: authenticationParams)
 
         self.setUserDetails()
     }
@@ -255,7 +245,7 @@ extension MessagingViewController {
                           profileImageURL: "http://www.mrbreakfast.com/ucp/342_6053_ucp.jpg",
                           phoneNumber: nil,
                           employeeID: "1111-1111")
-        LPMessagingSDK.instance.setUserProfile(user, brandID: self.accountTextField.text!)
+        LPMessaging.instance.setUserProfile(user, brandID: self.accountTextField.text!)
     }
     
     /**
@@ -265,10 +255,10 @@ extension MessagingViewController {
          https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-methods-logout.html
      */
     private func logoutLPSDK() {
-        LPMessagingSDK.instance.logout(completion: {
+        LPMessaging.instance.logout(completion: {
             print("successfully logout from MessagingSDK")
         }) { (error) in
-            print("failed to logout from MessagingSDK - error: \(error.localizedDescription)")
+            print("failed to logout from MessagingSDK - error: \(error)")
         }
     }
 }
