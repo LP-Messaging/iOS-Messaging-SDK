@@ -2587,9 +2587,6 @@ extension LPMessaging {
   public var type: LPMessagingSDK.NotificationPayload.PayloadType?
   @objc deinit
 }
-extension UIImageView : UIKit.UIGestureRecognizerDelegate {
-  @objc dynamic public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
-}
 @objcMembers @objc public class LPNotification : ObjectiveC.NSObject {
   @objc public var text: Swift.String
   @objc public var user: LPMessagingSDK.LPUser

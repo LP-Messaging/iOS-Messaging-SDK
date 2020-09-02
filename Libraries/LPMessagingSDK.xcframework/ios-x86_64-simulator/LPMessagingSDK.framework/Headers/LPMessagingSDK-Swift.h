@@ -2393,11 +2393,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8TTRModel")
 
 
 
-@interface UIImageView (SWIFT_EXTENSION(LPMessagingSDK)) <UIGestureRecognizerDelegate>
-- (BOOL)gestureRecognizer:(UIGestureRecognizer * _Nonnull)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer * _Nonnull)otherGestureRecognizer SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
 
 
 
