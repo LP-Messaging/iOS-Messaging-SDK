@@ -8,6 +8,8 @@
 
 #import "MessagingViewController.h"
 #import <LPMessagingSDK/LPMessagingSDK.h>
+#import <LPInfra/LPInfra.h>
+#import <LPAMS/LPAMS.h>
 
 
 #define WINDOW_SWITCH @"windowSwitch"
@@ -33,9 +35,9 @@
     BOOL authenticationSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:AUTHENTICATION_SWITCH];
     self.authenticationSwitch.on = authenticationSwitch;
     
-    [LPMessaging instance].delegate = self;
+    [LPMessagingSDK instance].delegate = self;
     [self setSDKConfigurations];
-    [[LPMessaging instance] setLoggingLevelWithLevel:LPLoggingLevelINFO];
+    [LPInfraFacade setLoggingLevelWithLevel:LPLoggingLevelINFO];
 }
     
 /**
@@ -68,7 +70,7 @@
                     profileImageURL:@"http://www.mrbreakfast.com/ucp/342_6053_ucp.jpg"
                     phoneNumber:@"000-0000000"
                     employeeID:@"1111-11111"];
-    [[LPMessaging instance] setUserProfile:user brandID:self.accountTextField.text];
+    [[LPMessagingSDK instance] setUserProfile:user brandID:self.accountTextField.text];
 }
 
 -(void)getUnreadMessageCount {
@@ -78,12 +80,20 @@
         return;
     }
     
-    id<ConversationParamProtocol> conversationQueryParam = [[LPMessaging instance] getConversationBrandQuery:account campaignInfo:nil];
-    [[LPMessaging instance] getUnreadMessagesCount:conversationQueryParam authenticationParams:nil completion:^(NSInteger count) {
+    //NOTE: Before SDK version 4.1.0
+    id<ConversationParamProtocol> conversationQueryParam = [[LPMessagingSDK instance] getConversationBrandQuery:account campaignInfo:nil];
+    [LPMessagingSDK getUnreadMessagesCount:conversationQueryParam completion:^(NSInteger count) {
         NSLog(@"unread message count: %ld", (long)count);
     } failure:^(NSError * _Nonnull error) {
         NSLog(@"unread message count - error: %@", error.localizedDescription);
     }];
+    
+    //NOTE: After SDK version 4.1.0
+//    [LPMessagingSDK getUnreadMessagesCountWithBrandID:account completion:^(NSInteger count) {
+//        NSLog(@"unread message count: %ld", (long)count);
+//    } failure:^(NSError * _Nonnull error) {
+//        NSLog(@"unread message count - error: %@", error.localizedDescription);
+//    }];
 }
 
 #pragma mark - IBActions
@@ -96,7 +106,7 @@
     }
     
     NSError *error = nil;
-    [[LPMessaging instance] initialize:account monitoringInitParams:nil error:&error];
+    [[LPMessagingSDK instance] initialize:account monitoringInitParams:nil error:&error];
     if (error) {
         NSLog(@"LPMessagingSDK Initialize Error: %@",error);
         return;
@@ -124,7 +134,7 @@
     }
     
     //ConversationParamProtocol
-    self.conversationQuery = [[LPMessaging instance] getConversationBrandQuery:account campaignInfo:nil];
+    self.conversationQuery = [[LPMessagingSDK instance] getConversationBrandQuery:account campaignInfo:nil];
     
     //LPConversationHistoryControlParam
     LPConversationHistoryControlParam * controlParam = [[LPConversationHistoryControlParam alloc] initWithHistoryConversationsStateToDisplay: LPConversationsHistoryStateToDisplayAll
@@ -176,7 +186,7 @@
                                                                                    conversationHistoryControlParam:controlParam
                                                                                                     welcomeMessage: welcomeMessageParam];
     
-    [[LPMessaging instance] showConversation:conversationViewParams authenticationParams:authenticationParams];
+    [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:authenticationParams];
     
     //needed for ViewController Mode (Non-Window mode)
     if (self.conversationViewController != nil) {

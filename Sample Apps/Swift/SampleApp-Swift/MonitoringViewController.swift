@@ -8,6 +8,8 @@
 
 import UIKit
 import LPMessagingSDK
+import LPInfra
+import LPMonitoring
 
 class MonitoringViewController: UIViewController {
     
@@ -118,7 +120,7 @@ extension MonitoringViewController {
         let monitoringInitParams = LPMonitoringInitParams(appInstallID: appInstallIdentifier)
         
         do {
-            try LPMessaging.instance.initialize(accountNumber, monitoringInitParams: monitoringInitParams)
+            try LPMessagingSDK.instance.initialize(accountNumber, monitoringInitParams: monitoringInitParams)
         } catch let error as NSError {
             print("initialize error: \(error)")
         }
@@ -138,7 +140,7 @@ extension MonitoringViewController {
         
         let monitoringParams = LPMonitoringParams(entryPoints: entryPoints, engagementAttributes: engagementAttributes)
         let identity = LPMonitoringIdentity(consumerID: consumerID, issuer: nil)
-        LPMessaging.instance.getEngagement(identities: [identity], monitoringParams: monitoringParams, completion: { [weak self] (getEngagementResponse) in
+        LPMonitoringAPI.instance.getEngagement(identities: [identity], monitoringParams: monitoringParams, completion: { [weak self] (getEngagementResponse) in
             print("received get engagement response with pageID: \(String(describing: getEngagementResponse.pageId)), campaignID: \(String(describing: getEngagementResponse.engagementDetails?.first?.campaignId)), engagementID: \(String(describing: getEngagementResponse.engagementDetails?.first?.engagementId))")
             // Save PageId for future reference
             self?.pageId = getEngagementResponse.pageId
@@ -166,7 +168,7 @@ extension MonitoringViewController {
     private func sendSDEwith(entryPoints: [String], engagementAttributes: [[String:Any]]) {
         let monitoringParams = LPMonitoringParams(entryPoints: entryPoints, engagementAttributes: engagementAttributes, pageId: self.pageId)
         let identity = LPMonitoringIdentity(consumerID: consumerID, issuer: nil)
-        LPMessaging.instance.sendSDE(identities: [identity], monitoringParams: monitoringParams, completion: { [weak self] (sendSdeResponse) in
+        LPMonitoringAPI.instance.sendSDE(identities: [identity], monitoringParams: monitoringParams, completion: { [weak self] (sendSdeResponse) in
             print("received send sde response with pageID: \(String(describing: sendSdeResponse.pageId))")
             // Save PageId for future reference
             self?.pageId = sendSdeResponse.pageId
@@ -183,9 +185,9 @@ extension MonitoringViewController {
          https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-sdk-apis-messaging-api.html#showconversation
      */
     private func showConversationWith(accountNumber: String, campaignInfo: LPCampaignInfo) {
-        let conversationQuery = LPMessaging.instance.getConversationBrandQuery(accountNumber, campaignInfo: campaignInfo)
+        let conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(accountNumber, campaignInfo: campaignInfo)
         let conversationViewParam = LPConversationViewParams(conversationQuery: conversationQuery, isViewOnly: false)
-        LPMessaging.instance.showConversation(conversationViewParam)
+        LPMessagingSDK.instance.showConversation(conversationViewParam)
     }
     
     /**
@@ -195,10 +197,10 @@ extension MonitoringViewController {
         https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-methods-logout.html
      */
     private func logoutLPSDK() {
-        LPMessaging.instance.logout(completion: {
+        LPMessagingSDK.instance.logout(completion: {
             print("successfully logout from MessagingSDK")
         }) { (error) in
-            print("failed to logout from MessagingSDK - error: \(error)")
+            print("failed to logout from MessagingSDK - error: \(error.localizedDescription)")
         }
     }
 }

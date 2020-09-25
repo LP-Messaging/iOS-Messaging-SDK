@@ -11,7 +11,7 @@
 @implementation ConversationViewController
 
 - (IBAction)backButtonPressed:(id)sender {
-    [[LPMessaging instance] removeConversation:self.conversationQuery];
+    [[LPMessagingSDK instance] removeConversation:self.conversationQuery];
     [[self navigationController] popViewControllerAnimated:true];
 }
 
@@ -31,21 +31,21 @@
      This is how to resolve a conversation
      */
     UIAlertAction *resolveAction = [UIAlertAction actionWithTitle:@"Resolve" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[LPMessaging instance] resolveConversation:self.conversationQuery];
+        [[LPMessagingSDK instance] resolveConversation:self.conversationQuery];
     }];
     
     
-    NSString *urgentTitle = [[LPMessaging instance] isUrgent:self.conversationQuery] ? @"Dismiss Urgent" : @"Mark as Urgent";
+    NSString *urgentTitle = [[LPMessagingSDK instance] isUrgent:self.conversationQuery] ? @"Dismiss Urgent" : @"Mark as Urgent";
     
     /**
      This is how to manage the urgency state of the conversation
      */
     UIAlertAction *urgentAction = [UIAlertAction actionWithTitle:urgentTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        if ([[LPMessaging instance] isUrgent:self.conversationQuery]) {
-            [[LPMessaging instance] dismissUrgent:self.conversationQuery];
+        if ([[LPMessagingSDK instance] isUrgent:self.conversationQuery]) {
+            [[LPMessagingSDK instance] dismissUrgent:self.conversationQuery];
         } else {
-            [[LPMessaging instance] markAsUrgent:self.conversationQuery];
+            [[LPMessagingSDK instance] markAsUrgent:self.conversationQuery];
         }
     }];
     
