@@ -26,11 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        LPMessaging.instance.registerPushNotifications(token: deviceToken, notificationDelegate: self)
+        LPMessagingSDK.instance.registerPushNotifications(token: deviceToken, notificationDelegate: self)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        LPMessaging.instance.handlePush(userInfo)
+        LPMessagingSDK.instance.handlePush(userInfo)
     }
 }
 

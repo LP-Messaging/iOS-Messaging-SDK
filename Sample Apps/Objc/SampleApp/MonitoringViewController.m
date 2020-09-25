@@ -7,6 +7,8 @@
 //
 
 #import "MonitoringViewController.h"
+#import <LPMonitoring/LPMonitoring.h>
+#import <LPInfra/LPInfra.h>
 #import <LPMessagingSDK/LPMessagingSDK.h>
 
 NSString * const consumerID = @"CONSUMER_ID"; // REPLACE THIS!
@@ -31,7 +33,7 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
     if (account.length > 0) {
         LPMonitoringInitParams *monitoringInitParams = [[LPMonitoringInitParams alloc] initWithAppInstallID: account];
         NSError *error = nil;
-        [[LPMessaging instance] initialize:account monitoringInitParams:monitoringInitParams error:&error];
+        [[LPMessagingSDK instance] initialize:account monitoringInitParams:monitoringInitParams error:&error];
         if (error) {
             NSLog(@"LPMessagingSDK Initialize Error: %@",error);
             return;
@@ -61,7 +63,7 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
     __weak MonitoringViewController *weakSelf = self;
       LPMonitoringIdentity *identity = [[LPMonitoringIdentity alloc] initWithConsumerID:consumerID
                                                                                  issuer:@""];
-      [[LPMessaging instance] getEngagementWithIdentities:@[identity] monitoringParams:monitoringParams completion:^(LPGetEngagementResponse * _Nonnull getEngagementResponse) {
+      [[LPMonitoringAPI instance] getEngagementWithIdentities:@[identity] monitoringParams:monitoringParams completion:^(LPGetEngagementResponse * _Nonnull getEngagementResponse) {
           weakSelf.pageId = getEngagementResponse.pageId;
           if (getEngagementResponse.engagementDetails.count > 0) {
               weakSelf.pageId = getEngagementResponse.pageId;
@@ -111,7 +113,7 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
                                                                                     pageId:@"pageId"];
     LPMonitoringIdentity *identity = [[LPMonitoringIdentity alloc] initWithConsumerID:consumerID
                                                                                issuer:@"BrandIssuer"];
-    [[LPMessaging instance] sendSDEWithIdentities:@[identity] monitoringParams:monitoringParams completion:^(LPSendSDEResponse * _Nonnull sendSdeResponse) {
+    [[LPMonitoringAPI instance] sendSDEWithIdentities:@[identity] monitoringParams:monitoringParams completion:^(LPSendSDEResponse * _Nonnull sendSdeResponse) {
         weakSelf.pageId = sendSdeResponse.pageId;
     } failure:^(NSError * _Nonnull error) {
         weakSelf.campaignInfo = nil;
@@ -131,7 +133,7 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
                                                                                                                               historyMaxDaysType:LPConversationHistoryMaxDaysDateTypeStartConversationDate];
         
         //ConversationParamProtocol
-        id <ConversationParamProtocol> conversationQuery = [[LPMessaging instance] getConversationBrandQuery:self.accountTextField.text campaignInfo:self.campaignInfo];
+        id <ConversationParamProtocol> conversationQuery = [[LPMessagingSDK instance] getConversationBrandQuery:self.accountTextField.text campaignInfo:self.campaignInfo];
         
         //LPConversationViewParams
         LPConversationViewParams *conversationViewParams = [[LPConversationViewParams alloc] initWithConversationQuery:conversationQuery
@@ -139,7 +141,7 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
                                                                                                             isViewOnly:NO
                                                                                        conversationHistoryControlParam:controlParam];
         
-        [[LPMessaging instance] showConversation:conversationViewParams authenticationParams:nil];
+        [[LPMessagingSDK instance] showConversation:conversationViewParams authenticationParams:nil];
     } else {
         NSLog(@"can not start coversation without campaignInfo and account number!");
     }
@@ -149,9 +151,9 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
 /// Logout Messaging SDK - all the data will be cleared
 - (IBAction)logoutClicked:(id)sender {
     [[self view] endEditing:YES];
-    [[LPMessaging instance] logoutWithCompletion:^{
+    [[LPMessagingSDK instance] logoutWithCompletion:^{
         NSLog(@"logout from SDK");
-    } failure:^(NSArray<NSError *> * _Nonnull error) {
+    } failure:^(NSError * _Nonnull error) {
         NSLog(@"Error: %@",error);
     }];
 }

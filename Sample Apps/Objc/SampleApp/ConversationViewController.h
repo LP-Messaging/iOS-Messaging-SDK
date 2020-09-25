@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <LPMessagingSDK/LPMessagingSDK.h>
+#import <LPAMS/LPAMS.h>
 
 @interface ConversationViewController : UIViewController
 
