@@ -1029,6 +1029,10 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// Default avatar image for Brand.
 /// If setting nil - default avatar image will be used with <code>remoteUserAvatarBackgroundColor</code> and <code>remoteUserAvatarIconColor</code>
 @property (nonatomic, strong) UIImage * _Nullable brandAvatarImage;
+/// the uiimageview content mode for the brand avatar image.
+/// note:
+/// this will be applied if a brandAvatarImage is set
+@property (nonatomic) UIViewContentMode brandAvatarImageContentMode;
 /// Background color of Agent’s default avatar in CSAT.
 @property (nonatomic, strong) UIColor * _Nonnull csatAgentAvatarBackgroundColor;
 /// Icon color of Agent’s default avatar in CSAT.
@@ -4100,6 +4104,10 @@ SWIFT_CLASS("_TtC7LPInfra8LPConfig")
 /// Default avatar image for Brand.
 /// If setting nil - default avatar image will be used with <code>remoteUserAvatarBackgroundColor</code> and <code>remoteUserAvatarIconColor</code>
 @property (nonatomic, strong) UIImage * _Nullable brandAvatarImage;
+/// the uiimageview content mode for the brand avatar image.
+/// note:
+/// this will be applied if a brandAvatarImage is set
+@property (nonatomic) UIViewContentMode brandAvatarImageContentMode;
 /// Background color of Agent’s default avatar in CSAT.
 @property (nonatomic, strong) UIColor * _Nonnull csatAgentAvatarBackgroundColor;
 /// Icon color of Agent’s default avatar in CSAT.
