@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>LPSampleSwift</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>
@@ -19,20 +21,28 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>5.2.1</string>
+	<string>6.1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>34</string>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Calendar Privacy Setting for LiveEngage iOS SDK</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera Privacy Setting for LiveEngage iOS SDK</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Contact Privacy Setting for LiveEngage iOS SDK</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone Privacy Setting for LiveEngage iOS SDK</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Sample App wants to add files to your Photos app.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -62,5 +72,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

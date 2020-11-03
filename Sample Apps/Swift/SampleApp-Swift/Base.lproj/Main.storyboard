@@ -1,204 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="abs-7c-Atn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="abs-7c-Atn">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Messaging View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="MessagingViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="YVz-GX-sQV">
-                                <rect key="frame" x="24" y="16" width="327" height="314"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yJa-bc-pBc">
-                                        <rect key="frame" x="0.0" y="0.0" width="327" height="30"/>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="fgT-UW-AnW"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="2je-Re-ZAd"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nP4-dT-STk">
-                                        <rect key="frame" x="0.0" y="42" width="327" height="30"/>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Rh4-Mu-wRZ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="AFw-p1-sPh"/>
-                                        </connections>
-                                    </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AhW-by-kN3">
-                                        <rect key="frame" x="0.0" y="84" width="327" height="70"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="FaJ-JH-4o0">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="31"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authentication mode" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0x-8A-dIF">
-                                                        <rect key="frame" x="0.0" y="0.0" width="256" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gma-Qu-mNz">
-                                                        <rect key="frame" x="278" y="0.0" width="51" height="31"/>
-                                                        <color key="onTintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <connections>
-                                                            <action selector="authenticationSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="lVe-7j-edo"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="mWe-Rq-dgw">
-                                                <rect key="frame" x="0.0" y="39" width="327" height="31"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Window mode" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdE-Eb-2jH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="256" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBJ-LC-ltR">
-                                                        <rect key="frame" x="278" y="0.0" width="51" height="31"/>
-                                                        <color key="onTintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <connections>
-                                                            <action selector="windowSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Pbr-EM-SWL"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Account Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j3F-z1-bXJ">
-                                        <rect key="frame" x="0.0" y="166" width="327" height="30"/>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="6G9-TU-ZVd"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="CEg-zp-UIQ"/>
-                                        </connections>
-                                    </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bPh-qY-lBG">
-                                        <rect key="frame" x="0.0" y="208" width="327" height="106"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzr-2u-epR">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="30"/>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="33c-ec-yTW"/>
-                                                </constraints>
-                                                <state key="normal" title="Init SDK">
-                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="initSDKsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0U2-Zz-Mdm"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WR6-xR-rjw">
-                                                <rect key="frame" x="0.0" y="38" width="327" height="30"/>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Show Conversation">
-                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="showConversation" destination="BYZ-38-t0r" eventType="touchUpInside" id="ciE-jz-Dgo"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATJ-yI-ifF">
-                                                <rect key="frame" x="0.0" y="76" width="327" height="30"/>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Logout">
-                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="logoutClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GXd-NW-UbL"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="j3F-z1-bXJ" firstAttribute="width" secondItem="YVz-GX-sQV" secondAttribute="width" id="6lu-vb-dne"/>
-                                    <constraint firstItem="nP4-dT-STk" firstAttribute="width" secondItem="YVz-GX-sQV" secondAttribute="width" id="Efm-x1-BpG"/>
-                                    <constraint firstItem="AhW-by-kN3" firstAttribute="width" secondItem="YVz-GX-sQV" secondAttribute="width" id="Fi0-Oy-cS0"/>
-                                    <constraint firstItem="yJa-bc-pBc" firstAttribute="width" secondItem="YVz-GX-sQV" secondAttribute="width" id="Gp5-Ep-KiG"/>
-                                    <constraint firstItem="bPh-qY-lBG" firstAttribute="width" secondItem="YVz-GX-sQV" secondAttribute="width" id="xXh-EN-hGN"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="YVz-GX-sQV" secondAttribute="trailing" constant="8" id="O8m-lX-7RX"/>
-                            <constraint firstItem="YVz-GX-sQV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="fyx-qp-yYz"/>
-                            <constraint firstItem="YVz-GX-sQV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pL6-79-WyZ"/>
-                            <constraint firstItem="YVz-GX-sQV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="yjB-Fr-BVU"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="pYA-fs-yn5"/>
-                    <connections>
-                        <outlet property="accountTextField" destination="j3F-z1-bXJ" id="3Lu-ao-ZKg"/>
-                        <outlet property="authenticationSwitch" destination="Gma-Qu-mNz" id="ozJ-QY-DeU"/>
-                        <outlet property="firstNameTextField" destination="yJa-bc-pBc" id="mlI-dr-FqT"/>
-                        <outlet property="lastNameTextField" destination="nP4-dT-STk" id="tWs-0D-fbp"/>
-                        <outlet property="windowSwitch" destination="TBJ-LC-ltR" id="LH3-D5-pIZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1153" y="-546"/>
-        </scene>
-        <!--Conversation View Controller-->
-        <scene sceneID="8W8-tX-9ba">
-            <objects>
-                <viewController storyboardIdentifier="ConversationViewController" id="rq2-Ie-c8f" customClass="ConversationViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WSH-xR-F46"/>
-                        <viewControllerLayoutGuide type="bottom" id="JSF-I8-LON"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ScT-5J-ou2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="RvI-aY-NIv">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="UqP-Xz-IDj">
-                            <connections>
-                                <action selector="backButtonPressed" destination="rq2-Ie-c8f" id="g05-f9-O8G"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Menu" id="wS1-ZZ-nQS">
-                            <connections>
-                                <action selector="menuButtonPressed" destination="rq2-Ie-c8f" id="jcn-rZ-7SW"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RYh-z8-ff9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1898" y="-546"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="8vS-Uf-qdF">
             <objects>
@@ -232,24 +41,24 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="kvw-DM-8ry">
                                 <rect key="frame" x="24" y="263.5" width="327" height="96"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SML-m8-HUN">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SML-m8-HUN">
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="40"/>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Zhc-hm-17s"/>
                                         </constraints>
                                         <state key="normal" title="Messaging">
-                                            <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" systemColor="systemBlueColor"/>
                                         </state>
                                         <connections>
                                             <action selector="messagingClicked:" destination="nhu-yH-hqQ" eventType="touchUpInside" id="kr0-SN-wCJ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FI2-yw-E4J">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FI2-yw-E4J">
                                         <rect key="frame" x="0.0" y="56" width="327" height="40"/>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                         <state key="normal" title="Monitoring">
-                                            <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" systemColor="systemBlueColor"/>
                                         </state>
                                         <connections>
                                             <action selector="monitoringClicked:" destination="nhu-yH-hqQ" eventType="touchUpInside" id="Qr3-Rm-UbQ"/>
@@ -258,7 +67,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="kvw-DM-8ry" firstAttribute="leading" secondItem="fKd-CA-pqj" secondAttribute="leadingMargin" constant="8" id="8DE-OU-DgB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kvw-DM-8ry" secondAttribute="trailing" constant="8" id="ZQ6-K9-bbt"/>
@@ -267,130 +76,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zy8-gK-cs7"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="showMessaging" id="haP-o7-O8F"/>
-                        <segue destination="n2p-dL-jnf" kind="show" identifier="showMonitoring" id="tOS-S9-kgH"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vFr-jV-gbG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="288.80000000000001" y="-331.48425787106447"/>
         </scene>
-        <!--Monitoring View Controller-->
-        <scene sceneID="wsq-6s-GtC">
-            <objects>
-                <viewController id="n2p-dL-jnf" customClass="MonitoringViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XWq-tj-M8F">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="w2L-KI-Bfl">
-                                <rect key="frame" x="16" y="16" width="343" height="304"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Account Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EoT-GL-mUm">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="34"/>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="xQ3-PS-SFU"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="App Install Identifier" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9B0-gI-7qR">
-                                        <rect key="frame" x="0.0" y="45" width="343" height="34"/>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="resignKeyboard" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="Tgl-cx-ikZ"/>
-                                        </connections>
-                                    </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="TSf-PC-Bgx">
-                                        <rect key="frame" x="0.0" y="90" width="343" height="214"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iak-2k-tiA">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Init SDK">
-                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="initSDKsClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="s1B-SW-EM5"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uK4-Id-7zp">
-                                                <rect key="frame" x="0.0" y="46" width="343" height="30"/>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Get Engagement">
-                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="getEngagementClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="xKk-uD-Syx"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVV-Sw-iuk">
-                                                <rect key="frame" x="0.0" y="92" width="343" height="30"/>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Send SDE">
-                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="sendSDEClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="UB7-6h-jc9"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaC-KN-zpf">
-                                                <rect key="frame" x="0.0" y="138" width="343" height="30"/>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Show Conversation With Campaign">
-                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="showConversationWithCampaignClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="OfW-cn-zKj"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzB-AR-Mo7">
-                                                <rect key="frame" x="0.0" y="184" width="343" height="30"/>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Logout">
-                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="logoutClicked:" destination="n2p-dL-jnf" eventType="touchUpInside" id="NMb-At-uYx"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="lVV-Sw-iuk" firstAttribute="width" secondItem="TSf-PC-Bgx" secondAttribute="width" id="IO5-os-tBu"/>
-                                            <constraint firstItem="Iak-2k-tiA" firstAttribute="width" secondItem="TSf-PC-Bgx" secondAttribute="width" id="MWD-Xy-rZP"/>
-                                            <constraint firstItem="XzB-AR-Mo7" firstAttribute="width" secondItem="TSf-PC-Bgx" secondAttribute="width" id="NMO-e0-LDO"/>
-                                            <constraint firstItem="uK4-Id-7zp" firstAttribute="width" secondItem="TSf-PC-Bgx" secondAttribute="width" id="Psk-aV-CF3"/>
-                                            <constraint firstItem="MaC-KN-zpf" firstAttribute="width" secondItem="TSf-PC-Bgx" secondAttribute="width" id="q49-mO-Pnh"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="9B0-gI-7qR" firstAttribute="width" secondItem="w2L-KI-Bfl" secondAttribute="width" id="BXw-aj-Rka"/>
-                                    <constraint firstItem="TSf-PC-Bgx" firstAttribute="width" secondItem="w2L-KI-Bfl" secondAttribute="width" id="Dlg-Uf-VWA"/>
-                                    <constraint firstItem="EoT-GL-mUm" firstAttribute="width" secondItem="w2L-KI-Bfl" secondAttribute="width" id="LXX-rd-7To"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="w2L-KI-Bfl" firstAttribute="top" secondItem="JcV-ep-2Ol" secondAttribute="top" constant="16" id="Gea-ja-ij2"/>
-                            <constraint firstItem="w2L-KI-Bfl" firstAttribute="leading" secondItem="JcV-ep-2Ol" secondAttribute="leading" constant="16" id="MJw-GT-RIr"/>
-                            <constraint firstItem="JcV-ep-2Ol" firstAttribute="trailing" secondItem="w2L-KI-Bfl" secondAttribute="trailing" constant="16" id="f0n-vk-Msd"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="JcV-ep-2Ol"/>
-                    </view>
-                    <connections>
-                        <outlet property="accountTextField" destination="EoT-GL-mUm" id="eVF-YG-ARQ"/>
-                        <outlet property="appInstallIdentifierTextField" destination="9B0-gI-7qR" id="lPZ-YK-mk1"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DFK-Jq-zB3" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1153" y="140"/>
-        </scene>
     </scenes>
+    <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
