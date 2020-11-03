@@ -17,7 +17,23 @@
 		D62EC5B91C7C427B0001C0D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D62EC5B71C7C427B0001C0D4 /* LaunchScreen.storyboard */; };
 		D62EC5D01C7C469D0001C0D4 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */; };
 		F729790C2257C770006716A5 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F729790B2257C770006716A5 /* UserNotifications.framework */; };
+		F7D09A9625142EDE00168C3E /* ConversationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D09A9325142EDE00168C3E /* ConversationViewController.xib */; };
+		F7D09A9725142EDE00168C3E /* MessagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D09A9425142EDE00168C3E /* MessagingViewController.xib */; };
+		F7D09A9825142EDE00168C3E /* MonitoringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D09A9525142EDE00168C3E /* MonitoringViewController.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F7D09AA32514309D00168C3E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CD3B9B371D97EA45008FF2BE /* SampleApp-Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SampleApp-Swift.entitlements"; sourceTree = "<group>"; };
@@ -33,6 +49,9 @@
 		D62EC5BA1C7C427B0001C0D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		F729790B2257C770006716A5 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		F7D09A9325142EDE00168C3E /* ConversationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationViewController.xib; sourceTree = "<group>"; };
+		F7D09A9425142EDE00168C3E /* MessagingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagingViewController.xib; sourceTree = "<group>"; };
+		F7D09A9525142EDE00168C3E /* MonitoringViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonitoringViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,14 +87,12 @@
 			isa = PBXGroup;
 			children = (
 				D62EC5AB1C7C427B0001C0D4 /* AppDelegate.swift */,
+				CD8C6B292031B6E8008EB94B /* MainViewController.swift */,
+				F7D09A9225142E4D00168C3E /* Shared */,
 				D62EC5B51C7C427B0001C0D4 /* Assets.xcassets */,
-				D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */,
 				D62EC5BA1C7C427B0001C0D4 /* Info.plist */,
 				D62EC5B71C7C427B0001C0D4 /* LaunchScreen.storyboard */,
 				D62EC5AF1C7C427B0001C0D4 /* Main.storyboard */,
-				CD8C6B292031B6E8008EB94B /* MainViewController.swift */,
-				D62EC5AD1C7C427B0001C0D4 /* MessagingViewController.swift */,
-				CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */,
 				D62EC5B21C7C427B0001C0D4 /* SampleApp_Swift.xcdatamodeld */,
 				CD3B9B371D97EA45008FF2BE /* SampleApp-Swift.entitlements */,
 			);
@@ -90,6 +107,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F7D09A9225142E4D00168C3E /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				D62EC5CF1C7C469D0001C0D4 /* ConversationViewController.swift */,
+				F7D09A9325142EDE00168C3E /* ConversationViewController.xib */,
+				D62EC5AD1C7C427B0001C0D4 /* MessagingViewController.swift */,
+				F7D09A9425142EDE00168C3E /* MessagingViewController.xib */,
+				CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */,
+				F7D09A9525142EDE00168C3E /* MonitoringViewController.xib */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -100,6 +130,7 @@
 				D62EC5A41C7C427B0001C0D4 /* Sources */,
 				D62EC5A51C7C427B0001C0D4 /* Frameworks */,
 				D62EC5A61C7C427B0001C0D4 /* Resources */,
+				F7D09AA32514309D00168C3E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -117,7 +148,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = LivePerson;
 				TargetAttributes = {
 					D62EC5A71C7C427B0001C0D4 = {
@@ -160,8 +191,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D62EC5B91C7C427B0001C0D4 /* LaunchScreen.storyboard in Resources */,
+				F7D09A9625142EDE00168C3E /* ConversationViewController.xib in Resources */,
+				F7D09A9825142EDE00168C3E /* MonitoringViewController.xib in Resources */,
 				D62EC5B61C7C427B0001C0D4 /* Assets.xcassets in Resources */,
 				D62EC5B11C7C427B0001C0D4 /* Main.storyboard in Resources */,
+				F7D09A9725142EDE00168C3E /* MessagingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +261,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -288,6 +323,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -323,10 +359,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = "SampleApp-Swift/SampleApp-Swift.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 29;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = M6C39UG9M8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -350,11 +386,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = "SampleApp-Swift/SampleApp-Swift.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 29;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = M6C39UG9M8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
