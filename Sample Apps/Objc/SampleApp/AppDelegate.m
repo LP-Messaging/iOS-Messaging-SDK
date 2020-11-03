@@ -10,8 +10,6 @@
 #import <UserNotifications/UserNotifications.h>
 
 #import <LPMessagingSDK/LPMessagingSDK.h>
-#import <LPInfra/LPInfra.h>
-#import <LPAMS/LPAMS.h>
 
 @interface AppDelegate () <LPMessagingSDKNotificationDelegate>
 
@@ -37,11 +35,11 @@
 }
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [[LPMessagingSDK instance] registerPushNotificationsWithToken:deviceToken notificationDelegate:self alternateBundleID:nil authenticationParams:nil];
+    [[LPMessaging instance] registerPushNotificationsWithToken:deviceToken notificationDelegate:self alternateBundleID:nil authenticationParams:nil];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    [[LPMessagingSDK instance] handlePush:userInfo];
+    [[LPMessaging instance] handlePush:userInfo];
 }
 
 //MARK: - LPMessagingSDKNotificationDelegate
