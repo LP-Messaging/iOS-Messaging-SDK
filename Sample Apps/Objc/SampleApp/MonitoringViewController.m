@@ -149,10 +149,12 @@ NSString * const appInstallID = @"APP_INSTALL_ID"; // REPLACE THIS!
 /// Logout Messaging SDK - all the data will be cleared
 - (IBAction)logoutClicked:(id)sender {
     [[self view] endEditing:YES];
-    [[LPMessaging instance] logoutWithCompletion:^{
+    
+    [[LPMessaging instance] logoutWithUnregisterType:LPPusherUnregisterTypeAll
+                                          completion:^{
         NSLog(@"logout from SDK");
-    } failure:^(NSArray<NSError *> * _Nonnull error) {
-        NSLog(@"Error: %@",error);
+    } failure:^(NSArray<NSError *> * _Nonnull errors) {
+        NSLog(@"Error: %@",errors);
     }];
 }
 
