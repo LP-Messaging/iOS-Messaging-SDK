@@ -195,10 +195,10 @@ extension MonitoringViewController {
         https://developers.liveperson.com/mobile-app-messaging-sdk-for-ios-methods-logout.html
      */
     private func logoutLPSDK() {
-        LPMessaging.instance.logout(completion: {
+        LPMessaging.instance.logout(unregisterType: .all, completion: {
             print("successfully logout from MessagingSDK")
-        }) { (error) in
-            print("failed to logout from MessagingSDK - error: \(error)")
+        }) { (errors) in
+            print("failed to logout from MessagingSDK - error: \(errors)")
         }
     }
 }

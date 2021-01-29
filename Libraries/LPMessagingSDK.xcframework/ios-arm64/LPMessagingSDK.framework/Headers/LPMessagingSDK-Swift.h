@@ -531,7 +531,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPCampaignInfo")
 @property (nonatomic, copy) NSString * _Nullable sessionId;
 @property (nonatomic, copy) NSString * _Nullable visitorId;
 - (nonnull instancetype)initWithCampaignId:(NSInteger)campaignId engagementId:(NSInteger)engagementId contextId:(NSString * _Nullable)contextId sessionId:(NSString * _Nullable)sessionId visitorId:(NSString * _Nullable)visitorId OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -587,18 +586,24 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull connectionStatusFailedToConnectTextColor;
 /// Color code for the text of the controller bubble.
 @property (nonatomic, strong) UIColor * _Nonnull controllerBubbleTextColor;
-/// Amount of conversations to show in advance.
-@property (nonatomic) NSUInteger maxPreviousConversationToPresent;
-/// Upon SDK initialization, all closed conversation with end date older than X months, will be deleted from the database. Setting 0 will delete all closed conversation.
-@property (nonatomic) NSUInteger deleteClosedConversationOlderThanMonths;
-/// Maximum number of minutes to send the message.
-@property (nonatomic) NSUInteger sendingMessageTimeoutInMinutes;
+/// Toggle conversation separator text message when conversation resolved from agent or consumer.
+/// attention:
+/// if <em>enableConversationSeparator</em> is set to <em>false</em>, Conversation Separator Text won’t be displayed even if this property is enable
+@property (nonatomic) BOOL enableConversationSeparatorTextMessage;
+/// Toggle conversation separator line when conversation is auto closed
+/// attention:
+/// if <em>enableConversationSeparator</em> is set to <em>false</em>, Conversation Separator Line won’t be displayed even if this property is enable
+@property (nonatomic) BOOL enableConversationSeparatorLineOnAutoClose;
+/// Toggle conversation separator line when conversation resolved from agent or consumer.
+/// attention:
+/// if <em>enableConversationSeparator</em> is set to <em>false</em>, Conversation Separator Line won’t be displayed even if this property is enable
+@property (nonatomic) BOOL enableConversationSeparatorLine;
+/// Toggle conversation separator view when conversation resolved from agent or consumer.
+/// attention:
+/// Setting this property to false will also disable <em>enableConversationSeparatorTextMessage</em> & <em>enableConversationSeparatorLine</em>
+@property (nonatomic) BOOL enableConversationSeparator;
 /// Conversation separator text and line color.
 @property (nonatomic, strong) UIColor * _Nonnull conversationSeparatorTextColor;
-/// Toggle conversation separator text message when conversation resolved from agent or consumer.
-@property (nonatomic) BOOL enableConversationSeparatorTextMessage;
-/// Toggle conversation separator line when conversation resolved from agent or consumer.
-@property (nonatomic) BOOL enableConversationSeparatorLine;
 /// Define the conversation Closed Separator font size.
 @property (nonatomic) UIFontTextStyle _Nonnull conversationSeparatorFontSize;
 /// Define the conversation Closed label to separator line padding.
@@ -610,6 +615,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) float conversationSeparatorViewBottomPadding;
 /// Define the conversation Closed Separator Top padding.
 @property (nonatomic) float conversationSeparatorTopPadding;
+/// Amount of conversations to show in advance.
+@property (nonatomic) NSUInteger maxPreviousConversationToPresent;
+/// Upon SDK initialization, all closed conversation with end date older than X months, will be deleted from the database. Setting 0 will delete all closed conversation.
+@property (nonatomic) NSUInteger deleteClosedConversationOlderThanMonths;
+/// Maximum number of minutes to send the message.
+@property (nonatomic) NSUInteger sendingMessageTimeoutInMinutes;
 /// Toggle device vibration when a new message from a remote user received.
 @property (nonatomic) BOOL enableVibrationOnMessageFromRemoteUser;
 /// If true, show agent is typing indicator. In accessibility mode, announce when agent is typing.
@@ -1628,8 +1639,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 
 
 
-
-
+enum LPPusherUnregisterType : NSInteger;
 
 @interface LPMessaging (SWIFT_EXTENSION(LPMessagingSDK))
 /// This method is a destructive method that is typically used stop and clear all the metadata of the SDK.
@@ -1658,7 +1668,22 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 ///
 /// \param failure A failure block with a list of errors that were encountered during logout process.
 ///
-- (void)logoutWithCompletion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure;
+- (void)logoutWithCompletion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=14.0,obsoleted=15.0.0,message="Use logout(unregisterType: LPPusherUnregisterType, completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead");
+/// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or just to logs the current user out.
+/// This method conducts the following:
+/// Unregisters from the push notification service depending on the option provided.
+/// Clears all SDK persistent data.
+/// Cleans running operations (see <a href="consumer-experience-ios-sdk-destruct.html">destruct</a>{:target=”_blank”}).
+/// Invocation of destruct() method
+/// note:
+/// this method should be called before any persistent clean up tasks are performed on host app
+/// \param unregisterType LPPusherUnregisterType
+///
+/// \param completion A completion block for successfully logout. Completion block will be invoked only if all logout steps succeeded.
+///
+/// \param failure A failure block with a list of errors that were encountered during logout process.
+///
+- (void)logoutWithUnregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure;
 @end
 
 
@@ -1684,7 +1709,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// This method unregisters the host app from SDK Pusher service
 /// \param brandId brand/account Identifier
 ///
-- (void)unregisterPusherWithBrandId:(NSString * _Nonnull)brandId completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// \param unregisterType Unregister Type
+///
+- (void)unregisterPusherWithBrandId:(NSString * _Nonnull)brandId unregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Set token for Pusher service in order to be able to receive remote push notifications
 /// \param token Data
 ///
@@ -1904,17 +1931,21 @@ SWIFT_CLASS("_TtC14LPMessagingSDK18LPMonitoringParams")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class ProactiveNotificationData;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK14LPNotification")
-@interface LPNotification : NSObject
+@interface LPNotification : NSObject <NSCoding>
 @property (nonatomic, copy) NSString * _Nonnull text;
 @property (nonatomic, strong) LPUser * _Nonnull user;
 @property (nonatomic, copy) NSString * _Nonnull accountID;
 @property (nonatomic) BOOL isRemote;
+@property (nonatomic, strong) ProactiveNotificationData * _Nullable proActiveData;
 @property (nonatomic, readonly, copy) NSString * _Nonnull toString;
-- (nonnull instancetype)initWithText:(NSString * _Nonnull)text firstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName uid:(NSString * _Nullable)uid accountID:(NSString * _Nonnull)accountID isRemote:(BOOL)isRemote;
-- (nonnull instancetype)initWithMessage:(id <Message> _Nonnull)message isRemote:(BOOL)isRemote;
-- (nonnull instancetype)initWithText:(NSString * _Nonnull)text user:(LPUser * _Nonnull)user accountID:(NSString * _Nonnull)accountID isRemote:(BOOL)isRemote OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithText:(NSString * _Nonnull)text firstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName uid:(NSString * _Nullable)uid accountID:(NSString * _Nonnull)accountID isRemote:(BOOL)isRemote proActiveData:(ProactiveNotificationData * _Nullable)proActiveData;
+- (nonnull instancetype)initWithMessage:(id <Message> _Nonnull)message isRemote:(BOOL)isRemote proActiveData:(ProactiveNotificationData * _Nullable)proActiveData;
+- (nonnull instancetype)initWithText:(NSString * _Nonnull)text user:(LPUser * _Nonnull)user accountID:(NSString * _Nonnull)accountID isRemote:(BOOL)isRemote proActiveData:(ProactiveNotificationData * _Nullable)proActiveData OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1947,6 +1978,12 @@ typedef SWIFT_ENUM(NSInteger, LPPermissionTypes, open) {
   LPPermissionTypesHomekit = 10,
   LPPermissionTypesMediaLibrary = 11,
   LPPermissionTypesMotionAndFitness = 12,
+};
+
+typedef SWIFT_ENUM(NSInteger, LPPusherUnregisterType, open) {
+  LPPusherUnregisterTypeAll = 0,
+  LPPusherUnregisterTypeNone = 1,
+  LPPusherUnregisterTypeAgent = 2,
 };
 
 /// All SDK supported regions
@@ -2166,7 +2203,7 @@ typedef SWIFT_ENUM(NSInteger, LPUrlPreviewStyle, open) {
 @protocol User;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK6LPUser")
-@interface LPUser : NSObject
+@interface LPUser : NSObject <NSCoding>
 @property (nonatomic, copy) NSString * _Nullable firstName;
 @property (nonatomic, copy) NSString * _Nullable lastName;
 @property (nonatomic, copy) NSString * _Nullable nickName;
@@ -2176,6 +2213,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK6LPUser")
 @property (nonatomic, copy) NSString * _Nullable uid;
 - (nonnull instancetype)initWithUser:(id <User> _Nonnull)user;
 - (nonnull instancetype)initWithFirstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName nickName:(NSString * _Nullable)nickName uid:(NSString * _Nullable)uid profileImageURL:(NSString * _Nullable)profileImageURL phoneNumber:(NSString * _Nullable)phoneNumber employeeID:(NSString * _Nullable)employeeID OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -2244,7 +2283,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK11LinkPreview_")
 
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK7Message_")
 @protocol Message <EntityInterface>
-@property (nonatomic, copy) NSDate * _Nonnull timestamp;
+@property (nonatomic, copy) NSDate * _Nullable timestamp;
 @property (nonatomic, copy) NSString * _Nonnull content;
 @property (nonatomic, copy) NSString * _Nullable uid;
 @property (nonatomic, copy) NSString * _Nonnull statusRaw;
@@ -2303,6 +2342,15 @@ SWIFT_CLASS("_TtC14LPMessagingSDK12NSBouncyView")
 
 
 
+
+
+SWIFT_CLASS("_TtC14LPMessagingSDK25ProactiveNotificationData")
+@interface ProactiveNotificationData : NSObject <NSCoding>
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK16QuickReplyAction")
@@ -2524,10 +2572,19 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) dispatch_que
 + (NSString * _Nullable)JSONStringify:(NSDictionary<NSString *, id> * _Nonnull)value prettyPrinted:(BOOL)prettyPrinted SWIFT_WARN_UNUSED_RESULT;
 + (id _Nullable)JSONDictionaryFromString:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
 + (void)delay:(double)delay closure:(void (^ _Nonnull)(void))closure;
-+ (NSError * _Nonnull)createErrorWithDomain:(NSString * _Nonnull)domain code:(NSInteger)code message:(NSString * _Nonnull)message SWIFT_WARN_UNUSED_RESULT;
 + (NSInteger)minutesBetweenDates:(NSDate * _Nonnull)startDate endDate:(NSDate * _Nonnull)endDate SWIFT_WARN_UNUSED_RESULT;
 /// Returns resized image size with a condition of a max height and max width
 + (CGSize)getResizedImageSizeWithImage:(UIImage * _Nonnull)image maxHeight:(CGFloat)maxHeight maxWidth:(CGFloat)maxWidth SWIFT_WARN_UNUSED_RESULT;
+/// Uwrap optional type. For example, when passing object from type String?, it will return String
+/// note:
+/// http://stackoverflow.com/questions/27989094/how-to-unwrap-an-optional-value-from-any-type/32516815#32516815
+/// attention:
+/// 🌮 This is not needed any more, REMOVE it later
+/// \param any Any
+///
+///
+/// returns:
+/// Any
 + (id _Nonnull)unwrapWithAny:(id _Nonnull)any SWIFT_WARN_UNUSED_RESULT;
 /// This method returns true if the device is landscape (it ignores states such as flat, face or back)
 + (BOOL)isLandscape SWIFT_WARN_UNUSED_RESULT;
