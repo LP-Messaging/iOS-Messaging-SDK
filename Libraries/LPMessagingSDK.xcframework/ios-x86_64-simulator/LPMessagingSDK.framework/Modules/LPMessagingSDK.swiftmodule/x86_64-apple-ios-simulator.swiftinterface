@@ -13,6 +13,7 @@ import MessageUI
 import Photos
 import QuartzCore
 import QuickLook
+import SafariServices
 import Security
 import Swift
 import SystemConfiguration
@@ -358,10 +359,7 @@ public enum ConversationQueryType : Swift.String {
   @objc override dynamic public init()
   @objc deinit
 }
-public enum LPLanguagesKeys : Swift.String {
-  public static var allRows: [LPMessagingSDK.LPLanguagesKeys] {
-    get
-  }
+public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case customButtonAccessibilityDescription
   case readReceiptTextSending
   case readReceiptTextSent
@@ -538,9 +536,28 @@ public enum LPLanguagesKeys : Swift.String {
   case camera
   case photoLibrary
   case microphone
+  case videoCallInvitationHeading
+  case videoActiveCall
+  case voiceCallInvitationHeading
+  case voiceActiveCall
+  case collaborationCallInvited
+  case collaborationCallAccepted
+  case collaborationCallDeclined
+  case collaborationCallEnded
+  case collaborationCallEndedByConsumer
+  case collaborationCallEndedByAgent
+  case collaborationCallTimeout
+  case collaborationCallNotJoined
+  case collaborationCallJoined
+  case collaborationCallCancelledInvitation
+  case collaborationCallConsumerLeft
   public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
   public var rawValue: Swift.String {
+    get
+  }
+  public typealias AllCases = [LPMessagingSDK.LPLanguagesKeys]
+  public static var allCases: [LPMessagingSDK.LPLanguagesKeys] {
     get
   }
 }
@@ -858,6 +875,15 @@ public enum LPPreferredFontType {
     get
   }
 }
+@objc public enum VoiceVideoEndCallButtonType : Swift.Int {
+  case close = 1
+  case hangup = 2
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
 public protocol QuickReplyButtonDelegate : AnyObject {
   func quickReplyButtonDidBecomeFocused(_ button: LPMessagingSDK.QuickReplyButton)
 }
@@ -1080,17 +1106,20 @@ public enum MessageType : Swift.String {
   case UserAudio
   case RemoteUserAudio
   case UserFile
+  case RemoteUserCobrowse
   public typealias RawValue = Swift.String
-  public init?(rawValue: Swift.String)
   public var rawValue: Swift.String {
     get
   }
+  public init?(rawValue: Swift.String)
 }
-public enum LocalMessageType : Swift.Int {
+public enum LocalMessageType : Swift.Int, Swift.CaseIterable {
   case welcomeMessage
   case closeMainDialogMessage
   case closeOtherDialogMessage
   case maskedMessage
+  case cobrowseMessage
+  case transcendentMessage
   case proactiveMessage
   public init?(number: Foundation.NSNumber)
   public typealias RawValue = Swift.Int
@@ -1098,6 +1127,10 @@ public enum LocalMessageType : Swift.Int {
     get
   }
   public init?(rawValue: Swift.Int)
+  public typealias AllCases = [LPMessagingSDK.LocalMessageType]
+  public static var allCases: [LPMessagingSDK.LocalMessageType] {
+    get
+  }
 }
 public enum MessageStatus : Swift.String {
   case Created
@@ -1188,6 +1221,7 @@ extension Message {
   public var isControllerMessage: Swift.Bool {
     get
   }
+  public func getBaseMessageType() -> LPMessagingSDK.MessageType?
   public func getLocalMessageType() -> LPMessagingSDK.LocalMessageType?
   public func getBoards(completion: @escaping ([LPMessagingSDK.CustomBoard]) -> (), failure: @escaping (Foundation.NSError) -> ())
 }
@@ -1383,13 +1417,16 @@ public enum LPFlowTag : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
+  case ANALYTICS
   case AUTHENTICATION
-  case CSAT
-  case CSDS
+  case COBROWSE
   case CONNECTION_STATE
   case CONVERSATION_SETUP
   case CONVERSATION_TABLE
   case CONVERSATION_VIEW
+  case CORE_DATA_RECOVERY
+  case CSAT
+  case CSDS
   case DEFAULT
   case DEVELOPMENT
   case ENCRYPTION
@@ -1399,6 +1436,7 @@ public enum LPFlowTag : Swift.CustomStringConvertible {
   case IMAGE
   case INCA
   case KEYCHAIN
+  case LINK_PREVIEW
   case LOADING_VIEW
   case LOCAL_MESSAGE
   case LOGGING
@@ -1422,7 +1460,6 @@ public enum LPFlowTag : Swift.CustomStringConvertible {
   case UNAUTHENTICATED
   case QUICK_REPLY
   case WELCOME_MESSAGE
-  case CORE_DATA_RECOVERY
   public static func == (a: LPMessagingSDK.LPFlowTag, b: LPMessagingSDK.LPFlowTag) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
@@ -1511,6 +1548,8 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var conversationSeparatorFontName: Swift.String?
   @objc public var conversationSeparatorViewBottomPadding: Swift.Float
   @objc public var conversationSeparatorTopPadding: Swift.Float
+  @objc public var conversationSeparatorContentViewTopPadding: CoreGraphics.CGFloat
+  @objc public var conversationSeparatorContentViewBottomPadding: CoreGraphics.CGFloat
   @objc public var maxPreviousConversationToPresent: Swift.UInt
   @objc public var deleteClosedConversationOlderThanMonths: Swift.UInt
   @objc public var sendingMessageTimeoutInMinutes: Swift.UInt
@@ -1547,6 +1586,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var linkPreviewSiteNameTextColor: UIKit.UIColor
   @objc public var linkPreviewBorderWidth: Swift.Double
   @objc public var linkPreviewBorderColor: UIKit.UIColor
+  @objc public var linkPreviewLoadingImage: UIKit.UIImage?
   @objc public var urlPreviewStyle: LPMessagingSDK.LPUrlPreviewStyle
   @objc public var urlRealTimePreviewBackgroundColor: UIKit.UIColor
   @objc public var urlRealTimePreviewBorderColor: UIKit.UIColor
@@ -1638,6 +1678,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var structuredContentButtonBorderColor: UIKit.UIColor
   @objc public var structuredContentButtonTextColor: UIKit.UIColor
   @objc public var structuredContentTextColor: UIKit.UIColor
+  @objc public var structuredButtonWidthConstant: CoreGraphics.CGFloat
   @objc public var csatSubmitButtonCornerRadius: Swift.Double
   @objc public var csatYesNoButtonsCornerRadius: Swift.Double
   @objc public var csatSubmitButtonBackgroundColor: UIKit.UIColor
@@ -1731,6 +1772,29 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var bubbleTimestampBottomPadding: Swift.Float
   @objc public var bubbleTimestampTopPadding: Swift.Float
   @objc public var enableEnlargeEmojies: Swift.Bool
+  @objc public var enableVoiceVideoCall: Swift.Bool
+  @objc public var voiceCallImageIcon: UIKit.UIImage?
+  @objc public var videoCallImageIcon: UIKit.UIImage?
+  @objc public var voiceVideoAcceptCallButtonImage: UIKit.UIImage?
+  @objc public var voiceVideoDeclineCallButtonImage: UIKit.UIImage?
+  @objc public var voiceVideoEndCallButtonImage: UIKit.UIImage?
+  @objc public var voiceVideoJoinCallButtonImage: UIKit.UIImage?
+  @objc public var voiceVideoInviteIconTint: UIKit.UIColor
+  @objc public var voiceVideoAcceptButtonTint: UIKit.UIColor
+  @objc public var voiceVideoDeclineButtonTint: UIKit.UIColor
+  @objc public var voiceVideoAcceptButtonBackgroundColor: UIKit.UIColor
+  @objc public var voiceVideoDeclineButtonBackgroundColor: UIKit.UIColor
+  @objc public var voiceVideoInvitationIconRenderingMode: UIKit.UIImage.RenderingMode
+  @objc public var voiceVideoAcceptButtonRenderingMode: UIKit.UIImage.RenderingMode
+  @objc public var voiceVideoDeclineButtonRenderingMode: UIKit.UIImage.RenderingMode
+  @objc public var voiceVideoEndCallButtonType: LPMessagingSDK.VoiceVideoEndCallButtonType
+  @objc public var voiceVideoButtonsInnerPadding: Swift.Double
+  @objc public var voiceVideoButtonsOuterPadding: Swift.Double
+  @objc public var voiceVideoInvitationBubbleBackgroundColor: UIKit.UIColor
+  @objc public var voiceVideoInvitationBubbleBorderColor: UIKit.UIColor
+  @objc public var voiceVideoInvitationBubbleBorderWidth: Swift.Double
+  @objc public var voiceVideoNavigationBackgroundColor: UIKit.UIColor
+  @objc public var voiceVideoNavigationTintColor: UIKit.UIColor
   @objc public var customButtonImage: UIKit.UIImage?
   @objc public var markdownHyperlinkFromAgent: Swift.Bool
   @objc public var remoteUserBubbleHyperlinkColor: UIKit.UIColor
@@ -2222,6 +2286,7 @@ public struct LPNotificationName {
   public static let AGENT_DETAILS_IMAGE_CHANGED: Foundation.Notification.Name
   public static let LP_SECURED_FORM_FINISHED_LOADING: Foundation.Notification.Name
   public static let LP_FINISHED_FETCHING_HISTORY: Foundation.Notification.Name
+  public static let LP_DIALOG_CLOSE: Foundation.Notification.Name
 }
 public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
   case TOKEN
@@ -2258,6 +2323,8 @@ public struct LPColor {
   public static let lpBlack: UIKit.UIColor
   public static let lpWhite: UIKit.UIColor
   public static let lpClear: UIKit.UIColor
+  public static let lpLightGray: UIKit.UIColor
+  public static let lpLightGray2: UIKit.UIColor
   public static let lpGray: UIKit.UIColor
   public static let lpGray2: UIKit.UIColor
   public static let lpGray3: UIKit.UIColor
@@ -2865,6 +2932,7 @@ public protocol LPStructuredContentImageDownloader {
   public var loadingImage: UIKit.UIImage?
   public var useCacheImageIfNeeded: Swift.Bool
   public var brokenImage: UIKit.UIImage?
+  public var buttonWidthConstant: CoreGraphics.CGFloat
   public var bubbleBorderWidth: Swift.Double
   public var bubbleTopLeftCornerRadius: Swift.Float
   public var bubbleTopRightCornerRadius: Swift.Float
@@ -2930,6 +2998,9 @@ extension LPMessagingSDK.LPConversationHistoryMaxDaysDateType : Swift.RawReprese
 extension LPMessagingSDK.LPAuthenticationType : Swift.Equatable {}
 extension LPMessagingSDK.LPAuthenticationType : Swift.Hashable {}
 extension LPMessagingSDK.LPAuthenticationType : Swift.RawRepresentable {}
+extension LPMessagingSDK.VoiceVideoEndCallButtonType : Swift.Equatable {}
+extension LPMessagingSDK.VoiceVideoEndCallButtonType : Swift.Hashable {}
+extension LPMessagingSDK.VoiceVideoEndCallButtonType : Swift.RawRepresentable {}
 extension LPMessagingSDK.FormState : Swift.Equatable {}
 extension LPMessagingSDK.FormState : Swift.Hashable {}
 extension LPMessagingSDK.FormState : Swift.RawRepresentable {}
