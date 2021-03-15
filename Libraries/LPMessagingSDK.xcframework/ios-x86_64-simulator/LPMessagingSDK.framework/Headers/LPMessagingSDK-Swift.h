@@ -541,6 +541,7 @@ enum LPUrlPreviewStyle : NSInteger;
 enum LPRegionCode : NSInteger;
 enum LPLanguage : NSInteger;
 @class LPConversationScrollConfiguration;
+enum VoiceVideoEndCallButtonType : NSInteger;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @interface LPConfig : NSObject
@@ -615,6 +616,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) float conversationSeparatorViewBottomPadding;
 /// Define the conversation Closed Separator Top padding.
 @property (nonatomic) float conversationSeparatorTopPadding;
+/// Define the top padding for the conversation separator content view
+@property (nonatomic) CGFloat conversationSeparatorContentViewTopPadding;
+/// Define the bottom padding for the conversation separator content view
+@property (nonatomic) CGFloat conversationSeparatorContentViewBottomPadding;
 /// Amount of conversations to show in advance.
 @property (nonatomic) NSUInteger maxPreviousConversationToPresent;
 /// Upon SDK initialization, all closed conversation with end date older than X months, will be deleted from the database. Setting 0 will delete all closed conversation.
@@ -700,6 +705,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) double linkPreviewBorderWidth;
 /// Color code for border color of link preview area inside cell.
 @property (nonatomic, strong) UIColor * _Nonnull linkPreviewBorderColor;
+/// image for loader in Link preview
+@property (nonatomic, strong) UIImage * _Nullable linkPreviewLoadingImage;
 /// LPUrlPreviewStyle defines the style in which the link prview cells will be shown
 /// slim - Small preview space with a small image, a title and a description
 /// large - Large preview space with a large image, a title and a description.
@@ -924,6 +931,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonTextColor;
 /// Used to set the text color for Structure Content elements of text type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentTextColor;
+@property (nonatomic) CGFloat structuredButtonWidthConstant;
 /// Corner radius for submit button.
 @property (nonatomic) double csatSubmitButtonCornerRadius;
 /// Corner radius for (Yes/No) buttons.
@@ -1138,6 +1146,76 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) float bubbleTimestampTopPadding;
 /// When true, user and remote user messages containing one or two emojies will be enlarged in chat. Messages with one emoji will be the largest, two emojis will be large, and 3 or more will be displayed as normal text.
 @property (nonatomic) BOOL enableEnlargeEmojies;
+/// When true, this will enable the agent to start a voice or video call
+/// remark:
+/// Default value is <code>false</code>
+@property (nonatomic) BOOL enableVoiceVideoCall;
+/// Defines Image icon for Voice Invite
+@property (nonatomic, strong) UIImage * _Nullable voiceCallImageIcon;
+/// Defines Image icon for Video Invite
+@property (nonatomic, strong) UIImage * _Nullable videoCallImageIcon;
+/// Defines background image for Accept button on Voice & Video Invite
+@property (nonatomic, strong) UIImage * _Nullable voiceVideoAcceptCallButtonImage;
+/// Defines background image for Decline button on Voice & Video Invite
+@property (nonatomic, strong) UIImage * _Nullable voiceVideoDeclineCallButtonImage;
+/// Defines background image for End button on Voice & Video Invite
+/// precondition:
+/// This image is only shown on the Voice & Video Invite when Consumer has an active Call
+/// requires:
+/// To enable this image <code>voiceVideoEndCallButtonType</code> should be set to <code>hangup</code>
+@property (nonatomic, strong) UIImage * _Nullable voiceVideoEndCallButtonImage;
+/// Defines background image for Join button on Voice & Video Invite
+@property (nonatomic, strong) UIImage * _Nullable voiceVideoJoinCallButtonImage;
+/// Defines tint <em>(Color)</em> for Icon on Voice & Video Invite
+@property (nonatomic, strong) UIColor * _Nonnull voiceVideoInviteIconTint;
+/// Defines tint <em>(Color)</em> for Accept/Join Button on  Voice & Video Invite
+/// note:
+/// This property controls both the Accept and Join call Button
+@property (nonatomic, strong) UIColor * _Nonnull voiceVideoAcceptButtonTint;
+/// Defines tint <em>(Color)</em> for Decline/End Button on Voice & Video Invite
+/// note:
+/// This property controls both the Decline and End call Button
+@property (nonatomic, strong) UIColor * _Nonnull voiceVideoDeclineButtonTint;
+/// Defines background color for Accept/Join Button on Voice & Video Invite
+/// note:
+/// This property controls both the Accept and Join call Button
+@property (nonatomic, strong) UIColor * _Nonnull voiceVideoAcceptButtonBackgroundColor;
+/// Defines background color for Decline/End Button on Voice & Video Invite
+/// note:
+/// This property controls both the Decline and End call Button
+@property (nonatomic, strong) UIColor * _Nonnull voiceVideoDeclineButtonBackgroundColor;
+/// Controls rendering mode for Voice or Video Invitation Icon
+/// remark:
+/// Default value is <code>.alwaysTemplate</code>
+@property (nonatomic) UIImageRenderingMode voiceVideoInvitationIconRenderingMode;
+/// Controls rendering mode for Accept Button on Voice & Video Invitation
+/// remark:
+/// Default value is <code>.alwaysTemplate</code>
+@property (nonatomic) UIImageRenderingMode voiceVideoAcceptButtonRenderingMode;
+/// Controls rending mode for Decline Button on Voice & Video Invitation
+/// remark:
+/// Default value is <code>.alwaysTemplate</code>
+@property (nonatomic) UIImageRenderingMode voiceVideoDeclineButtonRenderingMode;
+/// Controls which icon to display on Join Button for Voice & Video Invitation
+/// remark:
+/// Default value is <code>.close</code>
+/// precondition:
+/// This type is only shown on the Voice & Video Invite when Consumer has an active Call
+@property (nonatomic) enum VoiceVideoEndCallButtonType voiceVideoEndCallButtonType;
+/// Defines inner padding between Accept & Decline Buttons on Voice & Video Invitation
+@property (nonatomic) double voiceVideoButtonsInnerPadding;
+/// Defines outer padding between Accept & Decline Buttons on Voice & Video Invitation
+@property (nonatomic) double voiceVideoButtonsOuterPadding;
+/// Defines background color for Voice & Video Bubble
+@property (nonatomic, strong) UIColor * _Nonnull voiceVideoInvitationBubbleBackgroundColor;
+/// Defines border color for Voice & Video Invitation Bubble
+@property (nonatomic, strong) UIColor * _Nonnull voiceVideoInvitationBubbleBorderColor;
+/// Defines border width for Voice & Video Invitation Bubble
+@property (nonatomic) double voiceVideoInvitationBubbleBorderWidth;
+/// Defines background color of Navigation & Tab Bar for Voice & Video SFSafariViewController
+@property (nonatomic, strong) UIColor * _Nonnull voiceVideoNavigationBackgroundColor;
+/// Defines tint <em>(color)</em> of Navigation & Tab Bar Icons for Voice & Video SFSafariViewController
+@property (nonatomic, strong) UIColor * _Nonnull voiceVideoNavigationTintColor;
 /// Custom button icon image that displays on the navigation bar.
 /// NOTE: this property gets its tintColor from <code>conversationNavigationTitleColor</code>
 /// When pressed, the <a href="mobile-app-messaging-sdk-for-ios-sdk-apis-callbacks-index.html#lpmessagingsdkcustombuttontapped">LPMessagingSDKCustomButtonTapped</a> callback gets invoked.
@@ -2592,6 +2670,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) dispatch_que
 + (BOOL)isPortrait SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+typedef SWIFT_ENUM(NSInteger, VoiceVideoEndCallButtonType, open) {
+  VoiceVideoEndCallButtonTypeClose = 1,
+  VoiceVideoEndCallButtonTypeHangup = 2,
+};
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
