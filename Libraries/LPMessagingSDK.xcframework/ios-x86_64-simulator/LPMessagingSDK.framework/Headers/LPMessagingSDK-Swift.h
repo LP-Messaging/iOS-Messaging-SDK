@@ -193,6 +193,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import UIKit;
 #endif
 
+#import <LPMessagingSDK/LPMessagingSDK.h>
+
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
 #if __has_warning("-Wpragma-clang-attribute")
@@ -831,6 +833,25 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull userFileStateTint;
 /// Tint color for the state of photos send by user.
 @property (nonatomic, strong) UIColor * _Nonnull userPhotoStateTint;
+/// Enable or disable inapp reporting for push notifications to event manager api.
+/// If true: SDK will report delivery, read, and conversation events.
+/// <ul>
+///   <li>
+///     INFO:
+///   </li>
+/// </ul>
+/// <ol>
+///   <li>
+///     Due to iOS Limitations, Delivery event is reported alongside read event.
+///   </li>
+///   <li>
+///     Read event is reported when the consumer reads the push notification message (message is shown).
+///   </li>
+///   <li>
+///     Conversation event is reported when the consumer replies to the push notification message(conversation has been created).
+///   </li>
+/// </ol>
+@property (nonatomic) BOOL inAppReportingEnabled;
 /// Distance between the bottom and top edges of the button to the bottom and top edges of the text.
 @property (nonatomic) CGFloat quickReplyButtonVerticalPadding;
 /// Distance between the right and left edges of the button to the right and left edges of the text.
@@ -931,7 +952,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonTextColor;
 /// Used to set the text color for Structure Content elements of text type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentTextColor;
+/// Used to set the width constraint for Structured Constant elements of button type
 @property (nonatomic) CGFloat structuredButtonWidthConstant;
+/// Structured content loading image when images are being fetched/loaded
+@property (nonatomic, strong) UIImage * _Nullable structuredContentLoadingImage;
+/// Structured content loading image when images failed to fetched/loaded
+@property (nonatomic, strong) UIImage * _Nullable structuredContentBrokenImage;
 /// Corner radius for submit button.
 @property (nonatomic) double csatSubmitButtonCornerRadius;
 /// Corner radius for (Yes/No) buttons.
@@ -2298,6 +2324,15 @@ SWIFT_CLASS("_TtC14LPMessagingSDK6LPUser")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class LPSRSecurityPolicy;
+
+SWIFT_CLASS("_TtC14LPMessagingSDK11LPWebSocket")
+@interface LPWebSocket : LPSRWebSocket
+- (void)open;
+- (void)close;
+- (nonnull instancetype)initWithURLRequest:(NSURLRequest * _Nonnull)request protocols:(NSArray<NSString *> * _Nullable)protocols securityPolicy:(LPSRSecurityPolicy * _Nonnull)securityPolicy SWIFT_UNAVAILABLE;
+@end
+
 enum MessageFrequency : NSInteger;
 @class LPWelcomeMessageOption;
 @class QuickReplyItem;
@@ -2403,6 +2438,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK21MessagingServiceEvent")
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK12NSBouncyView")

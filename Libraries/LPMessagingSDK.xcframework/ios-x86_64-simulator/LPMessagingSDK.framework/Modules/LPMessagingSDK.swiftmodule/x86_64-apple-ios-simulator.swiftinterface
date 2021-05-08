@@ -128,8 +128,8 @@ extension File {
   @objc public func getQueryUID() -> Swift.String
   @objc public func getCampaignInfo() -> LPMessagingSDK.LPCampaignInfo?
   @objc public func getQueryProperties() -> [Swift.String : Any]
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public protocol LPStructuredContentDelegate : AnyObject {
   func lpStructuredContentDidPress(withActions actions: [LPMessagingSDK.LPStructuredContentAction], metadata: [[Swift.String : Any]]?)
@@ -323,8 +323,8 @@ extension LinkPreview {
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   public func compare(other: LPMessagingSDK.TTRModel) -> Swift.Bool
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public enum ConversationQueryType : Swift.String {
   case Brand
@@ -1123,10 +1123,10 @@ public enum LocalMessageType : Swift.Int, Swift.CaseIterable {
   case proactiveMessage
   public init?(number: Foundation.NSNumber)
   public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
-  public init?(rawValue: Swift.Int)
   public typealias AllCases = [LPMessagingSDK.LocalMessageType]
   public static var allCases: [LPMessagingSDK.LocalMessageType] {
     get
@@ -1232,10 +1232,10 @@ extension Message {
     case ContentEvent
     case StructuredContentEvent
     public typealias RawValue = Swift.String
-    public init?(rawValue: Swift.String)
     public var rawValue: Swift.String {
       get
     }
+    public init?(rawValue: Swift.String)
   }
   public enum NotificationDistributionType : Swift.String {
     case QUERY
@@ -1261,6 +1261,26 @@ extension Message {
   convenience public init?(fromData data: LPMessagingSDK.GeneralResponse.ContentEventBody?, dialog: LPMessagingSDK.Dialog, distributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType, sender: LPMessagingSDK.User? = nil)
   @objc deinit
   @objc override dynamic public init()
+}
+public protocol LPWebSocketHandler : LPMessagingSDK.SRWebSocketDelegate {
+  func getSocketID() -> Swift.String
+  func overloadRequest(_ requestHandler: LPMessagingSDK.LPWebSocket.RequestCompletionHandler) -> LPMessagingSDK.LPWebSocket.RequestCompletionHandler
+  func updateSocket(socket: LPMessagingSDK.LPWebSocket)
+}
+public struct SocketDetails {
+  public init(scheme: Swift.String, host: Swift.String, path: Swift.String, headers: [Swift.String : Swift.String]? = nil)
+}
+@objc @_hasMissingDesignatedInitializers public class LPWebSocket : LPMessagingSDK.LPSRWebSocket {
+  public typealias RequestResultCompleted = (Swift.AnyObject) -> (Swift.Void)
+  public typealias RequestResultFailed = (Foundation.NSError) -> (Swift.Void)
+  public struct RequestCompletionHandler {
+  }
+  public func requestDictionary(_ message: Swift.String, payload: [Swift.String : Any]? = nil, headers: [Swift.String : Any] = [:], metadata: [[Swift.String : Any]]? = nil, expectAckResponse: Swift.Bool? = false, completion: LPMessagingSDK.LPWebSocket.RequestResultCompleted?, failure: LPMessagingSDK.LPWebSocket.RequestResultFailed?)
+  public func requestWithCompletion(_ message: Swift.String, payload: [Swift.String : Any]? = nil, headers: [Swift.String : Any] = [:], metadata: [[Swift.String : Any]]? = nil, expectAckResponse: Swift.Bool? = false, completion: LPMessagingSDK.LPWebSocket.RequestResultCompleted?, failure: LPMessagingSDK.LPWebSocket.RequestResultFailed?)
+  @objc override dynamic public func open()
+  @objc override dynamic public func close()
+  @objc deinit
+  @objc override dynamic public init(urlRequest request: Foundation.URLRequest, protocols: [Swift.String]?, securityPolicy: LPMessagingSDK.LPSRSecurityPolicy)
 }
 @objc public enum LPPusherUnregisterType : Swift.Int {
   case all
@@ -1424,12 +1444,13 @@ public enum LPFlowTag : Swift.CustomStringConvertible {
   case CONVERSATION_SETUP
   case CONVERSATION_TABLE
   case CONVERSATION_VIEW
+  case CONVERSATION_VIEWMODEL
   case CORE_DATA_RECOVERY
   case CSAT
   case CSDS
   case DEFAULT
-  case DEVELOPMENT
   case ENCRYPTION
+  case EVENT_MANAGER
   case FCR
   case FILE
   case HISTORY_CONTROL
@@ -1454,6 +1475,12 @@ public enum LPFlowTag : Swift.CustomStringConvertible {
   case SCROLL_POSITION
   case SCROLL_TO_BOTTOM_BUTTON
   case SOCKET
+  case SOCKET_PRECONNECTION
+  case SOCKET_CONNECTION
+  case SOCKET_COMMUNICATION
+  case SOCKET_HANDLER
+  case SOCKET_TIMER
+  case STATE_HANDLER
   case STRUCTURED_CONTENT
   case UNIT_TEST
   case UNREAD_MESSAGES
@@ -1641,6 +1668,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var remoteFileStateTint: UIKit.UIColor
   @objc public var userFileStateTint: UIKit.UIColor
   @objc public var userPhotoStateTint: UIKit.UIColor
+  @objc public var inAppReportingEnabled: Swift.Bool
   @objc public var quickReplyButtonVerticalPadding: CoreGraphics.CGFloat
   @objc public var quickReplyButtonHorizontalPadding: CoreGraphics.CGFloat
   @objc public var quickReplyVerticalMargin: CoreGraphics.CGFloat
@@ -1679,6 +1707,8 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var structuredContentButtonTextColor: UIKit.UIColor
   @objc public var structuredContentTextColor: UIKit.UIColor
   @objc public var structuredButtonWidthConstant: CoreGraphics.CGFloat
+  @objc public var structuredContentLoadingImage: UIKit.UIImage?
+  @objc public var structuredContentBrokenImage: UIKit.UIImage?
   @objc public var csatSubmitButtonCornerRadius: Swift.Double
   @objc public var csatYesNoButtonsCornerRadius: Swift.Double
   @objc public var csatSubmitButtonBackgroundColor: UIKit.UIColor
@@ -2119,6 +2149,7 @@ public enum CSDSService : Swift.String {
   case loggos
   case pusher
   case tokenizer
+  case eventManager
   case adminArea
   case liveEngage
   case agentVep
@@ -2269,10 +2300,7 @@ public struct LPNotificationName {
   public static let AGENT_DETAILS_FETCHED: Foundation.Notification.Name
   public static let MESSAGE_NOTIFICATION_RECEIVED: Foundation.Notification.Name
   public static let CONVERSATION_VIEWCONTROLLER_REMOVED: Foundation.Notification.Name
-  public static let CONVERSATION_VIEWCONTROLLER_DID_LOAD: Foundation.Notification.Name
-  public static let CONVERSATION_VIEWCONTROLLER_WILL_APPEAR: Foundation.Notification.Name
   public static let ACTIVE_AGENT_DETAILS_CHANGED: Foundation.Notification.Name
-  public static let CSDS_DOMAIN_CHANGED: Foundation.Notification.Name
   public static let SOCKET_OPENED: Foundation.Notification.Name
   public static let SOCKET_CLOSED: Foundation.Notification.Name
   public static let CONNECTION_PROCESS_FAILED: Foundation.Notification.Name
@@ -2282,11 +2310,10 @@ public struct LPNotificationName {
   public static let UNAUTHENTICATED_USER_EXPIRED: Foundation.Notification.Name
   public static let REGISTRATION_TO_PUSHER_SUCCEEDED: Foundation.Notification.Name
   public static let REGISTRATION_TO_PUSHER_FAILED: Foundation.Notification.Name
-  public static let PUSHER_LOGIN_FLOW_STARTED: Foundation.Notification.Name
   public static let AGENT_DETAILS_IMAGE_CHANGED: Foundation.Notification.Name
   public static let LP_SECURED_FORM_FINISHED_LOADING: Foundation.Notification.Name
   public static let LP_FINISHED_FETCHING_HISTORY: Foundation.Notification.Name
-  public static let LP_DIALOG_CLOSE: Foundation.Notification.Name
+  public static let LP_SET_CONVERSATION_PARTICIPANTS: Foundation.Notification.Name
 }
 public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
   case TOKEN
@@ -2379,10 +2406,10 @@ public enum UserType : Swift.String {
   case Reader
   case Manager
   public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 @objc public protocol User : LPMessagingSDK.EntityInterface {
   @objc var uid: Swift.String { get set }
@@ -2447,10 +2474,10 @@ public enum ChannelTypes : Swift.String {
   case MESSAGING
   case COBROWSE
   public typealias RawValue = Swift.String
-  public init?(rawValue: Swift.String)
   public var rawValue: Swift.String {
     get
   }
+  public init?(rawValue: Swift.String)
 }
 public enum ChatState : Swift.String {
   case Active
@@ -2647,9 +2674,9 @@ public struct LPStructuredContentSampleData {
     get
   }
   public static let instance: LPMessagingSDK.LPMonitoringDataManager
+  @objc deinit
   public func initialize(accountId: Swift.String, monitoringInitParms: LPMessagingSDK.LPMonitoringInitParams)
   public func clearEngagementMonitoring()
-  @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentNavigateAction : LPMessagingSDK.LPStructuredContentAction {
   public var latitude: CoreLocation.CLLocationDegrees {
@@ -2708,6 +2735,26 @@ extension LPMessaging {
     get
   }
   @objc override public func encode(with aCoder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol LPSocketLoggerDelegate : AnyObject {
+  func lpSocketLogger(message: Swift.String, type: LPMessagingSDK.LPSocketLoggerType, error: Swift.Error?)
+}
+public enum LPSocketLoggerType : Swift.Int {
+  case error
+  case warning
+  case info
+  case debug
+  case trace
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers final public class LPSocketLogger {
+  weak final public var delegate: LPMessagingSDK.LPSocketLoggerDelegate?
+  public static let instance: LPMessagingSDK.LPSocketLogger
   @objc deinit
 }
 @objc public protocol ConversationViewControllerAgentDelegate {
@@ -2866,6 +2913,22 @@ public protocol LPStructuredContentLoggerDelegate : AnyObject {
 public protocol LPStructuredContentImageDownloader {
   func LPStructuredContentNeedsImageToDownload(imageURL: Swift.String, resizeImageSize: CoreGraphics.CGSize, completion: @escaping (UIKit.UIImage?) -> (), failure: (() -> ())?)
 }
+@_hasMissingDesignatedInitializers public class LPSocketManager {
+  public var webSockets: [Swift.String : LPMessagingSDK.LPWebSocket] {
+    get
+  }
+  public static let instance: LPMessagingSDK.LPSocketManager
+  public func createSocket(_ socketHandler: LPMessagingSDK.LPWebSocketHandler?, socketDetails: LPMessagingSDK.SocketDetails, securityPolicy: LPMessagingSDK.LPSRSecurityPolicy? = nil) -> LPMessagingSDK.LPWebSocket?
+  public func getSocket(_ brandID: Swift.String) -> LPMessagingSDK.LPWebSocket?
+  public func getSocket(socketHandler: LPMessagingSDK.LPWebSocketHandler) -> LPMessagingSDK.LPWebSocket?
+  public func removeSocket(socketHandler: LPMessagingSDK.LPWebSocketHandler)
+  public func openAllSockets()
+  public func openSocket(_ webSocket: LPMessagingSDK.LPWebSocket, securityPolicy: LPMessagingSDK.LPSRSecurityPolicy? = nil)
+  public func closeAllSockets()
+  public func removeSockets()
+  public func clearManager()
+  @objc deinit
+}
 @objc public protocol LPMessagingSDKdelegate {
   @objc optional func LPMessagingSDKCustomButtonTapped()
   @objc optional func LPMessagingSDKAgentDetails(_ agent: LPMessagingSDK.LPUser?)
@@ -2897,7 +2960,7 @@ public protocol LPStructuredContentImageDownloader {
   @objc optional func LPMessagingSDKUnauthenticatedUserExpired()
 }
 @objc public class ProactiveNotificationData : ObjectiveC.NSObject, Foundation.NSCoding {
-  public init(brandId: Swift.String, lookBackPeriod: Swift.Double? = nil, expirationEpochTime: Swift.Double, agentPid: Swift.String? = nil, backendService: Swift.String? = nil, leCampaignId: Swift.String? = nil, leEngagementId: Swift.String? = nil, externalConsumerId: Swift.String? = nil)
+  public init(brandId: Swift.String, lookBackPeriod: Swift.Double? = nil, expirationEpochTime: Swift.Double, agentPid: Swift.String? = nil, backendService: Swift.String? = nil, leCampaignId: Swift.String? = nil, leEngagementId: Swift.String? = nil, externalConsumerId: Swift.String? = nil, transactionId: Swift.String? = nil)
   @objc required public init?(coder: Foundation.NSCoder)
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc override dynamic public init()
@@ -3119,6 +3182,9 @@ extension LPMessagingSDK.DialogState : Swift.RawRepresentable {}
 extension LPMessagingSDK.SocketType : Swift.Equatable {}
 extension LPMessagingSDK.SocketType : Swift.Hashable {}
 extension LPMessagingSDK.SocketType : Swift.RawRepresentable {}
+extension LPMessagingSDK.LPSocketLoggerType : Swift.Equatable {}
+extension LPMessagingSDK.LPSocketLoggerType : Swift.Hashable {}
+extension LPMessagingSDK.LPSocketLoggerType : Swift.RawRepresentable {}
 extension LPMessagingSDK.NotificationPayload.PayloadType : Swift.Equatable {}
 extension LPMessagingSDK.NotificationPayload.PayloadType : Swift.Hashable {}
 extension LPMessagingSDK.NotificationPayload.PayloadType : Swift.RawRepresentable {}
