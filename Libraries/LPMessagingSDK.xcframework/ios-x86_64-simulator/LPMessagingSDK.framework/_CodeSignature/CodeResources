@@ -34,7 +34,7 @@
 		</data>
 		<key>Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		qe6Gb326XXwFceog288rr9kQygA=
+		IFV0TJ36wGxEVUN/+OyK/bQWW54=
 		</data>
 		<key>Headers/LPMessagingSDK.h</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		P+d+MUclgzHkE7MAbv+L1KtJ4Hk=
+		Nsgx/njsRnA9gybACXpzpHSA5Wk=
 		</data>
 		<key>Model.cdm</key>
 		<data>
@@ -50,31 +50,31 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		1WI/xyJxLXz6JRTrKKBFBOj3LAU=
+		HyFP91RsBGQ6uhl0MSL0qQMIJtc=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		2ka3cXWv08sk5Pcyu9hKhFiT5IY=
+		n8JhRYUcz/JXAQ6FudT1Df8Oqn4=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		zOVMbM4pHQNAVmmZFV3bRIikaRU=
+		5zN79YtKI+oi3iWpRBJ2mIEo854=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		1WI/xyJxLXz6JRTrKKBFBOj3LAU=
+		HyFP91RsBGQ6uhl0MSL0qQMIJtc=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		2ka3cXWv08sk5Pcyu9hKhFiT5IY=
+		n8JhRYUcz/JXAQ6FudT1Df8Oqn4=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		zOVMbM4pHQNAVmmZFV3bRIikaRU=
+		5zN79YtKI+oi3iWpRBJ2mIEo854=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		G0rRHBt8ODJe6ju0WK7BdaAVYz0=
+		8HCdE5Z7sLGES5u5VTA8f0FC3yc=
 		</data>
 		<key>PrivateHeaders/CIContext+Workaround.h</key>
 		<data>
@@ -160,6 +160,10 @@
 		<data>
 		Q25T9V95JP4Y9bX4Ds0zNBIq5hk=
 		</data>
+		<key>PrivateHeaders/LPSocket.h</key>
+		<data>
+		E2xWdstfw8NmiHUYMIBJthM2bWE=
+		</data>
 		<key>PrivateHeaders/LPSocketRocket.h</key>
 		<data>
 		cgvC1RW9ZIYv9EVb4S+scpqTIbs=
@@ -186,7 +190,7 @@
 		</data>
 		<key>module.modulemap</key>
 		<data>
-		GSgrRJcS+6y7zz7hZ99BfNBMoOw=
+		QP1wiZUIpFfGqKicoGrbcNVcN34=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -244,7 +248,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			F/T8CteZFIp2WJGVqo6zdgAneDAFiqF/wqV2HGVdiRc=
+			wYct0hSNWtTYti7K5tAdCEglWGSsNlWa/T4+Mvroykc=
 			</data>
 		</dict>
 		<key>Headers/LPMessagingSDK.h</key>
@@ -265,49 +269,49 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AFNgkDhFE2gbkKjt0sseq5JHRJSOB55DxtJH57RFb6c=
+			LUrpH3EqtaCfkpijS4XhDfVB7mg+2UjCM/nmrcyAwPg=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+BpQYPOfikLqYVtXbmvnD6vrQb6ngSNmknITkUeIXnE=
+			JAMjZ3hZlhxqkXtkKNM7CrYbaIX08+8ymILyqX5ulBM=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5tY2nOJ6a/xdjuCUdy+vtAojUBFxznmI6/9Tp5uLQ+s=
+			AtJUeIWDfaRkjggnHBxS32Zu4/J3c1Uo5UpiyL3Sotw=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			AFNgkDhFE2gbkKjt0sseq5JHRJSOB55DxtJH57RFb6c=
+			LUrpH3EqtaCfkpijS4XhDfVB7mg+2UjCM/nmrcyAwPg=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+BpQYPOfikLqYVtXbmvnD6vrQb6ngSNmknITkUeIXnE=
+			JAMjZ3hZlhxqkXtkKNM7CrYbaIX08+8ymILyqX5ulBM=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5tY2nOJ6a/xdjuCUdy+vtAojUBFxznmI6/9Tp5uLQ+s=
+			AtJUeIWDfaRkjggnHBxS32Zu4/J3c1Uo5UpiyL3Sotw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			eN2KMWmlYTQulqmQHbIykg0G+Amc0+T7aJrCHCc0Is4=
+			7Ys/UQ9bsJ4zt99hqv/ShgSnWimEL8lqSDgAnR+ih9Q=
 			</data>
 		</dict>
 		<key>PrivateHeaders/CIContext+Workaround.h</key>
@@ -457,6 +461,13 @@
 			OU1FR75onGmS7dsICj7oJLll/EHb4/jTImnxP9jK8lo=
 			</data>
 		</dict>
+		<key>PrivateHeaders/LPSocket.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			FcpPCGSgaoxHAngeUEYlU7suWz6XrZHpUhWNY9KrtpY=
+			</data>
+		</dict>
 		<key>PrivateHeaders/LPSocketRocket.h</key>
 		<dict>
 			<key>hash2</key>
@@ -503,7 +514,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+sA10o8ASJnBVaCgkIiF/qh5tMgHY4VGJQuSDTXVho0=
+			5c7+7oA9qrz/11O1dAhCfLZX/SKHOgAd0XYDwIbbjWE=
 			</data>
 		</dict>
 	</dict>
