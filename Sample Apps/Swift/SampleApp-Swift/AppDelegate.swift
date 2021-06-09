@@ -51,4 +51,14 @@ extension AppDelegate: LPMessagingSDKNotificationDelegate {
     func LPMessagingSDKNotification(notificationTapped notification: LPNotification) {
         
     }
+    
+    // Example on how to implement a custom InApp Notification that supports Proactive and IVR Deflection
+//    func LPMessagingSDKNotification(customLocalPushNotificationView notification: LPNotification) -> UIView {
+//        let view = Toast(frame: CGRect(x: 0,
+//                                       y: 0,
+//                                       width: UIScreen.main.bounds.width,
+//                                       height: 110))
+//        view.set(with: notification)
+//        return view
+//    }
 }
