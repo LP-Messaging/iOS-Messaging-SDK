@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6681AE522670191000A5FB8F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6681AE512670191000A5FB8F /* Toast.swift */; };
 		CD8C6B2A2031B6E8008EB94B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C6B292031B6E8008EB94B /* MainViewController.swift */; };
 		CD8C6B2C2031B811008EB94B /* MonitoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */; };
 		D62EC5AC1C7C427B0001C0D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62EC5AB1C7C427B0001C0D4 /* AppDelegate.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6681AE512670191000A5FB8F /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		CD3B9B371D97EA45008FF2BE /* SampleApp-Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SampleApp-Swift.entitlements"; sourceTree = "<group>"; };
 		CD8C6B292031B6E8008EB94B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CD8C6B2B2031B811008EB94B /* MonitoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoringViewController.swift; sourceTree = "<group>"; };
@@ -66,12 +68,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E91C0115F581C24A54D96F1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6681AE50267018F900A5FB8F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6681AE512670191000A5FB8F /* Toast.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		D62EC59F1C7C427B0001C0D4 = {
 			isa = PBXGroup;
 			children = (
 				D62EC5AA1C7C427B0001C0D4 /* SampleApp-Swift */,
 				D62EC5A91C7C427B0001C0D4 /* Products */,
 				F729790A2257C770006716A5 /* Frameworks */,
+				3E91C0115F581C24A54D96F1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +104,7 @@
 		D62EC5AA1C7C427B0001C0D4 /* SampleApp-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				6681AE50267018F900A5FB8F /* Views */,
 				D62EC5AB1C7C427B0001C0D4 /* AppDelegate.swift */,
 				CD8C6B292031B6E8008EB94B /* MainViewController.swift */,
 				F7D09A9225142E4D00168C3E /* Shared */,
@@ -127,6 +146,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D62EC5BD1C7C427B0001C0D4 /* Build configuration list for PBXNativeTarget "SampleApp" */;
 			buildPhases = (
+				BA170F835C90A2C9B66FDE7D /* [CP] Prepare Artifacts */,
 				D62EC5A41C7C427B0001C0D4 /* Sources */,
 				D62EC5A51C7C427B0001C0D4 /* Frameworks */,
 				D62EC5A61C7C427B0001C0D4 /* Resources */,
@@ -201,6 +221,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		BA170F835C90A2C9B66FDE7D /* [CP] Prepare Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SampleApp/Pods-SampleApp-artifacts.sh",
+				"${PODS_ROOT}/LPMessagingSDK/LPMessagingSDK.xcframework",
+			);
+			name = "[CP] Prepare Artifacts";
+			outputPaths = (
+				"${BUILT_PRODUCTS_DIR}/cocoapods-artifacts-${CONFIGURATION}.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SampleApp/Pods-SampleApp-artifacts.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D62EC5A41C7C427B0001C0D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -212,6 +253,7 @@
 				D62EC5D01C7C469D0001C0D4 /* ConversationViewController.swift in Sources */,
 				D62EC5AC1C7C427B0001C0D4 /* AppDelegate.swift in Sources */,
 				CD8C6B2A2031B6E8008EB94B /* MainViewController.swift in Sources */,
+				6681AE522670191000A5FB8F /* Toast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +404,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = "SampleApp-Swift/SampleApp-Swift.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 62;
 				DEVELOPMENT_TEAM = M6C39UG9M8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -390,7 +432,7 @@
 				CODE_SIGN_ENTITLEMENTS = "SampleApp-Swift/SampleApp-Swift.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 62;
 				DEVELOPMENT_TEAM = M6C39UG9M8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -402,6 +444,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 5.2.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = LivePerson.com.SampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
