@@ -1,0 +1,54 @@
+/*
+ This is the private module which is used to make private ObjC headers available to Swift code.
+ Note how all header files need to be specified with paths relative to this file.
+
+ This file lives inside a folder, and that folder is the actual module. In Xcode the SWIFT_INCLUDE_PATHS needs to include the partent directory to that folder.
+ */
+
+framework module LPMessagingSDK {
+    umbrella header "LPMessagingSDK.h"
+        
+    export *
+    module * {export *}
+    
+    header "LPTTTAttributedLabel.h"
+    header "ExceptionCatcher.h"
+    header "LPBSMobileProvision.h"
+    header "CIContext+Workaround.h"
+    
+    module LPSocket {
+      header "LPSocket.h"
+      header "LPSRWebSocket.h"
+      header "LPSRDelegateController.h"
+      header "LPSRSecurityPolicy.h"
+      header "LPSRIOConsumer.h"
+      header "LPSRIOConsumerPool.h"
+      header "LPSRHash.h"
+      header "LPSRRunLoopThread.h"
+      header "LPSRURLUtilities.h"
+      header "LPSRError.h"
+      header "NSRunLoop+LPSRWebSocket.h"
+      header "NSRunLoop+LPSRWebSocketPrivate.h"
+      header "NSURLRequest+LPSRWebSocket.h"
+      header "NSURLRequest+LPSRWebSocketPrivate.h"
+      header "LPSRConstants.h"
+      header "LPSRHTTPConnectMessage.h"
+      header "LPSRLog.h"
+      header "LPSRMutex.h"
+      header "LPSRPinningSecurityPolicy.h"
+      header "LPSRProxyConnect.h"
+      header "LPSRRandom.h"
+      header "LPSRSIMDHelpers.h"
+      export *
+    }
+    
+    module CommonCrypto [system] {
+        header "LPRNCryptor.h"
+        export *
+    }
+}
+
+module LPMessagingSDK.Swift {
+    header "LPMessagingSDK-Swift.h"
+    requires objc
+}
