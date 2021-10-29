@@ -495,6 +495,34 @@ typedef SWIFT_ENUM(NSInteger, LPAccountEnviroment, open) {
   LPAccountEnviromentQa = 2,
 };
 
+
+SWIFT_CLASS("_TtC14LPMessagingSDK17LPAppointmentList")
+@interface LPAppointmentList : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (void)layoutSubviews;
+@end
+
+
+
+
+
+
+
+
+
+@class UITableView;
+@class UITableViewCell;
+
+@interface LPAppointmentList (SWIFT_EXTENSION(LPMessagingSDK)) <UITableViewDataSource, UITableViewDelegate>
+- (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (void)tableView:(UITableView * _Nonnull)tableView didDeselectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (void)tableView:(UITableView * _Nonnull)tableView didEndDisplayingCell:(UITableViewCell * _Nonnull)cell forRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+@end
+
 enum LPAuthenticationType : NSInteger;
 
 /// #LPAuthenticationParams
@@ -563,11 +591,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPCalendarView")
 
 
 
-
-@interface LPCalendarView (SWIFT_EXTENSION(LPMessagingSDK))
-- (void)layoutSubviews;
-@end
-
 @class UICollectionView;
 @class UIScrollView;
 
@@ -576,6 +599,11 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPCalendarView")
 - (BOOL)collectionView:(UICollectionView * _Nonnull)collectionView shouldSelectItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView * _Nonnull)scrollView;
+@end
+
+
+@interface LPCalendarView (SWIFT_EXTENSION(LPMessagingSDK))
+- (void)layoutSubviews;
 @end
 
 
@@ -721,6 +749,58 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// Custom formatting for date and time string, for example: ‘EEEE MM/dd/YY hh:mm a’.
 /// If not defined, one of the default styles will be used.
 @property (nonatomic, copy) NSString * _Nullable lpDateTimeFormat;
+/// Default value for Calendar View Medium Font
+@property (nonatomic) CGFloat appointmentCalendarViewFontMedium;
+/// Default value for Calendar View Medium Large
+@property (nonatomic) CGFloat appointmentCalendarViewFontLarge;
+/// Default value for Calendar View Date Cell Height.
+@property (nonatomic) CGFloat appointmentCalendarViewDateCellHeight;
+/// Default value for when user presses and selects a cell from the Calendar View
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCalendarViewSelectedColor;
+/// Default value for the color of today’s cell
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCalendarViewTodayColor;
+/// Default value for dark text
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCalendarViewTextDark;
+/// Default value for darkText
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCalendarViewTextLight;
+/// Default value for calendar date color
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCalendarViewDateColor;
+/// Calendar background color
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCalendarBackgroundColor;
+/// Default Image for appointment slot
+@property (nonatomic, strong) UIImage * _Nullable appointmentSlotImage;
+/// Default Color for appointment slot image
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCellImageTintColor;
+/// Default Image for right chevron
+@property (nonatomic, strong) UIImage * _Nullable appointmentRightChevron;
+/// Default Image for left chevron
+@property (nonatomic, strong) UIImage * _Nullable appointmentLeftChevron;
+/// Default value for cell title text color
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCellTitleLabelTextColor;
+/// Default value for cell detail text color
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCellDetailLabelTextColor;
+/// Default value for cell accessory text color
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCellAccessoryLabelTextColor;
+/// Default value for when user presses and selects a cell from the Calendar View
+@property (nonatomic, strong) UIColor * _Nonnull appointmentCellSelectedColor;
+/// Default color for confirmation view background
+@property (nonatomic, strong) UIColor * _Nonnull appointmentConfirmationViewBackroundColor;
+/// Default text for confirmation button
+@property (nonatomic, copy) NSString * _Nonnull appointmentConfirmButtonTitle;
+/// Default radius for confirmation button corner radius
+@property (nonatomic) CGFloat appointmentConfirmButtonCornerRadius;
+/// Default color for confirmation button background
+@property (nonatomic, strong) UIColor * _Nonnull appointmentConfirmButtonBackgroundColor;
+/// Default color for confirmation button text
+@property (nonatomic, strong) UIColor * _Nonnull appointmentConfirmButtonTitleTextColor;
+/// Default size for confirmation button title font
+@property (nonatomic) CGFloat appointmentConfirmButtonTitleFontSize;
+/// Defualt format to present date in output message
+@property (nonatomic, copy) NSString * _Nonnull appointmetnCustomOutputDateFormat;
+/// Default
+@property (nonatomic, copy) NSString * _Nonnull appointmentCustomFontName;
+/// Default format to present Dates
+@property (nonatomic, copy) NSString * _Nonnull customDateFormat;
 /// Default font color for LPDatePickerHeaderView text
 @property (nonatomic, strong) UIColor * _Nonnull datePickerHeaderFontColor;
 /// Default background color for LPDatePickerHeaderView header
@@ -765,7 +845,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, copy) NSString * _Nonnull datePickerCustomFontName;
 /// Calendar Properties
 /// Default calendar background color
-@property (nonatomic, strong) UIColor * _Nonnull calendarBackgroundColor;
+@property (nonatomic, strong) UIColor * _Nonnull datePickerCalendarBackgroundColor;
 /// Header
 @property (nonatomic) CGFloat datePickerCalendarHeaderHeight;
 @property (nonatomic) CGFloat datePickerCalendarHeaderTopMargin;
@@ -804,6 +884,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) CGFloat datePickerCellSelectedBorderWidth;
 @property (nonatomic, strong) UIColor * _Nonnull datePickerCellSelectedColor;
 @property (nonatomic, strong) UIColor * _Nonnull datePickerCellSelectedTextColor;
+@property (nonatomic, strong) UIColor * _Nonnull datePickerCellInSelectedRangeColor;
 /// Default Weekend cell text color
 @property (nonatomic, strong) UIColor * _Nonnull datePickerCellTextColorWeekend;
 /// Locale Style
@@ -999,6 +1080,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// note:
 /// Default is .fullscreen. value. We support any current UIModalPresentationStyle except “.none”.
 @property (nonatomic) UIModalPresentationStyle datePickerPresentationStyle;
+/// The configuration to control our modal presentation stylen for LPAppointmentList controller within the SDK.
+/// note:
+/// Default is .fullscreen. value. We support any current UIModalPresentationStyle except “.none”.
+@property (nonatomic) UIModalPresentationStyle appointmentListPresentationStyle;
 /// Enable or disable inapp reporting for push notifications to event manager api.
 /// If true: SDK will report delivery, read, and conversation events.
 /// <ul>
@@ -1426,6 +1511,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) BOOL markdownHyperlinkFromAgent;
 /// Color code for hyperlink in the text of the remote user bubble.
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleHyperlinkColor;
+/// Controls text color for hyperlink item on the System Messages Bubble
+@property (nonatomic, strong) UIColor * _Nonnull controllerBubbleHyperlinkColor;
 @property (nonatomic, copy) NSString * _Nullable country SWIFT_AVAILABILITY(ios,deprecated=13.0.0,obsoleted=14.0.0,message="use region instead");
 /// Enable or disable file/photo sharing feature from agents.
 @property (nonatomic) BOOL enableFileSharing SWIFT_AVAILABILITY(ios,obsoleted=10.0,message="fileSharingFromAgent");
@@ -1587,6 +1674,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK12LPDatePicker")
 /// Overriding Super to help layout components
 - (void)setNeedsLayout;
 @end
+
+
 
 
 
@@ -2284,6 +2373,28 @@ typedef SWIFT_ENUM(NSInteger, LPPermissionTypes, open) {
   LPPermissionTypesMotionAndFitness = 12,
 };
 
+
+SWIFT_CLASS("_TtC14LPMessagingSDK12LPPickerView")
+@interface LPPickerView : UIControl
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class UIPickerView;
+
+@interface LPPickerView (SWIFT_EXTENSION(LPMessagingSDK)) <UIPickerViewDelegate>
+- (void)pickerView:(UIPickerView * _Nonnull)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
+@end
+
+
+@interface LPPickerView (SWIFT_EXTENSION(LPMessagingSDK)) <UIPickerViewDataSource>
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView * _Nonnull)pickerView SWIFT_WARN_UNUSED_RESULT;
+- (NSInteger)pickerView:(UIPickerView * _Nonnull)pickerView numberOfRowsInComponent:(NSInteger)component SWIFT_WARN_UNUSED_RESULT;
+- (UIView * _Nonnull)pickerView:(UIPickerView * _Nonnull)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView * _Nullable)view SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+
 typedef SWIFT_ENUM(NSInteger, LPPusherUnregisterType, open) {
   LPPusherUnregisterTypeAll = 0,
   LPPusherUnregisterTypeNone = 1,
@@ -2531,7 +2642,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14LPUIPickerView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIPickerView;
 
 @interface LPUIPickerView (SWIFT_EXTENSION(LPMessagingSDK)) <UIPickerViewDelegate>
 - (void)pickerView:(UIPickerView * _Nonnull)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
@@ -2579,6 +2689,29 @@ SWIFT_CLASS("_TtC14LPMessagingSDK11LPWebSocket")
 - (void)close;
 - (nonnull instancetype)initWithURLRequest:(NSURLRequest * _Nonnull)request protocols:(NSArray<NSString *> * _Nullable)protocols securityPolicy:(LPSRSecurityPolicy * _Nonnull)securityPolicy SWIFT_UNAVAILABLE;
 @end
+
+
+SWIFT_CLASS("_TtC14LPMessagingSDK20LPWeeklyCalendarView")
+@interface LPWeeklyCalendarView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@end
+
+
+
+
+
+@class UICollectionViewLayout;
+
+@interface LPWeeklyCalendarView (SWIFT_EXTENSION(LPMessagingSDK)) <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+- (NSInteger)collectionView:(UICollectionView * _Nonnull)collectionView numberOfItemsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (void)collectionView:(UICollectionView * _Nonnull)collectionView willDisplayCell:(UICollectionViewCell * _Nonnull)cell forItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (CGSize)collectionView:(UICollectionView * _Nonnull)collectionView layout:(UICollectionViewLayout * _Nonnull)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (void)collectionView:(UICollectionView * _Nonnull)collectionView didEndDisplayingCell:(UICollectionViewCell * _Nonnull)cell forItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+@end
+
+
 
 enum MessageFrequency : NSInteger;
 @class LPWelcomeMessageOption;
@@ -2843,6 +2976,21 @@ SWIFT_CLASS("_TtC14LPMessagingSDK15QuickReplyStyle")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+SWIFT_CLASS("_TtC14LPMessagingSDK4Slot")
+@interface Slot : NSObject <NSCoding>
+/// Decodes the base content item, stored in core data
+/// \param aCoder aCoder
+///
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// Encodes the base content item, will be used for storing in core data
+/// \param aCoder aCoder
+///
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 /// Used to set the socket type as consumer and/or brand. The URI for opening the socket is different between the two.
 /// <ul>
 ///   <li>
@@ -2866,6 +3014,14 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8TTRModel")
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
+
+
+
+
+
+
 
 
 

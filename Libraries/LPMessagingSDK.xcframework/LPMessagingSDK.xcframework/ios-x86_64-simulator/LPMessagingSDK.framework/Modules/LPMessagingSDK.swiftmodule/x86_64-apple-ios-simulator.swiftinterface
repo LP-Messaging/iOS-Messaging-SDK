@@ -457,6 +457,27 @@ public enum ConversationQueryType : Swift.String {
   @objc override dynamic public init()
   @objc deinit
 }
+@objc @_inheritsConvenienceInitializers public class LPAppointmentList : UIKit.UIView {
+  public var finished: ((LPMessagingSDK.AppointmentSlot) -> Swift.Void)?
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  convenience public init(frame: CoreGraphics.CGRect = .zero, viewModel: LPMessagingSDK.LPAppointmentListViewModel)
+  @objc override dynamic public func layoutSubviews()
+  @objc deinit
+}
+extension LPAppointmentList : UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
+  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didDeselectRowAt indexPath: Foundation.IndexPath)
+  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didEndDisplaying cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGFloat
+}
+extension LPAppointmentList : LPMessagingSDK.LPWeeklyCalendarViewDelegate {
+  public func shouldPresentPickerView(picker: LPMessagingSDK.LPPickerView)
+  public func shouldDismissPickerView(picker: LPMessagingSDK.LPPickerView)
+  public func calendar(_ calendar: LPMessagingSDK.LPWeeklyCalendarView, didSelectDate date: Foundation.Date)
+}
 public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case customButtonAccessibilityDescription
   case readReceiptTextSending
@@ -784,6 +805,18 @@ extension Conversation {
   @objc override public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
 }
+public struct LPAppointmentListViewModel {
+  public var configurations: LPMessagingSDK.LPAppointmentListConfigurations
+  public var calendar: Foundation.Calendar {
+    get
+  }
+  public var slotsOfTheDay: [LPMessagingSDK.AppointmentSlot]
+  public var slots: [LPMessagingSDK.AppointmentSlot]
+  public var calendarHeightAnchorConstant: Swift.Double
+  public var tableViewCellAccessoryViewWidthConstant: Swift.Double
+  public var tableViewCellAccessoryViewHeightConstant: Swift.Double
+  public init(slots: [LPMessagingSDK.AppointmentSlot], firstDayOfTheWeek: Swift.String? = nil)
+}
 @objc public enum CheckmarksState : Swift.Int {
   case sentOnly = 1
   case sentAndAccepted = 2
@@ -1094,6 +1127,9 @@ extension LPUIPickerView : UIKit.UIPickerViewDataSource {
   @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
   @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, viewForRow row: Swift.Int, forComponent component: Swift.Int, reusing view: UIKit.UIView?) -> UIKit.UIView
 }
+extension UIView {
+  public func addTapGestureRecognizer(action: (() -> Swift.Void)?)
+}
 @objc @objcMembers public class ConsumerQuery : LPMessagingSDK.BrandQuery {
   @objc public init(consumerID: Swift.String, brandID: Swift.String, agentToken: Swift.String)
   @objc override public func getConversations() -> [LPMessagingSDK.Conversation]?
@@ -1397,13 +1433,20 @@ extension Message {
   public func getBoards(completion: @escaping ([LPMessagingSDK.CustomBoard]) -> (), failure: @escaping (Foundation.NSError) -> ())
   public func getHTMLAttributedString(style: UIKit.UIFont.TextStyle, color: UIKit.UIColor, font: Swift.String) -> Foundation.NSAttributedString?
 }
-public struct Slot {
+@objc @_hasMissingDesignatedInitializers public class Slot : ObjectiveC.NSObject, Foundation.NSCoding {
+  @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  @objc public func encode(with aCoder: Foundation.NSCoder)
+  @objc deinit
+  @objc override dynamic public init()
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentAppointmentListAction : LPMessagingSDK.LPStructuredContentAction {
-  public var slots: [LPMessagingSDK.Slot] {
+  public var slots: [LPMessagingSDK.Slot]? {
     get
   }
   public var firstDayOfTheWeek: Swift.String? {
+    get
+  }
+  public var title: Swift.String? {
     get
   }
   @objc override public func encode(with aCoder: Foundation.NSCoder)
@@ -1640,6 +1683,7 @@ public enum LPFlowTag : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
+  case APPOINTMENT_LIST
   case ANALYTICS
   case AUTHENTICATION
   case COBROWSE
@@ -1795,6 +1839,32 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var lpDateFormat: Swift.String?
   @objc public var lpTimeFormat: Swift.String?
   @objc public var lpDateTimeFormat: Swift.String?
+  @objc public var appointmentCalendarViewFontMedium: CoreGraphics.CGFloat
+  @objc public var appointmentCalendarViewFontLarge: CoreGraphics.CGFloat
+  @objc public var appointmentCalendarViewDateCellHeight: CoreGraphics.CGFloat
+  @objc public var appointmentCalendarViewSelectedColor: UIKit.UIColor
+  @objc public var appointmentCalendarViewTodayColor: UIKit.UIColor
+  @objc public var appointmentCalendarViewTextDark: UIKit.UIColor
+  @objc public var appointmentCalendarViewTextLight: UIKit.UIColor
+  @objc public var appointmentCalendarViewDateColor: UIKit.UIColor
+  @objc public var appointmentCalendarBackgroundColor: UIKit.UIColor
+  @objc public var appointmentSlotImage: UIKit.UIImage?
+  @objc public var appointmentCellImageTintColor: UIKit.UIColor
+  @objc public var appointmentRightChevron: UIKit.UIImage?
+  @objc public var appointmentLeftChevron: UIKit.UIImage?
+  @objc public var appointmentCellTitleLabelTextColor: UIKit.UIColor
+  @objc public var appointmentCellDetailLabelTextColor: UIKit.UIColor
+  @objc public var appointmentCellAccessoryLabelTextColor: UIKit.UIColor
+  @objc public var appointmentCellSelectedColor: UIKit.UIColor
+  @objc public var appointmentConfirmationViewBackroundColor: UIKit.UIColor
+  @objc public var appointmentConfirmButtonTitle: Swift.String
+  @objc public var appointmentConfirmButtonCornerRadius: CoreGraphics.CGFloat
+  @objc public var appointmentConfirmButtonBackgroundColor: UIKit.UIColor
+  @objc public var appointmentConfirmButtonTitleTextColor: UIKit.UIColor
+  @objc public var appointmentConfirmButtonTitleFontSize: CoreGraphics.CGFloat
+  @objc public var appointmetnCustomOutputDateFormat: Swift.String
+  @objc public var appointmentCustomFontName: Swift.String
+  @objc public var customDateFormat: Swift.String
   @objc public var datePickerHeaderFontColor: UIKit.UIColor
   @objc public var datePickerHeaderBackgroundColor: UIKit.UIColor
   @objc public var datePickerHeaderAccessoryButtonTintColor: UIKit.UIColor
@@ -1815,7 +1885,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var datePickerFooterArrowTintColor: UIKit.UIColor
   @objc public var datePickerFooterArrowBackgroundColor: UIKit.UIColor
   @objc public var datePickerCustomFontName: Swift.String
-  @objc public var calendarBackgroundColor: UIKit.UIColor
+  @objc public var datePickerCalendarBackgroundColor: UIKit.UIColor
   @objc public var datePickerCalendarHeaderHeight: CoreGraphics.CGFloat
   @objc public var datePickerCalendarHeaderTopMargin: CoreGraphics.CGFloat
   @objc public var datePickerCalendarHeaderTextColor: UIKit.UIColor
@@ -1846,6 +1916,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var datePickerCellSelectedBorderWidth: CoreGraphics.CGFloat
   @objc public var datePickerCellSelectedColor: UIKit.UIColor
   @objc public var datePickerCellSelectedTextColor: UIKit.UIColor
+  @objc public var datePickerCellInSelectedRangeColor: UIKit.UIColor
   @objc public var datePickerCellTextColorWeekend: UIKit.UIColor
   @objc public var locale: Foundation.Locale
   @objc public var dateSeparatorTitleBackgroundColor: UIKit.UIColor
@@ -1935,6 +2006,10 @@ public enum QuickReplyActionType : Swift.String {
     @objc set
   }
   @objc public var datePickerPresentationStyle: UIKit.UIModalPresentationStyle {
+    @objc get
+    @objc set
+  }
+  @objc public var appointmentListPresentationStyle: UIKit.UIModalPresentationStyle {
     @objc get
     @objc set
   }
@@ -2099,6 +2174,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var customButtonImage: UIKit.UIImage?
   @objc public var markdownHyperlinkFromAgent: Swift.Bool
   @objc public var remoteUserBubbleHyperlinkColor: UIKit.UIColor
+  @objc public var controllerBubbleHyperlinkColor: UIKit.UIColor
   @objc @available(iOS, deprecated: 13.0.0, obsoleted: 14.0.0, message: "use region instead")
   public var country: Swift.String?
   @objc @available(iOS, obsoleted: 10.0, message: "fileSharingFromAgent")
@@ -2157,6 +2233,27 @@ public enum QuickReplyActionType : Swift.String {
   @objc override dynamic public func setValue(_ value: Any?, forUndefinedKey key: Swift.String)
   @objc public class func printAllConfigurations()
   @objc deinit
+}
+public protocol LPWeeklyCalendarViewDelegate {
+  func calendar(_ calendar: LPMessagingSDK.LPWeeklyCalendarView, didSelectDate date: Foundation.Date)
+  func shouldPresentPickerView(picker: LPMessagingSDK.LPPickerView)
+  func shouldDismissPickerView(picker: LPMessagingSDK.LPPickerView)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LPWeeklyCalendarView : UIKit.UIView {
+  public var firstDayAvailable: Swift.Int
+  public var selectedDate: Foundation.Date {
+    get
+    set
+  }
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc deinit
+}
+extension LPWeeklyCalendarView : UIKit.UICollectionViewDelegate, UIKit.UICollectionViewDataSource, UIKit.UICollectionViewDelegateFlowLayout {
+  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGSize
+  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didEndDisplaying cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
 }
 public class ConversationDetails : Swift.CustomStringConvertible {
   public struct CloseReason {
@@ -2642,6 +2739,10 @@ public struct LPColor {
   public static let lpGray4: UIKit.UIColor
   public static let lpGray5: UIKit.UIColor
   public static let lpHorizonBlue: UIKit.UIColor
+  public static let lpCalendarBackgroundDarkMode: UIKit.UIColor
+  public static let lpCalendarFooterDarkMode: UIKit.UIColor
+  public static let lpCellInSelectedRangeDarkMode: UIKit.UIColor
+  public static let lpCellImageTintDarkMode: UIKit.UIColor
   public static func rgba(r: CoreGraphics.CGFloat, g: CoreGraphics.CGFloat, b: CoreGraphics.CGFloat, a: CoreGraphics.CGFloat = 1.0) -> UIKit.UIColor
 }
 public struct Fields {
@@ -2893,6 +2994,10 @@ public struct LPStructuredContentSampleData {
   @objc deinit
   @objc override dynamic public init()
 }
+public struct AppointmentSlot : Swift.Encodable {
+  public init(type: Swift.String, id: Swift.String, start: Swift.Int, end: Swift.Int? = nil, title: Swift.String? = nil, description: Swift.String? = nil, imageUrl: Swift.String? = nil)
+  public func encode(to encoder: Swift.Encoder) throws
+}
 @_inheritsConvenienceInitializers @objcMembers @objc public class LPGetEngagementResponse : ObjectiveC.NSObject, Swift.Codable {
   @objc public var engagementDetails: [LPMessagingSDK.LPEngagementDetails]?
   @objc public var sessionId: Swift.String?
@@ -2993,6 +3098,49 @@ public struct LPStructuredContentSampleData {
   @objc override dynamic public init()
   required public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class LPAppointmentListConfigurations {
+  public static let instance: LPMessagingSDK.LPAppointmentListConfigurations
+  public var calendarViewFontSmall: CoreGraphics.CGFloat
+  public var calendarViewFontMedium: CoreGraphics.CGFloat
+  public var calendarViewFontLarge: CoreGraphics.CGFloat
+  public var calendarViewDateCellHeight: CoreGraphics.CGFloat
+  public var calendarViewSelectedColor: UIKit.UIColor
+  public var calendarViewTodayColor: UIKit.UIColor
+  public var calendarViewTextDark: UIKit.UIColor
+  public var calendarViewTextLight: UIKit.UIColor
+  public var calendarViewDateColor: UIKit.UIColor
+  public var calendarBackgroundColor: UIKit.UIColor
+  public var datePickerChevron: UIKit.UIImage?
+  public var slotImage: UIKit.UIImage?
+  public var rightChevron: UIKit.UIImage?
+  public var leftChevron: UIKit.UIImage?
+  public var pickerBackgroundColor: UIKit.UIColor
+  public var pickerToolbarBackgroundColor: UIKit.UIColor
+  public var pickerFontColor: UIKit.UIColor
+  public var pickerConfirmationButtonTintColor: UIKit.UIColor
+  public var pickerConfirmationButtonText: Swift.String
+  public var pickerToolbarStyle: UIKit.UIBarStyle
+  public var cellTitleLabelTextColor: UIKit.UIColor
+  public var cellDetailLabelTextColor: UIKit.UIColor
+  public var cellAccessoryLabelTextColor: UIKit.UIColor
+  public var cellSelectedColor: UIKit.UIColor
+  public var cellImageTintColor: UIKit.UIColor
+  public var confirmationViewBackroundColor: UIKit.UIColor
+  public var confirmButtonTitle: Swift.String
+  public var confirmButtonCornerRadius: CoreGraphics.CGFloat
+  public var confirmButtonBackgroundColor: UIKit.UIColor
+  public var confirmButtonTitleTextColor: UIKit.UIColor
+  public var confirmButtonTitleFontSize: CoreGraphics.CGFloat
+  public var customFontName: Swift.String
+  public var customDateFormat: Swift.String
+  public var customOutputDateFormat: Swift.String
+  public var locale: Foundation.Locale
+  public var calendar: Foundation.Calendar {
+    get
+    set
+  }
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers open class NSBouncyView : UIKit.UIView {
   open func setView(_ view: UIKit.UIView)
@@ -3107,6 +3255,14 @@ public protocol LPStructuredContentLoggerDelegate : AnyObject {
   @objc override public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
 }
+public protocol LPAppointmentListLoggerDelegate : AnyObject {
+  func lpAppointmentListLogger(message: Swift.String)
+}
+@_hasMissingDesignatedInitializers final public class LPAppointmentListLogger {
+  weak final public var delegate: LPMessagingSDK.LPAppointmentListLoggerDelegate?
+  public static let instance: LPMessagingSDK.LPAppointmentListLogger
+  @objc deinit
+}
 public enum CellShapeOptions {
   case round
   case square
@@ -3211,6 +3367,42 @@ public protocol LPDatePickerLoggerDelegate : AnyObject {
   weak final public var delegate: LPMessagingSDK.LPDatePickerLoggerDelegate?
   public static let instance: LPMessagingSDK.LPDatePickerLogger
   @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class LPPickerView : UIKit.UIControl {
+  open var minimumDate: Foundation.Date? {
+    get
+    set
+  }
+  open var maximumDate: Foundation.Date? {
+    get
+    set
+  }
+  open var date: Foundation.Date {
+    get
+    set
+  }
+  open var calendar: Foundation.Calendar {
+    get
+    set
+  }
+  open var locale: Foundation.Locale? {
+    get
+    set
+  }
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+extension LPPickerView {
+  open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
+}
+extension LPPickerView : UIKit.UIPickerViewDelegate {
+  @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
+}
+extension LPPickerView : UIKit.UIPickerViewDataSource {
+  @objc dynamic public func numberOfComponents(in pickerView: UIKit.UIPickerView) -> Swift.Int
+  @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
+  @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, viewForRow row: Swift.Int, forComponent component: Swift.Int, reusing view: UIKit.UIView?) -> UIKit.UIView
 }
 extension LPCalendarView : UIKit.UICollectionViewDelegateFlowLayout {
   @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
@@ -3334,6 +3526,23 @@ extension LPCalendarView : UIKit.UICollectionViewDataSource {
 }
 public protocol LPStructuredContentImageDownloader {
   func LPStructuredContentNeedsImageToDownload(imageURL: Swift.String, resizeImageSize: CoreGraphics.CGSize, completion: @escaping (UIKit.UIImage?) -> (), failure: (() -> ())?)
+}
+extension UIColor {
+  public class var appointmentListCalendarBlueColor: UIKit.UIColor {
+    get
+  }
+  public class var appointmentListDarkTextColor: UIKit.UIColor {
+    get
+  }
+  public class var appointmentListLightTextColor: UIKit.UIColor {
+    get
+  }
+  public class var appointmentListDateColor: UIKit.UIColor {
+    get
+  }
+  public class var appointmentListCellImageTintColor: UIKit.UIColor {
+    get
+  }
 }
 @_hasMissingDesignatedInitializers public class LPSocketManager {
   public var webSockets: [Swift.String : LPMessagingSDK.LPWebSocket] {
