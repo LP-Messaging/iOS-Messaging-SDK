@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
-// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LPMessagingSDK
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LPMessagingSDK
 import AVFoundation
 import AudioToolbox
 import LPMessagingSDK.CommonCrypto
@@ -2695,6 +2695,8 @@ public struct LPNotificationName {
   public static let LP_SECURED_FORM_FINISHED_LOADING: Foundation.Notification.Name
   public static let LP_FINISHED_FETCHING_HISTORY: Foundation.Notification.Name
   public static let LP_SET_CONVERSATION_PARTICIPANTS: Foundation.Notification.Name
+  public static let LP_RELOADING_QUICK_REPLY: Foundation.Notification.Name
+  public static let LP_DIFFABLE_SNAPSHOT_UPDATED: Foundation.Notification.Name
 }
 public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
   case TOKEN
