@@ -902,14 +902,14 @@ public enum LPPreferredFontType {
   public static var allRows: [LPMessagingSDK.LPLanguage] {
     get
   }
-  public var rawValue: Swift.String {
+  public typealias RawValue = Swift.String
+  public var rawValue: LPMessagingSDK.LPLanguage.RawValue {
     get
   }
   public init(rawValue: Swift.String)
   public var description: Swift.String? {
     get
   }
-  public typealias RawValue = Swift.String
 }
 @objc public enum LPRegionCode : Swift.Int {
   case device
@@ -955,14 +955,14 @@ public enum LPPreferredFontType {
   public static var allRows: [LPMessagingSDK.LPRegionCode] {
     get
   }
-  public var rawValue: Swift.String {
+  public typealias RawValue = Swift.String
+  public var rawValue: LPMessagingSDK.LPRegionCode.RawValue {
     get
   }
   public init(rawValue: Swift.String)
   public var description: Swift.String? {
     get
   }
-  public typealias RawValue = Swift.String
 }
 @objc public enum LPUrlPreviewStyle : Swift.Int {
   case slim
@@ -1293,26 +1293,27 @@ extension UIView {
   @objc deinit
 }
 public enum MessageType : Swift.String {
+  case UserAudio
+  case UserFile
   case User
   case UserMasked
-  case SeperatorSystem
-  case LocalSystem
-  case RemoteUser
-  case RemoteSystem
   case UserPhoto
-  case RemoteUserFile
   case UserLinkPreview
-  case RemoteUserLinkPreview
-  case RemoteUserHyperLink
-  case UserHyperLink
-  case RemoteUserSecureForm
   case UserStructuredContentContainer
-  case RemoteUserStructuredContentContainer
+  case UserHyperLink
   case Controller
-  case UserAudio
+  case LocalSystem
+  case RemoteSystem
+  case SeperatorSystem
   case RemoteUserAudio
-  case UserFile
   case RemoteUserCobrowse
+  case RemoteUserFile
+  case RemoteUserHyperLink
+  case RemoteUserLinkPreview
+  case RemoteUser
+  case RemoteUserSecureForm
+  case RemoteUserStructuredContentContainer
+  case RemoteUserQuickReply
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1679,6 +1680,15 @@ public enum LPBorder : Swift.String {
   @objc override dynamic public init()
   @objc deinit
 }
+public enum LPLoggosServiceStatus {
+  case enabled
+  case disabled
+  public static func == (a: LPMessagingSDK.LPLoggosServiceStatus, b: LPMessagingSDK.LPLoggosServiceStatus) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
 public enum LPFlowTag : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
@@ -1826,7 +1836,6 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var conversationSeparatorTopPadding: Swift.Float
   @objc public var conversationSeparatorContentViewTopPadding: CoreGraphics.CGFloat
   @objc public var conversationSeparatorContentViewBottomPadding: CoreGraphics.CGFloat
-  @objc public var maxPreviousConversationToPresent: Swift.UInt
   @objc public var deleteClosedConversationOlderThanMonths: Swift.UInt
   @objc public var sendingMessageTimeoutInMinutes: Swift.UInt
   @objc public var enableVibrationOnMessageFromRemoteUser: Swift.Bool
@@ -1865,6 +1874,11 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var appointmetnCustomOutputDateFormat: Swift.String
   @objc public var appointmentCustomFontName: Swift.String
   @objc public var customDateFormat: Swift.String
+  @objc public var enableWelcomeMessageForControlHistoryAPI: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public var enableHideWelcomeMessageOnClearHistory: Swift.Bool
   @objc public var datePickerHeaderFontColor: UIKit.UIColor
   @objc public var datePickerHeaderBackgroundColor: UIKit.UIColor
   @objc public var datePickerHeaderAccessoryButtonTintColor: UIKit.UIColor
@@ -2516,6 +2530,7 @@ public enum ContentType : Swift.String {
   case formInvitation
   case formSubmission
   case structuredContent
+  case quickReply
   public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
   public var rawValue: Swift.String {
@@ -2695,8 +2710,6 @@ public struct LPNotificationName {
   public static let LP_SECURED_FORM_FINISHED_LOADING: Foundation.Notification.Name
   public static let LP_FINISHED_FETCHING_HISTORY: Foundation.Notification.Name
   public static let LP_SET_CONVERSATION_PARTICIPANTS: Foundation.Notification.Name
-  public static let LP_RELOADING_QUICK_REPLY: Foundation.Notification.Name
-  public static let LP_DIFFABLE_SNAPSHOT_UPDATED: Foundation.Notification.Name
 }
 public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
   case TOKEN
@@ -3759,6 +3772,8 @@ extension LPMessagingSDK.LPWelcomeMessage.MessageFrequency : Swift.RawRepresenta
 extension LPMessagingSDK.LPWelcomeMessage.LPWelcomeMessageError : Swift.Equatable {}
 extension LPMessagingSDK.LPWelcomeMessage.LPWelcomeMessageError : Swift.Hashable {}
 extension LPMessagingSDK.LPWelcomeMessage.LPWelcomeMessageError : Swift.RawRepresentable {}
+extension LPMessagingSDK.LPLoggosServiceStatus : Swift.Equatable {}
+extension LPMessagingSDK.LPLoggosServiceStatus : Swift.Hashable {}
 extension LPMessagingSDK.LPFlowTag : Swift.Equatable {}
 extension LPMessagingSDK.LPFlowTag : Swift.Hashable {}
 extension LPMessagingSDK.LPLoggingLevel : Swift.Equatable {}

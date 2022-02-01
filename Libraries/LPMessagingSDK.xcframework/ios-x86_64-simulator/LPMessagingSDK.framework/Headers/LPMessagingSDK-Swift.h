@@ -716,8 +716,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) CGFloat conversationSeparatorContentViewTopPadding;
 /// Define the bottom padding for the conversation separator content view
 @property (nonatomic) CGFloat conversationSeparatorContentViewBottomPadding;
-/// Amount of conversations to show in advance.
-@property (nonatomic) NSUInteger maxPreviousConversationToPresent;
 /// Upon SDK initialization, all closed conversation with end date older than X months, will be deleted from the database. Setting 0 will delete all closed conversation.
 @property (nonatomic) NSUInteger deleteClosedConversationOlderThanMonths;
 /// Maximum number of minutes to send the message.
@@ -801,6 +799,16 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, copy) NSString * _Nonnull appointmentCustomFontName;
 /// Default format to present Dates
 @property (nonatomic, copy) NSString * _Nonnull customDateFormat;
+/// Will control if Welcome Message should be displayed if Control History API is being used
+/// note:
+/// if true, will show Custom or Default Welcome Message
+/// requires:
+/// This configuration will only enable showing the Welcome Message when <code>LPConversationsHistoryStateToDisplay.Open</code>
+/// since:
+/// LPMessagingSDK 6.7.0
+@property (nonatomic) BOOL enableWelcomeMessageForControlHistoryAPI;
+/// Hide welcome message on clear history - default false
+@property (nonatomic) BOOL enableHideWelcomeMessageOnClearHistory;
 /// Default font color for LPDatePickerHeaderView text
 @property (nonatomic, strong) UIColor * _Nonnull datePickerHeaderFontColor;
 /// Default background color for LPDatePickerHeaderView header
@@ -1590,6 +1598,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK33LPConversationHistoryControlParam")
 @property (nonatomic) enum LPConversationsHistoryStateToDisplay historyConversationsStateToDisplay;
 @property (nonatomic) enum LPConversationHistoryMaxDaysDateType historyConversationMaxDaysType;
 @property (nonatomic, readonly) BOOL isEnable;
+/// \param historyConversationsStateToDisplay Controls the state of the Conversations to display
+///
+/// \param historyConversationsMaxDays Controls number of days to display based on <code>historyMaxDaysType</code>
+///
+/// \param historyMaxDaysType Controls if should look for Conversation Close or Start Date
+///
 - (nonnull instancetype)initWithHistoryConversationsStateToDisplay:(enum LPConversationsHistoryStateToDisplay)historyConversationsStateToDisplay historyConversationsMaxDays:(NSInteger)historyConversationsMaxDays historyMaxDaysType:(enum LPConversationHistoryMaxDaysDateType)historyMaxDaysType OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (BOOL)isEqualsTo:(LPConversationHistoryControlParam * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
