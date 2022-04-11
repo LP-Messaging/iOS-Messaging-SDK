@@ -1816,20 +1816,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// <brandID> of the host app.
 /// This method throws an error/return false with with an error, in case the initialization failed.
 - (BOOL)initialize:(NSString * _Nullable)brandID monitoringInitParams:(LPMonitoringInitParams * _Nullable)monitoringInitParams error:(NSError * _Nullable * _Nullable)error;
-/// Show conversation view for conversation query.
-/// This method starts the conversation and show all the existing messages it exist.
-/// Optional parameters:
-/// <authenticationCode> to use an an authenticated users.
-/// <containerViewController> the containter which presents the conversation view as a child View Controller.
-/// DEPRECATED - Use showConversation(_ conversationViewParams: LPConversationViewParams) instead
-- (void)showConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nullable)authenticationCode containerViewController:(UIViewController * _Nullable)containerViewController SWIFT_AVAILABILITY(ios,deprecated=9.3.5,obsoleted=14.0.0,message="Use showConversation(_ conversationViewParams: LPConversationViewParams) instead");
 /// Show Conversation view and starts the conversation and show all the existing messages it exist.
 /// \param conversationViewParams an LPConversationViewParams object to determine the properties of the views. Such as Container or Window or if ViewOnly.
 ///
 /// \param authenticationParams an optional LPAuthenticationParams object to determine the properties of an authenticated connection. If using authenticate connection, this paramater must
 /// be passed. LPAuthenticationParams supports Code Flow login or Implicit Flow login.
 ///
-- (void)showConversation:(LPConversationViewParams * _Nonnull)conversationViewParams authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
+- (void)showConversation:(LPConversationViewParams * _Nonnull)conversationViewParams authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams SWIFT_AVAILABILITY(ios,introduced=13);
 /// Remove conversation view for conversation query from its container or window view.
 /// This method ends the conversation’s connection.
 - (void)removeConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
