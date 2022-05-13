@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
-// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LPMessagingSDK
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LPMessagingSDK
 import AVFoundation
 import AudioToolbox
 import LPMessagingSDK.CommonCrypto
@@ -639,12 +639,18 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case toolTipStartedReplyHint
   case toolTipDeletedRecordingHint
   case button
+  case errorSendingTheAudio
+  case sorryWeveEncounteredAnErrorWhileSendingTheAudio
   case fileSharingAttachmentMenu
   case fileSharingDocument
   case fileSharingUnsupportedFileSize
   case fileSharingFileSizeLimitation
   case fileSharingSendFile
   case fileSharingSendPhoto
+  case errorSendingTheFile
+  case sorryWeveEncounteredAnErrorWhileSendingTheFile
+  case fileExtensionMissing
+  case sorryWeveEncounteredAnErrorWhileSending
   case permissionPopUpDeniedOptionNotNow
   case permissionPopUpDeniedOptionGoToSettings
   case permissionPopUpDeniedTitle
@@ -1329,6 +1335,7 @@ public enum LocalMessageType : Swift.Int, Swift.CaseIterable {
   case transcendentMessage
   case proactiveMessage
   case richProactiveMessage
+  case proactiveContentEventMessage
   public init?(number: Foundation.NSNumber)
   public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
@@ -1740,6 +1747,7 @@ public enum LPFlowTag : Swift.CustomStringConvertible {
   case SOCKET_HANDLER
   case SOCKET_TIMER
   case STATE_HANDLER
+  case STEP_UP
   case STRUCTURED_CONTENT
   case UNIT_TEST
   case UNREAD_MESSAGES
@@ -2711,6 +2719,7 @@ public struct LPNotificationName {
   public static let LP_FINISHED_FETCHING_HISTORY: Foundation.Notification.Name
   public static let LP_SET_CONVERSATION_PARTICIPANTS: Foundation.Notification.Name
   public static let LP_RELOADING_QUICK_REPLY: Foundation.Notification.Name
+  public static let CONNECTION_STEP_UP_FAILED: Foundation.Notification.Name
 }
 public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
   case TOKEN
@@ -2719,6 +2728,7 @@ public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
   case SESSION_ID
   case VISITOR_ID
   case CONNECTOR_ID
+  case AUTH_CONNECTOR_ID
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3214,10 +3224,6 @@ public enum LPSocketLoggerType : Swift.Int {
   @objc override dynamic open var description: Swift.String {
     @objc get
   }
-  @objc override dynamic open var isSelected: Swift.Bool {
-    @objc get
-    @objc set
-  }
   public func clearStyles()
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic open func layoutSubviews()
@@ -3589,6 +3595,7 @@ extension UIColor {
   @objc func LPMessagingSDKAuthenticationFailed(_ error: Foundation.NSError)
   @objc func LPMessagingSDKTokenExpired(_ brandID: Swift.String)
   @objc func LPMessagingSDKError(_ error: Foundation.NSError)
+  @objc optional func LPMessagingStepupFailed(_ error: Foundation.NSError)
   @objc optional func LPMessagingSDKConnectionRetriesFailed(_ error: Foundation.NSError)
   @objc optional func LPMessagingSDKAgentIsTypingStateChanged(_ isTyping: Swift.Bool)
   @objc optional func LPMessagingSDKConversationStarted(_ conversationID: Swift.String?)

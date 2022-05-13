@@ -567,7 +567,6 @@ typedef SWIFT_ENUM(NSInteger, LPAuthenticationType, open) {
 SWIFT_CLASS("_TtC14LPMessagingSDK17LPCalendarDayCell")
 @interface LPCalendarDayCell : UICollectionViewCell
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
-@property (nonatomic, getter=isSelected) BOOL selected;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)layoutSubviews;
@@ -2235,6 +2234,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKTokenExpired:(NSString * _Nonnull)brandID;
 - (void)LPMessagingSDKError:(NSError * _Nonnull)error;
 @optional
+- (void)LPMessagingStepupFailed:(NSError * _Nonnull)error;
 - (void)LPMessagingSDKConnectionRetriesFailed:(NSError * _Nonnull)error;
 - (void)LPMessagingSDKAgentIsTypingStateChanged:(BOOL)isTyping;
 - (void)LPMessagingSDKConversationStarted:(NSString * _Nullable)conversationID;
