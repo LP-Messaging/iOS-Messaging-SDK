@@ -612,7 +612,8 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case connectionStatusBarFailedToConnect
   case quickReplyContentMessage
   case newRemoteMessage
-  case newStructuredContentMessage
+  case structuredContentCellWithItemsMessage
+  case structuredContentCellWithNoItemsMessage
   case structuredContentItemError
   case structuredContentAccessibilityMap
   case copyNumber
@@ -2131,6 +2132,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var inputTextViewContainerBackgroundColor: UIKit.UIColor
   @objc public var inputTextViewCornerRadius: Swift.Double
   @objc public var inputTextViewTopBorderColor: UIKit.UIColor
+  @objc public var inputTextViewPlaceholderColor: UIKit.UIColor?
   @objc public var remoteUserBubbleBackgroundColor: UIKit.UIColor
   @objc public var remoteUserBubbleBorderColor: UIKit.UIColor
   @objc public var remoteUserBubbleLinkColor: UIKit.UIColor

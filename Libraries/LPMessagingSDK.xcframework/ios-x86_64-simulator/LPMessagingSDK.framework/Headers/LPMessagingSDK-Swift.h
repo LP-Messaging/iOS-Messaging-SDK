@@ -1354,6 +1354,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) double inputTextViewCornerRadius;
 /// Input TextView top border color default clear color.
 @property (nonatomic, strong) UIColor * _Nonnull inputTextViewTopBorderColor;
+/// Input TextView placeholder color default is nil.
+@property (nonatomic, strong) UIColor * _Nullable inputTextViewPlaceholderColor;
 /// Color code for the background of the remote user bubble.
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleBackgroundColor;
 /// Color code for the outline color.
