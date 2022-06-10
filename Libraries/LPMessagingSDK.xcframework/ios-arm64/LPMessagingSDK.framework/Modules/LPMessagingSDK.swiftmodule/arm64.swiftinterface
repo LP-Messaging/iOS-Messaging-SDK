@@ -2248,6 +2248,9 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var accountEnvironment: LPMessagingSDK.LPAccountEnviroment
   @objc public var csdsDomain: Swift.String
   @objc public var lpTagDomain: Swift.String
+  @objc public var showResolveConversationMenuOption: Swift.Bool
+  @objc public var showMarkAsUrgentMenuOption: Swift.Bool
+  @objc public var showClearHistoryMenuOption: Swift.Bool
   @objc public var inputTextViewMaxHeight: CoreGraphics.CGFloat {
     @objc get
     @objc set

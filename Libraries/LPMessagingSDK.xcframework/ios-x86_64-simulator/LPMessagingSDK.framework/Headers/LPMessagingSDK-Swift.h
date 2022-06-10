@@ -1561,6 +1561,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, copy) NSString * _Nonnull csdsDomain;
 /// lpTag Domain URL.  For brands that need to control the URL that is the gateway for LivePerson services, use this key to set a URL of your choice.
 @property (nonatomic, copy) NSString * _Nonnull lpTagDomain;
+/// Show or Hide close conversation menu option. True is shown.
+@property (nonatomic) BOOL showResolveConversationMenuOption;
+/// Show or Hide mark as urgent menu option. True is shown.
+@property (nonatomic) BOOL showMarkAsUrgentMenuOption;
+/// Show or Hide remove history menu option. True is shown.
+@property (nonatomic) BOOL showClearHistoryMenuOption;
 /// The maximum height of the input text field in pixels. Default is 100 pixels.
 /// Cannot be smaller than 50 pixels.
 @property (nonatomic) CGFloat inputTextViewMaxHeight;
