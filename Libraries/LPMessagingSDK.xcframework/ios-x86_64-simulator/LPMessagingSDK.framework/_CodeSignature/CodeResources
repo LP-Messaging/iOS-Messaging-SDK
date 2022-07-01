@@ -42,7 +42,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		9p9WEJU44M3xVzcHiEe56wieVVc=
+		WGaMDCh5tPBBVW4KJ5qfD0fpA8I=
 		</data>
 		<key>Model.cdm</key>
 		<data>
@@ -54,11 +54,11 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		Jah4fxc7sGOgbu8a7ePtzfsFefo=
+		7+5TcRCY7iIsSEIls/yC7mORA1M=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		9gWf0Nxj4eWW75SYLKCiaObNZbs=
+		o4d/bmtqYl+GDXgPa8co8nwRp3c=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -66,11 +66,11 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		Jah4fxc7sGOgbu8a7ePtzfsFefo=
+		7+5TcRCY7iIsSEIls/yC7mORA1M=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		9gWf0Nxj4eWW75SYLKCiaObNZbs=
+		o4d/bmtqYl+GDXgPa8co8nwRp3c=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -190,7 +190,7 @@
 		</data>
 		<key>RemoteMessageQuickReplyTableViewCell.nib</key>
 		<data>
-		UEQkk8l4zUT35NxmJyUGDPD46g4=
+		uUofgRdUnyDUI/d8R9+QfdnTfqQ=
 		</data>
 		<key>module.modulemap</key>
 		<data>
@@ -280,14 +280,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+f8hyCEbORCn/Eam2vsnQjqXhfeOGd+dOfMj7+dJPCc=
+			TKsrCxsByCCwtWweMT1g/20v5KDHBugrNUM3fvXmjl0=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			65tiq4FPAtUHOf8//RphbVQ3HbLearSf4Nf/lhim8Do=
+			eoXHINY1N1xFegUHvWCoSwpTCr4GisXFDBo8zfqUphk=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftdoc</key>
@@ -301,14 +301,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+f8hyCEbORCn/Eam2vsnQjqXhfeOGd+dOfMj7+dJPCc=
+			TKsrCxsByCCwtWweMT1g/20v5KDHBugrNUM3fvXmjl0=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			65tiq4FPAtUHOf8//RphbVQ3HbLearSf4Nf/lhim8Do=
+			eoXHINY1N1xFegUHvWCoSwpTCr4GisXFDBo8zfqUphk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -518,7 +518,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			K0H8ZrnoNqkYgIRqGtvwFBHYNv+fJ23XZGymI7t+MJA=
+			9ew6LHO/b0QUb7rsOaqp4sJ7nds6zecnSkj6ZUQrPig=
 			</data>
 		</dict>
 		<key>module.modulemap</key>

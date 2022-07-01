@@ -643,6 +643,7 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case errorSendingTheAudio
   case sorryWeveEncounteredAnErrorWhileSendingTheAudio
   case fileSharingAttachmentMenu
+  case fileSharingCloseAttachmentMenu
   case fileSharingDocument
   case fileSharingUnsupportedFileSize
   case fileSharingFileSizeLimitation
@@ -2703,6 +2704,7 @@ public struct LPNotificationName {
   public static let AMS_CONVERSATION_CHAT_STATE_CHANGED: Foundation.Notification.Name
   public static let CONVERSATION_STARTED: Foundation.Notification.Name
   public static let CONVERSATION_RESOLVED: Foundation.Notification.Name
+  public static let CONVERSATION_VIEW_CONTROLLER_DISMISSED: Foundation.Notification.Name
   public static let REACHABILITY_CHANGED: Foundation.Notification.Name
   public static let CONVERSATION_CSAT_SUBMISSION_TAPPED: Foundation.Notification.Name
   public static let CONVERSATION_CSAT_DID_LOAD: Foundation.Notification.Name
