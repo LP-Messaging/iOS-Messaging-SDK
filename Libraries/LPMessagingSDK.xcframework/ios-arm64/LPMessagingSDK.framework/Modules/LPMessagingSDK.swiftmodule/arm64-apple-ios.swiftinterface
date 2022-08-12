@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
-// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LPMessagingSDK
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LPMessagingSDK
 import AVFoundation
 import AudioToolbox
 import LPMessagingSDK.CommonCrypto
@@ -95,8 +95,8 @@ public enum QuickReplyStyleSize : Swift.String {
   case small
   case medium
   case large
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -111,8 +111,8 @@ public enum QuickReplyStyleSize : Swift.String {
   public var size: Swift.String?
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public enum FileState : Swift.String {
   case Created
@@ -126,8 +126,8 @@ public enum FileState : Swift.String {
   case DownloadError
   case FetchError
   case GenerateError
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -166,8 +166,8 @@ extension File {
     case Bottom = 0
     case LastPosition
     case FirstUnreadMessage
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
@@ -176,8 +176,8 @@ extension File {
   @objc public var backgroundToForeground: LPMessagingSDK.LPConversationScrollConfiguration.ScrollPosition
   @objc public var scrollToBottomButtonPressed: LPMessagingSDK.LPConversationScrollConfiguration.ScrollPosition
   @objc public var pushNotificationTapped: LPMessagingSDK.LPConversationScrollConfiguration.ScrollPosition
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc @objcMembers public class BrandQuery : ObjectiveC.NSObject, LPMessagingSDK.ConversationParamProtocol {
   @objc override dynamic public var description: Swift.String {
@@ -204,8 +204,8 @@ extension File {
 public enum LPDatePickerClass : Swift.String {
   case range
   case single
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -299,8 +299,8 @@ public enum QuickReplyJsonKeys : Swift.String {
   case bold
   case size
   case borderRadius
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -310,8 +310,8 @@ public enum CustomItemType : Swift.String {
   case image
   case map
   case linkPreview
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -321,8 +321,8 @@ public enum ImageState : Swift.String {
   case downloaded
   case failed
   case noImageURL
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -357,8 +357,8 @@ extension LinkPreview {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objcMembers @objc public class LPConversationViewParams : ObjectiveC.NSObject {
   @objc public var conversationQuery: LPMessagingSDK.ConversationParamProtocol
@@ -372,8 +372,8 @@ extension LinkPreview {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_hasMissingDesignatedInitializers public class LPHyperlinkUtils {
   @objc deinit
@@ -393,8 +393,8 @@ extension LinkPreview {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @objcMembers public class Utils : ObjectiveC.NSObject {
   @objc public static let backgroundQueue: Dispatch.DispatchQueue
@@ -406,8 +406,8 @@ extension LinkPreview {
   @objc public class func unwrap(any: Any) -> Any
   @objc public class func isLandscape() -> Swift.Bool
   @objc public class func isPortrait() -> Swift.Bool
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc public class TTRModel : ObjectiveC.NSObject, Foundation.NSCoding {
   public var effectiveTTR: Foundation.Date!
@@ -427,11 +427,11 @@ extension LinkPreview {
 public enum ConversationQueryType : Swift.String {
   case Brand
   case Consumer
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 @objc public protocol ConversationParamProtocol {
   @objc func getConversations() -> [LPMessagingSDK.Conversation]?
@@ -679,13 +679,13 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case collaborationCallJoined
   case collaborationCallCancelledInvitation
   case collaborationCallConsumerLeft
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [LPMessagingSDK.LPLanguagesKeys]
+  public typealias RawValue = Swift.String
+  public static var allCases: [LPMessagingSDK.LPLanguagesKeys] {
     get
   }
-  public typealias AllCases = [LPMessagingSDK.LPLanguagesKeys]
-  public static var allCases: [LPMessagingSDK.LPLanguagesKeys] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -701,19 +701,19 @@ public enum ConversationState : Swift.String {
   case Created
   case Pending
   case Other
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 public enum TTRType : Swift.String {
   case Normal
   case Custom
   case Prioritized
   case Urgent
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -807,8 +807,8 @@ extension Conversation {
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class QuickReplyNavigateAction : LPMessagingSDK.QuickReplyAction {
-  public var latitude: CoreLocation.CLLocationDegrees
-  public var longitude: CoreLocation.CLLocationDegrees
+  public var latitude: Swift.Double
+  public var longitude: Swift.Double
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc override public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
@@ -829,8 +829,8 @@ public struct LPAppointmentListViewModel {
   case sentOnly = 1
   case sentAndAccepted = 2
   case all = 3
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -841,10 +841,10 @@ public enum LPPreferredFontType {
   case nonConversationFeed
   case conversationClosedSeparator
   public static func == (a: LPMessagingSDK.LPPreferredFontType, b: LPMessagingSDK.LPPreferredFontType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 @objc public enum LPAccountEnviroment : Swift.Int {
   case production = 0
@@ -854,8 +854,8 @@ public enum LPPreferredFontType {
     get
   }
   public static func rawValue(forString string: Swift.String) -> Swift.Int
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -975,8 +975,8 @@ public enum LPPreferredFontType {
 @objc public enum LPUrlPreviewStyle : Swift.Int {
   case slim
   case large
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -989,8 +989,8 @@ public enum LPPreferredFontType {
     get
   }
   public static func rawValue(forString string: Swift.String) -> Swift.Int
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -1002,8 +1002,8 @@ public enum LPPreferredFontType {
     get
   }
   public static func rawValue(forString string: Swift.String) -> Swift.Int
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -1019,8 +1019,8 @@ public enum LPPreferredFontType {
     get
   }
   public static func newInstance(description: Swift.String) -> LPMessagingSDK.LPAuthenticationType
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -1028,8 +1028,8 @@ public enum LPPreferredFontType {
 @objc public enum VoiceVideoEndCallButtonType : Swift.Int {
   case close = 1
   case hangup = 2
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -1051,8 +1051,8 @@ extension QuickReplyButton {
 public enum LPPickerType : Swift.String {
   case single
   case range
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -1065,11 +1065,11 @@ public enum FormState : Swift.String {
   case viewed
   case expired
   case error
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 @objc public protocol Form : LPMessagingSDK.EntityInterface {
   @objc var formID: Swift.String { get set }
@@ -1114,8 +1114,8 @@ extension Form {
   public enum PickerComponent : Swift.Int {
     case month
     case year
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
@@ -1147,8 +1147,8 @@ extension UIView {
   @objc override public func getQueryType() -> Swift.String
   @objc override public func isConversationRelatedToQuery(_ conversation: LPMessagingSDK.Conversation) -> Swift.Bool
   @objc override public func getQueryUID() -> Swift.String
-  @objc deinit
   @objc override public init(brandID: Swift.String, campaignInfo: LPMessagingSDK.LPCampaignInfo? = super)
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers open class LPCalendarHeaderView : UIKit.UIView {
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
@@ -1179,8 +1179,8 @@ extension UIView {
   }
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class QuickReplyLinkAction : LPMessagingSDK.QuickReplyAction {
   public var uri: Swift.String
@@ -1203,7 +1203,7 @@ extension UIView {
 }
 @objc @objcMembers public class GeneralResponse : ObjectiveC.NSObject {
   @objc public var kind: Swift.String?
-  @objc public var reqId: Swift.String?
+  public var reqId: LPMessagingSDK.WebSocketRequestID?
   public var code: Swift.Int?
   @objc public var type: Swift.String?
   @objc public init(jsonDict: [Swift.String : Any])
@@ -1322,11 +1322,11 @@ public enum MessageType : Swift.String {
   case RemoteUserSecureForm
   case RemoteUserStructuredContentContainer
   case RemoteUserQuickReply
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 public enum LocalMessageType : Swift.Int, Swift.CaseIterable {
   case welcomeMessage
@@ -1339,13 +1339,13 @@ public enum LocalMessageType : Swift.Int, Swift.CaseIterable {
   case richProactiveMessage
   case proactiveContentEventMessage
   public init?(number: Foundation.NSNumber)
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
-  public var rawValue: Swift.Int {
+  public typealias AllCases = [LPMessagingSDK.LocalMessageType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [LPMessagingSDK.LocalMessageType] {
     get
   }
-  public typealias AllCases = [LPMessagingSDK.LocalMessageType]
-  public static var allCases: [LPMessagingSDK.LocalMessageType] {
+  public var rawValue: Swift.Int {
     get
   }
 }
@@ -1360,8 +1360,8 @@ public enum MessageStatus : Swift.String {
   public var value: Swift.Int {
     get
   }
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -1370,8 +1370,8 @@ public enum LinkPreviewState : Swift.String {
   case loading
   case loaded
   case failed
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -1446,8 +1446,8 @@ extension Message {
 @objc @_hasMissingDesignatedInitializers public class Slot : ObjectiveC.NSObject, Foundation.NSCoding {
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentAppointmentListAction : LPMessagingSDK.LPStructuredContentAction {
   public var slots: [LPMessagingSDK.Slot]? {
@@ -1468,20 +1468,20 @@ extension Message {
     case ChatStateEvent
     case ContentEvent
     case StructuredContentEvent
+    public init?(rawValue: Swift.String)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
     }
-    public init?(rawValue: Swift.String)
   }
   public enum NotificationDistributionType : Swift.String {
     case QUERY
     case REALTIME
+    public init?(rawValue: Swift.String)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
     }
-    public init?(rawValue: Swift.String)
   }
   final public let messagingServiceEventType: LPMessagingSDK.MessagingServiceEvent.MessagingServiceEventType
   final public let notificationDistributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType
@@ -1496,9 +1496,10 @@ extension Message {
   public init(messagingServiceEventType: LPMessagingSDK.MessagingServiceEvent.MessagingServiceEventType, data: LPMessagingSDK.GeneralResponse.ContentEventBody?, dialog: LPMessagingSDK.Dialog, sender: LPMessagingSDK.User?, sequence: Swift.Int?, notificationDistributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType)
   @objc public init?(failure: Swift.Void)
   convenience public init?(fromData data: LPMessagingSDK.GeneralResponse.ContentEventBody?, dialog: LPMessagingSDK.Dialog, distributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType, sender: LPMessagingSDK.User? = nil)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
+public typealias WebSocketRequestID = Swift.UInt32
 public protocol LPWebSocketHandler : LPMessagingSDK.SRWebSocketDelegate {
   func getSocketID() -> Swift.String
   func overloadRequest(_ requestHandler: LPMessagingSDK.LPWebSocket.RequestCompletionHandler) -> LPMessagingSDK.LPWebSocket.RequestCompletionHandler
@@ -1523,8 +1524,8 @@ public struct SocketDetails {
   case all
   case none
   case agent
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -1545,8 +1546,8 @@ public struct SocketDetails {
   case userFileSharing
   case audioSharing
   case agentFileSharing
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -1562,10 +1563,10 @@ public struct SocketDetails {
     case hyperlink
     case otherType
     public static func == (a: LPMessagingSDK.LPLinkUtils.LinkType, b: LPMessagingSDK.LPLinkUtils.LinkType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   @objc deinit
 }
@@ -1584,11 +1585,11 @@ public enum LPStructuredContentItemType : Swift.String {
   case vertical
   case horizontal
   case carousel
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 public enum LPStructuredContentActionType : Swift.String {
   case navigate
@@ -1596,8 +1597,8 @@ public enum LPStructuredContentActionType : Swift.String {
   case publishText
   case appointmentList
   case datePicker
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -1606,26 +1607,26 @@ public enum LPStructuredContentStyleSize : Swift.String {
   case small
   case medium
   case large
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 public enum LPSpecielViewTags : Swift.Int {
   case IMAGE_VIEW_CLICK_EFFECT_VIEW
+  public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
-  public init?(rawValue: Swift.Int)
 }
 public enum LPBorder : Swift.String {
   case border
   case borderless
   case dropShadow
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -1641,15 +1642,15 @@ public enum LPBorder : Swift.String {
   @objc final public let value: Swift.String
   @objc final public let displayName: Swift.String
   @objc public init(value: Swift.String, displayName: Swift.String)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc final public class LPWelcomeMessage : ObjectiveC.NSObject {
   @objc public enum MessageFrequency : Swift.Int {
     case FirstTimeConversation
     case everyConversation
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
@@ -1661,12 +1662,12 @@ public enum LPBorder : Swift.String {
     public var description: Foundation.NSString {
       get
     }
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
-    public var rawValue: Swift.Int {
+    public typealias RawValue = Swift.Int
+    public static var _nsErrorDomain: Swift.String {
       get
     }
-    public static var _nsErrorDomain: Swift.String {
+    public var rawValue: Swift.Int {
       get
     }
   }
@@ -1693,10 +1694,10 @@ public enum LPLoggosServiceStatus {
   case enabled
   case disabled
   public static func == (a: LPMessagingSDK.LPLoggosServiceStatus, b: LPMessagingSDK.LPLoggosServiceStatus) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public enum LPFlowTag : Swift.CustomStringConvertible {
   public var description: Swift.String {
@@ -1757,10 +1758,10 @@ public enum LPFlowTag : Swift.CustomStringConvertible {
   case QUICK_REPLY
   case WELCOME_MESSAGE
   public static func == (a: LPMessagingSDK.LPFlowTag, b: LPMessagingSDK.LPFlowTag) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 @objc public enum LPLoggingLevel : Swift.Int, Swift.CustomStringConvertible {
   public var description: Swift.String {
@@ -1772,8 +1773,8 @@ public enum LPFlowTag : Swift.CustomStringConvertible {
   case INFO = 3
   case DEBUG = 4
   case TRACE = 5
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -1791,11 +1792,11 @@ public enum QuickReplyActionType : Swift.String {
   case navigate
   case link
   case publishText
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 @objc @_hasMissingDesignatedInitializers public class QuickReplyAction : ObjectiveC.NSObject, Foundation.NSCoding {
   public var ID: Swift.String
@@ -1807,7 +1808,7 @@ public enum QuickReplyActionType : Swift.String {
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers @objc public class LPConfig : ObjectiveC.NSObject {
   @objc public var retrieveAssignedAgentFromLastClosedConversation: Swift.Bool
-  @objc public var recordingDurationLimit: Foundation.TimeInterval
+  @objc public var recordingDurationLimit: Swift.Double
   @objc public var enableAudioSharing: Swift.Bool
   @objc public var maxNumberOfSavedAudioFilesOnDisk: Swift.UInt
   @objc public var hideUIUntilAuthenticated: Swift.Bool
@@ -2066,6 +2067,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var isSendMessageButtonInTextMode: Swift.Bool
   @objc public var enableStructuredContent: Swift.Bool
   @objc public var structuredContentBubbleBorderWidth: Swift.Double
+  @objc public var structuredContentButtonBorderWidth: CoreGraphics.CGFloat
   @objc public var structuredContentBubbleBorderColor: UIKit.UIColor
   @objc public var structuredContentBubbleTopLeftCornerRadius: Swift.Float
   @objc public var structuredContentBubbleTopRightCornerRadius: Swift.Float
@@ -2311,8 +2313,8 @@ public class ConversationDetails : Swift.CustomStringConvertible {
   public struct participant : Swift.Codable {
     public var id: Swift.String?
     public var role: Swift.String
-    public init(from decoder: Swift.Decoder) throws
     public func encode(to encoder: Swift.Encoder) throws
+    public init(from decoder: Swift.Decoder) throws
   }
   public class DialogDetails {
     public var dialogId: Swift.String?
@@ -2427,11 +2429,11 @@ public enum HTTPMethod : Swift.String {
   case PUT
   case POST
   case GET
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 public typealias HTTPRequestSuccessHandler = (Any?) -> ()
 public typealias HTTPRequestFailureHandler = (Foundation.NSError?) -> ()
@@ -2510,8 +2512,8 @@ public let SUPPORTED_FILE_EXTENSION_COLLECTION: [Swift.String]
 public enum TokenType : Swift.Int {
   case regular
   case voip
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -2522,8 +2524,8 @@ public enum LPRecorderStatus : Swift.String {
   case timeLimited
   case canceled
   case failed
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -2532,8 +2534,8 @@ public enum LPPlayerStatus : Swift.String {
   case none
   case stopped
   case failed
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -2545,8 +2547,8 @@ public enum ContentType : Swift.String {
   case formSubmission
   case structuredContent
   case quickReply
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -2568,19 +2570,19 @@ public enum CSDSService : Swift.String {
   case accountConfigReadWrite
   case accountConfigReadOnly
   case shark
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 @objc public enum LPConversationCloseReason : Swift.Int {
   case agent = 0
   case consumer
   case system
   public init(closeReason: Swift.String)
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -2590,8 +2592,8 @@ public enum AgentState : Swift.String {
   case OFFLINE
   case AWAY
   case BACK_SOON
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -2599,11 +2601,11 @@ public enum AgentState : Swift.String {
 public enum ChannelType : Swift.String {
   case MESSAGING
   case LIVECHAT
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 public enum RoleType : Swift.String {
   case ASSIGNED_AGENT
@@ -2612,11 +2614,11 @@ public enum RoleType : Swift.String {
   case MANAGER
   case READER
   case CONTROLLER
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 @objc public enum AMSState : Swift.Int {
   case IN_PROCESS = 0
@@ -2639,16 +2641,16 @@ public enum RoleType : Swift.String {
   case NO_SUBSCRIPTION = -9
   case CERT_PINNING_FAILED = -10
   public func description() -> Swift.String
+  public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
-  public init?(rawValue: Swift.Int)
 }
 public enum InactivityState : Swift.Int {
   case CONVERSATIONS_SCREEN_NOT_ACTIVE
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -2662,11 +2664,11 @@ public enum AMSStateError : Swift.String {
   case NO_SUBSCRIPTION
   case GENERAL_ERROR
   case CERT_PINNING_FAILED
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 @objc public enum LPPermissionTypes : Swift.Int {
   case location
@@ -2685,8 +2687,8 @@ public enum AMSStateError : Swift.String {
   public var description: Swift.String {
     get
   }
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -2736,15 +2738,15 @@ public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
   case VISITOR_ID
   case CONNECTOR_ID
   case AUTH_CONNECTOR_ID
-  public typealias RawValue = Swift.String
-  public var rawValue: Swift.String {
-    get
-  }
+  public init?(rawValue: Swift.String)
   public typealias AllCases = [LPMessagingSDK.LPKeychainKey]
+  public typealias RawValue = Swift.String
   public static var allCases: [LPMessagingSDK.LPKeychainKey] {
     get
   }
-  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
 }
 public struct LPBlurEffects {
   public static let lpLoadingViewEffect: UIKit.UIBlurEffect
@@ -2824,8 +2826,8 @@ public enum UserType : Swift.String {
   case Controller
   case Reader
   case Manager
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -2883,20 +2885,20 @@ public enum DialogType : Swift.String {
   case POST_SURVEY
   case AGENT
   case OTHER
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 public enum ChannelTypes : Swift.String {
   case MESSAGING
   case COBROWSE
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 public enum ChatState : Swift.String {
   case Active
@@ -2905,11 +2907,11 @@ public enum ChatState : Swift.String {
   case Inactive
   case Pause
   case Background
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 public enum DialogState : Swift.String {
   case Open
@@ -2918,11 +2920,11 @@ public enum DialogState : Swift.String {
   case Created
   case Pending
   case Other
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 @objc public protocol Dialog : LPMessagingSDK.EntityInterface {
   @objc var assignedAgentId: Swift.String? { get set }
@@ -2976,8 +2978,8 @@ extension Dialog {
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentStyle : ObjectiveC.NSObject, Foundation.NSCoding {
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc public protocol EntityInterface : LPMessagingSDK.EntityEquatableInterface {
 }
@@ -3024,8 +3026,8 @@ public struct LPStructuredContentSampleData {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public struct AppointmentSlot : Swift.Encodable {
   public init(type: Swift.String, id: Swift.String, start: Swift.Int, end: Swift.Int? = nil, title: Swift.String? = nil, description: Swift.String? = nil, imageUrl: Swift.String? = nil)
@@ -3039,10 +3041,10 @@ public struct AppointmentSlot : Swift.Encodable {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
-  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
 }
 @_inheritsConvenienceInitializers @objcMembers @objc public class LPEngagementDetails : ObjectiveC.NSObject, Swift.Codable {
   @objc public var campaignId: Swift.Int {
@@ -3063,16 +3065,16 @@ public struct AppointmentSlot : Swift.Encodable {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
-  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
 }
 @objc public enum SocketType : Swift.Int {
   case consumer
   case agent
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -3085,8 +3087,8 @@ public struct AppointmentSlot : Swift.Encodable {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LPMonitoringDataManager : ObjectiveC.NSObject {
   public var monitoringIdentities: [LPMessagingSDK.LPMonitoringIdentity] {
@@ -3103,10 +3105,10 @@ public struct AppointmentSlot : Swift.Encodable {
   public func clearEngagementMonitoring()
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentNavigateAction : LPMessagingSDK.LPStructuredContentAction {
-  public var latitude: CoreLocation.CLLocationDegrees {
+  public var latitude: Swift.Double {
     get
   }
-  public var longitude: CoreLocation.CLLocationDegrees {
+  public var longitude: Swift.Double {
     get
   }
   @objc override public func encode(with aCoder: Foundation.NSCoder)
@@ -3127,10 +3129,10 @@ public struct AppointmentSlot : Swift.Encodable {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
-  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
 }
 @_hasMissingDesignatedInitializers public class LPAppointmentListConfigurations {
   public static let instance: LPMessagingSDK.LPAppointmentListConfigurations
@@ -3213,8 +3215,8 @@ public enum LPSocketLoggerType : Swift.Int {
   case info
   case debug
   case trace
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -3260,8 +3262,8 @@ public protocol LPStructuredContentLoggerDelegate : AnyObject {
   public enum PayloadType : Swift.String {
     case ring
     case message
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
     }
@@ -3301,28 +3303,28 @@ public enum FirstWeekdayOptions {
   case sunday
   case monday
   public static func == (a: LPMessagingSDK.FirstWeekdayOptions, b: LPMessagingSDK.FirstWeekdayOptions) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public enum CellOutOfRangeDisplayOptions {
   case normal
   case hidden
   case grayed
   public static func == (a: LPMessagingSDK.CellOutOfRangeDisplayOptions, b: LPMessagingSDK.CellOutOfRangeDisplayOptions) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public enum WeekDaysTransform {
   case capitalized, uppercase
   public static func == (a: LPMessagingSDK.WeekDaysTransform, b: LPMessagingSDK.WeekDaysTransform) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 @_hasMissingDesignatedInitializers public class LPDatePickerConfigurations {
   public static let instance: LPMessagingSDK.LPDatePickerConfigurations
@@ -3659,6 +3661,7 @@ extension UIColor {
   public var useCacheImageIfNeeded: Swift.Bool
   public var brokenImage: UIKit.UIImage?
   public var buttonWidthConstant: CoreGraphics.CGFloat
+  public var buttonBorderWidth: CoreGraphics.CGFloat
   public var bubbleBorderWidth: Swift.Double
   public var bubbleTopLeftCornerRadius: Swift.Float
   public var bubbleTopRightCornerRadius: Swift.Float
