@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
 // swift-module-flags: -target arm64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LPMessagingSDK
 import AVFoundation
 import AudioToolbox
@@ -19,6 +19,7 @@ import Swift
 import SystemConfiguration
 import UIKit
 import WebKit
+import _Concurrency
 import os.log
 import os
 public protocol LPCalendarViewDataSource {
@@ -26,7 +27,7 @@ public protocol LPCalendarViewDataSource {
   func endDate() -> Foundation.Date
   func headerString(_ date: Foundation.Date) -> Swift.String?
 }
-extension LPCalendarViewDataSource {
+extension LPMessagingSDK.LPCalendarViewDataSource {
   public func startDate() -> Foundation.Date
   public func endDate() -> Foundation.Date
   public func headerString(_ date: Foundation.Date) -> Swift.String?
@@ -39,57 +40,57 @@ public protocol LPCalendarViewDelegate {
   func calendar(_ calendar: LPMessagingSDK.LPCalendarView, didDeselectDate date: Foundation.Date)
   func calendar(_ calendar: LPMessagingSDK.LPCalendarView, didLongPressDate date: Foundation.Date)
 }
-extension LPCalendarViewDelegate {
+extension LPMessagingSDK.LPCalendarViewDelegate {
   public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, canSelectDate date: Foundation.Date) -> Swift.Bool
   public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, didDeselectDate date: Foundation.Date)
   public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, didLongPressDate date: Foundation.Date)
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LPCalendarView : UIKit.UIView {
-  final public let cellReuseIdentifier: Swift.String
-  public var selectedIndexPaths: [Foundation.IndexPath] {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class LPCalendarView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) final public let cellReuseIdentifier: Swift.String
+  @_Concurrency.MainActor(unsafe) public var selectedIndexPaths: [Foundation.IndexPath] {
     get
   }
-  public var selectedDates: [Foundation.Date] {
+  @_Concurrency.MainActor(unsafe) public var selectedDates: [Foundation.Date] {
     get
   }
-  public var selectedStartDate: Foundation.Date?
-  public var selectedEndDate: Foundation.Date?
-  public var displayDate: Foundation.Date? {
+  @_Concurrency.MainActor(unsafe) public var selectedStartDate: Foundation.Date?
+  @_Concurrency.MainActor(unsafe) public var selectedEndDate: Foundation.Date?
+  @_Concurrency.MainActor(unsafe) public var displayDate: Foundation.Date? {
     get
   }
-  public var multipleSelectionEnable: Swift.Bool
-  public var enableDeselection: Swift.Bool
-  public var marksWeekends: Swift.Bool
-  public var config: LPMessagingSDK.LPDatePickerConfigurations {
-    get
-    set
-  }
-  public var calendar: Foundation.Calendar {
-    get
-  }
-  public var delegate: LPMessagingSDK.LPCalendarViewDelegate?
-  public var dataSource: LPMessagingSDK.LPCalendarViewDataSource?
-  public var direction: UIKit.UICollectionView.ScrollDirection {
+  @_Concurrency.MainActor(unsafe) public var multipleSelectionEnable: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var enableDeselection: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var marksWeekends: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var config: LPMessagingSDK.LPDatePickerConfigurations {
     get
     set
   }
-  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) public var calendar: Foundation.Calendar {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var delegate: LPMessagingSDK.LPCalendarViewDelegate?
+  @_Concurrency.MainActor(unsafe) public var dataSource: LPMessagingSDK.LPCalendarViewDataSource?
+  @_Concurrency.MainActor(unsafe) public var direction: UIKit.UICollectionView.ScrollDirection {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override dynamic open func awakeFromNib()
   @objc deinit
 }
-extension LPCalendarView {
-  @objc override dynamic open func layoutSubviews()
+extension LPMessagingSDK.LPCalendarView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
 }
-extension LPCalendarView {
-  public func reloadData()
-  public func setDisplayDate(_ date: Foundation.Date, animated: Swift.Bool = false)
-  public func selectDate(_ date: Foundation.Date)
-  public func deselectDate(_ date: Foundation.Date)
-  public func goToNextMonth()
-  public func goToPreviousMonth()
-  public func clearAllSelectedDates()
-  public func isBefore(dateA: Foundation.Date, dateB: Foundation.Date) -> Swift.Bool
-  public func areSameDay(dateA: Foundation.Date, dateB: Foundation.Date) -> Swift.Bool
+extension LPMessagingSDK.LPCalendarView {
+  @_Concurrency.MainActor(unsafe) public func reloadData()
+  @_Concurrency.MainActor(unsafe) public func setDisplayDate(_ date: Foundation.Date, animated: Swift.Bool = false)
+  @_Concurrency.MainActor(unsafe) public func selectDate(_ date: Foundation.Date)
+  @_Concurrency.MainActor(unsafe) public func deselectDate(_ date: Foundation.Date)
+  @_Concurrency.MainActor(unsafe) public func goToNextMonth()
+  @_Concurrency.MainActor(unsafe) public func goToPreviousMonth()
+  @_Concurrency.MainActor(unsafe) public func clearAllSelectedDates()
+  @_Concurrency.MainActor(unsafe) public func isBefore(dateA: Foundation.Date, dateB: Foundation.Date) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func areSameDay(dateA: Foundation.Date, dateB: Foundation.Date) -> Swift.Bool
 }
 public enum QuickReplyStyleSize : Swift.String {
   case small
@@ -111,7 +112,6 @@ public enum QuickReplyStyleSize : Swift.String {
   public var size: Swift.String?
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
 public enum FileState : Swift.String {
@@ -146,16 +146,16 @@ public enum FileState : Swift.String {
   @objc var metaDataContainer: LPMessagingSDK.LPFileMetaDataContainer? { get set }
   @objc var thumbnailImage: UIKit.UIImage? { get set }
   @objc var completion: (() -> ())? { get set }
-  @objc var failure: ((Foundation.NSError) -> ())? { get set }
+  @objc var failure: ((_ error: Foundation.NSError) -> ())? { get set }
   @objc var preUpload: (() -> ())? { get set }
   @objc var preDownload: (() -> ())? { get set }
-  @objc var uploading: ((Swift.Double) -> ())? { get set }
+  @objc var uploading: ((_ progress: Swift.Double) -> ())? { get set }
   @objc var uploadPercentage: CoreGraphics.CGFloat { get set }
-  @objc var downloading: ((Swift.Double) -> ())? { get set }
+  @objc var downloading: ((_ progress: Swift.Double) -> ())? { get set }
   @objc var downloadPercentage: CoreGraphics.CGFloat { get set }
   @objc var synced: (() -> ())? { get set }
 }
-extension File {
+extension LPMessagingSDK.File {
   public var isTransferring: Swift.Bool {
     get
   }
@@ -198,7 +198,6 @@ extension File {
   @objc public func getQueryUID() -> Swift.String
   @objc public func getCampaignInfo() -> LPMessagingSDK.LPCampaignInfo?
   @objc public func getQueryProperties() -> [Swift.String : Any]
-  @objc override dynamic public init()
   @objc deinit
 }
 public enum LPDatePickerClass : Swift.String {
@@ -240,40 +239,40 @@ public protocol LPStructuredContentDelegate : AnyObject {
   func lpStructuredContentScrollDidEndScrollingAnimationWith(contentOffset: CoreGraphics.CGPoint)
   func lpStructuredContentSave(currentPage: Swift.Int)
 }
-@objc @_inheritsConvenienceInitializers public class LPStructuredContent : UIKit.UIView {
-  public var stackViewContainer: UIKit.UIView {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class LPStructuredContent : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public var stackViewContainer: UIKit.UIView {
     get
     set
   }
-  weak public var delegate: LPMessagingSDK.LPStructuredContentDelegate?
-  public var originalContentOffset: CoreGraphics.CGPoint {
+  @_Concurrency.MainActor(unsafe) weak public var delegate: LPMessagingSDK.LPStructuredContentDelegate?
+  @_Concurrency.MainActor(unsafe) public var originalContentOffset: CoreGraphics.CGPoint {
     get
   }
-  public var item: LPMessagingSDK.LPStructuredContentItem? {
+  @_Concurrency.MainActor(unsafe) public var item: LPMessagingSDK.LPStructuredContentItem? {
     get
   }
-  public var accessibilityStructuredContentElements: [UIKit.UIView] {
+  @_Concurrency.MainActor(unsafe) public var accessibilityStructuredContentElements: [UIKit.UIView] {
     get
   }
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
-extension LPStructuredContent {
-  public func configureAccessibilityWith(accessibilityLabel: Swift.String? = nil)
+extension LPMessagingSDK.LPStructuredContent {
+  @_Concurrency.MainActor(unsafe) public func configureAccessibilityWith(accessibilityLabel: Swift.String? = nil)
 }
-extension LPStructuredContent : UIKit.UIGestureRecognizerDelegate {
-  public func handleOrientation()
-  public func removeStructuredContentObjects()
-  public func setWith(item: LPMessagingSDK.LPStructuredContentItem, imageDownloader: LPMessagingSDK.LPStructuredContentImageDownloader?, currentPage: Swift.Int = 0)
+extension LPMessagingSDK.LPStructuredContent : UIKit.UIGestureRecognizerDelegate {
+  @_Concurrency.MainActor(unsafe) public func handleOrientation()
+  @_Concurrency.MainActor(unsafe) public func removeStructuredContentObjects()
+  @_Concurrency.MainActor(unsafe) public func setWith(item: LPMessagingSDK.LPStructuredContentItem, imageDownloader: LPMessagingSDK.LPStructuredContentImageDownloader?, currentPage: Swift.Int = 0)
 }
-extension LPStructuredContent {
-  @objc override dynamic public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
+extension LPMessagingSDK.LPStructuredContent {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
 }
-extension LPStructuredContent : UIKit.UIScrollViewDelegate {
-  @objc dynamic public func scrollViewWillBeginDragging(_ scrollView: UIKit.UIScrollView)
-  @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
-  @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
+extension LPMessagingSDK.LPStructuredContent : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewWillBeginDragging(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
 }
 public enum QuickReplyJsonKeys : Swift.String {
   case quickReplies
@@ -338,11 +337,11 @@ public enum ImageState : Swift.String {
   @objc var imageURL: Swift.String? { get set }
   @objc var imageState: Swift.String? { get set }
   @objc var ownerCustomBoard: LPMessagingSDK.CustomBoard { get set }
-  @objc var imageDownloadCompleted: ((UIKit.UIImage?) -> ())? { get set }
-  @objc var imageDownloadFailed: ((Foundation.NSError) -> ())? { get set }
+  @objc var imageDownloadCompleted: ((_ image: UIKit.UIImage?) -> ())? { get set }
+  @objc var imageDownloadFailed: ((_ error: Foundation.NSError) -> ())? { get set }
   @objc var _image: UIKit.UIImage? { get set }
 }
-extension LinkPreview {
+extension LPMessagingSDK.LinkPreview {
   public var description: Swift.String {
     get
   }
@@ -357,7 +356,6 @@ extension LinkPreview {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
 }
 @objcMembers @objc public class LPConversationViewParams : ObjectiveC.NSObject {
@@ -372,7 +370,6 @@ extension LinkPreview {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class LPHyperlinkUtils {
@@ -393,7 +390,6 @@ extension LinkPreview {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @objcMembers public class Utils : ObjectiveC.NSObject {
@@ -421,7 +417,6 @@ extension LinkPreview {
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   public func compare(other: LPMessagingSDK.TTRModel) -> Swift.Bool
-  @objc override dynamic public init()
   @objc deinit
 }
 public enum ConversationQueryType : Swift.String {
@@ -454,29 +449,28 @@ public enum ConversationQueryType : Swift.String {
   public var actions: [LPMessagingSDK.QuickReplyAction]?
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers public class LPAppointmentList : UIKit.UIView {
-  public var finished: ((LPMessagingSDK.AppointmentSlot) -> Swift.Void)?
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  convenience public init(frame: CoreGraphics.CGRect = .zero, viewModel: LPMessagingSDK.LPAppointmentListViewModel)
-  @objc override dynamic public func layoutSubviews()
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class LPAppointmentList : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public var finished: ((LPMessagingSDK.AppointmentSlot) -> Swift.Void)?
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) convenience public init(frame: CoreGraphics.CGRect = .zero, viewModel: LPMessagingSDK.LPAppointmentListViewModel)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
   @objc deinit
 }
-extension LPAppointmentList : UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
-  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
-  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
-  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
-  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didDeselectRowAt indexPath: Foundation.IndexPath)
-  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didEndDisplaying cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
-  @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGFloat
+extension LPMessagingSDK.LPAppointmentList : UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didDeselectRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didEndDisplaying cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGFloat
 }
-extension LPAppointmentList : LPMessagingSDK.LPWeeklyCalendarViewDelegate {
-  public func shouldPresentPickerView(picker: LPMessagingSDK.LPPickerView)
-  public func shouldDismissPickerView(picker: LPMessagingSDK.LPPickerView)
-  public func calendar(_ calendar: LPMessagingSDK.LPWeeklyCalendarView, didSelectDate date: Foundation.Date)
+extension LPMessagingSDK.LPAppointmentList : LPMessagingSDK.LPWeeklyCalendarViewDelegate {
+  @_Concurrency.MainActor(unsafe) public func shouldPresentPickerView(picker: LPMessagingSDK.LPPickerView)
+  @_Concurrency.MainActor(unsafe) public func shouldDismissPickerView(picker: LPMessagingSDK.LPPickerView)
+  @_Concurrency.MainActor(unsafe) public func calendar(_ calendar: LPMessagingSDK.LPWeeklyCalendarView, didSelectDate date: Foundation.Date)
 }
 public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case customButtonAccessibilityDescription
@@ -689,7 +683,7 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
     get
   }
 }
-extension UIColor {
+extension UIKit.UIColor {
   public class var horizonBlue: UIKit.UIColor {
     get
   }
@@ -738,7 +732,7 @@ public enum TTRType : Swift.String {
   @objc var presented: Swift.Bool { get set }
   @objc var shouldQueryMessages: Swift.Bool { get }
 }
-extension Conversation {
+extension LPMessagingSDK.Conversation {
   public var conversationMessages: Foundation.NSOrderedSet {
     get
   }
@@ -907,6 +901,7 @@ public enum LPPreferredFontType {
   case zh
   case zh_Hans
   case zh_Hant_hk
+  case fil_PH
   public static var allRows: [LPMessagingSDK.LPLanguage] {
     get
   }
@@ -960,6 +955,7 @@ public enum LPPreferredFontType {
   case TW
   case CN
   case HK
+  case FIL
   public static var allRows: [LPMessagingSDK.LPRegionCode] {
     get
   }
@@ -1037,15 +1033,15 @@ public enum LPPreferredFontType {
 public protocol QuickReplyButtonDelegate : AnyObject {
   func quickReplyButtonDidBecomeFocused(_ button: LPMessagingSDK.QuickReplyButton)
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class QuickReplyButton : UIKit.UIButton {
-  public var details: LPMessagingSDK.QuickReplyButtonDetails?
-  weak public var delegate: LPMessagingSDK.QuickReplyButtonDelegate?
-  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  convenience public init(quickReplyButtonDetails: LPMessagingSDK.QuickReplyButtonDetails)
-  @objc override dynamic public func draw(_ rect: CoreGraphics.CGRect)
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class QuickReplyButton : UIKit.UIButton {
+  @_Concurrency.MainActor(unsafe) public var details: LPMessagingSDK.QuickReplyButtonDetails?
+  @_Concurrency.MainActor(unsafe) weak public var delegate: LPMessagingSDK.QuickReplyButtonDelegate?
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) convenience public init(quickReplyButtonDetails: LPMessagingSDK.QuickReplyButtonDetails)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreGraphics.CGRect)
   @objc deinit
 }
-extension QuickReplyButton {
+extension LPMessagingSDK.QuickReplyButton {
   @objc override dynamic public func accessibilityElementDidBecomeFocused()
 }
 public enum LPPickerType : Swift.String {
@@ -1082,7 +1078,7 @@ public enum FormState : Swift.String {
   @objc var writeOTK: Swift.String? { get set }
   @objc var url: Foundation.URL? { get set }
 }
-extension Form {
+extension LPMessagingSDK.Form {
   public var description: Swift.String {
     get
   }
@@ -1090,24 +1086,24 @@ extension Form {
     get
   }
 }
-@objc @_inheritsConvenienceInitializers open class LPUIPickerView : UIKit.UIControl {
-  open var minimumDate: Foundation.Date {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class LPUIPickerView : UIKit.UIControl {
+  @_Concurrency.MainActor(unsafe) open var minimumDate: Foundation.Date {
     get
     set
   }
-  open var maximumDate: Foundation.Date {
+  @_Concurrency.MainActor(unsafe) open var maximumDate: Foundation.Date {
     get
     set
   }
-  open var date: Foundation.Date {
+  @_Concurrency.MainActor(unsafe) open var date: Foundation.Date {
     get
     set
   }
-  open var calendar: Foundation.Calendar {
+  @_Concurrency.MainActor(unsafe) open var calendar: Foundation.Calendar {
     get
     set
   }
-  open var locale: Foundation.Locale? {
+  @_Concurrency.MainActor(unsafe) open var locale: Foundation.Locale? {
     get
     set
   }
@@ -1120,23 +1116,23 @@ extension Form {
       get
     }
   }
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
-extension LPUIPickerView {
-  open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
+extension LPMessagingSDK.LPUIPickerView {
+  @_Concurrency.MainActor(unsafe) open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
 }
-extension LPUIPickerView : UIKit.UIPickerViewDelegate {
-  @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
+extension LPMessagingSDK.LPUIPickerView : UIKit.UIPickerViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
 }
-extension LPUIPickerView : UIKit.UIPickerViewDataSource {
-  @objc dynamic public func numberOfComponents(in pickerView: UIKit.UIPickerView) -> Swift.Int
-  @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
-  @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, viewForRow row: Swift.Int, forComponent component: Swift.Int, reusing view: UIKit.UIView?) -> UIKit.UIView
+extension LPMessagingSDK.LPUIPickerView : UIKit.UIPickerViewDataSource {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func numberOfComponents(in pickerView: UIKit.UIPickerView) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, viewForRow row: Swift.Int, forComponent component: Swift.Int, reusing view: UIKit.UIView?) -> UIKit.UIView
 }
-extension UIView {
-  public func addTapGestureRecognizer(action: (() -> Swift.Void)?)
+extension UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public func addTapGestureRecognizer(action: (() -> Swift.Void)?)
 }
 @objc @objcMembers public class ConsumerQuery : LPMessagingSDK.BrandQuery {
   @objc public init(consumerID: Swift.String, brandID: Swift.String, agentToken: Swift.String)
@@ -1147,14 +1143,13 @@ extension UIView {
   @objc override public func getQueryType() -> Swift.String
   @objc override public func isConversationRelatedToQuery(_ conversation: LPMessagingSDK.Conversation) -> Swift.Bool
   @objc override public func getQueryUID() -> Swift.String
-  @objc override public init(brandID: Swift.String, campaignInfo: LPMessagingSDK.LPCampaignInfo? = super)
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers open class LPCalendarHeaderView : UIKit.UIView {
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  public func updateStyle()
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc override dynamic open func layoutSubviews()
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class LPCalendarHeaderView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) public func updateStyle()
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
   @objc deinit
 }
 @objc public protocol Brand : LPMessagingSDK.EntityInterface {
@@ -1179,7 +1174,6 @@ extension UIView {
   }
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class QuickReplyLinkAction : LPMessagingSDK.QuickReplyAction {
@@ -1198,7 +1192,6 @@ extension UIView {
   public var style: LPMessagingSDK.QuickReplyStyle?
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc @objcMembers public class GeneralResponse : ObjectiveC.NSObject {
@@ -1297,7 +1290,6 @@ extension UIView {
     @objc get
   }
   public func getContentEventBody(from bodyDict: [Swift.String : Any]) -> LPMessagingSDK.GeneralResponse.ContentEventBody
-  @objc override dynamic public init()
   @objc deinit
 }
 public enum MessageType : Swift.String {
@@ -1395,8 +1387,8 @@ public enum LinkPreviewState : Swift.String {
   @objc var _lastSendingTimestamp: Foundation.Date? { get set }
   @objc var distributionTypeRaw: Swift.String? { get set }
   @objc var carouselCurrentPage: Swift.Int { get set }
-  @objc var boardsBuildCompleted: (([LPMessagingSDK.CustomBoard]) -> ())? { get set }
-  @objc var boardsBuildFailed: ((Foundation.NSError) -> ())? { get set }
+  @objc var boardsBuildCompleted: ((_ boards: [LPMessagingSDK.CustomBoard]) -> ())? { get set }
+  @objc var boardsBuildFailed: ((_ error: Foundation.NSError) -> ())? { get set }
   @objc var timestampRepresentation: Swift.String? { get set }
   @objc var requestedToShowSendingState: Foundation.Date? { get set }
   @objc var messageMetadata: [[Swift.String : Any]]? { get set }
@@ -1405,7 +1397,7 @@ public enum LinkPreviewState : Swift.String {
   @objc var unreadMessageDividerString: Swift.String? { get set }
   @objc var sectionIdentifier: Swift.String? { get }
 }
-extension Message {
+extension LPMessagingSDK.Message {
   public var distributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType {
     get
     set
@@ -1440,13 +1432,12 @@ extension Message {
   }
   public func getBaseMessageType() -> LPMessagingSDK.MessageType?
   public func getLocalMessageType() -> LPMessagingSDK.LocalMessageType?
-  public func getBoards(completion: @escaping ([LPMessagingSDK.CustomBoard]) -> (), failure: @escaping (Foundation.NSError) -> ())
+  public func getBoards(completion: @escaping (_ boards: [LPMessagingSDK.CustomBoard]) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
   public func getHTMLAttributedString(style: UIKit.UIFont.TextStyle, color: UIKit.UIColor, font: Swift.String) -> Foundation.NSAttributedString?
 }
 @objc @_hasMissingDesignatedInitializers public class Slot : ObjectiveC.NSObject, Foundation.NSCoding {
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentAppointmentListAction : LPMessagingSDK.LPStructuredContentAction {
@@ -1491,12 +1482,11 @@ extension Message {
   @objc final public let dialog: LPMessagingSDK.Dialog!
   final public let sequence: Swift.Int?
   @objc final public let sender: LPMessagingSDK.User?
-  @objc public var fileMessageCompletion: ((LPMessagingSDK.Message) -> ())?
-  @objc public var fileMessageFailure: ((Foundation.NSError) -> ())?
+  @objc public var fileMessageCompletion: ((_ message: LPMessagingSDK.Message) -> ())?
+  @objc public var fileMessageFailure: ((_ error: Foundation.NSError) -> ())?
   public init(messagingServiceEventType: LPMessagingSDK.MessagingServiceEvent.MessagingServiceEventType, data: LPMessagingSDK.GeneralResponse.ContentEventBody?, dialog: LPMessagingSDK.Dialog, sender: LPMessagingSDK.User?, sequence: Swift.Int?, notificationDistributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType)
   @objc public init?(failure: Swift.Void)
   convenience public init?(fromData data: LPMessagingSDK.GeneralResponse.ContentEventBody?, dialog: LPMessagingSDK.Dialog, distributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType, sender: LPMessagingSDK.User? = nil)
-  @objc override dynamic public init()
   @objc deinit
 }
 public typealias WebSocketRequestID = Swift.UInt32
@@ -1509,8 +1499,8 @@ public struct SocketDetails {
   public init(scheme: Swift.String, host: Swift.String, path: Swift.String, headers: [Swift.String : Swift.String]? = nil)
 }
 @objc @_hasMissingDesignatedInitializers public class LPWebSocket : LPMessagingSDK.LPSRWebSocket {
-  public typealias RequestResultCompleted = (Swift.AnyObject) -> (Swift.Void)
-  public typealias RequestResultFailed = (Foundation.NSError) -> (Swift.Void)
+  public typealias RequestResultCompleted = (_ data: Swift.AnyObject) -> (Swift.Void)
+  public typealias RequestResultFailed = (_ error: Foundation.NSError) -> (Swift.Void)
   public struct RequestCompletionHandler {
   }
   public func requestDictionary(_ message: Swift.String, payload: [Swift.String : Any]? = nil, headers: [Swift.String : Any] = [:], metadata: [[Swift.String : Any]]? = nil, expectAckResponse: Swift.Bool? = false, completion: LPMessagingSDK.LPWebSocket.RequestResultCompleted?, failure: LPMessagingSDK.LPWebSocket.RequestResultFailed?)
@@ -1518,7 +1508,6 @@ public struct SocketDetails {
   @objc override dynamic public func open()
   @objc override dynamic public func close()
   @objc deinit
-  @objc override dynamic public init(urlRequest request: Foundation.URLRequest, protocols: [Swift.String]?, securityPolicy: LPMessagingSDK.LPSRSecurityPolicy)
 }
 @objc public enum LPPusherUnregisterType : Swift.Int {
   case all
@@ -1546,6 +1535,7 @@ public struct SocketDetails {
   case userFileSharing
   case audioSharing
   case agentFileSharing
+  case blurThumbnail
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -1573,7 +1563,6 @@ public struct SocketDetails {
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentItem : ObjectiveC.NSObject, Foundation.NSCoding {
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
 public enum LPStructuredContentItemType : Swift.String {
@@ -1631,18 +1620,17 @@ public enum LPBorder : Swift.String {
     get
   }
 }
-@objc @_inheritsConvenienceInitializers open class CalendarFlowLayout : UIKit.UICollectionViewFlowLayout {
-  @objc override dynamic open func layoutAttributesForElements(in rect: CoreGraphics.CGRect) -> [UIKit.UICollectionViewLayoutAttributes]?
-  @objc override dynamic open func layoutAttributesForItem(at indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewLayoutAttributes?
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class CalendarFlowLayout : UIKit.UICollectionViewFlowLayout {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutAttributesForElements(in rect: CoreGraphics.CGRect) -> [UIKit.UICollectionViewLayoutAttributes]?
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutAttributesForItem(at indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewLayoutAttributes?
   @objc override dynamic public init()
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 @objc final public class LPWelcomeMessageOption : ObjectiveC.NSObject {
   @objc final public let value: Swift.String
   @objc final public let displayName: Swift.String
   @objc public init(value: Swift.String, displayName: Swift.String)
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc final public class LPWelcomeMessage : ObjectiveC.NSObject {
@@ -1687,7 +1675,6 @@ public enum LPBorder : Swift.String {
   @objc final public func set(options: [LPMessagingSDK.LPWelcomeMessageOption]) throws
   @objc final public func clearOptions()
   @objc final public func set(NumberOfOptionsPerRow: Swift.Int)
-  @objc override dynamic public init()
   @objc deinit
 }
 public enum LPLoggosServiceStatus {
@@ -1803,7 +1790,6 @@ public enum QuickReplyActionType : Swift.String {
   public var type: Swift.String
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers @objc public class LPConfig : ObjectiveC.NSObject {
@@ -2068,6 +2054,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var enableStructuredContent: Swift.Bool
   @objc public var structuredContentBubbleBorderWidth: Swift.Double
   @objc public var structuredContentButtonBorderWidth: CoreGraphics.CGFloat
+  @objc public var structuredContentButtonBorderCornerRadius: CoreGraphics.CGFloat
   @objc public var structuredContentBubbleBorderColor: UIKit.UIColor
   @objc public var structuredContentBubbleTopLeftCornerRadius: Swift.Float
   @objc public var structuredContentBubbleTopRightCornerRadius: Swift.Float
@@ -2077,8 +2064,10 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var structuredContentMapLongitudeDeltaSpan: Swift.Double
   @objc public var structuredContentButtonBorderColor: UIKit.UIColor
   @objc public var structuredContentButtonTextColor: UIKit.UIColor
+  @objc public var structuredContentLinkButtonTextColor: UIKit.UIColor
   @objc public var structuredContentTextColor: UIKit.UIColor
   @objc public var structuredButtonWidthConstant: CoreGraphics.CGFloat
+  public var structuredButtonMinimumHeight: CoreGraphics.CGFloat?
   @objc public var structuredContentLoadingImage: UIKit.UIImage?
   @objc public var structuredContentBrokenImage: UIKit.UIImage?
   @objc public var csatSubmitButtonCornerRadius: Swift.Double
@@ -2269,21 +2258,21 @@ public protocol LPWeeklyCalendarViewDelegate {
   func shouldPresentPickerView(picker: LPMessagingSDK.LPPickerView)
   func shouldDismissPickerView(picker: LPMessagingSDK.LPPickerView)
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LPWeeklyCalendarView : UIKit.UIView {
-  public var firstDayAvailable: Swift.Int
-  public var selectedDate: Foundation.Date {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class LPWeeklyCalendarView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public var firstDayAvailable: Swift.Int
+  @_Concurrency.MainActor(unsafe) public var selectedDate: Foundation.Date {
     get
     set
   }
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc deinit
 }
-extension LPWeeklyCalendarView : UIKit.UICollectionViewDelegate, UIKit.UICollectionViewDataSource, UIKit.UICollectionViewDelegateFlowLayout {
-  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
-  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
-  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
-  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGSize
-  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didEndDisplaying cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+extension LPMessagingSDK.LPWeeklyCalendarView : UIKit.UICollectionViewDelegate, UIKit.UICollectionViewDataSource, UIKit.UICollectionViewDelegateFlowLayout {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGSize
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didEndDisplaying cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
 }
 public class ConversationDetails : Swift.CustomStringConvertible {
   public struct CloseReason {
@@ -2401,7 +2390,7 @@ public class ConversationDetails : Swift.CustomStringConvertible {
   }
   @objc deinit
 }
-extension ConversationDetails {
+extension LPMessagingSDK.ConversationDetails {
   public var isResolvedAutomatically: Swift.Bool {
     get
   }
@@ -2417,7 +2406,6 @@ extension ConversationDetails {
   @objc override dynamic public var debugDescription: Swift.String {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc public protocol UserProfile : LPMessagingSDK.User {
@@ -2435,22 +2423,22 @@ public enum HTTPMethod : Swift.String {
     get
   }
 }
-public typealias HTTPRequestSuccessHandler = (Any?) -> ()
-public typealias HTTPRequestFailureHandler = (Foundation.NSError?) -> ()
-@objc @_inheritsConvenienceInitializers public class LPDatePicker : UIKit.UIView {
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  convenience public init(type: LPMessagingSDK.LPPickerType, configurations: LPMessagingSDK.LPDatePickerConfigurations, frame: CoreGraphics.CGRect = .zero, minDate: Swift.Int, maxDate: Swift.Int)
-  @objc override dynamic public func setNeedsLayout()
+public typealias HTTPRequestSuccessHandler = (_ response: Any?) -> ()
+public typealias HTTPRequestFailureHandler = (_ error: Foundation.NSError?) -> ()
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class LPDatePicker : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) convenience public init(type: LPMessagingSDK.LPPickerType, configurations: LPMessagingSDK.LPDatePickerConfigurations, frame: CoreGraphics.CGRect = .zero, minDate: Swift.Int, maxDate: Swift.Int)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func setNeedsLayout()
   @objc deinit
 }
-extension LPDatePicker : LPMessagingSDK.LPCalendarViewDataSource, LPMessagingSDK.LPCalendarViewDelegate {
-  public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, startDate: Foundation.Date!, endDate: Foundation.Date!)
-  public func startDate() -> Foundation.Date
-  public func endDate() -> Foundation.Date
-  public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, didSelectDate date: Foundation.Date)
-  public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, didScrollToMonth date: Foundation.Date)
-  public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, didDeselectDate date: Foundation.Date)
+extension LPMessagingSDK.LPDatePicker : LPMessagingSDK.LPCalendarViewDataSource, LPMessagingSDK.LPCalendarViewDelegate {
+  @_Concurrency.MainActor(unsafe) public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, startDate: Foundation.Date!, endDate: Foundation.Date!)
+  @_Concurrency.MainActor(unsafe) public func startDate() -> Foundation.Date
+  @_Concurrency.MainActor(unsafe) public func endDate() -> Foundation.Date
+  @_Concurrency.MainActor(unsafe) public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, didSelectDate date: Foundation.Date)
+  @_Concurrency.MainActor(unsafe) public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, didScrollToMonth date: Foundation.Date)
+  @_Concurrency.MainActor(unsafe) public func calendar(_ calendar: LPMessagingSDK.LPCalendarView, didDeselectDate date: Foundation.Date)
 }
 public typealias amsReadyCompletion = () -> ()
 public let MESSAGE_MAX_CHARACTERS: Swift.Int
@@ -2847,7 +2835,7 @@ public enum UserType : Swift.String {
   @objc var lastUpdated: Foundation.Date? { get set }
   @objc var employeeID: Swift.String? { get set }
 }
-extension User {
+extension LPMessagingSDK.User {
   public var type: LPMessagingSDK.UserType {
     get
   }
@@ -2873,7 +2861,6 @@ extension User {
     @objc get
   }
   @objc public func isEquals(to params: LPMessagingSDK.LPConversationHistoryControlParam) -> Swift.Bool
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc public protocol Account : LPMessagingSDK.EntityInterface {
@@ -2945,7 +2932,7 @@ public enum DialogState : Swift.String {
   @objc var chatStateRaw: Swift.String { get set }
   @objc var shouldQueryMessages: Swift.Bool { get }
 }
-extension Dialog {
+extension LPMessagingSDK.Dialog {
   public var chatState: LPMessagingSDK.ChatState {
     get
     set(newValue)
@@ -2978,7 +2965,6 @@ extension Dialog {
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentStyle : ObjectiveC.NSObject, Foundation.NSCoding {
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc public protocol EntityInterface : LPMessagingSDK.EntityEquatableInterface {
@@ -3018,7 +3004,6 @@ public struct LPStructuredContentSampleData {
   @objc public var sessionId: Swift.String?
   @objc public var visitorId: Swift.String?
   @objc public init(campaignId: Swift.Int, engagementId: Swift.Int, contextId: Swift.String?, sessionId: Swift.String? = nil, visitorId: Swift.String? = nil)
-  @objc override dynamic public init()
   @objc deinit
 }
 @objcMembers @objc public class LPMonitoringInitParams : ObjectiveC.NSObject {
@@ -3026,7 +3011,6 @@ public struct LPStructuredContentSampleData {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
 }
 public struct AppointmentSlot : Swift.Encodable {
@@ -3087,7 +3071,6 @@ public struct AppointmentSlot : Swift.Encodable {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LPMonitoringDataManager : ObjectiveC.NSObject {
@@ -3119,7 +3102,6 @@ public struct AppointmentSlot : Swift.Encodable {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
 }
 @_inheritsConvenienceInitializers @objcMembers @objc public class LPSendSDEResponse : ObjectiveC.NSObject, Swift.Codable {
@@ -3177,26 +3159,26 @@ public struct AppointmentSlot : Swift.Encodable {
   }
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers open class NSBouncyView : UIKit.UIView {
-  open func setView(_ view: UIKit.UIView)
-  open func setColor(color: UIKit.UIColor)
-  open func toggleVisibility(show: Swift.Bool, willStart: @escaping () -> (), didComplete: @escaping () -> (), didFail: @escaping () -> ())
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class NSBouncyView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) open func setView(_ view: UIKit.UIView)
+  @_Concurrency.MainActor(unsafe) open func setColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) open func toggleVisibility(show: Swift.Bool, willStart: @escaping () -> (), didComplete: @escaping () -> (), didFail: @escaping () -> ())
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
-extension LPMessaging {
+extension LPMessagingSDK.LPMessaging {
   @objc dynamic public func registerPushNotifications(token: Foundation.Data, notificationDelegate: LPMessagingSDK.LPMessagingSDKNotificationDelegate? = nil, alternateBundleID: Swift.String? = nil, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
   @objc dynamic public func registerVoipPushNotifications(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
-  @objc dynamic public func unregisterPusher(brandId: Swift.String, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> (), failure: @escaping (Swift.Error) -> ())
+  @objc dynamic public func unregisterPusher(brandId: Swift.String, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> (), failure: @escaping (_ error: Swift.Error) -> ())
   @objc dynamic public class func setPusherToken(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
   @objc dynamic public class func setPusherVoipToken(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
   @objc @available(*, deprecated, message: "Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())")
-  dynamic public class func getUnreadMessagesCount(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, completion: @escaping (Swift.Int) -> (), failure: @escaping (Swift.Error) -> ())
+  dynamic public class func getUnreadMessagesCount(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, completion: @escaping (_ badgeCounter: Swift.Int) -> (), failure: @escaping (_ error: Swift.Error) -> ())
   @objc @available(*, deprecated, message: "Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())")
-  dynamic public class func getUnreadMessagesCount(brandID: Swift.String, completion: @escaping (Swift.Int) -> (), failure: @escaping (Swift.Error) -> ())
-  @objc dynamic public func getUnreadMessagesCount(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, completion: @escaping (Swift.Int) -> (), failure: @escaping (Swift.Error) -> ())
-  @objc dynamic public func isRegisteredForPushNotifications(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, token: Foundation.Data, alternateBundleID: Swift.String? = nil, completion: @escaping (Swift.Bool) -> (), failure: @escaping (Swift.Error) -> ())
+  dynamic public class func getUnreadMessagesCount(brandID: Swift.String, completion: @escaping (_ badgeCounter: Swift.Int) -> (), failure: @escaping (_ error: Swift.Error) -> ())
+  @objc dynamic public func getUnreadMessagesCount(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Swift.Int) -> (), failure: @escaping (_ error: Swift.Error) -> ())
+  @objc dynamic public func isRegisteredForPushNotifications(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, token: Foundation.Data, alternateBundleID: Swift.String? = nil, completion: @escaping (_ isRegistered: Swift.Bool) -> (), failure: @escaping (_ error: Swift.Error) -> ())
   @objc dynamic public func handlePush(_ userInfo: [Swift.AnyHashable : Any])
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentPublishTextAction : LPMessagingSDK.LPStructuredContentAction {
@@ -3229,26 +3211,26 @@ public enum LPSocketLoggerType : Swift.Int {
 @objc public protocol ConversationViewControllerAgentDelegate {
   @objc optional func agentDidChangeUserInputText(_ text: Swift.String)
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class LPCalendarDayCell : UIKit.UICollectionViewCell {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) open class LPCalendarDayCell : UIKit.UICollectionViewCell {
   @objc override dynamic open var description: Swift.String {
     @objc get
   }
-  public func clearStyles()
-  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @objc override dynamic open func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) public func clearStyles()
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class LPStructuredContentParser {
   public class func getStructuredContentLayoutContainer(fromJson json: [Swift.String : Any]) -> LPMessagingSDK.LPStructuredContentItemContainer?
   @objc deinit
 }
-extension LPMessaging {
+extension LPMessagingSDK.LPMessaging {
   @objc dynamic public func destruct()
   @objc @available(iOS, deprecated: 9.3.5, obsoleted: 14.0.0, message: "Use logout(completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead")
   dynamic public func logout()
   @objc @available(iOS, deprecated: 14.0, obsoleted: 15.0.0, message: "Use logout(unregisterType: LPPusherUnregisterType, completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead")
-  dynamic public func logout(completion: @escaping () -> (), failure: @escaping ([Swift.Error]) -> ())
-  @objc dynamic public func logout(unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> (), failure: @escaping ([Swift.Error]) -> ())
+  dynamic public func logout(completion: @escaping () -> (), failure: @escaping (_ errors: [Swift.Error]) -> ())
+  @objc dynamic public func logout(unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> (), failure: @escaping (_ errors: [Swift.Error]) -> ())
 }
 public protocol LPStructuredContentLoggerDelegate : AnyObject {
   func lpStructuredContentLogger(message: Swift.String)
@@ -3399,47 +3381,47 @@ public protocol LPDatePickerLoggerDelegate : AnyObject {
   public static let instance: LPMessagingSDK.LPDatePickerLogger
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers open class LPPickerView : UIKit.UIControl {
-  open var minimumDate: Foundation.Date? {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class LPPickerView : UIKit.UIControl {
+  @_Concurrency.MainActor(unsafe) open var minimumDate: Foundation.Date? {
     get
     set
   }
-  open var maximumDate: Foundation.Date? {
+  @_Concurrency.MainActor(unsafe) open var maximumDate: Foundation.Date? {
     get
     set
   }
-  open var date: Foundation.Date {
+  @_Concurrency.MainActor(unsafe) open var date: Foundation.Date {
     get
     set
   }
-  open var calendar: Foundation.Calendar {
+  @_Concurrency.MainActor(unsafe) open var calendar: Foundation.Calendar {
     get
     set
   }
-  open var locale: Foundation.Locale? {
+  @_Concurrency.MainActor(unsafe) open var locale: Foundation.Locale? {
     get
     set
   }
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
-extension LPPickerView {
-  open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
+extension LPMessagingSDK.LPPickerView {
+  @_Concurrency.MainActor(unsafe) open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
 }
-extension LPPickerView : UIKit.UIPickerViewDelegate {
-  @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
+extension LPMessagingSDK.LPPickerView : UIKit.UIPickerViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
 }
-extension LPPickerView : UIKit.UIPickerViewDataSource {
-  @objc dynamic public func numberOfComponents(in pickerView: UIKit.UIPickerView) -> Swift.Int
-  @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
-  @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, viewForRow row: Swift.Int, forComponent component: Swift.Int, reusing view: UIKit.UIView?) -> UIKit.UIView
+extension LPMessagingSDK.LPPickerView : UIKit.UIPickerViewDataSource {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func numberOfComponents(in pickerView: UIKit.UIPickerView) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, viewForRow row: Swift.Int, forComponent component: Swift.Int, reusing view: UIKit.UIView?) -> UIKit.UIView
 }
-extension LPCalendarView : UIKit.UICollectionViewDelegateFlowLayout {
-  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
-  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, shouldSelectItemAt indexPath: Foundation.IndexPath) -> Swift.Bool
-  @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
-  @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
+extension LPMessagingSDK.LPCalendarView : UIKit.UICollectionViewDelegateFlowLayout {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, shouldSelectItemAt indexPath: Foundation.IndexPath) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentAction : ObjectiveC.NSObject, Foundation.NSCoding {
   public var ID: Swift.String {
@@ -3453,7 +3435,6 @@ extension LPCalendarView : UIKit.UICollectionViewDelegateFlowLayout {
   }
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
 @objcMembers @objc public class LPNotification : ObjectiveC.NSObject, Foundation.NSCoding {
@@ -3474,7 +3455,6 @@ extension LPCalendarView : UIKit.UICollectionViewDelegateFlowLayout {
   @objc public init(text: Swift.String, body: Swift.String? = nil, user: LPMessagingSDK.LPUser, accountID: Swift.String, isRemote: Swift.Bool = false, proActiveData: LPMessagingSDK.ProactiveNotificationData? = nil)
   @objc required public init?(coder: Foundation.NSCoder)
   @objc public func encode(with coder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class LPMessaging : ObjectiveC.NSObject {
@@ -3507,9 +3487,9 @@ extension LPCalendarView : UIKit.UICollectionViewDelegateFlowLayout {
   @objc public func getSDKVersion() -> Swift.String?
   @objc public func addContentToMessage(text: Swift.String)
   @objc public func getInactiveUserInteractionTimeInterval(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol) -> Foundation.TimeInterval
-  @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (LPMessagingSDK.LPGetEngagementResponse) -> (), failure: @escaping (Foundation.NSError) -> ())
+  @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
   @objc public func setAuthenticationParams(authenticationParams: LPMessagingSDK.LPAuthenticationParams, brandID: Swift.String)
-  @objc public func sendSDE(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (LPMessagingSDK.LPSendSDEResponse) -> (), failure: @escaping (Foundation.NSError) -> ())
+  @objc public func sendSDE(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
   @objc public func handleTapForInAppNotification(notification: LPMessagingSDK.LPNotification)
   @objc public func clearHistory(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol) throws
   @objc public func printAllLocalizedKeys()
@@ -3529,11 +3509,11 @@ extension LPCalendarView : UIKit.UICollectionViewDelegateFlowLayout {
   @objc @available(iOS, deprecated: 12.2.0, obsoleted: 14.0.0, message: "Use createWelcomeLocalMessage(_ dialog: Dialog, welcomeMessage: LPWelcomeMessage, overrideTime: Date = Date()) -> Message? instead")
   public class func createWelcomeLocalMessage(_ dialog: LPMessagingSDK.Dialog, overrideTime: Foundation.Date = Date()) -> LPMessagingSDK.Message?
   @objc @available(iOS, deprecated: 12.1.0, obsoleted: 14.0.0, message: "Use unregisterPusherFor(_ brandId: String) instead")
-  public class func unregisterPusher(_ brand: LPMessagingSDK.Brand, completion: @escaping () -> (), failure: @escaping (Swift.Error) -> ())
+  public class func unregisterPusher(_ brand: LPMessagingSDK.Brand, completion: @escaping () -> (), failure: @escaping (_ error: Swift.Error) -> ())
   @objc @available(iOS, deprecated: 11.4.0, obsoleted: 14.0.0, message: "Use getEngagement(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams?, completion: @escaping (_ response: LPGetEngagementResponse)->(), failure: @escaping (_ error: NSError)->()) instead")
-  public func getEngagement(consumerID: Swift.String?, monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (LPMessagingSDK.LPGetEngagementResponse) -> (), failure: @escaping (Foundation.NSError) -> ())
+  public func getEngagement(consumerID: Swift.String?, monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
   @objc @available(iOS, deprecated: 11.4.0, obsoleted: 14.0.0, message: "Use sendSDE(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams, completion: @escaping (_ response: LPSendSDEResponse)->(), failure: @escaping (_ error: NSError)->()) instead")
-  public func sendSDE(consumerID: Swift.String, monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (LPMessagingSDK.LPSendSDEResponse) -> (), failure: @escaping (Foundation.NSError) -> ())
+  public func sendSDE(consumerID: Swift.String, monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
   @objc deinit
 }
 @objc public protocol LPMessagingSDKNotificationDelegate {
@@ -3542,22 +3522,21 @@ extension LPCalendarView : UIKit.UICollectionViewDelegateFlowLayout {
   @objc optional func LPMessagingSDKNotification(customLocalPushNotificationView notification: LPMessagingSDK.LPNotification) -> UIKit.UIView
   @objc optional func LPMessagingSDKNotification(notificationTapped notification: LPMessagingSDK.LPNotification)
 }
-extension LPCalendarView : UIKit.UICollectionViewDataSource {
-  @objc dynamic public func numberOfSections(in collectionView: UIKit.UICollectionView) -> Swift.Int
-  public func getCachedSectionInfo(_ section: Swift.Int) -> (firstDay: Swift.Int, daysTotal: Swift.Int)?
-  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
-  @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+extension LPMessagingSDK.LPCalendarView : UIKit.UICollectionViewDataSource {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func numberOfSections(in collectionView: UIKit.UICollectionView) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) public func getCachedSectionInfo(_ section: Swift.Int) -> (firstDay: Swift.Int, daysTotal: Swift.Int)?
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentClick : ObjectiveC.NSObject, Foundation.NSCoding {
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
 }
 public protocol LPStructuredContentImageDownloader {
-  func LPStructuredContentNeedsImageToDownload(imageURL: Swift.String, resizeImageSize: CoreGraphics.CGSize, completion: @escaping (UIKit.UIImage?) -> (), failure: (() -> ())?)
+  func LPStructuredContentNeedsImageToDownload(imageURL: Swift.String, resizeImageSize: CoreGraphics.CGSize, completion: @escaping (_ image: UIKit.UIImage?) -> (), failure: (() -> ())?)
 }
-extension UIColor {
+extension UIKit.UIColor {
   public class var appointmentListCalendarBlueColor: UIKit.UIColor {
     get
   }
@@ -3628,11 +3607,17 @@ extension UIColor {
   public init(brandId: Swift.String, lookBackPeriod: Swift.Double? = nil, expirationEpochTime: Swift.Double, agentPid: Swift.String? = nil, backendService: Swift.String? = nil, leCampaignId: Swift.String? = nil, leEngagementId: Swift.String? = nil, externalConsumerId: Swift.String? = nil, transactionId: Swift.String? = nil, event: [Swift.String : Any]? = nil)
   @objc required public init?(coder: Foundation.NSCoder)
   @objc public func encode(with coder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
+}
+public protocol LPStructuredContentFontProvider : AnyObject {
+  var textHeadlineFont: UIKit.UIFont { get }
+  var textSubHeadlineFont: UIKit.UIFont { get }
+  var textCaptionFont: UIKit.UIFont { get }
+  var buttonTextFont: UIKit.UIFont { get }
 }
 @_hasMissingDesignatedInitializers public class LPStructuredContentSettings {
   public static let instance: LPMessagingSDK.LPStructuredContentSettings
+  weak public var fontProvider: LPMessagingSDK.LPStructuredContentFontProvider?
   public var STRUCTURED_CONTENT_IMAGE_MAX_WIDTH_SIZE: CoreGraphics.CGFloat
   public var STRUCTURED_CONTENT_IMAGE_MAX_HEIGHT_SIZE: CoreGraphics.CGFloat
   public var STRUCTURED_CONTENT_PORTRAIT_WIDTH_RATIO: CoreGraphics.CGFloat
@@ -3641,10 +3626,18 @@ extension UIColor {
   public var newStructuredContentMessage: Swift.String
   public var structuredContentItemError: Swift.String
   public var structuredContentAccessibilityMap: Swift.String
-  public var textHeadlineFont: UIKit.UIFont
-  public var textSubHeadlineFont: UIKit.UIFont
-  public var textCaptionFont: UIKit.UIFont
-  public var buttonTextFont: UIKit.UIFont
+  public var textHeadlineFont: UIKit.UIFont {
+    get
+  }
+  public var textSubHeadlineFont: UIKit.UIFont {
+    get
+  }
+  public var textCaptionFont: UIKit.UIFont {
+    get
+  }
+  public var buttonTextFont: UIKit.UIFont {
+    get
+  }
   public var cardBackgroundColor: UIKit.UIColor
   public var carouselScrollBackgroundColor: UIKit.UIColor
   public var contentStyleColor: UIKit.UIColor
@@ -3661,6 +3654,8 @@ extension UIColor {
   public var useCacheImageIfNeeded: Swift.Bool
   public var brokenImage: UIKit.UIImage?
   public var buttonWidthConstant: CoreGraphics.CGFloat
+  public var buttonMinimumHeight: CoreGraphics.CGFloat?
+  public var buttonBorderCornerRadius: Swift.Double
   public var buttonBorderWidth: CoreGraphics.CGFloat
   public var bubbleBorderWidth: Swift.Double
   public var bubbleTopLeftCornerRadius: Swift.Float
