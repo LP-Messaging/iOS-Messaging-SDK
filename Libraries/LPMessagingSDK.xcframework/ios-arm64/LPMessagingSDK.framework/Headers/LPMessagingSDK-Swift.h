@@ -1220,11 +1220,11 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonBorderColor;
 /// Used to set the text color for Structure Content elements of button type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonTextColor;
-/// Used to set the text color for Structure Content elements of link button type
+/// Used to set the text color for Structured Content elements of link button type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentLinkButtonTextColor;
 /// Used to set the text color for Structure Content elements of text type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentTextColor;
-/// Used to set the width constraint for Structured Constant elements of button type
+/// Used to set the width constraint for Structured Content elements of button type
 @property (nonatomic) CGFloat structuredButtonWidthConstant;
 /// Structured content loading image when images are being fetched/loaded
 @property (nonatomic, strong) UIImage * _Nullable structuredContentLoadingImage;
