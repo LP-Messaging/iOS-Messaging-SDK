@@ -3169,6 +3169,7 @@ public struct AppointmentSlot : Swift.Encodable {
 }
 extension LPMessagingSDK.LPMessaging {
   @objc dynamic public func registerPushNotifications(token: Foundation.Data, notificationDelegate: LPMessagingSDK.LPMessagingSDKNotificationDelegate? = nil, alternateBundleID: Swift.String? = nil, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
+  @objc dynamic public func registerPushNotifications(tokenString: Swift.String, notificationDelegate: LPMessagingSDK.LPMessagingSDKNotificationDelegate? = nil, alternateBundleID: Swift.String? = nil, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
   @objc dynamic public func registerVoipPushNotifications(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
   @objc dynamic public func unregisterPusher(brandId: Swift.String, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> (), failure: @escaping (_ error: Swift.Error) -> ())
   @objc dynamic public class func setPusherToken(token: Foundation.Data, alternateBundleID: Swift.String? = nil)

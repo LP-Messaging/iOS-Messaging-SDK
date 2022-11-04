@@ -1220,11 +1220,11 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonBorderColor;
 /// Used to set the text color for Structure Content elements of button type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonTextColor;
-/// Used to set the text color for Structure Content elements of link button type
+/// Used to set the text color for Structured Content elements of link button type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentLinkButtonTextColor;
 /// Used to set the text color for Structure Content elements of text type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentTextColor;
-/// Used to set the width constraint for Structured Constant elements of button type
+/// Used to set the width constraint for Structured Content elements of button type
 @property (nonatomic) CGFloat structuredButtonWidthConstant;
 /// Structured content loading image when images are being fetched/loaded
 @property (nonatomic, strong) UIImage * _Nullable structuredContentLoadingImage;
@@ -2099,7 +2099,7 @@ enum LPPusherUnregisterType : NSInteger;
 /// This method registers the host app in the SDK Pusher service in order to be able to receive push notification in messaging.
 /// note:
 /// If passing authentication params, this method will register immediately to Pusher, the registration will be performed when calling showConversation
-/// \param token push device token data
+/// \param token Push device token data. SDK will hex decode it before sending it to Pusher.
 ///
 /// \param notificationDelegate implementer of LPMessagingSDKNotificationDelegate.
 ///
@@ -2108,6 +2108,18 @@ enum LPPusherUnregisterType : NSInteger;
 /// \param authenticationParams an optional authentication param (LPAuthenticationParams) to be used for immediate Pusher registration
 ///
 - (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
+/// This method registers the host app in the SDK Pusher service in order to be able to receive push notification in messaging.
+/// note:
+/// If passing authentication params, this method will register immediately to Pusher, the registration will be performed when calling showConversation
+/// \param tokenString Push device token string. SDK will send it as it is to Pusher.
+///
+/// \param notificationDelegate implementer of LPMessagingSDKNotificationDelegate.
+///
+/// \param alternateBundleID a value for using in order to let the Pusher service to identify the host app with this bundle identifier
+///
+/// \param authenticationParams an optional authentication param (LPAuthenticationParams) to be used for immediate Pusher registration
+///
+- (void)registerPushNotificationsWithTokenString:(NSString * _Nonnull)tokenString notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
 /// This method registers Voip the host app to SDK Pusher service
 /// \param token push device token data
 ///
