@@ -649,6 +649,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) NSUInteger maxNumberOfSavedAudioFilesOnDisk;
 /// Hides previous chat history until user identify has been verified
 @property (nonatomic) BOOL hideUIUntilAuthenticated;
+/// If set to true then UnAuth conversation can be stepped up
+@property (nonatomic) BOOL shouldPerformStepUp;
 /// The brand name will be shown as a title on toolbar when there is no active conversation.
 @property (nonatomic, copy) NSString * _Nonnull brandName;
 /// Color for the entire view background.
@@ -1000,6 +1002,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) enum LPLanguage language;
 /// Bool used to allow manual configuration for enabling the SDK to register to LP Pusher service. Requires user logout to change current configuration. Default is set to true.
 @property (nonatomic) BOOL enableLpPusherService;
+/// Bool used to clear unread badge count for all the unread messages of all the conversations at once on Pusher whenever user comes to the conversation screen.
+@property (nonatomic) BOOL pusherClearBadgeCount;
 /// Background color of navigation bar in conversation screen.
 @property (nonatomic, strong) UIColor * _Nonnull conversationNavigationBackgroundColor;
 /// Navigation title color in conversation screen.
