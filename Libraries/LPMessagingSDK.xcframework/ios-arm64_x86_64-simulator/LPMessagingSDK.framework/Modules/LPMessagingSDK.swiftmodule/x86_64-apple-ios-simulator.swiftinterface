@@ -564,6 +564,7 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case unreadMessages
   case invalidHyperLinkError
   case accessibilityCloseCameraButton
+  case richContentMessageNotification
   case accessibilityLinkText
   case accessibilityMessageError
   case accessibilityMessageErrorHint
@@ -1798,6 +1799,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var enableAudioSharing: Swift.Bool
   @objc public var maxNumberOfSavedAudioFilesOnDisk: Swift.UInt
   @objc public var hideUIUntilAuthenticated: Swift.Bool
+  @objc public var shouldPerformStepUp: Swift.Bool
   @objc public var brandName: Swift.String
   @objc public var conversationBackgroundColor: UIKit.UIColor
   @objc public var customFontNameConversationFeed: Swift.String?
@@ -1976,6 +1978,7 @@ public enum QuickReplyActionType : Swift.String {
     @objc set
   }
   @objc public var enableLpPusherService: Swift.Bool
+  @objc public var pusherClearBadgeCount: Swift.Bool
   @objc public var conversationNavigationBackgroundColor: UIKit.UIColor
   @objc public var conversationNavigationTitleColor: UIKit.UIColor
   @objc public var conversationStatusBarStyle: UIKit.UIStatusBarStyle

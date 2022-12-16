@@ -404,7 +404,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = "SampleApp-Swift/SampleApp-Swift.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 90;
+				CURRENT_PROJECT_VERSION = 91;
 				DEVELOPMENT_TEAM = M6C39UG9M8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -432,7 +432,7 @@
 				CODE_SIGN_ENTITLEMENTS = "SampleApp-Swift/SampleApp-Swift.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 90;
+				CURRENT_PROJECT_VERSION = 91;
 				DEVELOPMENT_TEAM = M6C39UG9M8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
