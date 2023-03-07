@@ -102,7 +102,10 @@ public enum QuickReplyStyleSize : Swift.String {
     get
   }
 }
-@objc @_hasMissingDesignatedInitializers public class QuickReplyStyle : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc @_hasMissingDesignatedInitializers public class QuickReplyStyle : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var bold: Swift.Bool?
   public var italic: Swift.Bool?
   public var color: UIKit.UIColor?
@@ -210,6 +213,9 @@ public enum LPDatePickerClass : Swift.String {
   }
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentDatePickerAction : LPMessagingSDK.LPStructuredContentAction {
+  @objc override public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var datePickerClass: LPMessagingSDK.LPDatePickerClass? {
     get
   }
@@ -350,9 +356,10 @@ extension LPMessagingSDK.LinkPreview {
   @objc public var authenticationCode: Swift.String?
   @objc public var jwt: Swift.String?
   @objc public var redirectURI: Swift.String?
+  @objc public var issuerDisplayName: Swift.String?
   @objc public var certPinningPublicKeys: [Swift.String]?
   @objc public var type: LPMessagingSDK.LPAuthenticationType
-  @objc public init(authenticationCode: Swift.String? = nil, jwt: Swift.String? = nil, redirectURI: Swift.String? = nil, certPinningPublicKeys: [Swift.String]? = nil, authenticationType: LPMessagingSDK.LPAuthenticationType = .signup)
+  @objc public init(authenticationCode: Swift.String? = nil, jwt: Swift.String? = nil, redirectURI: Swift.String? = nil, issuerDisplayName: Swift.String? = nil, certPinningPublicKeys: [Swift.String]? = nil, authenticationType: LPMessagingSDK.LPAuthenticationType = .signup)
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
@@ -375,7 +382,10 @@ extension LPMessagingSDK.LinkPreview {
 @_hasMissingDesignatedInitializers public class LPHyperlinkUtils {
   @objc deinit
 }
-@objcMembers @objc public class LPUser : ObjectiveC.NSObject, Foundation.NSCoding {
+@objcMembers @objc public class LPUser : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public static var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   @objc public var firstName: Swift.String?
   @objc public var lastName: Swift.String?
   @objc public var nickName: Swift.String?
@@ -405,7 +415,8 @@ extension LPMessagingSDK.LinkPreview {
   @objc override dynamic public init()
   @objc deinit
 }
-@objc public class TTRModel : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc public class TTRModel : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public static var supportsSecureCoding: Swift.Bool
   public var effectiveTTR: Foundation.Date!
   public var manualETTR: Foundation.Date?
   public var ttrValue: Swift.Int
@@ -443,7 +454,10 @@ public enum ConversationQueryType : Swift.String {
   @objc func getQueryUID() -> Swift.String
   @objc func getQueryProperties() -> [Swift.String : Any]
 }
-@objc @_hasMissingDesignatedInitializers public class QuickReplyClick : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc @_hasMissingDesignatedInitializers public class QuickReplyClick : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var ID: Swift.String
   public var metadata: [[Swift.String : Any]]?
   public var actions: [LPMessagingSDK.QuickReplyAction]?
@@ -802,6 +816,9 @@ extension LPMessagingSDK.Conversation {
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class QuickReplyNavigateAction : LPMessagingSDK.QuickReplyAction {
+  @objc override public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var latitude: Swift.Double
   public var longitude: Swift.Double
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
@@ -903,6 +920,7 @@ public enum LPPreferredFontType {
   case zh_Hans
   case zh_Hant_hk
   case fil_PH
+  case es_MX
   public static var allRows: [LPMessagingSDK.LPLanguage] {
     get
   }
@@ -957,6 +975,7 @@ public enum LPPreferredFontType {
   case CN
   case HK
   case FIL
+  case MX
   public static var allRows: [LPMessagingSDK.LPRegionCode] {
     get
   }
@@ -1100,6 +1119,7 @@ extension LPMessagingSDK.Form {
     get
     set
   }
+  @_Concurrency.MainActor(unsafe) open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
   @_Concurrency.MainActor(unsafe) open var calendar: Foundation.Calendar {
     get
     set
@@ -1120,9 +1140,6 @@ extension LPMessagingSDK.Form {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
-}
-extension LPMessagingSDK.LPUIPickerView {
-  @_Concurrency.MainActor(unsafe) open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
 }
 extension LPMessagingSDK.LPUIPickerView : UIKit.UIPickerViewDelegate {
   @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
@@ -1166,7 +1183,10 @@ extension UIKit.UIView {
   @objc var hidden: Swift.Bool { get set }
   @objc var accounts: Foundation.NSSet { get set }
 }
-@objc @_hasMissingDesignatedInitializers public class LPStructuredContentItemContainer : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc @_hasMissingDesignatedInitializers public class LPStructuredContentItemContainer : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var ID: Swift.String {
     get
   }
@@ -1178,13 +1198,19 @@ extension UIKit.UIView {
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class QuickReplyLinkAction : LPMessagingSDK.QuickReplyAction {
+  @objc override public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var uri: Swift.String
   public var deepLinkUri: Swift.String?
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc override public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
 }
-@objc @_hasMissingDesignatedInitializers public class QuickReplyButtonDetails : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc @_hasMissingDesignatedInitializers public class QuickReplyButtonDetails : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var ID: Swift.String
   public var text: Swift.String?
   public var tooltip: Swift.String?
@@ -1436,12 +1462,18 @@ extension LPMessagingSDK.Message {
   public func getBoards(completion: @escaping (_ boards: [LPMessagingSDK.CustomBoard]) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
   public func getHTMLAttributedString(style: UIKit.UIFont.TextStyle, color: UIKit.UIColor, font: Swift.String) -> Foundation.NSAttributedString?
 }
-@objc @_hasMissingDesignatedInitializers public class Slot : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc @_hasMissingDesignatedInitializers public class Slot : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentAppointmentListAction : LPMessagingSDK.LPStructuredContentAction {
+  @objc override public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var slots: [LPMessagingSDK.Slot]? {
     get
   }
@@ -1521,12 +1553,18 @@ public struct SocketDetails {
   }
 }
 @objc @_hasMissingDesignatedInitializers public class QuickReplyPublishTextAction : LPMessagingSDK.QuickReplyAction {
+  @objc override public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var text: Swift.String
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc override public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
 }
-@_inheritsConvenienceInitializers @objc public class LPFileMetaDataContainer : ObjectiveC.NSObject, Foundation.NSCoding {
+@_inheritsConvenienceInitializers @objc public class LPFileMetaDataContainer : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   @objc override dynamic public init()
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
@@ -1561,7 +1599,10 @@ public struct SocketDetails {
   }
   @objc deinit
 }
-@objc @_hasMissingDesignatedInitializers public class LPStructuredContentItem : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc @_hasMissingDesignatedInitializers public class LPStructuredContentItem : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
@@ -1786,7 +1827,10 @@ public enum QuickReplyActionType : Swift.String {
     get
   }
 }
-@objc @_hasMissingDesignatedInitializers public class QuickReplyAction : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc @_hasMissingDesignatedInitializers public class QuickReplyAction : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var ID: Swift.String
   public var type: Swift.String
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
@@ -1988,6 +2032,18 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var fileSharingFromConsumer: Swift.Bool
   @objc public var maxNumberOfSavedFilesOnDisk: Swift.UInt
   @objc public var maxNumberOfSavedDocumentsOnDisk: Swift.UInt
+  @objc public var maxPhotoCompression: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc public var maxPhotoHeightSize: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc public var maxPhotoWidthSize: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
   @objc public var photosharingMenuBackgroundColor: UIKit.UIColor
   @objc public var photosharingMenuButtonsBackgroundColor: UIKit.UIColor
   @objc public var photosharingMenuButtonsTintColor: UIKit.UIColor
@@ -2398,7 +2454,10 @@ extension LPMessagingSDK.ConversationDetails {
     get
   }
 }
-@objc public class QuickReplyItem : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc public class QuickReplyItem : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var sequence: Swift.Int
   public var ownerMessageUID: Swift.String?
   public var maxItemsPerRow: Swift.Int?
@@ -2455,9 +2514,6 @@ public let MAX_ALLOWED_UPLOAD_SIZE_IN_MB_INT: Swift.Int
 public let CELL_PHOTO_WIDTH: CoreGraphics.CGFloat
 public let THUMBNAIL_MAX_HEIGHT_SIZE: CoreGraphics.CGFloat
 public let THUMBNAIL_MAX_WIDTH_SIZE: CoreGraphics.CGFloat
-public let PHOTO_MAX_HEIGHT_SIZE: CoreGraphics.CGFloat
-public let PHOTO_MAX_WIDTH_SIZE: CoreGraphics.CGFloat
-public let FULL_PHOTO_COMPRESSION: CoreGraphics.CGFloat
 public let AUDIO_RECORDING_SAMPLE_RATE: Swift.Int
 public let AUDIO_RECORDING_BIT_RATE: Swift.Int
 public let AUDIO_RECORDING_CHANNELS: Swift.Int
@@ -2965,7 +3021,10 @@ extension LPMessagingSDK.Dialog {
     get
   }
 }
-@objc @_hasMissingDesignatedInitializers public class LPStructuredContentStyle : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc @_hasMissingDesignatedInitializers public class LPStructuredContentStyle : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
@@ -3091,6 +3150,9 @@ public struct AppointmentSlot : Swift.Encodable {
   public func clearEngagementMonitoring()
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentNavigateAction : LPMessagingSDK.LPStructuredContentAction {
+  @objc override public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var latitude: Swift.Double {
     get
   }
@@ -3186,6 +3248,9 @@ extension LPMessagingSDK.LPMessaging {
   @objc dynamic public func handlePush(_ userInfo: [Swift.AnyHashable : Any])
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentPublishTextAction : LPMessagingSDK.LPStructuredContentAction {
+  @objc override public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var text: Swift.String {
     get
   }
@@ -3263,6 +3328,9 @@ public protocol LPStructuredContentLoggerDelegate : AnyObject {
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentLinkAction : LPMessagingSDK.LPStructuredContentAction {
+  @objc override public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var uri: Swift.String {
     get
   }
@@ -3398,6 +3466,7 @@ public protocol LPDatePickerLoggerDelegate : AnyObject {
     get
     set
   }
+  @_Concurrency.MainActor(unsafe) open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
   @_Concurrency.MainActor(unsafe) open var calendar: Foundation.Calendar {
     get
     set
@@ -3409,9 +3478,6 @@ public protocol LPDatePickerLoggerDelegate : AnyObject {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
-}
-extension LPMessagingSDK.LPPickerView {
-  @_Concurrency.MainActor(unsafe) open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
 }
 extension LPMessagingSDK.LPPickerView : UIKit.UIPickerViewDelegate {
   @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
@@ -3427,7 +3493,10 @@ extension LPMessagingSDK.LPCalendarView : UIKit.UICollectionViewDelegateFlowLayo
   @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
   @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
 }
-@objc @_hasMissingDesignatedInitializers public class LPStructuredContentAction : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc @_hasMissingDesignatedInitializers public class LPStructuredContentAction : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   public var ID: Swift.String {
     get
   }
@@ -3441,7 +3510,10 @@ extension LPMessagingSDK.LPCalendarView : UIKit.UICollectionViewDelegateFlowLayo
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
 }
-@objcMembers @objc public class LPNotification : ObjectiveC.NSObject, Foundation.NSCoding {
+@objcMembers @objc public class LPNotification : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public static var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   @objc public var text: Swift.String
   @objc public var body: Swift.String?
   @objc public var user: LPMessagingSDK.LPUser
@@ -3532,7 +3604,10 @@ extension LPMessagingSDK.LPCalendarView : UIKit.UICollectionViewDataSource {
   @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
   @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
 }
-@objc @_hasMissingDesignatedInitializers public class LPStructuredContentClick : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc @_hasMissingDesignatedInitializers public class LPStructuredContentClick : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public class var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
@@ -3604,7 +3679,10 @@ extension UIKit.UIColor {
   @objc optional func LPMessagingSDKPushRegistrationDidFail(_ error: Foundation.NSError)
   @objc optional func LPMessagingSDKUnauthenticatedUserExpired()
 }
-@objc public class ProactiveNotificationData : ObjectiveC.NSObject, Foundation.NSCoding {
+@objc public class ProactiveNotificationData : ObjectiveC.NSObject, Foundation.NSSecureCoding {
+  @objc public static var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
   @objc override dynamic public var debugDescription: Swift.String {
     @objc get
   }

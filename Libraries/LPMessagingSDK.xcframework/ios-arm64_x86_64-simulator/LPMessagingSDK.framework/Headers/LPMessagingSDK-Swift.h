@@ -534,6 +534,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK22LPAuthenticationParams")
 @property (nonatomic, copy) NSString * _Nullable authenticationCode;
 @property (nonatomic, copy) NSString * _Nullable jwt;
 @property (nonatomic, copy) NSString * _Nullable redirectURI;
+/// Issuer name if multiple IDPs are supported
+@property (nonatomic, copy) NSString * _Nullable issuerDisplayName;
 /// will hold the Cert pining validation public keys
 @property (nonatomic, copy) NSArray<NSString *> * _Nullable certPinningPublicKeys;
 @property (nonatomic) enum LPAuthenticationType type;
@@ -549,7 +551,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK22LPAuthenticationParams")
 ///
 /// \param authenticationType .authenticated for Code Flow or Implicit, .unauthenticated for Unauthenticated.  If left as nil will default to .signup flow.
 ///
-- (nonnull instancetype)initWithAuthenticationCode:(NSString * _Nullable)authenticationCode jwt:(NSString * _Nullable)jwt redirectURI:(NSString * _Nullable)redirectURI certPinningPublicKeys:(NSArray<NSString *> * _Nullable)certPinningPublicKeys authenticationType:(enum LPAuthenticationType)authenticationType OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithAuthenticationCode:(NSString * _Nullable)authenticationCode jwt:(NSString * _Nullable)jwt redirectURI:(NSString * _Nullable)redirectURI issuerDisplayName:(NSString * _Nullable)issuerDisplayName certPinningPublicKeys:(NSArray<NSString *> * _Nullable)certPinningPublicKeys authenticationType:(enum LPAuthenticationType)authenticationType OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -1028,6 +1030,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// Max number of allowed saved documents on disk. This refers only to document files
 /// The validation of allowed max number of documents will be when showing and removing conversation.
 @property (nonatomic) NSUInteger maxNumberOfSavedDocumentsOnDisk;
+/// This will allow to adjust the jpeg compression on resize image function when consumer sends to agent. Lower = more higher = less. Must be between 0 and 1.
+@property (nonatomic) CGFloat maxPhotoCompression;
+/// This will allow the image resize to be increased for the image height when consumer sends to agent.  Must not be more than 1600 or less than 0.
+@property (nonatomic) CGFloat maxPhotoHeightSize;
+/// This will allow the image resize to be increased for the image width when consumer sends to agent. Must not be more than 1600 or less than 0.
+@property (nonatomic) CGFloat maxPhotoWidthSize;
 /// Photosharing menu background color.
 @property (nonatomic, strong) UIColor * _Nonnull photosharingMenuBackgroundColor;
 /// Photosharing menu buttons background color.
@@ -1727,7 +1735,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPEngagementDetails")
 
 /// Base class for file metadata container attribute
 SWIFT_CLASS("_TtC14LPMessagingSDK23LPFileMetaDataContainer")
-@interface LPFileMetaDataContainer : NSObject <NSCoding>
+@interface LPFileMetaDataContainer : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
@@ -1795,6 +1805,7 @@ typedef SWIFT_ENUM(NSInteger, LPLanguage, open) {
   LPLanguageZh_Hans = 44,
   LPLanguageZh_Hant_hk = 45,
   LPLanguageFil_PH = 46,
+  LPLanguageEs_MX = 47,
 };
 
 /// The various levels of logging.  Each case encapsulates the logging above.
@@ -2360,7 +2371,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK18LPMonitoringParams")
 @class ProactiveNotificationData;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK14LPNotification")
-@interface LPNotification : NSObject <NSCoding>
+@interface LPNotification : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, copy) NSString * _Nonnull text;
 @property (nonatomic, copy) NSString * _Nullable body;
 @property (nonatomic, strong) LPUser * _Nonnull user;
@@ -2422,12 +2435,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK12LPPickerView")
 @end
 
 
+
 @interface LPPickerView (SWIFT_EXTENSION(LPMessagingSDK)) <UIPickerViewDataSource>
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView * _Nonnull)pickerView SWIFT_WARN_UNUSED_RESULT;
 - (NSInteger)pickerView:(UIPickerView * _Nonnull)pickerView numberOfRowsInComponent:(NSInteger)component SWIFT_WARN_UNUSED_RESULT;
 - (UIView * _Nonnull)pickerView:(UIPickerView * _Nonnull)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView * _Nullable)view SWIFT_WARN_UNUSED_RESULT;
 @end
-
 
 typedef SWIFT_ENUM(NSInteger, LPPusherUnregisterType, open) {
   LPPusherUnregisterTypeAll = 0,
@@ -2480,6 +2493,7 @@ typedef SWIFT_ENUM(NSInteger, LPRegionCode, open) {
   LPRegionCodeCN = 38,
   LPRegionCodeHK = 39,
   LPRegionCodeFIL = 40,
+  LPRegionCodeMX = 41,
 };
 
 
@@ -2524,7 +2538,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK25LPStructuredContentAction")
-@interface LPStructuredContentAction : NSObject <NSCoding>
+@interface LPStructuredContentAction : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base Action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2540,6 +2556,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK25LPStructuredContentAction")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK40LPStructuredContentAppointmentListAction")
 @interface LPStructuredContentAppointmentListAction : LPStructuredContentAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the Link action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2552,7 +2570,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK40LPStructuredContentAppointmentListAction")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK24LPStructuredContentClick")
-@interface LPStructuredContentClick : NSObject <NSCoding>
+@interface LPStructuredContentClick : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base Action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2568,6 +2588,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK24LPStructuredContentClick")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK35LPStructuredContentDatePickerAction")
 @interface LPStructuredContentDatePickerAction : LPStructuredContentAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the datePicker action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2580,7 +2602,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK35LPStructuredContentDatePickerAction")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK23LPStructuredContentItem")
-@interface LPStructuredContentItem : NSObject <NSCoding>
+@interface LPStructuredContentItem : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2596,7 +2620,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK23LPStructuredContentItem")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK32LPStructuredContentItemContainer")
-@interface LPStructuredContentItemContainer : NSObject <NSCoding>
+@interface LPStructuredContentItemContainer : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the StructuredContentItamsContainer, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2612,6 +2638,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK32LPStructuredContentItemContainer")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK29LPStructuredContentLinkAction")
 @interface LPStructuredContentLinkAction : LPStructuredContentAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the Link action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2625,6 +2653,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK29LPStructuredContentLinkAction")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK33LPStructuredContentNavigateAction")
 @interface LPStructuredContentNavigateAction : LPStructuredContentAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the Navigate action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2638,6 +2668,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK33LPStructuredContentNavigateAction")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK36LPStructuredContentPublishTextAction")
 @interface LPStructuredContentPublishTextAction : LPStructuredContentAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the publishText action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2650,7 +2682,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK36LPStructuredContentPublishTextAction")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK24LPStructuredContentStyle")
-@interface LPStructuredContentStyle : NSObject <NSCoding>
+@interface LPStructuredContentStyle : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base Style, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2691,7 +2725,9 @@ typedef SWIFT_ENUM(NSInteger, LPUrlPreviewStyle, open) {
 @protocol User;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK6LPUser")
-@interface LPUser : NSObject <NSCoding>
+@interface LPUser : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, copy) NSString * _Nullable firstName;
 @property (nonatomic, copy) NSString * _Nullable lastName;
 @property (nonatomic, copy) NSString * _Nullable nickName;
@@ -2859,7 +2895,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK12NSBouncyView")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK25ProactiveNotificationData")
-@interface ProactiveNotificationData : NSObject <NSCoding>
+@interface ProactiveNotificationData : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly, copy) NSString * _Nonnull debugDescription;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
@@ -2869,7 +2907,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK25ProactiveNotificationData")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK16QuickReplyAction")
-@interface QuickReplyAction : NSObject <NSCoding>
+@interface QuickReplyAction : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2897,7 +2937,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK16QuickReplyButton")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK23QuickReplyButtonDetails")
-@interface QuickReplyButtonDetails : NSObject <NSCoding>
+@interface QuickReplyButtonDetails : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2912,7 +2954,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK23QuickReplyButtonDetails")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK15QuickReplyClick")
-@interface QuickReplyClick : NSObject <NSCoding>
+@interface QuickReplyClick : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2927,7 +2971,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK15QuickReplyClick")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK14QuickReplyItem")
-@interface QuickReplyItem : NSObject <NSCoding>
+@interface QuickReplyItem : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2944,6 +2990,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14QuickReplyItem")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK20QuickReplyLinkAction")
 @interface QuickReplyLinkAction : QuickReplyAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2957,6 +3005,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK20QuickReplyLinkAction")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK24QuickReplyNavigateAction")
 @interface QuickReplyNavigateAction : QuickReplyAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2970,6 +3020,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK24QuickReplyNavigateAction")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK27QuickReplyPublishTextAction")
 @interface QuickReplyPublishTextAction : QuickReplyAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2982,7 +3034,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK27QuickReplyPublishTextAction")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK15QuickReplyStyle")
-@interface QuickReplyStyle : NSObject <NSCoding>
+@interface QuickReplyStyle : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -2997,7 +3051,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK15QuickReplyStyle")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK4Slot")
-@interface Slot : NSObject <NSCoding>
+@interface Slot : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -3026,7 +3082,10 @@ typedef SWIFT_ENUM(NSInteger, SocketType, open) {
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK8TTRModel")
-@interface TTRModel : NSObject <NSCoding>
+@interface TTRModel : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
++ (void)setSupportsSecureCoding:(BOOL)value;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
@@ -3661,6 +3720,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK22LPAuthenticationParams")
 @property (nonatomic, copy) NSString * _Nullable authenticationCode;
 @property (nonatomic, copy) NSString * _Nullable jwt;
 @property (nonatomic, copy) NSString * _Nullable redirectURI;
+/// Issuer name if multiple IDPs are supported
+@property (nonatomic, copy) NSString * _Nullable issuerDisplayName;
 /// will hold the Cert pining validation public keys
 @property (nonatomic, copy) NSArray<NSString *> * _Nullable certPinningPublicKeys;
 @property (nonatomic) enum LPAuthenticationType type;
@@ -3676,7 +3737,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK22LPAuthenticationParams")
 ///
 /// \param authenticationType .authenticated for Code Flow or Implicit, .unauthenticated for Unauthenticated.  If left as nil will default to .signup flow.
 ///
-- (nonnull instancetype)initWithAuthenticationCode:(NSString * _Nullable)authenticationCode jwt:(NSString * _Nullable)jwt redirectURI:(NSString * _Nullable)redirectURI certPinningPublicKeys:(NSArray<NSString *> * _Nullable)certPinningPublicKeys authenticationType:(enum LPAuthenticationType)authenticationType OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithAuthenticationCode:(NSString * _Nullable)authenticationCode jwt:(NSString * _Nullable)jwt redirectURI:(NSString * _Nullable)redirectURI issuerDisplayName:(NSString * _Nullable)issuerDisplayName certPinningPublicKeys:(NSArray<NSString *> * _Nullable)certPinningPublicKeys authenticationType:(enum LPAuthenticationType)authenticationType OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -4155,6 +4216,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// Max number of allowed saved documents on disk. This refers only to document files
 /// The validation of allowed max number of documents will be when showing and removing conversation.
 @property (nonatomic) NSUInteger maxNumberOfSavedDocumentsOnDisk;
+/// This will allow to adjust the jpeg compression on resize image function when consumer sends to agent. Lower = more higher = less. Must be between 0 and 1.
+@property (nonatomic) CGFloat maxPhotoCompression;
+/// This will allow the image resize to be increased for the image height when consumer sends to agent.  Must not be more than 1600 or less than 0.
+@property (nonatomic) CGFloat maxPhotoHeightSize;
+/// This will allow the image resize to be increased for the image width when consumer sends to agent. Must not be more than 1600 or less than 0.
+@property (nonatomic) CGFloat maxPhotoWidthSize;
 /// Photosharing menu background color.
 @property (nonatomic, strong) UIColor * _Nonnull photosharingMenuBackgroundColor;
 /// Photosharing menu buttons background color.
@@ -4854,7 +4921,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPEngagementDetails")
 
 /// Base class for file metadata container attribute
 SWIFT_CLASS("_TtC14LPMessagingSDK23LPFileMetaDataContainer")
-@interface LPFileMetaDataContainer : NSObject <NSCoding>
+@interface LPFileMetaDataContainer : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
@@ -4922,6 +4991,7 @@ typedef SWIFT_ENUM(NSInteger, LPLanguage, open) {
   LPLanguageZh_Hans = 44,
   LPLanguageZh_Hant_hk = 45,
   LPLanguageFil_PH = 46,
+  LPLanguageEs_MX = 47,
 };
 
 /// The various levels of logging.  Each case encapsulates the logging above.
@@ -5487,7 +5557,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK18LPMonitoringParams")
 @class ProactiveNotificationData;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK14LPNotification")
-@interface LPNotification : NSObject <NSCoding>
+@interface LPNotification : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, copy) NSString * _Nonnull text;
 @property (nonatomic, copy) NSString * _Nullable body;
 @property (nonatomic, strong) LPUser * _Nonnull user;
@@ -5549,12 +5621,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK12LPPickerView")
 @end
 
 
+
 @interface LPPickerView (SWIFT_EXTENSION(LPMessagingSDK)) <UIPickerViewDataSource>
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView * _Nonnull)pickerView SWIFT_WARN_UNUSED_RESULT;
 - (NSInteger)pickerView:(UIPickerView * _Nonnull)pickerView numberOfRowsInComponent:(NSInteger)component SWIFT_WARN_UNUSED_RESULT;
 - (UIView * _Nonnull)pickerView:(UIPickerView * _Nonnull)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView * _Nullable)view SWIFT_WARN_UNUSED_RESULT;
 @end
-
 
 typedef SWIFT_ENUM(NSInteger, LPPusherUnregisterType, open) {
   LPPusherUnregisterTypeAll = 0,
@@ -5607,6 +5679,7 @@ typedef SWIFT_ENUM(NSInteger, LPRegionCode, open) {
   LPRegionCodeCN = 38,
   LPRegionCodeHK = 39,
   LPRegionCodeFIL = 40,
+  LPRegionCodeMX = 41,
 };
 
 
@@ -5651,7 +5724,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK25LPStructuredContentAction")
-@interface LPStructuredContentAction : NSObject <NSCoding>
+@interface LPStructuredContentAction : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base Action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -5667,6 +5742,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK25LPStructuredContentAction")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK40LPStructuredContentAppointmentListAction")
 @interface LPStructuredContentAppointmentListAction : LPStructuredContentAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the Link action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -5679,7 +5756,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK40LPStructuredContentAppointmentListAction")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK24LPStructuredContentClick")
-@interface LPStructuredContentClick : NSObject <NSCoding>
+@interface LPStructuredContentClick : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base Action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -5695,6 +5774,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK24LPStructuredContentClick")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK35LPStructuredContentDatePickerAction")
 @interface LPStructuredContentDatePickerAction : LPStructuredContentAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the datePicker action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -5707,7 +5788,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK35LPStructuredContentDatePickerAction")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK23LPStructuredContentItem")
-@interface LPStructuredContentItem : NSObject <NSCoding>
+@interface LPStructuredContentItem : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -5723,7 +5806,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK23LPStructuredContentItem")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK32LPStructuredContentItemContainer")
-@interface LPStructuredContentItemContainer : NSObject <NSCoding>
+@interface LPStructuredContentItemContainer : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the StructuredContentItamsContainer, stored in core data
 /// \param aCoder aCoder
 ///
@@ -5739,6 +5824,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK32LPStructuredContentItemContainer")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK29LPStructuredContentLinkAction")
 @interface LPStructuredContentLinkAction : LPStructuredContentAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the Link action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -5752,6 +5839,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK29LPStructuredContentLinkAction")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK33LPStructuredContentNavigateAction")
 @interface LPStructuredContentNavigateAction : LPStructuredContentAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the Navigate action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -5765,6 +5854,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK33LPStructuredContentNavigateAction")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK36LPStructuredContentPublishTextAction")
 @interface LPStructuredContentPublishTextAction : LPStructuredContentAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the publishText action, stored in core data
 /// \param aCoder aCoder
 ///
@@ -5777,7 +5868,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK36LPStructuredContentPublishTextAction")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK24LPStructuredContentStyle")
-@interface LPStructuredContentStyle : NSObject <NSCoding>
+@interface LPStructuredContentStyle : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base Style, stored in core data
 /// \param aCoder aCoder
 ///
@@ -5818,7 +5911,9 @@ typedef SWIFT_ENUM(NSInteger, LPUrlPreviewStyle, open) {
 @protocol User;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK6LPUser")
-@interface LPUser : NSObject <NSCoding>
+@interface LPUser : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, copy) NSString * _Nullable firstName;
 @property (nonatomic, copy) NSString * _Nullable lastName;
 @property (nonatomic, copy) NSString * _Nullable nickName;
@@ -5986,7 +6081,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK12NSBouncyView")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK25ProactiveNotificationData")
-@interface ProactiveNotificationData : NSObject <NSCoding>
+@interface ProactiveNotificationData : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly, copy) NSString * _Nonnull debugDescription;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
@@ -5996,7 +6093,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK25ProactiveNotificationData")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK16QuickReplyAction")
-@interface QuickReplyAction : NSObject <NSCoding>
+@interface QuickReplyAction : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -6024,7 +6123,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK16QuickReplyButton")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK23QuickReplyButtonDetails")
-@interface QuickReplyButtonDetails : NSObject <NSCoding>
+@interface QuickReplyButtonDetails : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -6039,7 +6140,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK23QuickReplyButtonDetails")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK15QuickReplyClick")
-@interface QuickReplyClick : NSObject <NSCoding>
+@interface QuickReplyClick : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -6054,7 +6157,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK15QuickReplyClick")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK14QuickReplyItem")
-@interface QuickReplyItem : NSObject <NSCoding>
+@interface QuickReplyItem : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -6071,6 +6176,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK14QuickReplyItem")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK20QuickReplyLinkAction")
 @interface QuickReplyLinkAction : QuickReplyAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -6084,6 +6191,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK20QuickReplyLinkAction")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK24QuickReplyNavigateAction")
 @interface QuickReplyNavigateAction : QuickReplyAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -6097,6 +6206,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK24QuickReplyNavigateAction")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK27QuickReplyPublishTextAction")
 @interface QuickReplyPublishTextAction : QuickReplyAction
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -6109,7 +6220,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK27QuickReplyPublishTextAction")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK15QuickReplyStyle")
-@interface QuickReplyStyle : NSObject <NSCoding>
+@interface QuickReplyStyle : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -6124,7 +6237,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK15QuickReplyStyle")
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK4Slot")
-@interface Slot : NSObject <NSCoding>
+@interface Slot : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
 /// Decodes the base content item, stored in core data
 /// \param aCoder aCoder
 ///
@@ -6153,7 +6268,10 @@ typedef SWIFT_ENUM(NSInteger, SocketType, open) {
 
 
 SWIFT_CLASS("_TtC14LPMessagingSDK8TTRModel")
-@interface TTRModel : NSObject <NSCoding>
+@interface TTRModel : NSObject <NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
++ (void)setSupportsSecureCoding:(BOOL)value;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
