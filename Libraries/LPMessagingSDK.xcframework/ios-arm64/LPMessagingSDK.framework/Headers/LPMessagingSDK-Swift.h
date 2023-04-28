@@ -577,42 +577,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK17LPCalendarDayCell")
 
 SWIFT_CLASS("_TtC14LPMessagingSDK20LPCalendarHeaderView")
 @interface LPCalendarHeaderView : UIView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE;
 - (void)layoutSubviews;
-@end
-
-
-SWIFT_CLASS("_TtC14LPMessagingSDK14LPCalendarView")
-@interface LPCalendarView : UIView
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (void)awakeFromNib;
-@end
-
-
-@class UICollectionView;
-@class UIScrollView;
-
-@interface LPCalendarView (SWIFT_EXTENSION(LPMessagingSDK)) <UICollectionViewDelegateFlowLayout>
-- (void)collectionView:(UICollectionView * _Nonnull)collectionView didSelectItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
-- (BOOL)collectionView:(UICollectionView * _Nonnull)collectionView shouldSelectItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView * _Nonnull)scrollView;
-@end
-
-
-@interface LPCalendarView (SWIFT_EXTENSION(LPMessagingSDK))
-- (void)layoutSubviews;
-@end
-
-
-
-
-@interface LPCalendarView (SWIFT_EXTENSION(LPMessagingSDK)) <UICollectionViewDataSource>
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView * _Nonnull)collectionView SWIFT_WARN_UNUSED_RESULT;
-- (NSInteger)collectionView:(UICollectionView * _Nonnull)collectionView numberOfItemsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
-- (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1704,19 +1671,6 @@ typedef SWIFT_ENUM(NSInteger, LPConversationsHistoryStateToDisplay, open) {
 };
 
 
-SWIFT_CLASS("_TtC14LPMessagingSDK12LPDatePicker")
-@interface LPDatePicker : UIView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-/// Overriding Super to help layout components
-- (void)setNeedsLayout;
-@end
-
-
-
-
-
-
 SWIFT_CLASS("_TtC14LPMessagingSDK19LPEngagementDetails")
 @interface LPEngagementDetails : NSObject
 @property (nonatomic, readonly) NSInteger campaignId;
@@ -1850,7 +1804,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// This method ends the conversation’s connection.
 - (void)removeConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
 /// This method reconnects the conversation’s connection for conversation query.
-/// Reconnect open related webSockets and sync the converstion with its latest updates.
+/// Reconnect open related webSockets and sync the conversation with its latest updates.
 /// Additional parameters:
 /// <authenticationCode> to use an an authenticated users.
 - (void)reconnect:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationCode:(NSString * _Nonnull)authenticationCode SWIFT_AVAILABILITY(ios,deprecated=9.3.5,obsoleted=14.0.0,message="Use reconnect(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams) instead");
@@ -2514,6 +2468,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
+
 @class UIGestureRecognizer;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK))
@@ -2522,11 +2477,11 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
-
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK)) <UIGestureRecognizerDelegate>
 @end
 
 
+@class UIScrollView;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK)) <UIScrollViewDelegate>
 - (void)scrollViewWillBeginDragging:(UIScrollView * _Nonnull)scrollView;
@@ -2761,6 +2716,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK20LPWeeklyCalendarView")
 
 
 
+@class UICollectionView;
 @class UICollectionViewLayout;
 
 @interface LPWeeklyCalendarView (SWIFT_EXTENSION(LPMessagingSDK)) <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>

@@ -38,7 +38,7 @@
 		</data>
 		<key>Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		oHJ1ysOFiJR+A1w/xucJ1jVWmdE=
+		NtteMtwrckNifR2X1wPORyxqwJ4=
 		</data>
 		<key>Headers/LPMessagingSDK.h</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		cTYR9hYbAFZWtUE1FTvrcMRzooo=
+		GneZ6OG9WQgHyHgEJFaRFsX52dg=
 		</data>
 		<key>Model.cdm</key>
 		<data>
@@ -54,51 +54,51 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		gEww6iYwaL5nyVQ6k4Nzsci/Nu8=
+		rDAE0KVRakDAi1cq9+W9fscPsgQ=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		EnlATvkdGi6i0wHXSA3HBRoWmIM=
+		bH9b8MzAQbZhAah2YJHYVUkAFHM=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		SybdTzAd7+oao/sED9KjCYqDojU=
+		XMyYvb/6HXVKTwk/UFv4eprXFmE=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		gEww6iYwaL5nyVQ6k4Nzsci/Nu8=
+		rDAE0KVRakDAi1cq9+W9fscPsgQ=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		EnlATvkdGi6i0wHXSA3HBRoWmIM=
+		bH9b8MzAQbZhAah2YJHYVUkAFHM=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		SybdTzAd7+oao/sED9KjCYqDojU=
+		XMyYvb/6HXVKTwk/UFv4eprXFmE=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		C2Jb1Hbnosp2NY0OipQYDNt1RUE=
+		kGJJFCJE78msSWQBJkUs3RQb234=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		XblKIK4DSoEXYw4RZPFG3IWaIhU=
+		zJhFzMBgSUrPD0Y82vMjWSKzCDM=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		Q2SGSRA/3frcKe80HB0DvrWJDXo=
+		SqNEabzHCMMcB8bHwpBjtHSkLo4=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		C2Jb1Hbnosp2NY0OipQYDNt1RUE=
+		kGJJFCJE78msSWQBJkUs3RQb234=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		XblKIK4DSoEXYw4RZPFG3IWaIhU=
+		zJhFzMBgSUrPD0Y82vMjWSKzCDM=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		Q2SGSRA/3frcKe80HB0DvrWJDXo=
+		SqNEabzHCMMcB8bHwpBjtHSkLo4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -701,7 +701,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			KsAjs9qJqjSl9+SsmnkUEsRKMkYa/EI4CVuVAKcvuNg=
+			+NAEoFJ/UK0vvv4kt+JXuXyYi5sH3h7Z6bj8gBFZ9A4=
 			</data>
 		</dict>
 		<key>Headers/LPMessagingSDK.h</key>
@@ -722,84 +722,84 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oOhkbAIvQFNwNToBPw6ZU3A0/EBKA+1gKXs3OLCrWhA=
+			Ha6oEjb08vz3PmGO8OLLQA0VgNnUOP7CvwKBTAk5IUs=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0kQLR5UfP3BSOqFy5hlLuWDZwq2I4u7O0mP9XnAchdw=
+			xXNetShUlFQbj5XVfLXz7Cx+WPaRV9DeusdwSDAjpTM=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9AmJYC2SzhUsRtMce5tgnCjxkS/H49tO9R4Ik5CPsZ8=
+			hgtpON3b4dMayjtE8NaYY2poJ2WI4RGUFmJ9+ZvZmew=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			oOhkbAIvQFNwNToBPw6ZU3A0/EBKA+1gKXs3OLCrWhA=
+			Ha6oEjb08vz3PmGO8OLLQA0VgNnUOP7CvwKBTAk5IUs=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0kQLR5UfP3BSOqFy5hlLuWDZwq2I4u7O0mP9XnAchdw=
+			xXNetShUlFQbj5XVfLXz7Cx+WPaRV9DeusdwSDAjpTM=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9AmJYC2SzhUsRtMce5tgnCjxkS/H49tO9R4Ik5CPsZ8=
+			hgtpON3b4dMayjtE8NaYY2poJ2WI4RGUFmJ9+ZvZmew=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DgB8LSm9f1PhJneMKj/ge7N5spX2DMcLsukV9/SPDjQ=
+			MRRceeDrfzNePAZcl/IBJs2OUMMaO/pl0zXYmuJYwtc=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			vd2Os35MTLMgqqshAGPrZsjzzB3X4iVTx8kIjBNgknA=
+			iT85j4rlo9T6AyVTY59/jNbpyPiVaCUWnEziwVCnlRY=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			BDkdlp9yAZNl31SoFAOpPgXbHbfG4+Viwd15bCil26Y=
+			eycHi0SWdYFxUFWgvQiz+OeUBlCUSuNmELcDPwm6naw=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DgB8LSm9f1PhJneMKj/ge7N5spX2DMcLsukV9/SPDjQ=
+			MRRceeDrfzNePAZcl/IBJs2OUMMaO/pl0zXYmuJYwtc=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			vd2Os35MTLMgqqshAGPrZsjzzB3X4iVTx8kIjBNgknA=
+			iT85j4rlo9T6AyVTY59/jNbpyPiVaCUWnEziwVCnlRY=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			BDkdlp9yAZNl31SoFAOpPgXbHbfG4+Viwd15bCil26Y=
+			eycHi0SWdYFxUFWgvQiz+OeUBlCUSuNmELcDPwm6naw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
