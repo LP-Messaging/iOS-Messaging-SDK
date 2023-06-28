@@ -1383,13 +1383,12 @@ extension LPMessagingSDK.Message {
   public var isControllerMessage: Swift.Bool {
     get
   }
-  public var isInitialMessage: Swift.Bool {
+  public var isInitialRemoteMessage: Swift.Bool {
     get
   }
   public func getBaseMessageType() -> LPMessagingSDK.MessageType?
   public func getLocalMessageType() -> LPMessagingSDK.LocalMessageType?
   public func getBoards(completion: @escaping (_ boards: [LPMessagingSDK.CustomBoard]) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
-  public func getHTMLAttributedString(style: UIKit.UIFont.TextStyle, color: UIKit.UIColor, font: Swift.String) -> Foundation.NSAttributedString?
 }
 @objc @_hasMissingDesignatedInitializers public class Slot : ObjectiveC.NSObject, Foundation.NSSecureCoding, Swift.Encodable {
   @objc public class var supportsSecureCoding: Swift.Bool {
@@ -1687,6 +1686,7 @@ public enum LPFlowTag : Swift.CustomStringConvertible {
   case IMAGE
   case INCA
   case KEYCHAIN
+  case SECURE_ENCLAVE
   case LINK_PREVIEW
   case LOADING_VIEW
   case LOCAL_MESSAGE
@@ -1818,6 +1818,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var sendingMessageTimeoutInMinutes: Swift.UInt
   @objc public var enableVibrationOnMessageFromRemoteUser: Swift.Bool
   @objc public var announceAgentTyping: Swift.Bool
+  @objc public var announceEventsSequentially: Swift.Bool
   @objc public var showAgentTypingInMessageBubble: Swift.Bool
   @objc public var enableClientOnlyMasking: Swift.Bool
   @objc public var enableRealTimeMasking: Swift.Bool
@@ -1843,13 +1844,13 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var appointmentCellDetailLabelTextColor: UIKit.UIColor
   @objc public var appointmentCellAccessoryLabelTextColor: UIKit.UIColor
   @objc public var appointmentCellSelectedColor: UIKit.UIColor
-  @objc public var appointmentConfirmationViewBackroundColor: UIKit.UIColor
+  @objc public var appointmentConfirmationViewBackgroundColor: UIKit.UIColor
   @objc public var appointmentConfirmButtonTitle: Swift.String
   @objc public var appointmentConfirmButtonCornerRadius: CoreGraphics.CGFloat
   @objc public var appointmentConfirmButtonBackgroundColor: UIKit.UIColor
   @objc public var appointmentConfirmButtonTitleTextColor: UIKit.UIColor
   @objc public var appointmentConfirmButtonTitleFontSize: CoreGraphics.CGFloat
-  @objc public var appointmetnCustomOutputDateFormat: Swift.String
+  @objc public var appointmentCustomOutputDateFormat: Swift.String
   @objc public var appointmentCustomFontName: Swift.String
   @objc public var customDateFormat: Swift.String
   @objc public var enableWelcomeMessageForControlHistoryAPI: Swift.Bool {
@@ -2716,6 +2717,14 @@ public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
     get
   }
 }
+public enum LPKeychainSecureEnclaveKey : Swift.String {
+  case encryptionKey
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
 public struct LPBlurEffects {
   public static let lpLoadingViewEffect: UIKit.UIBlurEffect
 }
@@ -2961,7 +2970,7 @@ extension LPMessagingSDK.Dialog {
   @objc var uniqueHashValue: Swift.Int { get }
   @objc func isThisEqualTo(_ object: LPMessagingSDK.EntityInterface) -> Swift.Bool
 }
-public struct LPStructuredContentSampleData {
+public enum LPStructuredContentSampleData {
   public static func getSCWithTextItem(text: Swift.String = "product name") -> Swift.String
   public static func getSCWithMapItem() -> Swift.String
   public static func getSCWithImageItem(imageURL: Swift.String = "https://static.pexels.com/photos/4641/iphone-smartphone-taking-photo-graffiti.jpg") -> Swift.String
@@ -3135,13 +3144,13 @@ public struct AppointmentSlot : Swift.Encodable {
   public var cellAccessoryLabelTextColor: UIKit.UIColor
   public var cellSelectedColor: UIKit.UIColor
   public var cellImageTintColor: UIKit.UIColor
-  public var confirmationViewBackroundColor: UIKit.UIColor
+  public var confirmationViewBackgroundColor: UIKit.UIColor
   public var confirmButtonTitle: Swift.String
   public var confirmButtonCornerRadius: CoreGraphics.CGFloat
   public var confirmButtonBackgroundColor: UIKit.UIColor
   public var confirmButtonTitleTextColor: UIKit.UIColor
   public var confirmButtonTitleFontSize: CoreGraphics.CGFloat
-  public var customFontName: Swift.String
+  public var customFontName: Swift.String?
   public var customDateFormat: Swift.String
   public var customOutputDateFormat: Swift.String
   public var locale: Foundation.Locale
@@ -3329,7 +3338,7 @@ public enum WeekDaysTransform {
   public var footerArrowImage: UIKit.UIImage?
   public var footerArrowTintColor: UIKit.UIColor
   public var footerArrowBackgroundColor: UIKit.UIColor
-  public var customFontName: Swift.String
+  public var customFontName: Swift.String?
   public var customDateFormat: Swift.String
   public var calendarHeaderHeight: CoreGraphics.CGFloat
   public var calendarHeaderTopMargin: CoreGraphics.CGFloat
@@ -3487,10 +3496,11 @@ extension LPMessagingSDK.LPPickerView : UIKit.UIPickerViewDataSource {
   @objc public func addContentToMessage(text: Swift.String)
   @objc public func getInactiveUserInteractionTimeInterval(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol) -> Foundation.TimeInterval
   @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
+  @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, authParams: LPMessagingSDK.LPAuthenticationParams, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
   @objc public func setAuthenticationParams(authenticationParams: LPMessagingSDK.LPAuthenticationParams, brandID: Swift.String)
   @objc public func sendSDE(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
   @objc public func handleTapForInAppNotification(notification: LPMessagingSDK.LPNotification)
-  @objc public func clearHistory(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol) throws
+  @objc public func clearHistory(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, shouldFetchHistoryOnShowConversation: Swift.Bool = false) throws
   @objc public func printAllLocalizedKeys()
   @objc public func printSupportedLanguages()
   @objc public func printSupportedRegions()
@@ -3531,7 +3541,7 @@ extension LPMessagingSDK.LPPickerView : UIKit.UIPickerViewDataSource {
   @objc deinit
 }
 public protocol LPStructuredContentImageDownloader {
-  func LPStructuredContentNeedsImageToDownload(imageURL: Swift.String, resizeImageSize: CoreGraphics.CGSize, completion: @escaping (_ image: UIKit.UIImage?) -> (), failure: (() -> ())?)
+  func LPStructuredContentNeedsImageToDownload(imageURL: Swift.String, resizeImageSize: CoreGraphics.CGSize, completion: @escaping (_ image: UIKit.UIImage?) -> Swift.Void, failure: (() -> Swift.Void)?)
 }
 extension UIKit.UIColor {
   public class var appointmentListCalendarBlueColor: UIKit.UIColor {
@@ -3836,6 +3846,9 @@ extension LPMessagingSDK.LPPermissionTypes : Swift.RawRepresentable {}
 extension LPMessagingSDK.LPKeychainKey : Swift.Equatable {}
 extension LPMessagingSDK.LPKeychainKey : Swift.Hashable {}
 extension LPMessagingSDK.LPKeychainKey : Swift.RawRepresentable {}
+extension LPMessagingSDK.LPKeychainSecureEnclaveKey : Swift.Equatable {}
+extension LPMessagingSDK.LPKeychainSecureEnclaveKey : Swift.Hashable {}
+extension LPMessagingSDK.LPKeychainSecureEnclaveKey : Swift.RawRepresentable {}
 extension LPMessagingSDK.UserType : Swift.Equatable {}
 extension LPMessagingSDK.UserType : Swift.Hashable {}
 extension LPMessagingSDK.UserType : Swift.RawRepresentable {}

@@ -50,6 +50,7 @@ class MonitoringViewController: UIViewController {
         initLPSDKwith(accountNumber: accountNumber, appInstallIdentifier: appInstallID)
     }
     
+    /// Casts to [String : Any] on SDE have been added due to an Apple change in Swift 5.8. This is not required in other swift versions and apple is to revert in swift 5.9. If any issue is caused in other versions remove the cast.
     @IBAction func getEngagementClicked(_ sender: Any) {
         let entryPoints = ["tel://972737004000",
                            "http://www.liveperson.com",
@@ -57,11 +58,11 @@ class MonitoringViewController: UIViewController {
                            "lang://Eng"]
         
         let engagementAttributes = [
-            ["type": "purchase", "total": 20.0],
+            ["type": "purchase", "total": 20.0] as [String : Any],
             ["type": "lead",
              "lead": ["topic": "luxury car test drive 2015",
                       "value": 22.22,
-                      "leadId": "xyz123"]]
+                      "leadId": "xyz123"] as [String : Any]]
         ]
 
         getEngagement(entryPoints: entryPoints, engagementAttributes: engagementAttributes)
@@ -75,11 +76,11 @@ class MonitoringViewController: UIViewController {
         let engagementAttributes = [
             ["type": "purchase",
              "total": 11.7,
-             "orderId": "DRV1534XC"],
+             "orderId": "DRV1534XC"] as [String : Any],
             ["type": "lead",
              "lead": ["topic": "luxury car test drive 2015",
                       "value": 22.22,
-                      "leadId": "xyz123"]]
+                      "leadId": "xyz123"] as [String : Any]]
         ]
 
         sendSDEwith(entryPoints: entryPoints, engagementAttributes: engagementAttributes)
