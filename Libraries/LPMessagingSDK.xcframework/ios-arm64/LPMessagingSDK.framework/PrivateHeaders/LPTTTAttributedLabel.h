@@ -431,6 +431,8 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
  */
 - (LPTTTAttributedLabelLink *)linkAtPoint:(CGPoint)point;
 
+- (void) callDelegateWithCheckingResult: (NSTextCheckingResult *)result;
+
 @end
 
 /**

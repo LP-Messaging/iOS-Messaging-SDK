@@ -693,6 +693,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// If true, show agent is typing indicator. In accessibility mode, announce when agent is typing.
 /// When false will not show any indication that the agent is typing, and will not announce when agent is typing in accessibility.
 @property (nonatomic) BOOL announceAgentTyping;
+/// If true, then new message won’t interrupt the previous ongoing voice over announcement rather it will be queued to be announced sequentially.
+@property (nonatomic) BOOL announceEventsSequentially;
 /// When true, shows agent  is typing indicator in a message bubble. When false, show indicator under Agent label in navigator bar.
 /// When announceAgentTyping is false, will not show any “is typing” indicator regardless of current value.
 @property (nonatomic) BOOL showAgentTypingInMessageBubble;
@@ -750,7 +752,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// Default value for when user presses and selects a cell from the Calendar View
 @property (nonatomic, strong) UIColor * _Nonnull appointmentCellSelectedColor;
 /// Default color for confirmation view background
-@property (nonatomic, strong) UIColor * _Nonnull appointmentConfirmationViewBackroundColor;
+@property (nonatomic, strong) UIColor * _Nonnull appointmentConfirmationViewBackgroundColor;
 /// Default text for confirmation button
 @property (nonatomic, copy) NSString * _Nonnull appointmentConfirmButtonTitle;
 /// Default radius for confirmation button corner radius
@@ -761,8 +763,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull appointmentConfirmButtonTitleTextColor;
 /// Default size for confirmation button title font
 @property (nonatomic) CGFloat appointmentConfirmButtonTitleFontSize;
-/// Defualt format to present date in output message
-@property (nonatomic, copy) NSString * _Nonnull appointmetnCustomOutputDateFormat;
+/// Default format to present date in output message
+@property (nonatomic, copy) NSString * _Nonnull appointmentCustomOutputDateFormat;
 /// Default
 @property (nonatomic, copy) NSString * _Nonnull appointmentCustomFontName;
 /// Default format to present Dates
@@ -833,13 +835,13 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) CGFloat datePickerCalendarWeekdaysTopMargin;
 /// Default bottom margin for weekdays view
 @property (nonatomic) CGFloat datePickerCalendarWeekdaysBottomMargin;
-/// Default height for weedays view
+/// Default height for weekdays view
 @property (nonatomic) CGFloat datePickerCalendarWeekdaysHeight;
 /// Default textColor for weekdays view
 @property (nonatomic, strong) UIColor * _Nonnull datePickerCalendarWeekdaysTextColor;
 /// Default backgroundColor for weekdays view
 @property (nonatomic, strong) UIColor * _Nonnull datePickerCalendarWeekdaysBackgroundColor;
-/// Default fornt for weekdays view
+/// Default font for weekdays view
 @property (nonatomic, strong) UIFont * _Nonnull datePickerCalendarWeekdaysFont;
 @property (nonatomic) BOOL datePickerShowAdjacentDays;
 /// Default Style for common cell
@@ -1001,13 +1003,13 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) CGFloat maxPhotoHeightSize;
 /// This will allow the image resize to be increased for the image width when consumer sends to agent. Must not be more than 1600 or less than 0.
 @property (nonatomic) CGFloat maxPhotoWidthSize;
-/// Photosharing menu background color.
+/// Photo sharing menu background color.
 @property (nonatomic, strong) UIColor * _Nonnull photosharingMenuBackgroundColor;
-/// Photosharing menu buttons background color.
+/// Photo sharing menu buttons background color.
 @property (nonatomic, strong) UIColor * _Nonnull photosharingMenuButtonsBackgroundColor;
-/// Photosharing menu buttons tint color.
+/// Photo sharing menu buttons tint color.
 @property (nonatomic, strong) UIColor * _Nonnull photosharingMenuButtonsTintColor;
-/// Photosharing menu buttons text color.
+/// Photo sharing menu buttons text color.
 @property (nonatomic, strong) UIColor * _Nonnull photosharingMenuButtonsTextColor;
 /// Camera button color in enabled mode in the conversation screen. Will be presented only if photo sharing feature is enabled.
 @property (nonatomic, strong) UIColor * _Nonnull cameraButtonEnabledColor;
@@ -1056,15 +1058,15 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// note:
 /// Default is .fullscreen. value. We support any current UIModalPresentationStyle except “.none”.
 @property (nonatomic) UIModalPresentationStyle modalPresentationStyle;
-/// The configuration to control our modal presentation stylen for image picker controller within the SDK.
+/// The configuration to control our modal presentation style for image picker controller within the SDK.
 /// note:
 /// Default is .fullscreen. value. We support any current UIModalPresentationStyle except “.none”.
 @property (nonatomic) UIModalPresentationStyle imagePickerPresentationStyle;
-/// The configuration to control our modal presentation stylen for LPDatePicker controller within the SDK.
+/// The configuration to control our modal presentation style for LPDatePicker controller within the SDK.
 /// note:
 /// Default is .fullscreen. value. We support any current UIModalPresentationStyle except “.none”.
 @property (nonatomic) UIModalPresentationStyle datePickerPresentationStyle;
-/// The configuration to control our modal presentation stylen for LPAppointmentList controller within the SDK.
+/// The configuration to control our modal presentation style for LPAppointmentList controller within the SDK.
 /// note:
 /// Default is .fullscreen. value. We support any current UIModalPresentationStyle except “.none”.
 @property (nonatomic) UIModalPresentationStyle appointmentListPresentationStyle;
@@ -1323,7 +1325,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// Default avatar image for Brand.
 /// If setting nil - default avatar image will be used with <code>remoteUserAvatarBackgroundColor</code> and <code>remoteUserAvatarIconColor</code>
 @property (nonatomic, strong) UIImage * _Nullable brandAvatarImage;
-/// the uiimageview content mode for the brand avatar image.
+/// the UIImageView content mode for the brand avatar image.
 /// note:
 /// this will be applied if a brandAvatarImage is set
 @property (nonatomic) UIViewContentMode brandAvatarImageContentMode;
@@ -1553,7 +1555,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// The maximum height of the input text field in pixels. Default is 100 pixels.
 /// Cannot be smaller than 50 pixels.
 @property (nonatomic) CGFloat inputTextViewMaxHeight;
-/// LPConfig is a singletone class,
+/// LPConfig is a singleton class,
 /// When defaultConfiguration is called it initializes the LPConfig
 /// and returns its object with default values.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) LPConfig * _Nonnull defaultConfiguration;)
@@ -1899,6 +1901,19 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// \param failure failure block with an error in case the request fails
 ///
 - (void)getEngagementWithIdentities:(NSArray<LPMonitoringIdentity *> * _Nonnull)identities monitoringParams:(LPMonitoringParams * _Nullable)monitoringParams completion:(void (^ _Nonnull)(LPGetEngagementResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Use this version of the getEngagement function to pass authentication params when using JWE.
+/// Do not pass authentication params for other flows.
+/// \param identities Mandatory array of identity objects of type LPMonitoringIdentity which includes the details on the consumer and issuer
+///
+/// \param monitoringParams an instance of includes optional Array of Entry Points and an optional dictionary of Engagement Attributes
+///
+/// \param authenticationParams an instance of the authentication params containing an authcode or JWE with the issuer display name for multiple IDP scenarios
+///
+/// \param completion completion block with response of type LPGetEngagementResponse. This response includes sessionID and visitorID along with LPEngagementDetails object.
+///
+/// \param failure failure block with an error in case the request fails
+///
+- (void)getEngagementWithIdentities:(NSArray<LPMonitoringIdentity *> * _Nonnull)identities monitoringParams:(LPMonitoringParams * _Nullable)monitoringParams authParams:(LPAuthenticationParams * _Nonnull)authParams completion:(void (^ _Nonnull)(LPGetEngagementResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Allows for manually setting the AuthenticationParams for a consumer seperate from any individual SDK API.
 /// <ul>
 ///   <li>
@@ -1925,9 +1940,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 ///
 - (void)handleTapForInAppNotificationWithNotification:(LPNotification * _Nonnull)notification;
 /// This method deletes all the messages and closed conversation of the related conversation query.
-/// This method throws an error if the conversations history failed to cleared.
+/// This method throws an error if the conversations history failed to be cleared.
 /// Note: clear history is allowed only if there is no open/active conversation related to the passed conversation query.
-- (BOOL)clearHistory:(id <ConversationParamProtocol> _Nonnull)conversationQuery error:(NSError * _Nullable * _Nullable)error;
+/// \param conversationQuery conversation query to clear the conversations
+///
+/// \param shouldFetchHistoryOnShowConversation to determine whether to fetch conversation history again on showing conversation.
+///
+- (BOOL)clearHistory:(id <ConversationParamProtocol> _Nonnull)conversationQuery shouldFetchHistoryOnShowConversation:(BOOL)shouldFetchHistoryOnShowConversation error:(NSError * _Nullable * _Nullable)error;
 /// Prints all localized string’s keys
 - (void)printAllLocalizedKeys;
 /// Prints the SDK supported languages
@@ -2841,6 +2860,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK12NSBouncyView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
