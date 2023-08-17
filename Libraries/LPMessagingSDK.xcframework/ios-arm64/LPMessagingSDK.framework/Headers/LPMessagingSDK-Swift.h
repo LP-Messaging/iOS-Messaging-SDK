@@ -373,6 +373,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK13ConsumerQuery")
 @end
 
 @class TTRModel;
+enum ConversationSource : int16_t;
 
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK12Conversation_")
 @protocol Conversation <EntityInterface>
@@ -394,8 +395,14 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK12Conversation_")
 @property (nonatomic) BOOL isHistoryFilterEnable;
 @property (nonatomic) BOOL presented;
 @property (nonatomic, readonly) BOOL shouldQueryMessages;
+@property (nonatomic) enum ConversationSource conversationSource;
 @end
 
+
+typedef SWIFT_ENUM(int16_t, ConversationSource, open) {
+  ConversationSourceINCA = 0,
+  ConversationSourceUMS = 1,
+};
 
 
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")
@@ -455,6 +462,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK4File_")
 @property (nonatomic, strong) id <Message> _Nullable ownerMessage;
 @property (nonatomic, copy) NSString * _Nullable swiftRelativePath;
 @property (nonatomic, strong) LPFileMetaDataContainer * _Nullable metaDataContainer;
+@property (nonatomic) id _Nullable backgroundTaskIdentifier;
 @property (nonatomic, strong) UIImage * _Nullable thumbnailImage;
 @property (nonatomic, copy) void (^ _Nullable completion)(void);
 @property (nonatomic, copy) void (^ _Nullable failure)(NSError * _Nonnull);
@@ -765,8 +773,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) CGFloat appointmentConfirmButtonTitleFontSize;
 /// Default format to present date in output message
 @property (nonatomic, copy) NSString * _Nonnull appointmentCustomOutputDateFormat;
-/// Default
-@property (nonatomic, copy) NSString * _Nonnull appointmentCustomFontName;
+/// Default appointment list font name, when not set system will be used
+@property (nonatomic, copy) NSString * _Nullable appointmentCustomFontName;
 /// Default format to present Dates
 @property (nonatomic, copy) NSString * _Nonnull customDateFormat;
 /// Will control if Welcome Message should be displayed if Control History API is being used
@@ -820,7 +828,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// Default background color for DatePicker Month to Month Arrow (from -> to).
 @property (nonatomic, strong) UIColor * _Nonnull datePickerFooterArrowBackgroundColor;
 /// Generic Properties
-@property (nonatomic, copy) NSString * _Nonnull datePickerCustomFontName;
+@property (nonatomic, copy) NSString * _Nullable datePickerCustomFontName;
 /// Calendar Properties
 /// Default calendar background color
 @property (nonatomic, strong) UIColor * _Nonnull datePickerCalendarBackgroundColor;
@@ -1824,6 +1832,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 ///   </li>
 /// </ul>
 - (void)reconnect:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationParams:(LPAuthenticationParams * _Nonnull)authenticationParams;
+/// Sets the welcome message of SDK, This welcome message overrides the welcome message provided with Conversation Parameters
+/// warning:
+/// Since this might update UI depending on changes, It should be called on main thread
+/// \param message LPWelcomeMessage to be used for welcome message
+///
+- (void)setWelcomeMessage:(LPWelcomeMessage * _Nonnull)message;
 /// This method changes the state of the action menu of the conversation for brandID.
 - (void)toggleChatActions:(NSString * _Nonnull)accountID sender:(UIBarButtonItem * _Nullable)sender;
 /// This method sets user details for the consumer of a brand.
@@ -2487,12 +2501,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
-
 @class UIGestureRecognizer;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK))
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer * _Nonnull)gestureRecognizer SWIFT_WARN_UNUSED_RESULT;
 @end
+
 
 
 
