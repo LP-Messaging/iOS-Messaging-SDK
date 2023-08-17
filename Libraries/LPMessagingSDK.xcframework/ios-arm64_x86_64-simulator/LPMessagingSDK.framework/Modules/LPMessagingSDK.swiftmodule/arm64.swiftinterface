@@ -78,6 +78,7 @@ public enum FileState : Swift.String {
   @objc var ownerMessage: LPMessagingSDK.Message? { get set }
   @objc var swiftRelativePath: Swift.String? { get set }
   @objc var metaDataContainer: LPMessagingSDK.LPFileMetaDataContainer? { get set }
+  @objc var backgroundTaskIdentifier: Any? { get set }
   @objc var thumbnailImage: UIKit.UIImage? { get set }
   @objc var completion: (() -> ())? { get set }
   @objc var failure: ((_ error: Foundation.NSError) -> ())? { get set }
@@ -632,6 +633,15 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
     get
   }
 }
+@objc public enum ConversationSource : Swift.Int16 {
+  case INCA
+  case UMS
+  public init?(rawValue: Swift.Int16)
+  public typealias RawValue = Swift.Int16
+  public var rawValue: Swift.Int16 {
+    get
+  }
+}
 public enum ConversationState : Swift.String {
   case Open
   case Close
@@ -675,6 +685,7 @@ public enum TTRType : Swift.String {
   @objc var isHistoryFilterEnable: Swift.Bool { get set }
   @objc var presented: Swift.Bool { get set }
   @objc var shouldQueryMessages: Swift.Bool { get }
+  @objc var conversationSource: LPMessagingSDK.ConversationSource { get set }
 }
 extension LPMessagingSDK.Conversation {
   public var conversationMessages: Foundation.NSOrderedSet {
@@ -1851,7 +1862,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var appointmentConfirmButtonTitleTextColor: UIKit.UIColor
   @objc public var appointmentConfirmButtonTitleFontSize: CoreGraphics.CGFloat
   @objc public var appointmentCustomOutputDateFormat: Swift.String
-  @objc public var appointmentCustomFontName: Swift.String
+  @objc public var appointmentCustomFontName: Swift.String?
   @objc public var customDateFormat: Swift.String
   @objc public var enableWelcomeMessageForControlHistoryAPI: Swift.Bool {
     @objc get
@@ -1877,7 +1888,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var datePickerFooterArrowImage: UIKit.UIImage?
   @objc public var datePickerFooterArrowTintColor: UIKit.UIColor
   @objc public var datePickerFooterArrowBackgroundColor: UIKit.UIColor
-  @objc public var datePickerCustomFontName: Swift.String
+  @objc public var datePickerCustomFontName: Swift.String?
   @objc public var datePickerCalendarBackgroundColor: UIKit.UIColor
   @objc public var datePickerCalendarHeaderHeight: CoreGraphics.CGFloat
   @objc public var datePickerCalendarHeaderTopMargin: CoreGraphics.CGFloat
@@ -3479,6 +3490,7 @@ extension LPMessagingSDK.LPPickerView : UIKit.UIPickerViewDataSource {
   @objc @available(iOS, deprecated: 9.3.5, obsoleted: 14.0.0, message: "Use reconnect(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams) instead")
   public func reconnect(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationCode: Swift.String)
   @objc public func reconnect(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams)
+  @objc public func setWelcomeMessage(_ message: LPMessagingSDK.LPWelcomeMessage)
   @objc public func toggleChatActions(_ accountID: Swift.String, sender: UIKit.UIBarButtonItem? = nil)
   @objc public func setUserProfile(_ lpuser: LPMessagingSDK.LPUser, brandID: Swift.String)
   @objc public func getConversationBrandQuery(_ brandID: Swift.String, campaignInfo: LPMessagingSDK.LPCampaignInfo? = nil) -> LPMessagingSDK.ConversationParamProtocol
@@ -3703,6 +3715,9 @@ extension LPMessagingSDK.ConversationQueryType : Swift.RawRepresentable {}
 extension LPMessagingSDK.LPLanguagesKeys : Swift.Equatable {}
 extension LPMessagingSDK.LPLanguagesKeys : Swift.Hashable {}
 extension LPMessagingSDK.LPLanguagesKeys : Swift.RawRepresentable {}
+extension LPMessagingSDK.ConversationSource : Swift.Equatable {}
+extension LPMessagingSDK.ConversationSource : Swift.Hashable {}
+extension LPMessagingSDK.ConversationSource : Swift.RawRepresentable {}
 extension LPMessagingSDK.ConversationState : Swift.Equatable {}
 extension LPMessagingSDK.ConversationState : Swift.Hashable {}
 extension LPMessagingSDK.ConversationState : Swift.RawRepresentable {}
