@@ -49,6 +49,6 @@ framework module LPMessagingSDK {
 }
 
 module LPMessagingSDK.Swift {
-    header "LPMessagingSDK-Swift.h"
-    requires objc
+  header "LPMessagingSDK-Swift.h"
+  requires objc
 }

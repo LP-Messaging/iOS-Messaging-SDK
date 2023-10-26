@@ -278,7 +278,7 @@ extern "C" {
     enum {
         kCCKeySizeAES128          = 16,
         kCCKeySizeAES192          = 24,
-        kCCKeySizeAES256          = 32,
+        RNCryptor_kCCKeySizeAES256 = 32,
         kCCKeySizeDES             = 8,
         kCCKeySize3DES            = 24,
         kCCKeySizeMinCAST         = 5,
