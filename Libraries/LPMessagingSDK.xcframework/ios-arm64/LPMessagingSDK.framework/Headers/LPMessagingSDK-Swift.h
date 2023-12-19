@@ -2898,12 +2898,14 @@ typedef SWIFT_ENUM(NSInteger, LPWelcomeMessageError, open) {
 };
 static NSString * _Nonnull const LPWelcomeMessageErrorDomain = @"LPMessagingSDK.LPWelcomeMessage.LPWelcomeMessageError";
 
+@class QuickReplyStyle;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK22LPWelcomeMessageOption")
 @interface LPWelcomeMessageOption : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull value;
 @property (nonatomic, readonly, copy) NSString * _Nonnull displayName;
-- (nonnull instancetype)initWithValue:(NSString * _Nonnull)value displayName:(NSString * _Nonnull)displayName OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, strong) QuickReplyStyle * _Nullable quickReplyStyle;
+- (nonnull instancetype)initWithValue:(NSString * _Nonnull)value displayName:(NSString * _Nonnull)displayName quickReplyStyle:(QuickReplyStyle * _Nullable)quickReplyStyle OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3185,6 +3187,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL supportsSecureCoding;)
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
 
 
 

@@ -154,7 +154,7 @@
 		</data>
 		<key>Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		HNpFSuld+wb524/ZwcWFS+eUXjQ=
+		2g/S5iXR+MN4Aa3A0AD0cZU/qq8=
 		</data>
 		<key>Headers/LPMessagingSDK.h</key>
 		<data>
@@ -162,7 +162,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		oikpzfh4eWLgVxGJtRFz/xF5No8=
+		BrVlpyMMVeftdUbzoPE/ejUBRZc=
 		</data>
 		<key>InputTextView.nib</key>
 		<data>
@@ -238,11 +238,11 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		X2NxTQDLVkDYKgRQrMSiNOdvpH4=
+		XxP7QkSumECsoh944rf6R+n7ZKY=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		jvArdCu3Ngxa8Ct2zRv0UPx6kMo=
+		fIpFtSQ4tVzG6HICjQ9VA6P5YXA=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -250,19 +250,19 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		jvArdCu3Ngxa8Ct2zRv0UPx6kMo=
+		fIpFtSQ4tVzG6HICjQ9VA6P5YXA=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		kxc0qGBIOxseU57zbiymm3xcKss=
+		d16Gc7NUQUlY8uCWRUAuZzUyMZk=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		X2NxTQDLVkDYKgRQrMSiNOdvpH4=
+		XxP7QkSumECsoh944rf6R+n7ZKY=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		jQCRRuANLPpn/SjAXB1IWsfA+nA=
+		JD2SzjRfcKiSUu/bMf4uBugZFaY=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -270,11 +270,11 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		jQCRRuANLPpn/SjAXB1IWsfA+nA=
+		JD2SzjRfcKiSUu/bMf4uBugZFaY=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		2czrZ5bFeDgW1rqpVQLNVa4Hzl8=
+		u8NPNg6AVqslyizJacSfxJlThF4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -406,7 +406,7 @@
 		</data>
 		<key>RemoteFileTableViewCell.nib</key>
 		<data>
-		NvhaopFJ6cOqWVUif4w4Aq58r5g=
+		CrgrJcwzmcp74e5KfDt/RlztcBg=
 		</data>
 		<key>RemoteMessageHyperlinkTableViewCell.nib</key>
 		<data>
@@ -418,7 +418,7 @@
 		</data>
 		<key>RemoteMessageQuickReplyTableViewCell.nib</key>
 		<data>
-		lqDomOvokTs1nkqsFMkjSRaiTz0=
+		GCkpm43ulA58vFcDl+ZNtCf4uDU=
 		</data>
 		<key>RemoteMessageSecureFormTableViewCell.nib</key>
 		<data>
@@ -426,11 +426,11 @@
 		</data>
 		<key>RemoteMessageStructuredContentContainerCell.nib</key>
 		<data>
-		2m994YweUOS79dWsHVoVpZN05t8=
+		vLlj976CiArPgrXz32+FiakWB3c=
 		</data>
 		<key>RemoteMessageTableViewCell.nib</key>
 		<data>
-		T0SOQsG7Hr+JOtpaGsUYFSFiwPU=
+		GnFg/nITRq31Rlp/Ytvc7jgxhhY=
 		</data>
 		<key>RemoteSystemMessageTableViewCell.nib</key>
 		<data>
@@ -1160,7 +1160,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rYoKwSFTJadyd09GY1yjyKJijmnxw+Whrn35LwrsM28=
+			x+9cGUFYvVR4oGgKo4lsW51D0gb2Y7NUkZ/LesYTSkU=
 			</data>
 		</dict>
 		<key>Headers/LPMessagingSDK.h</key>
@@ -1300,14 +1300,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			COzZPrGQxC03Rt3CUYfpjlGX/Pxiorgd9ywmbLYtLlM=
+			3ewL0sN7HSbtG4p/b1RBkuCbLs5y8v+mtyngtdRH048=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EA3diKcgST9an+QmH8CB+Za7y07KVf4+t/7BJXMYVSQ=
+			zmvRDrkqPrJo8PMYHJtf0iwTLNYCt+LKCjCTNCIUNfU=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -1321,28 +1321,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			EA3diKcgST9an+QmH8CB+Za7y07KVf4+t/7BJXMYVSQ=
+			zmvRDrkqPrJo8PMYHJtf0iwTLNYCt+LKCjCTNCIUNfU=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Iwyr1R+ZKPn53QKtDHetlCmodwcOYPGdU+L6yPU4Y0A=
+			XMO4GhbSuDG1XLiiOAaO1FNPW9T+moW7VJ8Aj2DX/fE=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			COzZPrGQxC03Rt3CUYfpjlGX/Pxiorgd9ywmbLYtLlM=
+			3ewL0sN7HSbtG4p/b1RBkuCbLs5y8v+mtyngtdRH048=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VR61cj2EsGOcEdvrheKcQcq85LTq21bGoRVmSfgHSd8=
+			ERFhtG4ZvjeWXZam9j+yBKYneKcnZE86vDa+Xq9oexo=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -1356,14 +1356,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VR61cj2EsGOcEdvrheKcQcq85LTq21bGoRVmSfgHSd8=
+			ERFhtG4ZvjeWXZam9j+yBKYneKcnZE86vDa+Xq9oexo=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Pr9WSqWmfF1+Ho7w9h9LnbapXSbNPJTnriU5F3/mS3M=
+			QnAZQwoYAPPxq9Jyuy7xBMzKCmnQZYmqakPG/Hbtw80=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -1594,7 +1594,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Ehw48gC38y9VhRl3UoaBm0gJQhBlnuFwYu6ie8D55RY=
+			b1VthjHhejUTHUdnGZgr4BHRFa+RFE8XSZhKxcSaioM=
 			</data>
 		</dict>
 		<key>RemoteMessageHyperlinkTableViewCell.nib</key>
@@ -1615,7 +1615,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mSE1kk8E+eieDOF30YDZHrIEDal76O9tC2b7x1FpkRo=
+			FCob2+iuSFS7ER46joyZnVV/wqKTI7Rc9mMzNhhD398=
 			</data>
 		</dict>
 		<key>RemoteMessageSecureFormTableViewCell.nib</key>
@@ -1629,14 +1629,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HA8kbj4RBv3dQNJNASHZaUasbbxMkn0mysPHZ0mnhzg=
+			Wa0qxy8Xs95kXMUQ8w8tOKgvIFPwstTGXguc0rSRrFE=
 			</data>
 		</dict>
 		<key>RemoteMessageTableViewCell.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			gxZTVeuQj6EXmirNR5yf3hyEsh7lBUL/9MKihRpYz9E=
+			Z82ZQpKTAx1C6cy6m0RA/Ve25knF/KaYDSoG8Eccbac=
 			</data>
 		</dict>
 		<key>RemoteSystemMessageTableViewCell.nib</key>

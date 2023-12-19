@@ -16,6 +16,7 @@ import Foundation
 import LocalAuthentication
 import MapKit
 import MessageUI
+import MetricKit
 import Photos
 import QuartzCore
 import QuickLook
@@ -39,7 +40,7 @@ public enum QuickReplyStyleSize : Swift.String {
     get
   }
 }
-@objc @_hasMissingDesignatedInitializers public class QuickReplyStyle : ObjectiveC.NSObject, Foundation.NSSecureCoding, Swift.Encodable {
+@objc public class QuickReplyStyle : ObjectiveC.NSObject, Foundation.NSSecureCoding, Swift.Encodable {
   @objc public class var supportsSecureCoding: Swift.Bool {
     @objc get
   }
@@ -50,6 +51,7 @@ public enum QuickReplyStyleSize : Swift.String {
   public var borderRadius: CoreFoundation.CGFloat?
   public var backgroundColor: UIKit.UIColor?
   public var size: Swift.String?
+  public init(bold: Swift.Bool? = false, italic: Swift.Bool? = false, color: UIKit.UIColor? = nil, borderColor: UIKit.UIColor? = nil, borderRadius: CoreFoundation.CGFloat? = nil, backgroundColor: UIKit.UIColor? = nil, size: LPMessagingSDK.QuickReplyStyleSize? = nil)
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   @objc public func encode(with aCoder: Foundation.NSCoder)
   public func encode(to encoder: Swift.Encoder) throws
@@ -283,6 +285,9 @@ extension LPMessagingSDK.JWS : LPMessagingSDK.CompactDeserializable {
     get
   }
   public init(from deserializer: LPMessagingSDK.CompactDeserializer) throws
+}
+extension UIKit.UIDevice {
+  @_Concurrency.MainActor(unsafe) public static let modelIdentifier: Swift.String
 }
 public enum QuickReplyJsonKeys : Swift.String {
   case quickReplies
@@ -1915,7 +1920,8 @@ public enum JOSESwiftError : Swift.Error {
 @objc final public class LPWelcomeMessageOption : ObjectiveC.NSObject {
   @objc final public let value: Swift.String
   @objc final public let displayName: Swift.String
-  @objc public init(value: Swift.String, displayName: Swift.String)
+  @objc final public let quickReplyStyle: LPMessagingSDK.QuickReplyStyle?
+  @objc public init(value: Swift.String, displayName: Swift.String, quickReplyStyle: LPMessagingSDK.QuickReplyStyle? = nil)
   @objc deinit
 }
 @objc final public class LPWelcomeMessage : ObjectiveC.NSObject {
@@ -2031,6 +2037,7 @@ public enum LPFlowTag : Swift.CustomStringConvertible, Swift.CaseIterable {
   case QUICK_REPLY
   case WELCOME_MESSAGE
   case INITIAL_MESSAGE
+  case TELEMETRY
   public static func == (a: LPMessagingSDK.LPFlowTag, b: LPMessagingSDK.LPFlowTag) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public typealias AllCases = [LPMessagingSDK.LPFlowTag]
@@ -2814,6 +2821,7 @@ public enum CSDSService : Swift.String {
   case accountConfigReadWrite
   case accountConfigReadOnly
   case shark
+  case otelDomainConsumerSdk
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
