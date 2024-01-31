@@ -22,6 +22,7 @@ import QuartzCore
 import QuickLook
 import SafariServices
 import Security
+import Speech
 import Swift
 import SystemConfiguration
 import UIKit
@@ -755,6 +756,12 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case collaborationCallJoined
   case collaborationCallCancelledInvitation
   case collaborationCallConsumerLeft
+  case accessibilityVoiceRecognitionButton
+  case accessibilityVoiceRecognitionButtonActivationHint
+  case accessibilityVoiceRecognitionButtonDeactivationHint
+  case accessibilityVoiceRecognitionButtonErrorHint
+  case accessibilityVoiceRecognitionInsertedText
+  case voiceRecognitionPlaceHolder
   public init?(rawValue: Swift.String)
   public typealias AllCases = [LPMessagingSDK.LPLanguagesKeys]
   public typealias RawValue = Swift.String
@@ -1477,6 +1484,9 @@ public enum LinkPreviewState : Swift.String {
     get
   }
 }
+@objc public protocol MessageDelegate {
+  @objc func updateMessageSendingStatus(message: LPMessagingSDK.Message)
+}
 @objc public protocol Message : LPMessagingSDK.EntityInterface {
   @objc var timestamp: Foundation.Date? { get set }
   @objc var content: Swift.String { get set }
@@ -1505,6 +1515,7 @@ public enum LinkPreviewState : Swift.String {
   @objc var isFirstUnreadMessage: Swift.Bool { get set }
   @objc var unreadMessageDividerString: Swift.String? { get set }
   @objc var sectionIdentifier: Swift.String? { get }
+  @objc var messageDelegate: LPMessagingSDK.MessageDelegate? { get set }
 }
 extension LPMessagingSDK.Message {
   public var distributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType {
@@ -2098,6 +2109,8 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var retrieveAssignedAgentFromLastClosedConversation: Swift.Bool
   @objc public var recordingDurationLimit: Swift.Double
   @objc public var enableAudioSharing: Swift.Bool
+  @objc public var enableSpeechRecognition: Swift.Bool
+  @objc public var speechRecognitionInputDurationInSeconds: Swift.Double
   @objc public var maxNumberOfSavedAudioFilesOnDisk: Swift.UInt
   @objc public var hideUIUntilAuthenticated: Swift.Bool
   @objc public var shouldPerformStepUp: Swift.Bool
@@ -2524,6 +2537,14 @@ public enum QuickReplyActionType : Swift.String {
     @objc get
     @objc set
   }
+  @objc public var offlineMessagingEnabled: Swift.Bool
+  @objc public var pcsBehaviorForOfflineMessages: Swift.UInt
+  @objc public var offlineLoaderColor: UIKit.UIColor
+  @objc public var offlineLoaderBackgroundColor: UIKit.UIColor
+  @objc public var offlineLoaderCornerRadius: CoreFoundation.CGFloat
+  @objc public var offlineLoaderWidthPercentage: CoreFoundation.CGFloat
+  @objc public var offlineLoaderHeight: CoreFoundation.CGFloat
+  @objc public var offlineLoaderAnimationSpeed: CoreFoundation.CGFloat
   @objc public static var defaultConfiguration: LPMessagingSDK.LPConfig
   @objc public func resetToDefaultConfiguration()
   @objc override dynamic public func setValue(_ value: Any?, forUndefinedKey key: Swift.String)
@@ -3028,6 +3049,7 @@ public struct LPColor {
   public static let lpClear: UIKit.UIColor
   public static let lpLightGray: UIKit.UIColor
   public static let lpLightGray2: UIKit.UIColor
+  public static let lpBarBlue: UIKit.UIColor
   public static let lpGray: UIKit.UIColor
   public static let lpGray2: UIKit.UIColor
   public static let lpGray3: UIKit.UIColor
