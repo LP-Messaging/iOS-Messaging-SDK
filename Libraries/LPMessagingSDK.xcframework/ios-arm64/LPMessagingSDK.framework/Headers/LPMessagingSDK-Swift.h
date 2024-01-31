@@ -669,6 +669,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) NSTimeInterval recordingDurationLimit;
 /// Enable or disable audio sharing feature. True is enabled.
 @property (nonatomic) BOOL enableAudioSharing;
+/// Enable or disable speech dictation
+@property (nonatomic) BOOL enableSpeechRecognition;
+/// Timer duration of the speech dictation when activated
+@property (nonatomic) double speechRecognitionInputDurationInSeconds;
 /// Max number of allowed saved audio files on disk. This refers only to audio files.
 /// The validation of allowed max number of documents will be when showing and removing conversation.
 @property (nonatomic) NSUInteger maxNumberOfSavedAudioFilesOnDisk;
@@ -1650,6 +1654,25 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// The maximum height of the input text field in pixels. Default is 100 pixels.
 /// Cannot be smaller than 50 pixels.
 @property (nonatomic) CGFloat inputTextViewMaxHeight;
+/// If enabled then user will be able to compose and send messages straight away even the conversation history synchronization is in progress. These messages will be stored offline on device storage and will be sent once conversation history is fully synced and socket is open.
+@property (nonatomic) BOOL offlineMessagingEnabled;
+/// It defines how offline message should be treated if main dialog of conversation is closed and post conversation survey has started.
+/// 0 - do nothing, just send offline messages to the same dialog
+/// 1 - remove offline messages from dialog and do not send them to UMS, continue with PCS dialog
+/// 2 - resolve active PCS dialog and send offline messages to a new conversation
+@property (nonatomic) NSUInteger pcsBehaviorForOfflineMessages;
+/// Color to apply to the offline messaging loader bar
+@property (nonatomic, strong) UIColor * _Nonnull offlineLoaderColor;
+/// Color to apply to the offline messaging loader bar
+@property (nonatomic, strong) UIColor * _Nonnull offlineLoaderBackgroundColor;
+/// Corner radius to apply to the offline messaging loader bar
+@property (nonatomic) CGFloat offlineLoaderCornerRadius;
+/// Offline messaging loader bar width percentage (0 = no width, 1 = Maximum width)
+@property (nonatomic) CGFloat offlineLoaderWidthPercentage;
+/// Offline messaging loader bar height
+@property (nonatomic) CGFloat offlineLoaderHeight;
+/// Offline messaging loader bar animation speed (in seconds)
+@property (nonatomic) CGFloat offlineLoaderAnimationSpeed;
 /// LPConfig is a singleton class,
 /// When defaultConfiguration is called it initializes the LPConfig
 /// and returns its object with default values.
@@ -2607,12 +2630,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
-
 @class UIGestureRecognizer;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK))
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer * _Nonnull)gestureRecognizer SWIFT_WARN_UNUSED_RESULT;
 @end
+
 
 
 
@@ -2928,6 +2951,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK11LinkPreview_")
 @property (nonatomic, strong) UIImage * _Nullable _image;
 @end
 
+@protocol MessageDelegate;
 
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK7Message_")
 @protocol Message <EntityInterface>
@@ -2959,6 +2983,13 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK7Message_")
 @property (nonatomic) BOOL isFirstUnreadMessage;
 @property (nonatomic, copy) NSString * _Nullable unreadMessageDividerString;
 @property (nonatomic, readonly, copy) NSString * _Nullable sectionIdentifier;
+@property (nonatomic, strong) id <MessageDelegate> _Nullable messageDelegate;
+@end
+
+
+SWIFT_PROTOCOL("_TtP14LPMessagingSDK15MessageDelegate_")
+@protocol MessageDelegate
+- (void)updateMessageSendingStatusWithMessage:(id <Message> _Nonnull)message;
 @end
 
 
@@ -3187,6 +3218,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL supportsSecureCoding;)
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
 
 
 
