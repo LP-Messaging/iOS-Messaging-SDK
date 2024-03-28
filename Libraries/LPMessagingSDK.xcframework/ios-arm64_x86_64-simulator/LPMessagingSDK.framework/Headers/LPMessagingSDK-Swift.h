@@ -267,6 +267,7 @@ typedef SWIFT_ENUM(NSInteger, AMSState, open) {
   AMSStateVALID_USERID = 6,
   AMSStateREADY = 7,
   AMSStateREADY_WITH_DATA = 8,
+/// errors
   AMSStateSDK_ERROR = -1,
   AMSStateGENERAL_ERROR = -2,
   AMSStateNETWORK_UNREACHABLE = -3,
@@ -393,6 +394,12 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK8Campaign_")
 @property (nonatomic, strong) id <Brand> _Nonnull ownerBrand;
 @end
 
+typedef SWIFT_ENUM(NSUInteger, CarouselNavigationButtonsAppearance, open) {
+  CarouselNavigationButtonsAppearanceAlwaysHide = 0,
+  CarouselNavigationButtonsAppearanceShowOnVoiceOver = 1,
+  CarouselNavigationButtonsAppearanceAlwaysShow = 2,
+};
+
 typedef SWIFT_ENUM(NSInteger, CheckmarksState, open) {
   CheckmarksStateSentOnly = 1,
   CheckmarksStateSentAndAccepted = 2,
@@ -421,6 +428,7 @@ enum ConversationSource : int16_t;
 
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK12Conversation_")
 @protocol Conversation <EntityInterface>
+/// Attributes
 @property (nonatomic, copy) NSString * _Nonnull uid;
 @property (nonatomic, copy) NSDate * _Nonnull creationDate;
 @property (nonatomic, copy) NSString * _Nonnull handlerId;
@@ -432,6 +440,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK12Conversation_")
 @property (nonatomic, copy) NSString * _Nullable type;
 @property (nonatomic, copy) NSString * _Nullable consumerId;
 @property (nonatomic, strong) TTRModel * _Nullable ttrModel;
+/// Relationship
 @property (nonatomic, strong) id <Brand> _Nonnull ownerBrand;
 @property (nonatomic, strong) NSSet * _Nonnull participants;
 @property (nonatomic, strong) NSSet * _Nonnull conversationDialogs;
@@ -481,6 +490,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK6Dialog_")
 @property (nonatomic, copy) NSString * _Nonnull stateRaw;
 @property (nonatomic, copy) NSString * _Nullable uid;
 @property (nonatomic, copy) NSString * _Nonnull handlerId;
+/// Relationship
 @property (nonatomic, strong) id <Conversation> _Nonnull ownerConversation;
 @property (nonatomic, strong) NSSet * _Nonnull participants;
 @property (nonatomic, strong) NSOrderedSet * _Nonnull dialogMessages;
@@ -1287,16 +1297,39 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonBorderColor;
 /// Used to set the text color for Structure Content elements of button type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonTextColor;
+/// Used to set the button area background color in structured content cards
+@property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonBackgroundColor;
 /// Used to set the text color for Structured Content elements of link button type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentLinkButtonTextColor;
 /// Used to set the text color for Structure Content elements of text type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentTextColor;
 /// Used to set the width constraint for Structured Content elements of button type
 @property (nonatomic) CGFloat structuredButtonWidthConstant;
+/// Used to set card background without needing to pass style in the JSON
+@property (nonatomic, strong) UIColor * _Nonnull structuredContentCardBackgroundColor;
 /// Structured content loading image when images are being fetched/loaded
 @property (nonatomic, strong) UIImage * _Nullable structuredContentLoadingImage;
 /// Structured content loading image when images failed to fetched/loaded
 @property (nonatomic, strong) UIImage * _Nullable structuredContentBrokenImage;
+/// Structured Content navigation button - UInt Enum value of the behavior. Default alwaysHide.
+/// alwaysHide - never show navigation buttons
+/// showOnVoiceOver - show navigation buttons only if accessibility mode is enabled
+/// alwaysShow - always show navigation buttons.
+@property (nonatomic) enum CarouselNavigationButtonsAppearance carouselNavigationButtonsAppearance;
+/// Navigation buttons background color
+@property (nonatomic, strong) UIColor * _Nonnull carouselNavigationButtonBackgroundColor;
+/// Navigation buttons size
+@property (nonatomic) CGFloat carouselNavigationButtonSize;
+/// Navigation buttons corner radius
+@property (nonatomic) CGFloat carouselNavigationButtonCornerRadius;
+/// Navigation buttons margins from left and right
+@property (nonatomic) CGFloat carouselNavigationButtonsMargin;
+/// Navigation buttons icon color
+@property (nonatomic, strong) UIColor * _Nonnull carouselNavigationButtonIconColor;
+/// Previous navigation button icon, default is “chevron.left.circle.fill”, SF Symbol (systemName).
+@property (nonatomic, strong) UIImage * _Nullable carouselNavigationMoveToPreviousIcon;
+/// Next navigation button icon, default is “chevron.right.circle.fill”, SF Symbol (systemName).
+@property (nonatomic, strong) UIImage * _Nullable carouselNavigationMoveToNextIcon;
 /// Corner radius for submit button.
 @property (nonatomic) double csatSubmitButtonCornerRadius;
 /// Corner radius for (Yes/No) buttons.
@@ -1661,6 +1694,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// 1 - remove offline messages from dialog and do not send them to UMS, continue with PCS dialog
 /// 2 - resolve active PCS dialog and send offline messages to a new conversation
 @property (nonatomic) NSUInteger pcsBehaviorForOfflineMessages;
+/// If enabled then welcome message will be injected after offline messages are published for a new conversation.
+@property (nonatomic) BOOL welcomeMessageEnabledForOfflineMessaging;
 /// Color to apply to the offline messaging loader bar
 @property (nonatomic, strong) UIColor * _Nonnull offlineLoaderColor;
 /// Color to apply to the offline messaging loader bar
@@ -1695,6 +1730,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) LPConfig * _Nonnull de
 + (void)printAllConfigurations;
 @end
 
+/// For SDK API External Use
 typedef SWIFT_ENUM(NSInteger, LPConversationCloseReason, open) {
   LPConversationCloseReasonAgent = 0,
   LPConversationCloseReasonConsumer = 1,
@@ -1820,9 +1856,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 
 SWIFT_CLASS("_TtC14LPMessagingSDK23LPGetEngagementResponse")
 @interface LPGetEngagementResponse : NSObject
+/// Optional Engagement Details response in case received from the server, per the Engagement’s request
 @property (nonatomic, copy) NSArray<LPEngagementDetails *> * _Nullable engagementDetails;
+/// Engagement’s request
 @property (nonatomic, copy) NSString * _Nullable sessionId;
 @property (nonatomic, copy) NSString * _Nullable visitorId;
+/// PageID of the Engagement. If not sending one in request, a new one will be generated from server in the
 @property (nonatomic, copy) NSString * _Nullable pageId;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -2427,9 +2466,11 @@ SWIFT_CLASS("_TtC14LPMessagingSDK20LPMonitoringIdentity")
 
 
 /// <h1>LPMonitoringInitParams</h1>
-/// An initialization parameter of type LPMonitoringInitParams. This object contains all relevant parameters for initialization of the SDK for an account, including app install id.
+/// An initialization parameter of type LPMonitoringInitParams. This object contains all relevant parameters for initialization of the SDK
+/// for an account, including app install id.
 /// note:
-/// App install ID or ‘appInstallId’ is generated when setting up LiveEngage Site for Unauthenticated messaging. Please see Support for more details.
+/// App install ID or ‘appInstallId’ is generated when setting up LiveEngage Site for Unauthenticated messaging.
+/// Please see Support for more details.
 SWIFT_CLASS("_TtC14LPMessagingSDK22LPMonitoringInitParams")
 @interface LPMonitoringInitParams : NSObject
 /// Init LPMonitoringInitParams with mandatory params
@@ -2630,6 +2671,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
+
 @class UIGestureRecognizer;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK))
@@ -2639,16 +2681,16 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
-@interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK)) <UIGestureRecognizerDelegate>
-@end
-
-
 @class UIScrollView;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK)) <UIScrollViewDelegate>
 - (void)scrollViewWillBeginDragging:(UIScrollView * _Nonnull)scrollView;
 - (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView * _Nonnull)scrollView;
+@end
+
+
+@interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK)) <UIGestureRecognizerDelegate>
 @end
 
 
@@ -2969,9 +3011,14 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK7Message_")
 @property (nonatomic, strong) NSOrderedSet * _Nullable customBoards;
 @property (nonatomic, copy) NSString * _Nullable linkPreviewState;
 @property (nonatomic, strong) LPStructuredContentItemContainer * _Nullable structuredContentItemContainer;
+/// flag shows that message presented/must be visible to user
+/// appear from ConsumerDataModel_17 version
 @property (nonatomic) BOOL presented;
-/// Timestamp when started sending message by user. By default it is the message creation timestamp, when the user tapped ‘Send’. If the message was resent by user, this value will be updated, but not stored in DB.
+/// Timestamp when started sending message by user. By default it is the message creation timestamp, when the user tapped ‘Send’. If the
+/// message was resent by user, this value will be updated, but not stored in DB.
 @property (nonatomic, copy) NSDate * _Nullable _lastSendingTimestamp;
+/// We use this field to see how we received this message; either by a query or in realtime. We don’t care to save this, that’s why it’s
+/// not NSManaged. This data is only important for this run.
 @property (nonatomic, copy) NSString * _Nullable distributionTypeRaw;
 @property (nonatomic) NSInteger carouselCurrentPage;
 @property (nonatomic, copy) void (^ _Nullable boardsBuildCompleted)(NSArray<id <CustomBoard>> * _Nonnull);
@@ -3583,6 +3630,7 @@ typedef SWIFT_ENUM(NSInteger, AMSState, open) {
   AMSStateVALID_USERID = 6,
   AMSStateREADY = 7,
   AMSStateREADY_WITH_DATA = 8,
+/// errors
   AMSStateSDK_ERROR = -1,
   AMSStateGENERAL_ERROR = -2,
   AMSStateNETWORK_UNREACHABLE = -3,
@@ -3709,6 +3757,12 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK8Campaign_")
 @property (nonatomic, strong) id <Brand> _Nonnull ownerBrand;
 @end
 
+typedef SWIFT_ENUM(NSUInteger, CarouselNavigationButtonsAppearance, open) {
+  CarouselNavigationButtonsAppearanceAlwaysHide = 0,
+  CarouselNavigationButtonsAppearanceShowOnVoiceOver = 1,
+  CarouselNavigationButtonsAppearanceAlwaysShow = 2,
+};
+
 typedef SWIFT_ENUM(NSInteger, CheckmarksState, open) {
   CheckmarksStateSentOnly = 1,
   CheckmarksStateSentAndAccepted = 2,
@@ -3737,6 +3791,7 @@ enum ConversationSource : int16_t;
 
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK12Conversation_")
 @protocol Conversation <EntityInterface>
+/// Attributes
 @property (nonatomic, copy) NSString * _Nonnull uid;
 @property (nonatomic, copy) NSDate * _Nonnull creationDate;
 @property (nonatomic, copy) NSString * _Nonnull handlerId;
@@ -3748,6 +3803,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK12Conversation_")
 @property (nonatomic, copy) NSString * _Nullable type;
 @property (nonatomic, copy) NSString * _Nullable consumerId;
 @property (nonatomic, strong) TTRModel * _Nullable ttrModel;
+/// Relationship
 @property (nonatomic, strong) id <Brand> _Nonnull ownerBrand;
 @property (nonatomic, strong) NSSet * _Nonnull participants;
 @property (nonatomic, strong) NSSet * _Nonnull conversationDialogs;
@@ -3797,6 +3853,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK6Dialog_")
 @property (nonatomic, copy) NSString * _Nonnull stateRaw;
 @property (nonatomic, copy) NSString * _Nullable uid;
 @property (nonatomic, copy) NSString * _Nonnull handlerId;
+/// Relationship
 @property (nonatomic, strong) id <Conversation> _Nonnull ownerConversation;
 @property (nonatomic, strong) NSSet * _Nonnull participants;
 @property (nonatomic, strong) NSOrderedSet * _Nonnull dialogMessages;
@@ -4603,16 +4660,39 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonBorderColor;
 /// Used to set the text color for Structure Content elements of button type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonTextColor;
+/// Used to set the button area background color in structured content cards
+@property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonBackgroundColor;
 /// Used to set the text color for Structured Content elements of link button type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentLinkButtonTextColor;
 /// Used to set the text color for Structure Content elements of text type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentTextColor;
 /// Used to set the width constraint for Structured Content elements of button type
 @property (nonatomic) CGFloat structuredButtonWidthConstant;
+/// Used to set card background without needing to pass style in the JSON
+@property (nonatomic, strong) UIColor * _Nonnull structuredContentCardBackgroundColor;
 /// Structured content loading image when images are being fetched/loaded
 @property (nonatomic, strong) UIImage * _Nullable structuredContentLoadingImage;
 /// Structured content loading image when images failed to fetched/loaded
 @property (nonatomic, strong) UIImage * _Nullable structuredContentBrokenImage;
+/// Structured Content navigation button - UInt Enum value of the behavior. Default alwaysHide.
+/// alwaysHide - never show navigation buttons
+/// showOnVoiceOver - show navigation buttons only if accessibility mode is enabled
+/// alwaysShow - always show navigation buttons.
+@property (nonatomic) enum CarouselNavigationButtonsAppearance carouselNavigationButtonsAppearance;
+/// Navigation buttons background color
+@property (nonatomic, strong) UIColor * _Nonnull carouselNavigationButtonBackgroundColor;
+/// Navigation buttons size
+@property (nonatomic) CGFloat carouselNavigationButtonSize;
+/// Navigation buttons corner radius
+@property (nonatomic) CGFloat carouselNavigationButtonCornerRadius;
+/// Navigation buttons margins from left and right
+@property (nonatomic) CGFloat carouselNavigationButtonsMargin;
+/// Navigation buttons icon color
+@property (nonatomic, strong) UIColor * _Nonnull carouselNavigationButtonIconColor;
+/// Previous navigation button icon, default is “chevron.left.circle.fill”, SF Symbol (systemName).
+@property (nonatomic, strong) UIImage * _Nullable carouselNavigationMoveToPreviousIcon;
+/// Next navigation button icon, default is “chevron.right.circle.fill”, SF Symbol (systemName).
+@property (nonatomic, strong) UIImage * _Nullable carouselNavigationMoveToNextIcon;
 /// Corner radius for submit button.
 @property (nonatomic) double csatSubmitButtonCornerRadius;
 /// Corner radius for (Yes/No) buttons.
@@ -4977,6 +5057,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// 1 - remove offline messages from dialog and do not send them to UMS, continue with PCS dialog
 /// 2 - resolve active PCS dialog and send offline messages to a new conversation
 @property (nonatomic) NSUInteger pcsBehaviorForOfflineMessages;
+/// If enabled then welcome message will be injected after offline messages are published for a new conversation.
+@property (nonatomic) BOOL welcomeMessageEnabledForOfflineMessaging;
 /// Color to apply to the offline messaging loader bar
 @property (nonatomic, strong) UIColor * _Nonnull offlineLoaderColor;
 /// Color to apply to the offline messaging loader bar
@@ -5011,6 +5093,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) LPConfig * _Nonnull de
 + (void)printAllConfigurations;
 @end
 
+/// For SDK API External Use
 typedef SWIFT_ENUM(NSInteger, LPConversationCloseReason, open) {
   LPConversationCloseReasonAgent = 0,
   LPConversationCloseReasonConsumer = 1,
@@ -5136,9 +5219,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 
 SWIFT_CLASS("_TtC14LPMessagingSDK23LPGetEngagementResponse")
 @interface LPGetEngagementResponse : NSObject
+/// Optional Engagement Details response in case received from the server, per the Engagement’s request
 @property (nonatomic, copy) NSArray<LPEngagementDetails *> * _Nullable engagementDetails;
+/// Engagement’s request
 @property (nonatomic, copy) NSString * _Nullable sessionId;
 @property (nonatomic, copy) NSString * _Nullable visitorId;
+/// PageID of the Engagement. If not sending one in request, a new one will be generated from server in the
 @property (nonatomic, copy) NSString * _Nullable pageId;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -5743,9 +5829,11 @@ SWIFT_CLASS("_TtC14LPMessagingSDK20LPMonitoringIdentity")
 
 
 /// <h1>LPMonitoringInitParams</h1>
-/// An initialization parameter of type LPMonitoringInitParams. This object contains all relevant parameters for initialization of the SDK for an account, including app install id.
+/// An initialization parameter of type LPMonitoringInitParams. This object contains all relevant parameters for initialization of the SDK
+/// for an account, including app install id.
 /// note:
-/// App install ID or ‘appInstallId’ is generated when setting up LiveEngage Site for Unauthenticated messaging. Please see Support for more details.
+/// App install ID or ‘appInstallId’ is generated when setting up LiveEngage Site for Unauthenticated messaging.
+/// Please see Support for more details.
 SWIFT_CLASS("_TtC14LPMessagingSDK22LPMonitoringInitParams")
 @interface LPMonitoringInitParams : NSObject
 /// Init LPMonitoringInitParams with mandatory params
@@ -5946,6 +6034,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
+
 @class UIGestureRecognizer;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK))
@@ -5955,16 +6044,16 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
-@interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK)) <UIGestureRecognizerDelegate>
-@end
-
-
 @class UIScrollView;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK)) <UIScrollViewDelegate>
 - (void)scrollViewWillBeginDragging:(UIScrollView * _Nonnull)scrollView;
 - (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView * _Nonnull)scrollView;
+@end
+
+
+@interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK)) <UIGestureRecognizerDelegate>
 @end
 
 
@@ -6285,9 +6374,14 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK7Message_")
 @property (nonatomic, strong) NSOrderedSet * _Nullable customBoards;
 @property (nonatomic, copy) NSString * _Nullable linkPreviewState;
 @property (nonatomic, strong) LPStructuredContentItemContainer * _Nullable structuredContentItemContainer;
+/// flag shows that message presented/must be visible to user
+/// appear from ConsumerDataModel_17 version
 @property (nonatomic) BOOL presented;
-/// Timestamp when started sending message by user. By default it is the message creation timestamp, when the user tapped ‘Send’. If the message was resent by user, this value will be updated, but not stored in DB.
+/// Timestamp when started sending message by user. By default it is the message creation timestamp, when the user tapped ‘Send’. If the
+/// message was resent by user, this value will be updated, but not stored in DB.
 @property (nonatomic, copy) NSDate * _Nullable _lastSendingTimestamp;
+/// We use this field to see how we received this message; either by a query or in realtime. We don’t care to save this, that’s why it’s
+/// not NSManaged. This data is only important for this run.
 @property (nonatomic, copy) NSString * _Nullable distributionTypeRaw;
 @property (nonatomic) NSInteger carouselCurrentPage;
 @property (nonatomic, copy) void (^ _Nullable boardsBuildCompleted)(NSArray<id <CustomBoard>> * _Nonnull);
