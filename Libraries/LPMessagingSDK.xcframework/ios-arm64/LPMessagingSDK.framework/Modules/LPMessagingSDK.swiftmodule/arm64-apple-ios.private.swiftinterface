@@ -90,15 +90,15 @@ public enum FileState : Swift.String {
   @objc var metaDataContainer: LPMessagingSDK.LPFileMetaDataContainer? { get set }
   @objc var backgroundTaskIdentifier: Any? { get set }
   @objc var thumbnailImage: UIKit.UIImage? { get set }
-  @objc var completion: (() -> ())? { get set }
-  @objc var failure: ((_ error: Foundation.NSError) -> ())? { get set }
-  @objc var preUpload: (() -> ())? { get set }
-  @objc var preDownload: (() -> ())? { get set }
-  @objc var uploading: ((_ progress: Swift.Double) -> ())? { get set }
+  @objc var completion: (() -> Swift.Void)? { get set }
+  @objc var failure: ((_ error: Foundation.NSError) -> Swift.Void)? { get set }
+  @objc var preUpload: (() -> Swift.Void)? { get set }
+  @objc var preDownload: (() -> Swift.Void)? { get set }
+  @objc var uploading: ((_ progress: Swift.Double) -> Swift.Void)? { get set }
   @objc var uploadPercentage: CoreFoundation.CGFloat { get set }
-  @objc var downloading: ((_ progress: Swift.Double) -> ())? { get set }
+  @objc var downloading: ((_ progress: Swift.Double) -> Swift.Void)? { get set }
   @objc var downloadPercentage: CoreFoundation.CGFloat { get set }
-  @objc var synced: (() -> ())? { get set }
+  @objc var synced: (() -> Swift.Void)? { get set }
 }
 extension LPMessagingSDK.File {
   public var isTransferring: Swift.Bool {
@@ -235,9 +235,6 @@ public protocol LPStructuredContentDelegate : AnyObject {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
-extension LPMessagingSDK.LPStructuredContent {
-  @_Concurrency.MainActor(unsafe) public func configureAccessibilityWith(accessibilityLabel: Swift.String? = nil)
-}
 extension LPMessagingSDK.LPStructuredContent : UIKit.UIGestureRecognizerDelegate {
   @_Concurrency.MainActor(unsafe) public func handleOrientation()
   @_Concurrency.MainActor(unsafe) public func removeStructuredContentObjects()
@@ -354,8 +351,8 @@ public enum ImageState : Swift.String {
   @objc var imageURL: Swift.String? { get set }
   @objc var imageState: Swift.String? { get set }
   @objc var ownerCustomBoard: LPMessagingSDK.CustomBoard { get set }
-  @objc var imageDownloadCompleted: ((_ image: UIKit.UIImage?) -> ())? { get set }
-  @objc var imageDownloadFailed: ((_ error: Foundation.NSError) -> ())? { get set }
+  @objc var imageDownloadCompleted: ((_ image: UIKit.UIImage?) -> Swift.Void)? { get set }
+  @objc var imageDownloadFailed: ((_ error: Foundation.NSError) -> Swift.Void)? { get set }
   @objc var _image: UIKit.UIImage? { get set }
 }
 extension LPMessagingSDK.LinkPreview {
@@ -446,7 +443,7 @@ public struct SymmetricKey : LPMessagingSDK.JWK {
   @objc public static let backgroundQueue: Dispatch.DispatchQueue
   @objc public class func JSONStringify(_ value: [Swift.String : Any], prettyPrinted: Swift.Bool = false) -> Swift.String?
   @objc public class func JSONDictionaryFromString(_ string: Swift.String) -> Any?
-  @objc public class func delay(_ delay: Swift.Double, closure: @escaping () -> ())
+  @objc public class func delay(_ delay: Swift.Double, closure: @escaping () -> Swift.Void)
   @objc public class func minutesBetweenDates(_ startDate: Foundation.Date, endDate: Foundation.Date) -> Swift.Int
   @objc public class func getResizedImageSize(image: UIKit.UIImage, maxHeight: CoreFoundation.CGFloat, maxWidth: CoreFoundation.CGFloat) -> CoreFoundation.CGSize
   @objc public class func unwrap(any: Any) -> Any
@@ -539,6 +536,7 @@ public enum ConversationQueryType : Swift.String {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) convenience public init(frame: CoreFoundation.CGRect = .zero, viewModel: LPMessagingSDK.LPAppointmentListViewModel)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) public func adjustAfterOrientationChange()
   @objc deinit
 }
 extension LPMessagingSDK.LPAppointmentList : UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
@@ -762,6 +760,9 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case accessibilityVoiceRecognitionButtonErrorHint
   case accessibilityVoiceRecognitionInsertedText
   case voiceRecognitionPlaceHolder
+  case accessibilityCarouselNavPreviousButton
+  case accessibilityCarouselNavNextButton
+  case accessibilityCarouselCardOrderAnnouncement
   public init?(rawValue: Swift.String)
   public typealias AllCases = [LPMessagingSDK.LPLanguagesKeys]
   public typealias RawValue = Swift.String
@@ -872,11 +873,11 @@ extension LPMessagingSDK.Conversation {
   }
 }
 @objc @_inheritsConvenienceInitializers open class LPOperation : Foundation.Operation {
-  @objc final override public var isExecuting: Swift.Bool {
+  @objc override final public var isExecuting: Swift.Bool {
     @objc get
     @objc set
   }
-  @objc final override public var isFinished: Swift.Bool {
+  @objc override final public var isFinished: Swift.Bool {
     @objc get
     @objc set
   }
@@ -919,6 +920,16 @@ public struct LPAppointmentListViewModel {
   public var tableViewCellAccessoryViewWidthConstant: Swift.Double
   public var tableViewCellAccessoryViewHeightConstant: Swift.Double
   public init(slots: [LPMessagingSDK.AppointmentSlot], firstDayOfTheWeek: Swift.String? = nil)
+}
+@objc public enum CarouselNavigationButtonsAppearance : Swift.UInt {
+  case alwaysHide = 0
+  case showOnVoiceOver = 1
+  case alwaysShow = 2
+  public init?(rawValue: Swift.UInt)
+  public typealias RawValue = Swift.UInt
+  public var rawValue: Swift.UInt {
+    get
+  }
 }
 @objc public enum CheckmarksState : Swift.Int {
   case sentOnly = 1
@@ -1506,8 +1517,8 @@ public enum LinkPreviewState : Swift.String {
   @objc var _lastSendingTimestamp: Foundation.Date? { get set }
   @objc var distributionTypeRaw: Swift.String? { get set }
   @objc var carouselCurrentPage: Swift.Int { get set }
-  @objc var boardsBuildCompleted: ((_ boards: [LPMessagingSDK.CustomBoard]) -> ())? { get set }
-  @objc var boardsBuildFailed: ((_ error: Foundation.NSError) -> ())? { get set }
+  @objc var boardsBuildCompleted: ((_ boards: [LPMessagingSDK.CustomBoard]) -> Swift.Void)? { get set }
+  @objc var boardsBuildFailed: ((_ error: Foundation.NSError) -> Swift.Void)? { get set }
   @objc var timestampRepresentation: Swift.String? { get set }
   @objc var requestedToShowSendingState: Foundation.Date? { get set }
   @objc var messageMetadata: [[Swift.String : Any]]? { get set }
@@ -1555,7 +1566,7 @@ extension LPMessagingSDK.Message {
   }
   public func getBaseMessageType() -> LPMessagingSDK.MessageType?
   public func getLocalMessageType() -> LPMessagingSDK.LocalMessageType?
-  public func getBoards(completion: @escaping (_ boards: [LPMessagingSDK.CustomBoard]) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
+  public func getBoards(completion: @escaping (_ boards: [LPMessagingSDK.CustomBoard]) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
 }
 @objc @_hasMissingDesignatedInitializers public class Slot : ObjectiveC.NSObject, Foundation.NSSecureCoding, Swift.Encodable {
   @objc public class var supportsSecureCoding: Swift.Bool {
@@ -2394,12 +2405,22 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var structuredContentMapLongitudeDeltaSpan: Swift.Double
   @objc public var structuredContentButtonBorderColor: UIKit.UIColor
   @objc public var structuredContentButtonTextColor: UIKit.UIColor
+  @objc public var structuredContentButtonBackgroundColor: UIKit.UIColor
   @objc public var structuredContentLinkButtonTextColor: UIKit.UIColor
   @objc public var structuredContentTextColor: UIKit.UIColor
   @objc public var structuredButtonWidthConstant: CoreFoundation.CGFloat
   public var structuredButtonMinimumHeight: CoreFoundation.CGFloat?
+  @objc public var structuredContentCardBackgroundColor: UIKit.UIColor
   @objc public var structuredContentLoadingImage: UIKit.UIImage?
   @objc public var structuredContentBrokenImage: UIKit.UIImage?
+  @objc public var carouselNavigationButtonsAppearance: LPMessagingSDK.CarouselNavigationButtonsAppearance
+  @objc public var carouselNavigationButtonBackgroundColor: UIKit.UIColor
+  @objc public var carouselNavigationButtonSize: CoreFoundation.CGFloat
+  @objc public var carouselNavigationButtonCornerRadius: CoreFoundation.CGFloat
+  @objc public var carouselNavigationButtonsMargin: CoreFoundation.CGFloat
+  @objc public var carouselNavigationButtonIconColor: UIKit.UIColor
+  @objc public var carouselNavigationMoveToPreviousIcon: UIKit.UIImage?
+  @objc public var carouselNavigationMoveToNextIcon: UIKit.UIImage?
   @objc public var csatSubmitButtonCornerRadius: Swift.Double
   @objc public var csatYesNoButtonsCornerRadius: Swift.Double
   @objc public var csatSubmitButtonBackgroundColor: UIKit.UIColor
@@ -2539,6 +2560,7 @@ public enum QuickReplyActionType : Swift.String {
   }
   @objc public var offlineMessagingEnabled: Swift.Bool
   @objc public var pcsBehaviorForOfflineMessages: Swift.UInt
+  @objc public var welcomeMessageEnabledForOfflineMessaging: Swift.Bool
   @objc public var offlineLoaderColor: UIKit.UIColor
   @objc public var offlineLoaderBackgroundColor: UIKit.UIColor
   @objc public var offlineLoaderCornerRadius: CoreFoundation.CGFloat
@@ -2573,25 +2595,25 @@ extension LPMessagingSDK.LPWeeklyCalendarView : UIKit.UICollectionViewDelegate, 
   @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didEndDisplaying cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
 }
 public class ConversationDetails : Swift.CustomStringConvertible {
-  public struct CloseReason {
+  public enum CloseReason {
     public static let CLOSE_REASON_AGENT: Swift.String
     public static let CLOSE_REASON_CONSUMER: Swift.String
     public static let CLOSE_REASON_TIMEOUT: Swift.String
     public static let CLOSE_REASON_SYSTEM: Swift.String
     public static let CLOSE_REASON_UNKNOWN: Swift.String
   }
-  public struct TTR_TYPE {
+  public enum TTR_TYPE {
     public static let TTR_TYPE_CUSTOM: Swift.String
     public static let TTR_TYPE_NORMAL: Swift.String
     public static let TTR_TYPE_PRIORITIZED: Swift.String
     public static let TTR_TYPE_URGENT: Swift.String
   }
-  public struct DELAY_TYPE {
+  public enum DELAY_TYPE {
     public static let DELAY_TYPE_HOLIDAY: Swift.String
     public static let DELAY_TYPE_NIGHT: Swift.String
     public static let DELAY_TYPE_WEEKEND: Swift.String
   }
-  public struct CSAT_STATUS {
+  public enum CSAT_STATUS {
     public static let CSAT_STATUS_FILLED: Swift.String
     public static let CSAT_STATUS_PARTIALLY_FILLED: Swift.String
     public static let CSAT_STATUS_SKIPPED: Swift.String
@@ -2727,7 +2749,7 @@ public enum HTTPMethod : Swift.String {
 }
 public typealias HTTPRequestSuccessHandler = (_ response: Any?) -> ()
 public typealias HTTPRequestFailureHandler = (_ error: Foundation.NSError?) -> ()
-public typealias amsReadyCompletion = () -> ()
+public typealias amsReadyCompletion = () -> Swift.Void
 public let MESSAGE_MAX_CHARACTERS: Swift.Int
 public let FILE_CAPTION_MAX_CHARACTERS: Swift.Int
 public let MIN_UI_ELEMENT_DURATION_DURING_VOICEOVER: Swift.Double
@@ -2966,7 +2988,7 @@ public enum AMSStateError : Swift.String {
     get
   }
 }
-public struct LPNotificationName {
+public enum LPNotificationName {
   public static let CSAT_SCORE_SUBMISSION_DID_FINISH: Foundation.Notification.Name
   public static let SDK_OBSELETE_VERSION: Foundation.Notification.Name
   public static let SDK_AUTHENTICATION_FAILED: Foundation.Notification.Name
@@ -3029,10 +3051,10 @@ public enum LPKeychainSecureEnclaveKey : Swift.String {
     get
   }
 }
-public struct LPBlurEffects {
+public enum LPBlurEffects {
   public static let lpLoadingViewEffect: UIKit.UIBlurEffect
 }
-public struct LPColor {
+public enum LPColor {
   public static let lpBackground: UIKit.UIColor
   public static let lpLink: UIKit.UIColor
   public static let lpLabel: UIKit.UIColor
@@ -3058,7 +3080,7 @@ public struct LPColor {
   public static let lpHorizonBlue: UIKit.UIColor
   public static func rgba(r: CoreFoundation.CGFloat, g: CoreFoundation.CGFloat, b: CoreFoundation.CGFloat, a: CoreFoundation.CGFloat = 1.0) -> UIKit.UIColor
 }
-public struct Fields {
+public enum Fields {
   public static let CONVERSATION_ID: Swift.String
   public static let DIALOG_ID: Swift.String
   public static let EVENT: Swift.String
@@ -3090,7 +3112,7 @@ public struct Fields {
   public static let UPLOADABLE: Swift.String
   public static let SUBMISSION_ID: Swift.String
 }
-public struct LPConstants {
+public enum LPConstants {
 }
 @objc public protocol Campaign : LPMessagingSDK.EntityInterface {
   @objc var uid: Swift.String { get set }
@@ -3520,7 +3542,7 @@ extension Security.SecKey : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class NSBouncyView : UIKit.UIView {
   @_Concurrency.MainActor(unsafe) open func setView(_ view: UIKit.UIView)
   @_Concurrency.MainActor(unsafe) open func setColor(color: UIKit.UIColor)
-  @_Concurrency.MainActor(unsafe) open func toggleVisibility(show: Swift.Bool, willStart: @escaping () -> (), didComplete: @escaping () -> (), didFail: @escaping () -> ())
+  @_Concurrency.MainActor(unsafe) open func toggleVisibility(show: Swift.Bool, willStart: @escaping () -> Swift.Void, didComplete: @escaping () -> Swift.Void, didFail: @escaping () -> Swift.Void)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
@@ -4386,6 +4408,7 @@ public protocol LPStructuredContentFontProvider : AnyObject {
   public var buttonBorderColor: UIKit.UIColor
   public var buttonLinkForegroundColor: UIKit.UIColor
   public var buttonTextLinkColor: UIKit.UIColor
+  public var buttonBackgroundColor: UIKit.UIColor
   public var buttonTextColor: UIKit.UIColor
   public var buttonHighlightedBackgroundColor: UIKit.UIColor
   public var textColor: UIKit.UIColor
@@ -4396,6 +4419,17 @@ public protocol LPStructuredContentFontProvider : AnyObject {
   public var buttonWidthConstant: CoreFoundation.CGFloat
   public var buttonMinimumHeight: CoreFoundation.CGFloat?
   public var buttonBorderCornerRadius: Swift.Double
+  public var carouselNavigationButtonsAppearance: Swift.UInt
+  public var carouselNavigationButtonBackgroundColor: UIKit.UIColor
+  public var carouselNavigationButtonSize: CoreFoundation.CGFloat
+  public var carouselNavigationButtonCornerRadius: CoreFoundation.CGFloat
+  public var carouselNavigationButtonsMargin: CoreFoundation.CGFloat
+  public var carouselNavigationButtonIconColor: UIKit.UIColor
+  public var carouselNavigationMoveToPreviousIcon: UIKit.UIImage?
+  public var carouselNavigationMoveToNextIcon: UIKit.UIImage?
+  public var accessibilityCarouselNavPreviousButton: Swift.String
+  public var accessibilityCarouselNavNextButton: Swift.String
+  public var accessibilityCarouselCardOrder: Swift.String
   public var buttonBorderWidth: CoreFoundation.CGFloat
   public var bubbleBorderWidth: Swift.Double
   public var bubbleTopLeftCornerRadius: Swift.Float
@@ -4459,6 +4493,9 @@ extension LPMessagingSDK.ConversationState : Swift.RawRepresentable {}
 extension LPMessagingSDK.TTRType : Swift.Equatable {}
 extension LPMessagingSDK.TTRType : Swift.Hashable {}
 extension LPMessagingSDK.TTRType : Swift.RawRepresentable {}
+extension LPMessagingSDK.CarouselNavigationButtonsAppearance : Swift.Equatable {}
+extension LPMessagingSDK.CarouselNavigationButtonsAppearance : Swift.Hashable {}
+extension LPMessagingSDK.CarouselNavigationButtonsAppearance : Swift.RawRepresentable {}
 extension LPMessagingSDK.CheckmarksState : Swift.Equatable {}
 extension LPMessagingSDK.CheckmarksState : Swift.Hashable {}
 extension LPMessagingSDK.CheckmarksState : Swift.RawRepresentable {}
