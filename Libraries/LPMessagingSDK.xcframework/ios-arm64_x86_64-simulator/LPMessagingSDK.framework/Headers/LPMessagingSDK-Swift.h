@@ -1266,6 +1266,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) BOOL isSendMessageButtonInTextMode;
 /// Enable or Disable toggle for Structured Content feature in conversations.
 @property (nonatomic) BOOL enableStructuredContent;
+/// Set the Structured Content link as a callback (true) instead of a link intent (false).
+/// When set to true, tapping any link within structured content of type “link” will trigger
+/// <code>LPMessagingSDKDelegate</code> method <code>LPMessagingSDKStructuredContentLinkClicked</code>.
+@property (nonatomic) BOOL structuredContentLinkAsCallback;
 /// Structured Content bubble border width in pixels.
 @property (nonatomic) double structuredContentBubbleBorderWidth;
 /// Structured Content button border width in pixels.
@@ -1650,6 +1654,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull voiceVideoNavigationBackgroundColor;
 /// Defines tint <em>(color)</em> of Navigation & Tab Bar Icons for Voice & Video SFSafariViewController
 @property (nonatomic, strong) UIColor * _Nonnull voiceVideoNavigationTintColor;
+/// Defines back/minimize button image for Voice & Video call screen
+@property (nonatomic, strong) UIImage * _Nullable voiceVideoNavigationMinimizeButtonImage;
 /// Custom button icon image that displays on the navigation bar.
 /// NOTE: this property gets its tintColor from <code>conversationNavigationTitleColor</code>
 /// When pressed, the
@@ -2202,6 +2208,30 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 + (void)unregisterPusher:(id <Brand> _Nonnull)brand completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=12.1.0,obsoleted=14.0.0,message="Use unregisterPusherFor(_ brandId: String) instead");
 - (void)getEngagementWithConsumerID:(NSString * _Nullable)consumerID monitoringParams:(LPMonitoringParams * _Nullable)monitoringParams completion:(void (^ _Nonnull)(LPGetEngagementResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=11.4.0,obsoleted=14.0.0,message="Use getEngagement(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams?, completion: @escaping (_ response: LPGetEngagementResponse)->(), failure: @escaping (_ error: NSError)->()) instead");
 - (void)sendSDEWithConsumerID:(NSString * _Nonnull)consumerID monitoringParams:(LPMonitoringParams * _Nonnull)monitoringParams completion:(void (^ _Nonnull)(LPSendSDEResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=11.4.0,obsoleted=14.0.0,message="Use sendSDE(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams, completion: @escaping (_ response: LPSendSDEResponse)->(), failure: @escaping (_ error: NSError)->()) instead");
+- (BOOL)sendText:(NSString * _Nonnull)text error:(NSError * _Nullable * _Nullable)error;
+/// Opens the system document picker for the consumer to select a file to send
+- (BOOL)fileSharingOpenFileSelectionAndReturnError:(NSError * _Nullable * _Nullable)error;
+/// Opens Photo Library for the consumer to select an image to send.
+/// If validation is enabled and the Photo library permission is not authorized (authorized or limited)
+/// throws an error about denied permission before trying to open the photo library screen.
+/// If validation is disabled (default) SDK will try to open the photo library, asking for permission or
+/// showing an alert to the consumer to enable the permission from the OS settings.
+/// <em>NOTE: If the validation is disabled, errors will be reported on
+/// <code>permissionDenied(permissionType: LPPermissionTypes)</code></em>
+/// \param validatingPermission if true validates the photo library permission
+///
+- (BOOL)fileSharingOpenGalleryWithValidatingPermission:(BOOL)validatingPermission error:(NSError * _Nullable * _Nullable)error;
+/// Opens Camera for the consumer to take a photo to send.
+/// If validation is enabled and the AVMediaType.video permission is not authorized
+/// throws an error about denied permission before trying to open the camera screen.
+/// If validation is disabled (default) SDK will try to open the camera, asking for permission or
+/// showing an alert to the consumer to enable the permission from the OS settings
+/// <em>NOTE: If the validation is disabled, errors will be reported on
+/// <code>permissionDenied(permissionType: LPPermissionTypes)</code></em>
+/// \param validatingPermission if true validates the photo library permission
+///
+- (BOOL)fileSharingOpenCameraWithValidatingPermission:(BOOL)validatingPermission error:(NSError * _Nullable * _Nullable)error;
+- (BOOL)setIsViewOnlyWithMode:(BOOL)mode error:(NSError * _Nullable * _Nullable)error;
 @end
 
 
@@ -2251,6 +2281,7 @@ enum LPPusherUnregisterType : NSInteger;
 ///
 - (void)logoutWithUnregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure;
 @end
+
 
 @class NSData;
 
@@ -2438,6 +2469,9 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 /// \param error failure error reason
 ///
 - (void)LPMessagingSDKPushRegistrationDidFail:(NSError * _Nonnull)error;
+/// Called when a structured content control with Link action gets clicked.
+/// This function is only invoked when LPConfig\structuredContentLinkAsCallback is set to true
+- (void)LPMessagingSDKStructuredContentLinkClicked:(NSString * _Nonnull)uri;
 /// Called when an Unauthenticated user expired and can no longer be in used.
 /// When this callback is invoked, the previous open conversation will be closed locally.
 - (void)LPMessagingSDKUnauthenticatedUserExpired;
@@ -2671,12 +2705,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
-
 @class UIGestureRecognizer;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK))
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer * _Nonnull)gestureRecognizer SWIFT_WARN_UNUSED_RESULT;
 @end
+
 
 
 
@@ -4629,6 +4663,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) BOOL isSendMessageButtonInTextMode;
 /// Enable or Disable toggle for Structured Content feature in conversations.
 @property (nonatomic) BOOL enableStructuredContent;
+/// Set the Structured Content link as a callback (true) instead of a link intent (false).
+/// When set to true, tapping any link within structured content of type “link” will trigger
+/// <code>LPMessagingSDKDelegate</code> method <code>LPMessagingSDKStructuredContentLinkClicked</code>.
+@property (nonatomic) BOOL structuredContentLinkAsCallback;
 /// Structured Content bubble border width in pixels.
 @property (nonatomic) double structuredContentBubbleBorderWidth;
 /// Structured Content button border width in pixels.
@@ -5013,6 +5051,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull voiceVideoNavigationBackgroundColor;
 /// Defines tint <em>(color)</em> of Navigation & Tab Bar Icons for Voice & Video SFSafariViewController
 @property (nonatomic, strong) UIColor * _Nonnull voiceVideoNavigationTintColor;
+/// Defines back/minimize button image for Voice & Video call screen
+@property (nonatomic, strong) UIImage * _Nullable voiceVideoNavigationMinimizeButtonImage;
 /// Custom button icon image that displays on the navigation bar.
 /// NOTE: this property gets its tintColor from <code>conversationNavigationTitleColor</code>
 /// When pressed, the
@@ -5565,6 +5605,30 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 + (void)unregisterPusher:(id <Brand> _Nonnull)brand completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=12.1.0,obsoleted=14.0.0,message="Use unregisterPusherFor(_ brandId: String) instead");
 - (void)getEngagementWithConsumerID:(NSString * _Nullable)consumerID monitoringParams:(LPMonitoringParams * _Nullable)monitoringParams completion:(void (^ _Nonnull)(LPGetEngagementResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=11.4.0,obsoleted=14.0.0,message="Use getEngagement(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams?, completion: @escaping (_ response: LPGetEngagementResponse)->(), failure: @escaping (_ error: NSError)->()) instead");
 - (void)sendSDEWithConsumerID:(NSString * _Nonnull)consumerID monitoringParams:(LPMonitoringParams * _Nonnull)monitoringParams completion:(void (^ _Nonnull)(LPSendSDEResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=11.4.0,obsoleted=14.0.0,message="Use sendSDE(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams, completion: @escaping (_ response: LPSendSDEResponse)->(), failure: @escaping (_ error: NSError)->()) instead");
+- (BOOL)sendText:(NSString * _Nonnull)text error:(NSError * _Nullable * _Nullable)error;
+/// Opens the system document picker for the consumer to select a file to send
+- (BOOL)fileSharingOpenFileSelectionAndReturnError:(NSError * _Nullable * _Nullable)error;
+/// Opens Photo Library for the consumer to select an image to send.
+/// If validation is enabled and the Photo library permission is not authorized (authorized or limited)
+/// throws an error about denied permission before trying to open the photo library screen.
+/// If validation is disabled (default) SDK will try to open the photo library, asking for permission or
+/// showing an alert to the consumer to enable the permission from the OS settings.
+/// <em>NOTE: If the validation is disabled, errors will be reported on
+/// <code>permissionDenied(permissionType: LPPermissionTypes)</code></em>
+/// \param validatingPermission if true validates the photo library permission
+///
+- (BOOL)fileSharingOpenGalleryWithValidatingPermission:(BOOL)validatingPermission error:(NSError * _Nullable * _Nullable)error;
+/// Opens Camera for the consumer to take a photo to send.
+/// If validation is enabled and the AVMediaType.video permission is not authorized
+/// throws an error about denied permission before trying to open the camera screen.
+/// If validation is disabled (default) SDK will try to open the camera, asking for permission or
+/// showing an alert to the consumer to enable the permission from the OS settings
+/// <em>NOTE: If the validation is disabled, errors will be reported on
+/// <code>permissionDenied(permissionType: LPPermissionTypes)</code></em>
+/// \param validatingPermission if true validates the photo library permission
+///
+- (BOOL)fileSharingOpenCameraWithValidatingPermission:(BOOL)validatingPermission error:(NSError * _Nullable * _Nullable)error;
+- (BOOL)setIsViewOnlyWithMode:(BOOL)mode error:(NSError * _Nullable * _Nullable)error;
 @end
 
 
@@ -5614,6 +5678,7 @@ enum LPPusherUnregisterType : NSInteger;
 ///
 - (void)logoutWithUnregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure;
 @end
+
 
 @class NSData;
 
@@ -5801,6 +5866,9 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 /// \param error failure error reason
 ///
 - (void)LPMessagingSDKPushRegistrationDidFail:(NSError * _Nonnull)error;
+/// Called when a structured content control with Link action gets clicked.
+/// This function is only invoked when LPConfig\structuredContentLinkAsCallback is set to true
+- (void)LPMessagingSDKStructuredContentLinkClicked:(NSString * _Nonnull)uri;
 /// Called when an Unauthenticated user expired and can no longer be in used.
 /// When this callback is invoked, the previous open conversation will be closed locally.
 - (void)LPMessagingSDKUnauthenticatedUserExpired;
@@ -6034,12 +6102,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
-
 @class UIGestureRecognizer;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK))
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer * _Nonnull)gestureRecognizer SWIFT_WARN_UNUSED_RESULT;
 @end
+
 
 
 

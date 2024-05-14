@@ -2393,6 +2393,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var sendButtonImage: UIKit.UIImage?
   @objc public var isSendMessageButtonInTextMode: Swift.Bool
   @objc public var enableStructuredContent: Swift.Bool
+  @objc public var structuredContentLinkAsCallback: Swift.Bool
   @objc public var structuredContentBubbleBorderWidth: Swift.Double
   @objc public var structuredContentButtonBorderWidth: CoreFoundation.CGFloat
   @objc public var structuredContentButtonBorderCornerRadius: CoreFoundation.CGFloat
@@ -2538,6 +2539,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var voiceVideoInvitationBubbleBorderWidth: Swift.Double
   @objc public var voiceVideoNavigationBackgroundColor: UIKit.UIColor
   @objc public var voiceVideoNavigationTintColor: UIKit.UIColor
+  @objc public var voiceVideoNavigationMinimizeButtonImage: UIKit.UIImage?
   @objc public var customButtonImage: UIKit.UIImage?
   @objc public var markdownHyperlinkFromAgent: Swift.Bool
   @objc public var remoteUserBubbleHyperlinkColor: UIKit.UIColor
@@ -3015,6 +3017,7 @@ public enum LPNotificationName {
   public static let CONNECTION_PROCESS_RETRIES_FAILED: Foundation.Notification.Name
   public static let AGENT_STATE_CHANGED: Foundation.Notification.Name
   public static let BACKGROUND_IMAGE_CONFIGURATION_CHANGED: Foundation.Notification.Name
+  public static let STRUCTURED_CONTENT_LINK_CLICKED: Foundation.Notification.Name
   public static let UNAUTHENTICATED_USER_EXPIRED: Foundation.Notification.Name
   public static let REGISTRATION_TO_PUSHER_SUCCEEDED: Foundation.Notification.Name
   public static let REGISTRATION_TO_PUSHER_FAILED: Foundation.Notification.Name
@@ -4280,6 +4283,11 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   public func getEngagement(consumerID: Swift.String?, monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
   @objc @available(iOS, deprecated: 11.4.0, obsoleted: 14.0.0, message: "Use sendSDE(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams, completion: @escaping (_ response: LPSendSDEResponse)->(), failure: @escaping (_ error: NSError)->()) instead")
   public func sendSDE(consumerID: Swift.String, monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
+  @objc public func sendText(_ text: Swift.String) throws
+  @objc public func fileSharingOpenFileSelection() throws
+  @objc public func fileSharingOpenGallery(validatingPermission: Swift.Bool = false) throws
+  @objc public func fileSharingOpenCamera(validatingPermission: Swift.Bool = false) throws
+  @objc public func setIsViewOnly(mode: Swift.Bool) throws
   @objc deinit
 }
 @objc public protocol LPMessagingSDKNotificationDelegate {
@@ -4357,6 +4365,7 @@ public protocol LPStructuredContentImageDownloader {
   @objc optional func LPMessagingSDKCertPinningFailed(_ error: Foundation.NSError)
   @objc optional func LPMessagingSDKPushRegistrationDidFinish()
   @objc optional func LPMessagingSDKPushRegistrationDidFail(_ error: Foundation.NSError)
+  @objc optional func LPMessagingSDKStructuredContentLinkClicked(_ uri: Swift.String)
   @objc optional func LPMessagingSDKUnauthenticatedUserExpired()
 }
 @objc public class ProactiveNotificationData : ObjectiveC.NSObject, Foundation.NSSecureCoding {
