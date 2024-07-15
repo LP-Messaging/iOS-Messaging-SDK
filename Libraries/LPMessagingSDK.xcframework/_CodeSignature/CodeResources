@@ -77,9 +77,13 @@
 		<data>
 		Nyn4OU7y8Jg0U7PWw6+jJ+3DICQ=
 		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 21.omo</key>
+		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.mom</key>
 		<data>
-		LL9d2MA2c2+DpkkSq8cOzTwLoLs=
+		yem/+o+ll93B1jb7XE6mBoDtbc0=
+		</data>
+		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.omo</key>
+		<data>
+		YTBohA7+Hxs/t8yT2Ngjj1eC8Cg=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_11_EventID_Photo_Sharing.mom</key>
 		<data>
@@ -115,7 +119,7 @@
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/VersionInfo.plist</key>
 		<data>
-		g+tsPmEuqLKkx0+gKwgl3rzKLUU=
+		8JwFIFmsAq3Eek/xqf4zGudbLNI=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_12.cdm</key>
 		<data>
@@ -159,7 +163,7 @@
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		uESkTehSvDpgN7SXrtGEY95M9fM=
+		wen87luTn8VsvTrmu9iGyI3cHGQ=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Headers/LPMessagingSDK.h</key>
 		<data>
@@ -167,7 +171,7 @@
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Info.plist</key>
 		<data>
-		EBLPXixFapagjzixH/FGJjbva0A=
+		myuF0JR9u7h9LvIoyYgGvNs33ho=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/InputTextView.nib</key>
 		<data>
@@ -187,7 +191,7 @@
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/LPMessagingSDK</key>
 		<data>
-		yl34bsfj7wrF991GLV0VYbtmbz4=
+		IBX/+fQr5htnz1gnrkKww2GBHHs=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/LPMessagingSDK.storyboardc/ConversationViewController.nib</key>
 		<data>
@@ -247,19 +251,19 @@
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		A1aLz+/JvJcP60wcWnTiTifUMmM=
+		jwRaVa52iAELjHkSOR4JG4WndVw=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		Osgqr1C+HsaptjKSx+0JUQyJ+3I=
+		dxqeyTajEN4T7eE2qENuICz+RTI=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		v2m5hCU1wFT3hexMeRYKs37iuLM=
+		b05VRWo7b3un/QZSSQsM0pWXa34=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		Osgqr1C+HsaptjKSx+0JUQyJ+3I=
+		dxqeyTajEN4T7eE2qENuICz+RTI=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/module.modulemap</key>
 		<data>
@@ -275,11 +279,11 @@
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/PrivateHeaders/CIContext+Workaround.h</key>
 		<data>
-		fPRVF6hg3WCIB1uOxrMbstlGtK4=
+		ZLiGsNHJSqPM4Foy/RcxR9Qq7Ks=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/PrivateHeaders/ExceptionCatcher.h</key>
 		<data>
-		i6mjqXUNZ1PVwvfMwGdcVVZ1fWM=
+		MF3z5QDdCVY4jhe3n2DMsW7ysII=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/PrivateHeaders/JOSESwift.h</key>
 		<data>
@@ -956,9 +960,13 @@
 		<data>
 		Nyn4OU7y8Jg0U7PWw6+jJ+3DICQ=
 		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 21.omo</key>
+		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.mom</key>
 		<data>
-		LL9d2MA2c2+DpkkSq8cOzTwLoLs=
+		yem/+o+ll93B1jb7XE6mBoDtbc0=
+		</data>
+		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.omo</key>
+		<data>
+		YTBohA7+Hxs/t8yT2Ngjj1eC8Cg=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_11_EventID_Photo_Sharing.mom</key>
 		<data>
@@ -994,7 +1002,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/VersionInfo.plist</key>
 		<data>
-		g+tsPmEuqLKkx0+gKwgl3rzKLUU=
+		8JwFIFmsAq3Eek/xqf4zGudbLNI=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_12.cdm</key>
 		<data>
@@ -1038,7 +1046,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		keImAges+AYml6O6FlA8fL9KCpY=
+		532I3XsCibTbkxpmtx6g/gvgpj0=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Headers/LPMessagingSDK.h</key>
 		<data>
@@ -1046,7 +1054,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Info.plist</key>
 		<data>
-		quoEdCufhw/K3C3sOcxHwafyKzY=
+		dRHEu1tonDoe1B4GH0CbFuPVLJc=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/InputTextView.nib</key>
 		<data>
@@ -1066,7 +1074,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPMessagingSDK</key>
 		<data>
-		2lSc7PWE2T4fL1iuRHqmLupamkk=
+		Pbzo/8/WM7RpnPwYTCZ/Zm2+IOs=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPMessagingSDK.storyboardc/ConversationViewController.nib</key>
 		<data>
@@ -1126,35 +1134,35 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		auiMcsA2r9w9R2TcaNph/XzPnXA=
+		gLecjUP0FbFWT0JDZB4cGCMnhHM=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		qxQnv+2obGHjihss4RCGVbKoi50=
+		JUFwzS3yYI5Fs7BR+Cv7ZVQ8EkU=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		rl8QknIVud6yuMNIWumZjst21cA=
+		3TO6+9Y5f/t+tvr6/Ei3kYMZEMk=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		qxQnv+2obGHjihss4RCGVbKoi50=
+		JUFwzS3yYI5Fs7BR+Cv7ZVQ8EkU=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		auiMcsA2r9w9R2TcaNph/XzPnXA=
+		gLecjUP0FbFWT0JDZB4cGCMnhHM=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		61lGXGFJS50n617jUIX6jBwloDk=
+		RfkN1SZGDM1HM0RqRMxXoqMgzwA=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		NesOGLaCn+YfRHu1IWkfXAg5eyE=
+		tce7BdnfDDghfr36KLALy/c45TA=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		61lGXGFJS50n617jUIX6jBwloDk=
+		RfkN1SZGDM1HM0RqRMxXoqMgzwA=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/module.modulemap</key>
 		<data>
@@ -1170,11 +1178,11 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/PrivateHeaders/CIContext+Workaround.h</key>
 		<data>
-		fPRVF6hg3WCIB1uOxrMbstlGtK4=
+		ZLiGsNHJSqPM4Foy/RcxR9Qq7Ks=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/PrivateHeaders/ExceptionCatcher.h</key>
 		<data>
-		i6mjqXUNZ1PVwvfMwGdcVVZ1fWM=
+		MF3z5QDdCVY4jhe3n2DMsW7ysII=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/PrivateHeaders/JOSESwift.h</key>
 		<data>
@@ -1358,7 +1366,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/_CodeSignature/CodeResources</key>
 		<data>
-		TI23i5NwjA7iX40d+Q4DRKgA9Es=
+		epIy8LIWUBPMWr7QM7KljvgAApg=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ar.lproj/LPLocalizable.strings</key>
 		<dict>
@@ -1974,15 +1982,26 @@
 			56oU0zwb539wI3AnamMrdmz84OHt4NDnJihHO/h/GHE=
 			</data>
 		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 21.omo</key>
+		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.mom</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LL9d2MA2c2+DpkkSq8cOzTwLoLs=
+			yem/+o+ll93B1jb7XE6mBoDtbc0=
 			</data>
 			<key>hash2</key>
 			<data>
-			ICu2EqV1wu9Cvm1dDOS3QAXpbl580RZ9X8ggGrJVLhg=
+			LsQ3g0mJga/ne4Ge4VER04LbT2DshyiHO3o9/hWMemY=
+			</data>
+		</dict>
+		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.omo</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YTBohA7+Hxs/t8yT2Ngjj1eC8Cg=
+			</data>
+			<key>hash2</key>
+			<data>
+			uFGaTLb+Dkzt40X9a/ZaVb4x+oF2NO2jCWWe+E9QgHg=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_11_EventID_Photo_Sharing.mom</key>
@@ -2077,11 +2096,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			g+tsPmEuqLKkx0+gKwgl3rzKLUU=
+			8JwFIFmsAq3Eek/xqf4zGudbLNI=
 			</data>
 			<key>hash2</key>
 			<data>
-			Uf4ll8PPV9yYUboK5NcqEFYsJ+s2mwaBkJpXSd/B8Kg=
+			VLhkDiKvRJLcAoupgDm4G+WITKwGRhCUy2TlqnSGkt0=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_12.cdm</key>
@@ -2198,11 +2217,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			uESkTehSvDpgN7SXrtGEY95M9fM=
+			wen87luTn8VsvTrmu9iGyI3cHGQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			GvKvFMKnPbiqtJHw1YxDrjHMvno1L12XWVXdat9wFW0=
+			10Wq5Uh2ELEOwsFfgJD2GSsJhhCh9YzAoJFVLyCP1dA=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Headers/LPMessagingSDK.h</key>
@@ -2220,11 +2239,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			EBLPXixFapagjzixH/FGJjbva0A=
+			myuF0JR9u7h9LvIoyYgGvNs33ho=
 			</data>
 			<key>hash2</key>
 			<data>
-			z92iORwW9DaKeANbsVVYBjgCa4a80p9cv1th5zIOMjw=
+			rrqENbTSn8AYfJPa532nA3YEnb89RzJw2tlpmnOuIFs=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/InputTextView.nib</key>
@@ -2275,11 +2294,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yl34bsfj7wrF991GLV0VYbtmbz4=
+			IBX/+fQr5htnz1gnrkKww2GBHHs=
 			</data>
 			<key>hash2</key>
 			<data>
-			1T+pNXgCKGph0wtwhKPPCCM+h97pgtZJGsGg+hIVTBc=
+			ELqsN0xHR/sXvMtskLR6M8Gd7W4kkygu2zmytb8cIC4=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/LPMessagingSDK.storyboardc/ConversationViewController.nib</key>
@@ -2440,44 +2459,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			A1aLz+/JvJcP60wcWnTiTifUMmM=
+			jwRaVa52iAELjHkSOR4JG4WndVw=
 			</data>
 			<key>hash2</key>
 			<data>
-			Yrvx9NqhNEBInMJkgMdJA9q30zSxZomesP1JTe73bTQ=
+			wz0DjcZEFWWJ38hBjvYJiMgAiWlHxLQI+m1PmtMqA/g=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Osgqr1C+HsaptjKSx+0JUQyJ+3I=
+			dxqeyTajEN4T7eE2qENuICz+RTI=
 			</data>
 			<key>hash2</key>
 			<data>
-			XOgiOc9Fsxw2S4r1Np63vXq95z6jSGU+E5ywEoUf7tM=
+			l9ZZmpj5Q7Ojp5O/CC09+HlRhWgBjEsLEml36b6js9E=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			v2m5hCU1wFT3hexMeRYKs37iuLM=
+			b05VRWo7b3un/QZSSQsM0pWXa34=
 			</data>
 			<key>hash2</key>
 			<data>
-			N3WPvLmKuRhDu+nDMxjYdyUs30ewEvTN72a5mo74vAg=
+			Mq10gAAIYPUNsAiZixvNJej8cvapWRPNf81XPDaHtfY=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Osgqr1C+HsaptjKSx+0JUQyJ+3I=
+			dxqeyTajEN4T7eE2qENuICz+RTI=
 			</data>
 			<key>hash2</key>
 			<data>
-			XOgiOc9Fsxw2S4r1Np63vXq95z6jSGU+E5ywEoUf7tM=
+			l9ZZmpj5Q7Ojp5O/CC09+HlRhWgBjEsLEml36b6js9E=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/module.modulemap</key>
@@ -2517,22 +2536,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fPRVF6hg3WCIB1uOxrMbstlGtK4=
+			ZLiGsNHJSqPM4Foy/RcxR9Qq7Ks=
 			</data>
 			<key>hash2</key>
 			<data>
-			N03WxwtkxtPNfMHDQXEaCrzk6h21RE3jB4Q0R0QCACI=
+			mFuEr5wQGARNs2pUAjHDnlYMVpWvi9k8a3nKYLA8k8U=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/PrivateHeaders/ExceptionCatcher.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			i6mjqXUNZ1PVwvfMwGdcVVZ1fWM=
+			MF3z5QDdCVY4jhe3n2DMsW7ysII=
 			</data>
 			<key>hash2</key>
 			<data>
-			xvohJ5clvPcRlJ17GpWJJntcAfIWl/bB9KVURjAbgFQ=
+			RIqV29df5lfZgkT/iz0Xe067dVtA4f7qDwP7ZZzHEPY=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/PrivateHeaders/JOSESwift.h</key>
@@ -3839,15 +3858,26 @@
 			56oU0zwb539wI3AnamMrdmz84OHt4NDnJihHO/h/GHE=
 			</data>
 		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 21.omo</key>
+		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.mom</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LL9d2MA2c2+DpkkSq8cOzTwLoLs=
+			yem/+o+ll93B1jb7XE6mBoDtbc0=
 			</data>
 			<key>hash2</key>
 			<data>
-			ICu2EqV1wu9Cvm1dDOS3QAXpbl580RZ9X8ggGrJVLhg=
+			LsQ3g0mJga/ne4Ge4VER04LbT2DshyiHO3o9/hWMemY=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.omo</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YTBohA7+Hxs/t8yT2Ngjj1eC8Cg=
+			</data>
+			<key>hash2</key>
+			<data>
+			uFGaTLb+Dkzt40X9a/ZaVb4x+oF2NO2jCWWe+E9QgHg=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_11_EventID_Photo_Sharing.mom</key>
@@ -3942,11 +3972,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			g+tsPmEuqLKkx0+gKwgl3rzKLUU=
+			8JwFIFmsAq3Eek/xqf4zGudbLNI=
 			</data>
 			<key>hash2</key>
 			<data>
-			Uf4ll8PPV9yYUboK5NcqEFYsJ+s2mwaBkJpXSd/B8Kg=
+			VLhkDiKvRJLcAoupgDm4G+WITKwGRhCUy2TlqnSGkt0=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_12.cdm</key>
@@ -4063,11 +4093,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			keImAges+AYml6O6FlA8fL9KCpY=
+			532I3XsCibTbkxpmtx6g/gvgpj0=
 			</data>
 			<key>hash2</key>
 			<data>
-			2O0z7T2irZVF6K/hKBKLeax72rDOA38rRRLJT6P5F5Y=
+			hDwgfwRLBifnAirR9TDlqW6X1Uq8E/b96ivdHp49xUA=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Headers/LPMessagingSDK.h</key>
@@ -4085,11 +4115,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			quoEdCufhw/K3C3sOcxHwafyKzY=
+			dRHEu1tonDoe1B4GH0CbFuPVLJc=
 			</data>
 			<key>hash2</key>
 			<data>
-			oA8wPX6pmslunmCJMPBmVEnkhbOiYudei66slVVLUxc=
+			+Px6tsjt2FzQ0TcEbwffCDjta72s1Tdt1TZs/O0H+No=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/InputTextView.nib</key>
@@ -4140,11 +4170,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2lSc7PWE2T4fL1iuRHqmLupamkk=
+			Pbzo/8/WM7RpnPwYTCZ/Zm2+IOs=
 			</data>
 			<key>hash2</key>
 			<data>
-			Rla5eWYQS2BNrKEmXICRADTcyKx4SnTM0yoi2/MHfaE=
+			th9StWLtdkTA2Ji0TCaQQ0ka3c7Z5c8SbMfZAzkacd4=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPMessagingSDK.storyboardc/ConversationViewController.nib</key>
@@ -4305,88 +4335,88 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			auiMcsA2r9w9R2TcaNph/XzPnXA=
+			gLecjUP0FbFWT0JDZB4cGCMnhHM=
 			</data>
 			<key>hash2</key>
 			<data>
-			uOP4hQu+/KSMoO8oIV4urh2eemqrYY3C+pvSXBNb5tA=
+			L+RSxQBV64Hf9BDz4mMJLtq4+cZe9LEA2BMRkTbN544=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			qxQnv+2obGHjihss4RCGVbKoi50=
+			JUFwzS3yYI5Fs7BR+Cv7ZVQ8EkU=
 			</data>
 			<key>hash2</key>
 			<data>
-			JYIXxgeUJNCCKW5d2CIMTL+ORQLzoDPq1cGcJR+DPD8=
+			kD2bDE18AcEV80SQ6PpATOTzN1uhCv/eupe7MxYKzN0=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rl8QknIVud6yuMNIWumZjst21cA=
+			3TO6+9Y5f/t+tvr6/Ei3kYMZEMk=
 			</data>
 			<key>hash2</key>
 			<data>
-			fihwpkUgUXxs6QA60Q0TVYxr+j2Veo++9ESsl94PEsI=
+			P6oDEqCtQuDPNtg9oChiC3QvogB11CMbkxZqqr0Vgl0=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			qxQnv+2obGHjihss4RCGVbKoi50=
+			JUFwzS3yYI5Fs7BR+Cv7ZVQ8EkU=
 			</data>
 			<key>hash2</key>
 			<data>
-			JYIXxgeUJNCCKW5d2CIMTL+ORQLzoDPq1cGcJR+DPD8=
+			kD2bDE18AcEV80SQ6PpATOTzN1uhCv/eupe7MxYKzN0=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			auiMcsA2r9w9R2TcaNph/XzPnXA=
+			gLecjUP0FbFWT0JDZB4cGCMnhHM=
 			</data>
 			<key>hash2</key>
 			<data>
-			uOP4hQu+/KSMoO8oIV4urh2eemqrYY3C+pvSXBNb5tA=
+			L+RSxQBV64Hf9BDz4mMJLtq4+cZe9LEA2BMRkTbN544=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			61lGXGFJS50n617jUIX6jBwloDk=
+			RfkN1SZGDM1HM0RqRMxXoqMgzwA=
 			</data>
 			<key>hash2</key>
 			<data>
-			J4eKhe2s4OWLyM0QAaWD6UI3uWLiqHBpY/E6NlbT7UA=
+			PRGnK1gmza7nG/i1+/cAZx+U/c0gNHBP0tqZ0upA7oU=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			NesOGLaCn+YfRHu1IWkfXAg5eyE=
+			tce7BdnfDDghfr36KLALy/c45TA=
 			</data>
 			<key>hash2</key>
 			<data>
-			KoU+eFPzcdLC8OykFeowVRUhDhr5Xa/x197p5L8X/N0=
+			62/gkGOU3KXyxKyXZkEHngDYw6D1sDh4cX5olBc3ndo=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			61lGXGFJS50n617jUIX6jBwloDk=
+			RfkN1SZGDM1HM0RqRMxXoqMgzwA=
 			</data>
 			<key>hash2</key>
 			<data>
-			J4eKhe2s4OWLyM0QAaWD6UI3uWLiqHBpY/E6NlbT7UA=
+			PRGnK1gmza7nG/i1+/cAZx+U/c0gNHBP0tqZ0upA7oU=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/module.modulemap</key>
@@ -4426,22 +4456,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fPRVF6hg3WCIB1uOxrMbstlGtK4=
+			ZLiGsNHJSqPM4Foy/RcxR9Qq7Ks=
 			</data>
 			<key>hash2</key>
 			<data>
-			N03WxwtkxtPNfMHDQXEaCrzk6h21RE3jB4Q0R0QCACI=
+			mFuEr5wQGARNs2pUAjHDnlYMVpWvi9k8a3nKYLA8k8U=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/PrivateHeaders/ExceptionCatcher.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			i6mjqXUNZ1PVwvfMwGdcVVZ1fWM=
+			MF3z5QDdCVY4jhe3n2DMsW7ysII=
 			</data>
 			<key>hash2</key>
 			<data>
-			xvohJ5clvPcRlJ17GpWJJntcAfIWl/bB9KVURjAbgFQ=
+			RIqV29df5lfZgkT/iz0Xe067dVtA4f7qDwP7ZZzHEPY=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/PrivateHeaders/JOSESwift.h</key>
@@ -4943,11 +4973,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			TI23i5NwjA7iX40d+Q4DRKgA9Es=
+			epIy8LIWUBPMWr7QM7KljvgAApg=
 			</data>
 			<key>hash2</key>
 			<data>
-			1ZMa2albDkxAEbbpFDTxJzZTnhVdwn/xeB1YiE9SJdI=
+			umXKzaSK/5wup66mPt0AIyDf9mSq8MBLfKLUrqx2oaE=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ar.lproj/LPLocalizable.strings</key>
