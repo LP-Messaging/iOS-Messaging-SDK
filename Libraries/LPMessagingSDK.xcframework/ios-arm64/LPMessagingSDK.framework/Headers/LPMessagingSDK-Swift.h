@@ -303,6 +303,13 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK7Account_")
 @property (nonatomic, strong) id <Brand> _Nonnull brand;
 @end
 
+typedef SWIFT_ENUM(int16_t, AgentType, open) {
+  AgentTypeUnknown = -1,
+  AgentTypeController = 0,
+  AgentTypeHuman = 1,
+  AgentTypeBot = 2,
+};
+
 @class NSSet;
 @class NSDate;
 
@@ -491,7 +498,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK6Dialog_")
 @property (nonatomic, copy) NSString * _Nullable uid;
 @property (nonatomic, copy) NSString * _Nonnull handlerId;
 /// Relationship
-@property (nonatomic, strong) id <Conversation> _Nonnull ownerConversation;
+@property (nonatomic, strong) id <Conversation> _Nullable ownerConversation;
 @property (nonatomic, strong) NSSet * _Nonnull participants;
 @property (nonatomic, strong) NSOrderedSet * _Nonnull dialogMessages;
 @property (nonatomic, copy) NSString * _Nonnull chatStateRaw;
@@ -588,7 +595,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK17LPAppointmentList")
 enum LPAuthenticationType : NSInteger;
 
 /// #LPAuthenticationParams
-/// This class represents an object to determine the properties of an authenticated connection. If using an authenticated connection, this parameter must be passed: LPAuthenticationParams supports Code Flow login, Implicit Flow login, or Unauthenticated login. See Constructor for details.
+/// This class represents an object to determine the properties of an authenticated connection.
+/// If using an authenticated connection, this parameter must be passed: LPAuthenticationParams supports Code Flow login,
+/// Implicit Flow login, or Unauthenticated login. See Constructor for details.
 SWIFT_CLASS("_TtC14LPMessagingSDK22LPAuthenticationParams")
 @interface LPAuthenticationParams : NSObject
 @property (nonatomic, copy) NSString * _Nullable authenticationCode;
@@ -601,18 +610,23 @@ SWIFT_CLASS("_TtC14LPMessagingSDK22LPAuthenticationParams")
 @property (nonatomic, copy) NSArray<NSString *> * _Nullable certPinningPublicKeys;
 @property (nonatomic) enum LPAuthenticationType type;
 /// LPAuthenticationParams initialization with params
-/// \param authenticationCode an optional authCode which is used for ‘Code Flow’ authentication. If passing JWT - authenticationCode will be ignored
+/// \param authenticationCode an optional authCode which is used for ‘Code Flow’ authentication. If passing JWT - authenticationCode will
+/// be ignored
 ///
 /// \param jwt an optional JWT which is used for ‘Implicit Flow’ authentication. If passing JWT - authenticationCode will be ignored
 ///
 /// \param redirectURI IDP redirect URI
 ///
-/// \param codeVerifier A JWE generated off a random string to be used as a compairson against a code challenge used on the brand side to prevent stolen tokens in a PKCE code flow solution only.
+/// \param codeVerifier A JWE generated off a random string to be used as a compairson against a code challenge used on the brand side to
+/// prevent stolen tokens in a PKCE code flow solution only.
 ///
-/// \param certPinningPublicKeys Set the certificate public key hash this API can get multiple public key hashes for the ability to support more then one key and if the certificate leaf change his public key we will still be able to validate the keys of the others certificate leaf
+/// \param certPinningPublicKeys Set the certificate public key hash this API can get multiple public key hashes for the ability to
+/// support more then one key and if the certificate leaf change his public key we will still be able to validate the keys of the others
+/// certificate leaf
 /// if nil the Cert Pinning is disable
 ///
-/// \param authenticationType .authenticated for Code Flow or Implicit, .unauthenticated for Unauthenticated.  If left as nil will default to .signup flow.
+/// \param authenticationType .authenticated for Code Flow or Implicit, .unauthenticated for Unauthenticated.  If left as nil will default
+/// to .signup flow.
 ///
 - (nonnull instancetype)initWithAuthenticationCode:(NSString * _Nullable)authenticationCode jwt:(NSString * _Nullable)jwt codeVerifier:(NSString * _Nullable)codeVerifier redirectURI:(NSString * _Nullable)redirectURI issuerDisplayName:(NSString * _Nullable)issuerDisplayName certPinningPublicKeys:(NSArray<NSString *> * _Nullable)certPinningPublicKeys authenticationType:(enum LPAuthenticationType)authenticationType OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -1199,6 +1213,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) CGFloat quickReplyHorizontalMargin;
 /// Border size of Quick Reply buttons.
 @property (nonatomic) CGFloat quickReplyButtonBorderWidth;
+/// Color of the quick reply text
+@property (nonatomic, strong) UIColor * _Nonnull quickReplyTextColor;
+@property (nonatomic, strong) UIColor * _Nonnull quickReplyBackgroundColor;
+@property (nonatomic, strong) UIColor * _Nonnull quickReplyBorderColor;
 /// Conversation Scroll configurations for scenarios:
 /// <ul>
 ///   <li>
@@ -1451,6 +1469,22 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) CGFloat remoteUserAvatarIconBorderWidth;
 /// Define the remote avatar icon border color.
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserAvatarIconBorderColor;
+/// Background color of the bot user’s avatar.
+@property (nonatomic, strong) UIColor * _Nonnull botUserAvatarBackgroundColor;
+/// Define the bot avatar Leading padding  (left edge to avatar).
+@property (nonatomic) float botUserAvatarLeadingPadding;
+/// Define the bot avatar Trailing padding (Avatar to bubble).
+@property (nonatomic) float botUserAvatarTrailingPadding;
+/// Icon color of default botUser avatar.
+@property (nonatomic, strong) UIColor * _Nonnull botUserAvatarIconColor;
+/// Default Avatar image of the bot user.
+/// When assigned, this image will disable <code>botUserAvatarBackgroundColor</code> and <code>botUserAvatarIconColor</code> configurations.
+/// If remote user has an avatar image in his profile, this attribute will be ignored.
+@property (nonatomic, strong) UIImage * _Nullable botUserDefaultAvatarImage;
+/// Define the bot avatar icon border width.
+@property (nonatomic) CGFloat botUserAvatarIconBorderWidth;
+/// Define the bot avatar icon border color.
+@property (nonatomic, strong) UIColor * _Nonnull botUserAvatarIconBorderColor;
 /// Default avatar image for Brand.
 /// If setting nil - default avatar image will be used with <code>remoteUserAvatarBackgroundColor</code> and <code>remoteUserAvatarIconColor</code>
 @property (nonatomic, strong) UIImage * _Nullable brandAvatarImage;
@@ -1490,12 +1524,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleLongPressOverlayColor;
 /// Alpha of the remote user’s bubble overlay when user use long press gesture on the bubble. Value can be 0.0 - 1.0. Overlay will
 /// appear as long as the menu controller appears on the bubble, when the menu dismissed, overlay will disappear too. In order to show
-/// overlay enableBubblesOverlayOnLongPress should be true. Default value is LPColor.lpLabel.
+/// overlay enableBubblesOverlayOnLongPress should be true.
 @property (nonatomic) float remoteUserBubbleLongPressOverlayAlpha;
 /// Top left Radius corner on the Remote bubble.
 /// Setting the radius to a value greater than 0.0 causes the bubble’s layer to begin drawing rounded corners on its background. This
 /// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
-/// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually. Default value is 0.3.
+/// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually. Default value is 8.0.
 @property (nonatomic) float remoteUserBubbleTopLeftCornerRadius;
 /// Top right Radius corner on the Remote bubble.
 /// Setting the radius to a value greater than 0.0 causes the bubble’s layer to begin drawing rounded corners on its background. This
@@ -1512,6 +1546,46 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
 /// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually.
 @property (nonatomic) float remoteUserBubbleBottomRightCornerRadius;
+/// Color code for the background of the bot user bubble.
+@property (nonatomic, strong) UIColor * _Nonnull botUserBubbleBackgroundColor;
+/// Color code for the outline color.
+@property (nonatomic, strong) UIColor * _Nonnull botUserBubbleBorderColor;
+/// Color code for links in the text of the bot user bubble.
+@property (nonatomic, strong) UIColor * _Nonnull botUserBubbleLinkColor;
+/// Color code for the text of the bot user bubble.
+@property (nonatomic, strong) UIColor * _Nonnull botUserBubbleTextColor;
+/// Double number for the outline width.
+@property (nonatomic) double botUserBubbleBorderWidth;
+/// Color code for the timestamp of the bot user bubble.
+@property (nonatomic, strong) UIColor * _Nonnull botUserBubbleTimestampColor;
+/// Color of the bot user’s bubble overlay when user use long press gesture on the bubble. Overlay will appear as long as the menu
+/// controller appears on the bubble, when the menu dismissed, overlay will disappear too. In order to show overlay
+/// enableBubblesOverlayOnLongPress should be true.
+@property (nonatomic, strong) UIColor * _Nonnull botUserBubbleLongPressOverlayColor;
+/// Alpha of the bot user’s bubble overlay when user use long press gesture on the bubble. Value can be 0.0 - 1.0. Overlay will
+/// appear as long as the menu controller appears on the bubble, when the menu dismissed, overlay will disappear too. In order to show
+/// overlay enableBubblesOverlayOnLongPress should be true.
+@property (nonatomic) float botUserBubbleLongPressOverlayAlpha;
+/// Top left Radius corner on the remote bot bubble.
+/// Setting the radius to a value greater than 0.0 causes the bubble’s layer to begin drawing rounded corners on its background. This
+/// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
+/// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually. Default value is 8.0.
+@property (nonatomic) float botUserBubbleTopLeftCornerRadius;
+/// Top right Radius corner on the remote bot bubble.
+/// Setting the radius to a value greater than 0.0 causes the bubble’s layer to begin drawing rounded corners on its background. This
+/// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
+/// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually.
+@property (nonatomic) float botUserBubbleTopRightCornerRadius;
+/// Bottom left Radius corner on the remote bot bubble.
+/// Setting the radius to a value greater than 0.0 causes the bubble’s layer to begin drawing rounded corners on its background. This
+/// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
+/// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually.
+@property (nonatomic) float botUserBubbleBottomLeftCornerRadius;
+/// Bottom right Radius corner on the remote bot bubble.
+/// Setting the radius to a value greater than 0.0 causes the bubble’s layer to begin drawing rounded corners on its background. This
+/// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
+/// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually.
+@property (nonatomic) float botUserBubbleBottomRightCornerRadius;
 /// Color code for the background of the visitor bubble.
 @property (nonatomic, strong) UIColor * _Nonnull userBubbleBackgroundColor;
 /// Color code for the outline of the visitor bubble.
@@ -1693,7 +1767,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// The maximum height of the input text field in pixels. Default is 100 pixels.
 /// Cannot be smaller than 50 pixels.
 @property (nonatomic) CGFloat inputTextViewMaxHeight;
-/// If enabled then user will be able to compose and send messages straight away even the conversation history synchronization is in progress. These messages will be stored offline on device storage and will be sent once conversation history is fully synced and socket is open.
+/// If enabled then user will be able to compose and send messages straight away even the conversation history synchronization is in
+/// progress. These messages will be stored offline on device storage and will be sent once conversation history is fully synced and
+/// socket is open.
 @property (nonatomic) BOOL offlineMessagingEnabled;
 /// It defines how offline message should be treated if main dialog of conversation is closed and post conversation survey has started.
 /// 0 - do nothing, just send offline messages to the same dialog
@@ -1736,12 +1812,104 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) LPConfig * _Nonnull de
 + (void)printAllConfigurations;
 @end
 
+
+SWIFT_CLASS("_TtC14LPMessagingSDK25LPConversationCSATDetails")
+@interface LPConversationCSATDetails : NSObject
+@property (nonatomic, readonly) NSInteger rate;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC14LPMessagingSDK29LPConversationCampaignDetails")
+@interface LPConversationCampaignDetails : NSObject
+@property (nonatomic, readonly) NSInteger campaignId;
+@property (nonatomic, readonly) NSInteger engagementId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC14LPMessagingSDK35LPConversationClientPropertyDetails")
+@interface LPConversationClientPropertyDetails : NSObject
+@property (nonatomic, copy) NSString * _Nullable appId;
+@property (nonatomic, copy) NSString * _Nullable appVersion;
+@property (nonatomic, copy) NSString * _Nullable ipAddress;
+@property (nonatomic, copy) NSString * _Nullable deviceFamily;
+@property (nonatomic, copy) NSString * _Nullable os;
+@property (nonatomic, copy) NSString * _Nullable osVersion;
+@property (nonatomic, copy) NSString * _Nullable osName;
+@property (nonatomic, copy) NSString * _Nullable integration;
+@property (nonatomic, copy) NSString * _Nullable integrationVersion;
+@property (nonatomic, copy) NSString * _Nullable timeZone;
+@property (nonatomic, copy) NSString * _Nullable deviceModel;
+@property (nonatomic, copy) NSArray<NSString *> * _Nullable features;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 /// For SDK API External Use
 typedef SWIFT_ENUM(NSInteger, LPConversationCloseReason, open) {
   LPConversationCloseReasonAgent = 0,
   LPConversationCloseReasonConsumer = 1,
   LPConversationCloseReasonSystem = 2,
 };
+
+
+SWIFT_CLASS("_TtC14LPMessagingSDK28LPConversationContextDetails")
+@interface LPConversationContextDetails : NSObject
+@property (nonatomic, copy) NSString * _Nullable type;
+@property (nonatomic, copy) NSString * _Nullable lang;
+@property (nonatomic, strong) LPConversationClientPropertyDetails * _Nullable clientProperties;
+@property (nonatomic, copy) NSString * _Nullable visitorId;
+@property (nonatomic, copy) NSString * _Nullable sessionId;
+@property (nonatomic, copy) NSString * _Nullable interactionContextId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class LPConversationDialogDetails;
+@class LPConversationTTRDetails;
+@class LPConversationRolloverDetails;
+
+SWIFT_CLASS("_TtC14LPMessagingSDK25LPConversationDataDetails")
+@interface LPConversationDataDetails : NSObject
+@property (nonatomic, copy) NSString * _Nullable id;
+@property (nonatomic, copy) NSString * _Nullable createdTs;
+@property (nonatomic, copy) NSString * _Nullable lastUpdatedTs;
+@property (nonatomic, copy) NSString * _Nullable brandId;
+@property (nonatomic, copy) NSString * _Nullable skillId;
+@property (nonatomic, copy) NSString * _Nullable state;
+@property (nonatomic, copy) NSString * _Nullable stage;
+@property (nonatomic, copy) NSArray<LPConversationDialogDetails *> * _Nullable dialogs;
+@property (nonatomic, strong) LPConversationContextDetails * _Nullable context;
+@property (nonatomic, strong) LPConversationTTRDetails * _Nullable ttr;
+@property (nonatomic, strong) LPConversationCampaignDetails * _Nullable campaignInfo;
+@property (nonatomic, strong) LPConversationCSATDetails * _Nullable csat;
+@property (nonatomic, strong) LPConversationRolloverDetails * _Nullable conversationRollOverHandler;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class LPconversationMetaDataDetails;
+@class LPconversationParticipantDetails;
+
+SWIFT_CLASS("_TtC14LPMessagingSDK27LPConversationDialogDetails")
+@interface LPConversationDialogDetails : NSObject
+@property (nonatomic, copy) NSString * _Nullable id;
+@property (nonatomic, copy) NSString * _Nullable createdTs;
+@property (nonatomic, copy) NSString * _Nullable lastUpdatedTs;
+@property (nonatomic, copy) NSString * _Nullable conversationId;
+@property (nonatomic, strong) LPconversationMetaDataDetails * _Nullable metaData;
+@property (nonatomic, copy) NSString * _Nullable closedTs;
+@property (nonatomic, copy) NSArray<LPconversationParticipantDetails *> * _Nullable participants;
+@property (nonatomic, copy) NSString * _Nullable dialogType;
+@property (nonatomic, copy) NSString * _Nullable channelType;
+@property (nonatomic, copy) NSString * _Nullable state;
+@property (nonatomic, copy) NSString * _Nullable closedBy;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 enum LPConversationsHistoryStateToDisplay : NSInteger;
 enum LPConversationHistoryMaxDaysDateType : NSInteger;
@@ -1771,6 +1939,23 @@ typedef SWIFT_ENUM(NSInteger, LPConversationHistoryMaxDaysDateType, open) {
   LPConversationHistoryMaxDaysDateTypeEndConversationDate = 1,
 };
 
+
+SWIFT_CLASS("_TtC14LPMessagingSDK26LPConversationLinksDetails")
+@interface LPConversationLinksDetails : NSObject
+@property (nonatomic, copy) NSString * _Nullable selfValue;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC14LPMessagingSDK29LPConversationRolloverDetails")
+@interface LPConversationRolloverDetails : NSObject
+@property (nonatomic, copy) NSString * _Nullable accountId;
+@property (nonatomic, copy) NSString * _Nullable skillId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 enum ScrollPosition : NSInteger;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK33LPConversationScrollConfiguration")
@@ -1783,7 +1968,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK33LPConversationScrollConfiguration")
 @property (nonatomic) enum ScrollPosition scrollToBottomButtonPressed;
 /// scenario when a push notification is tapped.
 /// note:
-/// This requires the call <code>LPMessagingSDK.instance.setPushNotificationTapped()</code> immediately after it is determine that a push notification was tapped.
+/// This requires the call <code>LPMessagingSDK.instance.setPushNotificationTapped()</code> immediately after it is determine that a push
+/// notification was tapped.
 @property (nonatomic) enum ScrollPosition pushNotificationTapped;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -1797,6 +1983,15 @@ typedef SWIFT_ENUM(NSInteger, ScrollPosition, open) {
   ScrollPositionFirstUnreadMessage = 2,
 };
 
+
+SWIFT_CLASS("_TtC14LPMessagingSDK24LPConversationTTRDetails")
+@interface LPConversationTTRDetails : NSObject
+@property (nonatomic, copy) NSString * _Nullable type;
+@property (nonatomic, readonly) NSInteger value;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class UIViewController;
 @class LPWelcomeMessage;
 
@@ -1809,19 +2004,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK24LPConversationViewParams")
 @property (nonatomic, readonly) BOOL isViewOnly;
 @property (nonatomic, readonly, strong) LPConversationHistoryControlParam * _Nonnull conversationHistoryControlParam;
 @property (nonatomic, strong) LPWelcomeMessage * _Nonnull welcomeMessage;
-/// <h1>LPConversationViewParams</h1>
-/// \param conversationQuery Type ConversationParamProtocol which ties this object to the brand.
-///
-/// \param containerViewController Type UIViewController used as a reference if embedding the view.
-///
-/// \param isViewOnly Bool is the request pertaining to obtaining a single view (true) to embed or a whole view stack (false).
-///
-/// \param conversationHistoryControlParam LPConversationHistoryControlParam object related to displaying history within a conversation.
-///
-/// \param welcomeMessage LPWelcome object related to welcome message at the start of the conversation.
-///
 - (nonnull instancetype)initWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery containerViewController:(UIViewController * _Nullable)containerViewController isViewOnly:(BOOL)isViewOnly conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nonnull)conversationHistoryControlParam welcomeMessage:(LPWelcomeMessage * _Nonnull)welcomeMessage OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery containerViewController:(UIViewController * _Nullable)containerViewController isViewOnly:(BOOL)isViewOnly conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nonnull)conversationHistoryControlParam OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,deprecated=12.0.0,obsoleted=14.0.0,message="Use public init(conversationQuery: ConversationParamProtocol, containerViewController: UIViewController? = nil, isViewOnly: Bool = false, conversationHistoryControlParam: LPConversationHistoryControlParam = LPConversationHistoryControlParam(historyConversationsStateToDisplay: .none), welcomeMessage: LPWelcomeMessage = LPWelcomeMessage(message: nil)) instead");
+/// Deprecated 5/20/2019
+- (nonnull instancetype)initWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery containerViewController:(UIViewController * _Nullable)containerViewController isViewOnly:(BOOL)isViewOnly conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nonnull)conversationHistoryControlParam OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,deprecated=12.0.0,obsoleted=14.0.0,message="\n        Use public init(conversationQuery: ConversationParamProtocol, containerViewController: UIViewController? = nil,         isViewOnly: Bool = false, conversationHistoryControlParam: LPConversationHistoryControlParam =         LPConversationHistoryControlParam(historyConversationsStateToDisplay: .none),         welcomeMessage: LPWelcomeMessage = LPWelcomeMessage(message: nil)) instead\n        ");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -1860,6 +2045,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
+SWIFT_CLASS("_TtC14LPMessagingSDK26LPGetConversationsResponse")
+@interface LPGetConversationsResponse : NSObject
+@property (nonatomic, copy) NSArray<LPConversationDataDetails *> * _Nullable data;
+@property (nonatomic, strong) LPConversationLinksDetails * _Nullable links;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC14LPMessagingSDK23LPGetEngagementResponse")
 @interface LPGetEngagementResponse : NSObject
 /// Optional Engagement Details response in case received from the server, per the Engagement’s request
@@ -1875,7 +2069,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK23LPGetEngagementResponse")
 
 /// All SDK supported languages
 /// The enum contains general languages and specific if exists.
-/// For example: Portuguese from ‘pt’ folder will be used for all regions when the language is Portuguese. Portuguese from ‘pt-PT’ folder will be used for Portugal region only when the language is Portuguese (Portugal)
+/// For example: Portuguese from ‘pt’ folder will be used for all regions
+/// when the language is Portuguese. Portuguese from ‘pt-PT’ folder will be used
+/// for Portugal region only when the language is Portuguese (Portugal)
 typedef SWIFT_ENUM(NSInteger, LPLanguage, open) {
   LPLanguageDevice = 0,
   LPLanguageEn = 1,
@@ -1962,15 +2158,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// This method throws an error/return false with with an error, in case the initialization failed.
 - (BOOL)initialize:(NSString * _Nullable)brandID monitoringInitParams:(LPMonitoringInitParams * _Nullable)monitoringInitParams error:(NSError * _Nullable * _Nullable)error;
 /// Show Conversation view and starts the conversation and show all the existing messages it exist.
-/// \param conversationViewParams an LPConversationViewParams object to determine the properties of the views. Such as Container or Window or if ViewOnly.
+/// \param conversationViewParams an LPConversationViewParams object to determine the properties of the views. Such as Container or Window
+/// or if ViewOnly.
 ///
-/// \param authenticationParams an optional LPAuthenticationParams object to determine the properties of an authenticated connection. If using authenticate connection, this paramater must
+/// \param authenticationParams an optional LPAuthenticationParams object to determine the properties of an authenticated connection. If
+/// using authenticate connection, this paramater must
 /// be passed. LPAuthenticationParams supports Code Flow login or Implicit Flow login.
 ///
 - (void)showConversation:(LPConversationViewParams * _Nonnull)conversationViewParams authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
 /// Remove conversation view for conversation query from its container or window view.
 /// This method ends the conversation’s connection.
 - (void)removeConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+/// Deprecated @ 07/2017
 /// This method reconnects the conversation’s connection for conversation query.
 /// Reconnect open related webSockets and sync the conversation with its latest updates.
 /// Additional parameters:
@@ -1986,7 +2185,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 ///     conversationQuery: conversationQuery of ConversationParamProtocol
 ///   </li>
 ///   <li>
-///     authenticationParams: an LPAuthenticationParams object to determine the properties of an authenticated connection. LPAuthenticationParams supports Code Flow login or Implicit Flow login.
+///     authenticationParams: an LPAuthenticationParams object to determine the properties of an authenticated connection.
+///     LPAuthenticationParams supports Code Flow login or Implicit Flow login.
 ///   </li>
 /// </ul>
 - (void)reconnect:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationParams:(LPAuthenticationParams * _Nonnull)authenticationParams;
@@ -2005,17 +2205,20 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// If the SDK is not connected, it’ll save the last user for each brand, until connected.
 - (void)setUserProfile:(LPUser * _Nonnull)lpuser brandID:(NSString * _Nonnull)brandID;
 /// This method created ConversationParamProtocol of Brand query type.
-/// ConversationParamProtocol represents a ’filter’ for the conversation screen, determining which of the conversations will be displayed in the following screens.
+/// ConversationParamProtocol represents a ’filter’ for the conversation screen, determining which of the conversations will be
+/// displayed in the following screens.
 /// \param brandID brandID to request the conversation query for
 ///
-/// \param campaignInfo an optional campaign info (LPCampaignInfo) to use advanced routing for the consumer. This object based on campaignID and engagementID
+/// \param campaignInfo an optional campaign info (LPCampaignInfo) to use advanced routing for the consumer. This object based on
+/// campaignID and engagementID
 ///
 ///
 /// returns:
 /// a new ConversationParamProtocol by type of BrandQuery
 - (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo SWIFT_WARN_UNUSED_RESULT;
 /// This method created ConversationParamProtocol of Consumer and Skill query type.
-/// ConversationParamProtocol represents a ’filter’ for the conversation screen, determining which of the conversations will be displayed in the following screens.
+/// ConversationParamProtocol represents a ’filter’ for the conversation screen, determining which of the conversations will be
+/// displayed in the following screens.
 /// \param consumerID consumerID to request the conversation query for
 ///
 /// \param brandID brandID to request the conversation query for
@@ -2031,6 +2234,28 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// True - there is an active conversation.
 /// False - there is no active conversation.
 - (BOOL)checkActiveConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_WARN_UNUSED_RESULT;
+/// This method checks for an active(Open/Created) conversation according to UMS Rest API.
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     brandID: brandID to request the conversation query for
+///   </li>
+///   <li>
+///     authParams: LPAuthentication params object for authenticated consumers or nil for unauth consumers
+///   </li>
+///   <li>
+///     fullData: flag to determine whether the full response needs to be returned or just conversation id or empty object.
+///   </li>
+/// </ul>
+///
+/// returns:
+/// a new ConversationParamProtocol by type of ConsumerQuery
+/// Completion - LPGetConversationsResponse
+/// Failiure - NSError and LPRestAPI error code
+- (void)checkActiveConversationFromServerWithBrandID:(NSString * _Nonnull)brandID authParams:(LPAuthenticationParams * _Nullable)authParams fullData:(BOOL)fullData completion:(void (^ _Nonnull)(LPGetConversationsResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Deprecated @ 08/2016
 /// DEPRECATED - This method sets a custom image for the custom button in the conversation navigationBar.
 /// Use customButtonImage instead
 - (void)setCustomButton:(UIImage * _Nullable)image SWIFT_AVAILABILITY(ios,deprecated=9.3.5,obsoleted=14.0.0,message="configure the image using customButtonImage in LPConfig instead");
@@ -2056,32 +2281,39 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// \param text Text to append
 ///
 - (void)addContentToMessageWithText:(NSString * _Nonnull)text;
-/// Get Inactive time interval in seconds of the user last touch on screen. This interval applies to scroll/messaging/action menus and any other general action on the conversation screen.
+/// Get Inactive time interval in seconds of the user last touch on screen. This interval applies to scroll/messaging/action menus and
+/// any other general action on the conversation screen.
 /// If the screen is not active or the application is in background this api will return -1.
 ///
 /// returns:
 /// Inactive TimeInterval (Double)
 - (NSTimeInterval)getInactiveUserInteractionTimeInterval:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_WARN_UNUSED_RESULT;
-/// Use this API to get an engagement for a consumer in an appInstallationId context. When calculating eligibility the decision is based on the SDEs and other parameters. Based on messaging campaign concept.
+/// Use this API to get an engagement for a consumer in an appInstallationId context. When calculating eligibility the decision is based
+/// on the SDEs and other parameters. Based on messaging campaign concept.
 /// As an optional parameter, you can pass SDE Data which includes Entry Points and Engagement Attributes for routing the conversation.
-/// \param identities Mandatory array of identity objects of type LPMonitoringIdentity which includes the details on the consumer and issuer
+/// \param identities Mandatory array of identity objects of type LPMonitoringIdentity which includes the details on the consumer and
+/// issuer
 ///
 /// \param monitoringParams an instance of includes optional Array of Entry Points and an optional dictionary of Engagement Attributes
 ///
-/// \param completion completion block with response of type LPGetEngagementResponse. This response includes sessionID and visitorID along with LPEngagementDetails object.
+/// \param completion completion block with response of type LPGetEngagementResponse. This response includes sessionID and visitorID along
+/// with LPEngagementDetails object.
 ///
 /// \param failure failure block with an error in case the request fails
 ///
 - (void)getEngagementWithIdentities:(NSArray<LPMonitoringIdentity *> * _Nonnull)identities monitoringParams:(LPMonitoringParams * _Nullable)monitoringParams completion:(void (^ _Nonnull)(LPGetEngagementResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// Use this version of the getEngagement function to pass authentication params when using JWE.
 /// Do not pass authentication params for other flows.
-/// \param identities Mandatory array of identity objects of type LPMonitoringIdentity which includes the details on the consumer and issuer
+/// \param identities Mandatory array of identity objects of type LPMonitoringIdentity which includes the details on the consumer and
+/// issuer
 ///
 /// \param monitoringParams an instance of includes optional Array of Entry Points and an optional dictionary of Engagement Attributes
 ///
-/// \param authenticationParams an instance of the authentication params containing an authcode or JWE with the issuer display name for multiple IDP scenarios
+/// \param authenticationParams an instance of the authentication params containing an authcode or JWE with the issuer display name for
+/// multiple IDP scenarios
 ///
-/// \param completion completion block with response of type LPGetEngagementResponse. This response includes sessionID and visitorID along with LPEngagementDetails object.
+/// \param completion completion block with response of type LPGetEngagementResponse. This response includes sessionID and visitorID along
+/// with LPEngagementDetails object.
 ///
 /// \param failure failure block with an error in case the request fails
 ///
@@ -2089,7 +2321,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// Allows for manually setting the AuthenticationParams for a consumer seperate from any individual SDK API.
 /// <ul>
 ///   <li>
-///     Discussion: This is useful when we need to establish consumer related information early in a particular user flow.. for example setting up certificate pins before calling getEngagement.
+///     Discussion: This is useful when we need to establish consumer related information early in a particular user flow.. for example
+///     setting up certificate pins before calling getEngagement.
 ///   </li>
 /// </ul>
 /// \param authenticationParams The LPAuthentication Parmas for the Consumer.
@@ -2097,12 +2330,17 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// \param brandId The brands account number
 ///
 - (void)setAuthenticationParamsWithAuthenticationParams:(LPAuthenticationParams * _Nonnull)authenticationParams brandID:(NSString * _Nonnull)brandID;
-/// Use this API to report an engagement attributes (SDEs) for a consumer in an appInstallationId context including show and accept impression.
-/// \param identities Mandatory array of identity objects of type LPMonitoringIdentity which includes the details on the consumer and issuer
+/// Use this API to report an engagement attributes (SDEs) for a consumer in an appInstallationId context including show and accept
+/// impression.
+/// \param identities Mandatory array of identity objects of type LPMonitoringIdentity which includes the details on the consumer and
+/// issuer
 ///
-/// \param monitoringParams an instance of LPMonitoringParams includes optional Array of Entry Points and an optional dictionary of Engagement Attributes. Additional optional parameter is PageID which is used for Page identification for sending events on the current engagement. PageID will be received in LPSendSDEResponse and in LPGetEngagementResponse
+/// \param monitoringParams an instance of LPMonitoringParams includes optional Array of Entry Points and an optional dictionary of
+/// Engagement Attributes. Additional optional parameter is PageID which is used for Page identification for sending events on the
+/// current engagement. PageID will be received in LPSendSDEResponse and in LPGetEngagementResponse
 ///
-/// \param completion completion block with response of type LPSendSDEResponse. This response includes sessionID and visitorID and pageID for future use.
+/// \param completion completion block with response of type LPSendSDEResponse. This response includes sessionID and visitorID and pageID
+/// for future use.
 ///
 /// \param failure failure block with an error in case the request fails
 ///
@@ -2119,7 +2357,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// \param shouldFetchHistoryOnShowConversation to determine whether to fetch conversation history again on showing conversation.
 ///
 - (BOOL)clearHistory:(id <ConversationParamProtocol> _Nonnull)conversationQuery shouldFetchHistoryOnShowConversation:(BOOL)shouldFetchHistoryOnShowConversation error:(NSError * _Nullable * _Nullable)error;
-/// Calls to generate the PKCE information from the sdk and returns the information back so the host app can start the flow. SDK does not store this information. Host APP should pass it back later.
+/// Calls to generate the PKCE information from the sdk and returns the information
+/// back so the host app can start the flow. SDK does not store this information. Host APP should pass it back later.
 /// Returned Objects:
 /// - Code Challenge
 /// - Code Verifier
@@ -2147,7 +2386,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// Setter for the logging level of console logs produced by LPMessaging iOS SDK.
 /// <ul>
 ///   <li>
-///     Info: The default value for release mode is .INFO and for debug is .TRACE.  Apps should not log lower than .INFO in release configurations.
+///     Info: The default value for release mode is .INFO and for debug is .TRACE.  Apps should not log lower than .INFO in release
+///     configurations.
 ///   </li>
 ///   <li>
 ///     Discussion: This will be replacing the previous functionality via LogsManager.
@@ -2162,7 +2402,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 ///     Info: The logger only records the last 100 logs total, filtering by log level may reduce the number of logs returned.
 ///   </li>
 ///   <li>
-///     Discussion: This will be replacing the previous functionality via LogsManager.  The log history does not adhere to the logging level filter.  The log history records all log levels.  You can filter the logs returned by using the ‘level’ parameter in the same way you can filter the logging level. However be aware log snapshot and logging level work independently.
+///     Discussion: This will be replacing the previous functionality via LogsManager.  The log history does not adhere to the logging
+///     level filter.  The log history records all log levels.  You can filter the logs returned by using the ‘level’ parameter in the same
+///     way you can filter the logging level. However be aware log snapshot and logging level work independently.
 ///   </li>
 /// </ul>
 /// \param level The filtering level of logging options in the following order: (.TRACE, .DEBUG, .INFO, .WARNING, .ERROR, .OFF)
@@ -2177,7 +2419,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 ///     Info: The logger only records the last 100 logs total, filtering by log level may reduce the number of logs returned.
 ///   </li>
 ///   <li>
-///     Discussion: This will be replacing the previous functionality via LogsManager.  The log history does not adhere to the logging level filter.  The log history records all log levels.  You can filter the logs returned by using the ‘level’ parameter in the same way you can filter the logging level. However be aware log snapshot and logging level work independently.
+///     Discussion: This will be replacing the previous functionality via LogsManager.  The log history does not adhere to the logging
+///     level filter.  The log history records all log levels.  You can filter the logs returned by using the ‘level’ parameter in the same
+///     way you can filter the logging level. However be aware log snapshot and logging level work independently.
 ///   </li>
 /// </ul>
 /// \param level The level of logging options in order: (.TRACE, .DEBUG, .INFO, .WARNING, .ERROR, .OFF)
@@ -2195,10 +2439,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// \param enabled Is masking PII enabled for the logs.
 ///
 - (void)setDataMaskingEnabledWithEnabled:(BOOL)enabled;
+/// Deprecated 2.12.2019
 + (void)resolveConversation:(id <Conversation> _Nonnull)conversation SWIFT_AVAILABILITY(ios,deprecated=12.1.4,obsoleted=14.0.0,message="Use resolveConversation(_ conversation: Conversation, completion: (() -> Void)? = {()}) instead");
-+ (void)resolveConversationForConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_AVAILABILITY(ios,deprecated=12.1.4,obsoleted=14.0.0,message="Use resolveConversationForConversationQuery(_ conversationQuery: ConversationParamProtocol, completion: (() -> Void)? = {()}) instead");
+/// Deprecated 2.12.2019
++ (void)resolveConversationForConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_AVAILABILITY(ios,deprecated=12.1.4,obsoleted=14.0.0,message="\n        Use resolveConversationForConversationQuery(_ conversationQuery: ConversationParamProtocol,         completion: (() -> Void)? = {()}) instead\n        ");
+/// Deprecated @ 08/2016
 /// Creates welcome local system message for dialog
-+ (id <Message> _Nullable)createWelcomeLocalMessage:(id <Dialog> _Nonnull)dialog overrideTime:(NSDate * _Nonnull)overrideTime SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,deprecated=12.2.0,obsoleted=14.0.0,message="Use createWelcomeLocalMessage(_ dialog: Dialog, welcomeMessage: LPWelcomeMessage, overrideTime: Date = Date()) -> Message? instead");
++ (id <Message> _Nullable)createWelcomeLocalMessage:(id <Dialog> _Nonnull)dialog overrideTime:(NSDate * _Nonnull)overrideTime SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,deprecated=12.2.0,obsoleted=14.0.0,message="\n        Use createWelcomeLocalMessage(_ dialog: Dialog, welcomeMessage: LPWelcomeMessage,\n        overrideTime: Date = Date()) -> Message? instead\n        ");
 /// Unregister pusher.
 /// Before unregistering the Pusher, we make sure we have the following params:
 /// param: Consumer UserID
@@ -2206,8 +2453,35 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// param: Account (brand account)
 /// When all params available - perform unregister
 + (void)unregisterPusher:(id <Brand> _Nonnull)brand completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=12.1.0,obsoleted=14.0.0,message="Use unregisterPusherFor(_ brandId: String) instead");
-- (void)getEngagementWithConsumerID:(NSString * _Nullable)consumerID monitoringParams:(LPMonitoringParams * _Nullable)monitoringParams completion:(void (^ _Nonnull)(LPGetEngagementResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=11.4.0,obsoleted=14.0.0,message="Use getEngagement(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams?, completion: @escaping (_ response: LPGetEngagementResponse)->(), failure: @escaping (_ error: NSError)->()) instead");
-- (void)sendSDEWithConsumerID:(NSString * _Nonnull)consumerID monitoringParams:(LPMonitoringParams * _Nonnull)monitoringParams completion:(void (^ _Nonnull)(LPSendSDEResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=11.4.0,obsoleted=14.0.0,message="Use sendSDE(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams, completion: @escaping (_ response: LPSendSDEResponse)->(), failure: @escaping (_ error: NSError)->()) instead");
+/// Use this API to get an engagement for a consumer in an appInstallationId context. When calculating eligibility the decision is based
+/// on the SDEs and other parameters. Based on messaging campaign concept.
+/// As an optional parameter, you can pass SDE Data which includes Entry Points and Engagement Attributes for routing the conversation.
+/// \param consumerID an optional brand app consumer ID to get the engagement for
+///
+/// \param monitoringParams an instance of includes optional Array of Entry Points and an optional dictionary of Engagement Attributes
+///
+/// \param completion completion block with response of type LPGetEngagementResponse. This response includes sessionID and visitorID along
+/// with LPEngagementDetails object.
+///
+/// \param failure failure block with an error in case the request fails
+/// Deprecated @ 05/2018
+///
+- (void)getEngagementWithConsumerID:(NSString * _Nullable)consumerID monitoringParams:(LPMonitoringParams * _Nullable)monitoringParams completion:(void (^ _Nonnull)(LPGetEngagementResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=11.4.0,obsoleted=14.0.0,message="\n        Use getEngagement(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams?,         completion: @escaping (_ response: LPGetEngagementResponse)->(), failure: @escaping (_ error: NSError)->()) instead\n        ");
+/// Use this API to report an engagement attributes (SDEs) for a consumer in an appInstallationId context including show and accept
+/// impression.
+/// \param consumerID brand app consumer ID to sendSDE for
+///
+/// \param monitoringParams an instance of LPMonitoringParams includes optional Array of Entry Points and an optional dictionary of
+/// Engagement Attributes. Additional optioanl parameter is PageID which is used for Page identification for sending events on the
+/// current engagement. PageID will be received in LPSendSDEResponse and in LPGetEngagementResponse
+///
+/// \param completion completion block with response of type LPSendSDEResponse. This response includes sessionID and visitorID and pageID
+/// for future use.
+///
+/// \param failure failure block with an error in case the request fails
+/// Deprecated @ 05/2018
+///
+- (void)sendSDEWithConsumerID:(NSString * _Nonnull)consumerID monitoringParams:(LPMonitoringParams * _Nonnull)monitoringParams completion:(void (^ _Nonnull)(LPSendSDEResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=11.4.0,obsoleted=14.0.0,message="\n        Use sendSDE(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams,         completion: @escaping (_ response: LPSendSDEResponse)->(), failure: @escaping (_ error: NSError)->()) instead\n        ");
 - (BOOL)sendText:(NSString * _Nonnull)text error:(NSError * _Nullable * _Nullable)error;
 /// Opens the system document picker for the consumer to select a file to send
 - (BOOL)fileSharingOpenFileSelectionAndReturnError:(NSError * _Nullable * _Nullable)error;
@@ -2244,7 +2518,9 @@ enum LPPusherUnregisterType : NSInteger;
 /// Stops all connections.
 /// Remove Conversation View Controller
 - (void)destruct;
-/// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or just to logs the current user out.
+/// Deprecated @ 09/2017
+/// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or
+/// just to logs the current user out.
 /// This method conducts the following:
 /// Unregisters from the push notification service.
 /// Clears all SDK persistent data.
@@ -2252,7 +2528,8 @@ enum LPPusherUnregisterType : NSInteger;
 /// Invocation of destruct() method
 /// DEPRECATED - Use logout(completion: @escaping ()->(), failure: @escaping (</em> error: Error)->()) instead
 - (void)logout SWIFT_AVAILABILITY(ios,deprecated=9.3.5,obsoleted=14.0.0,message="Use logout(completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead");
-/// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or just to logs the current user out.
+/// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or
+/// just to logs the current user out.
 /// This method conducts the following:
 /// Unregisters from the push notification service.
 /// Clears all SDK persistent data.
@@ -2264,8 +2541,9 @@ enum LPPusherUnregisterType : NSInteger;
 ///
 /// \param failure A failure block with a list of errors that were encountered during logout process.
 ///
-- (void)logoutWithCompletion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=14.0,obsoleted=15.0.0,message="Use logout(unregisterType: LPPusherUnregisterType, completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead");
-/// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or just to logs the current user out.
+- (void)logoutWithCompletion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=14.0,obsoleted=15.0.0,message="\n        Use logout(unregisterType: LPPusherUnregisterType, completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead\n        ");
+/// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or
+/// just to logs the current user out.
 /// This method conducts the following:
 /// Unregisters from the push notification service depending on the option provided.
 /// Clears all SDK persistent data.
@@ -2288,7 +2566,8 @@ enum LPPusherUnregisterType : NSInteger;
 @interface LPMessaging (SWIFT_EXTENSION(LPMessagingSDK))
 /// This method registers the host app in the SDK Pusher service in order to be able to receive push notification in messaging.
 /// note:
-/// If passing authentication params, this method will register immediately to Pusher, the registration will be performed when calling showConversation
+/// If passing authentication params, this method will register immediately to Pusher, the registration will be performed when
+/// calling showConversation
 /// \param token Push device token data. SDK will hex decode it before sending it to Pusher.
 ///
 /// \param notificationDelegate implementer of LPMessagingSDKNotificationDelegate.
@@ -2300,7 +2579,8 @@ enum LPPusherUnregisterType : NSInteger;
 - (void)registerPushNotificationsWithToken:(NSData * _Nonnull)token notificationDelegate:(id <LPMessagingSDKNotificationDelegate> _Nullable)notificationDelegate alternateBundleID:(NSString * _Nullable)alternateBundleID authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
 /// This method registers the host app in the SDK Pusher service in order to be able to receive push notification in messaging.
 /// note:
-/// If passing authentication params, this method will register immediately to Pusher, the registration will be performed when calling showConversation
+/// If passing authentication params, this method will register immediately to Pusher, the registration will be performed when
+/// calling showConversation
 /// \param tokenString Push device token string. SDK will send it as it is to Pusher.
 ///
 /// \param notificationDelegate implementer of LPMessagingSDKNotificationDelegate.
@@ -2352,7 +2632,7 @@ enum LPPusherUnregisterType : NSInteger;
 ///
 /// \param failure called once the operation failed
 ///
-+ (void)getUnreadMessagesCount:(id <ConversationParamProtocol> _Nonnull)conversationQuery completion:(void (^ _Nonnull)(NSInteger))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_DEPRECATED_MSG("Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())");
++ (void)getUnreadMessagesCount:(id <ConversationParamProtocol> _Nonnull)conversationQuery completion:(void (^ _Nonnull)(NSInteger))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_DEPRECATED_MSG("\n        Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol,         authenticationParams: LPAuthenticationParams? = nil,         completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())\n        ");
 /// Get unread message badge counter
 /// \param brandID the account number for the brand
 ///
@@ -2360,10 +2640,11 @@ enum LPPusherUnregisterType : NSInteger;
 ///
 /// \param failure called once the operation failed
 ///
-+ (void)getUnreadMessagesCountWithBrandID:(NSString * _Nonnull)brandID completion:(void (^ _Nonnull)(NSInteger))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_DEPRECATED_MSG("Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())");
++ (void)getUnreadMessagesCountWithBrandID:(NSString * _Nonnull)brandID completion:(void (^ _Nonnull)(NSInteger))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_DEPRECATED_MSG("\n        Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol,         authenticationParams: LPAuthenticationParams? = nil,         completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())\n        ");
 /// Get unread message badge counter from Pusher
 /// note:
-/// If passing authentication params, this method will use this authentication go get UnreadCount else will try to use cached one if any is found
+/// If passing authentication params, this method will use this authentication go get UnreadCount else will try to use cached
+/// one if any is found
 /// \param conversationQuery conversationQuery: used to identify the related brand
 ///
 /// \param authenticationParams an optional authentication param (LPAuthenticationParams) to be used as authentication
@@ -2378,7 +2659,7 @@ enum LPPusherUnregisterType : NSInteger;
 ///
 /// \param authenticationParams an optional authentication param (LPAuthenticationParams) to be used as authentication
 ///
-/// \param token device push notification token
+/// \param token device push notification token in Data format
 ///
 /// \param alternateBundleID custom bundle ID for Pusher
 ///
@@ -2391,6 +2672,24 @@ enum LPPusherUnregisterType : NSInteger;
 /// \param error corresponding error
 ///
 - (void)isRegisteredForPushNotifications:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams token:(NSData * _Nonnull)token alternateBundleID:(NSString * _Nullable)alternateBundleID completion:(void (^ _Nonnull)(BOOL))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// Gets users registration status on the Pusher Server with String token
+/// \param conversationQuery used to identify the related brand
+///
+/// \param authenticationParams an optional authentication param (LPAuthenticationParams) to be used as authentication
+///
+/// \param tokenString device push notification token in String format
+///
+/// \param alternateBundleID custom bundle ID for Pusher
+///
+/// \param completion called once the operation ends sucessfully
+///
+/// \param failure called once the operation fails
+///
+/// \param isRegistered Boolean contaning flag if user is registered on Pusher
+///
+/// \param error corresponding error
+///
+- (void)isRegisteredForPushNotifications:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams tokenString:(NSString * _Nonnull)tokenString alternateBundleID:(NSString * _Nullable)alternateBundleID completion:(void (^ _Nonnull)(BOOL))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// This method passes a user info of a remote push notification to be handled by the SDK.
 /// \param userInfo Dictionary
 ///
@@ -2450,6 +2749,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKConnectionRetriesFailed:(NSError * _Nonnull)error;
 - (void)LPMessagingSDKAgentIsTypingStateChanged:(BOOL)isTyping;
 - (void)LPMessagingSDKConversationStarted:(NSString * _Nullable)conversationID;
+/// Deprecated @ 02/2017
 - (void)LPMessagingSDKConversationEnded:(NSString * _Nullable)conversationID SWIFT_AVAILABILITY(ios,deprecated=9.3.5,obsoleted=14.0.0,message="use LPMessagingSDKConversationEnded(_:closeReason) instead");
 - (void)LPMessagingSDKConversationEnded:(NSString * _Nullable)conversationID closeReason:(enum LPConversationCloseReason)closeReason;
 - (void)LPMessagingSDKConversationCSATDismissedOnSubmittion:(NSString * _Nullable)conversationID;
@@ -2457,10 +2757,13 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 - (void)LPMessagingSDKConnectionStateChanged:(BOOL)isReady brandID:(NSString * _Nonnull)brandID;
 - (void)LPMessagingSDKOffHoursStateChanged:(BOOL)isOffHours brandID:(NSString * _Nonnull)brandID;
 - (void)LPMessagingSDKConversationViewControllerDidDismiss;
-/// Called when the Cert pinning mechanism failed. The server trust was successfully evaluated but did not contain any of the configured public keys pins. or The server trust’s evaluation failed: the server’s certificate chain is not trusted.
+/// Called when the Cert pinning mechanism failed.
+/// The server trust was successfully evaluated but did not contain any of the configured
+/// public keys pins. or The server trust’s evaluation failed: the server’s certificate chain is not trusted.
 /// \param error failure error reason
 ///
 - (void)LPMessagingSDKCertPinningFailed:(NSError * _Nonnull)error;
+/// Pusher Registration
 /// Called the SDK registration for  LP Pusher service has been succeeded.
 /// Pusher is the service that responsible for Remote Push Notifications routing and delivering from and to APNS.
 - (void)LPMessagingSDKPushRegistrationDidFinish;
@@ -2475,6 +2778,10 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 /// Called when an Unauthenticated user expired and can no longer be in used.
 /// When this callback is invoked, the previous open conversation will be closed locally.
 - (void)LPMessagingSDKUnauthenticatedUserExpired;
+/// Called when user taps on one of the quick reply options of welcome message.
+/// \param title Tapped quick reply option title.
+///
+- (void)LPMessagingSDKWelcomeMessageOptionTapped:(NSString * _Nonnull)title;
 @end
 
 
@@ -2632,14 +2939,20 @@ SWIFT_CLASS("_TtC14LPMessagingSDK12LPPickerView")
 @end
 
 typedef SWIFT_ENUM(NSInteger, LPPusherUnregisterType, open) {
+/// unregister for all types of push notification messages
   LPPusherUnregisterTypeAll = 0,
+/// do not unregister from pusher at all.
   LPPusherUnregisterTypeNone = 1,
+/// Unregister only for agent push notification messages. Consumers can still receive
+/// outbound push notifications sent from the Proactive or Connect to Messaging (IVR) services.
   LPPusherUnregisterTypeAgent = 2,
 };
 
 /// All SDK supported regions
 /// The enum contains general regions and specific if exists.
-/// For example: Portugal from ‘PT’ folder will be used for all languages when the region  is Portugal. Portuguese from ‘pt-PT’ folder will be used for Portuguese (Portugal) language only when the region in portugal
+/// For example: Portugal from ‘PT’ folder will be used for all
+/// languages when the region  is Portugal. Portuguese from ‘pt-PT’
+/// folder will be used for Portuguese (Portugal) language only when the region in portugal
 typedef SWIFT_ENUM(NSInteger, LPRegionCode, open) {
   LPRegionCodeDevice = 0,
   LPRegionCodeUS = 1,
@@ -2704,7 +3017,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 
 
 
-
 @class UIGestureRecognizer;
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK))
@@ -2722,6 +3034,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPStructuredContent")
 - (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView * _Nonnull)scrollView;
 @end
+
 
 
 @interface LPStructuredContent (SWIFT_EXTENSION(LPMessagingSDK)) <UIGestureRecognizerDelegate>
@@ -3010,6 +3323,24 @@ SWIFT_CLASS("_TtC14LPMessagingSDK22LPWelcomeMessageOption")
 @end
 
 
+SWIFT_CLASS("_TtC14LPMessagingSDK29LPconversationMetaDataDetails")
+@interface LPconversationMetaDataDetails : NSObject
+@property (nonatomic, copy) NSString * _Nullable appInstallId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC14LPMessagingSDK32LPconversationParticipantDetails")
+@interface LPconversationParticipantDetails : NSObject
+@property (nonatomic, copy) NSString * _Nullable id;
+@property (nonatomic, copy) NSString * _Nullable role;
+@property (nonatomic, copy) NSString * _Nullable state;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK11LinkPreview_")
 @protocol LinkPreview <EntityInterface>
 @property (nonatomic, copy) NSString * _Nonnull uid;
@@ -3037,7 +3368,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK7Message_")
 @property (nonatomic, copy) NSString * _Nonnull statusRaw;
 @property (nonatomic, copy) NSString * _Nonnull contentType;
 @property (nonatomic, copy) NSString * _Nonnull messageType;
-@property (nonatomic, strong) id <Dialog> _Nonnull ownerDialog;
+@property (nonatomic, strong) id <Dialog> _Nullable ownerDialog;
 @property (nonatomic, strong) id <User> _Nullable ownerUser;
 @property (nonatomic, strong) id <File> _Nullable file;
 @property (nonatomic, strong) id <Form> _Nullable form;
@@ -3093,6 +3424,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK12NSBouncyView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
@@ -3343,6 +3675,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK4User_")
 @property (nonatomic) BOOL isSaved;
 @property (nonatomic, copy) NSDate * _Nullable lastUpdated;
 @property (nonatomic, copy) NSString * _Nullable employeeID;
+@property (nonatomic) enum AgentType agentType;
 @end
 
 

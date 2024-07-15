@@ -3,7 +3,7 @@
 //  LPMessagingSDK
 //
 //  Created by Nir Lachman on 27/09/2016.
-//  Copyright © 2016 Udi Dagan. All rights reserved.
+//  Copyright © 2016 Liveperson Inc. All rights reserved.
 //
 
 //

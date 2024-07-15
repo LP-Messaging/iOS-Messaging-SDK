@@ -388,8 +388,7 @@ extension LPMessagingSDK.LinkPreview {
   }
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class LPHyperlinkUtils {
-  @objc deinit
+public enum LPHyperlinkUtils {
 }
 @objcMembers @objc public class LPUser : ObjectiveC.NSObject, Foundation.NSSecureCoding {
   @objc public static var supportsSecureCoding: Swift.Bool {
@@ -487,6 +486,11 @@ extension LPMessagingSDK.ECPrivateKey : Swift.Decodable {
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   public func compare(other: LPMessagingSDK.TTRModel) -> Swift.Bool
   @objc deinit
+}
+extension Swift.Optional : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
 }
 extension LPMessagingSDK.SymmetricKey : Swift.Encodable {
   public func encode(to encoder: Swift.Encoder) throws
@@ -1505,7 +1509,7 @@ public enum LinkPreviewState : Swift.String {
   @objc var statusRaw: Swift.String { get set }
   @objc var contentType: Swift.String { get set }
   @objc var messageType: Swift.String { get set }
-  @objc var ownerDialog: LPMessagingSDK.Dialog { get set }
+  @objc var ownerDialog: LPMessagingSDK.Dialog? { get set }
   @objc var ownerUser: LPMessagingSDK.User? { get set }
   @objc var file: LPMessagingSDK.File? { get set }
   @objc var form: LPMessagingSDK.Form? { get set }
@@ -1559,6 +1563,12 @@ extension LPMessagingSDK.Message {
     get
   }
   public var isControllerMessage: Swift.Bool {
+    get
+  }
+  public var isWelcomeMessage: Swift.Bool {
+    get
+  }
+  public var isBotMessage: Swift.Bool {
     get
   }
   public var isInitialRemoteMessage: Swift.Bool {
@@ -1623,8 +1633,8 @@ extension LPMessagingSDK.Message {
   @objc final public let dialog: LPMessagingSDK.Dialog!
   final public let sequence: Swift.Int?
   @objc final public let sender: LPMessagingSDK.User?
-  @objc public var fileMessageCompletion: ((_ message: LPMessagingSDK.Message) -> ())?
-  @objc public var fileMessageFailure: ((_ error: Foundation.NSError) -> ())?
+  @objc public var fileMessageCompletion: ((_ message: LPMessagingSDK.Message) -> Swift.Void)?
+  @objc public var fileMessageFailure: ((_ error: Foundation.NSError) -> Swift.Void)?
   public init(messagingServiceEventType: LPMessagingSDK.MessagingServiceEvent.MessagingServiceEventType, data: LPMessagingSDK.GeneralResponse.ContentEventBody?, dialog: LPMessagingSDK.Dialog, sender: LPMessagingSDK.User?, sequence: Swift.Int?, notificationDistributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType)
   @objc public init?(failure: Swift.Void)
   convenience public init?(fromData data: LPMessagingSDK.GeneralResponse.ContentEventBody?, dialog: LPMessagingSDK.Dialog, distributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType, sender: LPMessagingSDK.User? = nil)
@@ -2060,6 +2070,7 @@ public enum LPFlowTag : Swift.CustomStringConvertible, Swift.CaseIterable {
   case WELCOME_MESSAGE
   case INITIAL_MESSAGE
   case TELEMETRY
+  case UMS_REST
   public static func == (a: LPMessagingSDK.LPFlowTag, b: LPMessagingSDK.LPFlowTag) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public typealias AllCases = [LPMessagingSDK.LPFlowTag]
@@ -2129,7 +2140,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var conversationBackgroundColor: UIKit.UIColor
   @objc public var customFontNameConversationFeed: Swift.String?
   @objc public var customFontNameNonConversationFeed: Swift.String?
-  @objc public var customRefreshControllerImagesArray: Swift.Array<UIKit.UIImage>?
+  @objc public var customRefreshControllerImagesArray: [UIKit.UIImage]?
   @objc public var customRefreshControllerAnimationSpeed: Swift.Float
   @objc public var conversationBackgroundPortraitImage: UIKit.UIImage? {
     @objc get
@@ -2372,6 +2383,9 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var quickReplyVerticalMargin: CoreFoundation.CGFloat
   @objc public var quickReplyHorizontalMargin: CoreFoundation.CGFloat
   @objc public var quickReplyButtonBorderWidth: CoreFoundation.CGFloat
+  @objc public var quickReplyTextColor: UIKit.UIColor
+  @objc public var quickReplyBackgroundColor: UIKit.UIColor
+  @objc public var quickReplyBorderColor: UIKit.UIColor
   @objc public var conversationScrollConfiguration: LPMessagingSDK.LPConversationScrollConfiguration
   @objc public var secureFormBackButtonColor: UIKit.UIColor
   @objc public var secureFormUIStatusBarStyle: UIKit.UIStatusBarStyle
@@ -2469,6 +2483,13 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var remoteUserDefaultAvatarImage: UIKit.UIImage?
   @objc public var remoteUserAvatarIconBorderWidth: CoreFoundation.CGFloat
   @objc public var remoteUserAvatarIconBorderColor: UIKit.UIColor
+  @objc public var botUserAvatarBackgroundColor: UIKit.UIColor
+  @objc public var botUserAvatarLeadingPadding: Swift.Float
+  @objc public var botUserAvatarTrailingPadding: Swift.Float
+  @objc public var botUserAvatarIconColor: UIKit.UIColor
+  @objc public var botUserDefaultAvatarImage: UIKit.UIImage?
+  @objc public var botUserAvatarIconBorderWidth: CoreFoundation.CGFloat
+  @objc public var botUserAvatarIconBorderColor: UIKit.UIColor
   @objc public var brandAvatarImage: UIKit.UIImage?
   @objc public var brandAvatarImageContentMode: UIKit.UIView.ContentMode
   @objc public var csatAgentAvatarBackgroundColor: UIKit.UIColor
@@ -2490,6 +2511,18 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var remoteUserBubbleTopRightCornerRadius: Swift.Float
   @objc public var remoteUserBubbleBottomLeftCornerRadius: Swift.Float
   @objc public var remoteUserBubbleBottomRightCornerRadius: Swift.Float
+  @objc public var botUserBubbleBackgroundColor: UIKit.UIColor
+  @objc public var botUserBubbleBorderColor: UIKit.UIColor
+  @objc public var botUserBubbleLinkColor: UIKit.UIColor
+  @objc public var botUserBubbleTextColor: UIKit.UIColor
+  @objc public var botUserBubbleBorderWidth: Swift.Double
+  @objc public var botUserBubbleTimestampColor: UIKit.UIColor
+  @objc public var botUserBubbleLongPressOverlayColor: UIKit.UIColor
+  @objc public var botUserBubbleLongPressOverlayAlpha: Swift.Float
+  @objc public var botUserBubbleTopLeftCornerRadius: Swift.Float
+  @objc public var botUserBubbleTopRightCornerRadius: Swift.Float
+  @objc public var botUserBubbleBottomLeftCornerRadius: Swift.Float
+  @objc public var botUserBubbleBottomRightCornerRadius: Swift.Float
   @objc public var userBubbleBackgroundColor: UIKit.UIColor
   @objc public var userBubbleBorderColor: UIKit.UIColor
   @objc public var userBubbleLinkColor: UIKit.UIColor
@@ -2749,8 +2782,8 @@ public enum HTTPMethod : Swift.String {
     get
   }
 }
-public typealias HTTPRequestSuccessHandler = (_ response: Any?) -> ()
-public typealias HTTPRequestFailureHandler = (_ error: Foundation.NSError?) -> ()
+public typealias HTTPRequestSuccessHandler = (_ response: Any?) -> Swift.Void
+public typealias HTTPRequestFailureHandler = (_ error: Foundation.NSError?) -> Swift.Void
 public typealias amsReadyCompletion = () -> Swift.Void
 public let MESSAGE_MAX_CHARACTERS: Swift.Int
 public let FILE_CAPTION_MAX_CHARACTERS: Swift.Int
@@ -2867,6 +2900,7 @@ public enum CSDSService : Swift.String {
   case accountConfigReadOnly
   case shark
   case otelDomainConsumerSdk
+  case UMSRestAPI
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
@@ -3135,6 +3169,17 @@ public enum UserType : Swift.String {
     get
   }
 }
+@objc public enum AgentType : Swift.Int16 {
+  case unknown = -1
+  case controller = 0
+  case human = 1
+  case bot = 2
+  public init?(rawValue: Swift.Int16)
+  public typealias RawValue = Swift.Int16
+  public var rawValue: Swift.Int16 {
+    get
+  }
+}
 @objc public protocol User : LPMessagingSDK.EntityInterface {
   @objc var uid: Swift.String { get set }
   @objc var firstName: Swift.String { get set }
@@ -3149,6 +3194,7 @@ public enum UserType : Swift.String {
   @objc var isSaved: Swift.Bool { get set }
   @objc var lastUpdated: Foundation.Date? { get set }
   @objc var employeeID: Swift.String? { get set }
+  @objc var agentType: LPMessagingSDK.AgentType { get set }
 }
 extension LPMessagingSDK.User {
   public var type: LPMessagingSDK.UserType {
@@ -3283,7 +3329,7 @@ public enum DialogState : Swift.String {
   @objc var stateRaw: Swift.String { get set }
   @objc var uid: Swift.String? { get set }
   @objc var handlerId: Swift.String { get set }
-  @objc var ownerConversation: LPMessagingSDK.Conversation { get set }
+  @objc var ownerConversation: LPMessagingSDK.Conversation? { get set }
   @objc var participants: Foundation.NSSet { get set }
   @objc var dialogMessages: Foundation.NSOrderedSet { get set }
   @objc var chatStateRaw: Swift.String { get set }
@@ -3542,6 +3588,166 @@ extension Security.SecKey : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   }
   @objc deinit
 }
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPGetConversationsResponse : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var data: [LPMessagingSDK.LPConversationDataDetails]?
+  @objc public var links: LPMessagingSDK.LPConversationLinksDetails?
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPConversationDataDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var id: Swift.String?
+  @objc public var createdTs: Swift.String?
+  @objc public var lastUpdatedTs: Swift.String?
+  @objc public var brandId: Swift.String?
+  @objc public var skillId: Swift.String?
+  @objc public var state: Swift.String?
+  @objc public var stage: Swift.String?
+  @objc public var dialogs: [LPMessagingSDK.LPConversationDialogDetails]?
+  @objc public var context: LPMessagingSDK.LPConversationContextDetails?
+  @objc public var ttr: LPMessagingSDK.LPConversationTTRDetails?
+  @objc public var campaignInfo: LPMessagingSDK.LPConversationCampaignDetails?
+  @objc public var csat: LPMessagingSDK.LPConversationCSATDetails?
+  @objc public var conversationRollOverHandler: LPMessagingSDK.LPConversationRolloverDetails?
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPConversationDialogDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var id: Swift.String?
+  @objc public var createdTs: Swift.String?
+  @objc public var lastUpdatedTs: Swift.String?
+  @objc public var conversationId: Swift.String?
+  @objc public var metaData: LPMessagingSDK.LPconversationMetaDataDetails?
+  @objc public var closedTs: Swift.String?
+  @objc public var participants: [LPMessagingSDK.LPconversationParticipantDetails]?
+  @objc public var dialogType: Swift.String?
+  @objc public var channelType: Swift.String?
+  @objc public var state: Swift.String?
+  @objc public var closedBy: Swift.String?
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPconversationMetaDataDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var appInstallId: Swift.String?
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPconversationParticipantDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var id: Swift.String?
+  @objc public var role: Swift.String?
+  @objc public var state: Swift.String?
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPConversationContextDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var type: Swift.String?
+  @objc public var lang: Swift.String?
+  @objc public var clientProperties: LPMessagingSDK.LPConversationClientPropertyDetails?
+  @objc public var visitorId: Swift.String?
+  @objc public var sessionId: Swift.String?
+  @objc public var interactionContextId: Swift.String?
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPConversationClientPropertyDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var appId: Swift.String?
+  @objc public var appVersion: Swift.String?
+  @objc public var ipAddress: Swift.String?
+  @objc public var deviceFamily: Swift.String?
+  @objc public var os: Swift.String?
+  @objc public var osVersion: Swift.String?
+  @objc public var osName: Swift.String?
+  @objc public var integration: Swift.String?
+  @objc public var integrationVersion: Swift.String?
+  @objc public var timeZone: Swift.String?
+  @objc public var deviceModel: Swift.String?
+  @objc public var features: [Swift.String]?
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPConversationTTRDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var type: Swift.String?
+  @objc public var value: Swift.Int {
+    @objc get
+  }
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPConversationCampaignDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var campaignId: Swift.Int {
+    @objc get
+  }
+  @objc public var engagementId: Swift.Int {
+    @objc get
+  }
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPConversationCSATDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var rate: Swift.Int {
+    @objc get
+  }
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPConversationRolloverDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var accountId: Swift.String?
+  @objc public var skillId: Swift.String?
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers @objcMembers @objc public class LPConversationLinksDetails : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var selfValue: Swift.String?
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class NSBouncyView : UIKit.UIView {
   @_Concurrency.MainActor(unsafe) open func setView(_ view: UIKit.UIView)
   @_Concurrency.MainActor(unsafe) open func setColor(color: UIKit.UIColor)
@@ -3554,15 +3760,16 @@ extension LPMessagingSDK.LPMessaging {
   @objc dynamic public func registerPushNotifications(token: Foundation.Data, notificationDelegate: LPMessagingSDK.LPMessagingSDKNotificationDelegate? = nil, alternateBundleID: Swift.String? = nil, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
   @objc dynamic public func registerPushNotifications(tokenString: Swift.String, notificationDelegate: LPMessagingSDK.LPMessagingSDKNotificationDelegate? = nil, alternateBundleID: Swift.String? = nil, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
   @objc dynamic public func registerVoipPushNotifications(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
-  @objc dynamic public func unregisterPusher(brandId: Swift.String, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> (), failure: @escaping (_ error: Swift.Error) -> ())
+  @objc dynamic public func unregisterPusher(brandId: Swift.String, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
   @objc dynamic public class func setPusherToken(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
   @objc dynamic public class func setPusherVoipToken(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
   @objc @available(*, deprecated, message: "Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())")
-  dynamic public class func getUnreadMessagesCount(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, completion: @escaping (_ badgeCounter: Swift.Int) -> (), failure: @escaping (_ error: Swift.Error) -> ())
+  dynamic public class func getUnreadMessagesCount(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, completion: @escaping (_ badgeCounter: Swift.Int) -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
   @objc @available(*, deprecated, message: "Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())")
-  dynamic public class func getUnreadMessagesCount(brandID: Swift.String, completion: @escaping (_ badgeCounter: Swift.Int) -> (), failure: @escaping (_ error: Swift.Error) -> ())
-  @objc dynamic public func getUnreadMessagesCount(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Swift.Int) -> (), failure: @escaping (_ error: Swift.Error) -> ())
-  @objc dynamic public func isRegisteredForPushNotifications(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, token: Foundation.Data, alternateBundleID: Swift.String? = nil, completion: @escaping (_ isRegistered: Swift.Bool) -> (), failure: @escaping (_ error: Swift.Error) -> ())
+  dynamic public class func getUnreadMessagesCount(brandID: Swift.String, completion: @escaping (_ badgeCounter: Swift.Int) -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
+  @objc dynamic public func getUnreadMessagesCount(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Swift.Int) -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
+  @objc dynamic public func isRegisteredForPushNotifications(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, token: Foundation.Data, alternateBundleID: Swift.String? = nil, completion: @escaping (_ isRegistered: Swift.Bool) -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
+  @objc dynamic public func isRegisteredForPushNotifications(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, tokenString: Swift.String, alternateBundleID: Swift.String? = nil, completion: @escaping (_ isRegistered: Swift.Bool) -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
   @objc dynamic public func handlePush(_ userInfo: [Swift.AnyHashable : Any])
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentPublishTextAction : LPMessagingSDK.LPStructuredContentAction {
@@ -3699,8 +3906,8 @@ extension LPMessagingSDK.LPMessaging {
   @objc @available(iOS, deprecated: 9.3.5, obsoleted: 14.0.0, message: "Use logout(completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead")
   dynamic public func logout()
   @objc @available(iOS, deprecated: 14.0, obsoleted: 15.0.0, message: "Use logout(unregisterType: LPPusherUnregisterType, completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead")
-  dynamic public func logout(completion: @escaping () -> (), failure: @escaping (_ errors: [Swift.Error]) -> ())
-  @objc dynamic public func logout(unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> (), failure: @escaping (_ errors: [Swift.Error]) -> ())
+  dynamic public func logout(completion: @escaping () -> Swift.Void, failure: @escaping (_ errors: [Swift.Error]) -> Swift.Void)
+  @objc dynamic public func logout(unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> Swift.Void, failure: @escaping (_ errors: [Swift.Error]) -> Swift.Void)
 }
 public protocol LPStructuredContentLoggerDelegate : AnyObject {
   func lpStructuredContentLogger(message: Swift.String)
@@ -4243,6 +4450,7 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   @objc public func getConversationBrandQuery(_ brandID: Swift.String, campaignInfo: LPMessagingSDK.LPCampaignInfo? = nil) -> LPMessagingSDK.ConversationParamProtocol
   @objc public func getConversationConsumerQuery(_ consumerID: Swift.String?, brandID: Swift.String, agentToken: Swift.String) -> LPMessagingSDK.ConversationParamProtocol
   @objc public func checkActiveConversation(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol) -> Swift.Bool
+  @objc public func checkActiveConversationFromServer(brandID: Swift.String, authParams: LPMessagingSDK.LPAuthenticationParams?, fullData: Swift.Bool = false, completion: @escaping (_ response: LPMessagingSDK.LPGetConversationsResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
   @objc @available(iOS, deprecated: 9.3.5, obsoleted: 14.0.0, message: "configure the image using customButtonImage in LPConfig instead")
   public func setCustomButton(_ image: UIKit.UIImage?)
   @objc public func isUrgent(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol) -> Swift.Bool
@@ -4254,10 +4462,10 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   @objc public func getSDKVersion() -> Swift.String?
   @objc public func addContentToMessage(text: Swift.String)
   @objc public func getInactiveUserInteractionTimeInterval(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol) -> Foundation.TimeInterval
-  @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
-  @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, authParams: LPMessagingSDK.LPAuthenticationParams, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
+  @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
+  @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, authParams: LPMessagingSDK.LPAuthenticationParams, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
   @objc public func setAuthenticationParams(authenticationParams: LPMessagingSDK.LPAuthenticationParams, brandID: Swift.String)
-  @objc public func sendSDE(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
+  @objc public func sendSDE(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
   @objc public func handleTapForInAppNotification(notification: LPMessagingSDK.LPNotification)
   @objc public func clearHistory(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, shouldFetchHistoryOnShowConversation: Swift.Bool = false) throws
   @objc public func getPkceParams(accountID: Swift.String, completion: @escaping (_ pkceParams: LPMessagingSDK.LPPKCEResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
@@ -4275,14 +4483,14 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   public class func resolveConversation(_ conversation: LPMessagingSDK.Conversation)
   @objc @available(iOS, deprecated: 12.1.4, obsoleted: 14.0.0, message: "Use resolveConversationForConversationQuery(_ conversationQuery: ConversationParamProtocol, completion: (() -> Void)? = {()}) instead")
   public class func resolveConversationForConversationQuery(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol)
-  @objc @available(iOS, deprecated: 12.2.0, obsoleted: 14.0.0, message: "Use createWelcomeLocalMessage(_ dialog: Dialog, welcomeMessage: LPWelcomeMessage, overrideTime: Date = Date()) -> Message? instead")
+  @objc @available(iOS, deprecated: 12.2.0, obsoleted: 14.0.0, message: "Use createWelcomeLocalMessage(_ dialog: Dialog, welcomeMessage: LPWelcomeMessage,\noverrideTime: Date = Date()) -> Message? instead")
   public class func createWelcomeLocalMessage(_ dialog: LPMessagingSDK.Dialog, overrideTime: Foundation.Date = Date()) -> LPMessagingSDK.Message?
   @objc @available(iOS, deprecated: 12.1.0, obsoleted: 14.0.0, message: "Use unregisterPusherFor(_ brandId: String) instead")
-  public class func unregisterPusher(_ brand: LPMessagingSDK.Brand, completion: @escaping () -> (), failure: @escaping (_ error: Swift.Error) -> ())
+  public class func unregisterPusher(_ brand: LPMessagingSDK.Brand, completion: @escaping () -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
   @objc @available(iOS, deprecated: 11.4.0, obsoleted: 14.0.0, message: "Use getEngagement(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams?, completion: @escaping (_ response: LPGetEngagementResponse)->(), failure: @escaping (_ error: NSError)->()) instead")
-  public func getEngagement(consumerID: Swift.String?, monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
+  public func getEngagement(consumerID: Swift.String?, monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
   @objc @available(iOS, deprecated: 11.4.0, obsoleted: 14.0.0, message: "Use sendSDE(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams, completion: @escaping (_ response: LPSendSDEResponse)->(), failure: @escaping (_ error: NSError)->()) instead")
-  public func sendSDE(consumerID: Swift.String, monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> (), failure: @escaping (_ error: Foundation.NSError) -> ())
+  public func sendSDE(consumerID: Swift.String, monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
   @objc public func sendText(_ text: Swift.String) throws
   @objc public func fileSharingOpenFileSelection() throws
   @objc public func fileSharingOpenGallery(validatingPermission: Swift.Bool = false) throws
@@ -4367,6 +4575,7 @@ public protocol LPStructuredContentImageDownloader {
   @objc optional func LPMessagingSDKPushRegistrationDidFail(_ error: Foundation.NSError)
   @objc optional func LPMessagingSDKStructuredContentLinkClicked(_ uri: Swift.String)
   @objc optional func LPMessagingSDKUnauthenticatedUserExpired()
+  @objc optional func LPMessagingSDKWelcomeMessageOptionTapped(_ title: Swift.String)
 }
 @objc public class ProactiveNotificationData : ObjectiveC.NSObject, Foundation.NSSecureCoding {
   @objc public static var supportsSecureCoding: Swift.Bool {
@@ -4652,6 +4861,9 @@ extension LPMessagingSDK.LPKeychainSecureEnclaveKey : Swift.RawRepresentable {}
 extension LPMessagingSDK.UserType : Swift.Equatable {}
 extension LPMessagingSDK.UserType : Swift.Hashable {}
 extension LPMessagingSDK.UserType : Swift.RawRepresentable {}
+extension LPMessagingSDK.AgentType : Swift.Equatable {}
+extension LPMessagingSDK.AgentType : Swift.Hashable {}
+extension LPMessagingSDK.AgentType : Swift.RawRepresentable {}
 extension LPMessagingSDK.DialogType : Swift.Equatable {}
 extension LPMessagingSDK.DialogType : Swift.Hashable {}
 extension LPMessagingSDK.DialogType : Swift.RawRepresentable {}
