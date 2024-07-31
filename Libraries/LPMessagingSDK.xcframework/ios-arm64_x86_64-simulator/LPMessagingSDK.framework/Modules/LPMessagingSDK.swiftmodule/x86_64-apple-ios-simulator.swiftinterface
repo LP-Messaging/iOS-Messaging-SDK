@@ -2572,6 +2572,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var voiceVideoInvitationBubbleBorderWidth: Swift.Double
   @objc public var voiceVideoNavigationBackgroundColor: UIKit.UIColor
   @objc public var voiceVideoNavigationTintColor: UIKit.UIColor
+  @objc public var voiceVideoStatusBarStyle: UIKit.UIStatusBarStyle
   @objc public var voiceVideoNavigationMinimizeButtonImage: UIKit.UIImage?
   @objc public var customButtonImage: UIKit.UIImage?
   @objc public var markdownHyperlinkFromAgent: Swift.Bool
@@ -2882,27 +2883,27 @@ public enum ContentType : Swift.String {
     get
   }
 }
-public enum CSDSService : Swift.String {
+public enum CSDSService : Swift.String, Swift.CaseIterable {
   case asyncMessaging
   case idp
   case swift
   case acCdn
+  case acCdnFallback
   case leCdn
   case loggos
   case pusher
   case tokenizer
   case eventManager
-  case adminArea
-  case liveEngage
-  case agentVep
   case engagementHistory
-  case accountConfigReadWrite
-  case accountConfigReadOnly
   case shark
   case otelDomainConsumerSdk
   case UMSRestAPI
   public init?(rawValue: Swift.String)
+  public typealias AllCases = [LPMessagingSDK.CSDSService]
   public typealias RawValue = Swift.String
+  public static var allCases: [LPMessagingSDK.CSDSService] {
+    get
+  }
   public var rawValue: Swift.String {
     get
   }

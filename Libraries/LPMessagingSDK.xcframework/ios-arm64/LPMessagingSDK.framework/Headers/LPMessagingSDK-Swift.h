@@ -1213,7 +1213,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) CGFloat quickReplyHorizontalMargin;
 /// Border size of Quick Reply buttons.
 @property (nonatomic) CGFloat quickReplyButtonBorderWidth;
-/// Color of the quick reply text
+/// Color of the quick reply text.
 @property (nonatomic, strong) UIColor * _Nonnull quickReplyTextColor;
 @property (nonatomic, strong) UIColor * _Nonnull quickReplyBackgroundColor;
 @property (nonatomic, strong) UIColor * _Nonnull quickReplyBorderColor;
@@ -1471,7 +1471,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserAvatarIconBorderColor;
 /// Background color of the bot user’s avatar.
 @property (nonatomic, strong) UIColor * _Nonnull botUserAvatarBackgroundColor;
-/// Define the bot avatar Leading padding  (left edge to avatar).
+/// Define the bot avatar Leading padding (left edge to avatar).
 @property (nonatomic) float botUserAvatarLeadingPadding;
 /// Define the bot avatar Trailing padding (Avatar to bubble).
 @property (nonatomic) float botUserAvatarTrailingPadding;
@@ -1566,22 +1566,22 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// appear as long as the menu controller appears on the bubble, when the menu dismissed, overlay will disappear too. In order to show
 /// overlay enableBubblesOverlayOnLongPress should be true.
 @property (nonatomic) float botUserBubbleLongPressOverlayAlpha;
-/// Top left Radius corner on the remote bot bubble.
+/// Top left corner radius on the remote bot bubble.
 /// Setting the radius to a value greater than 0.0 causes the bubble’s layer to begin drawing rounded corners on its background. This
 /// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
 /// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually. Default value is 8.0.
 @property (nonatomic) float botUserBubbleTopLeftCornerRadius;
-/// Top right Radius corner on the remote bot bubble.
+/// Top right corner radius on the remote bot bubble.
 /// Setting the radius to a value greater than 0.0 causes the bubble’s layer to begin drawing rounded corners on its background. This
 /// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
 /// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually.
 @property (nonatomic) float botUserBubbleTopRightCornerRadius;
-/// Bottom left Radius corner on the remote bot bubble.
+/// Bottom left corner radius on the remote bot bubble.
 /// Setting the radius to a value greater than 0.0 causes the bubble’s layer to begin drawing rounded corners on its background. This
 /// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
 /// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually.
 @property (nonatomic) float botUserBubbleBottomLeftCornerRadius;
-/// Bottom right Radius corner on the remote bot bubble.
+/// Bottom right corner radius on the remote bot bubble.
 /// Setting the radius to a value greater than 0.0 causes the bubble’s layer to begin drawing rounded corners on its background. This
 /// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
 /// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually.
@@ -1666,17 +1666,17 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIImage * _Nullable voiceCallImageIcon;
 /// Defines Image icon for Video Invite
 @property (nonatomic, strong) UIImage * _Nullable videoCallImageIcon;
-/// Defines background image for Accept button on Voice & Video Invite
+/// Defines image for Accept button on Voice & Video Invite
 @property (nonatomic, strong) UIImage * _Nullable voiceVideoAcceptCallButtonImage;
-/// Defines background image for Decline button on Voice & Video Invite
+/// Defines image for Decline button on Voice & Video Invite
 @property (nonatomic, strong) UIImage * _Nullable voiceVideoDeclineCallButtonImage;
-/// Defines background image for End button on Voice & Video Invite
+/// Defines image for End button on Voice & Video Invite
 /// precondition:
 /// This image is only shown on the Voice & Video Invite when Consumer has an active Call
 /// requires:
 /// To enable this image <code>voiceVideoEndCallButtonType</code> should be set to <code>hangup</code>
 @property (nonatomic, strong) UIImage * _Nullable voiceVideoEndCallButtonImage;
-/// Defines background image for Join button on Voice & Video Invite
+/// Defines image for Join button on Voice & Video Invite
 @property (nonatomic, strong) UIImage * _Nullable voiceVideoJoinCallButtonImage;
 /// Defines tint <em>(Color)</em> for Icon on Voice & Video Invite
 @property (nonatomic, strong) UIColor * _Nonnull voiceVideoInviteIconTint;
@@ -1728,6 +1728,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull voiceVideoNavigationBackgroundColor;
 /// Defines tint <em>(color)</em> of Navigation & Tab Bar Icons for Voice & Video SFSafariViewController
 @property (nonatomic, strong) UIColor * _Nonnull voiceVideoNavigationTintColor;
+/// Status bar style in Cobrowse screen.
+@property (nonatomic) UIStatusBarStyle voiceVideoStatusBarStyle;
 /// Defines back/minimize button image for Voice & Video call screen
 @property (nonatomic, strong) UIImage * _Nullable voiceVideoNavigationMinimizeButtonImage;
 /// Custom button icon image that displays on the navigation bar.
