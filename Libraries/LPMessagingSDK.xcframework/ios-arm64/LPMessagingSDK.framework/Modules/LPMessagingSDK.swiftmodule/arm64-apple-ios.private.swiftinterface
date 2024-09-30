@@ -238,7 +238,7 @@ public protocol LPStructuredContentDelegate : AnyObject {
 extension LPMessagingSDK.LPStructuredContent : UIKit.UIGestureRecognizerDelegate {
   @_Concurrency.MainActor(unsafe) public func handleOrientation()
   @_Concurrency.MainActor(unsafe) public func removeStructuredContentObjects()
-  @_Concurrency.MainActor(unsafe) public func setWith(item: LPMessagingSDK.LPStructuredContentItem, imageDownloader: LPMessagingSDK.LPStructuredContentImageDownloader?, currentPage: Swift.Int = 0)
+  @_Concurrency.MainActor(unsafe) public func setWith(item: LPMessagingSDK.LPStructuredContentItem, imageDownloader: LPMessagingSDK.LPStructuredContentImageDownloader?, currentPage: Swift.Int = 0, isCurrentMessage: Swift.Bool = true)
 }
 extension LPMessagingSDK.LPStructuredContent {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
@@ -486,11 +486,6 @@ extension LPMessagingSDK.ECPrivateKey : Swift.Decodable {
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
   public func compare(other: LPMessagingSDK.TTRModel) -> Swift.Bool
   @objc deinit
-}
-extension Swift.Optional : Swift.CustomStringConvertible {
-  public var description: Swift.String {
-    get
-  }
 }
 extension LPMessagingSDK.SymmetricKey : Swift.Encodable {
   public func encode(to encoder: Swift.Encoder) throws
@@ -767,6 +762,8 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case accessibilityCarouselNavPreviousButton
   case accessibilityCarouselNavNextButton
   case accessibilityCarouselCardOrderAnnouncement
+  case accessibilityPreviousWeek
+  case accessibilityNextWeek
   public init?(rawValue: Swift.String)
   public typealias AllCases = [LPMessagingSDK.LPLanguagesKeys]
   public typealias RawValue = Swift.String
@@ -1574,6 +1571,9 @@ extension LPMessagingSDK.Message {
   public var isInitialRemoteMessage: Swift.Bool {
     get
   }
+  public var isProactiveMessage: Swift.Bool {
+    get
+  }
   public func getBaseMessageType() -> LPMessagingSDK.MessageType?
   public func getLocalMessageType() -> LPMessagingSDK.LocalMessageType?
   public func getBoards(completion: @escaping (_ boards: [LPMessagingSDK.CustomBoard]) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
@@ -1821,6 +1821,8 @@ public struct SymmetricDecryptionContext {
   case audioSharing
   case agentFileSharing
   case blurThumbnail
+  case blockSCWhenNotLastMsgDefault
+  case blockTextInputDefault
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -2355,7 +2357,9 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var fileSharingPDFFileThumbnailimage: UIKit.UIImage?
   @objc public var fileSharingPPTXFileThumbnailimage: UIKit.UIImage?
   @objc public var fileSharingDOCXFileThumbnailimage: UIKit.UIImage?
+  @objc public var fileSharingDOCFileThumbnailimage: UIKit.UIImage?
   @objc public var fileSharingXLSXFileThumbnailimage: UIKit.UIImage?
+  @objc public var fileSharingXLSFileThumbnailimage: UIKit.UIImage?
   @objc public var conversationEmptyStateTextColor: UIKit.UIColor
   @objc public var remoteFileStateTint: UIKit.UIColor
   @objc public var userFileStateTint: UIKit.UIColor
@@ -2378,6 +2382,11 @@ public enum QuickReplyActionType : Swift.String {
   }
   @objc public var inAppReportingEnabled: Swift.Bool
   @objc public var enableInAppProcessingForActiveState: Swift.Bool
+  @objc public var fetchPendingProactiveMessagesImplicitly: Swift.Bool
+  @objc public var maxNumberOfProactiveMessagesToRenderImplicitly: Swift.Int {
+    @objc get
+    @objc set
+  }
   @objc public var quickReplyButtonVerticalPadding: CoreFoundation.CGFloat
   @objc public var quickReplyButtonHorizontalPadding: CoreFoundation.CGFloat
   @objc public var quickReplyVerticalMargin: CoreFoundation.CGFloat
@@ -2420,6 +2429,8 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var structuredContentMapLongitudeDeltaSpan: Swift.Double
   @objc public var structuredContentButtonBorderColor: UIKit.UIColor
   @objc public var structuredContentButtonTextColor: UIKit.UIColor
+  @objc public var disabledStructuredContentButtonTextColor: UIKit.UIColor
+  @objc public var disabledStructuredContentButtonBorderColor: UIKit.UIColor
   @objc public var structuredContentButtonBackgroundColor: UIKit.UIColor
   @objc public var structuredContentLinkButtonTextColor: UIKit.UIColor
   @objc public var structuredContentTextColor: UIKit.UIColor
@@ -2523,6 +2534,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var botUserBubbleTopRightCornerRadius: Swift.Float
   @objc public var botUserBubbleBottomLeftCornerRadius: Swift.Float
   @objc public var botUserBubbleBottomRightCornerRadius: Swift.Float
+  @objc public var messageLinkAsCallback: Swift.Bool
   @objc public var userBubbleBackgroundColor: UIKit.UIColor
   @objc public var userBubbleBorderColor: UIKit.UIColor
   @objc public var userBubbleLinkColor: UIKit.UIColor
@@ -2628,7 +2640,8 @@ extension LPMessagingSDK.LPWeeklyCalendarView : UIKit.UICollectionViewDelegate, 
   @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
   @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
   @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGSize
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didEndDisplaying cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
 }
 public class ConversationDetails : Swift.CustomStringConvertible {
   public enum CloseReason {
@@ -2777,6 +2790,7 @@ public enum HTTPMethod : Swift.String {
   case PUT
   case POST
   case GET
+  case DELETE
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
@@ -2821,13 +2835,17 @@ public let HYPERLINK: Swift.String
 public let PDF_FILE_EXTENSION: Swift.String
 public let PPTX_FILE_EXTENSION: Swift.String
 public let XLSX_FILE_EXTENSION: Swift.String
+public let XLS_FILE_EXTENSION: Swift.String
 public let DOCX_FILE_EXTENSION: Swift.String
+public let DOC_FILE_EXTENSION: Swift.String
 public let JPEG_FILE_EXTENSION: Swift.String
 public let UNIVERSAL_FILE_UTI: Swift.String
 public let PDF_FILE_UTI: Swift.String
 public let PPTX_FILE_UTI: Swift.String
 public let XLSX_FILE_UTI: Swift.String
+public let XLS_FILE_UTI: Swift.String
 public let DOCX_FILE_UTI: Swift.String
+public let DOC_FILE_UTI: Swift.String
 public let QUERY_HISTORY_COMPLETED_KEY: Swift.String
 public let QUERY_HISTORY_TOTAL_KEY: Swift.String
 public let APNS_CERTIFICATE_NAME_FIELD: Swift.String
@@ -3062,6 +3080,7 @@ public enum LPNotificationName {
   public static let LP_SET_CONVERSATION_PARTICIPANTS: Foundation.Notification.Name
   public static let LP_RELOADING_QUICK_REPLY: Foundation.Notification.Name
   public static let CONNECTION_STEP_UP_FAILED: Foundation.Notification.Name
+  public static let MESSAGE_LINK_CLICKED: Foundation.Notification.Name
 }
 public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
   case TOKEN
@@ -3368,6 +3387,9 @@ extension LPMessagingSDK.Dialog {
   public var isMainDialog: Swift.Bool {
     get
   }
+  public var latestInitialMessage: LPMessagingSDK.Message? {
+    get
+  }
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentStyle : ObjectiveC.NSObject, Foundation.NSSecureCoding, Swift.Encodable {
   @objc public class var supportsSecureCoding: Swift.Bool {
@@ -3485,20 +3507,6 @@ public struct AppointmentSlot : Swift.Encodable {
   }
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LPMonitoringDataManager : ObjectiveC.NSObject {
-  public var monitoringIdentities: [LPMessagingSDK.LPMonitoringIdentity] {
-    get
-    set
-  }
-  public var monitoringParam: LPMessagingSDK.LPMonitoringParams?
-  public var isInitialized: Swift.Bool {
-    get
-  }
-  public static let instance: LPMessagingSDK.LPMonitoringDataManager
-  @objc deinit
-  public func initialize(accountId: Swift.String, monitoringInitParms: LPMessagingSDK.LPMonitoringInitParams)
-  public func clearEngagementMonitoring()
-}
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentNavigateAction : LPMessagingSDK.LPStructuredContentAction {
   @objc override public class var supportsSecureCoding: Swift.Bool {
     @objc get
@@ -3558,7 +3566,6 @@ extension Security.SecKey : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   public var calendarViewTextLight: UIKit.UIColor
   public var calendarViewDateColor: UIKit.UIColor
   public var calendarBackgroundColor: UIKit.UIColor
-  public var datePickerChevron: UIKit.UIImage?
   public var slotImage: UIKit.UIImage?
   public var rightChevron: UIKit.UIImage?
   public var leftChevron: UIKit.UIImage?
@@ -3583,6 +3590,8 @@ extension Security.SecKey : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   public var customDateFormat: Swift.String
   public var customOutputDateFormat: Swift.String
   public var locale: Foundation.Locale
+  public var accessibilityNavigationNextWeekLabel: Swift.String
+  public var accessibilityNavigationPreviousWeekLabel: Swift.String
   public var calendar: Foundation.Calendar {
     get
     set
@@ -3772,6 +3781,7 @@ extension LPMessagingSDK.LPMessaging {
   @objc dynamic public func isRegisteredForPushNotifications(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, token: Foundation.Data, alternateBundleID: Swift.String? = nil, completion: @escaping (_ isRegistered: Swift.Bool) -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
   @objc dynamic public func isRegisteredForPushNotifications(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, tokenString: Swift.String, alternateBundleID: Swift.String? = nil, completion: @escaping (_ isRegistered: Swift.Bool) -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
   @objc dynamic public func handlePush(_ userInfo: [Swift.AnyHashable : Any])
+  @objc dynamic public func getPendingProactiveMessages(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams, alternateBundleID: Swift.String? = nil, completion: @escaping (_ notifications: [LPMessagingSDK.LPNotification]) -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentPublishTextAction : LPMessagingSDK.LPStructuredContentAction {
   @objc override public class var supportsSecureCoding: Swift.Bool {
@@ -3934,6 +3944,7 @@ public protocol LPStructuredContentLoggerDelegate : AnyObject {
   public var userID: Swift.String?
   public var type: LPMessagingSDK.NotificationPayload.PayloadType?
   public var proActiveData: LPMessagingSDK.ProactiveNotificationData?
+  public var dateCreated: Swift.Double?
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentLinkAction : LPMessagingSDK.LPStructuredContentAction {
@@ -4419,15 +4430,16 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   @objc public var accountID: Swift.String
   @objc public var isRemote: Swift.Bool
   @objc public var proActiveData: LPMessagingSDK.ProactiveNotificationData?
+  public var dateCreated: Swift.Double?
   @objc public var toString: Swift.String {
     @objc get
   }
   @objc override dynamic public var debugDescription: Swift.String {
     @objc get
   }
-  @objc convenience public init(text: Swift.String, body: Swift.String?, firstName: Swift.String?, lastName: Swift.String?, uid: Swift.String?, accountID: Swift.String, isRemote: Swift.Bool = false, proActiveData: LPMessagingSDK.ProactiveNotificationData? = nil)
+  convenience public init(text: Swift.String, body: Swift.String?, firstName: Swift.String?, lastName: Swift.String?, uid: Swift.String?, accountID: Swift.String, isRemote: Swift.Bool = false, proActiveData: LPMessagingSDK.ProactiveNotificationData? = nil, dateCreated: Swift.Double? = nil)
   @objc convenience public init(message: LPMessagingSDK.Message, isRemote: Swift.Bool = false, proActiveData: LPMessagingSDK.ProactiveNotificationData? = nil)
-  @objc public init(text: Swift.String, body: Swift.String? = nil, user: LPMessagingSDK.LPUser, accountID: Swift.String, isRemote: Swift.Bool = false, proActiveData: LPMessagingSDK.ProactiveNotificationData? = nil)
+  public init(text: Swift.String, body: Swift.String? = nil, user: LPMessagingSDK.LPUser, accountID: Swift.String, isRemote: Swift.Bool = false, proActiveData: LPMessagingSDK.ProactiveNotificationData? = nil, dateCreated: Swift.Double? = nil)
   @objc required public init?(coder: Foundation.NSCoder)
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc deinit
@@ -4467,7 +4479,6 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, authParams: LPMessagingSDK.LPAuthenticationParams, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
   @objc public func setAuthenticationParams(authenticationParams: LPMessagingSDK.LPAuthenticationParams, brandID: Swift.String)
   @objc public func sendSDE(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
-  @objc public func handleTapForInAppNotification(notification: LPMessagingSDK.LPNotification)
   @objc public func clearHistory(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol, shouldFetchHistoryOnShowConversation: Swift.Bool = false) throws
   @objc public func getPkceParams(accountID: Swift.String, completion: @escaping (_ pkceParams: LPMessagingSDK.LPPKCEResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
   @objc public func printAllLocalizedKeys()
@@ -4475,6 +4486,9 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   @objc public func printSupportedRegions()
   @objc public func getAllSupportedLanguages() -> [Swift.String : Swift.String]
   @objc public func getAllSupportedRegions() -> [Swift.String : Swift.String]
+  @objc @available(*, deprecated, message: "Use `handleTapForInAppNotifications(notifications:, clearOthers:)` method instead")
+  public func handleTapForInAppNotification(notification: LPMessagingSDK.LPNotification)
+  @objc public func handleTapForInAppNotifications(notifications: [LPMessagingSDK.LPNotification], clearOthers: Swift.Bool = false)
   @objc public func setPushNotificationTapped()
   @objc public func setLoggingLevel(level: LPMessagingSDK.LPLoggingLevel)
   @objc public func getLogSnapshot(level: LPMessagingSDK.LPLoggingLevel) -> [Swift.String]
@@ -4577,15 +4591,22 @@ public protocol LPStructuredContentImageDownloader {
   @objc optional func LPMessagingSDKStructuredContentLinkClicked(_ uri: Swift.String)
   @objc optional func LPMessagingSDKUnauthenticatedUserExpired()
   @objc optional func LPMessagingSDKWelcomeMessageOptionTapped(_ title: Swift.String)
+  @objc optional func LPMessagingSDKMessageLinkClicked(_ uri: Swift.String)
 }
 @objc public class ProactiveNotificationData : ObjectiveC.NSObject, Foundation.NSSecureCoding {
   @objc public static var supportsSecureCoding: Swift.Bool {
     @objc get
   }
+  final public let brandId: Swift.String
+  final public let transactionId: Swift.String
+  final public let expirationEpochTime: Swift.Double
+  final public let leCampaignId: Swift.String?
+  final public let leEngagementId: Swift.String?
+  final public let event: [Swift.String : Any]?
   @objc override dynamic public var debugDescription: Swift.String {
     @objc get
   }
-  public init(brandId: Swift.String, lookBackPeriod: Swift.Double? = nil, expirationEpochTime: Swift.Double, agentPid: Swift.String? = nil, backendService: Swift.String? = nil, leCampaignId: Swift.String? = nil, leEngagementId: Swift.String? = nil, externalConsumerId: Swift.String? = nil, transactionId: Swift.String? = nil, event: [Swift.String : Any]? = nil)
+  public init(brandId: Swift.String, lookBackPeriod: Swift.Double? = nil, expirationEpochTime: Swift.Double, agentPid: Swift.String? = nil, backendService: Swift.String? = nil, leCampaignId: Swift.String? = nil, leEngagementId: Swift.String? = nil, externalConsumerId: Swift.String? = nil, transactionId: Swift.String, event: [Swift.String : Any]? = nil)
   @objc required public init?(coder: Foundation.NSCoder)
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc deinit
@@ -4629,6 +4650,8 @@ public protocol LPStructuredContentFontProvider : AnyObject {
   public var buttonTextLinkColor: UIKit.UIColor
   public var buttonBackgroundColor: UIKit.UIColor
   public var buttonTextColor: UIKit.UIColor
+  public var disabledButtonTextColor: UIKit.UIColor
+  public var disabledButtonBorderColor: UIKit.UIColor
   public var buttonHighlightedBackgroundColor: UIKit.UIColor
   public var textColor: UIKit.UIColor
   public var imageViewGrayColor: UIKit.UIColor
