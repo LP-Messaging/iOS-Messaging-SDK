@@ -146,9 +146,11 @@
     if (self.authenticationSwitch.on) {
         authenticationParams = [[LPAuthenticationParams alloc] initWithAuthenticationCode:nil
                                                                                       jwt:nil
+                                                                             codeVerifier:nil
                                                                               redirectURI:nil
-                                                                    certPinningPublicKeys:nil
-                                                                       authenticationType:LPAuthenticationTypeAuthenticated];
+                                                                        issuerDisplayName:nil
+                                                                    certPinningPublicKeys:nil authenticationType:LPAuthenticationTypeAuthenticated
+        ];
     }
     
     //LPWelcomeMessageParam
