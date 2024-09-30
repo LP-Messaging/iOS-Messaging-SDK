@@ -1148,8 +1148,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIImage * _Nullable fileSharingPPTXFileThumbnailimage;
 /// Image for custom the thumbnail of DOCX files in file sharing.
 @property (nonatomic, strong) UIImage * _Nullable fileSharingDOCXFileThumbnailimage;
+/// Image for custom the thumbnail of DOC files in file sharing.
+@property (nonatomic, strong) UIImage * _Nullable fileSharingDOCFileThumbnailimage;
 /// Image for custom the thumbnail of XLSX files in file sharing.
 @property (nonatomic, strong) UIImage * _Nullable fileSharingXLSXFileThumbnailimage;
+/// Image for custom the thumbnail of XLS files in file sharing.
+@property (nonatomic, strong) UIImage * _Nullable fileSharingXLSFileThumbnailimage;
 /// Color code for the empty state label.
 @property (nonatomic, strong) UIColor * _Nonnull conversationEmptyStateTextColor;
 /// Tint color for the state of files received from agents.
@@ -1193,9 +1197,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 ///   </li>
 /// </ol>
 @property (nonatomic) BOOL inAppReportingEnabled;
-/// Enable or disable the ability to process Proactive and IVR Deflection messages
-/// precondition:
-/// HostApp implements <code>LPMessagingSDKNotification(customLocalPushNotificationView notification: LPNotification)</code>
+/// Enable or disable the ability to process Proactive and IVR Deflection messages when app is in Active state.
 /// requires:
 /// Consumer to be registered for Push Notifications
 /// since:
@@ -1203,6 +1205,14 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// remark:
 /// Default value is <code>false</code>
 @property (nonatomic) BOOL enableInAppProcessingForActiveState;
+/// If enabled then SDK will fetch the pending proactive messages implicitly along side fetching the other history messages.
+@property (nonatomic) BOOL fetchPendingProactiveMessagesImplicitly;
+/// Maximum number of proactive messages to be rendered implicitly.
+/// This property will be used if brand app didn’t provide the tapped messages to render explicitly.
+/// remark:
+/// Default value is <code>1</code> but it can have other values as <code>-1</code> to show all messages,
+/// <code>0</code> to show none (only tapped ones if any) or <code>>1</code> which means maximum messages to render.
+@property (nonatomic) NSInteger maxNumberOfProactiveMessagesToRenderImplicitly;
 /// Distance between the bottom and top edges of the button to the bottom and top edges of the text.
 @property (nonatomic) CGFloat quickReplyButtonVerticalPadding;
 /// Distance between the right and left edges of the button to the right and left edges of the text.
@@ -1319,6 +1329,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonBorderColor;
 /// Used to set the text color for Structure Content elements of button type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonTextColor;
+/// Used to set the disabled button text color for Structured Content button types
+@property (nonatomic, strong) UIColor * _Nonnull disabledStructuredContentButtonTextColor;
+/// Used to set the disabled button border color for Structured Content button types
+@property (nonatomic, strong) UIColor * _Nonnull disabledStructuredContentButtonBorderColor;
 /// Used to set the button area background color in structured content cards
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonBackgroundColor;
 /// Used to set the text color for Structured Content elements of link button type
@@ -1586,6 +1600,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
 /// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually.
 @property (nonatomic) float botUserBubbleBottomRightCornerRadius;
+/// Set the Remote Bubble (agent/bot msg) messages’s link as a callback (true) instead of a link intent (false).
+/// When set to true, tapping any link within the remote user bubble’s link will trigger
+/// <code>LPMessagingSDKDelegate</code> method <code>LPMessagingSDKMessageLinkClicked</code>.
+@property (nonatomic) BOOL messageLinkAsCallback;
 /// Color code for the background of the visitor bubble.
 @property (nonatomic, strong) UIColor * _Nonnull userBubbleBackgroundColor;
 /// Color code for the outline of the visitor bubble.
@@ -2143,8 +2161,8 @@ typedef SWIFT_ENUM(NSInteger, LPLoggingLevel, open) {
 @class LPMonitoringIdentity;
 @class LPMonitoringParams;
 @class LPSendSDEResponse;
-@class LPNotification;
 @class LPPKCEResponse;
+@class LPNotification;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK11LPMessaging")
 @interface LPMessaging : NSObject
@@ -2347,10 +2365,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// \param failure failure block with an error in case the request fails
 ///
 - (void)sendSDEWithIdentities:(NSArray<LPMonitoringIdentity *> * _Nonnull)identities monitoringParams:(LPMonitoringParams * _Nonnull)monitoringParams completion:(void (^ _Nonnull)(LPSendSDEResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-/// Will handle the case when Consumer taps an In App Notification that contains a Proactive Engagement
-/// \param notification LPNotification
-///
-- (void)handleTapForInAppNotificationWithNotification:(LPNotification * _Nonnull)notification;
 /// This method deletes all the messages and closed conversation of the related conversation query.
 /// This method throws an error if the conversations history failed to be cleared.
 /// Note: clear history is allowed only if there is no open/active conversation related to the passed conversation query.
@@ -2381,6 +2395,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// returns:
 /// [region : regionName]
 - (NSDictionary<NSString *, NSString *> * _Nonnull)getAllSupportedRegions SWIFT_WARN_UNUSED_RESULT;
+/// Will handle the case when Consumer taps an In App Notification that contains a Proactive Engagement
+/// \param notification LPNotification
+///
+- (void)handleTapForInAppNotificationWithNotification:(LPNotification * _Nonnull)notification SWIFT_DEPRECATED_MSG("Use `handleTapForInAppNotifications(notifications:, clearOthers:)` method instead");
+/// Brand can implement their custom logic to select multiple messages to be rendered and
+/// provide the list of proactive messages to SDK to render.
+/// \param notifications [LPNotification] list of proactive messages to render
+///
+/// \param clearOthers Bool if set to <code>true</code> then SDK will remove the
+/// non-rendered proactive messages from Pusher when show conversation method is called.
+///
+- (void)handleTapForInAppNotificationsWithNotifications:(NSArray<LPNotification *> * _Nonnull)notifications clearOthers:(BOOL)clearOthers;
 /// Notifies the SDK that a push notification was tapped.
 /// This method should be called immediately after the host app has determined that a notification was tapped.
 /// For scroll behavior on push notification tapped, see LPConfig.conversationScrollConfiguration
@@ -2696,6 +2722,26 @@ enum LPPusherUnregisterType : NSInteger;
 /// \param userInfo Dictionary
 ///
 - (void)handlePush:(NSDictionary * _Nonnull)userInfo;
+/// This method fetches the pending proactive messages from Pusher.
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     conversationQuery: used to identify the related brand
+///   </li>
+///   <li>
+///     authenticationParams: an LPAuthenticationParams object to determine the properties
+///     of an authenticated connection.
+///   </li>
+///   <li>
+///     completion: called once the operation ends successfully
+///   </li>
+///   <li>
+///     failure: called once the operation failed
+///   </li>
+/// </ul>
+- (void)getPendingProactiveMessages:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationParams:(LPAuthenticationParams * _Nonnull)authenticationParams alternateBundleID:(NSString * _Nullable)alternateBundleID completion:(void (^ _Nonnull)(NSArray<LPNotification *> * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 @end
 
 /// ENUM to list major features to control from config.
@@ -2715,6 +2761,8 @@ typedef SWIFT_ENUM(NSInteger, LPMessagingSDKFeature, open) {
   LPMessagingSDKFeatureAudioSharing = 1,
   LPMessagingSDKFeatureAgentFileSharing = 2,
   LPMessagingSDKFeatureBlurThumbnail = 3,
+  LPMessagingSDKFeatureBlockSCWhenNotLastMsgDefault = 4,
+  LPMessagingSDKFeatureBlockTextInputDefault = 5,
 };
 
 
@@ -2784,13 +2832,9 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 /// \param title Tapped quick reply option title.
 ///
 - (void)LPMessagingSDKWelcomeMessageOptionTapped:(NSString * _Nonnull)title;
-@end
-
-
-SWIFT_CLASS("_TtC14LPMessagingSDK23LPMonitoringDataManager")
-@interface LPMonitoringDataManager : NSObject
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+/// Called when consumer click/tap on a link from any remote user bubble messages.
+/// This function is only invoked when LPConfig\messageLinkAsCallback is set to true
+- (void)LPMessagingSDKMessageLinkClicked:(NSString * _Nonnull)uri;
 @end
 
 
@@ -2869,9 +2913,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @property (nonatomic, strong) ProactiveNotificationData * _Nullable proActiveData;
 @property (nonatomic, readonly, copy) NSString * _Nonnull toString;
 @property (nonatomic, readonly, copy) NSString * _Nonnull debugDescription;
-- (nonnull instancetype)initWithText:(NSString * _Nonnull)text body:(NSString * _Nullable)body firstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName uid:(NSString * _Nullable)uid accountID:(NSString * _Nonnull)accountID isRemote:(BOOL)isRemote proActiveData:(ProactiveNotificationData * _Nullable)proActiveData;
 - (nonnull instancetype)initWithMessage:(id <Message> _Nonnull)message isRemote:(BOOL)isRemote proActiveData:(ProactiveNotificationData * _Nullable)proActiveData;
-- (nonnull instancetype)initWithText:(NSString * _Nonnull)text body:(NSString * _Nullable)body user:(LPUser * _Nonnull)user accountID:(NSString * _Nonnull)accountID isRemote:(BOOL)isRemote proActiveData:(ProactiveNotificationData * _Nullable)proActiveData OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -3276,7 +3318,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK20LPWeeklyCalendarView")
 - (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (void)collectionView:(UICollectionView * _Nonnull)collectionView willDisplayCell:(UICollectionViewCell * _Nonnull)cell forItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (CGSize)collectionView:(UICollectionView * _Nonnull)collectionView layout:(UICollectionViewLayout * _Nonnull)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-- (void)collectionView:(UICollectionView * _Nonnull)collectionView didEndDisplayingCell:(UICollectionViewCell * _Nonnull)cell forItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView * _Nonnull)scrollView;
+- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 @end
 
 
@@ -4880,8 +4923,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIImage * _Nullable fileSharingPPTXFileThumbnailimage;
 /// Image for custom the thumbnail of DOCX files in file sharing.
 @property (nonatomic, strong) UIImage * _Nullable fileSharingDOCXFileThumbnailimage;
+/// Image for custom the thumbnail of DOC files in file sharing.
+@property (nonatomic, strong) UIImage * _Nullable fileSharingDOCFileThumbnailimage;
 /// Image for custom the thumbnail of XLSX files in file sharing.
 @property (nonatomic, strong) UIImage * _Nullable fileSharingXLSXFileThumbnailimage;
+/// Image for custom the thumbnail of XLS files in file sharing.
+@property (nonatomic, strong) UIImage * _Nullable fileSharingXLSFileThumbnailimage;
 /// Color code for the empty state label.
 @property (nonatomic, strong) UIColor * _Nonnull conversationEmptyStateTextColor;
 /// Tint color for the state of files received from agents.
@@ -4925,9 +4972,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 ///   </li>
 /// </ol>
 @property (nonatomic) BOOL inAppReportingEnabled;
-/// Enable or disable the ability to process Proactive and IVR Deflection messages
-/// precondition:
-/// HostApp implements <code>LPMessagingSDKNotification(customLocalPushNotificationView notification: LPNotification)</code>
+/// Enable or disable the ability to process Proactive and IVR Deflection messages when app is in Active state.
 /// requires:
 /// Consumer to be registered for Push Notifications
 /// since:
@@ -4935,6 +4980,14 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// remark:
 /// Default value is <code>false</code>
 @property (nonatomic) BOOL enableInAppProcessingForActiveState;
+/// If enabled then SDK will fetch the pending proactive messages implicitly along side fetching the other history messages.
+@property (nonatomic) BOOL fetchPendingProactiveMessagesImplicitly;
+/// Maximum number of proactive messages to be rendered implicitly.
+/// This property will be used if brand app didn’t provide the tapped messages to render explicitly.
+/// remark:
+/// Default value is <code>1</code> but it can have other values as <code>-1</code> to show all messages,
+/// <code>0</code> to show none (only tapped ones if any) or <code>>1</code> which means maximum messages to render.
+@property (nonatomic) NSInteger maxNumberOfProactiveMessagesToRenderImplicitly;
 /// Distance between the bottom and top edges of the button to the bottom and top edges of the text.
 @property (nonatomic) CGFloat quickReplyButtonVerticalPadding;
 /// Distance between the right and left edges of the button to the right and left edges of the text.
@@ -5051,6 +5104,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonBorderColor;
 /// Used to set the text color for Structure Content elements of button type
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonTextColor;
+/// Used to set the disabled button text color for Structured Content button types
+@property (nonatomic, strong) UIColor * _Nonnull disabledStructuredContentButtonTextColor;
+/// Used to set the disabled button border color for Structured Content button types
+@property (nonatomic, strong) UIColor * _Nonnull disabledStructuredContentButtonBorderColor;
 /// Used to set the button area background color in structured content cards
 @property (nonatomic, strong) UIColor * _Nonnull structuredContentButtonBackgroundColor;
 /// Used to set the text color for Structured Content elements of link button type
@@ -5318,6 +5375,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
 /// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually.
 @property (nonatomic) float botUserBubbleBottomRightCornerRadius;
+/// Set the Remote Bubble (agent/bot msg) messages’s link as a callback (true) instead of a link intent (false).
+/// When set to true, tapping any link within the remote user bubble’s link will trigger
+/// <code>LPMessagingSDKDelegate</code> method <code>LPMessagingSDKMessageLinkClicked</code>.
+@property (nonatomic) BOOL messageLinkAsCallback;
 /// Color code for the background of the visitor bubble.
 @property (nonatomic, strong) UIColor * _Nonnull userBubbleBackgroundColor;
 /// Color code for the outline of the visitor bubble.
@@ -5875,8 +5936,8 @@ typedef SWIFT_ENUM(NSInteger, LPLoggingLevel, open) {
 @class LPMonitoringIdentity;
 @class LPMonitoringParams;
 @class LPSendSDEResponse;
-@class LPNotification;
 @class LPPKCEResponse;
+@class LPNotification;
 
 SWIFT_CLASS("_TtC14LPMessagingSDK11LPMessaging")
 @interface LPMessaging : NSObject
@@ -6079,10 +6140,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// \param failure failure block with an error in case the request fails
 ///
 - (void)sendSDEWithIdentities:(NSArray<LPMonitoringIdentity *> * _Nonnull)identities monitoringParams:(LPMonitoringParams * _Nonnull)monitoringParams completion:(void (^ _Nonnull)(LPSendSDEResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
-/// Will handle the case when Consumer taps an In App Notification that contains a Proactive Engagement
-/// \param notification LPNotification
-///
-- (void)handleTapForInAppNotificationWithNotification:(LPNotification * _Nonnull)notification;
 /// This method deletes all the messages and closed conversation of the related conversation query.
 /// This method throws an error if the conversations history failed to be cleared.
 /// Note: clear history is allowed only if there is no open/active conversation related to the passed conversation query.
@@ -6113,6 +6170,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// returns:
 /// [region : regionName]
 - (NSDictionary<NSString *, NSString *> * _Nonnull)getAllSupportedRegions SWIFT_WARN_UNUSED_RESULT;
+/// Will handle the case when Consumer taps an In App Notification that contains a Proactive Engagement
+/// \param notification LPNotification
+///
+- (void)handleTapForInAppNotificationWithNotification:(LPNotification * _Nonnull)notification SWIFT_DEPRECATED_MSG("Use `handleTapForInAppNotifications(notifications:, clearOthers:)` method instead");
+/// Brand can implement their custom logic to select multiple messages to be rendered and
+/// provide the list of proactive messages to SDK to render.
+/// \param notifications [LPNotification] list of proactive messages to render
+///
+/// \param clearOthers Bool if set to <code>true</code> then SDK will remove the
+/// non-rendered proactive messages from Pusher when show conversation method is called.
+///
+- (void)handleTapForInAppNotificationsWithNotifications:(NSArray<LPNotification *> * _Nonnull)notifications clearOthers:(BOOL)clearOthers;
 /// Notifies the SDK that a push notification was tapped.
 /// This method should be called immediately after the host app has determined that a notification was tapped.
 /// For scroll behavior on push notification tapped, see LPConfig.conversationScrollConfiguration
@@ -6428,6 +6497,26 @@ enum LPPusherUnregisterType : NSInteger;
 /// \param userInfo Dictionary
 ///
 - (void)handlePush:(NSDictionary * _Nonnull)userInfo;
+/// This method fetches the pending proactive messages from Pusher.
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     conversationQuery: used to identify the related brand
+///   </li>
+///   <li>
+///     authenticationParams: an LPAuthenticationParams object to determine the properties
+///     of an authenticated connection.
+///   </li>
+///   <li>
+///     completion: called once the operation ends successfully
+///   </li>
+///   <li>
+///     failure: called once the operation failed
+///   </li>
+/// </ul>
+- (void)getPendingProactiveMessages:(id <ConversationParamProtocol> _Nonnull)conversationQuery authenticationParams:(LPAuthenticationParams * _Nonnull)authenticationParams alternateBundleID:(NSString * _Nullable)alternateBundleID completion:(void (^ _Nonnull)(NSArray<LPNotification *> * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 @end
 
 /// ENUM to list major features to control from config.
@@ -6447,6 +6536,8 @@ typedef SWIFT_ENUM(NSInteger, LPMessagingSDKFeature, open) {
   LPMessagingSDKFeatureAudioSharing = 1,
   LPMessagingSDKFeatureAgentFileSharing = 2,
   LPMessagingSDKFeatureBlurThumbnail = 3,
+  LPMessagingSDKFeatureBlockSCWhenNotLastMsgDefault = 4,
+  LPMessagingSDKFeatureBlockTextInputDefault = 5,
 };
 
 
@@ -6516,13 +6607,9 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 /// \param title Tapped quick reply option title.
 ///
 - (void)LPMessagingSDKWelcomeMessageOptionTapped:(NSString * _Nonnull)title;
-@end
-
-
-SWIFT_CLASS("_TtC14LPMessagingSDK23LPMonitoringDataManager")
-@interface LPMonitoringDataManager : NSObject
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+/// Called when consumer click/tap on a link from any remote user bubble messages.
+/// This function is only invoked when LPConfig\messageLinkAsCallback is set to true
+- (void)LPMessagingSDKMessageLinkClicked:(NSString * _Nonnull)uri;
 @end
 
 
@@ -6601,9 +6688,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @property (nonatomic, strong) ProactiveNotificationData * _Nullable proActiveData;
 @property (nonatomic, readonly, copy) NSString * _Nonnull toString;
 @property (nonatomic, readonly, copy) NSString * _Nonnull debugDescription;
-- (nonnull instancetype)initWithText:(NSString * _Nonnull)text body:(NSString * _Nullable)body firstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName uid:(NSString * _Nullable)uid accountID:(NSString * _Nonnull)accountID isRemote:(BOOL)isRemote proActiveData:(ProactiveNotificationData * _Nullable)proActiveData;
 - (nonnull instancetype)initWithMessage:(id <Message> _Nonnull)message isRemote:(BOOL)isRemote proActiveData:(ProactiveNotificationData * _Nullable)proActiveData;
-- (nonnull instancetype)initWithText:(NSString * _Nonnull)text body:(NSString * _Nullable)body user:(LPUser * _Nonnull)user accountID:(NSString * _Nonnull)accountID isRemote:(BOOL)isRemote proActiveData:(ProactiveNotificationData * _Nullable)proActiveData OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -7008,7 +7093,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK20LPWeeklyCalendarView")
 - (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (void)collectionView:(UICollectionView * _Nonnull)collectionView willDisplayCell:(UICollectionViewCell * _Nonnull)cell forItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (CGSize)collectionView:(UICollectionView * _Nonnull)collectionView layout:(UICollectionViewLayout * _Nonnull)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-- (void)collectionView:(UICollectionView * _Nonnull)collectionView didEndDisplayingCell:(UICollectionViewCell * _Nonnull)cell forItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView * _Nonnull)scrollView;
+- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 @end
 
 
