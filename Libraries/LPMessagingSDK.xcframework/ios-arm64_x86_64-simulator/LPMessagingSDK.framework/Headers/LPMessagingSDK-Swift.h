@@ -2474,13 +2474,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// Deprecated @ 08/2016
 /// Creates welcome local system message for dialog
 + (id <Message> _Nullable)createWelcomeLocalMessage:(id <Dialog> _Nonnull)dialog overrideTime:(NSDate * _Nonnull)overrideTime SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,deprecated=12.2.0,obsoleted=14.0.0,message="\n        Use createWelcomeLocalMessage(_ dialog: Dialog, welcomeMessage: LPWelcomeMessage,\n        overrideTime: Date = Date()) -> Message? instead\n        ");
-/// Unregister pusher.
-/// Before unregistering the Pusher, we make sure we have the following params:
-/// param: Consumer UserID
-/// param: CSDS Domain for Pusher
-/// param: Account (brand account)
-/// When all params available - perform unregister
-+ (void)unregisterPusher:(id <Brand> _Nonnull)brand completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=12.1.0,obsoleted=14.0.0,message="Use unregisterPusherFor(_ brandId: String) instead");
 /// Use this API to get an engagement for a consumer in an appInstallationId context. When calculating eligibility the decision is based
 /// on the SDEs and other parameters. Based on messaging campaign concept.
 /// As an optional parameter, you can pass SDE Data which includes Entry Points and Engagement Attributes for routing the conversation.
@@ -2546,20 +2539,10 @@ enum LPPusherUnregisterType : NSInteger;
 /// Stops all connections.
 /// Remove Conversation View Controller
 - (void)destruct;
-/// Deprecated @ 09/2017
 /// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or
 /// just to logs the current user out.
 /// This method conducts the following:
-/// Unregisters from the push notification service.
-/// Clears all SDK persistent data.
-/// Cleans running operations (see <a href="consumer-experience-ios-sdk-destruct.html">destruct</a>{:target=”<em>blank”}).
-/// Invocation of destruct() method
-/// DEPRECATED - Use logout(completion: @escaping ()->(), failure: @escaping (</em> error: Error)->()) instead
-- (void)logout SWIFT_AVAILABILITY(ios,deprecated=9.3.5,obsoleted=14.0.0,message="Use logout(completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead");
-/// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or
-/// just to logs the current user out.
-/// This method conducts the following:
-/// Unregisters from the push notification service.
+/// Unregisters from the push notification service depending on the option provided.
 /// Clears all SDK persistent data.
 /// Cleans running operations (see <a href="consumer-experience-ios-sdk-destruct.html">destruct</a>{:target=”_blank”}).
 /// Invocation of destruct() method
@@ -2569,7 +2552,7 @@ enum LPPusherUnregisterType : NSInteger;
 ///
 /// \param failure A failure block with a list of errors that were encountered during logout process.
 ///
-- (void)logoutWithCompletion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=14.0,obsoleted=15.0.0,message="\n        Use logout(unregisterType: LPPusherUnregisterType, completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead\n        ");
+- (void)logoutWithUnregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure SWIFT_DEPRECATED_MSG("This function is deprecated. Use public func logout(authType:, unregisterType:=.all, completion:, failure:) instead.");
 /// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or
 /// just to logs the current user out.
 /// This method conducts the following:
@@ -2585,7 +2568,7 @@ enum LPPusherUnregisterType : NSInteger;
 ///
 /// \param failure A failure block with a list of errors that were encountered during logout process.
 ///
-- (void)logoutWithUnregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure;
+- (void)logoutWithAuthType:(enum LPAuthenticationType)authType unregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure;
 @end
 
 
@@ -2627,9 +2610,17 @@ enum LPPusherUnregisterType : NSInteger;
 /// This method unregisters the host app from SDK Pusher service
 /// \param brandId brand/account Identifier
 ///
+/// \param authType authentication type
+///
 /// \param unregisterType Unregister Type
 ///
-- (void)unregisterPusherWithBrandId:(NSString * _Nonnull)brandId unregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+- (void)unregisterPusherWithBrandId:(NSString * _Nonnull)brandId authType:(enum LPAuthenticationType)authType unregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// This method unregisters the host app from SDK Pusher service
+/// \param brandId brand/account Identifier
+///
+/// \param unregisterType Unregister Type
+///
+- (void)unregisterPusherWithBrandId:(NSString * _Nonnull)brandId unregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_DEPRECATED_MSG("This function is deprecated. Use public func unregisterPusher(brandId:, authType:, unregisterType:=.all, completion:, failure:) instead.");
 /// Set token for Pusher service in order to be able to receive remote push notifications
 /// \param token Data
 ///
@@ -6249,13 +6240,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// Deprecated @ 08/2016
 /// Creates welcome local system message for dialog
 + (id <Message> _Nullable)createWelcomeLocalMessage:(id <Dialog> _Nonnull)dialog overrideTime:(NSDate * _Nonnull)overrideTime SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,deprecated=12.2.0,obsoleted=14.0.0,message="\n        Use createWelcomeLocalMessage(_ dialog: Dialog, welcomeMessage: LPWelcomeMessage,\n        overrideTime: Date = Date()) -> Message? instead\n        ");
-/// Unregister pusher.
-/// Before unregistering the Pusher, we make sure we have the following params:
-/// param: Consumer UserID
-/// param: CSDS Domain for Pusher
-/// param: Account (brand account)
-/// When all params available - perform unregister
-+ (void)unregisterPusher:(id <Brand> _Nonnull)brand completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=12.1.0,obsoleted=14.0.0,message="Use unregisterPusherFor(_ brandId: String) instead");
 /// Use this API to get an engagement for a consumer in an appInstallationId context. When calculating eligibility the decision is based
 /// on the SDEs and other parameters. Based on messaging campaign concept.
 /// As an optional parameter, you can pass SDE Data which includes Entry Points and Engagement Attributes for routing the conversation.
@@ -6321,20 +6305,10 @@ enum LPPusherUnregisterType : NSInteger;
 /// Stops all connections.
 /// Remove Conversation View Controller
 - (void)destruct;
-/// Deprecated @ 09/2017
 /// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or
 /// just to logs the current user out.
 /// This method conducts the following:
-/// Unregisters from the push notification service.
-/// Clears all SDK persistent data.
-/// Cleans running operations (see <a href="consumer-experience-ios-sdk-destruct.html">destruct</a>{:target=”<em>blank”}).
-/// Invocation of destruct() method
-/// DEPRECATED - Use logout(completion: @escaping ()->(), failure: @escaping (</em> error: Error)->()) instead
-- (void)logout SWIFT_AVAILABILITY(ios,deprecated=9.3.5,obsoleted=14.0.0,message="Use logout(completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead");
-/// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or
-/// just to logs the current user out.
-/// This method conducts the following:
-/// Unregisters from the push notification service.
+/// Unregisters from the push notification service depending on the option provided.
 /// Clears all SDK persistent data.
 /// Cleans running operations (see <a href="consumer-experience-ios-sdk-destruct.html">destruct</a>{:target=”_blank”}).
 /// Invocation of destruct() method
@@ -6344,7 +6318,7 @@ enum LPPusherUnregisterType : NSInteger;
 ///
 /// \param failure A failure block with a list of errors that were encountered during logout process.
 ///
-- (void)logoutWithCompletion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure SWIFT_AVAILABILITY(ios,deprecated=14.0,obsoleted=15.0.0,message="\n        Use logout(unregisterType: LPPusherUnregisterType, completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead\n        ");
+- (void)logoutWithUnregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure SWIFT_DEPRECATED_MSG("This function is deprecated. Use public func logout(authType:, unregisterType:=.all, completion:, failure:) instead.");
 /// This method is a destructive method that is typically used to clean a user’s data before a second user logs into the same device or
 /// just to logs the current user out.
 /// This method conducts the following:
@@ -6360,7 +6334,7 @@ enum LPPusherUnregisterType : NSInteger;
 ///
 /// \param failure A failure block with a list of errors that were encountered during logout process.
 ///
-- (void)logoutWithUnregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure;
+- (void)logoutWithAuthType:(enum LPAuthenticationType)authType unregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure;
 @end
 
 
@@ -6402,9 +6376,17 @@ enum LPPusherUnregisterType : NSInteger;
 /// This method unregisters the host app from SDK Pusher service
 /// \param brandId brand/account Identifier
 ///
+/// \param authType authentication type
+///
 /// \param unregisterType Unregister Type
 ///
-- (void)unregisterPusherWithBrandId:(NSString * _Nonnull)brandId unregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+- (void)unregisterPusherWithBrandId:(NSString * _Nonnull)brandId authType:(enum LPAuthenticationType)authType unregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
+/// This method unregisters the host app from SDK Pusher service
+/// \param brandId brand/account Identifier
+///
+/// \param unregisterType Unregister Type
+///
+- (void)unregisterPusherWithBrandId:(NSString * _Nonnull)brandId unregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure SWIFT_DEPRECATED_MSG("This function is deprecated. Use public func unregisterPusher(brandId:, authType:, unregisterType:=.all, completion:, failure:) instead.");
 /// Set token for Pusher service in order to be able to receive remote push notifications
 /// \param token Data
 ///
