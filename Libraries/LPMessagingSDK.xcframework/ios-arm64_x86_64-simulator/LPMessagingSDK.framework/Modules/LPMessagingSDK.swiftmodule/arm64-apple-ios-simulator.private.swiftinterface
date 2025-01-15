@@ -3770,7 +3770,9 @@ extension LPMessagingSDK.LPMessaging {
   @objc dynamic public func registerPushNotifications(token: Foundation.Data, notificationDelegate: LPMessagingSDK.LPMessagingSDKNotificationDelegate? = nil, alternateBundleID: Swift.String? = nil, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
   @objc dynamic public func registerPushNotifications(tokenString: Swift.String, notificationDelegate: LPMessagingSDK.LPMessagingSDKNotificationDelegate? = nil, alternateBundleID: Swift.String? = nil, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
   @objc dynamic public func registerVoipPushNotifications(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
-  @objc dynamic public func unregisterPusher(brandId: Swift.String, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
+  @objc dynamic public func unregisterPusher(brandId: Swift.String, authType: LPMessagingSDK.LPAuthenticationType, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> (), failure: @escaping (_ error: Swift.Error) -> ())
+  @objc @available(*, deprecated, message: "This function is deprecated. Use public func unregisterPusher(brandId:, authType:, unregisterType:=.all, completion:, failure:) instead.")
+  dynamic public func unregisterPusher(brandId: Swift.String, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
   @objc dynamic public class func setPusherToken(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
   @objc dynamic public class func setPusherVoipToken(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
   @objc @available(*, deprecated, message: "Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())")
@@ -3914,11 +3916,9 @@ public typealias ECKeyPair = LPMessagingSDK.ECPrivateKey
 }
 extension LPMessagingSDK.LPMessaging {
   @objc dynamic public func destruct()
-  @objc @available(iOS, deprecated: 9.3.5, obsoleted: 14.0.0, message: "Use logout(completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead")
-  dynamic public func logout()
-  @objc @available(iOS, deprecated: 14.0, obsoleted: 15.0.0, message: "Use logout(unregisterType: LPPusherUnregisterType, completion: @escaping ()->(), failure: @escaping (_ error: Error)->()) instead")
-  dynamic public func logout(completion: @escaping () -> Swift.Void, failure: @escaping (_ errors: [Swift.Error]) -> Swift.Void)
-  @objc dynamic public func logout(unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> Swift.Void, failure: @escaping (_ errors: [Swift.Error]) -> Swift.Void)
+  @objc @available(*, deprecated, message: "This function is deprecated. Use public func logout(authType:, unregisterType:=.all, completion:, failure:) instead.")
+  dynamic public func logout(unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> (), failure: @escaping (_ errors: [Swift.Error]) -> Swift.Void)
+  @objc dynamic public func logout(authType: LPMessagingSDK.LPAuthenticationType, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> Swift.Void, failure: @escaping (_ errors: [Swift.Error]) -> Swift.Void)
 }
 public protocol LPStructuredContentLoggerDelegate : AnyObject {
   func lpStructuredContentLogger(message: Swift.String)
@@ -4500,8 +4500,6 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   public class func resolveConversationForConversationQuery(_ conversationQuery: LPMessagingSDK.ConversationParamProtocol)
   @objc @available(iOS, deprecated: 12.2.0, obsoleted: 14.0.0, message: "Use createWelcomeLocalMessage(_ dialog: Dialog, welcomeMessage: LPWelcomeMessage,\noverrideTime: Date = Date()) -> Message? instead")
   public class func createWelcomeLocalMessage(_ dialog: LPMessagingSDK.Dialog, overrideTime: Foundation.Date = Date()) -> LPMessagingSDK.Message?
-  @objc @available(iOS, deprecated: 12.1.0, obsoleted: 14.0.0, message: "Use unregisterPusherFor(_ brandId: String) instead")
-  public class func unregisterPusher(_ brand: LPMessagingSDK.Brand, completion: @escaping () -> Swift.Void, failure: @escaping (_ error: Swift.Error) -> Swift.Void)
   @objc @available(iOS, deprecated: 11.4.0, obsoleted: 14.0.0, message: "Use getEngagement(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams?, completion: @escaping (_ response: LPGetEngagementResponse)->(), failure: @escaping (_ error: NSError)->()) instead")
   public func getEngagement(consumerID: Swift.String?, monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
   @objc @available(iOS, deprecated: 11.4.0, obsoleted: 14.0.0, message: "Use sendSDE(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams, completion: @escaping (_ response: LPSendSDEResponse)->(), failure: @escaping (_ error: NSError)->()) instead")
