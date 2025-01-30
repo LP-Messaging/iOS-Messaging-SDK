@@ -140,6 +140,11 @@ IB_DESIGNABLE
 @property (readonly, nonatomic, strong) NSArray *links;
 
 /**
+ An array of `LPTTTAttributedLabelLink` objects for links detected or manually added to the label text.
+ */
+@property (readwrite, nonatomic, strong) NSArray *linkModels;
+
+/**
  A dictionary containing the default `NSAttributedString` attributes to be applied to links detected or manually added to the label text. The default link style is blue and underlined.
  
  @warning You must specify `linkAttributes` before setting autodecting or manually-adding links for these attributes to be applied.
