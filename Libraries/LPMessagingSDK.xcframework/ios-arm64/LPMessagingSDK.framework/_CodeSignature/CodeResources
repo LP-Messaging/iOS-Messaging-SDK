@@ -80,9 +80,13 @@
 		<data>
 		9oMuirJ+eAIzON7rEQNPXJszyT4=
 		</data>
-		<key>ConsumerDataModel.momd/ConsumerDataModel_ 23.omo</key>
+		<key>ConsumerDataModel.momd/ConsumerDataModel_ 24.mom</key>
 		<data>
-		EegXSKUzNIExVDa4XbfgGAoURxI=
+		oTMfHw+LZhN7xOb7e2dbX4hwKV8=
+		</data>
+		<key>ConsumerDataModel.momd/ConsumerDataModel_ 24.omo</key>
+		<data>
+		TeIRNMDos7kFgSvgVrvzCJJVMW4=
 		</data>
 		<key>ConsumerDataModel.momd/ConsumerDataModel_11_EventID_Photo_Sharing.mom</key>
 		<data>
@@ -118,7 +122,7 @@
 		</data>
 		<key>ConsumerDataModel.momd/VersionInfo.plist</key>
 		<data>
-		tjiYBudpPI4dZniBy2dyjgm29j0=
+		LofwcrlQwURRt6IuqF6U5fkHPa8=
 		</data>
 		<key>ConsumerModelMappingFrom_12.cdm</key>
 		<data>
@@ -162,7 +166,7 @@
 		</data>
 		<key>Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		2514ihXmIv9go3SfFSBHRt92mFA=
+		jqkQn2Ge0vpdQmnU1QK/l81dNVA=
 		</data>
 		<key>Headers/LPMessagingSDK.h</key>
 		<data>
@@ -170,7 +174,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		lkoIy6zqkQxFJKMwjX9OfZvS6i0=
+		uFcPJ7+cGgP2UZI2XQheLy+VMc8=
 		</data>
 		<key>InputTextView.nib</key>
 		<data>
@@ -246,23 +250,23 @@
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		0dvbkOI4xogpJKoLDDWsg/IwMdw=
+		6u9+OpHJrQU4oPVR08gDGduu7zc=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		Cej9TurNmaUyYg5M5ZbzZCtb6cE=
+		CvGA2nvfcum8E+tGyk/K+WF5XLc=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		05O/HCSbQ3X5ioloGHbBSmbFbVI=
+		JyLLqdl20F6oetjilYX37EvGd6Q=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		Cej9TurNmaUyYg5M5ZbzZCtb6cE=
+		CvGA2nvfcum8E+tGyk/K+WF5XLc=
 		</data>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		FaLrlVWDy/Frykos1MNSlulvufI=
+		LB/c6mCB7/WsCfsviMQVnk58hqY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -1022,11 +1026,18 @@
 			e+HBXgL93YdrOE/7/22lD9TqEiIOio3EUG3NuvDfb+o=
 			</data>
 		</dict>
-		<key>ConsumerDataModel.momd/ConsumerDataModel_ 23.omo</key>
+		<key>ConsumerDataModel.momd/ConsumerDataModel_ 24.mom</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			AWXh4fheML3Qs4ibC7zh3r6pGAPVnm8ZjnwK/rLwWE4=
+			bzwPy52nn8v5/BFUDFs5sO+hw46+gFZumuBVCjke1qA=
+			</data>
+		</dict>
+		<key>ConsumerDataModel.momd/ConsumerDataModel_ 24.omo</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			F8Ek5Ym7Z1LWLSmsr3KiEmOZ4rRdz9GtrakDJ3+QeBU=
 			</data>
 		</dict>
 		<key>ConsumerDataModel.momd/ConsumerDataModel_11_EventID_Photo_Sharing.mom</key>
@@ -1089,7 +1100,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bfNgBHUHVlZUze6x2Fcbn7icVCvKQllC7oP+Y4b/a8U=
+			W+mhVEabdL5tQWszRJjRRrZaBksgc6iUJa7POmViTlY=
 			</data>
 		</dict>
 		<key>ConsumerModelMappingFrom_12.cdm</key>
@@ -1166,7 +1177,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1Rs+ZJBBtZdiGxbH0fvBvYDVfkum36+ynpqyRy/soQ0=
+			7/1wTUV3UTP5cjLLc0T+Mfp7uQBwXKyJO6JcVu6DDqw=
 			</data>
 		</dict>
 		<key>Headers/LPMessagingSDK.h</key>
@@ -1306,35 +1317,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			u4leYoUA0zuCjIi6KS+ccI3pQmQB8EXpMXU2Wvs8Egw=
+			G54N6t7P+y939Q4oMT+onGg/lZoer9dxmFU6ppucFVk=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bXNUnSzuGsLvrKtlBG7RAL275G1HT7aQL7vLNST6FCc=
+			ew3K9x5M3VbZBAy6E/bDMuN4eB7CjpVcKpMOkjCHcrU=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			waf0zRGhmMVGHstQNIYADkyssk92tNRQI3Fhbo2r6GY=
+			kwIe5fIGJ4vqpULMYDbAOlsFB3ivRE6J8LcqgjFV3uY=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bXNUnSzuGsLvrKtlBG7RAL275G1HT7aQL7vLNST6FCc=
+			ew3K9x5M3VbZBAy6E/bDMuN4eB7CjpVcKpMOkjCHcrU=
 			</data>
 		</dict>
 		<key>Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Xyh6/uMguoEqnOSYMpZ6qWTjmpwGmWAX3yHlSJOsT3Y=
+			aUjXbOcep9gK9oowOJcmBuNFfCSUdbPGhWcSVpDurf0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

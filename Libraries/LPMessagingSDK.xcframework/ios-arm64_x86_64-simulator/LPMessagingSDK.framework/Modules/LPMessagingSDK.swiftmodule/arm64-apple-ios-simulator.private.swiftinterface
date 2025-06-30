@@ -210,7 +210,7 @@ public enum LPDatePickerClass : Swift.String, Swift.Encodable {
 }
 public protocol LPStructuredContentDelegate : AnyObject {
   func lpStructuredContentDidPress(withActions actions: [LPMessagingSDK.LPStructuredContentAction], metadata: [[Swift.String : Any]]?)
-  func lpStructuredContentNeedsReload(imageFinishedLoading: Swift.Bool?)
+  func lpStructuredContentNeedsReload()
   func lpStructuredContentPanGestureStartedWith(offset: CoreFoundation.CGPoint)
   func lpStructuredContentPanGestureFailedWith(page: Swift.Int)
   func lpStructuredContentPanGestureEndedWith(page: Swift.Int)
@@ -948,6 +948,16 @@ public struct LPAppointmentListViewModel {
     get
   }
 }
+@objc public enum CarouselNavigationButtonsVerticalAlignment : Swift.UInt {
+  case top = 0
+  case center = 1
+  case bottom = 2
+  public init?(rawValue: Swift.UInt)
+  public typealias RawValue = Swift.UInt
+  public var rawValue: Swift.UInt {
+    get
+  }
+}
 @objc public enum CheckmarksState : Swift.Int {
   case sentOnly = 1
   case sentAndAccepted = 2
@@ -1291,7 +1301,6 @@ extension UIKit.UIView {
   @objc var name: Swift.String { get set }
   @objc var uid: Swift.String { get set }
   @objc var details: Swift.String { get set }
-  @objc var brandCampaigns: Foundation.NSSet { get set }
   @objc var brandConversations: Foundation.NSSet { get set }
   @objc var dateJoined: Foundation.Date { get set }
   @objc var hidden: Swift.Bool { get set }
@@ -2462,6 +2471,9 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var structuredContentBrokenImage: UIKit.UIImage?
   @objc public var structuredContentAnnounceEntireMessageContent: Swift.Bool
   @objc public var carouselNavigationButtonsAppearance: LPMessagingSDK.CarouselNavigationButtonsAppearance
+  @objc public var carouselNavigationButtonsVerticalAlignment: LPMessagingSDK.CarouselNavigationButtonsVerticalAlignment
+  @objc public var carouselNavigationButtonsTopPadding: CoreFoundation.CGFloat
+  @objc public var carouselNavigationButtonsBottomPadding: CoreFoundation.CGFloat
   @objc public var carouselNavigationButtonBackgroundColor: UIKit.UIColor
   @objc public var carouselNavigationButtonSize: CoreFoundation.CGFloat
   @objc public var carouselNavigationButtonCornerRadius: CoreFoundation.CGFloat
@@ -3195,12 +3207,6 @@ public enum Fields {
 }
 public enum LPConstants {
 }
-@objc public protocol Campaign : LPMessagingSDK.EntityInterface {
-  @objc var uid: Swift.String { get set }
-  @objc var name: Swift.String { get set }
-  @objc var image: Swift.String { get set }
-  @objc var ownerBrand: any LPMessagingSDK.Brand { get set }
-}
 public enum UserType : Swift.String {
   case Consumer
   case Agent
@@ -3312,7 +3318,7 @@ public struct RSAPrivateKey : LPMessagingSDK.JWK {
 public typealias RSAKeyPair = LPMessagingSDK.RSAPrivateKey
 @objc public protocol Account : LPMessagingSDK.EntityInterface {
   @objc var accountId: Swift.String { get set }
-  @objc var brand: any LPMessagingSDK.Brand { get set }
+  @objc var brand: (any LPMessagingSDK.Brand)? { get set }
 }
 public enum DialogType : Swift.String {
   case MAIN
@@ -4714,6 +4720,9 @@ public protocol LPStructuredContentFontProvider : AnyObject {
   public var buttonMinimumHeight: CoreFoundation.CGFloat?
   public var buttonBorderCornerRadius: Swift.Double
   public var carouselNavigationButtonsAppearance: Swift.UInt
+  public var carouselNavigationButtonsVerticalAlignment: Swift.UInt
+  public var carouselNavigationButtonsTopPadding: CoreFoundation.CGFloat
+  public var carouselNavigationButtonsBottomPadding: CoreFoundation.CGFloat
   public var carouselNavigationButtonBackgroundColor: UIKit.UIColor
   public var carouselNavigationButtonSize: CoreFoundation.CGFloat
   public var carouselNavigationButtonCornerRadius: CoreFoundation.CGFloat
@@ -4790,6 +4799,9 @@ extension LPMessagingSDK.TTRType : Swift.RawRepresentable {}
 extension LPMessagingSDK.CarouselNavigationButtonsAppearance : Swift.Equatable {}
 extension LPMessagingSDK.CarouselNavigationButtonsAppearance : Swift.Hashable {}
 extension LPMessagingSDK.CarouselNavigationButtonsAppearance : Swift.RawRepresentable {}
+extension LPMessagingSDK.CarouselNavigationButtonsVerticalAlignment : Swift.Equatable {}
+extension LPMessagingSDK.CarouselNavigationButtonsVerticalAlignment : Swift.Hashable {}
+extension LPMessagingSDK.CarouselNavigationButtonsVerticalAlignment : Swift.RawRepresentable {}
 extension LPMessagingSDK.CheckmarksState : Swift.Equatable {}
 extension LPMessagingSDK.CheckmarksState : Swift.Hashable {}
 extension LPMessagingSDK.CheckmarksState : Swift.RawRepresentable {}

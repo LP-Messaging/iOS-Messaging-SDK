@@ -347,7 +347,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK15EntityInterface_")
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK7Account_")
 @protocol Account <EntityInterface>
 @property (nonatomic, copy) NSString * _Nonnull accountId;
-@property (nonatomic, strong) id <Brand> _Nonnull brand;
+@property (nonatomic, strong) id <Brand> _Nullable brand;
 @end
 
 typedef SWIFT_ENUM(int16_t, AgentType, open) {
@@ -368,7 +368,6 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK5Brand_")
 @property (nonatomic, copy) NSString * _Nonnull name;
 @property (nonatomic, copy) NSString * _Nonnull uid;
 @property (nonatomic, copy) NSString * _Nonnull details;
-@property (nonatomic, strong) NSSet * _Nonnull brandCampaigns;
 @property (nonatomic, strong) NSSet * _Nonnull brandConversations;
 @property (nonatomic, copy) NSDate * _Nonnull dateJoined;
 @property (nonatomic) BOOL hidden;
@@ -439,19 +438,20 @@ SWIFT_CLASS("_TtC14LPMessagingSDK18CalendarFlowLayout")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-
-SWIFT_PROTOCOL("_TtP14LPMessagingSDK8Campaign_")
-@protocol Campaign <EntityInterface>
-@property (nonatomic, copy) NSString * _Nonnull uid;
-@property (nonatomic, copy) NSString * _Nonnull name;
-@property (nonatomic, copy) NSString * _Nonnull image;
-@property (nonatomic, strong) id <Brand> _Nonnull ownerBrand;
-@end
-
 typedef SWIFT_ENUM(NSUInteger, CarouselNavigationButtonsAppearance, open) {
   CarouselNavigationButtonsAppearanceAlwaysHide = 0,
   CarouselNavigationButtonsAppearanceShowOnVoiceOver = 1,
   CarouselNavigationButtonsAppearanceAlwaysShow = 2,
+};
+
+/// Defines the vertical alignment options for carousel navigation buttons.
+typedef SWIFT_ENUM(NSUInteger, CarouselNavigationButtonsVerticalAlignment, open) {
+/// Aligns the navigation buttons to the top of the carousel.
+  CarouselNavigationButtonsVerticalAlignmentTop = 0,
+/// Centers the navigation buttons vertically within the carousel.
+  CarouselNavigationButtonsVerticalAlignmentCenter = 1,
+/// Aligns the navigation buttons to the bottom of the carousel.
+  CarouselNavigationButtonsVerticalAlignmentBottom = 2,
 };
 
 typedef SWIFT_ENUM(NSInteger, CheckmarksState, open) {
@@ -1410,6 +1410,17 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// showOnVoiceOver - show navigation buttons only if accessibility mode is enabled
 /// alwaysShow - always show navigation buttons.
 @property (nonatomic) enum CarouselNavigationButtonsAppearance carouselNavigationButtonsAppearance;
+/// Specifies the vertical alignment of the carousel navigation buttons.
+/// Use this to control whether the left/right navigation buttons are aligned
+/// to the top, center or bottom of the carousel view.
+/// Default: <code>.center</code>
+@property (nonatomic) enum CarouselNavigationButtonsVerticalAlignment carouselNavigationButtonsVerticalAlignment;
+/// Specifies the top padding applied to the carousel navigation buttons.
+/// Default: <code>8.0</code>
+@property (nonatomic) CGFloat carouselNavigationButtonsTopPadding;
+/// Specifies the bottom padding applied to the carousel navigation buttons.
+/// Default: <code>8.0</code>
+@property (nonatomic) CGFloat carouselNavigationButtonsBottomPadding;
 /// Navigation buttons background color
 @property (nonatomic, strong) UIColor * _Nonnull carouselNavigationButtonBackgroundColor;
 /// Navigation buttons size
@@ -4182,7 +4193,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK15EntityInterface_")
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK7Account_")
 @protocol Account <EntityInterface>
 @property (nonatomic, copy) NSString * _Nonnull accountId;
-@property (nonatomic, strong) id <Brand> _Nonnull brand;
+@property (nonatomic, strong) id <Brand> _Nullable brand;
 @end
 
 typedef SWIFT_ENUM(int16_t, AgentType, open) {
@@ -4203,7 +4214,6 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK5Brand_")
 @property (nonatomic, copy) NSString * _Nonnull name;
 @property (nonatomic, copy) NSString * _Nonnull uid;
 @property (nonatomic, copy) NSString * _Nonnull details;
-@property (nonatomic, strong) NSSet * _Nonnull brandCampaigns;
 @property (nonatomic, strong) NSSet * _Nonnull brandConversations;
 @property (nonatomic, copy) NSDate * _Nonnull dateJoined;
 @property (nonatomic) BOOL hidden;
@@ -4274,19 +4284,20 @@ SWIFT_CLASS("_TtC14LPMessagingSDK18CalendarFlowLayout")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-
-SWIFT_PROTOCOL("_TtP14LPMessagingSDK8Campaign_")
-@protocol Campaign <EntityInterface>
-@property (nonatomic, copy) NSString * _Nonnull uid;
-@property (nonatomic, copy) NSString * _Nonnull name;
-@property (nonatomic, copy) NSString * _Nonnull image;
-@property (nonatomic, strong) id <Brand> _Nonnull ownerBrand;
-@end
-
 typedef SWIFT_ENUM(NSUInteger, CarouselNavigationButtonsAppearance, open) {
   CarouselNavigationButtonsAppearanceAlwaysHide = 0,
   CarouselNavigationButtonsAppearanceShowOnVoiceOver = 1,
   CarouselNavigationButtonsAppearanceAlwaysShow = 2,
+};
+
+/// Defines the vertical alignment options for carousel navigation buttons.
+typedef SWIFT_ENUM(NSUInteger, CarouselNavigationButtonsVerticalAlignment, open) {
+/// Aligns the navigation buttons to the top of the carousel.
+  CarouselNavigationButtonsVerticalAlignmentTop = 0,
+/// Centers the navigation buttons vertically within the carousel.
+  CarouselNavigationButtonsVerticalAlignmentCenter = 1,
+/// Aligns the navigation buttons to the bottom of the carousel.
+  CarouselNavigationButtonsVerticalAlignmentBottom = 2,
 };
 
 typedef SWIFT_ENUM(NSInteger, CheckmarksState, open) {
@@ -5245,6 +5256,17 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// showOnVoiceOver - show navigation buttons only if accessibility mode is enabled
 /// alwaysShow - always show navigation buttons.
 @property (nonatomic) enum CarouselNavigationButtonsAppearance carouselNavigationButtonsAppearance;
+/// Specifies the vertical alignment of the carousel navigation buttons.
+/// Use this to control whether the left/right navigation buttons are aligned
+/// to the top, center or bottom of the carousel view.
+/// Default: <code>.center</code>
+@property (nonatomic) enum CarouselNavigationButtonsVerticalAlignment carouselNavigationButtonsVerticalAlignment;
+/// Specifies the top padding applied to the carousel navigation buttons.
+/// Default: <code>8.0</code>
+@property (nonatomic) CGFloat carouselNavigationButtonsTopPadding;
+/// Specifies the bottom padding applied to the carousel navigation buttons.
+/// Default: <code>8.0</code>
+@property (nonatomic) CGFloat carouselNavigationButtonsBottomPadding;
 /// Navigation buttons background color
 @property (nonatomic, strong) UIColor * _Nonnull carouselNavigationButtonBackgroundColor;
 /// Navigation buttons size
