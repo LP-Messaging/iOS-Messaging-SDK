@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
-// swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LPMessagingSDK
-// swift-module-flags-ignorable: -enable-bare-slash-regex
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name LPMessagingSDK
 import AVFoundation
 import AudioToolbox
 import Combine
@@ -1940,6 +1939,16 @@ public enum LPBorder : Swift.String, Swift.Encodable {
     get
   }
 }
+public enum LPTextAlignment : Swift.String, Swift.Encodable {
+  case leading
+  case center
+  case trailing
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
 public enum JOSESwiftError : Swift.Error {
   case signingFailed(description: Swift.String)
   case verifyingFailed(description: Swift.String)
@@ -2464,7 +2473,10 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var structuredContentButtonBackgroundColor: UIKit.UIColor
   @objc public var structuredContentLinkButtonTextColor: UIKit.UIColor
   @objc public var structuredContentTextColor: UIKit.UIColor
-  @objc public var structuredButtonWidthConstant: CoreFoundation.CGFloat
+  @objc public var structuredButtonWidthConstant: CoreFoundation.CGFloat {
+    @objc get
+    @objc set
+  }
   public var structuredButtonMinimumHeight: CoreFoundation.CGFloat?
   @objc public var structuredContentCardBackgroundColor: UIKit.UIColor
   @objc public var structuredContentLoadingImage: UIKit.UIImage?
@@ -2650,6 +2662,7 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var offlineLoaderWidthPercentage: CoreFoundation.CGFloat
   @objc public var offlineLoaderHeight: CoreFoundation.CGFloat
   @objc public var offlineLoaderAnimationSpeed: CoreFoundation.CGFloat
+  @objc public var baseHttpsServicesResponseCacheTtlInMinutes: Swift.UInt
   @objc public static var defaultConfiguration: LPMessagingSDK.LPConfig
   @objc public func resetToDefaultConfiguration()
   @objc override dynamic public func setValue(_ value: Any?, forUndefinedKey key: Swift.String)
@@ -2833,7 +2846,7 @@ public enum HTTPMethod : Swift.String {
   }
 }
 public typealias HTTPRequestSuccessHandler = (_ response: Any?) -> Swift.Void
-public typealias HTTPRequestFailureHandler = (_ error: Foundation.NSError?) -> Swift.Void
+public typealias HTTPRequestFailureHandler = (_ error: Foundation.NSError) -> Swift.Void
 public typealias amsReadyCompletion = () -> Swift.Void
 public let MESSAGE_MAX_CHARACTERS: Swift.Int
 public let FILE_CAPTION_MAX_CHARACTERS: Swift.Int
@@ -4008,9 +4021,9 @@ public enum JWKParameter : Swift.String, Swift.CodingKey {
   case X509CertificateChain
   case X509CertificateSHA1Thumbprint
   case X509CertificateSHA256Thumbprint
+  public init?(rawValue: Swift.String)
   public init?(stringValue: Swift.String)
   public init?(intValue: Swift.Int)
-  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var intValue: Swift.Int? {
     get
@@ -4506,6 +4519,8 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
     @objc set
   }
   @objc public static let instance: LPMessagingSDK.LPMessaging
+  @objc public func initialize(_ brandID: Swift.String? = nil, monitoringInitParams: LPMessagingSDK.LPMonitoringInitParams? = nil, preloadConfiguration: Swift.Bool) throws
+  @objc public func initialize(_ brandID: Swift.String? = nil, monitoringInitParams: LPMessagingSDK.LPMonitoringInitParams? = nil, preloadConfiguration: Swift.Bool = true, completion: @escaping () -> Swift.Void, failure: @escaping (any Swift.Error) -> Swift.Void)
   @objc public func initialize(_ brandID: Swift.String? = nil, monitoringInitParams: LPMessagingSDK.LPMonitoringInitParams? = nil) throws
   @objc public func showConversation(_ conversationViewParams: LPMessagingSDK.LPConversationViewParams, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
   @objc public func removeConversation(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol)
@@ -4882,6 +4897,9 @@ extension LPMessagingSDK.LPSpecielViewTags : Swift.RawRepresentable {}
 extension LPMessagingSDK.LPBorder : Swift.Equatable {}
 extension LPMessagingSDK.LPBorder : Swift.Hashable {}
 extension LPMessagingSDK.LPBorder : Swift.RawRepresentable {}
+extension LPMessagingSDK.LPTextAlignment : Swift.Equatable {}
+extension LPMessagingSDK.LPTextAlignment : Swift.Hashable {}
+extension LPMessagingSDK.LPTextAlignment : Swift.RawRepresentable {}
 extension LPMessagingSDK.LPWelcomeMessage.MessageFrequency : Swift.Equatable {}
 extension LPMessagingSDK.LPWelcomeMessage.MessageFrequency : Swift.Hashable {}
 extension LPMessagingSDK.LPWelcomeMessage.MessageFrequency : Swift.RawRepresentable {}
