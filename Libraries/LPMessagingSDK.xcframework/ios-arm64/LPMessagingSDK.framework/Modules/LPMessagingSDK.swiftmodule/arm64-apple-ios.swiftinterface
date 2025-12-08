@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
-// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name LPMessagingSDK
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.19.9 clang-1700.3.19.1)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name LPMessagingSDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import AVFoundation
 import AudioToolbox
 import Combine
@@ -18,6 +19,7 @@ import MapKit
 import MessageUI
 import MetricKit
 import Photos
+import PhotosUI
 import QuartzCore
 import QuickLook
 import SafariServices
@@ -37,7 +39,9 @@ public enum QuickReplyStyleSize : Swift.String {
   case small
   case medium
   case large
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -54,8 +58,12 @@ public enum QuickReplyStyleSize : Swift.String {
   public var borderRadius: CoreFoundation.CGFloat?
   public var backgroundColor: UIKit.UIColor?
   public var size: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(bold: Swift.Bool? = false, italic: Swift.Bool? = false, color: UIKit.UIColor? = nil, borderColor: UIKit.UIColor? = nil, borderRadius: CoreFoundation.CGFloat? = nil, backgroundColor: UIKit.UIColor? = nil, size: LPMessagingSDK.QuickReplyStyleSize? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   public func encode(to encoder: any Swift.Encoder) throws
   @objc deinit
@@ -72,35 +80,75 @@ public enum FileState : Swift.String {
   case DownloadError
   case FetchError
   case GenerateError
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
 }
 @objc public protocol File : LPMessagingSDK.EntityInterface {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var fileExtension: Swift.String? { get set }
+  #endif
   @objc var uid: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var state: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var fileName: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var relativeFilePath: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var relativeThumbnailPath: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var fileSize: Foundation.NSNumber? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var creationDate: Foundation.NSDate? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var ownerMessage: (any LPMessagingSDK.Message)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var swiftRelativePath: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var metaDataContainer: LPMessagingSDK.LPFileMetaDataContainer? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var backgroundTaskIdentifier: Any? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var thumbnailImage: UIKit.UIImage? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var completion: (() -> Swift.Void)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var failure: ((_ error: Foundation.NSError) -> Swift.Void)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var preUpload: (() -> Swift.Void)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var preDownload: (() -> Swift.Void)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var uploading: ((_ progress: Swift.Double) -> Swift.Void)? { get set }
+  #endif
   @objc var uploadPercentage: CoreFoundation.CGFloat { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var downloading: ((_ progress: Swift.Double) -> Swift.Void)? { get set }
+  #endif
   @objc var downloadPercentage: CoreFoundation.CGFloat { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var synced: (() -> Swift.Void)? { get set }
+  #endif
 }
 extension LPMessagingSDK.File {
   public var isTransferring: Swift.Bool {
@@ -113,7 +161,9 @@ extension LPMessagingSDK.File {
     case Bottom = 0
     case LastPosition
     case FirstUnreadMessage
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
+    #endif
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
@@ -158,27 +208,47 @@ extension LPMessagingSDK.JWE : LPMessagingSDK.CompactDeserializable {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init(brandID: Swift.String, campaignInfo: LPMessagingSDK.LPCampaignInfo? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getConversations() -> [any LPMessagingSDK.Conversation]?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getConversations(_ predicate: Foundation.NSPredicate?) -> [any LPMessagingSDK.Conversation]?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getActiveConversation() -> (any LPMessagingSDK.Conversation)?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getClosedConversations() -> [any LPMessagingSDK.Conversation]?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getOpenConversation() -> (any LPMessagingSDK.Conversation)?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getOpenDialog() -> (any LPMessagingSDK.Dialog)?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getLatestClosedConversations(_ conversationsCount: Swift.Int) -> [any LPMessagingSDK.Conversation]?
+  #endif
   @objc public func createNewConversation() -> any LPMessagingSDK.Conversation
   @objc public func getQueryType() -> Swift.String
   @objc public func isConversationRelatedToQuery(_ conversation: any LPMessagingSDK.Conversation) -> Swift.Bool
   @objc public func getBrandID() -> Swift.String
   @objc public func getQueryUID() -> Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getCampaignInfo() -> LPMessagingSDK.LPCampaignInfo?
+  #endif
   @objc public func getQueryProperties() -> [Swift.String : Any]
   @objc deinit
 }
 public enum LPDatePickerClass : Swift.String, Swift.Encodable {
   case range
   case single
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -208,7 +278,9 @@ public enum LPDatePickerClass : Swift.String, Swift.Encodable {
   @objc deinit
 }
 public protocol LPStructuredContentDelegate : AnyObject {
+  #if compiler(>=5.3) && $NonescapableTypes
   func lpStructuredContentDidPress(withActions actions: [LPMessagingSDK.LPStructuredContentAction], metadata: [[Swift.String : Any]]?)
+  #endif
   func lpStructuredContentNeedsReload()
   func lpStructuredContentPanGestureStartedWith(offset: CoreFoundation.CGPoint)
   func lpStructuredContentPanGestureFailedWith(page: Swift.Int)
@@ -218,45 +290,53 @@ public protocol LPStructuredContentDelegate : AnyObject {
   func lpStructuredContentScrollDidEndScrollingAnimationWith(contentOffset: CoreFoundation.CGPoint)
   func lpStructuredContentSave(currentPage: Swift.Int)
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class LPStructuredContent : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public var stackViewContainer: UIKit.UIView {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class LPStructuredContent : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var stackViewContainer: UIKit.UIView {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) weak public var delegate: (any LPMessagingSDK.LPStructuredContentDelegate)?
-  @_Concurrency.MainActor(unsafe) public var originalContentOffset: CoreFoundation.CGPoint {
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any LPMessagingSDK.LPStructuredContentDelegate)?
+  @_Concurrency.MainActor @preconcurrency public var originalContentOffset: CoreFoundation.CGPoint {
     get
   }
-  @_Concurrency.MainActor(unsafe) public var item: LPMessagingSDK.LPStructuredContentItem? {
+  @_Concurrency.MainActor @preconcurrency public var item: LPMessagingSDK.LPStructuredContentItem? {
     get
   }
-  @_Concurrency.MainActor(unsafe) public var accessibilityStructuredContentElements: [UIKit.UIView] {
+  @_Concurrency.MainActor @preconcurrency public var accessibilityStructuredContentElements: [UIKit.UIView] {
     get
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc deinit
 }
 extension LPMessagingSDK.LPStructuredContent : UIKit.UIGestureRecognizerDelegate {
-  @_Concurrency.MainActor(unsafe) public func handleOrientation()
-  @_Concurrency.MainActor(unsafe) public func removeStructuredContentObjects()
-  @_Concurrency.MainActor(unsafe) public func disableStructuredContent(_ isCurrentMessage: Swift.Bool)
-  @_Concurrency.MainActor(unsafe) public func setWith(item: LPMessagingSDK.LPStructuredContentItem, imageDownloader: (any LPMessagingSDK.LPStructuredContentImageDownloader)?, currentPage: Swift.Int = 0, isCurrentMessage: Swift.Bool = true)
+  @_Concurrency.MainActor @preconcurrency public func handleOrientation()
+  @_Concurrency.MainActor @preconcurrency public func removeStructuredContentObjects()
+  @_Concurrency.MainActor @preconcurrency public func disableStructuredContent(_ isCurrentMessage: Swift.Bool)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency public func setWith(item: LPMessagingSDK.LPStructuredContentItem, imageDownloader: (any LPMessagingSDK.LPStructuredContentImageDownloader)?, currentPage: Swift.Int = 0, isCurrentMessage: Swift.Bool = true)
+  #endif
 }
 extension LPMessagingSDK.LPStructuredContent {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
 }
 extension LPMessagingSDK.LPStructuredContent : UIKit.UIScrollViewDelegate {
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewWillBeginDragging(_ scrollView: UIKit.UIScrollView)
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewWillBeginDragging(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
 }
 public struct Signer<KeyType> {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(signingAlgorithm: LPMessagingSDK.SignatureAlgorithm, key: KeyType)
+  #endif
 }
 extension LPMessagingSDK.Signer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `init?(signingAlgorithm: SignatureAlgorithm, key: KeyType)` instead")
   public init?(signingAlgorithm: LPMessagingSDK.SignatureAlgorithm, privateKey: KeyType)
+  #endif
 }
 public struct JWS {
   public let header: LPMessagingSDK.JWSHeader
@@ -288,7 +368,7 @@ extension LPMessagingSDK.JWS : LPMessagingSDK.CompactDeserializable {
   public init(from deserializer: any LPMessagingSDK.CompactDeserializer) throws
 }
 extension UIKit.UIDevice {
-  @_Concurrency.MainActor(unsafe) public static let modelIdentifier: Swift.String
+  @_Concurrency.MainActor @preconcurrency public static let modelIdentifier: Swift.String
 }
 public enum QuickReplyJsonKeys : Swift.String {
   case quickReplies
@@ -315,7 +395,9 @@ public enum QuickReplyJsonKeys : Swift.String {
   case size
   case borderRadius
   case button
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -326,7 +408,9 @@ public enum CustomItemType : Swift.String {
   case image
   case map
   case linkPreview
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -337,7 +421,9 @@ public enum ImageState : Swift.String {
   case downloaded
   case failed
   case noImageURL
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -347,16 +433,34 @@ public enum ImageState : Swift.String {
   @objc var uid: Swift.String { get set }
   @objc var type: Swift.String { get set }
   @objc var url: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var captionTitle: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var captionDescription: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var captionSiteName: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var relativeImagePath: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var imageURL: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var imageState: Swift.String? { get set }
+  #endif
   @objc var ownerCustomBoard: any LPMessagingSDK.CustomBoard { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var imageDownloadCompleted: ((_ image: UIKit.UIImage?) -> Swift.Void)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var imageDownloadFailed: ((_ error: Foundation.NSError) -> Swift.Void)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var _image: UIKit.UIImage? { get set }
+  #endif
 }
 extension LPMessagingSDK.LinkPreview {
   public var description: Swift.String {
@@ -371,7 +475,9 @@ extension LPMessagingSDK.LinkPreview {
   @objc public var issuerDisplayName: Swift.String?
   @objc public var certPinningPublicKeys: [Swift.String]?
   @objc public var type: LPMessagingSDK.LPAuthenticationType
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init(authenticationCode: Swift.String? = nil, jwt: Swift.String? = nil, codeVerifier: Swift.String? = nil, redirectURI: Swift.String? = nil, issuerDisplayName: Swift.String? = nil, certPinningPublicKeys: [Swift.String]? = nil, authenticationType: LPMessagingSDK.LPAuthenticationType = .signup)
+  #endif
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
@@ -383,9 +489,13 @@ extension LPMessagingSDK.LinkPreview {
   @objc final public let isViewOnly: Swift.Bool
   @objc final public let conversationHistoryControlParam: LPMessagingSDK.LPConversationHistoryControlParam
   @objc public var welcomeMessage: LPMessagingSDK.LPWelcomeMessage
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init(conversationQuery: any LPMessagingSDK.ConversationParamProtocol, containerViewController: UIKit.UIViewController? = nil, isViewOnly: Swift.Bool = false, conversationHistoryControlParam: LPMessagingSDK.LPConversationHistoryControlParam = LPConversationHistoryControlParam(historyConversationsStateToDisplay: .all), welcomeMessage: LPMessagingSDK.LPWelcomeMessage = LPWelcomeMessage(message: nil))
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc @available(iOS, deprecated: 12.0.0, obsoleted: 14.0.0, message: "Use public init(conversationQuery: ConversationParamProtocol, containerViewController: UIViewController? = nil, isViewOnly: Bool = false, conversationHistoryControlParam: LPConversationHistoryControlParam = LPConversationHistoryControlParam(historyConversationsStateToDisplay: .none), welcomeMessage: LPWelcomeMessage = LPWelcomeMessage(message: nil)) instead")
   public init(conversationQuery: any LPMessagingSDK.ConversationParamProtocol, containerViewController: UIKit.UIViewController? = nil, isViewOnly: Swift.Bool = false, conversationHistoryControlParam: LPMessagingSDK.LPConversationHistoryControlParam = LPConversationHistoryControlParam(historyConversationsStateToDisplay: .all))
+  #endif
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
@@ -403,15 +513,19 @@ extension LPMessagingSDK.LinkPreview {
   @objc public var employeeID: Swift.String?
   @objc public var uid: Swift.String?
   @objc convenience public init(user: any LPMessagingSDK.User)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init(firstName: Swift.String? = nil, lastName: Swift.String? = nil, nickName: Swift.String? = nil, uid: Swift.String? = nil, profileImageURL: Swift.String? = nil, phoneNumber: Swift.String? = nil, employeeID: Swift.String? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
   @objc deinit
 }
-public typealias SymmetricKeyComponents = (Foundation.Data)
+public typealias SymmetricKeyComponents = Foundation.Data
 public protocol ExpressibleAsSymmetricKeyComponents {
   static func representing(symmetricKeyComponents components: LPMessagingSDK.SymmetricKeyComponents) throws -> Self
   func symmetricKeyComponents() throws -> LPMessagingSDK.SymmetricKeyComponents
@@ -441,8 +555,12 @@ public struct SymmetricKey : LPMessagingSDK.JWK {
 }
 @objc @_inheritsConvenienceInitializers @objcMembers public class Utils : ObjectiveC.NSObject {
   @objc public static let backgroundQueue: Dispatch.DispatchQueue
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public class func JSONStringify(_ value: [Swift.String : Any], prettyPrinted: Swift.Bool = false) -> Swift.String?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public class func JSONDictionaryFromString(_ string: Swift.String) -> Any?
+  #endif
   @objc public class func delay(_ delay: Swift.Double, closure: @escaping () -> Swift.Void)
   @objc public class func minutesBetweenDates(_ startDate: Foundation.Date, endDate: Foundation.Date) -> Swift.Int
   @objc public class func getResizedImageSize(image: UIKit.UIImage, maxHeight: CoreFoundation.CGFloat, maxWidth: CoreFoundation.CGFloat) -> CoreFoundation.CGSize
@@ -451,13 +569,19 @@ public struct SymmetricKey : LPMessagingSDK.JWK {
   @objc deinit
 }
 extension LPMessagingSDK.JWK {
+  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(parameter: Swift.String) -> Swift.String? {
     get
   }
+  #endif
 }
 extension LPMessagingSDK.JWK {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func jsonString() -> Swift.String?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func jsonData() -> Foundation.Data?
+  #endif
 }
 extension LPMessagingSDK.ECPublicKey : Swift.Encodable {
   public func encode(to encoder: any Swift.Encoder) throws
@@ -473,16 +597,20 @@ extension LPMessagingSDK.ECPrivateKey : Swift.Decodable {
 }
 @objc public class TTRModel : ObjectiveC.NSObject, Foundation.NSSecureCoding {
   @objc public static var supportsSecureCoding: Swift.Bool
-  public var effectiveTTR: Foundation.Date!
+  public var effectiveTTR: Foundation.Date?
   public var manualETTR: Foundation.Date?
   public var ttrValue: Swift.Int
   public var delay: Foundation.Date?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(effectiveTTR: Foundation.Date, manualETTR: Foundation.Date?, ttrValue: Swift.Int, delay: Foundation.Date?)
+  #endif
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
   @objc public func encode(with aCoder: Foundation.NSCoder)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   public func compare(other: LPMessagingSDK.TTRModel) -> Swift.Bool
   @objc deinit
 }
@@ -495,20 +623,36 @@ extension LPMessagingSDK.SymmetricKey : Swift.Decodable {
 public enum ConversationQueryType : Swift.String {
   case Brand
   case Consumer
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
 }
 @objc public protocol ConversationParamProtocol {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc func getConversations() -> [any LPMessagingSDK.Conversation]?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc func getConversations(_ predicate: Foundation.NSPredicate?) -> [any LPMessagingSDK.Conversation]?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc func getClosedConversations() -> [any LPMessagingSDK.Conversation]?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc func getActiveConversation() -> (any LPMessagingSDK.Conversation)?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc func getOpenConversation() -> (any LPMessagingSDK.Conversation)?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc func getOpenDialog() -> (any LPMessagingSDK.Dialog)?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc func getLatestClosedConversations(_ conversationsCount: Swift.Int) -> [any LPMessagingSDK.Conversation]?
+  #endif
   @objc func createNewConversation() -> any LPMessagingSDK.Conversation
   @objc func getQueryType() -> Swift.String
   @objc func isConversationRelatedToQuery(_ conversation: any LPMessagingSDK.Conversation) -> Swift.Bool
@@ -523,32 +667,36 @@ public enum ConversationQueryType : Swift.String {
   public var ID: Swift.String
   public var metadata: [[Swift.String : Any]]?
   public var actions: [LPMessagingSDK.QuickReplyAction]?
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class LPAppointmentList : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public var finished: ((LPMessagingSDK.AppointmentSlot) -> Swift.Void)?
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) convenience public init(frame: CoreFoundation.CGRect = .zero, viewModel: LPMessagingSDK.LPAppointmentListViewModel)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
-  @_Concurrency.MainActor(unsafe) public func adjustAfterOrientationChange()
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class LPAppointmentList : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var finished: ((LPMessagingSDK.AppointmentSlot) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
+  @_Concurrency.MainActor @preconcurrency convenience public init(frame: CoreFoundation.CGRect = .zero, viewModel: LPMessagingSDK.LPAppointmentListViewModel)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency public func adjustAfterOrientationChange()
   @objc deinit
 }
 extension LPMessagingSDK.LPAppointmentList : UIKit.UITableViewDataSource, UIKit.UITableViewDelegate {
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didDeselectRowAt indexPath: Foundation.IndexPath)
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didEndDisplaying cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didDeselectRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didEndDisplaying cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGFloat
 }
 extension LPMessagingSDK.LPAppointmentList : LPMessagingSDK.LPWeeklyCalendarViewDelegate {
-  @_Concurrency.MainActor(unsafe) public func shouldPresentPickerView(picker: LPMessagingSDK.LPPickerView)
-  @_Concurrency.MainActor(unsafe) public func shouldDismissPickerView(picker: LPMessagingSDK.LPPickerView)
-  @_Concurrency.MainActor(unsafe) public func calendar(_ calendar: LPMessagingSDK.LPWeeklyCalendarView, didSelectDate date: Foundation.Date)
+  @_Concurrency.MainActor @preconcurrency public func shouldPresentPickerView(picker: LPMessagingSDK.LPPickerView)
+  @_Concurrency.MainActor @preconcurrency public func shouldDismissPickerView(picker: LPMessagingSDK.LPPickerView)
+  @_Concurrency.MainActor @preconcurrency public func calendar(_ calendar: LPMessagingSDK.LPWeeklyCalendarView, didSelectDate date: Foundation.Date)
 }
 public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case customButtonAccessibilityDescription
@@ -779,10 +927,12 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case accessibilityFileSharingFileTypeXlsx
   case accessibilityFileSharingFileTypePdf
   case accessibilityFileSharingFileTypeUnknown
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias AllCases = [LPMessagingSDK.LPLanguagesKeys]
   public typealias RawValue = Swift.String
-  public static var allCases: [LPMessagingSDK.LPLanguagesKeys] {
+  nonisolated public static var allCases: [LPMessagingSDK.LPLanguagesKeys] {
     get
   }
   public var rawValue: Swift.String {
@@ -792,7 +942,9 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
 @objc public enum ConversationSource : Swift.Int16 {
   case INCA
   case UMS
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int16)
+  #endif
   public typealias RawValue = Swift.Int16
   public var rawValue: Swift.Int16 {
     get
@@ -805,7 +957,9 @@ public enum ConversationState : Swift.String {
   case Created
   case Pending
   case Other
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -816,7 +970,9 @@ public enum TTRType : Swift.String {
   case Custom
   case Prioritized
   case Urgent
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -826,14 +982,26 @@ public enum TTRType : Swift.String {
   @objc var uid: Swift.String { get set }
   @objc var creationDate: Foundation.Date { get set }
   @objc var handlerId: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var closeDate: Foundation.Date? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var lastUpdateDate: Foundation.Date? { get set }
+  #endif
   @objc var stateRaw: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var closeReason: Swift.String? { get set }
+  #endif
   @objc var ttrTypeRaw: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var type: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var consumerId: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var ttrModel: LPMessagingSDK.TTRModel? { get set }
+  #endif
   @objc var ownerBrand: any LPMessagingSDK.Brand { get set }
   @objc var participants: Foundation.NSSet { get set }
   @objc var conversationDialogs: Foundation.NSSet { get set }
@@ -856,12 +1024,16 @@ extension LPMessagingSDK.Conversation {
   public var unreadMessages: [any LPMessagingSDK.Message] {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var lastMessageObj: (any LPMessagingSDK.Message)? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var lastMessageOriginator: (any LPMessagingSDK.User)? {
     get
   }
+  #endif
   public var relatedSocketID: Swift.String {
     get
   }
@@ -884,9 +1056,11 @@ extension LPMessagingSDK.Conversation {
   public var isOpen: Swift.Bool {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var mainDialog: (any LPMessagingSDK.Dialog)? {
     get
   }
+  #endif
 }
 @objc @_inheritsConvenienceInitializers open class LPOperation : Foundation.Operation, @unchecked Swift.Sendable {
   @objc override final public var isExecuting: Swift.Bool {
@@ -920,7 +1094,9 @@ extension LPMessagingSDK.Conversation {
   }
   public var latitude: Swift.Double
   public var longitude: Swift.Double
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc override public func encode(with aCoder: Foundation.NSCoder)
   override public func encode(to encoder: any Swift.Encoder) throws
   @objc deinit
@@ -933,15 +1109,20 @@ public struct LPAppointmentListViewModel {
   public var slotsOfTheDay: [LPMessagingSDK.AppointmentSlot]
   public var slots: [LPMessagingSDK.AppointmentSlot]
   public var calendarHeightAnchorConstant: Swift.Double
+  public var confirmViewHeightConstant: CoreFoundation.CGFloat
   public var tableViewCellAccessoryViewWidthConstant: Swift.Double
   public var tableViewCellAccessoryViewHeightConstant: Swift.Double
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(slots: [LPMessagingSDK.AppointmentSlot], firstDayOfTheWeek: Swift.String? = nil)
+  #endif
 }
 @objc public enum CarouselNavigationButtonsAppearance : Swift.UInt {
   case alwaysHide = 0
   case showOnVoiceOver = 1
   case alwaysShow = 2
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.UInt)
+  #endif
   public typealias RawValue = Swift.UInt
   public var rawValue: Swift.UInt {
     get
@@ -951,7 +1132,9 @@ public struct LPAppointmentListViewModel {
   case top = 0
   case center = 1
   case bottom = 2
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.UInt)
+  #endif
   public typealias RawValue = Swift.UInt
   public var rawValue: Swift.UInt {
     get
@@ -961,7 +1144,9 @@ public struct LPAppointmentListViewModel {
   case sentOnly = 1
   case sentAndAccepted = 2
   case all = 3
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -986,7 +1171,9 @@ public enum LPPreferredFontType {
     get
   }
   public static func rawValue(forString string: Swift.String) -> Swift.Int
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -1049,9 +1236,11 @@ public enum LPPreferredFontType {
     get
   }
   public init(rawValue: Swift.String)
+  #if compiler(>=5.3) && $NonescapableTypes
   public var description: Swift.String? {
     get
   }
+  #endif
 }
 @objc public enum LPRegionCode : Swift.Int {
   case device
@@ -1104,14 +1293,18 @@ public enum LPPreferredFontType {
     get
   }
   public init(rawValue: Swift.String)
+  #if compiler(>=5.3) && $NonescapableTypes
   public var description: Swift.String? {
     get
   }
+  #endif
 }
 @objc public enum LPUrlPreviewStyle : Swift.Int {
   case slim
   case large
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -1125,7 +1318,9 @@ public enum LPPreferredFontType {
     get
   }
   public static func rawValue(forString string: Swift.String) -> Swift.Int
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -1138,7 +1333,9 @@ public enum LPPreferredFontType {
     get
   }
   public static func rawValue(forString string: Swift.String) -> Swift.Int
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -1155,7 +1352,9 @@ public enum LPPreferredFontType {
     get
   }
   public static func newInstance(description: Swift.String) -> LPMessagingSDK.LPAuthenticationType
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -1164,7 +1363,9 @@ public enum LPPreferredFontType {
 @objc public enum VoiceVideoEndCallButtonType : Swift.Int {
   case close = 1
   case hangup = 2
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -1173,21 +1374,25 @@ public enum LPPreferredFontType {
 public protocol QuickReplyButtonDelegate : AnyObject {
   func quickReplyButtonDidBecomeFocused(_ button: LPMessagingSDK.QuickReplyButton)
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class QuickReplyButton : UIKit.UIButton {
-  @_Concurrency.MainActor(unsafe) public var details: LPMessagingSDK.QuickReplyButtonDetails?
-  @_Concurrency.MainActor(unsafe) weak public var delegate: (any LPMessagingSDK.QuickReplyButtonDelegate)?
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) convenience public init(quickReplyButtonDetails: LPMessagingSDK.QuickReplyButtonDetails)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class QuickReplyButton : UIKit.UIButton {
+  @_Concurrency.MainActor @preconcurrency public var details: LPMessagingSDK.QuickReplyButtonDetails?
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any LPMessagingSDK.QuickReplyButtonDelegate)?
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
+  @_Concurrency.MainActor @preconcurrency convenience public init(quickReplyButtonDetails: LPMessagingSDK.QuickReplyButtonDetails)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
   @objc deinit
 }
 extension LPMessagingSDK.QuickReplyButton {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func accessibilityElementDidBecomeFocused()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func accessibilityElementDidBecomeFocused()
 }
 public enum LPPickerType : Swift.String {
   case single
   case range
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1201,7 +1406,9 @@ public enum FormState : Swift.String {
   case viewed
   case expired
   case error
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1211,20 +1418,32 @@ public enum FormState : Swift.String {
   @objc var formID: Swift.String { get set }
   @objc var invitationID: Swift.String { get set }
   @objc var state: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var title: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var submissionID: Swift.String? { get set }
+  #endif
   @objc var ownerMessages: Foundation.NSOrderedSet { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var readOTK: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var writeOTK: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var url: Foundation.URL? { get set }
+  #endif
 }
 extension LPMessagingSDK.Form {
   public var description: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var ownerDialog: (any LPMessagingSDK.Dialog)? {
     get
   }
+  #endif
 }
 public protocol CompactDeserializable {
   static var componentCount: Swift.Int { get }
@@ -1239,64 +1458,82 @@ public struct JOSEDeserializer {
 }
 public enum ComponentCompactSerializedIndex {
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class LPUIPickerView : UIKit.UIControl {
-  @_Concurrency.MainActor(unsafe) open var minimumDate: Foundation.Date {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class LPUIPickerView : UIKit.UIControl {
+  @_Concurrency.MainActor @preconcurrency open var minimumDate: Foundation.Date {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) open var maximumDate: Foundation.Date {
+  @_Concurrency.MainActor @preconcurrency open var maximumDate: Foundation.Date {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) open var date: Foundation.Date {
+  @_Concurrency.MainActor @preconcurrency open var date: Foundation.Date {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
-  @_Concurrency.MainActor(unsafe) open var calendar: Foundation.Calendar {
+  @_Concurrency.MainActor @preconcurrency open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency open var calendar: Foundation.Calendar {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) open var locale: Foundation.Locale? {
+  @_Concurrency.MainActor @preconcurrency open var locale: Foundation.Locale? {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc deinit
 }
 extension LPMessagingSDK.LPUIPickerView : UIKit.UIPickerViewDelegate {
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
 }
 extension LPMessagingSDK.LPUIPickerView : UIKit.UIPickerViewDataSource {
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func numberOfComponents(in pickerView: UIKit.UIPickerView) -> Swift.Int
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, viewForRow row: Swift.Int, forComponent component: Swift.Int, reusing view: UIKit.UIView?) -> UIKit.UIView
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func numberOfComponents(in pickerView: UIKit.UIPickerView) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, viewForRow row: Swift.Int, forComponent component: Swift.Int, reusing view: UIKit.UIView?) -> UIKit.UIView
+  #endif
 }
 extension UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public func addTapGestureRecognizer(action: (() -> Swift.Void)?)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency public func addTapGestureRecognizer(action: (() -> Swift.Void)?)
+  #endif
 }
 @objc @objcMembers public class ConsumerQuery : LPMessagingSDK.BrandQuery {
   @objc public init(consumerID: Swift.String, brandID: Swift.String, agentToken: Swift.String)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc override public func getConversations() -> [any LPMessagingSDK.Conversation]?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc override public func getActiveConversation() -> (any LPMessagingSDK.Conversation)?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc override public func getConversations(_ predicate: Foundation.NSPredicate?) -> [any LPMessagingSDK.Conversation]?
+  #endif
   @objc override public func createNewConversation() -> any LPMessagingSDK.Conversation
   @objc override public func getQueryType() -> Swift.String
   @objc override public func isConversationRelatedToQuery(_ conversation: any LPMessagingSDK.Conversation) -> Swift.Bool
   @objc override public func getQueryUID() -> Swift.String
   @objc deinit
 }
-@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) open class LPCalendarHeaderView : UIKit.UIView {
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency open class LPCalendarHeaderView : UIKit.UIView {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, unavailable)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  #endif
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func layoutSubviews()
   @objc deinit
 }
 @objc public protocol Brand : LPMessagingSDK.EntityInterface {
   @objc var iconURL: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var imageURL: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var logoURL: Swift.String? { get set }
+  #endif
   @objc var name: Swift.String { get set }
   @objc var uid: Swift.String { get set }
   @objc var details: Swift.String { get set }
@@ -1315,7 +1552,9 @@ extension UIKit.UIView {
   public var item: LPMessagingSDK.LPStructuredContentItem? {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
 }
@@ -1325,7 +1564,9 @@ extension UIKit.UIView {
   }
   public var uri: Swift.String
   public var deepLinkUri: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc override public func encode(with aCoder: Foundation.NSCoder)
   override public func encode(to encoder: any Swift.Encoder) throws
   @objc deinit
@@ -1340,7 +1581,9 @@ extension UIKit.UIView {
   public var rtl: Swift.Bool?
   public var click: LPMessagingSDK.QuickReplyClick?
   public var style: LPMessagingSDK.QuickReplyStyle?
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   public func encode(to encoder: any Swift.Encoder) throws
   @objc deinit
@@ -1361,13 +1604,17 @@ extension UIKit.UIView {
     public var eventId: Swift.String?
     public var originatorMetadata: LPMessagingSDK.GeneralResponse.OriginatorMetadata?
     public var metadata: LPMessagingSDK.MessageMetaData?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(sequence: Swift.Int?, originatorId: Swift.String?, originatorMetadata: LPMessagingSDK.GeneralResponse.OriginatorMetadata?, serverTimestamp: Foundation.Date?, event: LPMessagingSDK.GeneralResponse.Event?, dialogId: Swift.String?, originatorClientProperties: [Swift.String : Any]?, eventId: Swift.String?, metadata: LPMessagingSDK.MessageMetaData?)
+    #endif
     @objc deinit
   }
   public class TTR : Swift.CustomStringConvertible {
     public var ttrType: Swift.String?
     public var value: Swift.Int?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(mTtrType: Swift.String?, mValue: Swift.Int?)
+    #endif
     public var description: Swift.String {
       get
     }
@@ -1376,7 +1623,9 @@ extension UIKit.UIView {
   public class Delay : Swift.CustomStringConvertible {
     public var type: Swift.String?
     public var tillWhen: Foundation.NSNumber?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(mDelayType: Swift.String?, mTillWhen: Foundation.NSNumber?)
+    #endif
     public var description: Swift.String {
       get
     }
@@ -1388,7 +1637,9 @@ extension UIKit.UIView {
     public var dialogType: Swift.String?
     public var channelType: Swift.String?
     public var open: Swift.Bool?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(dialogId: Swift.String?, participants: [Swift.String]?, dialogType: Swift.String?, channelType: Swift.String?, open: Swift.Bool?)
+    #endif
     @objc deinit
   }
   public class Event {
@@ -1399,13 +1650,17 @@ extension UIKit.UIView {
     public var status: Swift.String?
     public var sequenceList: Foundation.NSArray?
     public var quickReplyItem: LPMessagingSDK.QuickReplyItem?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(type: Swift.String?, contentType: LPMessagingSDK.ContentType?, content: Any?, chatState: Swift.String?, status: Swift.String?, sequenceList: Foundation.NSArray?, quickReplyItem: LPMessagingSDK.QuickReplyItem? = nil)
+    #endif
     public class FileMessage {
       public var caption: Swift.String?
       public var fileType: Swift.String?
       public var preview: Swift.String?
       public var relativePath: Swift.String?
+      #if compiler(>=5.3) && $NonescapableTypes
       public init(caption: Swift.String?, fileType: Swift.String?, preview: Swift.String?, relativePath: Swift.String?)
+      #endif
       public var description: Swift.String {
         get
       }
@@ -1415,18 +1670,24 @@ extension UIKit.UIView {
       public var formId: Swift.String?
       public var invitationId: Swift.String?
       public var title: Swift.String?
+      #if compiler(>=5.3) && $NonescapableTypes
       public init(formId: Swift.String?, invitationId: Swift.String?, title: Swift.String?)
+      #endif
       @objc deinit
     }
     public class SecureFormSubmissionMessage {
       public var submissionId: Swift.String?
       public var invitationId: Swift.String?
+      #if compiler(>=5.3) && $NonescapableTypes
       public init(submissionId: Swift.String?, invitationId: Swift.String?)
+      #endif
       @objc deinit
     }
     public class StructuredContentMessage {
       public var structuredContentItemsContainer: LPMessagingSDK.LPStructuredContentItemContainer?
+      #if compiler(>=5.3) && $NonescapableTypes
       public init(structuredContentData: [Swift.String : Any]?)
+      #endif
       @objc deinit
     }
     @objc deinit
@@ -1435,7 +1696,9 @@ extension UIKit.UIView {
     public var id: Swift.String?
     public var role: Swift.String?
     public var clientProperties: [Swift.String : Any]?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(id: Swift.String?, role: Swift.String?, clientProperties: [Swift.String : Any]?)
+    #endif
     @objc deinit
   }
   @objc public var responseDescription: Swift.String {
@@ -1465,7 +1728,9 @@ public enum MessageType : Swift.String {
   case RemoteUserSecureForm
   case RemoteUserStructuredContentContainer
   case RemoteUserQuickReply
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1481,11 +1746,15 @@ public enum LocalMessageType : Swift.Int, Swift.CaseIterable {
   case proactiveMessage
   case richProactiveMessage
   case proactiveContentEventMessage
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(number: Foundation.NSNumber)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias AllCases = [LPMessagingSDK.LocalMessageType]
   public typealias RawValue = Swift.Int
-  public static var allCases: [LPMessagingSDK.LocalMessageType] {
+  nonisolated public static var allCases: [LPMessagingSDK.LocalMessageType] {
     get
   }
   public var rawValue: Swift.Int {
@@ -1503,7 +1772,9 @@ public enum MessageStatus : Swift.String {
   public var value: Swift.Int {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1513,7 +1784,9 @@ public enum LinkPreviewState : Swift.String {
   case loading
   case loaded
   case failed
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1523,35 +1796,77 @@ public enum LinkPreviewState : Swift.String {
   @objc func updateMessageSendingStatus(message: any LPMessagingSDK.Message)
 }
 @objc public protocol Message : LPMessagingSDK.EntityInterface {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var timestamp: Foundation.Date? { get set }
+  #endif
   @objc var content: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var uid: Swift.String? { get set }
+  #endif
   @objc var statusRaw: Swift.String { get set }
   @objc var contentType: Swift.String { get set }
   @objc var messageType: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var ownerDialog: (any LPMessagingSDK.Dialog)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var ownerUser: (any LPMessagingSDK.User)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var file: (any LPMessagingSDK.File)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var form: (any LPMessagingSDK.Form)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var eventId: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var customBoards: Foundation.NSOrderedSet? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var linkPreviewState: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var structuredContentItemContainer: LPMessagingSDK.LPStructuredContentItemContainer? { get set }
+  #endif
   @objc var presented: Swift.Bool { get set }
   @objc var isMaskedContent: Swift.Bool { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var _lastSendingTimestamp: Foundation.Date? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var distributionTypeRaw: Swift.String? { get set }
+  #endif
   @objc var carouselCurrentPage: Swift.Int { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var boardsBuildCompleted: ((_ boards: [any LPMessagingSDK.CustomBoard]) -> Swift.Void)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var boardsBuildFailed: ((_ error: Foundation.NSError) -> Swift.Void)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var timestampRepresentation: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var requestedToShowSendingState: Foundation.Date? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var messageMetadata: [[Swift.String : Any]]? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var maskedContent: Swift.String? { get set }
+  #endif
   @objc var isFirstUnreadMessage: Swift.Bool { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var unreadMessageDividerString: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var sectionIdentifier: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var messageDelegate: (any LPMessagingSDK.MessageDelegate)? { get set }
+  #endif
 }
 extension LPMessagingSDK.Message {
   public var distributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType {
@@ -1598,15 +1913,21 @@ extension LPMessagingSDK.Message {
   public var isProactiveMessage: Swift.Bool {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public func getBaseMessageType() -> LPMessagingSDK.MessageType?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func getLocalMessageType() -> LPMessagingSDK.LocalMessageType?
+  #endif
   public func getBoards(completion: @escaping (_ boards: [any LPMessagingSDK.CustomBoard]) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
 }
 @objc @_hasMissingDesignatedInitializers public class Slot : ObjectiveC.NSObject, Foundation.NSSecureCoding, Swift.Encodable {
   @objc public class var supportsSecureCoding: Swift.Bool {
     @objc get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
@@ -1634,7 +1955,9 @@ extension LPMessagingSDK.Message {
     case ChatStateEvent
     case ContentEvent
     case StructuredContentEvent
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
+    #endif
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -1643,7 +1966,9 @@ extension LPMessagingSDK.Message {
   public enum NotificationDistributionType : Swift.String {
     case QUERY
     case REALTIME
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
+    #endif
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -1659,9 +1984,15 @@ extension LPMessagingSDK.Message {
   @objc final public let sender: (any LPMessagingSDK.User)?
   @objc public var fileMessageCompletion: ((_ message: any LPMessagingSDK.Message) -> Swift.Void)?
   @objc public var fileMessageFailure: ((_ error: Foundation.NSError) -> Swift.Void)?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(messagingServiceEventType: LPMessagingSDK.MessagingServiceEvent.MessagingServiceEventType, data: LPMessagingSDK.GeneralResponse.ContentEventBody?, dialog: any LPMessagingSDK.Dialog, sender: (any LPMessagingSDK.User)?, sequence: Swift.Int?, notificationDistributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init?(failure: Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init?(fromData data: LPMessagingSDK.GeneralResponse.ContentEventBody?, dialog: any LPMessagingSDK.Dialog, distributionType: LPMessagingSDK.MessagingServiceEvent.NotificationDistributionType, sender: (any LPMessagingSDK.User)? = nil)
+  #endif
   @objc deinit
 }
 extension Foundation.Data : LPMessagingSDK.ExpressibleAsSymmetricKeyComponents {
@@ -1673,75 +2004,109 @@ public struct JWEHeader {
   public init(parameters: [Swift.String : Any]) throws
 }
 extension LPMessagingSDK.JWEHeader {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var keyManagementAlgorithm: LPMessagingSDK.KeyManagementAlgorithm? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var contentEncryptionAlgorithm: LPMessagingSDK.ContentEncryptionAlgorithm? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var compressionAlgorithm: LPMessagingSDK.CompressionAlgorithm? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var zip: Swift.String? {
     get
     set
   }
+  #endif
 }
 extension LPMessagingSDK.JWEHeader : LPMessagingSDK.CommonHeaderParameterSpace {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var jku: Foundation.URL? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var jwk: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var jwkTyped: (any LPMessagingSDK.JWK)? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var kid: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var x5u: Foundation.URL? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var x5c: [Swift.String]? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var x5t: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var x5tS256: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var typ: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var cty: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var crit: [Swift.String]? {
     get
     set
   }
+  #endif
 }
 extension LPMessagingSDK.JWEHeader {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `JWEHeader.keyManagementAlgorithm` instead")
   public var algorithm: LPMessagingSDK.AsymmetricKeyAlgorithm? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `JWEHeader.contentEncryptionAlgorithm` instead")
   public var encryptionAlgorithm: LPMessagingSDK.SymmetricKeyAlgorithm? {
     get
   }
+  #endif
   @available(*, deprecated, message: "Use `init(keyManagementAlgorithm:contentEncryptionAlgorithm` instead")
   public init(algorithm: LPMessagingSDK.AsymmetricKeyAlgorithm, encryptionAlgorithm: LPMessagingSDK.SymmetricKeyAlgorithm)
 }
@@ -1752,28 +2117,38 @@ public protocol LPWebSocketHandler : LPMessagingSDK.SRWebSocketDelegate {
   func updateSocket(socket: LPMessagingSDK.LPWebSocket)
 }
 public struct SocketDetails {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(scheme: Swift.String, host: Swift.String, path: Swift.String, headers: [Swift.String : Swift.String]? = nil)
+  #endif
 }
 @objc @_hasMissingDesignatedInitializers public class LPWebSocket : LPMessagingSDK.LPSRWebSocket {
   public typealias RequestResultCompleted = (_ data: Swift.AnyObject) -> Swift.Void
   public typealias RequestResultFailed = (_ error: Foundation.NSError) -> Swift.Void
   public struct RequestCompletionHandler {
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public func requestDictionary(_ message: Swift.String, payload: [Swift.String : Any]? = nil, headers: [Swift.String : Any] = [:], metadata: [[Swift.String : Any]]? = nil, expectAckResponse: Swift.Bool? = false, completion: LPMessagingSDK.LPWebSocket.RequestResultCompleted?, failure: LPMessagingSDK.LPWebSocket.RequestResultFailed?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func requestWithCompletion(_ message: Swift.String, payload: [Swift.String : Any]? = nil, headers: [Swift.String : Any] = [:], metadata: [[Swift.String : Any]]? = nil, expectAckResponse: Swift.Bool? = false, completion: LPMessagingSDK.LPWebSocket.RequestResultCompleted?, failure: LPMessagingSDK.LPWebSocket.RequestResultFailed?)
+  #endif
   @objc override dynamic public func open()
   @objc override dynamic public func close()
   @objc deinit
 }
 public protocol DataConvertible {
+  #if compiler(>=5.3) && $NonescapableTypes
   init?(_ data: Foundation.Data)
+  #endif
   func data() -> Foundation.Data
 }
 @objc public enum LPPusherUnregisterType : Swift.Int {
   case all
   case none
   case agent
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -1788,7 +2163,9 @@ extension Security.SecKey : LPMessagingSDK.ExpressibleAsECPrivateKeyComponents {
     @objc get
   }
   public var text: Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc override public func encode(with aCoder: Foundation.NSCoder)
   override public func encode(to encoder: any Swift.Encoder) throws
   @objc deinit
@@ -1812,12 +2189,18 @@ extension LPMessagingSDK.JWKSet : Swift.Decodable {
   }
   @objc override dynamic public init()
   @objc public func encode(with aCoder: Foundation.NSCoder)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc deinit
 }
 extension Foundation.Data {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(base64URLEncoded base64URLString: Swift.String)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(base64URLEncoded base64URLData: Foundation.Data)
+  #endif
   public func base64URLEncodedString() -> Swift.String
   public func base64URLEncodedData() -> Foundation.Data
 }
@@ -1826,13 +2209,19 @@ extension Foundation.Data : LPMessagingSDK.DataConvertible {
   public func data() -> Foundation.Data
 }
 public struct Decrypter {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?<KeyType>(keyManagementAlgorithm: LPMessagingSDK.KeyManagementAlgorithm, contentEncryptionAlgorithm: LPMessagingSDK.ContentEncryptionAlgorithm, decryptionKey: KeyType)
+  #endif
 }
 extension LPMessagingSDK.Decrypter {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `init?(keyManagementAlgorithm:contentEncryptionAlgorithm:decryptionKey:)` instead")
   public init?<KeyType>(keyDecryptionAlgorithm: LPMessagingSDK.AsymmetricKeyAlgorithm, decryptionKey key: KeyType, contentDecryptionAlgorithm: LPMessagingSDK.SymmetricKeyAlgorithm)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `init?(keyManagementAlgorithm:contentEncryptionAlgorithm:decryptionKey:)` instead")
   public init?<KeyType>(keyDecryptionAlgorithm: LPMessagingSDK.AsymmetricKeyAlgorithm, keyDecryptionKey kdk: KeyType, contentDecryptionAlgorithm: LPMessagingSDK.SymmetricKeyAlgorithm)
+  #endif
 }
 @available(*, deprecated, message: "This type will be removed with the next major release.")
 public struct DecryptionContext {
@@ -1847,7 +2236,9 @@ public struct SymmetricDecryptionContext {
   case blurThumbnail
   case blockSCWhenNotLastMsgDefault
   case blockTextInputDefault
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -1879,7 +2270,9 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsECPublicKeyComponents {
   @objc public class var supportsSecureCoding: Swift.Bool {
     @objc get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
@@ -1893,7 +2286,9 @@ public enum LPStructuredContentItemType : Swift.String, Swift.Encodable {
   case vertical
   case horizontal
   case carousel
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1905,7 +2300,9 @@ public enum LPStructuredContentActionType : Swift.String, Swift.Encodable {
   case publishText
   case appointmentList
   case datePicker
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1915,7 +2312,9 @@ public enum LPStructuredContentStyleSize : Swift.String, Swift.Encodable {
   case small
   case medium
   case large
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1923,7 +2322,9 @@ public enum LPStructuredContentStyleSize : Swift.String, Swift.Encodable {
 }
 public enum LPSpecielViewTags : Swift.Int {
   case IMAGE_VIEW_CLICK_EFFECT_VIEW
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -1933,7 +2334,9 @@ public enum LPBorder : Swift.String, Swift.Encodable {
   case border
   case borderless
   case dropShadow
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1943,7 +2346,9 @@ public enum LPTextAlignment : Swift.String, Swift.Encodable {
   case leading
   case center
   case trailing
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -1978,25 +2383,35 @@ public enum JOSESwiftError : Swift.Error {
   case compressedDataMustBeGreaterThanZero
   case thumbprintSerialization
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class CalendarFlowLayout : UIKit.UICollectionViewFlowLayout {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutAttributesForElements(in rect: CoreFoundation.CGRect) -> [UIKit.UICollectionViewLayoutAttributes]?
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutAttributesForItem(at indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewLayoutAttributes?
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init()
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class CalendarFlowLayout : UIKit.UICollectionViewFlowLayout {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func layoutAttributesForElements(in rect: CoreFoundation.CGRect) -> [UIKit.UICollectionViewLayoutAttributes]?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func layoutAttributesForItem(at indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewLayoutAttributes?
+  #endif
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init()
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  #endif
   @objc deinit
 }
 @objc final public class LPWelcomeMessageOption : ObjectiveC.NSObject {
   @objc final public let value: Swift.String
   @objc final public let displayName: Swift.String
   @objc final public let quickReplyStyle: LPMessagingSDK.QuickReplyStyle?
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init(value: Swift.String, displayName: Swift.String, quickReplyStyle: LPMessagingSDK.QuickReplyStyle? = nil)
+  #endif
   @objc deinit
 }
 @objc final public class LPWelcomeMessage : ObjectiveC.NSObject {
   @objc public enum MessageFrequency : Swift.Int {
     case FirstTimeConversation
     case everyConversation
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
+    #endif
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
@@ -2009,7 +2424,9 @@ public enum JOSESwiftError : Swift.Error {
     public var description: Foundation.NSString {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
+    #endif
     public typealias RawValue = Swift.Int
     public static var _nsErrorDomain: Swift.String {
       get
@@ -2026,10 +2443,14 @@ public enum JOSESwiftError : Swift.Error {
   @objc final public var numberOfOptionsPerRow: Swift.Int {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc final public var quickReply: LPMessagingSDK.QuickReplyItem? {
     @objc get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init(message: Swift.String? = nil, frequency: LPMessagingSDK.LPWelcomeMessage.MessageFrequency = .FirstTimeConversation)
+  #endif
   @objc final public func shouldDisplayDefaultMessage() -> Swift.Bool
   @objc final public func set(options: [LPMessagingSDK.LPWelcomeMessageOption]) throws
   @objc final public func clearOptions()
@@ -2108,11 +2529,11 @@ public enum LPFlowTag : Swift.CustomStringConvertible, Swift.CaseIterable {
   case TELEMETRY
   case UMS_REST
   public static func == (a: LPMessagingSDK.LPFlowTag, b: LPMessagingSDK.LPFlowTag) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
   public typealias AllCases = [LPMessagingSDK.LPFlowTag]
-  public static var allCases: [LPMessagingSDK.LPFlowTag] {
+  nonisolated public static var allCases: [LPMessagingSDK.LPFlowTag] {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -2127,7 +2548,9 @@ public enum LPFlowTag : Swift.CustomStringConvertible, Swift.CaseIterable {
   case INFO = 3
   case DEBUG = 4
   case TRACE = 5
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -2135,18 +2558,30 @@ public enum LPFlowTag : Swift.CustomStringConvertible, Swift.CaseIterable {
 }
 @_hasMissingDesignatedInitializers public class LPLogger {
   public static let sharedInstance: LPMessagingSDK.LPLogger
+  #if compiler(>=5.3) && $NonescapableTypes
   public func TRACE(_ message: Swift.String, tag: LPMessagingSDK.LPFlowTag = .DEFAULT, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line, error: (any Swift.Error)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func DEBUG(_ message: Swift.String, tag: LPMessagingSDK.LPFlowTag = .DEFAULT, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line, error: (any Swift.Error)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func INFO(_ message: Swift.String, tag: LPMessagingSDK.LPFlowTag = .DEFAULT, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line, error: (any Swift.Error)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func WARNING(_ message: Swift.String, tag: LPMessagingSDK.LPFlowTag = .DEFAULT, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line, error: (any Swift.Error)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func ERROR(_ message: Swift.String, tag: LPMessagingSDK.LPFlowTag = .DEFAULT, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line, error: (any Swift.Error)? = nil)
+  #endif
   @objc deinit
 }
 public enum QuickReplyActionType : Swift.String {
   case navigate
   case link
   case publishText
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -2158,7 +2593,9 @@ public enum QuickReplyActionType : Swift.String {
   }
   public var ID: Swift.String
   public var type: Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
@@ -2264,7 +2701,8 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var datePickerHeaderPickerFontColor: UIKit.UIColor
   @objc public var datePickerHeaderPickerConfirmationButtonTintColor: UIKit.UIColor
   @objc public var datePickerHeaderPickerConfirmationButtonText: Swift.String
-  @objc public var datePickerHeaderPickerToolbarStyle: UIKit.UIBarStyle
+  @objc @available(iOS, deprecated: 13.0.0, obsoleted: 26.0.0, message: "Use `datePickerHeaderPickerConfirmationButtonTintColor` instead")
+  public var datePickerHeaderPickerToolbarStyle: UIKit.UIBarStyle
   @objc public var datePickerFooterBackgroundColor: UIKit.UIColor
   @objc public var datePickerFooterButtonBackgroundColor: UIKit.UIColor
   @objc public var datePickerFooterButtonFontColor: UIKit.UIColor
@@ -2665,7 +3103,9 @@ public enum QuickReplyActionType : Swift.String {
   @objc public var baseHttpsServicesResponseCacheTtlInMinutes: Swift.UInt
   @objc public static var defaultConfiguration: LPMessagingSDK.LPConfig
   @objc public func resetToDefaultConfiguration()
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc override dynamic public func setValue(_ value: Any?, forUndefinedKey key: Swift.String)
+  #endif
   @objc public class func printAllConfigurations()
   @objc deinit
 }
@@ -2674,22 +3114,22 @@ public protocol LPWeeklyCalendarViewDelegate : AnyObject {
   func shouldPresentPickerView(picker: LPMessagingSDK.LPPickerView)
   func shouldDismissPickerView(picker: LPMessagingSDK.LPPickerView)
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class LPWeeklyCalendarView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) public var firstDayAvailable: Swift.Int
-  @_Concurrency.MainActor(unsafe) public var selectedDate: Foundation.Date {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class LPWeeklyCalendarView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var firstDayAvailable: Swift.Int
+  @_Concurrency.MainActor @preconcurrency public var selectedDate: Foundation.Date {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @objc deinit
 }
 extension LPMessagingSDK.LPWeeklyCalendarView : UIKit.UICollectionViewDelegate, UIKit.UICollectionViewDataSource, UIKit.UICollectionViewDelegateFlowLayout {
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGSize
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGSize
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndScrollingAnimation(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
 }
 public class ConversationDetails : Swift.CustomStringConvertible {
   public enum CloseReason {
@@ -2753,7 +3193,9 @@ public class ConversationDetails : Swift.CustomStringConvertible {
       set
     }
     public var metaDataLastUpdateTs: Foundation.Date?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(dialogId: Swift.String?, participants: [LPMessagingSDK.ConversationDetails.participant]?, dialogType: Swift.String?, channelType: Swift.String?, closedBy: Swift.String?, startTs: Foundation.Date?, endTs: Foundation.Date?, metaDataLastUpdateTs: Foundation.Date?, state: Swift.String?)
+    #endif
     public init(jsonDict: [Swift.String : Any])
     @objc deinit
   }
@@ -2761,7 +3203,9 @@ public class ConversationDetails : Swift.CustomStringConvertible {
     public var csatRate: Swift.Int?
     public var csatResolutionConfirmation: Swift.Bool?
     public var status: Swift.String?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(csatRate: Swift.Int?, csatResolutionConfirmation: Swift.Bool?, status: Swift.String?)
+    #endif
     @objc deinit
   }
   public var conversationID: Swift.String
@@ -2821,7 +3265,9 @@ extension LPMessagingSDK.ConversationDetails {
   public var maxItemsPerRow: Swift.Int?
   public var buttonsDetails: [LPMessagingSDK.QuickReplyButtonDetails]?
   public init(sequence: Swift.Int)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc override dynamic public var debugDescription: Swift.String {
     @objc get
@@ -2831,15 +3277,21 @@ extension LPMessagingSDK.ConversationDetails {
 }
 @objc public protocol UserProfile : LPMessagingSDK.User {
   @objc var email: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var fbProfile: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var token: Swift.String? { get set }
+  #endif
 }
 public enum HTTPMethod : Swift.String {
   case PUT
   case POST
   case GET
   case DELETE
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -2908,7 +3360,9 @@ public let SUPPORTED_FILE_EXTENSION_COLLECTION: [Swift.String]
 public enum TokenType : Swift.Int {
   case regular
   case voip
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -2920,7 +3374,9 @@ public enum LPRecorderStatus : Swift.String {
   case timeLimited
   case canceled
   case failed
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -2930,7 +3386,9 @@ public enum LPPlayerStatus : Swift.String {
   case none
   case stopped
   case failed
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -2943,7 +3401,9 @@ public enum ContentType : Swift.String {
   case formSubmission
   case structuredContent
   case quickReply
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -2964,10 +3424,12 @@ public enum CSDSService : Swift.String, Swift.CaseIterable {
   case shark
   case otelDomainConsumerSdk
   case UMSRestAPI
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias AllCases = [LPMessagingSDK.CSDSService]
   public typealias RawValue = Swift.String
-  public static var allCases: [LPMessagingSDK.CSDSService] {
+  nonisolated public static var allCases: [LPMessagingSDK.CSDSService] {
     get
   }
   public var rawValue: Swift.String {
@@ -2979,7 +3441,9 @@ public enum CSDSService : Swift.String, Swift.CaseIterable {
   case consumer
   case system
   public init(closeReason: Swift.String)
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -2990,7 +3454,9 @@ public enum AgentState : Swift.String {
   case OFFLINE
   case AWAY
   case BACK_SOON
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -2999,7 +3465,9 @@ public enum AgentState : Swift.String {
 public enum ChannelType : Swift.String {
   case MESSAGING
   case LIVECHAT
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3012,7 +3480,9 @@ public enum RoleType : Swift.String {
   case MANAGER
   case READER
   case CONTROLLER
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3039,7 +3509,9 @@ public enum RoleType : Swift.String {
   case NO_SUBSCRIPTION = -9
   case CERT_PINNING_FAILED = -10
   public func description() -> Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -3047,7 +3519,9 @@ public enum RoleType : Swift.String {
 }
 public enum InactivityState : Swift.Int {
   case CONVERSATIONS_SCREEN_NOT_ACTIVE
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -3062,7 +3536,9 @@ public enum AMSStateError : Swift.String {
   case NO_SUBSCRIPTION
   case GENERAL_ERROR
   case CERT_PINNING_FAILED
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3085,7 +3561,9 @@ public enum AMSStateError : Swift.String {
   public var description: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -3138,10 +3616,12 @@ public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
   case VISITOR_ID
   case CONNECTOR_ID
   case AUTH_CONNECTOR_ID
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias AllCases = [LPMessagingSDK.LPKeychainKey]
   public typealias RawValue = Swift.String
-  public static var allCases: [LPMessagingSDK.LPKeychainKey] {
+  nonisolated public static var allCases: [LPMessagingSDK.LPKeychainKey] {
     get
   }
   public var rawValue: Swift.String {
@@ -3150,7 +3630,9 @@ public enum LPKeychainKey : Swift.String, Swift.CaseIterable {
 }
 public enum LPKeychainSecureEnclaveKey : Swift.String {
   case encryptionKey
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3226,7 +3708,9 @@ public enum UserType : Swift.String {
   case Controller
   case Reader
   case Manager
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3237,7 +3721,9 @@ public enum UserType : Swift.String {
   case controller = 0
   case human = 1
   case bot = 2
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int16)
+  #endif
   public typealias RawValue = Swift.Int16
   public var rawValue: Swift.Int16 {
     get
@@ -3247,16 +3733,30 @@ public enum UserType : Swift.String {
   @objc var uid: Swift.String { get set }
   @objc var firstName: Swift.String { get set }
   @objc var lastName: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var nickName: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var profileImageURL: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var coverImageURL: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var phoneNumber: Swift.String? { get set }
+  #endif
   @objc var typeRaw: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var bio: Swift.String? { get set }
+  #endif
   @objc var userMessages: Foundation.NSSet { get set }
   @objc var isSaved: Swift.Bool { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var lastUpdated: Foundation.Date? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var employeeID: Swift.String? { get set }
+  #endif
   @objc var agentType: LPMessagingSDK.AgentType { get set }
 }
 extension LPMessagingSDK.User {
@@ -3331,14 +3831,18 @@ public struct RSAPrivateKey : LPMessagingSDK.JWK {
 public typealias RSAKeyPair = LPMessagingSDK.RSAPrivateKey
 @objc public protocol Account : LPMessagingSDK.EntityInterface {
   @objc var accountId: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var brand: (any LPMessagingSDK.Brand)? { get set }
+  #endif
 }
 public enum DialogType : Swift.String {
   case MAIN
   case POST_SURVEY
   case AGENT
   case OTHER
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3347,7 +3851,9 @@ public enum DialogType : Swift.String {
 public enum ChannelTypes : Swift.String {
   case MESSAGING
   case COBROWSE
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3360,7 +3866,9 @@ public enum ChatState : Swift.String {
   case Inactive
   case Pause
   case Background
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3373,26 +3881,44 @@ public enum DialogState : Swift.String {
   case Created
   case Pending
   case Other
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
 }
 @objc public protocol Dialog : LPMessagingSDK.EntityInterface {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var assignedAgentId: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var channelType: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var closeDate: Foundation.Date? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var lastUpdateDate: Foundation.Date? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var closeReason: Swift.String? { get set }
+  #endif
   @objc var creationDate: Foundation.Date { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var dialogType: Swift.String? { get set }
+  #endif
   @objc var lastReceivedSequence: Foundation.NSNumber { get set }
   @objc var resolved: Swift.Bool { get set }
   @objc var stateRaw: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var uid: Swift.String? { get set }
+  #endif
   @objc var handlerId: Swift.String { get set }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc var ownerConversation: (any LPMessagingSDK.Conversation)? { get set }
+  #endif
   @objc var participants: Foundation.NSSet { get set }
   @objc var dialogMessages: Foundation.NSOrderedSet { get set }
   @objc var chatStateRaw: Swift.String { get set }
@@ -3406,9 +3932,11 @@ extension LPMessagingSDK.Dialog {
   public var state: LPMessagingSDK.DialogState {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var lastMessageObj: (any LPMessagingSDK.Message)? {
     get
   }
+  #endif
   public var sortedMessages: [any LPMessagingSDK.Message] {
     get
   }
@@ -3430,15 +3958,19 @@ extension LPMessagingSDK.Dialog {
   public var isMainDialog: Swift.Bool {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var latestInitialMessage: (any LPMessagingSDK.Message)? {
     get
   }
+  #endif
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentStyle : ObjectiveC.NSObject, Foundation.NSSecureCoding, Swift.Encodable {
   @objc public class var supportsSecureCoding: Swift.Bool {
     @objc get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   public func encode(to encoder: any Swift.Encoder) throws
   @objc deinit
@@ -3480,7 +4012,9 @@ public typealias MessageMetaData = [[Swift.String : Any]]
   @objc public var contextId: Swift.String?
   @objc public var sessionId: Swift.String?
   @objc public var visitorId: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init(campaignId: Swift.Int, engagementId: Swift.Int, contextId: Swift.String?, sessionId: Swift.String? = nil, visitorId: Swift.String? = nil)
+  #endif
   @objc deinit
 }
 @objcMembers @objc public class LPMonitoringInitParams : ObjectiveC.NSObject {
@@ -3491,7 +4025,9 @@ public typealias MessageMetaData = [[Swift.String : Any]]
   @objc deinit
 }
 public struct AppointmentSlot : Swift.Encodable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(type: Swift.String, id: Swift.String, start: Swift.Int, end: Swift.Int? = nil, title: Swift.String? = nil, description: Swift.String? = nil, imageUrl: Swift.String? = nil)
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
 }
 @_inheritsConvenienceInitializers @objcMembers @objc public class LPGetEngagementResponse : ObjectiveC.NSObject, Swift.Codable {
@@ -3534,7 +4070,9 @@ public struct AppointmentSlot : Swift.Encodable {
 @objc public enum SocketType : Swift.Int {
   case consumer
   case agent
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -3544,7 +4082,9 @@ public struct AppointmentSlot : Swift.Encodable {
   @objc public var entryPoints: [Swift.String]?
   @objc public var engagementAttributes: [[Swift.String : Any]]?
   @objc public var pageId: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init(entryPoints: [Swift.String]?, engagementAttributes: [[Swift.String : Any]]?, pageId: Swift.String? = nil)
+  #endif
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
@@ -3568,7 +4108,9 @@ public struct AppointmentSlot : Swift.Encodable {
   @objc deinit
 }
 @objcMembers @objc public class LPMonitoringIdentity : ObjectiveC.NSObject {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init(consumerID: Swift.String? = nil, issuer: Swift.String? = nil)
+  #endif
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
@@ -3804,33 +4346,55 @@ extension Security.SecKey : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   @objc deinit
   required public init(from decoder: any Swift.Decoder) throws
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class NSBouncyView : UIKit.UIView {
-  @_Concurrency.MainActor(unsafe) open func setView(_ view: UIKit.UIView)
-  @_Concurrency.MainActor(unsafe) open func setColor(color: UIKit.UIColor)
-  @_Concurrency.MainActor(unsafe) open func toggleVisibility(show: Swift.Bool, willStart: @escaping () -> Swift.Void, didComplete: @escaping () -> Swift.Void, didFail: @escaping () -> Swift.Void)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class NSBouncyView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency open func setView(_ view: UIKit.UIView)
+  @_Concurrency.MainActor @preconcurrency open func setColor(color: UIKit.UIColor)
+  @_Concurrency.MainActor @preconcurrency open func toggleVisibility(show: Swift.Bool, willStart: @escaping () -> Swift.Void, didComplete: @escaping () -> Swift.Void, didFail: @escaping () -> Swift.Void)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  #endif
   @objc deinit
 }
 extension LPMessagingSDK.LPMessaging {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic public func registerPushNotifications(token: Foundation.Data, notificationDelegate: (any LPMessagingSDK.LPMessagingSDKNotificationDelegate)? = nil, alternateBundleID: Swift.String? = nil, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic public func registerPushNotifications(tokenString: Swift.String, notificationDelegate: (any LPMessagingSDK.LPMessagingSDKNotificationDelegate)? = nil, alternateBundleID: Swift.String? = nil, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic public func registerVoipPushNotifications(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
+  #endif
   @objc dynamic public func unregisterPusher(brandId: Swift.String, authType: LPMessagingSDK.LPAuthenticationType, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> (), failure: @escaping (_ error: any Swift.Error) -> ())
   @objc @available(*, deprecated, message: "This function is deprecated. Use public func unregisterPusher(brandId:, authType:, unregisterType:=.all, completion:, failure:) instead.")
   dynamic public func unregisterPusher(brandId: Swift.String, unregisterType: LPMessagingSDK.LPPusherUnregisterType = .all, completion: @escaping () -> Swift.Void, failure: @escaping (_ error: any Swift.Error) -> Swift.Void)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic public class func setPusherToken(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic public class func setPusherVoipToken(token: Foundation.Data, alternateBundleID: Swift.String? = nil)
+  #endif
   @objc @available(*, deprecated, message: "Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())")
   dynamic public class func getUnreadMessagesCount(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol, completion: @escaping (_ badgeCounter: Swift.Int) -> Swift.Void, failure: @escaping (_ error: any Swift.Error) -> Swift.Void)
   @objc @available(*, deprecated, message: "Use public func getUnreadMessagesCount(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Int) -> (), failure: @escaping (_ error: Error) -> ())")
   dynamic public class func getUnreadMessagesCount(brandID: Swift.String, completion: @escaping (_ badgeCounter: Swift.Int) -> Swift.Void, failure: @escaping (_ error: any Swift.Error) -> Swift.Void)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic public func getUnreadMessagesCount(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, completion: @escaping (_ badgeCounter: Swift.Int) -> Swift.Void, failure: @escaping (_ error: any Swift.Error) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic public func isRegisteredForPushNotifications(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, token: Foundation.Data, alternateBundleID: Swift.String? = nil, completion: @escaping (_ isRegistered: Swift.Bool) -> Swift.Void, failure: @escaping (_ error: any Swift.Error) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic public func isRegisteredForPushNotifications(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil, tokenString: Swift.String, alternateBundleID: Swift.String? = nil, completion: @escaping (_ isRegistered: Swift.Bool) -> Swift.Void, failure: @escaping (_ error: any Swift.Error) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc @discardableResult
   dynamic public func handlePush(_ userInfo: [Swift.AnyHashable : Any]) -> LPMessagingSDK.LPNotification?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic public func getPendingProactiveMessages(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams, alternateBundleID: Swift.String? = nil, completion: @escaping (_ notifications: [LPMessagingSDK.LPNotification]) -> Swift.Void, failure: @escaping (_ error: any Swift.Error) -> Swift.Void)
+  #endif
 }
 @objc @_hasMissingDesignatedInitializers public class LPStructuredContentPublishTextAction : LPMessagingSDK.LPStructuredContentAction {
   @objc override public class var supportsSecureCoding: Swift.Bool {
@@ -3844,7 +4408,9 @@ extension LPMessagingSDK.LPMessaging {
   @objc deinit
 }
 public protocol LPSocketLoggerDelegate : AnyObject {
+  #if compiler(>=5.3) && $NonescapableTypes
   func lpSocketLogger(message: Swift.String, type: LPMessagingSDK.LPSocketLoggerType, error: (any Swift.Error)?)
+  #endif
 }
 public enum LPSocketLoggerType : Swift.Int {
   case error
@@ -3852,7 +4418,9 @@ public enum LPSocketLoggerType : Swift.Int {
   case info
   case debug
   case trace
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -3864,17 +4432,39 @@ public enum LPSocketLoggerType : Swift.Int {
   @objc deinit
 }
 public protocol CommonHeaderParameterSpace {
+  #if compiler(>=5.3) && $NonescapableTypes
   var jku: Foundation.URL? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var jwk: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var jwkTyped: (any LPMessagingSDK.JWK)? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var kid: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var x5u: Foundation.URL? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var x5c: [Swift.String]? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var x5t: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var x5tS256: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var typ: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var cty: Swift.String? { get set }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var crit: [Swift.String]? { get set }
+  #endif
 }
 @objc public protocol ConversationViewControllerAgentDelegate {
   @objc optional func agentDidChangeUserInputText(_ text: Swift.String)
@@ -3887,7 +4477,9 @@ public enum ECCurveType : Swift.String, Swift.Codable {
   case P256
   case P384
   case P521
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3899,7 +4491,9 @@ public enum ECCompression : Swift.UInt8 {
   case Uncompressed
   case HybridYEven
   case HybridYOdd
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.UInt8)
+  #endif
   public typealias RawValue = Swift.UInt8
   public var rawValue: Swift.UInt8 {
     get
@@ -3949,16 +4543,20 @@ public struct ECPrivateKey : LPMessagingSDK.JWK {
   public func withThumbprintAsKeyId(algorithm: LPMessagingSDK.JWKThumbprintAlgorithm = .SHA256) throws -> LPMessagingSDK.ECPrivateKey
 }
 public typealias ECKeyPair = LPMessagingSDK.ECPrivateKey
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) open class LPCalendarDayCell : UIKit.UICollectionViewCell {
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open var description: Swift.String {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency open class LPCalendarDayCell : UIKit.UICollectionViewCell {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open var description: Swift.String {
     @objc get
   }
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic open func layoutSubviews()
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class LPStructuredContentParser {
+  #if compiler(>=5.3) && $NonescapableTypes
   public class func getStructuredContentLayoutContainer(fromJson json: [Swift.String : Any]) -> LPMessagingSDK.LPStructuredContentItemContainer?
+  #endif
   @objc deinit
 }
 extension LPMessagingSDK.LPMessaging {
@@ -3979,7 +4577,9 @@ public protocol LPStructuredContentLoggerDelegate : AnyObject {
   public enum PayloadType : Swift.String {
     case ring
     case message
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
+    #endif
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -4021,13 +4621,21 @@ public enum JWKParameter : Swift.String, Swift.CodingKey {
   case X509CertificateChain
   case X509CertificateSHA1Thumbprint
   case X509CertificateSHA256Thumbprint
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(stringValue: Swift.String)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(intValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
   public var intValue: Swift.Int? {
     get
   }
+  #endif
   public var rawValue: Swift.String {
     get
   }
@@ -4039,13 +4647,21 @@ public enum RSAParameter : Swift.String, Swift.CodingKey {
   case modulus
   case exponent
   case privateExponent
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(stringValue: Swift.String)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(intValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
   public var intValue: Swift.Int? {
     get
   }
+  #endif
   public var rawValue: Swift.String {
     get
   }
@@ -4055,13 +4671,21 @@ public enum RSAParameter : Swift.String, Swift.CodingKey {
 }
 public enum SymmetricKeyParameter : Swift.String, Swift.CodingKey {
   case key
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(stringValue: Swift.String)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(intValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
   public var intValue: Swift.Int? {
     get
   }
+  #endif
   public var rawValue: Swift.String {
     get
   }
@@ -4074,13 +4698,21 @@ public enum ECParameter : Swift.String, Swift.CodingKey {
   case x
   case y
   case privateKey
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(stringValue: Swift.String)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(intValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
   public var intValue: Swift.Int? {
     get
   }
+  #endif
   public var rawValue: Swift.String {
     get
   }
@@ -4202,7 +4834,9 @@ public enum JWKKeyType : Swift.String, Swift.Codable {
   case RSA
   case OCT
   case EC
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -4212,10 +4846,16 @@ public protocol JWK : Swift.Decodable, Swift.Encodable {
   var keyType: LPMessagingSDK.JWKKeyType { get }
   var parameters: [Swift.String : Swift.String] { get }
   var requiredParameters: [Swift.String : Swift.String] { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   subscript(parameter: Swift.String) -> Swift.String? { get }
+  #endif
   init(data: Foundation.Data) throws
+  #if compiler(>=5.3) && $NonescapableTypes
   func jsonString() -> Swift.String?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   func jsonData() -> Foundation.Data?
+  #endif
   @available(iOS 11.0, *)
   func thumbprint(algorithm: LPMessagingSDK.JWKThumbprintAlgorithm) throws -> Swift.String
   @available(iOS 11.0, *)
@@ -4241,7 +4881,9 @@ public enum SignatureAlgorithm : Swift.String {
   case ES256
   case ES384
   case ES512
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -4255,10 +4897,12 @@ public enum KeyManagementAlgorithm : Swift.String, Swift.CaseIterable {
   case A192KW
   case A256KW
   case direct
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias AllCases = [LPMessagingSDK.KeyManagementAlgorithm]
   public typealias RawValue = Swift.String
-  public static var allCases: [LPMessagingSDK.KeyManagementAlgorithm] {
+  nonisolated public static var allCases: [LPMessagingSDK.KeyManagementAlgorithm] {
     get
   }
   public var rawValue: Swift.String {
@@ -4270,7 +4914,9 @@ public enum ContentEncryptionAlgorithm : Swift.String {
   case A128CBCHS256
   case A256GCM
   case A128GCM
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -4280,7 +4926,9 @@ public enum HMACAlgorithm : Swift.String {
   case SHA512
   case SHA384
   case SHA256
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -4288,7 +4936,9 @@ public enum HMACAlgorithm : Swift.String {
 }
 public enum JWKThumbprintAlgorithm : Swift.String {
   case SHA256
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -4297,7 +4947,9 @@ public enum JWKThumbprintAlgorithm : Swift.String {
 public enum CompressionAlgorithm : Swift.String {
   case DEFLATE
   case NONE
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -4311,8 +4963,12 @@ public struct JWKSet {
   public let keys: [any LPMessagingSDK.JWK]
   public init(keys: [any LPMessagingSDK.JWK])
   public init(data: Foundation.Data) throws
+  #if compiler(>=5.3) && $NonescapableTypes
   public func jsonString() -> Swift.String?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func jsonData() -> Foundation.Data?
+  #endif
 }
 extension LPMessagingSDK.JWKSet : Swift.Collection {
   public typealias ArrayType = [any LPMessagingSDK.JWK]
@@ -4338,13 +4994,19 @@ extension LPMessagingSDK.JWKSet : Swift.ExpressibleByArrayLiteral {
   public init(arrayLiteral elements: LPMessagingSDK.JWKSet.ArrayLiteralElement...)
 }
 public struct Encrypter<KeyType> {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(keyManagementAlgorithm: LPMessagingSDK.KeyManagementAlgorithm, contentEncryptionAlgorithm: LPMessagingSDK.ContentEncryptionAlgorithm, encryptionKey: KeyType)
+  #endif
 }
 extension LPMessagingSDK.Encrypter {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `init?(keyManagementAlgorithm:contentEncryptionAlgorithm:encryptionKey:)` instead")
   public init?(keyEncryptionAlgorithm: LPMessagingSDK.AsymmetricKeyAlgorithm, encryptionKey key: KeyType, contentEncyptionAlgorithm: LPMessagingSDK.SymmetricKeyAlgorithm)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `init?(keyManagementAlgorithm:contentEncryptionAlgorithm:encryptionKey:)` instead")
   public init?(keyEncryptionAlgorithm: LPMessagingSDK.AsymmetricKeyAlgorithm, keyEncryptionKey kek: KeyType, contentEncyptionAlgorithm: LPMessagingSDK.SymmetricKeyAlgorithm)
+  #endif
 }
 @available(*, deprecated, message: "This type will be removed with the next major release.")
 public struct EncryptionContext {
@@ -4364,94 +5026,122 @@ public protocol LPDatePickerLoggerDelegate : AnyObject {
   public static let instance: LPMessagingSDK.LPDatePickerLogger
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class LPPickerView : UIKit.UIControl {
-  @_Concurrency.MainActor(unsafe) open var minimumDate: Foundation.Date? {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class LPPickerView : UIKit.UIControl {
+  @_Concurrency.MainActor @preconcurrency open var minimumDate: Foundation.Date? {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) open var maximumDate: Foundation.Date? {
+  @_Concurrency.MainActor @preconcurrency open var maximumDate: Foundation.Date? {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) open var date: Foundation.Date {
+  @_Concurrency.MainActor @preconcurrency open var date: Foundation.Date {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
-  @_Concurrency.MainActor(unsafe) open var calendar: Foundation.Calendar {
+  @_Concurrency.MainActor @preconcurrency open func setDate(_ date: Foundation.Date, animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency open var calendar: Foundation.Calendar {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) open var locale: Foundation.Locale? {
+  @_Concurrency.MainActor @preconcurrency open var locale: Foundation.Locale? {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc deinit
 }
 extension LPMessagingSDK.LPPickerView : UIKit.UIPickerViewDelegate {
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
 }
 extension LPMessagingSDK.LPPickerView : UIKit.UIPickerViewDataSource {
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func numberOfComponents(in pickerView: UIKit.UIPickerView) -> Swift.Int
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, viewForRow row: Swift.Int, forComponent component: Swift.Int, reusing view: UIKit.UIView?) -> UIKit.UIView
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func numberOfComponents(in pickerView: UIKit.UIPickerView) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, viewForRow row: Swift.Int, forComponent component: Swift.Int, reusing view: UIKit.UIView?) -> UIKit.UIView
+  #endif
 }
 public struct JWSHeader {
   public init(algorithm: LPMessagingSDK.SignatureAlgorithm)
   public init(parameters: [Swift.String : Any]) throws
 }
 extension LPMessagingSDK.JWSHeader {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var algorithm: LPMessagingSDK.SignatureAlgorithm? {
     get
   }
+  #endif
 }
 extension LPMessagingSDK.JWSHeader : LPMessagingSDK.CommonHeaderParameterSpace {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var jku: Foundation.URL? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var jwk: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var jwkTyped: (any LPMessagingSDK.JWK)? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var kid: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var x5u: Foundation.URL? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var x5c: [Swift.String]? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var x5t: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var x5tS256: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var typ: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var cty: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var crit: [Swift.String]? {
     get
     set
   }
+  #endif
 }
 extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   public static func representing(rsaPublicKeyComponents components: LPMessagingSDK.RSAPublicKeyComponents) throws -> Foundation.Data
@@ -4467,10 +5157,14 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   public var type: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var actionType: LPMessagingSDK.LPStructuredContentActionType? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
@@ -4479,7 +5173,9 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   case regular = 0
   case proactive = 1
   case c2m = 2
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -4505,48 +5201,84 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   @objc override dynamic public var debugDescription: Swift.String {
     @objc get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(text: Swift.String, body: Swift.String?, firstName: Swift.String?, lastName: Swift.String?, uid: Swift.String?, accountID: Swift.String, isRemote: Swift.Bool = false, proActiveData: LPMessagingSDK.ProactiveNotificationData? = nil, dateCreated: Swift.Double? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc convenience public init(message: any LPMessagingSDK.Message, isRemote: Swift.Bool = false, proActiveData: LPMessagingSDK.ProactiveNotificationData? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(text: Swift.String, body: Swift.String? = nil, user: LPMessagingSDK.LPUser, accountID: Swift.String, isRemote: Swift.Bool = false, proActiveData: LPMessagingSDK.ProactiveNotificationData? = nil, dateCreated: Swift.Double? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class LPMessaging : ObjectiveC.NSObject {
   @objc weak public var delegate: (any LPMessagingSDK.LPMessagingSDKdelegate)?
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc weak public var notificationDelegate: (any LPMessagingSDK.LPMessagingSDKNotificationDelegate)? {
     @objc get
     @objc set
   }
+  #endif
   @objc public static let instance: LPMessagingSDK.LPMessaging
-  @objc public func initialize(_ brandID: Swift.String? = nil, monitoringInitParams: LPMessagingSDK.LPMonitoringInitParams? = nil, preloadConfiguration: Swift.Bool) throws
-  @objc public func initialize(_ brandID: Swift.String? = nil, monitoringInitParams: LPMessagingSDK.LPMonitoringInitParams? = nil, preloadConfiguration: Swift.Bool = true, completion: @escaping () -> Swift.Void, failure: @escaping (any Swift.Error) -> Swift.Void)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func initialize(_ brandID: Swift.String? = nil, monitoringInitParams: LPMessagingSDK.LPMonitoringInitParams? = nil, preloadConfiguration: Swift.Bool, certPinningKeys: [Swift.String]?) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func initialize(_ brandID: Swift.String? = nil, monitoringInitParams: LPMessagingSDK.LPMonitoringInitParams? = nil, preloadConfiguration: Swift.Bool = false, certPinningKeys: [Swift.String]? = nil, completion: @escaping () -> Swift.Void, failure: @escaping (any Swift.Error) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func initialize(_ brandID: Swift.String? = nil, monitoringInitParams: LPMessagingSDK.LPMonitoringInitParams? = nil) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func showConversation(_ conversationViewParams: LPMessagingSDK.LPConversationViewParams, authenticationParams: LPMessagingSDK.LPAuthenticationParams? = nil)
+  #endif
   @objc public func removeConversation(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol)
   @objc @available(iOS, deprecated: 9.3.5, obsoleted: 14.0.0, message: "Use reconnect(_ conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams) instead")
   public func reconnect(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol, authenticationCode: Swift.String)
   @objc public func reconnect(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol, authenticationParams: LPMessagingSDK.LPAuthenticationParams)
   @objc public func setWelcomeMessage(_ message: LPMessagingSDK.LPWelcomeMessage)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func toggleChatActions(_ accountID: Swift.String, sender: UIKit.UIBarButtonItem? = nil)
+  #endif
   @objc public func setUserProfile(_ lpuser: LPMessagingSDK.LPUser, brandID: Swift.String)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getConversationBrandQuery(_ brandID: Swift.String, campaignInfo: LPMessagingSDK.LPCampaignInfo? = nil) -> any LPMessagingSDK.ConversationParamProtocol
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getConversationConsumerQuery(_ consumerID: Swift.String?, brandID: Swift.String, agentToken: Swift.String) -> any LPMessagingSDK.ConversationParamProtocol
+  #endif
   @objc public func checkActiveConversation(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol) -> Swift.Bool
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func checkActiveConversationFromServer(brandID: Swift.String, authParams: LPMessagingSDK.LPAuthenticationParams?, fullData: Swift.Bool = false, completion: @escaping (_ response: LPMessagingSDK.LPGetConversationsResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc @available(iOS, deprecated: 9.3.5, obsoleted: 14.0.0, message: "configure the image using customButtonImage in LPConfig instead")
   public func setCustomButton(_ image: UIKit.UIImage?)
+  #endif
   @objc public func isUrgent(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol) -> Swift.Bool
   @objc public func markAsUrgent(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol)
   @objc public func dismissUrgent(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol)
   @objc public func resolveConversation(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getAssignedAgent(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol) -> LPMessagingSDK.LPUser?
+  #endif
   @objc public func isBrandReady(_ brandID: Swift.String) -> Swift.Bool
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getSDKVersion() -> Swift.String?
+  #endif
   @objc public func addContentToMessage(text: Swift.String)
   @objc public func getInactiveUserInteractionTimeInterval(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol) -> Foundation.TimeInterval
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func getEngagement(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams?, authParams: LPMessagingSDK.LPAuthenticationParams, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
+  #endif
   @objc public func setAuthenticationParams(authenticationParams: LPMessagingSDK.LPAuthenticationParams, brandID: Swift.String)
   @objc public func sendSDE(identities: [LPMessagingSDK.LPMonitoringIdentity], monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
   @objc public func clearHistory(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol, shouldFetchHistoryOnShowConversation: Swift.Bool = false) throws
@@ -4568,10 +5300,14 @@ extension Foundation.Data : LPMessagingSDK.ExpressibleAsRSAPublicKeyComponents {
   public class func resolveConversation(_ conversation: any LPMessagingSDK.Conversation)
   @objc @available(iOS, deprecated: 12.1.4, obsoleted: 14.0.0, message: "Use resolveConversationForConversationQuery(_ conversationQuery: ConversationParamProtocol, completion: (() -> Void)? = {()}) instead")
   public class func resolveConversationForConversationQuery(_ conversationQuery: any LPMessagingSDK.ConversationParamProtocol)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc @available(iOS, deprecated: 12.2.0, obsoleted: 14.0.0, message: "Use createWelcomeLocalMessage(_ dialog: Dialog, welcomeMessage: LPWelcomeMessage,\noverrideTime: Date = Date()) -> Message? instead")
   public class func createWelcomeLocalMessage(_ dialog: any LPMessagingSDK.Dialog, overrideTime: Foundation.Date = Date()) -> (any LPMessagingSDK.Message)?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc @available(iOS, deprecated: 11.4.0, obsoleted: 14.0.0, message: "Use getEngagement(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams?, completion: @escaping (_ response: LPGetEngagementResponse)->(), failure: @escaping (_ error: NSError)->()) instead")
   public func getEngagement(consumerID: Swift.String?, monitoringParams: LPMessagingSDK.LPMonitoringParams?, completion: @escaping (_ response: LPMessagingSDK.LPGetEngagementResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
+  #endif
   @objc @available(iOS, deprecated: 11.4.0, obsoleted: 14.0.0, message: "Use sendSDE(identity: LPMonitoringIdentity, monitoringParams: LPMonitoringParams, completion: @escaping (_ response: LPSendSDEResponse)->(), failure: @escaping (_ error: NSError)->()) instead")
   public func sendSDE(consumerID: Swift.String, monitoringParams: LPMessagingSDK.LPMonitoringParams, completion: @escaping (_ response: LPMessagingSDK.LPSendSDEResponse) -> Swift.Void, failure: @escaping (_ error: Foundation.NSError) -> Swift.Void)
   @objc public func sendText(_ text: Swift.String) throws
@@ -4604,25 +5340,37 @@ extension LPMessagingSDK.RSAPrivateKey : Swift.Decodable {
   @objc public class var supportsSecureCoding: Swift.Bool {
     @objc get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with aCoder: Foundation.NSCoder)
   public func encode(to encoder: any Swift.Encoder) throws
   @objc deinit
 }
 public protocol LPStructuredContentImageDownloader {
+  #if compiler(>=5.3) && $NonescapableTypes
   func LPStructuredContentNeedsImageToDownload(imageURL: Swift.String, resizeImageSize: CoreFoundation.CGSize, completion: @escaping (_ image: UIKit.UIImage?) -> Swift.Void, failure: (() -> Swift.Void)?)
+  #endif
 }
 @_hasMissingDesignatedInitializers public class LPSocketManager {
   public var webSockets: [Swift.String : LPMessagingSDK.LPWebSocket] {
     get
   }
   public static let instance: LPMessagingSDK.LPSocketManager
+  #if compiler(>=5.3) && $NonescapableTypes
   public func createSocket(_ socketHandler: (any LPMessagingSDK.LPWebSocketHandler)?, socketDetails: LPMessagingSDK.SocketDetails, securityPolicy: LPMessagingSDK.LPSRSecurityPolicy? = nil) -> LPMessagingSDK.LPWebSocket?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func getSocket(_ brandID: Swift.String) -> LPMessagingSDK.LPWebSocket?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func getSocket(socketHandler: any LPMessagingSDK.LPWebSocketHandler) -> LPMessagingSDK.LPWebSocket?
+  #endif
   public func removeSocket(socketHandler: any LPMessagingSDK.LPWebSocketHandler)
   public func openAllSockets()
+  #if compiler(>=5.3) && $NonescapableTypes
   public func openSocket(_ webSocket: LPMessagingSDK.LPWebSocket, securityPolicy: LPMessagingSDK.LPSRSecurityPolicy? = nil)
+  #endif
   public func closeAllSockets()
   public func removeSockets()
   public func clearManager()
@@ -4630,13 +5378,21 @@ public protocol LPStructuredContentImageDownloader {
 }
 @objc public protocol LPMessagingSDKdelegate {
   @objc optional func LPMessagingSDKCustomButtonTapped()
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func LPMessagingSDKAgentDetails(_ agent: LPMessagingSDK.LPUser?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func LPMessagingSDKAgentAvatarTapped(_ agent: LPMessagingSDK.LPUser?)
+  #endif
   @objc optional func LPMessagingSDKActionsMenuToggled(_ toggled: Swift.Bool)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func LPMessagingSDKHasConnectionError(_ error: Swift.String?)
+  #endif
   @objc optional func LPMessagingSDKCSATScoreSubmissionDidFinish(_ brandID: Swift.String, rating: Swift.Int)
   @objc optional func LPMessagingSDKCSATCustomTitleView(_ brandID: Swift.String) -> UIKit.UIView
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func LPMessagingSDKConversationCSATSkipped(_ conversationID: Swift.String?)
+  #endif
   @objc optional func LPMessagingSDKUserDeniedPermission(_ permissionType: LPMessagingSDK.LPPermissionTypes)
   @objc func LPMessagingSDKObseleteVersion(_ error: Foundation.NSError)
   @objc func LPMessagingSDKAuthenticationFailed(_ error: Foundation.NSError)
@@ -4645,12 +5401,22 @@ public protocol LPStructuredContentImageDownloader {
   @objc optional func LPMessagingStepupFailed(_ error: Foundation.NSError)
   @objc optional func LPMessagingSDKConnectionRetriesFailed(_ error: Foundation.NSError)
   @objc optional func LPMessagingSDKAgentIsTypingStateChanged(_ isTyping: Swift.Bool)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func LPMessagingSDKConversationStarted(_ conversationID: Swift.String?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, deprecated: 9.3.5, obsoleted: 14.0.0, message: "use LPMessagingSDKConversationEnded(_:closeReason) instead")
   @objc optional func LPMessagingSDKConversationEnded(_ conversationID: Swift.String?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func LPMessagingSDKConversationEnded(_ conversationID: Swift.String?, closeReason: LPMessagingSDK.LPConversationCloseReason)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func LPMessagingSDKConversationCSATDismissedOnSubmittion(_ conversationID: Swift.String?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func LPMessagingSDKConversationCSATDidLoad(_ conversationID: Swift.String?)
+  #endif
   @objc optional func LPMessagingSDKConnectionStateChanged(_ isReady: Swift.Bool, brandID: Swift.String)
   @objc optional func LPMessagingSDKOffHoursStateChanged(_ isOffHours: Swift.Bool, brandID: Swift.String)
   @objc optional func LPMessagingSDKConversationViewControllerDidDismiss()
@@ -4679,8 +5445,12 @@ public protocol LPStructuredContentImageDownloader {
   @objc override dynamic public var debugDescription: Swift.String {
     @objc get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(brandId: Swift.String, lookBackPeriod: Swift.Double? = nil, expirationEpochTime: Swift.Double, agentPid: Swift.String? = nil, backendService: Swift.String? = nil, leCampaignId: Swift.String? = nil, leEngagementId: Swift.String? = nil, externalConsumerId: Swift.String? = nil, transactionId: Swift.String, event: [Swift.String : Any]? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc required public init?(coder: Foundation.NSCoder)
+  #endif
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc deinit
 }
@@ -4763,11 +5533,15 @@ public struct Payload : LPMessagingSDK.DataConvertible {
   public func data() -> Foundation.Data
 }
 public struct Verifier {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?<KeyType>(verifyingAlgorithm: LPMessagingSDK.SignatureAlgorithm, key: KeyType)
+  #endif
 }
 extension LPMessagingSDK.Verifier {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Use `init?(verifyingAlgorithm: SignatureAlgorithm, key: KeyType)` instead")
   public init?<KeyType>(verifyingAlgorithm: LPMessagingSDK.SignatureAlgorithm, publicKey: KeyType)
+  #endif
 }
 extension LPMessagingSDK.QuickReplyStyleSize : Swift.Equatable {}
 extension LPMessagingSDK.QuickReplyStyleSize : Swift.Hashable {}
