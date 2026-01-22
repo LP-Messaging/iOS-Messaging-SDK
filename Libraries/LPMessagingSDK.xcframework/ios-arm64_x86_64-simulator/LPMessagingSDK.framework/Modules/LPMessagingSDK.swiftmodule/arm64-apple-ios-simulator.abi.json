@@ -29472,6 +29472,154 @@
             "moduleName": "LPMessagingSDK"
           },
           {
+            "kind": "Var",
+            "name": "accessibilityAcceptCallButton",
+            "printedName": "accessibilityAcceptCallButton",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(LPMessagingSDK.LPLanguagesKeys.Type) -> LPMessagingSDK.LPLanguagesKeys",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LPLanguagesKeys",
+                    "printedName": "LPMessagingSDK.LPLanguagesKeys",
+                    "usr": "s:14LPMessagingSDK15LPLanguagesKeysO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "LPMessagingSDK.LPLanguagesKeys.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LPLanguagesKeys",
+                        "printedName": "LPMessagingSDK.LPLanguagesKeys",
+                        "usr": "s:14LPMessagingSDK15LPLanguagesKeysO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:14LPMessagingSDK15LPLanguagesKeysO29accessibilityAcceptCallButtonyA2CmF",
+            "mangledName": "$s14LPMessagingSDK15LPLanguagesKeysO29accessibilityAcceptCallButtonyA2CmF",
+            "moduleName": "LPMessagingSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "accessibilityDeclineCallButton",
+            "printedName": "accessibilityDeclineCallButton",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(LPMessagingSDK.LPLanguagesKeys.Type) -> LPMessagingSDK.LPLanguagesKeys",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LPLanguagesKeys",
+                    "printedName": "LPMessagingSDK.LPLanguagesKeys",
+                    "usr": "s:14LPMessagingSDK15LPLanguagesKeysO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "LPMessagingSDK.LPLanguagesKeys.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LPLanguagesKeys",
+                        "printedName": "LPMessagingSDK.LPLanguagesKeys",
+                        "usr": "s:14LPMessagingSDK15LPLanguagesKeysO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:14LPMessagingSDK15LPLanguagesKeysO30accessibilityDeclineCallButtonyA2CmF",
+            "mangledName": "$s14LPMessagingSDK15LPLanguagesKeysO30accessibilityDeclineCallButtonyA2CmF",
+            "moduleName": "LPMessagingSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "accessibilityReturnToCallButton",
+            "printedName": "accessibilityReturnToCallButton",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(LPMessagingSDK.LPLanguagesKeys.Type) -> LPMessagingSDK.LPLanguagesKeys",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LPLanguagesKeys",
+                    "printedName": "LPMessagingSDK.LPLanguagesKeys",
+                    "usr": "s:14LPMessagingSDK15LPLanguagesKeysO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "LPMessagingSDK.LPLanguagesKeys.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LPLanguagesKeys",
+                        "printedName": "LPMessagingSDK.LPLanguagesKeys",
+                        "usr": "s:14LPMessagingSDK15LPLanguagesKeysO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:14LPMessagingSDK15LPLanguagesKeysO31accessibilityReturnToCallButtonyA2CmF",
+            "mangledName": "$s14LPMessagingSDK15LPLanguagesKeysO31accessibilityReturnToCallButtonyA2CmF",
+            "moduleName": "LPMessagingSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "accessibilityEndCallButton",
+            "printedName": "accessibilityEndCallButton",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(LPMessagingSDK.LPLanguagesKeys.Type) -> LPMessagingSDK.LPLanguagesKeys",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LPLanguagesKeys",
+                    "printedName": "LPMessagingSDK.LPLanguagesKeys",
+                    "usr": "s:14LPMessagingSDK15LPLanguagesKeysO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "LPMessagingSDK.LPLanguagesKeys.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LPLanguagesKeys",
+                        "printedName": "LPMessagingSDK.LPLanguagesKeys",
+                        "usr": "s:14LPMessagingSDK15LPLanguagesKeysO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:14LPMessagingSDK15LPLanguagesKeysO26accessibilityEndCallButtonyA2CmF",
+            "mangledName": "$s14LPMessagingSDK15LPLanguagesKeysO26accessibilityEndCallButtonyA2CmF",
+            "moduleName": "LPMessagingSDK"
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init(rawValue:)",
@@ -212310,175 +212458,175 @@
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "StringLiteral",
-      "offset": 2535,
+      "offset": 2480,
       "length": 108,
       "value": "\"Changed shouldFetchHistoryMessagingEventNotifications to: \""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "StringLiteral",
-      "offset": 2642,
+      "offset": 2587,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "BooleanLiteral",
-      "offset": 2757,
+      "offset": 2702,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "BooleanLiteral",
-      "offset": 2813,
+      "offset": 2758,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "BooleanLiteral",
-      "offset": 2452,
+      "offset": 2397,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "StringLiteral",
-      "offset": 2953,
+      "offset": 2898,
       "length": 68,
       "value": "\"Changed isFetchingHistoryMessages to: \""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "StringLiteral",
-      "offset": 3020,
+      "offset": 2965,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "BooleanLiteral",
-      "offset": 3067,
+      "offset": 3012,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "BooleanLiteral",
-      "offset": 2886,
+      "offset": 2831,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "StringLiteral",
-      "offset": 3582,
+      "offset": 3527,
       "length": 85,
       "value": "\"value changed for didEndFetchingUMSConversations: \""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "StringLiteral",
-      "offset": 3666,
+      "offset": 3611,
       "length": 14,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "BooleanLiteral",
-      "offset": 3515,
+      "offset": 3460,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "StringLiteral",
-      "offset": 3824,
+      "offset": 3769,
       "length": 87,
       "value": "\"value changed for didEndFetchingIncaConversations: \""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "StringLiteral",
-      "offset": 3910,
+      "offset": 3855,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "BooleanLiteral",
-      "offset": 3740,
+      "offset": 3685,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "IntegerLiteral",
-      "offset": 4163,
+      "offset": 4108,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "IntegerLiteral",
-      "offset": 4209,
+      "offset": 4154,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "IntegerLiteral",
-      "offset": 4267,
+      "offset": 4212,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "Array",
-      "offset": 4317,
+      "offset": 4262,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "IntegerLiteral",
-      "offset": 4358,
+      "offset": 4303,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "IntegerLiteral",
-      "offset": 4426,
+      "offset": 4371,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "IntegerLiteral",
-      "offset": 4621,
+      "offset": 4566,
       "length": 2,
       "value": "12"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "IntegerLiteral",
-      "offset": 4676,
+      "offset": 4621,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "BooleanLiteral",
-      "offset": 13157,
+      "offset": 13102,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPExConversationSubscribeService.swift",
       "kind": "BooleanLiteral",
-      "offset": 15460,
+      "offset": 15405,
       "length": 5,
       "value": "false"
     },
@@ -213045,14 +213193,14 @@
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder+ClickAction.swift",
       "kind": "BooleanLiteral",
-      "offset": 2779,
+      "offset": 2567,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder+ClickAction.swift",
       "kind": "BooleanLiteral",
-      "offset": 2817,
+      "offset": 2605,
       "length": 5,
       "value": "false"
     },
@@ -213122,9 +213270,23 @@
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPSynchronizedDictionary.swift",
       "kind": "StringLiteral",
-      "offset": 340,
+      "offset": 342,
       "length": 49,
       "value": "\"com.LivePersonSDK.LPSynchronizedDictionaryQueue\""
+    },
+    {
+      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPSynchronizedDictionary.swift",
+      "kind": "Dictionary",
+      "offset": 462,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPSynchronizedDictionary.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1477,
+      "length": 5,
+      "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Objects\/LPStructuredContentLinkPreviewItem.swift",
@@ -213702,15 +213864,8 @@
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPSynchronizedArray.swift",
-      "kind": "Array",
-      "offset": 241,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPSynchronizedArray.swift",
       "kind": "StringLiteral",
-      "offset": 352,
+      "offset": 1297,
       "length": 39,
       "value": "\"com.LivePersonSDK.LPSynchronizedArray\""
     },
@@ -217140,70 +217295,70 @@
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 44070,
+      "offset": 44412,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 50017,
+      "offset": 50880,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 61446,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
-      "kind": "BooleanLiteral",
-      "offset": 67585,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
-      "kind": "BooleanLiteral",
-      "offset": 70329,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
-      "kind": "IntegerLiteral",
-      "offset": 72560,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
-      "kind": "IntegerLiteral",
-      "offset": 73611,
+      "offset": 62309,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
       "kind": "BooleanLiteral",
-      "offset": 73633,
+      "offset": 68448,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
+      "kind": "BooleanLiteral",
+      "offset": 71192,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 74651,
+      "offset": 73423,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 75479,
+      "offset": 74474,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
+      "kind": "BooleanLiteral",
+      "offset": 74496,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 75514,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPStructuredContent\/Sources\/LPStructuredContent\/Helpers\/LPStructuredContentItemBuilder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 76342,
       "length": 1,
       "value": "0"
     },
@@ -220381,9 +220536,16 @@
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPRestService.swift",
       "kind": "StringLiteral",
-      "offset": 4974,
+      "offset": 4960,
       "length": 23,
       "value": "\"LPRestServiceDownload\""
+    },
+    {
+      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPRestService.swift",
+      "kind": "StringLiteral",
+      "offset": 5126,
+      "length": 42,
+      "value": "\"com.liveperson.LPRestService.accessQueue\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/Cell\/RemoteMessage\/RemoteMessageQuickReplyTableViewCell.swift",
@@ -225281,252 +225443,252 @@
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 492,
+      "offset": 489,
       "length": 28,
       "value": "\"ConversationViewController\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 1477,
+      "offset": 1474,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 2115,
+      "offset": 2112,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2190,
+      "offset": 2187,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2223,
+      "offset": 2220,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2255,
+      "offset": 2252,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2302,
+      "offset": 2299,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2341,
+      "offset": 2338,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2368,
+      "offset": 2365,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2410,
+      "offset": 2407,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2447,
+      "offset": 2444,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2495,
+      "offset": 2492,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3116,
+      "offset": 3113,
       "length": 15,
       "value": "\"OffHoursToast\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3164,
+      "offset": 3161,
       "length": 10,
       "value": "\"TTRToast\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3214,
+      "offset": 3211,
       "length": 17,
       "value": "\"ConnectingToast\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3278,
+      "offset": 3275,
       "length": 23,
       "value": "\"ConnectionFailedToast\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3338,
+      "offset": 3335,
       "length": 14,
       "value": "\"OfflineToast\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3407,
+      "offset": 3404,
       "length": 29,
       "value": "\"DatePickerPresentationToast\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3491,
+      "offset": 3488,
       "length": 29,
       "value": "\"DatePickerConfirmationToast\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3626,
+      "offset": 3623,
       "length": 40,
       "value": "\"AppointmentListPresentationFailedToast\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3772,
+      "offset": 3769,
       "length": 40,
       "value": "\"AppointmentListConfirmationFailedToast\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 4330,
+      "offset": 4327,
       "length": 4,
       "value": "60.0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 5074,
+      "offset": 5071,
       "length": 34,
       "value": "\"New brand is set \""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 5107,
+      "offset": 5104,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5906,
+      "offset": 5903,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5955,
+      "offset": 5952,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5989,
+      "offset": 5986,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6042,
+      "offset": 6039,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6157,
+      "offset": 6154,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 6887,
+      "offset": 6884,
       "length": 53,
       "value": "\"updated activity state to \""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 6939,
+      "offset": 6936,
       "length": 27,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 7099,
+      "offset": 7096,
       "length": 10,
       "value": "\"IN_FRONT\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 7180,
+      "offset": 7177,
       "length": 6,
       "value": "\"IDLE\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 24276,
+      "offset": 24596,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 57321,
+      "offset": 57641,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 82717,
+      "offset": 83037,
       "length": 4,
       "value": "true"
     },
@@ -225687,21 +225849,21 @@
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/FilePreviewViewController.swift",
       "kind": "StringLiteral",
-      "offset": 819,
+      "offset": 816,
       "length": 27,
       "value": "\"FilePreviewViewController\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/FilePreviewViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 889,
+      "offset": 886,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/FilePreviewViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1264,
+      "offset": 1261,
       "length": 4,
       "value": "true"
     },
@@ -230412,7 +230574,7 @@
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/ConversationViewController+UITableView.swift",
       "kind": "BooleanLiteral",
-      "offset": 16492,
+      "offset": 16669,
       "length": 5,
       "value": "false"
     },
