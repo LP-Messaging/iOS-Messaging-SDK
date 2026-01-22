@@ -927,6 +927,10 @@ public enum LPLanguagesKeys : Swift.String, Swift.CaseIterable {
   case accessibilityFileSharingFileTypeXlsx
   case accessibilityFileSharingFileTypePdf
   case accessibilityFileSharingFileTypeUnknown
+  case accessibilityAcceptCallButton
+  case accessibilityDeclineCallButton
+  case accessibilityReturnToCallButton
+  case accessibilityEndCallButton
   #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
   #endif
