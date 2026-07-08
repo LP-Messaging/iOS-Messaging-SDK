@@ -133347,8 +133347,7 @@
         "declAttributes": [
           "HasInitialValue",
           "HasStorage",
-          "AccessControl",
-          "RawDocComment"
+          "AccessControl"
         ],
         "isLet": true,
         "hasStorage": true,
@@ -215181,23 +215180,44 @@
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPTagManager.swift",
       "kind": "StringLiteral",
-      "offset": 693,
+      "offset": 756,
       "length": 82,
       "value": "\"https:\/\/%@\/lptag\/api\/account\/%@\/configuration\/applications\/taglets\/?v=2.0&scp=mb\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPTagManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 920,
+      "offset": 1046,
       "length": 1,
-      "value": "0"
+      "value": "5"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPTagManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 959,
+      "offset": 1227,
+      "length": 2,
+      "value": "60"
+    },
+    {
+      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPTagManager.swift",
+      "kind": "Dictionary",
+      "offset": 1650,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPTagManager.swift",
+      "kind": "Dictionary",
+      "offset": 1854,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPTagManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 8061,
       "length": 1,
-      "value": "5"
+      "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/LPConfigEnumerations.swift",
@@ -217452,20 +217472,6 @@
       "offset": 449,
       "length": 1,
       "value": "3"
-    },
-    {
-      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/CSDSManager.swift",
-      "kind": "StringLiteral",
-      "offset": 1616,
-      "length": 50,
-      "value": "\"Returning Saved Cache for domains :\""
-    },
-    {
-      "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/CSDSManager.swift",
-      "kind": "StringLiteral",
-      "offset": 1665,
-      "length": 14,
-      "value": "\"\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/Persistent\/Services\/MessageService.swift",
@@ -221005,1239 +221011,1239 @@
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 3801,
+      "offset": 3765,
       "length": 4,
       "value": "1"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 4748,
+      "offset": 4712,
       "length": 12,
       "value": "\"text\/plain\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 4777,
+      "offset": 4741,
       "length": 13,
       "value": "\"hosted\/file\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 4817,
+      "offset": 4781,
       "length": 25,
       "value": "\"forms\/secure-invitation\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 4869,
+      "offset": 4833,
       "length": 25,
       "value": "\"forms\/secure-submission\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 5079,
+      "offset": 5043,
       "length": 19,
       "value": "\"asyncMessagingEnt\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 5144,
+      "offset": 5108,
       "length": 22,
       "value": "\"acCdnDomainMobileSdk\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 5192,
+      "offset": 5156,
       "length": 13,
       "value": "\"acCdnDomain\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 5223,
+      "offset": 5187,
       "length": 13,
       "value": "\"leCdnDomain\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 5339,
+      "offset": 5303,
       "length": 9,
       "value": "\"msgHist\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 5384,
+      "offset": 5349,
       "length": 5,
       "value": "\"smt\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 5471,
+      "offset": 5438,
       "length": 24,
       "value": "\"messagingRestApiDomain\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 5811,
+      "offset": 7083,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 5822,
+      "offset": 7094,
       "length": 8,
       "value": "1"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 5840,
+      "offset": 7112,
       "length": 6,
       "value": "2"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 6482,
+      "offset": 7754,
       "length": 11,
       "value": "\"LIVE_CHAT\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 6739,
+      "offset": 8011,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 6770,
+      "offset": 8042,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 6798,
+      "offset": 8070,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 6823,
+      "offset": 8095,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 6851,
+      "offset": 8123,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 6877,
+      "offset": 8149,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 6903,
+      "offset": 8175,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 6922,
+      "offset": 8194,
       "length": 1,
       "value": "7"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 6951,
+      "offset": 8223,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 6989,
+      "offset": 8261,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 7017,
+      "offset": 8289,
       "length": 2,
       "value": "-2"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 7051,
+      "offset": 8323,
       "length": 2,
       "value": "-3"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 7082,
+      "offset": 8354,
       "length": 2,
       "value": "-4"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 7105,
+      "offset": 8377,
       "length": 2,
       "value": "-5"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 7134,
+      "offset": 8406,
       "length": 2,
       "value": "-6"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 7167,
+      "offset": 8439,
       "length": 2,
       "value": "-7"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 7191,
+      "offset": 8463,
       "length": 2,
       "value": "-8"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 7221,
+      "offset": 8493,
       "length": 2,
       "value": "-9"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 7255,
+      "offset": 8527,
       "length": 3,
       "value": "-10"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 8738,
+      "offset": 10010,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 8837,
+      "offset": 10109,
       "length": 20,
       "value": "\"Netork unreachable\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 8886,
+      "offset": 10158,
       "length": 18,
       "value": "\"CSDS unreachable\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 8925,
+      "offset": 10197,
       "length": 26,
       "value": "\"Failed to retrieve token\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 8982,
+      "offset": 10254,
       "length": 21,
       "value": "\"Sockect unreachable\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 9025,
+      "offset": 10297,
       "length": 28,
       "value": "\"Failed to retrieve user id\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 9081,
+      "offset": 10353,
       "length": 51,
       "value": "\"Failed to retrieve subscription for conversations\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 9158,
+      "offset": 10430,
       "length": 19,
       "value": "\"General SDK error\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 9209,
+      "offset": 10481,
       "length": 21,
       "value": "\"Cert Pinning Failed\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9334,
+      "offset": 10606,
       "length": 8,
       "value": "1"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9352,
+      "offset": 10624,
       "length": 9,
       "value": "2"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9371,
+      "offset": 10643,
       "length": 9,
       "value": "3"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9390,
+      "offset": 10662,
       "length": 6,
       "value": "4"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9406,
+      "offset": 10678,
       "length": 9,
       "value": "5"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9425,
+      "offset": 10697,
       "length": 10,
       "value": "6"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9445,
+      "offset": 10717,
       "length": 17,
       "value": "7"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9472,
+      "offset": 10744,
       "length": 6,
       "value": "8"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9488,
+      "offset": 10760,
       "length": 6,
       "value": "9"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9504,
+      "offset": 10776,
       "length": 7,
       "value": "10"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9521,
+      "offset": 10793,
       "length": 12,
       "value": "11"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 9543,
+      "offset": 10815,
       "length": 16,
       "value": "12"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 10564,
+      "offset": 11790,
       "length": 37,
       "value": "\"LP_CSAT_SCORE_SUBMISSION_DID_FINISH\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 10666,
+      "offset": 11892,
       "length": 25,
       "value": "\"LP_SDK_OBSELETE_VERSION\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 10761,
+      "offset": 11987,
       "length": 30,
       "value": "\"LP_SDK_AUTHENTICATION_FAILED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 10853,
+      "offset": 12079,
       "length": 22,
       "value": "\"LP_SDK_TOKEN_EXPIRED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 10943,
+      "offset": 12169,
       "length": 28,
       "value": "\"LP_SDK_CERT_PINNING_FAILED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 11036,
+      "offset": 12262,
       "length": 25,
       "value": "\"LP_SDK_CONNECTION_ERROR\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 11115,
+      "offset": 12341,
       "length": 14,
       "value": "\"LP_SDK_ERROR\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 11197,
+      "offset": 12423,
       "length": 28,
       "value": "\"LP_OFF_HOURS_STATE_CHANGED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 11287,
+      "offset": 12513,
       "length": 22,
       "value": "\"LP_AMS_STATE_CHANGED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 11389,
+      "offset": 12615,
       "length": 40,
       "value": "\"LP_AMS_CONVERSATION_CHAT_STATE_CHANGED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 11494,
+      "offset": 12720,
       "length": 25,
       "value": "\"LP_CONVERSATION_STARTED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 11585,
+      "offset": 12811,
       "length": 26,
       "value": "\"LP_CONVERSATION_RESOLVED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 11694,
+      "offset": 12920,
       "length": 43,
       "value": "\"LP_CONVERSATION_VIEW_CONTROLLER_DISMISSED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 11802,
+      "offset": 13028,
       "length": 25,
       "value": "\"LP_REACHABILITY_CHANGED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 11907,
+      "offset": 13133,
       "length": 40,
       "value": "\"LP_CONVERSATION_CSAT_SUBMISSION_TAPPED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12018,
+      "offset": 13244,
       "length": 31,
       "value": "\"LP_CONVERSATION_CSAT_DID_LOAD\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12113,
+      "offset": 13339,
       "length": 24,
       "value": "\"LP_AGENT_AVATAR_TAPPED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12203,
+      "offset": 13429,
       "length": 26,
       "value": "\"LP_AGENT_DETAILS_FETCHED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12303,
+      "offset": 13529,
       "length": 34,
       "value": "\"LP_MESSAGE_NOTIFICATION_RECEIVED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12410,
+      "offset": 13636,
       "length": 33,
       "value": "\"LP_ACTIVE_AGENT_DETAILS_CHANGED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12501,
+      "offset": 13727,
       "length": 18,
       "value": "\"LP_SOCKET_OPENED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12577,
+      "offset": 13803,
       "length": 18,
       "value": "\"LP_SOCKET_CLOSED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12665,
+      "offset": 13891,
       "length": 30,
       "value": "\"LP_CONNECTION_PROCESS_FAILED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12773,
+      "offset": 13999,
       "length": 38,
       "value": "\"LP_CONNECTION_PROCESS_RETRIES_FAILED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12875,
+      "offset": 14101,
       "length": 24,
       "value": "\"LP_AGENT_STATE_CHANGED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 12982,
+      "offset": 14208,
       "length": 43,
       "value": "\"LP_BACKGROUND_IMAGE_CONFIGURATION_CHANGED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 13101,
+      "offset": 14327,
       "length": 36,
       "value": "\"LP_STRUCTURED_CONTENT_LINK_CLICKED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 13210,
+      "offset": 14436,
       "length": 33,
       "value": "\"LP_UNAUTHENTICATED_USER_EXPIRED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 13320,
+      "offset": 14546,
       "length": 37,
       "value": "\"LP_REGISTRATION_TO_PUSHER_SUCCEEDED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 13431,
+      "offset": 14657,
       "length": 34,
       "value": "\"LP_REGISTRATION_TO_PUSHER_FAILED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 13537,
+      "offset": 14763,
       "length": 32,
       "value": "\"LP_AGENT_DETAILS_IMAGE_CHANGED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 13646,
+      "offset": 14872,
       "length": 33,
       "value": "\"LP_SECURE_FORM_FINISHED_LOADING\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 13752,
+      "offset": 14978,
       "length": 30,
       "value": "\"LP_FINISHED_FETCHING_HISTORY\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 13859,
+      "offset": 15085,
       "length": 34,
       "value": "\"LP_SET_CONVERSATION_PARTICIPANTS\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 13962,
+      "offset": 15188,
       "length": 26,
       "value": "\"LP_RELOADING_QUICK_REPLY\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 14058,
+      "offset": 15284,
       "length": 30,
       "value": "\"LP_CONNECTION_STEP_UP_FAILED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 14153,
+      "offset": 15379,
       "length": 27,
       "value": "\"LP_MESSAGING_LINK_CLICKED\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 14278,
+      "offset": 15504,
       "length": 17,
       "value": "\"SE_AMS_TOKEN_%@\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 14322,
+      "offset": 15548,
       "length": 22,
       "value": "\"SE_NON_AUTH_TOKEN_%@\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 14367,
+      "offset": 15593,
       "length": 22,
       "value": "\"SE_LP_ENCRYPTION_KEY\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 14412,
+      "offset": 15638,
       "length": 15,
       "value": "\"SE_SESSION_ID\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 14450,
+      "offset": 15676,
       "length": 15,
       "value": "\"SE_VISITOR_ID\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 14490,
+      "offset": 15716,
       "length": 20,
       "value": "\"SE_CONNECTOR_ID_%@\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 14540,
+      "offset": 15766,
       "length": 25,
       "value": "\"SE_AUTH_CONNECTOR_ID_%@\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 15195,
+      "offset": 16421,
       "length": 34,
       "value": "\"LP_ENCRYPTION_SECURE_ENCLAVE_KEY\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16430,
+      "offset": 17624,
       "length": 4,
       "value": "0.29"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16443,
+      "offset": 17637,
       "length": 4,
       "value": "0.29"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16455,
+      "offset": 17649,
       "length": 4,
       "value": "0.29"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16468,
+      "offset": 17662,
       "length": 4,
       "value": "1.00"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16598,
+      "offset": 17772,
       "length": 4,
       "value": "0.74"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16611,
+      "offset": 17785,
       "length": 4,
       "value": "0.74"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16623,
+      "offset": 17797,
       "length": 4,
       "value": "0.74"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16636,
+      "offset": 17810,
       "length": 4,
       "value": "1.00"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16769,
+      "offset": 17923,
       "length": 4,
       "value": "0.95"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16782,
+      "offset": 17936,
       "length": 4,
       "value": "0.95"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16794,
+      "offset": 17948,
       "length": 4,
       "value": "0.95"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16807,
+      "offset": 17961,
       "length": 4,
       "value": "1.00"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 16933,
+      "offset": 18067,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16937,
+      "offset": 18071,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 16951,
+      "offset": 18085,
       "length": 3,
       "value": "115"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16957,
+      "offset": 18091,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "IntegerLiteral",
-      "offset": 16970,
+      "offset": 18104,
       "length": 3,
       "value": "238"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16976,
+      "offset": 18110,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 16990,
+      "offset": 18124,
       "length": 4,
       "value": "1.00"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 17747,
+      "offset": 18873,
       "length": 4,
       "value": "0.01"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 17813,
+      "offset": 18939,
       "length": 4,
       "value": "0.39"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 17878,
+      "offset": 19004,
       "length": 4,
       "value": "0.68"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 17944,
+      "offset": 19070,
       "length": 4,
       "value": "1.00"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "FloatLiteral",
-      "offset": 18097,
+      "offset": 19223,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18288,
+      "offset": 19414,
       "length": 16,
       "value": "\"conversationId\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18339,
+      "offset": 19465,
       "length": 10,
       "value": "\"dialogId\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18380,
+      "offset": 19506,
       "length": 7,
       "value": "\"event\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18420,
+      "offset": 19546,
       "length": 9,
       "value": "\"eventId\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18467,
+      "offset": 19593,
       "length": 10,
       "value": "\"sequence\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18516,
+      "offset": 19642,
       "length": 14,
       "value": "\"sequenceList\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18569,
+      "offset": 19695,
       "length": 9,
       "value": "\"fromSeq\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18610,
+      "offset": 19736,
       "length": 8,
       "value": "\"status\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18653,
+      "offset": 19779,
       "length": 14,
       "value": "\"originatorId\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18703,
+      "offset": 19829,
       "length": 11,
       "value": "\"chatState\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18758,
+      "offset": 19884,
       "length": 19,
       "value": "\"endpointTimestamp\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18819,
+      "offset": 19945,
       "length": 17,
       "value": "\"serverTimestamp\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18874,
+      "offset": 20000,
       "length": 13,
       "value": "\"contentType\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18920,
+      "offset": 20046,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 18967,
+      "offset": 20093,
       "length": 13,
       "value": "\"maxQuantity\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19025,
+      "offset": 20151,
       "length": 19,
       "value": "\"newerThanSequence\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19089,
+      "offset": 20215,
       "length": 19,
       "value": "\"olderThanSequence\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19144,
+      "offset": 20270,
       "length": 6,
       "value": "\"type\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19187,
+      "offset": 20313,
       "length": 6,
       "value": "\"code\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19237,
+      "offset": 20363,
       "length": 12,
       "value": "\"rejectDesc\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19306,
+      "offset": 20432,
       "length": 10,
       "value": "\"fileSize\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19351,
+      "offset": 20477,
       "length": 10,
       "value": "\"fileType\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19394,
+      "offset": 20520,
       "length": 9,
       "value": "\"caption\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19442,
+      "offset": 20568,
       "length": 14,
       "value": "\"relativePath\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19497,
+      "offset": 20623,
       "length": 9,
       "value": "\"preview\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19559,
+      "offset": 20685,
       "length": 8,
       "value": "\"formId\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19606,
+      "offset": 20732,
       "length": 14,
       "value": "\"invitationId\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19651,
+      "offset": 20777,
       "length": 7,
       "value": "\"title\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19694,
+      "offset": 20820,
       "length": 12,
       "value": "\"uploadable\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19745,
+      "offset": 20871,
       "length": 14,
       "value": "\"submissionId\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19844,
+      "offset": 20970,
       "length": 27,
       "value": "\"adminlogin.liveperson.net\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19902,
+      "offset": 21028,
       "length": 22,
       "value": "\"lptag.liveperson.net\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 19971,
+      "offset": 21097,
       "length": 8,
       "value": "\"Camera\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20027,
+      "offset": 21153,
       "length": 14,
       "value": "\"gallery_menu\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20090,
+      "offset": 21216,
       "length": 10,
       "value": "\"document\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20151,
+      "offset": 21277,
       "length": 12,
       "value": "\"attachment\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20209,
+      "offset": 21335,
       "length": 11,
       "value": "\"menuClose\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20256,
+      "offset": 21382,
       "length": 17,
       "value": "\"sendMessageIcon\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20308,
+      "offset": 21434,
       "length": 9,
       "value": "\"lpClose\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20358,
+      "offset": 21484,
       "length": 8,
       "value": "\"lpMore\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20411,
+      "offset": 21537,
       "length": 22,
       "value": "\"remoteUserAvatarIcon\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20479,
+      "offset": 21605,
       "length": 20,
       "value": "\"loader_light_small\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20533,
+      "offset": 21659,
       "length": 12,
       "value": "\"broken_img\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20605,
+      "offset": 21731,
       "length": 12,
       "value": "\"voice_icon\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20660,
+      "offset": 21786,
       "length": 12,
       "value": "\"video_icon\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20716,
+      "offset": 21842,
       "length": 18,
       "value": "\"accept_call_icon\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20779,
+      "offset": 21905,
       "length": 19,
       "value": "\"decline_call_icon\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20834,
+      "offset": 21960,
       "length": 15,
       "value": "\"end_call_icon\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20891,
+      "offset": 22017,
       "length": 18,
       "value": "\"rejoin_call_icon\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 20971,
+      "offset": 22097,
       "length": 16,
       "value": "\"picker_chevron\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 21026,
+      "offset": 22152,
       "length": 14,
       "value": "\"picker_arrow\""
     },
     {
       "filePath": "\/Users\/umali\/Data\/Dev\/maker\/LPMessagingSDKMaker\/Submodule\/LPMessagingSDKiOS\/LPMessagingSDK\/common\/LPDefines.swift",
       "kind": "StringLiteral",
-      "offset": 21079,
+      "offset": 22205,
       "length": 13,
       "value": "\"appointment\""
     },
