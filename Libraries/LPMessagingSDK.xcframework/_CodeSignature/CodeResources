@@ -6,157 +6,17 @@
 	<dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Assets.car</key>
 		<data>
-		lDWog0jA8oqhflRoZwRcG0QxxJw=
+		YIxdbMR5mHVj2CLnXTA/JlXZMno=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Base.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			iIJl8LekW8tdbun4SO9YpaJmnHE=
+			0xyuK2N83nnDco+eWQ35r/qSLkg=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 10.mom</key>
-		<data>
-		Mjl9t2HaDDAS+m/SNFDsO64yabg=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 2.mom</key>
-		<data>
-		AdOQnKhob59aT0nzLL5WJ6DLMvQ=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 3.mom</key>
-		<data>
-		mRVwFBtZGCcgV6zhqkYH96EEMBo=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 4.mom</key>
-		<data>
-		Ak5zELV+TY4RRJxFqpp2BGc36yc=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 5.mom</key>
-		<data>
-		C5hXHrvHUlvWouMuChmxKhQdulA=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 6.mom</key>
-		<data>
-		1KrD2aLnIxp/DTo9KdQpwYEp5p0=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 7.mom</key>
-		<data>
-		HL/rOXcTg4A5gq8hOcWGqTCmjcg=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 8.mom</key>
-		<data>
-		FsryQrRQksV6RsgCWl5i/dBpOJM=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 9 EventID.mom</key>
-		<data>
-		XLyWb1oNHJo94ml6aX6dWGcLkRY=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 9.mom</key>
-		<data>
-		KaX0k0dFJ+asmrs/VBS9/rrDJPI=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel.mom</key>
-		<data>
-		+9cgakudCiDk4fuCt0aq/8kJM9I=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 17.mom</key>
-		<data>
-		qpB2ceaaTW2s1ks7BxxBMohUaAk=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 18.mom</key>
-		<data>
-		vDOhhVJlAy03zMb3HNf7Bbox4e0=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 20.mom</key>
-		<data>
-		aXFxuYwx/+gm+MZrGdwIPnVzPkU=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 21.mom</key>
-		<data>
-		cYURJU8i+c1fDRYmMoox2nIL1PQ=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.mom</key>
-		<data>
-		xsqm7kYPPm+0/xWgBlz184f7OFk=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 23.mom</key>
-		<data>
-		HwffiP4se9uNG8+9oP7daJXKX14=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 24.mom</key>
-		<data>
-		dCtGeRWtVZwZhmfxoTTtq6jUM7g=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 24.omo</key>
-		<data>
-		A2Lrtv1Z2TSUFld8eIi/voY7Wb4=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_11_EventID_Photo_Sharing.mom</key>
-		<data>
-		HQt9hiY3A2+kRlpABLNNtZGb3ME=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_12_Structured_Content.mom</key>
-		<data>
-		sYIclQxQQlnCFVaFlPToIQ4n3Pc=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_13_Structured_Content.mom</key>
-		<data>
-		0DIjF2VYdwTYNmRlffP+eKoVsfA=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_14_PCI.mom</key>
-		<data>
-		mh/UejbpSYL/cnjy+WyNXkyE/rc=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_15_Structured_Content.mom</key>
-		<data>
-		ArUqNxQCZB25Ea3yAWYyb8XNlE4=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_16.mom</key>
-		<data>
-		7gtkJGnXOs/nR6ALzqqjb1qIPU0=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_18.mom</key>
-		<data>
-		4vIvBRfpLigvYK60zt0EAQXtqq0=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_19.mom</key>
-		<data>
-		QLXH3FZ1u5vNyyVLvnVtvE8wSyg=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/VersionInfo.plist</key>
-		<data>
-		LofwcrlQwURRt6IuqF6U5fkHPa8=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_12.cdm</key>
-		<data>
-		4Uc4VNOOn9QEs2sx/NqMdBOGyPw=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_13.cdm</key>
-		<data>
-		QsWxPURJZRnPrQxuXCTXgMgUlUE=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_14.cdm</key>
-		<data>
-		8By00IEshUd2JqtQzvj1MxOV+bU=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_15.cdm</key>
-		<data>
-		rct9eTBjJ4Iug6YfauPM1drr8DY=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_16.cdm</key>
-		<data>
-		MOD9yEUnqmn65gio3lLd2Y337ok=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_17.cdm</key>
-		<data>
-		Zbdj0n7BPcYUW164a3OJPTxoNsY=
-		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_18.cdm</key>
-		<data>
-		zEqHQq7vIWVPk742VfuOjjG4NK4=
-		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/ControllerMessageTableViewCell.nib</key>
 		<data>
 		BczrKEqmM+cVar9FvhnmbzPmScw=
@@ -171,7 +31,7 @@
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		ULWqO6K+f1xTfc9Z6ul0Gwgzd+E=
+		MiI9Nk9u6Sp+03xm96xlMF8+H14=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Headers/LPMessagingSDK.h</key>
 		<data>
@@ -179,15 +39,27 @@
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Info.plist</key>
 		<data>
-		X9bQC7bAzSKFI41pRC6ocHlu9Kk=
+		QCSEQpHS6nDfY2n/OQTpd78TdoU=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/InputTextView.nib</key>
 		<data>
-		jSKcW1JGq4SjLZ6pQ4AiYESA1Q8=
+		vSYODrjhM2x1qS5RiGiBCUEEj84=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/IsTypingFooterView.nib</key>
 		<data>
 		8ksDwIUtqXJqOmt7jpsEwAAa7Ow=
+		</data>
+		<key>ios-arm64/LPMessagingSDK.framework/LPConsumerDataModel.momd/LPConsumerDataModel.mom</key>
+		<data>
+		P3O8ClTXn239y0qNgU03Pt0rP7A=
+		</data>
+		<key>ios-arm64/LPMessagingSDK.framework/LPConsumerDataModel.momd/LPConsumerDataModel.omo</key>
+		<data>
+		u7FS9rkZhhiC2HlT6suBf75/Xcs=
+		</data>
+		<key>ios-arm64/LPMessagingSDK.framework/LPConsumerDataModel.momd/VersionInfo.plist</key>
+		<data>
+		ypc+OPVHoN8qD8ltqwZfJzs2z9o=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/LPHeaderView.nib</key>
 		<data>
@@ -199,7 +71,7 @@
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/LPMessagingSDK</key>
 		<data>
-		Efoil61HRzJEW7aDNa+rSZUl4fQ=
+		fL40gEFEM5MvrSBV4PXX/cPmaxo=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/LPMessagingSDK.storyboardc/ConversationViewController.nib</key>
 		<data>
@@ -253,29 +125,25 @@
 		<data>
 		pLCDXRvhNjBrRiJjtR4X/u1LrGc=
 		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/Model.cdm</key>
-		<data>
-		ZjncQPuElQKIizBnq1envUoYqqc=
-		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		f6s49/UcKTzwlVbk3NqSZm7YTKQ=
+		JhSQdp5EJCnzjq/UsZuHrJxQ4LU=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		olsWys0ptOSHuq/+DJYaCKBcZV4=
+		yeZkTYX0JeZhPk3CSbpdWno4+sQ=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		l//R8DykSUHX+S3LEjIvqjYeAFY=
+		aLsmpdZ0Hd7IfHJqE8CzRmp4I/g=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		olsWys0ptOSHuq/+DJYaCKBcZV4=
+		yeZkTYX0JeZhPk3CSbpdWno4+sQ=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/module.modulemap</key>
 		<data>
-		0BREQB74sFsILOF5giwCY8kuqZE=
+		3+LFg6fxvQ0Mqhh2EM87kF+Nyg4=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/NSBouncyView.nib</key>
 		<data>
@@ -377,10 +245,6 @@
 		<data>
 		E2xWdstfw8NmiHUYMIBJthM2bWE=
 		</data>
-		<key>ios-arm64/LPMessagingSDK.framework/PrivateHeaders/LPSocketRocket.h</key>
-		<data>
-		cgvC1RW9ZIYv9EVb4S+scpqTIbs=
-		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/PrivateHeaders/LPTTTAttributedLabel.h</key>
 		<data>
 		ello4bo/zed/uwMyIOrTC91xOWM=
@@ -471,13 +335,13 @@
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/_CodeSignature/CodeResources</key>
 		<data>
-		FU1s+ok046f/Z8uo7ePXRZN8WbM=
+		W/iF7gn1ZJJwAWAHMeEy31F57kk=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/ar.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BvOOCvT18Y3E14zudG9SR/M88uc=
+			3zgyY5WIW778C1vGA6w9r9KhcjI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -486,7 +350,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wvai5z5CdVVA3PBzvS4QAYgBq7U=
+			6SJgAgrNe5FF2OLCiKDfijA4pjc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -495,7 +359,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5/njkGX3nDydc6SDo356Q42BIcs=
+			t6bu+nG+qSMSF1gXLJqeut6g/Go=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -504,7 +368,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/8t12S2jG4JEMFFUTXneHTcofHI=
+			409L4kMY0EyKY4F+sPhauoTgcxQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -513,7 +377,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ILVNk4upxrWOjA0c6CdHlEfkUJg=
+			TXRcWa77maiU0cfYkA9P2+I1fiA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -522,7 +386,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0aqEF2L3S/kSNHTNRJTpEYj5YfY=
+			iyEyZRAG6ZHgttH4TXWeVtdPyOM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -531,7 +395,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6Q29SX4Djv0fF/cmwH60wwGlD1A=
+			qSKRJZJN9cwUiyGxkCI5Z8Cgl4U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -540,7 +404,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vdV3mBZWfb0WO9CQSpT8p05mHac=
+			rLEfKFXDetFGhC1ft7wf8uUOazI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -549,7 +413,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			D+0QbM7mx/AuxNMuvRbgjtQT1rE=
+			keA+6M7vh3I97SzSDgRF+7XYlQg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -558,7 +422,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			D+0QbM7mx/AuxNMuvRbgjtQT1rE=
+			keA+6M7vh3I97SzSDgRF+7XYlQg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -567,7 +431,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+UoUdmgTX30SpxNMl9BZhjb3UuA=
+			LCjcpmnaqmdqidzXMFxsSO2AcSc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -576,7 +440,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3v94mVbieLv4eu+gpyeJAFAIgDI=
+			Lx/HtAbQBs6IPGhWjVAt6OQrorA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -585,7 +449,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			U1TNdsS7nUSQ0DUOmqDwRHpKXGY=
+			8H5MYbSs/FgR6Dnu/zriUGJEWvE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -594,7 +458,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4c70R8lhaQcw6M812XAKrzizVEQ=
+			0z8hrXm5QffbfCrPIgR+WF97XkY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -603,7 +467,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			idp8C4aiO2+JqL6MPuodvdbvLeA=
+			Ulszwbu2+kNg6zZt8e4xLQAD1JU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -612,7 +476,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			M/L+LiCByf980kUltdZo+RC+ZmA=
+			vGRZ1AuWtXezFBj0a+5+1NtUnUo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -625,7 +489,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Whoegl91GaUo+nQCpMqMeL50RPo=
+			RolQO2ZF4YgzVfikbZvf8lXntW8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -634,7 +498,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ka33rGD2IkqkZenCQKpLO2yqQwA=
+			xihZeKyuHDOS04tAvo3+cPUiCqs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -643,7 +507,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KUNegUlDj9yWTDF0clQATy1IeEw=
+			PbvBTLUd7bhfjuKBly7WousJpZ4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -652,7 +516,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aBWN5uR+U5nMwzbK0Z13qsQCHNU=
+			rYe1ka3UiDBxiUF/6xHloUg8aQo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -661,7 +525,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Gpz63A5wIUdgT+HhVcdUm+cto5U=
+			Y+mL6peSLIfsbBuf5ViJo+IaBhQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -670,7 +534,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			GjBMoN13ULYuWHXyEneRd4+MJiw=
+			oU1O3VhgA3Y5NgDAdGk1IbddQjY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -679,7 +543,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8RqEXvFzUmJC+PHXrOSYwg2YIjQ=
+			lGSjAeN1SF7VxmwreWrTIHhBiFU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -688,7 +552,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8spzslL70bNBU4bmBtwMTRLOrX0=
+			YRzyTQDESzFG0hJgazJ8YSNIg4I=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -697,7 +561,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			WY6VxNOpkn3vsmvAe74K4R3o0BY=
+			oplc161NDLv4utaTWC+lsbkMGLg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -706,7 +570,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			a34yorEY+xlj5ZTYzPpDUuhu/xQ=
+			z2yMiMbO8awkwW3tELzCAvCUesg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -715,20 +579,20 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			R/XGj5386Ractb4F/7zVXVh78RA=
+			4mUryeWmRCJ+G5SsLrHbi5LwPVg=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/module.modulemap</key>
 		<data>
-		QP1wiZUIpFfGqKicoGrbcNVcN34=
+		3Sr6Ggw0EIZgK6vuMcckvfn9g2E=
 		</data>
 		<key>ios-arm64/LPMessagingSDK.framework/ms-MY.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7DOqgIfcn1GQ+tcuQoAESckEsnA=
+			ccjIOZSopJR2fcuvyxRw1Gf8/50=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -737,7 +601,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G436UUxHH3mQtKIbPZMTW1jAir8=
+			0DMmDFE4gLJppl/4H9eEo+LGYIA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -746,7 +610,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			veBUIFLD8MRSdd7KzxFpPdePJ9E=
+			5n8yBLO4cvdImXYygePpNr1/QGk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -755,7 +619,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1YKijQui8Wj1owr2beeXHt5dMtc=
+			Dis1kpNd/kvxowZyPrbLPdy/3l8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -764,7 +628,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			V1Vy0YrZPjg7HJ5fF1zNReIT4Ok=
+			CGnYAoQzd1eZ90QRXxs5+DaWCcM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -773,7 +637,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Po1GskZu02W/P5D4yf39xZnJLdA=
+			BGTNxa+fnzlGV3XmCG4sm/VU5sg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -782,7 +646,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gmUkHsVl2vqh6T6w04jnfBPQQLA=
+			qIL3Vav8XBIsNWzg/X6Cw2d+H5U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -791,7 +655,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qsfKPAn/S5JjuQ5WkGkDEIIdshM=
+			0lZsTDLtLcM5HGmSGgQ1x4TXXtU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -800,7 +664,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			UxMeqxRKJhLpdNoyxxMRP9m1WN0=
+			u78uIHJmcuTcUor/GomeJmkLlCo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -809,7 +673,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			haswuLHOIMbeMxFkAOccWWmi/4o=
+			3eNe9JxzCjP40YUGNYeNvhQmapE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -818,7 +682,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9WVZtDJe8VgYJCH6ilSCwUvCor4=
+			SSGUwIu4kGKWzP3kmaGszAbNv7U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -827,7 +691,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G3ss0NeUrOrktXAi2Eu2dwDUWmw=
+			7aVhuM1zSde9liWPpgnjzgNHSns=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -836,7 +700,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			p1vOHSMAjFe8eis9eOTV7sLkw2o=
+			icO1w3SY+wv5Qm7thKMpsNPmJ7M=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -845,7 +709,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8P1QfqImqN7xHJ8LBHp/Cz8Icwg=
+			SAiPw5cCe0Vb7rJV+FsAH8i5H74=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -854,7 +718,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			i3noDI1Z5cbvgFVE34zq1PcoBWg=
+			jg3Mc72RvuGSFUhGUi9kxxCu/+w=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -863,7 +727,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			kbwb/JAWCjlq8NglbKCwoJoE4a4=
+			ixLs4khdWASQva/UVs6a5JbJ9WQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -872,7 +736,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vaJNMqNaaz4e4jlHZerQmJBBkZw=
+			pbPm87G/lPTeuCjg7+zbTMVcVe4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -881,7 +745,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			rSVj9kXwqX8G9zuYR7V0afcLDz0=
+			thXSk98xhEhvTLN43EWS3bMngKo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -890,164 +754,24 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			IKhIrAPjXt0o1YjOf9Nb0cUcz8g=
+			q9nBolAagT2hSfDC9G4uqqs5JBI=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Assets.car</key>
 		<data>
-		lDWog0jA8oqhflRoZwRcG0QxxJw=
+		YIxdbMR5mHVj2CLnXTA/JlXZMno=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Base.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			iIJl8LekW8tdbun4SO9YpaJmnHE=
+			0xyuK2N83nnDco+eWQ35r/qSLkg=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 10.mom</key>
-		<data>
-		Mjl9t2HaDDAS+m/SNFDsO64yabg=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 2.mom</key>
-		<data>
-		AdOQnKhob59aT0nzLL5WJ6DLMvQ=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 3.mom</key>
-		<data>
-		mRVwFBtZGCcgV6zhqkYH96EEMBo=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 4.mom</key>
-		<data>
-		Ak5zELV+TY4RRJxFqpp2BGc36yc=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 5.mom</key>
-		<data>
-		C5hXHrvHUlvWouMuChmxKhQdulA=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 6.mom</key>
-		<data>
-		1KrD2aLnIxp/DTo9KdQpwYEp5p0=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 7.mom</key>
-		<data>
-		HL/rOXcTg4A5gq8hOcWGqTCmjcg=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 8.mom</key>
-		<data>
-		FsryQrRQksV6RsgCWl5i/dBpOJM=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 9 EventID.mom</key>
-		<data>
-		XLyWb1oNHJo94ml6aX6dWGcLkRY=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 9.mom</key>
-		<data>
-		KaX0k0dFJ+asmrs/VBS9/rrDJPI=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel.mom</key>
-		<data>
-		+9cgakudCiDk4fuCt0aq/8kJM9I=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 17.mom</key>
-		<data>
-		qpB2ceaaTW2s1ks7BxxBMohUaAk=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 18.mom</key>
-		<data>
-		vDOhhVJlAy03zMb3HNf7Bbox4e0=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 20.mom</key>
-		<data>
-		aXFxuYwx/+gm+MZrGdwIPnVzPkU=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 21.mom</key>
-		<data>
-		cYURJU8i+c1fDRYmMoox2nIL1PQ=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.mom</key>
-		<data>
-		xsqm7kYPPm+0/xWgBlz184f7OFk=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 23.mom</key>
-		<data>
-		HwffiP4se9uNG8+9oP7daJXKX14=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 24.mom</key>
-		<data>
-		dCtGeRWtVZwZhmfxoTTtq6jUM7g=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 24.omo</key>
-		<data>
-		A2Lrtv1Z2TSUFld8eIi/voY7Wb4=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_11_EventID_Photo_Sharing.mom</key>
-		<data>
-		HQt9hiY3A2+kRlpABLNNtZGb3ME=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_12_Structured_Content.mom</key>
-		<data>
-		sYIclQxQQlnCFVaFlPToIQ4n3Pc=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_13_Structured_Content.mom</key>
-		<data>
-		0DIjF2VYdwTYNmRlffP+eKoVsfA=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_14_PCI.mom</key>
-		<data>
-		mh/UejbpSYL/cnjy+WyNXkyE/rc=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_15_Structured_Content.mom</key>
-		<data>
-		ArUqNxQCZB25Ea3yAWYyb8XNlE4=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_16.mom</key>
-		<data>
-		7gtkJGnXOs/nR6ALzqqjb1qIPU0=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_18.mom</key>
-		<data>
-		4vIvBRfpLigvYK60zt0EAQXtqq0=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_19.mom</key>
-		<data>
-		QLXH3FZ1u5vNyyVLvnVtvE8wSyg=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/VersionInfo.plist</key>
-		<data>
-		LofwcrlQwURRt6IuqF6U5fkHPa8=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_12.cdm</key>
-		<data>
-		4Uc4VNOOn9QEs2sx/NqMdBOGyPw=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_13.cdm</key>
-		<data>
-		QsWxPURJZRnPrQxuXCTXgMgUlUE=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_14.cdm</key>
-		<data>
-		8By00IEshUd2JqtQzvj1MxOV+bU=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_15.cdm</key>
-		<data>
-		rct9eTBjJ4Iug6YfauPM1drr8DY=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_16.cdm</key>
-		<data>
-		MOD9yEUnqmn65gio3lLd2Y337ok=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_17.cdm</key>
-		<data>
-		Zbdj0n7BPcYUW164a3OJPTxoNsY=
-		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_18.cdm</key>
-		<data>
-		zEqHQq7vIWVPk742VfuOjjG4NK4=
-		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ControllerMessageTableViewCell.nib</key>
 		<data>
 		BczrKEqmM+cVar9FvhnmbzPmScw=
@@ -1062,7 +786,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Headers/LPMessagingSDK-Swift.h</key>
 		<data>
-		3lQdLAIm+R1+Y3/lQh3v4iTdxKM=
+		pz/yxqrso7qFVDNBmZXqQI+ufYs=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Headers/LPMessagingSDK.h</key>
 		<data>
@@ -1070,15 +794,27 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Info.plist</key>
 		<data>
-		dktgPXfH+rVbWiCFaRsE+chXr0w=
+		fuTs9iT3DCRGPLSgYRlfvRwcuWQ=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/InputTextView.nib</key>
 		<data>
-		jSKcW1JGq4SjLZ6pQ4AiYESA1Q8=
+		vSYODrjhM2x1qS5RiGiBCUEEj84=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/IsTypingFooterView.nib</key>
 		<data>
 		8ksDwIUtqXJqOmt7jpsEwAAa7Ow=
+		</data>
+		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPConsumerDataModel.momd/LPConsumerDataModel.mom</key>
+		<data>
+		P3O8ClTXn239y0qNgU03Pt0rP7A=
+		</data>
+		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPConsumerDataModel.momd/LPConsumerDataModel.omo</key>
+		<data>
+		u7FS9rkZhhiC2HlT6suBf75/Xcs=
+		</data>
+		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPConsumerDataModel.momd/VersionInfo.plist</key>
+		<data>
+		ypc+OPVHoN8qD8ltqwZfJzs2z9o=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPHeaderView.nib</key>
 		<data>
@@ -1090,7 +826,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPMessagingSDK</key>
 		<data>
-		K/JfVyZeIXkFC7tI94G8NbjaoCg=
+		WHZn5UB2VZiPEsqQOPrikGjSgyg=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPMessagingSDK.storyboardc/ConversationViewController.nib</key>
 		<data>
@@ -1144,45 +880,41 @@
 		<data>
 		pLCDXRvhNjBrRiJjtR4X/u1LrGc=
 		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Model.cdm</key>
-		<data>
-		ZjncQPuElQKIizBnq1envUoYqqc=
-		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		KuNS6mdZrTxFkYIuIkulgl5QSyw=
+		PzpQL+Ix0vLjEFSnZWZix3uFWr8=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		2a0uth6eol2ms3IsaIICi2NtalE=
+		QVquBEuAgqKSWolBMV831rvP0xI=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		j5JH2lhhc5lycIg8RpjiwOwK+C8=
+		tgzS8QeGJUHRC1PgFmzkoscKzQg=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		2a0uth6eol2ms3IsaIICi2NtalE=
+		QVquBEuAgqKSWolBMV831rvP0xI=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		KuNS6mdZrTxFkYIuIkulgl5QSyw=
+		PzpQL+Ix0vLjEFSnZWZix3uFWr8=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		y+sfPYxfO6gWmrqCtjhQ/A6md88=
+		YkJ1KYBs53H2giDzevM/aSgX9TE=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		H9+O6XmKLFWv24+21rl+0xIHwMA=
+		g+EyA4amgix4MDZ8DKJh/tmUvyM=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		y+sfPYxfO6gWmrqCtjhQ/A6md88=
+		YkJ1KYBs53H2giDzevM/aSgX9TE=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/module.modulemap</key>
 		<data>
-		0BREQB74sFsILOF5giwCY8kuqZE=
+		3+LFg6fxvQ0Mqhh2EM87kF+Nyg4=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/NSBouncyView.nib</key>
 		<data>
@@ -1284,10 +1016,6 @@
 		<data>
 		E2xWdstfw8NmiHUYMIBJthM2bWE=
 		</data>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/PrivateHeaders/LPSocketRocket.h</key>
-		<data>
-		cgvC1RW9ZIYv9EVb4S+scpqTIbs=
-		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/PrivateHeaders/LPTTTAttributedLabel.h</key>
 		<data>
 		ello4bo/zed/uwMyIOrTC91xOWM=
@@ -1378,13 +1106,13 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/_CodeSignature/CodeResources</key>
 		<data>
-		9aG0fZRc8PH2uLZzSJ3cgHUL7vE=
+		Ed9Np4+HRJihqu2KMjgIDepFpkA=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ar.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BvOOCvT18Y3E14zudG9SR/M88uc=
+			3zgyY5WIW778C1vGA6w9r9KhcjI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1393,7 +1121,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wvai5z5CdVVA3PBzvS4QAYgBq7U=
+			6SJgAgrNe5FF2OLCiKDfijA4pjc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1402,7 +1130,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5/njkGX3nDydc6SDo356Q42BIcs=
+			t6bu+nG+qSMSF1gXLJqeut6g/Go=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1411,7 +1139,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/8t12S2jG4JEMFFUTXneHTcofHI=
+			409L4kMY0EyKY4F+sPhauoTgcxQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1420,7 +1148,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ILVNk4upxrWOjA0c6CdHlEfkUJg=
+			TXRcWa77maiU0cfYkA9P2+I1fiA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1429,7 +1157,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0aqEF2L3S/kSNHTNRJTpEYj5YfY=
+			iyEyZRAG6ZHgttH4TXWeVtdPyOM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1438,7 +1166,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6Q29SX4Djv0fF/cmwH60wwGlD1A=
+			qSKRJZJN9cwUiyGxkCI5Z8Cgl4U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1447,7 +1175,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vdV3mBZWfb0WO9CQSpT8p05mHac=
+			rLEfKFXDetFGhC1ft7wf8uUOazI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1456,7 +1184,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			D+0QbM7mx/AuxNMuvRbgjtQT1rE=
+			keA+6M7vh3I97SzSDgRF+7XYlQg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1465,7 +1193,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			D+0QbM7mx/AuxNMuvRbgjtQT1rE=
+			keA+6M7vh3I97SzSDgRF+7XYlQg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1474,7 +1202,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+UoUdmgTX30SpxNMl9BZhjb3UuA=
+			LCjcpmnaqmdqidzXMFxsSO2AcSc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1483,7 +1211,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3v94mVbieLv4eu+gpyeJAFAIgDI=
+			Lx/HtAbQBs6IPGhWjVAt6OQrorA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1492,7 +1220,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			U1TNdsS7nUSQ0DUOmqDwRHpKXGY=
+			8H5MYbSs/FgR6Dnu/zriUGJEWvE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1501,7 +1229,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4c70R8lhaQcw6M812XAKrzizVEQ=
+			0z8hrXm5QffbfCrPIgR+WF97XkY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1510,7 +1238,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			idp8C4aiO2+JqL6MPuodvdbvLeA=
+			Ulszwbu2+kNg6zZt8e4xLQAD1JU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1519,7 +1247,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			M/L+LiCByf980kUltdZo+RC+ZmA=
+			vGRZ1AuWtXezFBj0a+5+1NtUnUo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1532,7 +1260,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Whoegl91GaUo+nQCpMqMeL50RPo=
+			RolQO2ZF4YgzVfikbZvf8lXntW8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1541,7 +1269,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ka33rGD2IkqkZenCQKpLO2yqQwA=
+			xihZeKyuHDOS04tAvo3+cPUiCqs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1550,7 +1278,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KUNegUlDj9yWTDF0clQATy1IeEw=
+			PbvBTLUd7bhfjuKBly7WousJpZ4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1559,7 +1287,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aBWN5uR+U5nMwzbK0Z13qsQCHNU=
+			rYe1ka3UiDBxiUF/6xHloUg8aQo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1568,7 +1296,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Gpz63A5wIUdgT+HhVcdUm+cto5U=
+			Y+mL6peSLIfsbBuf5ViJo+IaBhQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1577,7 +1305,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			GjBMoN13ULYuWHXyEneRd4+MJiw=
+			oU1O3VhgA3Y5NgDAdGk1IbddQjY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1586,7 +1314,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8RqEXvFzUmJC+PHXrOSYwg2YIjQ=
+			lGSjAeN1SF7VxmwreWrTIHhBiFU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1595,7 +1323,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8spzslL70bNBU4bmBtwMTRLOrX0=
+			YRzyTQDESzFG0hJgazJ8YSNIg4I=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1604,7 +1332,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			WY6VxNOpkn3vsmvAe74K4R3o0BY=
+			oplc161NDLv4utaTWC+lsbkMGLg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1613,7 +1341,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			a34yorEY+xlj5ZTYzPpDUuhu/xQ=
+			z2yMiMbO8awkwW3tELzCAvCUesg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1622,20 +1350,20 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			R/XGj5386Ractb4F/7zVXVh78RA=
+			4mUryeWmRCJ+G5SsLrHbi5LwPVg=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/module.modulemap</key>
 		<data>
-		QP1wiZUIpFfGqKicoGrbcNVcN34=
+		3Sr6Ggw0EIZgK6vuMcckvfn9g2E=
 		</data>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ms-MY.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7DOqgIfcn1GQ+tcuQoAESckEsnA=
+			ccjIOZSopJR2fcuvyxRw1Gf8/50=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1644,7 +1372,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G436UUxHH3mQtKIbPZMTW1jAir8=
+			0DMmDFE4gLJppl/4H9eEo+LGYIA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1653,7 +1381,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			veBUIFLD8MRSdd7KzxFpPdePJ9E=
+			5n8yBLO4cvdImXYygePpNr1/QGk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1662,7 +1390,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1YKijQui8Wj1owr2beeXHt5dMtc=
+			Dis1kpNd/kvxowZyPrbLPdy/3l8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1671,7 +1399,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			V1Vy0YrZPjg7HJ5fF1zNReIT4Ok=
+			CGnYAoQzd1eZ90QRXxs5+DaWCcM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1680,7 +1408,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Po1GskZu02W/P5D4yf39xZnJLdA=
+			BGTNxa+fnzlGV3XmCG4sm/VU5sg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1689,7 +1417,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gmUkHsVl2vqh6T6w04jnfBPQQLA=
+			qIL3Vav8XBIsNWzg/X6Cw2d+H5U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1698,7 +1426,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qsfKPAn/S5JjuQ5WkGkDEIIdshM=
+			0lZsTDLtLcM5HGmSGgQ1x4TXXtU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1707,7 +1435,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			UxMeqxRKJhLpdNoyxxMRP9m1WN0=
+			u78uIHJmcuTcUor/GomeJmkLlCo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1716,7 +1444,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			haswuLHOIMbeMxFkAOccWWmi/4o=
+			3eNe9JxzCjP40YUGNYeNvhQmapE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1725,7 +1453,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9WVZtDJe8VgYJCH6ilSCwUvCor4=
+			SSGUwIu4kGKWzP3kmaGszAbNv7U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1734,7 +1462,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G3ss0NeUrOrktXAi2Eu2dwDUWmw=
+			7aVhuM1zSde9liWPpgnjzgNHSns=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1743,7 +1471,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			p1vOHSMAjFe8eis9eOTV7sLkw2o=
+			icO1w3SY+wv5Qm7thKMpsNPmJ7M=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1752,7 +1480,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8P1QfqImqN7xHJ8LBHp/Cz8Icwg=
+			SAiPw5cCe0Vb7rJV+FsAH8i5H74=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1761,7 +1489,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			i3noDI1Z5cbvgFVE34zq1PcoBWg=
+			jg3Mc72RvuGSFUhGUi9kxxCu/+w=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1770,7 +1498,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			kbwb/JAWCjlq8NglbKCwoJoE4a4=
+			ixLs4khdWASQva/UVs6a5JbJ9WQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1779,7 +1507,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vaJNMqNaaz4e4jlHZerQmJBBkZw=
+			pbPm87G/lPTeuCjg7+zbTMVcVe4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1788,7 +1516,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			rSVj9kXwqX8G9zuYR7V0afcLDz0=
+			thXSk98xhEhvTLN43EWS3bMngKo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1797,7 +1525,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			IKhIrAPjXt0o1YjOf9Nb0cUcz8g=
+			q9nBolAagT2hSfDC9G4uqqs5JBI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1809,262 +1537,17 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HXgSFFfjhHCIEcjeeD2rSs7F90e/5m9/mwG/fdwVET4=
+			nM+RBlx7N8CdAN6YkPHuxcYXgk1vyDA5vDbZpT5H52Y=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Base.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/cJf+hBikXBEwjFZcckx1+AAfxhSni8vHUB4vJT7k2Y=
+			UjYULAFRMOS9bknNktYz+YUAmQNYsSf9q+7O1/tjFVA=
 			</data>
 			<key>optional</key>
 			<true/>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 10.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			n4sKf0/feH69Z4FBGAta3LFMEra4SDWcwCQTeNgdNEY=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 2.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			6MRmi7VIASyd5o96AgmHlLCZsnaAr9XBUqmrSwm3B6s=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 3.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			72e2oy1rbNyfR7EF80EM6drUw3LbrkDOQCbRKev7fhA=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 4.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			6dlut+QyCX0LEKEMrTqJccteDae/dQ2SVKuT2c+G4hg=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 5.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			co9dVFA6kRjISW//YOPtSwPHHvE1LGz/Ft5Pyj7l3vQ=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 6.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			mnFXwHZNYPGLdrE/i62Xdug96LzYc+a7tajsjbPrleM=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 7.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			cXnJyA9t76UPAaSpgRmJZqSccNKXnb2M+SO7MthQ06Q=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 8.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			bxBrLhbArpaRjM+5W7lRyEiH1t23MQthDVDQwP0uPRM=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 9 EventID.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			KmP3wTCZKsJmnAXTRLbcHIii03rQRZZy6zYKbON1rYQ=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 9.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ufxdOK39DaWdFolmjdSj+hK8zXOW80Hz9a6neq1+Ncw=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			AOaqywfsJ6xAE2jxDxPL061rFI3LJLm2mE96pLF/Cug=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 17.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			OCZpMaJ3fxFDpa+QvkkkJCL5xiXzLn+RPj6+uLy0+sM=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 18.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			rMjEYTQLvYSbmnmu/q2I7QYCcUYBLDhr7QIgLr5igbs=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 20.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			P/8rCovNMUWO5eVBKhmn+GmNwXOEHzUk9sfmNpExtdU=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 21.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			DuHC7UYv4z8moo24l+Gy9hRHl1Fn8s8XHu8q/CL4qgk=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			FHOLopy+SYTVBQQc3pFtr0/mU1dsiKLeGcpqpmBtYVQ=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 23.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			fu+riMMSPKzP0iFkfnGUHgGhjXYQw0CVry5IMHne3FA=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 24.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			dpKJX2sKf8JiI/EGFU9q3QyvXMThAdugdKQMXgU1C0A=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 24.omo</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			+51OR4byulArsIqsg31rj6B0194dXZoaSdoIJeoQPuI=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_11_EventID_Photo_Sharing.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			hdicLEo0qX/71dx4aQVs9m3XAuKgZGkc+QcPpk1ZQRk=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_12_Structured_Content.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HawWAXCHzDcSMDa3DzSWIbY5ry2gZX+wb6pcHAbld5s=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_13_Structured_Content.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			qvBIBpiWIbP8y+rCEBAe5Z54AyMl7hV/cHqWc1xT0e8=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_14_PCI.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			V+HdKACZCGZAN45RYBTAZasqp0343dFzh2deGJUVfvc=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_15_Structured_Content.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			W8FzYiQJaPNKo1kO+/0Q4jXffxyn2K9ArSoxPnp4yNA=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_16.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			kSjUXSrZv4wLx2UvIfsAJXObIg34Y0jqUF8xHokcQH4=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_18.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Cq3owE1qlIqFS9KtjJmhYiy1VotH0CelAXkoN8YZoBg=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_19.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			JKFbQm1I0JkozdOMo2JMhQgf9wv22bXOdXshVGWLxXw=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerDataModel.momd/VersionInfo.plist</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			W+mhVEabdL5tQWszRJjRRrZaBksgc6iUJa7POmViTlY=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_12.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			polzMfxJyaFOwKJ1XzdirFS0Nt729AYF7QEUqib1AMc=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_13.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Lb6QtwzNMwcHfVO3/z4PYR9sC3q5LmHtG0bYmLkcDc4=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_14.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			4KMQMOVEFqO5EwSMIL98ODgfp+uM8Gxc2spMpum2vXI=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_15.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ORT49E/i7NBwoA/sfM4PeXpEXrcWyCSoM6ZUhTis8ZA=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_16.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			H+gi8n3itko6jYP0ISkS/REWu6sUyWGJKwS0ltmIlGU=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_17.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			AtJEOV2W+uQn9lU1by3UESB/d62a5+HIn4mwp/VcjeM=
-			</data>
-		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/ConsumerModelMappingFrom_18.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			DI7k2Q+MULyCK9v/ln3s4Dc7wC13DxFyFx13L7vtzgg=
-			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/ControllerMessageTableViewCell.nib</key>
 		<dict>
@@ -2091,7 +1574,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0iNHEok+5fXqcmmWhye+wRWRsrVTLNJRRawHsmohUDA=
+			TwZUu0IhaKZ/mOGZj308yo4T3iUndWHsvWXeQWCJ5I8=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Headers/LPMessagingSDK.h</key>
@@ -2105,14 +1588,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6d/AnT7vs5V2rd08g427WbXkjpvxYcYANA1VPSOdFno=
+			Seefp+2Mfw9Fl3wRmTe6tnovKm9Bjn9BM9AQxNF6vZA=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/InputTextView.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wzkv0kfbyxdt63piIEiE0Z8d4LzCaYqnY0Vno2qJ+8w=
+			C0/UQLLhh9eaq2EZ0R5zI+QHYTV7kfJFJwz6Dr1cgos=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/IsTypingFooterView.nib</key>
@@ -2120,6 +1603,27 @@
 			<key>hash2</key>
 			<data>
 			92ivZXYutXXvBPI/GE1HvH3/bzKwrT5PjpkD7VWVkmM=
+			</data>
+		</dict>
+		<key>ios-arm64/LPMessagingSDK.framework/LPConsumerDataModel.momd/LPConsumerDataModel.mom</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rfV1c8Ym0HkaKzrnJPPviNGLNCNmMkngSNoU8b5xzbo=
+			</data>
+		</dict>
+		<key>ios-arm64/LPMessagingSDK.framework/LPConsumerDataModel.momd/LPConsumerDataModel.omo</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			EIDgxIUxwebj8nR/FN28yj5s7WYS2L6SMEyrKFxb36w=
+			</data>
+		</dict>
+		<key>ios-arm64/LPMessagingSDK.framework/LPConsumerDataModel.momd/VersionInfo.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rjLQqWO5MadbP3A/AyFe6ZuXTgV62Ho9qU78NTo+kDs=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/LPHeaderView.nib</key>
@@ -2140,7 +1644,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			jkLY221YAAIp3QJZA1N+75wPGJXdS1yR7qkPQvzE0Gg=
+			hdhOFqtRaUmyYcW/ruJosIsBCdGdt96xtd1J+FeyomQ=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/LPMessagingSDK.storyboardc/ConversationViewController.nib</key>
@@ -2234,46 +1738,39 @@
 			8WQT78c9gTPPjAWvgXmdKARP3lY+9X4U0E0hhDR1v7s=
 			</data>
 		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/Model.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			bkNs9y4QSrpyK4aM1Cb6cjii2eOblbpfPwPjg17KXiM=
-			</data>
-		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bHskXbhi82GpernAYIvcUEHhHRaAzQ/aK2vDadGJfac=
+			CzL7yi40mSUpC/Q5vccqrkXVg1PQ0ZZrjgiiXN4J+7k=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			OjCZ+sobfxr2nyyHZF4RcJJmz5JKIrf/ZDTGnv3YSkg=
+			Yqh8/XJIMserrJUznAc1yI98C2Z9bQV0izgyD/DE53U=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yfUVfUdbtdKVfO7fcnYNuZW0Xjn76F6o71a06RJF/nk=
+			GsOn0tGOjOm4ar+Dh5hZ707vwB29fYOfqT8JjKcONX8=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			OjCZ+sobfxr2nyyHZF4RcJJmz5JKIrf/ZDTGnv3YSkg=
+			Yqh8/XJIMserrJUznAc1yI98C2Z9bQV0izgyD/DE53U=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/Modules/module.modulemap</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cJ/dwbDm8/x3EYFnCewRYIDa498e2QqeLQHkdwzwYAw=
+			0hw/hj4DcYKpvGTyHP6bQz2GxgccQnms571bngv0AGQ=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/NSBouncyView.nib</key>
@@ -2451,13 +1948,6 @@
 			FcpPCGSgaoxHAngeUEYlU7suWz6XrZHpUhWNY9KrtpY=
 			</data>
 		</dict>
-		<key>ios-arm64/LPMessagingSDK.framework/PrivateHeaders/LPSocketRocket.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Y07YrCUjG9q/NZo6Vq/4CxbUiKxx+Z/h6Pd/XJqpAAo=
-			</data>
-		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/PrivateHeaders/LPTTTAttributedLabel.h</key>
 		<dict>
 			<key>hash2</key>
@@ -2616,14 +2106,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			jPkaVROwZdV93cWnsxzOntdFIXDCzs/tu6TErq40YF8=
+			LZlhkwMNRYoQrV1PzDGahkWNx8Th+azj8obVsJPLPok=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/ar.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			hs9/Z85vwOJHezz4LZpe//WzzKI+J+2UeNDJTVc/0fE=
+			M5rPIMkGrHZudpWfgWsNK3DHMoSpikYxgG+Iv8wVh74=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2632,7 +2122,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			x8UqbWS1wMUrIwrF5MmHdk/kGtJNWQ1BGNOBF2NgxEE=
+			M9K/xtni4uZ2pcjKTsm2TdIsheo9Pxnl6jlDYIexH5U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2641,7 +2131,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0v3G39eZfqC4FsiZV9RPSZ6IN/kLBJUFUMZi2kx5Js4=
+			CTYYdfwCuWKIvbITsC4xPfNvZWE6LO1dg4WruZcLg/A=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2650,7 +2140,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rj112pv4FXlAv4IHG029mcwS1+0nI0O7Q0Eyd4zEwSU=
+			MnC3+aaCz4f39kPkwhyE2ZqA4w2wqhkL/13Qeg9eqxc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2659,7 +2149,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AWbzh4kQsyg8hSeacZEUsx7Sq9SPyoixYYgq7ngga1M=
+			vN3aBCz1I2tCNgKp+/4IUY/jIbpbVb0/U0DaNnwDQsE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2668,7 +2158,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			d4JHHt4I2jc/gyWvRC7pywkFlxk9cKMI/yOdXQdEFwU=
+			a6tbcY2PuBkKMPW5/UheH0svn2nyUthH10HKpK1VHhY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2677,7 +2167,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			OFl8thlo+XDPMXtloIYuUqA9U5bu9kndOTpT81oWF7k=
+			5OHIrEyRz4j9C+RQpoirPIBtw2OGiMNstSzarJUUsiI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2686,7 +2176,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bkvpOr95YjpTfBs+pfxRHCtoB8qL8oXFu6BnSAi7p1w=
+			PvF1j8X7aH0KhlrgUKN+zZQE9Ma7ZR1T5/znQHq5dig=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2695,7 +2185,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eWLtNkMhrdG/AwCVamQjJwecIvBx7PS0CZ7WBYrB99U=
+			TyFi4vrsljfL41rgTVdcpkNrgtioolEM3EcVghCozJU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2704,7 +2194,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eWLtNkMhrdG/AwCVamQjJwecIvBx7PS0CZ7WBYrB99U=
+			TyFi4vrsljfL41rgTVdcpkNrgtioolEM3EcVghCozJU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2713,7 +2203,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3Nn/xAlYiL7Z94ABAnL5nbbeendOgp4GWqjmQhlx4Z8=
+			lSsfC0ex9oB9qoB5R10s5/JcLnqMmf1iWNe1efhI6oY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2722,7 +2212,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BOevdl5lEN1+sE/kmFZeORwM5mhmyIDjvK1Xfsk/n6s=
+			ceFp3JOfYBiUZRyiEWsrUJ3m2rd/G7bmkYNN/h7edd0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2731,7 +2221,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ECMmyw1w2A8f+JzURZiVEfuxTfCRSHCVuttlfMsXuJc=
+			2vhfNqBV0GFRppqNNMuloy+SfjlZFESiI/DCWL33EWA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2740,7 +2230,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			72aP0XTwQlvW/jHZBrhYrrX4E2llr6uvAPNiFFsFddc=
+			qaYSbgct71zN51DByj/xXbWTPPEzSAyuSYNf06DoYw0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2749,7 +2239,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qV1qyhfdZs6mO9m9UljLLcc7Q/JlgyvpeXGa6pQ0CRU=
+			SmcSAGlrSZfjppGSmbwEQKgSHdsPQtLLiHjNvctFzlI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2758,7 +2248,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qW0ABnGDmiLpP6xemz2suRADHsJNT4LG6qRIXDiMgj0=
+			DBOmJY6N41xASq7ElAr1P81t+4ExiS17Bms6AmyuGME=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2774,7 +2264,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZhzbBxCy91EmLRADLf3ac+isxzjnlL/xHKkLpNa6Bw0=
+			sRNq0ccNX+hz6+2mCqPri10pE5T4URv0r1v8pQYoAbI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2783,7 +2273,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GBI/H8r2RBCMeMEvkIKGafaRUzwripr6U4NkWGY9pTU=
+			sHPRSnpEnepxg86O8+J7nHj37QWnQvpE3eFCulPfXMA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2792,7 +2282,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zW1siefUmEqw3rJTGEJu0hHWTS2CzNahBPwS85aVDt8=
+			GqJiB9kDgaeCRk+E3VObOPWZGFZyR4K5o2KdKr+ZFE8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2801,7 +2291,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0qAYZMH1KBRY/zIjdkFzulHY0/LfajJplqnMXAVNvv4=
+			1RGxo5sLiviJP4We0qfcHCdOiA33/IZABMDU0zBYrGY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2810,7 +2300,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lwQj5htom1muLE8XAycscyzvl6wHATGb47RduVPQ8u4=
+			QDvqcu16jAyVydsD9nT7gp6TbmmFbCnl6LaFqXJxqHM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2819,7 +2309,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			F0TZHWV2aMJxz+W98yO/sAGOsM85A+QN5FdZQxD1q3s=
+			BZD9xFWrR5uisRLwGp8Zh2DPVqUn8E+mkeNRNe7rN3c=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2828,7 +2318,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			X/0/i88qtyP0dxF9I8bgQsfucFae2ukhx090on4F3Vs=
+			+g5BJ/ECLWa0K8vNxm6tJZ+vjbaAgT6hzhfhDJtPMH4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2837,7 +2327,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AZoHrDE2hR2nNR6WEIiIG3sUg3Ag7EKi7CuZSSpnIaQ=
+			Pax0Hosxlr0y4Z69xUQ7e7GAoQxZNssR+Q5Ec4J0e8E=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2846,7 +2336,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GqqkL3A9zlK4U3ExkjmDULYy1r/gJFXdvWCtJhcRH1s=
+			l8NZaT/He4MEiTGwsF+0bYF7CGod1Hn4HtsPS5f7IFM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2855,7 +2345,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+S6hPWrcu1I2l/r7CrDPmvvg6MF1V5q2nvf465MOQXM=
+			1GmNCsWFSmNhS3uejPQF8pJKvhAc/UkKuSKRJLpQ0ZY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2864,7 +2354,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			IrrsZmHQnuNrY19wk4q7FVsX4GBBIo5fwpjfPV3G4Ts=
+			DYNBNd9N4JkbDnEenVVcZziPQR4KdVp9fooF8MbPQyw=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2873,14 +2363,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5c7+7oA9qrz/11O1dAhCfLZX/SKHOgAd0XYDwIbbjWE=
+			0oiMgi8tA5mmKwzuDcx0XHt3JngGPjyC8BhxJ7+wtGM=
 			</data>
 		</dict>
 		<key>ios-arm64/LPMessagingSDK.framework/ms-MY.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cmgazEvb8Xy7zczkl/vYBBevyNNYZrPG0ylc0qHVjG0=
+			VvgSEtEQ3goJJZQHoemkAn/PA64jy4WbzmZrysmvCpo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2889,7 +2379,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Zx78DZ0HbYpOlX9ou37xo0XMdmIlgUwmXts/3LOzQeI=
+			SY7oE5iWP+V2EUxkKb/HeMpT0EClt9kh/nC8K4q7Jp0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2898,7 +2388,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			acGEVQ3qz7bKgOd+CIrgXmiTM/IHwUhc14+GHKI2pgo=
+			00GVLp3Jjpf+1rFhdtfWOdBJv8HUVcfHJ2TWHz5/g/o=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2907,7 +2397,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HTkLCLREom719oAiUpjgBUyYgs3wV5W0GCGJS5KTec4=
+			oEZ2wRmjWnDd/ZerKnawJvirVAJaCLrVkclICEOX2qg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2916,7 +2406,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MKvZ2jm2G+AwbQUCi/GXUmWnf0cgX1CuJ32xJ36xPj8=
+			dWGhvjJsYliA8tiMCepYYzcdbelDFigwHO2/AOhhDqc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2925,7 +2415,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			dF00nnxHkg0WlwUnoOMNWUvJVzYr8VhGjabw4N/kaRE=
+			vTpxKo+y8jn6DUYmi6oEZrne30vdDEIYO5ZZn3P1Xfk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2934,7 +2424,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rZHiL8kZsNPLQfTZWg2djA2JwOA7o8CTRTp3aNNderM=
+			8LeoUgJxpcBKwg/PoNGb11pqdaX8DAeli8RaOwbxnSw=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2943,7 +2433,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0Gl9HLRx54XTRGTe3X9gJscKoH6sdYWqqqq89OvwWEQ=
+			7/HjVKKFg+41CRGO+J0MBPKn6FQSIFxpZWpCcYRsGdo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2952,7 +2442,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oD0Gjjhz3W1050bvgFziSWxA6VNup6a/AN44loXogG0=
+			+Kfmuf2O5RZ1zLw2Tds1XYPbVsC7udG1DIhDhRmOvyU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2961,7 +2451,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			dzyRs6x5wKmBwflSdpqiZ5/OOqpmtaXjKawd02kJoQ4=
+			BfOo0vIQdJILcBeqLokmgE9Jfhh+uZAIvbaAzl9vGSI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2970,7 +2460,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			YLVaxw583oJmXfcmXVNVYdNq/PM0SWPgfG8VVR3sVBA=
+			FC99FzIBJtDb0mENC/MfNysd4utwrFDLwivkgusLZRQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2979,7 +2469,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SZHJP28tRiAvmjGsB8BGy8aDg5hW9xWMhEpmusAahaY=
+			jNb2QuY8IeuiIxNjyyOWjQ2q2L6K6u3ynGUc5UVWMMI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2988,7 +2478,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DCSDH0mddM5fZqn8cNtIj43bOVHh0CxNhlRJ+GJpqzI=
+			jMmZjZE56zNz621lACUFuV9mchP/NwIRnYJSdhImoqk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2997,7 +2487,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3SPX7isRKnhkCt2Tw9ICNozl79eTE87ZeR8H07ChRwg=
+			bV21TPQ7cwqPSAii7mjLMU8P9eJPb3pc3+JHiqOVYbk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3006,7 +2496,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5N7NRSwe9KJWu4LX0QBYlNaZ/c+9PyQeg+Gvzi/weMo=
+			2vtOZaJaXZfWPjvHYbM9LKlYS2EPpmb3jPYlIKaWFvQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3015,7 +2505,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Q2ikNMu/wnM2RTj7BMkqFqpIQwzajWFHXS76BxmVdS0=
+			NVhvSodB7bQM1LWy7usVyHcWH2kh0NUrlFlMUqevdwQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3024,7 +2514,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8cq7D+ad0qei1bcFNYzOCgm+Ifa5uxHv+RroF1A/qS4=
+			fCJcPiC+PmcCMZn8NvNBNAxTtKYWHm6f7DscWr68FQA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3033,7 +2523,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4k/ydrhh+2TUt0ieesLAEZysBssgQg5PF5sKGdW6OIE=
+			S2DU983XRw56eleKdooMtEzHpphLl4UPz3dvvIhySfU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3042,7 +2532,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Z39dtJxor+BrfxzGP54i9xBvsHmHTdfWcEnhj8/UhaU=
+			7DvZkz2VCoszKD8Wk6HbQLqH3+R54WIOn8j3Ffk6alA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3051,262 +2541,17 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HXgSFFfjhHCIEcjeeD2rSs7F90e/5m9/mwG/fdwVET4=
+			nM+RBlx7N8CdAN6YkPHuxcYXgk1vyDA5vDbZpT5H52Y=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Base.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/cJf+hBikXBEwjFZcckx1+AAfxhSni8vHUB4vJT7k2Y=
+			UjYULAFRMOS9bknNktYz+YUAmQNYsSf9q+7O1/tjFVA=
 			</data>
 			<key>optional</key>
 			<true/>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 10.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			n4sKf0/feH69Z4FBGAta3LFMEra4SDWcwCQTeNgdNEY=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 2.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			6MRmi7VIASyd5o96AgmHlLCZsnaAr9XBUqmrSwm3B6s=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 3.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			72e2oy1rbNyfR7EF80EM6drUw3LbrkDOQCbRKev7fhA=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 4.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			6dlut+QyCX0LEKEMrTqJccteDae/dQ2SVKuT2c+G4hg=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 5.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			co9dVFA6kRjISW//YOPtSwPHHvE1LGz/Ft5Pyj7l3vQ=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 6.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			mnFXwHZNYPGLdrE/i62Xdug96LzYc+a7tajsjbPrleM=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 7.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			cXnJyA9t76UPAaSpgRmJZqSccNKXnb2M+SO7MthQ06Q=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 8.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			bxBrLhbArpaRjM+5W7lRyEiH1t23MQthDVDQwP0uPRM=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 9 EventID.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			KmP3wTCZKsJmnAXTRLbcHIii03rQRZZy6zYKbON1rYQ=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel 9.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ufxdOK39DaWdFolmjdSj+hK8zXOW80Hz9a6neq1+Ncw=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			AOaqywfsJ6xAE2jxDxPL061rFI3LJLm2mE96pLF/Cug=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 17.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			OCZpMaJ3fxFDpa+QvkkkJCL5xiXzLn+RPj6+uLy0+sM=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 18.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			rMjEYTQLvYSbmnmu/q2I7QYCcUYBLDhr7QIgLr5igbs=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 20.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			P/8rCovNMUWO5eVBKhmn+GmNwXOEHzUk9sfmNpExtdU=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 21.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			DuHC7UYv4z8moo24l+Gy9hRHl1Fn8s8XHu8q/CL4qgk=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 22.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			FHOLopy+SYTVBQQc3pFtr0/mU1dsiKLeGcpqpmBtYVQ=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 23.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			fu+riMMSPKzP0iFkfnGUHgGhjXYQw0CVry5IMHne3FA=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 24.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			dpKJX2sKf8JiI/EGFU9q3QyvXMThAdugdKQMXgU1C0A=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_ 24.omo</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			+51OR4byulArsIqsg31rj6B0194dXZoaSdoIJeoQPuI=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_11_EventID_Photo_Sharing.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			hdicLEo0qX/71dx4aQVs9m3XAuKgZGkc+QcPpk1ZQRk=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_12_Structured_Content.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HawWAXCHzDcSMDa3DzSWIbY5ry2gZX+wb6pcHAbld5s=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_13_Structured_Content.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			qvBIBpiWIbP8y+rCEBAe5Z54AyMl7hV/cHqWc1xT0e8=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_14_PCI.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			V+HdKACZCGZAN45RYBTAZasqp0343dFzh2deGJUVfvc=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_15_Structured_Content.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			W8FzYiQJaPNKo1kO+/0Q4jXffxyn2K9ArSoxPnp4yNA=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_16.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			kSjUXSrZv4wLx2UvIfsAJXObIg34Y0jqUF8xHokcQH4=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_18.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Cq3owE1qlIqFS9KtjJmhYiy1VotH0CelAXkoN8YZoBg=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/ConsumerDataModel_19.mom</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			JKFbQm1I0JkozdOMo2JMhQgf9wv22bXOdXshVGWLxXw=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerDataModel.momd/VersionInfo.plist</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			W+mhVEabdL5tQWszRJjRRrZaBksgc6iUJa7POmViTlY=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_12.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			polzMfxJyaFOwKJ1XzdirFS0Nt729AYF7QEUqib1AMc=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_13.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Lb6QtwzNMwcHfVO3/z4PYR9sC3q5LmHtG0bYmLkcDc4=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_14.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			4KMQMOVEFqO5EwSMIL98ODgfp+uM8Gxc2spMpum2vXI=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_15.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ORT49E/i7NBwoA/sfM4PeXpEXrcWyCSoM6ZUhTis8ZA=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_16.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			H+gi8n3itko6jYP0ISkS/REWu6sUyWGJKwS0ltmIlGU=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_17.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			AtJEOV2W+uQn9lU1by3UESB/d62a5+HIn4mwp/VcjeM=
-			</data>
-		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ConsumerModelMappingFrom_18.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			DI7k2Q+MULyCK9v/ln3s4Dc7wC13DxFyFx13L7vtzgg=
-			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ControllerMessageTableViewCell.nib</key>
 		<dict>
@@ -3333,7 +2578,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			85B8O3eqeH+/ZxwUgGhjPob7447HkR/FxW3Cowl/zfk=
+			Tphhx6g//SNcCsRU94JNz5Hc7zuIocVHyAq3VTBMguk=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Headers/LPMessagingSDK.h</key>
@@ -3347,14 +2592,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3jZVDheZUHV0NxFpccN35hCwxeqXFi6vN5EV3S1gFno=
+			uBBbcyaReV3CAj7X62y49Jj1nSaO4R4CiM8tSYbKdss=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/InputTextView.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wzkv0kfbyxdt63piIEiE0Z8d4LzCaYqnY0Vno2qJ+8w=
+			C0/UQLLhh9eaq2EZ0R5zI+QHYTV7kfJFJwz6Dr1cgos=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/IsTypingFooterView.nib</key>
@@ -3362,6 +2607,27 @@
 			<key>hash2</key>
 			<data>
 			92ivZXYutXXvBPI/GE1HvH3/bzKwrT5PjpkD7VWVkmM=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPConsumerDataModel.momd/LPConsumerDataModel.mom</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rfV1c8Ym0HkaKzrnJPPviNGLNCNmMkngSNoU8b5xzbo=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPConsumerDataModel.momd/LPConsumerDataModel.omo</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			EIDgxIUxwebj8nR/FN28yj5s7WYS2L6SMEyrKFxb36w=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPConsumerDataModel.momd/VersionInfo.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rjLQqWO5MadbP3A/AyFe6ZuXTgV62Ho9qU78NTo+kDs=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPHeaderView.nib</key>
@@ -3382,7 +2648,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			uMomWXBygebcDqMKfIPFEWNOpuBx0cWXWZh8HgHV810=
+			K5bhQOrZXY4q2u+sIYE91BOmH2ef5L4TiEncWX+3D0U=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/LPMessagingSDK.storyboardc/ConversationViewController.nib</key>
@@ -3476,74 +2742,67 @@
 			8WQT78c9gTPPjAWvgXmdKARP3lY+9X4U0E0hhDR1v7s=
 			</data>
 		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Model.cdm</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			bkNs9y4QSrpyK4aM1Cb6cjii2eOblbpfPwPjg17KXiM=
-			</data>
-		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			CEX4npoWdsJVjmPo4g2ds53fzOZpzd416Nf0uCyricw=
+			z/sI2QWoxgBQiwdoZ6fuvlEMDWdQoY6yB3Sag3dGr+Y=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2hx5zUmyAy6yKpDdOHk+Lv0bH+piA+0kLBpHI/m8Wss=
+			kBCSQc4U3KVj9iHPWh0mzE6wrJS5kfSFUkpvGm23+FQ=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nqE1tuZugQJUuw4Brz3/ACMHi3s3/UE9bRhrVR/Ih0o=
+			bLHU/sPLrhHrGiiaYk5ttrkv6Se1YWHc2PKiACsWjQ8=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2hx5zUmyAy6yKpDdOHk+Lv0bH+piA+0kLBpHI/m8Wss=
+			kBCSQc4U3KVj9iHPWh0mzE6wrJS5kfSFUkpvGm23+FQ=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			CEX4npoWdsJVjmPo4g2ds53fzOZpzd416Nf0uCyricw=
+			z/sI2QWoxgBQiwdoZ6fuvlEMDWdQoY6yB3Sag3dGr+Y=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TpPe0K/HVbXo0LAn6Hdh1vP9+5mReeyI/euIkQIXYTE=
+			tYv1AU34PfnY3rUsBgVslFcb58qir8pkEJerxu7sFwg=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			T6EHAemmHv+CuYpCnrveMOtgiKFBYevRCXM/Cooqd4M=
+			JmgVjGftQ2Mke3nXwbxh7znRoBg4Mzesy7hGI0LQu7M=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/LPMessagingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TpPe0K/HVbXo0LAn6Hdh1vP9+5mReeyI/euIkQIXYTE=
+			tYv1AU34PfnY3rUsBgVslFcb58qir8pkEJerxu7sFwg=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/Modules/module.modulemap</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cJ/dwbDm8/x3EYFnCewRYIDa498e2QqeLQHkdwzwYAw=
+			0hw/hj4DcYKpvGTyHP6bQz2GxgccQnms571bngv0AGQ=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/NSBouncyView.nib</key>
@@ -3721,13 +2980,6 @@
 			FcpPCGSgaoxHAngeUEYlU7suWz6XrZHpUhWNY9KrtpY=
 			</data>
 		</dict>
-		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/PrivateHeaders/LPSocketRocket.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Y07YrCUjG9q/NZo6Vq/4CxbUiKxx+Z/h6Pd/XJqpAAo=
-			</data>
-		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/PrivateHeaders/LPTTTAttributedLabel.h</key>
 		<dict>
 			<key>hash2</key>
@@ -3886,14 +3138,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			fN5OklD/HfIWr1HQ6vzfpvO422G0OrAUcIL9PfnsBk4=
+			uDkXqiBdNynKYx2vcqAW1CvdoXzfuNn2RNzYygPPe4o=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ar.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			hs9/Z85vwOJHezz4LZpe//WzzKI+J+2UeNDJTVc/0fE=
+			M5rPIMkGrHZudpWfgWsNK3DHMoSpikYxgG+Iv8wVh74=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3902,7 +3154,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			x8UqbWS1wMUrIwrF5MmHdk/kGtJNWQ1BGNOBF2NgxEE=
+			M9K/xtni4uZ2pcjKTsm2TdIsheo9Pxnl6jlDYIexH5U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3911,7 +3163,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0v3G39eZfqC4FsiZV9RPSZ6IN/kLBJUFUMZi2kx5Js4=
+			CTYYdfwCuWKIvbITsC4xPfNvZWE6LO1dg4WruZcLg/A=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3920,7 +3172,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rj112pv4FXlAv4IHG029mcwS1+0nI0O7Q0Eyd4zEwSU=
+			MnC3+aaCz4f39kPkwhyE2ZqA4w2wqhkL/13Qeg9eqxc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3929,7 +3181,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AWbzh4kQsyg8hSeacZEUsx7Sq9SPyoixYYgq7ngga1M=
+			vN3aBCz1I2tCNgKp+/4IUY/jIbpbVb0/U0DaNnwDQsE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3938,7 +3190,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			d4JHHt4I2jc/gyWvRC7pywkFlxk9cKMI/yOdXQdEFwU=
+			a6tbcY2PuBkKMPW5/UheH0svn2nyUthH10HKpK1VHhY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3947,7 +3199,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			OFl8thlo+XDPMXtloIYuUqA9U5bu9kndOTpT81oWF7k=
+			5OHIrEyRz4j9C+RQpoirPIBtw2OGiMNstSzarJUUsiI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3956,7 +3208,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bkvpOr95YjpTfBs+pfxRHCtoB8qL8oXFu6BnSAi7p1w=
+			PvF1j8X7aH0KhlrgUKN+zZQE9Ma7ZR1T5/znQHq5dig=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3965,7 +3217,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eWLtNkMhrdG/AwCVamQjJwecIvBx7PS0CZ7WBYrB99U=
+			TyFi4vrsljfL41rgTVdcpkNrgtioolEM3EcVghCozJU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3974,7 +3226,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eWLtNkMhrdG/AwCVamQjJwecIvBx7PS0CZ7WBYrB99U=
+			TyFi4vrsljfL41rgTVdcpkNrgtioolEM3EcVghCozJU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3983,7 +3235,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3Nn/xAlYiL7Z94ABAnL5nbbeendOgp4GWqjmQhlx4Z8=
+			lSsfC0ex9oB9qoB5R10s5/JcLnqMmf1iWNe1efhI6oY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -3992,7 +3244,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BOevdl5lEN1+sE/kmFZeORwM5mhmyIDjvK1Xfsk/n6s=
+			ceFp3JOfYBiUZRyiEWsrUJ3m2rd/G7bmkYNN/h7edd0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4001,7 +3253,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ECMmyw1w2A8f+JzURZiVEfuxTfCRSHCVuttlfMsXuJc=
+			2vhfNqBV0GFRppqNNMuloy+SfjlZFESiI/DCWL33EWA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4010,7 +3262,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			72aP0XTwQlvW/jHZBrhYrrX4E2llr6uvAPNiFFsFddc=
+			qaYSbgct71zN51DByj/xXbWTPPEzSAyuSYNf06DoYw0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4019,7 +3271,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qV1qyhfdZs6mO9m9UljLLcc7Q/JlgyvpeXGa6pQ0CRU=
+			SmcSAGlrSZfjppGSmbwEQKgSHdsPQtLLiHjNvctFzlI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4028,7 +3280,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qW0ABnGDmiLpP6xemz2suRADHsJNT4LG6qRIXDiMgj0=
+			DBOmJY6N41xASq7ElAr1P81t+4ExiS17Bms6AmyuGME=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4044,7 +3296,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZhzbBxCy91EmLRADLf3ac+isxzjnlL/xHKkLpNa6Bw0=
+			sRNq0ccNX+hz6+2mCqPri10pE5T4URv0r1v8pQYoAbI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4053,7 +3305,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GBI/H8r2RBCMeMEvkIKGafaRUzwripr6U4NkWGY9pTU=
+			sHPRSnpEnepxg86O8+J7nHj37QWnQvpE3eFCulPfXMA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4062,7 +3314,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zW1siefUmEqw3rJTGEJu0hHWTS2CzNahBPwS85aVDt8=
+			GqJiB9kDgaeCRk+E3VObOPWZGFZyR4K5o2KdKr+ZFE8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4071,7 +3323,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0qAYZMH1KBRY/zIjdkFzulHY0/LfajJplqnMXAVNvv4=
+			1RGxo5sLiviJP4We0qfcHCdOiA33/IZABMDU0zBYrGY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4080,7 +3332,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lwQj5htom1muLE8XAycscyzvl6wHATGb47RduVPQ8u4=
+			QDvqcu16jAyVydsD9nT7gp6TbmmFbCnl6LaFqXJxqHM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4089,7 +3341,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			F0TZHWV2aMJxz+W98yO/sAGOsM85A+QN5FdZQxD1q3s=
+			BZD9xFWrR5uisRLwGp8Zh2DPVqUn8E+mkeNRNe7rN3c=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4098,7 +3350,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			X/0/i88qtyP0dxF9I8bgQsfucFae2ukhx090on4F3Vs=
+			+g5BJ/ECLWa0K8vNxm6tJZ+vjbaAgT6hzhfhDJtPMH4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4107,7 +3359,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AZoHrDE2hR2nNR6WEIiIG3sUg3Ag7EKi7CuZSSpnIaQ=
+			Pax0Hosxlr0y4Z69xUQ7e7GAoQxZNssR+Q5Ec4J0e8E=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4116,7 +3368,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GqqkL3A9zlK4U3ExkjmDULYy1r/gJFXdvWCtJhcRH1s=
+			l8NZaT/He4MEiTGwsF+0bYF7CGod1Hn4HtsPS5f7IFM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4125,7 +3377,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+S6hPWrcu1I2l/r7CrDPmvvg6MF1V5q2nvf465MOQXM=
+			1GmNCsWFSmNhS3uejPQF8pJKvhAc/UkKuSKRJLpQ0ZY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4134,7 +3386,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			IrrsZmHQnuNrY19wk4q7FVsX4GBBIo5fwpjfPV3G4Ts=
+			DYNBNd9N4JkbDnEenVVcZziPQR4KdVp9fooF8MbPQyw=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4143,14 +3395,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5c7+7oA9qrz/11O1dAhCfLZX/SKHOgAd0XYDwIbbjWE=
+			0oiMgi8tA5mmKwzuDcx0XHt3JngGPjyC8BhxJ7+wtGM=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/LPMessagingSDK.framework/ms-MY.lproj/LPLocalizable.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cmgazEvb8Xy7zczkl/vYBBevyNNYZrPG0ylc0qHVjG0=
+			VvgSEtEQ3goJJZQHoemkAn/PA64jy4WbzmZrysmvCpo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4159,7 +3411,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Zx78DZ0HbYpOlX9ou37xo0XMdmIlgUwmXts/3LOzQeI=
+			SY7oE5iWP+V2EUxkKb/HeMpT0EClt9kh/nC8K4q7Jp0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4168,7 +3420,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			acGEVQ3qz7bKgOd+CIrgXmiTM/IHwUhc14+GHKI2pgo=
+			00GVLp3Jjpf+1rFhdtfWOdBJv8HUVcfHJ2TWHz5/g/o=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4177,7 +3429,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HTkLCLREom719oAiUpjgBUyYgs3wV5W0GCGJS5KTec4=
+			oEZ2wRmjWnDd/ZerKnawJvirVAJaCLrVkclICEOX2qg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4186,7 +3438,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MKvZ2jm2G+AwbQUCi/GXUmWnf0cgX1CuJ32xJ36xPj8=
+			dWGhvjJsYliA8tiMCepYYzcdbelDFigwHO2/AOhhDqc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4195,7 +3447,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			dF00nnxHkg0WlwUnoOMNWUvJVzYr8VhGjabw4N/kaRE=
+			vTpxKo+y8jn6DUYmi6oEZrne30vdDEIYO5ZZn3P1Xfk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4204,7 +3456,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rZHiL8kZsNPLQfTZWg2djA2JwOA7o8CTRTp3aNNderM=
+			8LeoUgJxpcBKwg/PoNGb11pqdaX8DAeli8RaOwbxnSw=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4213,7 +3465,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0Gl9HLRx54XTRGTe3X9gJscKoH6sdYWqqqq89OvwWEQ=
+			7/HjVKKFg+41CRGO+J0MBPKn6FQSIFxpZWpCcYRsGdo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4222,7 +3474,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oD0Gjjhz3W1050bvgFziSWxA6VNup6a/AN44loXogG0=
+			+Kfmuf2O5RZ1zLw2Tds1XYPbVsC7udG1DIhDhRmOvyU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4231,7 +3483,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			dzyRs6x5wKmBwflSdpqiZ5/OOqpmtaXjKawd02kJoQ4=
+			BfOo0vIQdJILcBeqLokmgE9Jfhh+uZAIvbaAzl9vGSI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4240,7 +3492,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			YLVaxw583oJmXfcmXVNVYdNq/PM0SWPgfG8VVR3sVBA=
+			FC99FzIBJtDb0mENC/MfNysd4utwrFDLwivkgusLZRQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4249,7 +3501,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SZHJP28tRiAvmjGsB8BGy8aDg5hW9xWMhEpmusAahaY=
+			jNb2QuY8IeuiIxNjyyOWjQ2q2L6K6u3ynGUc5UVWMMI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4258,7 +3510,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DCSDH0mddM5fZqn8cNtIj43bOVHh0CxNhlRJ+GJpqzI=
+			jMmZjZE56zNz621lACUFuV9mchP/NwIRnYJSdhImoqk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4267,7 +3519,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3SPX7isRKnhkCt2Tw9ICNozl79eTE87ZeR8H07ChRwg=
+			bV21TPQ7cwqPSAii7mjLMU8P9eJPb3pc3+JHiqOVYbk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4276,7 +3528,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5N7NRSwe9KJWu4LX0QBYlNaZ/c+9PyQeg+Gvzi/weMo=
+			2vtOZaJaXZfWPjvHYbM9LKlYS2EPpmb3jPYlIKaWFvQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4285,7 +3537,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Q2ikNMu/wnM2RTj7BMkqFqpIQwzajWFHXS76BxmVdS0=
+			NVhvSodB7bQM1LWy7usVyHcWH2kh0NUrlFlMUqevdwQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4294,7 +3546,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8cq7D+ad0qei1bcFNYzOCgm+Ifa5uxHv+RroF1A/qS4=
+			fCJcPiC+PmcCMZn8NvNBNAxTtKYWHm6f7DscWr68FQA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4303,7 +3555,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4k/ydrhh+2TUt0ieesLAEZysBssgQg5PF5sKGdW6OIE=
+			S2DU983XRw56eleKdooMtEzHpphLl4UPz3dvvIhySfU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -4312,7 +3564,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Z39dtJxor+BrfxzGP54i9xBvsHmHTdfWcEnhj8/UhaU=
+			7DvZkz2VCoszKD8Wk6HbQLqH3+R54WIOn8j3Ffk6alA=
 			</data>
 			<key>optional</key>
 			<true/>
