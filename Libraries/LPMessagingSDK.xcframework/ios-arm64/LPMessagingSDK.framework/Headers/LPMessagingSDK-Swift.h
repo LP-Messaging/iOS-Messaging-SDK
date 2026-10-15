@@ -500,6 +500,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK12Conversation_")
 @property (nonatomic) BOOL presented;
 @property (nonatomic, readonly) BOOL shouldQueryMessages;
 @property (nonatomic) enum ConversationSource conversationSource;
+@property (nonatomic, copy) NSString * _Nullable threadId;
 @end
 
 typedef SWIFT_ENUM(int16_t, ConversationSource, open) {
@@ -1565,6 +1566,21 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic, strong) UIColor * _Nonnull inputTextViewTopBorderColor;
 /// Input TextView placeholder color default is nil.
 @property (nonatomic, strong) UIColor * _Nullable inputTextViewPlaceholderColor;
+/// Show or hide the character counter below the input text view. Default is false.
+@property (nonatomic) BOOL showCharacterCounter;
+/// Color code for the character counter text, while under the character limit.
+@property (nonatomic, strong) UIColor * _Nonnull characterCounterTextColor;
+/// Color code for the character counter text, once the character limit has been exceeded.
+@property (nonatomic, strong) UIColor * _Nonnull characterCounterErrorColor;
+/// Font size for the character counter text. Default is 12.
+@property (nonatomic) CGFloat characterCounterTextSize;
+/// Width/height of the error alert icon shown next to the character counter. Default is 18.
+@property (nonatomic) CGFloat characterCounterIconSize;
+/// Spacing between the alert icon and the character counter text. Default is 2.
+@property (nonatomic) CGFloat characterCounterIconGap;
+/// Percent of the max allowed characters at which the character counter starts being shown. Default is 80.
+/// Value is clamped between 0 and 100.
+@property (nonatomic) NSInteger percentLimitOfMaxCharToShowCharacterCounter;
 /// Color code for the background of the remote user bubble.
 @property (nonatomic, strong) UIColor * _Nonnull remoteUserBubbleBackgroundColor;
 /// Color code for the outline color.
