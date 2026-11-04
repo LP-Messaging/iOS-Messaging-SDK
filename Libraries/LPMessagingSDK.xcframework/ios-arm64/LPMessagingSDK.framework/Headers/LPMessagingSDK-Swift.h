@@ -466,7 +466,7 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK25ConversationParamProtocol_")
 SWIFT_CLASS("_TtC14LPMessagingSDK10BrandQuery")
 @interface BrandQuery : NSObject <ConversationParamProtocol>
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)initWithBrandID:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo inboxCampaignInfo:(LPCampaignInfo * _Nullable)inboxCampaignInfo OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithBrandID:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo OBJC_DESIGNATED_INITIALIZER;
 /// Get all conversations by brand.
 - (NSArray<id <Conversation>> * _Nullable)getConversations SWIFT_WARN_UNUSED_RESULT;
 /// Get all conversations by brand, filtered with predicate
@@ -525,6 +525,22 @@ typedef SWIFT_ENUM(NSInteger, CheckmarksState, open) {
   CheckmarksStateAll = 3,
 };
 
+SWIFT_CLASS("_TtC14LPMessagingSDK13ConsumerQuery")
+@interface ConsumerQuery : BrandQuery
+- (nonnull instancetype)initWithConsumerID:(NSString * _Nonnull)consumerID brandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken OBJC_DESIGNATED_INITIALIZER;
+/// Get all conversations by consumerID.
+- (NSArray<id <Conversation>> * _Nullable)getConversations SWIFT_WARN_UNUSED_RESULT;
+/// Get active conversation based on state and consumerID
+- (id <Conversation> _Nullable)getActiveConversation SWIFT_WARN_UNUSED_RESULT;
+/// Get all conversations by consumerID, filtered with predicate
+- (NSArray<id <Conversation>> * _Nullable)getConversations:(NSPredicate * _Nullable)predicate SWIFT_WARN_UNUSED_RESULT;
+- (id <Conversation> _Nonnull)createNewConversation SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getQueryType SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isConversationRelatedToQuery:(id <Conversation> _Nonnull)conversation SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getQueryUID SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithBrandID:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo SWIFT_UNAVAILABLE;
+@end
+
 @class TTRModel;
 SWIFT_ENUM_FWD_DECL(int16_t, ConversationSource)
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK12Conversation_")
@@ -554,9 +570,8 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK12Conversation_")
 @end
 
 typedef SWIFT_ENUM(int16_t, ConversationSource, open) {
-  ConversationSourceLocal = 0,
+  ConversationSourceINCA = 0,
   ConversationSourceUMS = 1,
-  ConversationSourceINCA = 2,
 };
 
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK39ConversationViewControllerAgentDelegate_")
@@ -655,18 +670,6 @@ typedef SWIFT_ENUM(NSInteger, LPAccountEnviroment, open) {
   LPAccountEnviromentAlpha = 1,
   LPAccountEnviromentQa = 2,
 };
-
-/// Identifiers for the thread and conversation currently visible in the transcript view.
-SWIFT_CLASS("_TtC14LPMessagingSDK18LPActiveThreadInfo")
-@interface LPActiveThreadInfo : NSObject
-/// The id of the open conversation, or <code>nil</code> if there is no ongoing conversation.
-@property (nonatomic, readonly, copy) NSString * _Nullable conversationId;
-/// The id of the active thread, or <code>nil</code> if it is the legacy thread.
-@property (nonatomic, readonly, copy) NSString * _Nullable threadId;
-- (nonnull instancetype)initWithConversationId:(NSString * _Nullable)conversationId threadId:(NSString * _Nullable)threadId OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
 
 SWIFT_CLASS("_TtC14LPMessagingSDK17LPAppointmentList")
 @interface LPAppointmentList : UIView
@@ -773,11 +776,10 @@ SWIFT_ENUM_FWD_DECL(NSInteger, LPRegionCode)
 SWIFT_ENUM_FWD_DECL(NSInteger, LPLanguage)
 @class LPConversationScrollConfiguration;
 SWIFT_ENUM_FWD_DECL(NSInteger, VoiceVideoEndCallButtonType)
-@class LPInboxConfig;
 SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @interface LPConfig : NSObject
 /// A boolean which determines whether to retrieve the agent details from the last closed conversation in case there is no assigned
-/// agent. Agent details will be retrieved from API method: func getAssignedAgent()
+/// agent. Agent details will be retrieved from API method: func getAssignedAgent(conversationQuery: ConversationParamProtocol)
 @property (nonatomic) BOOL retrieveAssignedAgentFromLastClosedConversation;
 /// Maximum time frame for recording audio message (in seconds).
 @property (nonatomic) NSTimeInterval recordingDurationLimit;
@@ -794,9 +796,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// Max number of allowed saved audio files on disk. This refers only to audio files.
 /// The validation of allowed max number of documents will be when showing and removing conversation.
 @property (nonatomic) NSUInteger maxNumberOfSavedAudioFilesOnDisk;
-/// Enable or disable loading view.
-/// remark:
-/// Default value is <code>true</code>
+/// Hides previous chat history until user identify has been verified
 @property (nonatomic) BOOL hideUIUntilAuthenticated;
 /// If set to true then UnAuth conversation can be stepped up
 @property (nonatomic) BOOL shouldPerformStepUp;
@@ -1094,13 +1094,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) BOOL messageStatusNumericTimestampOnly;
 /// The show duration of the local notifications view in the SDK.
 @property (nonatomic) double notificationShowDurationInSeconds;
-/// Determines whether an in-SDK banner is displayed when a message arrives for another thread
-/// while the consumer is actively viewing a conversation.
-@property (nonatomic) BOOL showCrossThreadNotificationBanner;
-/// Background color for in-SDK cross-thread notification banner view.
-@property (nonatomic, strong) UIColor * _Nonnull crossThreadBannerBackgroundColor;
-/// Text color for in-SDK cross-thread notification banner view.
-@property (nonatomic, strong) UIColor * _Nonnull crossThreadBannerTextColor;
 /// Enable or disable real time link preview feature when the consumer is typing a url.
 @property (nonatomic) BOOL enableRealTimeLinkPreview;
 /// Enable or disable link preview feature. If disabled, user will not see site’s link preview or link preview.
@@ -1139,8 +1132,8 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// since:
 /// LPMessagingSDK 6.5.0
 /// remark:
-/// Default value is <code>true</code>
-@property (nonatomic) BOOL enableLoadingView SWIFT_DEPRECATED_MSG("Use `hideUIUntilAuthenticated` instead");
+/// Default value is <code>false</code>
+@property (nonatomic) BOOL enableLoadingView;
 /// The type of effect on the loading view.
 @property (nonatomic, strong) UIBlurEffect * _Nonnull loadingViewBlurEffect;
 /// The background color of the loading view.
@@ -1186,10 +1179,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) UIStatusBarStyle conversationStatusBarStyle;
 /// LivePerson Navigation Bar Left Item custom button.
 /// NOTE: this property gets it tintColor from <code>conversationNavigationTitleColor</code>
-@property (nonatomic, strong) UIImage * _Nullable lpNavigationBarLeftItemImageButton SWIFT_DEPRECATED_MSG("Use `lpNavigationBarCloseButtonImage` instead");
-/// LivePerson Navigation Bar Close Item custom button.
-/// NOTE: this property gets it tintColor from <code>conversationNavigationTitleColor</code>
-@property (nonatomic, strong) UIImage * _Nullable lpNavigationBarCloseButtonImage;
+@property (nonatomic, strong) UIImage * _Nullable lpNavigationBarLeftItemImageButton;
 /// LivePerson Navigation Bar Right Item custom button.
 /// NOTE: this property gets it tintColor from <code>conversationNavigationTitleColor</code>
 @property (nonatomic, strong) UIImage * _Nullable lpNavigationBarRightItemImageButton;
@@ -1333,9 +1323,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) CGFloat quickReplyButtonBorderWidth;
 /// Color of the quick reply text.
 @property (nonatomic, strong) UIColor * _Nonnull quickReplyTextColor;
-/// Color of the quick reply background.
 @property (nonatomic, strong) UIColor * _Nonnull quickReplyBackgroundColor;
-/// Color of the quick reply border.
 @property (nonatomic, strong) UIColor * _Nonnull quickReplyBorderColor;
 /// Conversation Scroll configurations for scenarios:
 /// <ul>
@@ -1701,7 +1689,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// attribute affects the bubble’s masking and it’s recommended to use a corner radius which is at max equals to half of the bubble’s
 /// height. Setting a corner radius larger than half of the bubble’s height will cause text to cut visually.
 @property (nonatomic) float remoteUserBubbleBottomRightCornerRadius;
-/// Bot user bubble configs
 /// Color code for the background of the bot user bubble.
 @property (nonatomic, strong) UIColor * _Nonnull botUserBubbleBackgroundColor;
 /// Color code for the outline color.
@@ -1746,7 +1733,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 /// When set to true, tapping any link within the remote user bubble’s link will trigger
 /// <code>LPMessagingSDKDelegate</code> method <code>LPMessagingSDKMessageLinkClicked</code>.
 @property (nonatomic) BOOL messageLinkAsCallback;
-/// User bubble configs
 /// Color code for the background of the visitor bubble.
 @property (nonatomic, strong) UIColor * _Nonnull userBubbleBackgroundColor;
 /// Color code for the outline of the visitor bubble.
@@ -1954,16 +1940,10 @@ SWIFT_CLASS("_TtC14LPMessagingSDK8LPConfig")
 @property (nonatomic) CGFloat offlineLoaderHeight;
 /// Offline messaging loader bar animation speed (in seconds)
 @property (nonatomic) CGFloat offlineLoaderAnimationSpeed;
-/// Image to use for back button on navigation bar (window mode), system Chevron.left is used if not provided
-@property (nonatomic, strong) UIImage * _Nullable backButtonImage;
 /// The time-to-live (TTL) duration in minutes for caching base HTTPS service responses.
 /// Determines how long the cached responses remain valid before a new network request is made.
 /// Default value is 15 minutes.
 @property (nonatomic) NSUInteger baseHttpsServicesResponseCacheTtlInMinutes;
-/// Configuration for the Inbox feature.
-@property (nonatomic, strong) LPInboxConfig * _Nonnull inboxConfig;
-/// Helper for Objective-C to configure inbox in a block.
-- (void)configureInbox:(SWIFT_NOESCAPE void (^ _Nonnull)(LPInboxConfig * _Nonnull))configBlock;
 /// LPConfig is a singleton class,
 /// When defaultConfiguration is called it initializes the LPConfig
 /// and returns its object with default values.
@@ -1984,11 +1964,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) LPConfig * _Nonnull de
 - (void)setValue:(id _Nullable)value forUndefinedKey:(NSString * _Nonnull)key;
 /// Prints all the configurations keys of the SDK.
 + (void)printAllConfigurations;
-/// Set to <code>true</code> to opt in to Threaded Conversations.
-/// This flag is a necessary condition but not sufficient on its own — the feature will only
-/// activate when the account also has ThreadedConversations feature enabled server-side
-/// and the user is authenticated.
-@property (nonatomic) BOOL threadedConversationsEnabled;
 @end
 
 SWIFT_CLASS("_TtC14LPMessagingSDK25LPConversationCSATDetails")
@@ -2043,15 +2018,12 @@ SWIFT_CLASS("_TtC14LPMessagingSDK28LPConversationContextDetails")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class LPThreadDetails;
 @class LPConversationDialogDetails;
 @class LPConversationTTRDetails;
 @class LPConversationRolloverDetails;
 SWIFT_CLASS("_TtC14LPMessagingSDK25LPConversationDataDetails")
 @interface LPConversationDataDetails : NSObject
 @property (nonatomic, copy) NSString * _Nullable id;
-/// Thread metadata associated with the conversation.
-@property (nonatomic, strong) LPThreadDetails * _Nullable thread;
 @property (nonatomic, copy) NSString * _Nullable createdTs;
 @property (nonatomic, copy) NSString * _Nullable lastUpdatedTs;
 @property (nonatomic, copy) NSString * _Nullable brandId;
@@ -2174,8 +2146,7 @@ SWIFT_CLASS("_TtC14LPMessagingSDK24LPConversationViewParams")
 @property (nonatomic, readonly) BOOL isViewOnly;
 @property (nonatomic, readonly, strong) LPConversationHistoryControlParam * _Nonnull conversationHistoryControlParam;
 @property (nonatomic, strong) LPWelcomeMessage * _Nonnull welcomeMessage;
-@property (nonatomic, copy) NSString * _Nullable threadId;
-- (nonnull instancetype)initWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery containerViewController:(UIViewController * _Nullable)containerViewController isViewOnly:(BOOL)isViewOnly conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nonnull)conversationHistoryControlParam welcomeMessage:(LPWelcomeMessage * _Nonnull)welcomeMessage threadId:(NSString * _Nullable)threadId OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery containerViewController:(UIViewController * _Nullable)containerViewController isViewOnly:(BOOL)isViewOnly conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nonnull)conversationHistoryControlParam welcomeMessage:(LPWelcomeMessage * _Nonnull)welcomeMessage OBJC_DESIGNATED_INITIALIZER;
 /// Deprecated 5/20/2019
 - (nonnull instancetype)initWithConversationQuery:(id <ConversationParamProtocol> _Nonnull)conversationQuery containerViewController:(UIViewController * _Nullable)containerViewController isViewOnly:(BOOL)isViewOnly conversationHistoryControlParam:(LPConversationHistoryControlParam * _Nonnull)conversationHistoryControlParam OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,deprecated=12.0.0,obsoleted=14.0.0,message="\n        Use public init(conversationQuery: ConversationParamProtocol, containerViewController: UIViewController? = nil,         isViewOnly: Bool = false, conversationHistoryControlParam: LPConversationHistoryControlParam =         LPConversationHistoryControlParam(historyConversationsStateToDisplay: .none),         welcomeMessage: LPWelcomeMessage = LPWelcomeMessage(message: nil)) instead\n        ");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -2190,7 +2161,6 @@ typedef SWIFT_ENUM(NSInteger, LPConversationsHistoryStateToDisplay, open) {
   LPConversationsHistoryStateToDisplayAll = 2,
 };
 
-SWIFT_ENUM_FWD_DECL(NSInteger, LPEngagementType)
 SWIFT_CLASS("_TtC14LPMessagingSDK19LPEngagementDetails")
 @interface LPEngagementDetails : NSObject
 @property (nonatomic, readonly) NSInteger campaignId;
@@ -2200,17 +2170,9 @@ SWIFT_CLASS("_TtC14LPMessagingSDK19LPEngagementDetails")
 @property (nonatomic, copy) NSString * _Nullable conversationId;
 @property (nonatomic, copy) NSString * _Nullable status;
 @property (nonatomic, copy) NSString * _Nullable contextId;
-@property (nonatomic, readonly) BOOL isThreaded;
-@property (nonatomic, readonly) enum LPEngagementType engagementType;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
-
-/// The type of engagement associated with a campaign.
-typedef SWIFT_ENUM(NSInteger, LPEngagementType, open) {
-  LPEngagementTypePageLevel = 13,
-  LPEngagementTypeInbox = 14,
-};
 
 /// Base class for file metadata container attribute
 SWIFT_CLASS("_TtC14LPMessagingSDK23LPFileMetaDataContainer")
@@ -2240,141 +2202,6 @@ SWIFT_CLASS("_TtC14LPMessagingSDK23LPGetEngagementResponse")
 /// PageID of the Engagement. If not sending one in request, a new one will be generated from server in the
 @property (nonatomic, copy) NSString * _Nullable pageId;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-SWIFT_CLASS("_TtC14LPMessagingSDK13LPInboxConfig")
-@interface LPInboxConfig : NSObject
-@property (nonatomic, strong) UIColor * _Nonnull viewBackgroundColor;
-/// Background color for the ongoing sections in the Inbox.
-@property (nonatomic, strong) UIColor * _Nonnull ongoingSectionBackgroundColor;
-/// Background color for the closed sections in the Inbox.
-@property (nonatomic, strong) UIColor * _Nonnull closedSectionBackgroundColor;
-/// Text color for the ongoing section header in the Inbox.
-@property (nonatomic, strong) UIColor * _Nonnull ongoingSectionHeaderTitleColor;
-/// Text color for the closed section header in the Inbox.
-@property (nonatomic, strong) UIColor * _Nonnull closedSectionHeaderTitleColor;
-/// Text style (size) for the section headers in the Inbox.
-@property (nonatomic) UIFontTextStyle _Nonnull sectionHeaderFontSize;
-/// Custom font name for the section headers in the Inbox.
-@property (nonatomic, copy) NSString * _Nullable sectionHeaderFontName;
-/// Height for the section headers in the Inbox.
-@property (nonatomic) CGFloat sectionHeaderHeight;
-/// Background color for the “New Conversation” button bar in the Inbox.
-@property (nonatomic, strong) UIColor * _Nonnull newConversationButtonBackgroundColor;
-/// Tint color for the “New Conversation” button (icon and text) in the Inbox.
-@property (nonatomic, strong) UIColor * _Nonnull newConversationButtonTintColor;
-/// Text style (size) for the “New Conversation” button in the Inbox.
-@property (nonatomic) UIFontTextStyle _Nonnull newConversationButtonFontSize;
-/// Custom font name for the “New Conversation” button in the Inbox.
-@property (nonatomic, copy) NSString * _Nullable newConversationButtonFontName;
-/// Height for the “New Conversation” button bar in the Inbox.
-@property (nonatomic) CGFloat newConversationButtonHeight;
-/// Image for the “New Conversation” button system plus icon is used if not provided.
-@property (nonatomic, strong) UIImage * _Nullable newConversationButtonImage;
-/// Background color for the “New Conversation” button bar when disabled (max threads reached).
-@property (nonatomic, strong) UIColor * _Nonnull newConversationButtonDisabledBackgroundColor;
-/// Tint color for the “New Conversation” button (icon and text) when disabled.
-@property (nonatomic, strong) UIColor * _Nonnull newConversationButtonDisabledTintColor;
-/// Color for the separator lines between thread cells in the Inbox.
-@property (nonatomic, strong) UIColor * _Nonnull threadSeparatorColor;
-/// Color for the agent name in the Inbox thread cell.
-@property (nonatomic, strong) UIColor * _Nonnull threadTitleColor;
-/// Text style (size) for the agent name in the Inbox thread cell.
-@property (nonatomic) UIFontTextStyle _Nonnull threadTitleFontSize;
-/// Custom font name for the agent name in the Inbox thread cell.
-@property (nonatomic, copy) NSString * _Nullable threadTitleFontName;
-/// Color for the last message text in the Inbox thread cell.
-@property (nonatomic, strong) UIColor * _Nonnull threadLastMessageColor;
-/// Text color for unread messages (when unread count > 0) in the Inbox thread cell.
-@property (nonatomic, strong) UIColor * _Nonnull threadLastMessageUnreadColor;
-/// Text style (size) for the last message text in the Inbox thread cell.
-@property (nonatomic) UIFontTextStyle _Nonnull threadLastMessageFontSize;
-/// Text style (size) for the last unread message text in the Inbox thread cell.
-@property (nonatomic) UIFontTextStyle _Nonnull threadLastMessageUnreadFontSize;
-/// Custom font name for the last message text in the Inbox thread cell.
-@property (nonatomic, copy) NSString * _Nullable threadLastMessageFontName;
-/// Custom font name for the last unread message text in the Inbox thread cell.
-@property (nonatomic, copy) NSString * _Nullable threadLastMessageUnreadFontName;
-/// Image tint color for the message type
-@property (nonatomic, strong) UIColor * _Nonnull threadLastMessageTypeIconTintColor;
-/// Image tint color for the message type when the message is unread
-@property (nonatomic, strong) UIColor * _Nonnull threadLastMessageUnreadTypeIconTintColor;
-@property (nonatomic, strong) UIImage * _Nullable threadLastMessageAudioImage;
-@property (nonatomic, strong) UIImage * _Nullable threadLastMessageFileImage;
-@property (nonatomic, strong) UIImage * _Nullable threadLastMessagePhotoImage;
-@property (nonatomic, strong) UIImage * _Nullable threadLastMessageStructuredContentImage;
-@property (nonatomic, strong) UIImage * _Nullable threadLastMessageSecureFormImage;
-@property (nonatomic, strong) UIImage * _Nullable threadEmptyOngoingThreadsSectionImage;
-/// Background color for the unread count badge in the Inbox thread cell.
-@property (nonatomic, strong) UIColor * _Nonnull threadUnreadBadgeBackgroundColor;
-/// Text color for the unread count badge in the Inbox thread cell.
-@property (nonatomic, strong) UIColor * _Nonnull threadUnreadBadgeTextColor;
-/// Text style (size) for the unread badge text in the Inbox thread cell.
-@property (nonatomic) UIFontTextStyle _Nonnull threadUnreadBadgeFontSize;
-/// Custom font name for the unread badge text in the Inbox thread cell.
-@property (nonatomic, copy) NSString * _Nullable threadUnreadBadgeFontName;
-/// Image for the draft icon. A system pencil icon is used if not provided.
-@property (nonatomic, strong) UIImage * _Nullable threadDraftIconImage;
-/// Color for the close reason text in the Inbox thread cell.
-@property (nonatomic, strong) UIColor * _Nonnull threadCloseReasonColor;
-/// Text style (size) for the close reason text in the Inbox thread cell.
-@property (nonatomic) UIFontTextStyle _Nonnull threadCloseReasonFontSize;
-/// Custom font name for the close reason text in the Inbox thread cell.
-@property (nonatomic, copy) NSString * _Nullable threadCloseReasonFontName;
-/// Color for the timestamp/metadata in the Inbox thread cell.
-@property (nonatomic, strong) UIColor * _Nonnull threadTimestampColor;
-/// Text style (size) for the timestamp/metadata in the Inbox thread cell.
-@property (nonatomic) UIFontTextStyle _Nonnull threadTimestampFontSize;
-/// Custom font name for the timestamp/metadata in the Inbox thread cell.
-@property (nonatomic, copy) NSString * _Nullable threadTimestampFontName;
-/// Color for the chevron icon in the Inbox thread cell.
-@property (nonatomic, strong) UIColor * _Nonnull threadChevronColor;
-@property (nonatomic, strong) UIImage * _Nullable threadChevronImage;
-/// Border color for the avatar icons in the Inbox thread cell.
-@property (nonatomic, strong) UIColor * _Nonnull threadAvatarBorderColor;
-/// Border width for the avatar icons in the Inbox thread cell.
-@property (nonatomic) CGFloat threadAvatarBorderWidth;
-/// Tint color for the icon in the ongoing empty state view.
-@property (nonatomic, strong) UIColor * _Nonnull ongoingEmptyStateIconTintColor;
-/// Text color for the title in the ongoing empty state view.
-@property (nonatomic, strong) UIColor * _Nonnull ongoingEmptyStateTitleColor;
-/// Text style (size) for the title in the ongoing empty state view.
-@property (nonatomic) UIFontTextStyle _Nonnull ongoingEmptyStateTitleFontSize;
-/// Text color for the subtitle in the ongoing empty state view.
-@property (nonatomic, strong) UIColor * _Nonnull ongoingEmptyStateSubtitleColor;
-/// Text style (size) for the subtitle in the ongoing empty state view.
-@property (nonatomic) UIFontTextStyle _Nonnull ongoingEmptyStateSubtitleFontSize;
-/// Background color for the full-Inbox empty state view, shown when there are no threads at all
-/// (neither ongoing nor closed).
-@property (nonatomic, strong) UIColor * _Nonnull inboxEmptyStateBackgroundColor;
-/// Text color for the message in the full-Inbox empty state view.
-@property (nonatomic, strong) UIColor * _Nonnull inboxEmptyStateTextColor;
-/// Text style (size) for the message in the full-Inbox empty state view.
-@property (nonatomic) UIFontTextStyle _Nonnull inboxEmptyStateFontSize;
-/// Tint color for the “Load More” button (icon and text) in the Inbox.
-@property (nonatomic, strong) UIColor * _Nonnull loadMoreButtonTintColor;
-/// Text style (size) for the “Load More” button in the Inbox.
-@property (nonatomic) UIFontTextStyle _Nonnull loadMoreButtonFontSize;
-/// Custom font name for the “Load More” button in the Inbox.
-@property (nonatomic, copy) NSString * _Nullable loadMoreButtonFontName;
-/// Background color for the max threads banner.
-@property (nonatomic, strong) UIColor * _Nonnull maxThreadsBannerBackgroundColor;
-/// Text color for the max threads banner message.
-@property (nonatomic, strong) UIColor * _Nonnull maxThreadsBannerTextColor;
-/// Text style (size) for the max threads banner message.
-@property (nonatomic) UIFontTextStyle _Nonnull maxThreadsBannerFontSize;
-/// Custom font name for the max threads banner message.
-@property (nonatomic, copy) NSString * _Nullable maxThreadsBannerFontName;
-/// Tint color for the dismiss (X) button on the max threads banner.
-@property (nonatomic, strong) UIColor * _Nonnull maxThreadsBannerDismissButtonColor;
-/// Updates the configuration using a block and returns the configuration instance for chaining.
-/// \param block A configuration block.
-///
-///
-/// returns:
-/// The configuration instance (self).
-- (LPInboxConfig * _Nonnull)configure:(SWIFT_NOESCAPE void (^ _Nonnull)(LPInboxConfig * _Nonnull))block;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -2522,15 +2349,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// using authenticate connection, this paramater must
 /// be passed. LPAuthenticationParams supports Code Flow login or Implicit Flow login.
 ///
-- (BOOL)showConversation:(LPConversationViewParams * _Nonnull)conversationViewParams authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams error:(NSError * _Nullable * _Nullable)error;
+- (void)showConversation:(LPConversationViewParams * _Nonnull)conversationViewParams authenticationParams:(LPAuthenticationParams * _Nullable)authenticationParams;
 /// Remove conversation view for conversation query from its container or window view.
 /// This method ends the conversation’s connection.
-/// \param conversationQuery Ignored. The SDK hides the conversation screen it is currently presenting.
-///
-- (void)removeConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_DEPRECATED_MSG("Use hideConversation() instead. Note: the conversationQuery parameter is ignored.");
-/// Hides the conversation screen from its container or window view, the counterpart of <code>showConversation</code>.
-/// This method ends the conversation’s connection. It does nothing visible if the SDK is not presenting a conversation screen.
-- (void)hideConversation;
+- (void)removeConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
 /// Deprecated @ 07/2017
 /// This method reconnects the conversation’s connection for conversation query.
 /// Reconnect open related webSockets and sync the conversation with its latest updates.
@@ -2559,18 +2381,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 ///
 - (void)setWelcomeMessage:(LPWelcomeMessage * _Nonnull)message;
 /// This method changes the state of the action menu of the conversation for brandID.
-/// Note: this method is allowed only while the conversation transcript view is open.
-/// \param accountID Ignored.
-///
-/// \param sender The bar button item the menu is presented from.
-///
-- (BOOL)toggleChatActions:(NSString * _Nonnull)accountID sender:(UIBarButtonItem * _Nullable)sender error:(NSError * _Nullable * _Nullable)error SWIFT_DEPRECATED_MSG("Use toggleChatActions(sender:) instead. Note: the accountID parameter is ignored.");
-/// This method changes the state of the action menu of the conversation that is currently shown in the
-/// conversation transcript view.
-/// This method throws an error if the conversation transcript view is not open.
-/// \param sender The bar button item the menu is presented from.
-///
-- (BOOL)toggleChatActionsWithSender:(UIBarButtonItem * _Nullable)sender error:(NSError * _Nullable * _Nullable)error;
+- (void)toggleChatActions:(NSString * _Nonnull)accountID sender:(UIBarButtonItem * _Nullable)sender;
 /// This method sets user details for the consumer of a brand.
 /// The user object is in Type of LPUser which includes all the user details.
 /// Additional parameters:
@@ -2588,7 +2399,20 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 ///
 /// returns:
 /// a new ConversationParamProtocol by type of BrandQuery
-- (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo inboxCampaignInfo:(LPCampaignInfo * _Nullable)inboxCampaignInfo SWIFT_WARN_UNUSED_RESULT;
+- (id <ConversationParamProtocol> _Nonnull)getConversationBrandQuery:(NSString * _Nonnull)brandID campaignInfo:(LPCampaignInfo * _Nullable)campaignInfo SWIFT_WARN_UNUSED_RESULT;
+/// This method created ConversationParamProtocol of Consumer and Skill query type.
+/// ConversationParamProtocol represents a ’filter’ for the conversation screen, determining which of the conversations will be
+/// displayed in the following screens.
+/// \param consumerID consumerID to request the conversation query for
+///
+/// \param brandID brandID to request the conversation query for
+///
+/// \param agentToken a unique token for agent aka Agent Bearer
+///
+///
+/// returns:
+/// a new ConversationParamProtocol by type of ConsumerQuery
+- (id <ConversationParamProtocol> _Nonnull)getConversationConsumerQuery:(NSString * _Nullable)consumerID brandID:(NSString * _Nonnull)brandID agentToken:(NSString * _Nonnull)agentToken SWIFT_WARN_UNUSED_RESULT;
 /// This method checks for an active(Open/Created) conversation according to conversation query.
 /// Return value:
 /// True - there is an active conversation.
@@ -2619,47 +2443,31 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 /// DEPRECATED - This method sets a custom image for the custom button in the conversation navigationBar.
 /// Use customButtonImage instead
 - (void)setCustomButton:(UIImage * _Nullable)image SWIFT_AVAILABILITY(ios,deprecated=9.3.5,obsoleted=14.0.0,message="configure the image using customButtonImage in LPConfig instead");
+/// This method checks if the active conversation of a conversation query marked as Urgent.
+/// Return value:
+/// True - conversation is marked as Urgent.
+/// False - conversation is not marked as Urgent.
+- (BOOL)isUrgent:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_WARN_UNUSED_RESULT;
 /// This method marks the active conversation of a conversation query as Urgent.
-/// Note: this method is allowed only while the conversation transcript view is open.
-/// \param conversationQuery conversation query to mark as urgent
-///
-- (BOOL)markAsUrgent:(id <ConversationParamProtocol> _Nonnull)conversationQuery error:(NSError * _Nullable * _Nullable)error SWIFT_DEPRECATED_MSG("\n        Use markAsUrgent() instead, which marks the currently shown conversation's thread.         Note: the conversationQuery parameter is ignored.\n        ");
-/// This method marks the active conversation of the thread that is currently shown
-/// in the conversation transcript view as Urgent.
-/// This method throws an error if the conversation transcript view is not open.
-- (BOOL)markAsUrgentAndReturnError:(NSError * _Nullable * _Nullable)error;
+- (void)markAsUrgent:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
 /// This method dismisses the active conversation from Urgent to Normal.
-/// Note: this method is allowed only while the conversation transcript view is open.
-/// \param conversationQuery conversation query to dismiss urgent state
-///
-- (BOOL)dismissUrgent:(id <ConversationParamProtocol> _Nonnull)conversationQuery error:(NSError * _Nullable * _Nullable)error SWIFT_DEPRECATED_MSG("\n        Use dismissUrgent() instead, which dismisses the currently shown conversation's thread.         Note: the conversationQuery parameter is ignored.\n        ");
-/// This method dismisses the active conversation of the thread that is currently shown
-/// in the conversation transcript view from Urgent to Normal.
-/// This method throws an error if the conversation transcript view is not open.
-- (BOOL)dismissUrgentAndReturnError:(NSError * _Nullable * _Nullable)error;
-/// This method ends the active conversation of a conversation query if exists.
-/// Note: this method is allowed only while the conversation transcript view is open.
-/// \param conversationQuery conversation query to resolve
-///
-- (BOOL)resolveConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery error:(NSError * _Nullable * _Nullable)error SWIFT_DEPRECATED_MSG("\n        Use resolveConversation() instead, which resolves the currently shown conversation's thread.         Note: the conversationQuery parameter is ignored.\n        ");
-/// This method ends the active conversation of the thread that is currently shown
-/// in the conversation transcript view, if exists.
-/// This method throws an error if the conversation transcript view is not open.
-- (BOOL)resolveConversationAndReturnError:(NSError * _Nullable * _Nullable)error;
+- (void)dismissUrgent:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+/// This method ends the active conversation if exists.
+- (void)resolveConversation:(id <ConversationParamProtocol> _Nonnull)conversationQuery;
+/// This methods returns the assigned agent of the active or the latest closed conversation, if exists.
+- (LPUser * _Nullable)getAssignedAgent:(id <ConversationParamProtocol> _Nonnull)conversationQuery SWIFT_WARN_UNUSED_RESULT;
 /// This method determines wether a brandID is Ready.
 /// Ready means that the brand is connected and conversation can be proccessed.
 - (BOOL)isBrandReady:(NSString * _Nonnull)brandID SWIFT_WARN_UNUSED_RESULT;
 /// This method returns the SDK version.
 - (NSString * _Nullable)getSDKVersion SWIFT_WARN_UNUSED_RESULT;
 /// Appends content to the message text field
-/// This method throws an error if the conversation transcript view is not open.
 /// \param text Text to append
 ///
-- (BOOL)addContentToMessageWithText:(NSString * _Nonnull)text error:(NSError * _Nullable * _Nullable)error;
+- (void)addContentToMessageWithText:(NSString * _Nonnull)text;
 /// Get Inactive time interval in seconds of the user last touch on screen. This interval applies to scroll/messaging/action menus and
-/// any other general action on the SDK screens (Inbox and conversation).
-/// If the SDK is not presenting a screen or the application is in background this api will return -1.
-/// Interaction with views presented modally over the SDK (for example CSAT or pickers) is not counted.
+/// any other general action on the conversation screen.
+/// If the screen is not active or the application is in background this api will return -1.
 ///
 /// returns:
 /// Inactive TimeInterval (Double)
@@ -2723,19 +2531,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 - (void)sendSDEWithIdentities:(NSArray<LPMonitoringIdentity *> * _Nonnull)identities monitoringParams:(LPMonitoringParams * _Nonnull)monitoringParams completion:(void (^ _Nonnull)(LPSendSDEResponse * _Nonnull))completion failure:(void (^ _Nonnull)(NSError * _Nonnull))failure;
 /// This method deletes all the messages and closed conversation of the related conversation query.
 /// This method throws an error if the conversations history failed to be cleared.
-/// Note: clear history is allowed only if there is no open/active conversation related to the
-/// passed conversation query and conversation transcript view is open.
+/// Note: clear history is allowed only if there is no open/active conversation related to the passed conversation query.
 /// \param conversationQuery conversation query to clear the conversations
 ///
 /// \param shouldFetchHistoryOnShowConversation to determine whether to fetch conversation history again on showing conversation.
 ///
-- (BOOL)clearHistory:(id <ConversationParamProtocol> _Nonnull)conversationQuery shouldFetchHistoryOnShowConversation:(BOOL)shouldFetchHistoryOnShowConversation error:(NSError * _Nullable * _Nullable)error SWIFT_DEPRECATED_MSG("Use clearHistory() instead, which clears history for the currently shown conversation's thread. Note: the conversationQuery and shouldFetchHistoryOnShowConversation parameters are ignored; history is always cleared for the currently shown thread.");
-/// This method deletes all the messages and closed conversation of the thread that is currently shown
-/// in the conversation transcript view.
-/// This method throws an error if the conversation history failed to be cleared.
-/// Note: clear history is allowed only if there is no open/active conversation on the shown thread and
-/// the conversation transcript view is open.
-- (BOOL)clearHistoryAndReturnError:(NSError * _Nullable * _Nullable)error;
+- (BOOL)clearHistory:(id <ConversationParamProtocol> _Nonnull)conversationQuery shouldFetchHistoryOnShowConversation:(BOOL)shouldFetchHistoryOnShowConversation error:(NSError * _Nullable * _Nullable)error;
 /// Calls to generate the PKCE information from the sdk and returns the information
 /// back so the host app can start the flow. SDK does not store this information. Host APP should pass it back later.
 /// Returned Objects:
@@ -2890,19 +2691,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LPMessaging 
 ///
 - (BOOL)fileSharingOpenCameraWithValidatingPermission:(BOOL)validatingPermission error:(NSError * _Nullable * _Nullable)error;
 - (BOOL)setIsViewOnlyWithMode:(BOOL)mode error:(NSError * _Nullable * _Nullable)error;
-/// Returns information about the thread currently visible in the transcript view, if any.
-///
-/// returns:
-/// <code>nil</code> if there is no visible thread. Otherwise, an <code>LPActiveThreadInfo</code> where:
-/// <ul>
-///   <li>
-///     <code>threadId</code> is the id of the active thread, or <code>nil</code> if it is the legacy thread.
-///   </li>
-///   <li>
-///     <code>conversationId</code> is the id of the open conversation, or <code>nil</code> if there is no ongoing conversation.
-///   </li>
-/// </ul>
-- (LPActiveThreadInfo * _Nullable)getActiveThreadInfo SWIFT_WARN_UNUSED_RESULT;
 @end
 
 SWIFT_ENUM_FWD_DECL(NSInteger, LPPusherUnregisterType)
@@ -2943,94 +2731,6 @@ SWIFT_ENUM_FWD_DECL(NSInteger, LPPusherUnregisterType)
 /// \param failure A failure block with a list of errors that were encountered during logout process.
 ///
 - (void)logoutWithAuthType:(enum LPAuthenticationType)authType unregisterType:(enum LPPusherUnregisterType)unregisterType completion:(void (^ _Nonnull)(void))completion failure:(void (^ _Nonnull)(NSArray<NSError *> * _Nonnull))failure;
-@end
-
-@interface LPMessaging (SWIFT_EXTENSION(LPMessagingSDK))
-/// Indicates whether it is currently possible to navigate to a specific thread from the inbox.
-/// Returns <code>true</code> only when <em>all</em> of the following conditions are met:
-/// <ul>
-///   <li>
-///     Threaded conversations are active.
-///   </li>
-///   <li>
-///     If SDK <code>showConversation</code>  was called.
-///   </li>
-///   <li>
-///     The <code>ConversationViewController</code> is <em>not</em> currently on screen
-///     which means it’s on inbox screen (no thread is already being viewed).
-///   </li>
-///   <li>
-///     Inbox screen is presenting any other screens.
-///   </li>
-/// </ul>
-/// Use this property to guard calls to <code>navigateToThread(threadId:)</code> so that the host app
-/// only attempts the transition when it will succeed.
-@property (nonatomic, readonly) BOOL canNavigateToThread;
-/// Indicates whether it is currently possible to navigate back to the inbox.
-/// Returns <code>true</code> only when <em>all</em> of the following conditions are met:
-/// <ul>
-///   <li>
-///     Threaded conversations are active.
-///   </li>
-///   <li>
-///     If SDK <code>showConversation</code>  was called.
-///   </li>
-///   <li>
-///     The <code>ConversationViewController</code> is currently on screen which means (a thread is already being viewed).
-///   </li>
-///   <li>
-///     Inbox or conversation screens are not presenting any other screens.
-///   </li>
-/// </ul>
-/// Use this property to guard calls to <code>navigateBackToInbox()</code> so that the host app
-/// only attempts the transition when it will succeed.
-@property (nonatomic, readonly) BOOL canNavigateBackToInbox;
-/// Navigates from the inbox view to a specific thread’s conversation view.
-/// This method is intended for use when threaded conversations are active.
-/// It performs an animated transition from the <code>InboxViewController</code> to the <code>ConversationViewController</code>
-/// for the specified thread.
-/// Pass <code>LP_LEGACY_THREAD_ID</code> as the <code>threadId</code> to navigate to the legacy thread.
-/// \param threadId The identifier of the thread to navigate to,
-/// or <code>LP_LEGACY_THREAD_ID</code> to navigate to the legacy thread.
-///
-///
-/// throws:
-/// An <code>NSError</code> if any of the following preconditions are not met:
-/// <ul>
-///   <li>
-///     <code>threadedConversationsNotActive</code> if threaded conversations are disabled.
-///   </li>
-///   <li>
-///     <code>sdkIsNotPresentingAnything</code> if SDK showConversation was not called.
-///   </li>
-///   <li>
-///     <code>transcriptViewIsAlreadyVisible</code> if a thread is already being viewed.
-///   </li>
-///   <li>
-///     <code>sdkIsPresentingAModal</code> if the inbox screen presenting any other controller.
-///   </li>
-/// </ul>
-- (BOOL)navigateToThreadWithThreadId:(NSString * _Nonnull)threadId error:(NSError * _Nullable * _Nullable)error;
-/// Navigates from the currently displayed conversation view back to the inbox view.
-/// It performs an animated transition from the <code>ConversationViewController</code> back to the <code>InboxViewController</code>.
-///
-/// throws:
-/// An <code>NSError</code> if any of the following preconditions are not met:
-/// <ul>
-///   <li>
-///     <code>threadedConversationsNotActive</code> if threaded conversations are disabled.
-///   </li>
-///   <li>
-///     <code>sdkIsNotPresentingAnything</code> if SDK showConversation was not called.
-///   </li>
-///   <li>
-///     <code>transcriptViewIsNotVisible</code> if a thread is not already being viewed.
-///   </li>
-///   <li>
-///     <code>sdkIsPresentingAModal</code> if the inbox or conversation view controllers presenting any other controller.
-///   </li>
-/// </ul>
-- (BOOL)navigateBackToInboxAndReturnError:(NSError * _Nullable * _Nullable)error;
 @end
 
 @class NSData;
@@ -3221,27 +2921,15 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK34LPMessagingSDKNotificationDelegate_")
 @optional
 - (void)LPMessagingSDKNotificationWithDidReceivePushNotification:(LPNotification * _Nonnull)notification SWIFT_AVAILABILITY(ios,deprecated=0.0.1,message="This delegate method id deprecated as LPNotification object is being return from handlePush(:) method.");
 - (BOOL)LPMessagingSDKNotificationWithShouldShowPushNotification:(LPNotification * _Nonnull)notification SWIFT_WARN_UNUSED_RESULT;
-- (UIView * _Nonnull)LPMessagingSDKNotificationWithCustomLocalPushNotificationView:(LPNotification * _Nonnull)notification SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("customLocalPushNotificationView is deprecated for in-SDK banners. Use LPConfig properties.");
+- (UIView * _Nonnull)LPMessagingSDKNotificationWithCustomLocalPushNotificationView:(LPNotification * _Nonnull)notification SWIFT_WARN_UNUSED_RESULT;
 - (void)LPMessagingSDKNotificationWithNotificationTapped:(LPNotification * _Nonnull)notification;
 @end
 
 SWIFT_ENUM_FWD_DECL(NSInteger, LPPermissionTypes)
-@class ThreadUnreadInfo;
 SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 @protocol LPMessagingSDKdelegate
 @optional
 - (void)LPMessagingSDKCustomButtonTapped;
-/// Called when the agent assigned to the conversation shown in the transcript view is set or removed.
-/// This callback is tied to the thread currently shown in the transcript view. It is delivered only for the conversation
-/// displayed by the conversation view controller, and only while that conversation has an open dialog. Agent changes of other
-/// threads are not reported, and are not replayed when those threads are shown later. Use <code>getActiveThreadInfo()</code> to identify
-/// the thread this callback refers to.
-/// note:
-/// Delivery follows the view controller’s appearance (from just before it appears until it disappears), not the
-/// moment the thread is reported as visible. The callback can therefore arrive slightly before <code>getActiveThreadInfo()</code>
-/// starts returning that thread.
-/// \param agent The assigned agent, or <code>nil</code> if the agent was removed (e.g. the conversation returned to the queue).
-///
 - (void)LPMessagingSDKAgentDetails:(LPUser * _Nullable)agent;
 - (void)LPMessagingSDKAgentAvatarTapped:(LPUser * _Nullable)agent;
 - (void)LPMessagingSDKActionsMenuToggled:(BOOL)toggled;
@@ -3258,38 +2946,9 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 @optional
 - (void)LPMessagingStepupFailed:(NSError * _Nonnull)error;
 - (void)LPMessagingSDKConnectionRetriesFailed:(NSError * _Nonnull)error;
-/// Called when the agent typing state changes.
-/// note:
-/// Deprecated. Not called if <code>LPMessagingSDKAgentIsTypingStateChanged(_:threadId:)</code> is implemented.
-- (void)LPMessagingSDKAgentIsTypingStateChanged:(BOOL)isTyping SWIFT_DEPRECATED_MSG("Use LPMessagingSDKAgentIsTypingStateChanged(_:threadId:) instead");
-/// Called when the agent typing state changes.
-/// \param isTyping Whether the agent is typing
-///
-/// \param threadId The thread ID of the conversation the agent is typing in, or nil if not in threaded mode
-///
-- (void)LPMessagingSDKAgentIsTypingStateChanged:(BOOL)isTyping threadId:(NSString * _Nullable)threadId;
-/// Called when a conversation starts.
-/// note:
-/// Deprecated. Not called if <code>LPMessagingSDKConversationStarted(_:threadId:)</code> is implemented.
-- (void)LPMessagingSDKConversationStarted:(NSString * _Nullable)conversationID SWIFT_DEPRECATED_MSG("Use LPMessagingSDKConversationStarted(_:threadId:) instead");
-/// Called when a conversation starts.
-/// \param conversationID The ID of the started conversation
-///
-/// \param threadId The thread ID of the started conversation, or nil if not in threaded mode
-///
-- (void)LPMessagingSDKConversationStarted:(NSString * _Nullable)conversationID threadId:(NSString * _Nullable)threadId;
-/// Called when a conversation ends.
-/// note:
-/// Deprecated. Not called if <code>LPMessagingSDKConversationEnded(_:threadId:closeReason:)</code> is implemented.
-- (void)LPMessagingSDKConversationEnded:(NSString * _Nullable)conversationID closeReason:(enum LPConversationCloseReason)closeReason SWIFT_DEPRECATED_MSG("Use LPMessagingSDKConversationEnded(_:threadId:closeReason:) instead");
-/// Called when a conversation ends.
-/// \param conversationID The ID of the ended conversation
-///
-/// \param threadId The thread ID of the ended conversation, or nil if not in threaded mode
-///
-/// \param closeReason The reason the conversation was closed
-///
-- (void)LPMessagingSDKConversationEnded:(NSString * _Nullable)conversationID threadId:(NSString * _Nullable)threadId closeReason:(enum LPConversationCloseReason)closeReason;
+- (void)LPMessagingSDKAgentIsTypingStateChanged:(BOOL)isTyping;
+- (void)LPMessagingSDKConversationStarted:(NSString * _Nullable)conversationID;
+- (void)LPMessagingSDKConversationEnded:(NSString * _Nullable)conversationID closeReason:(enum LPConversationCloseReason)closeReason;
 - (void)LPMessagingSDKConversationCSATDismissedOnSubmittion:(NSString * _Nullable)conversationID;
 - (void)LPMessagingSDKConversationCSATDidLoad:(NSString * _Nullable)conversationID;
 - (void)LPMessagingSDKConnectionStateChanged:(BOOL)isReady brandID:(NSString * _Nonnull)brandID;
@@ -3323,48 +2982,6 @@ SWIFT_PROTOCOL("_TtP14LPMessagingSDK22LPMessagingSDKdelegate_")
 /// Called when consumer click/tap on a link from any remote user bubble messages.
 /// This function is only invoked when LPConfig\messageLinkAsCallback is set to true
 - (void)LPMessagingSDKMessageLinkClicked:(NSString * _Nonnull)uri;
-/// Called when the total unread message count changes across threads
-/// This is called IMMEDIATELY upon subscription with the initial state,
-/// then subsequently whenever the count changes
-/// note:
-/// This is called on the main thread and safe for UI updates
-/// note:
-/// Only counts ongoing threads (closed threads are excluded)
-/// \param count Total unread messages across all ongoing threads
-///
-/// \param threads Array of ThreadUnreadInfo containing threadId, conversationId, and unread count for each thread
-///
-- (void)LPMessagingSDKWithThreadUnreadMessageCountDidChange:(NSInteger)count threads:(NSArray<ThreadUnreadInfo *> * _Nonnull)threads;
-/// Called when the number of threads changes (thread opened, resumed, or closed)
-/// note:
-/// This is called on the main thread and safe for UI updates
-/// \param totalThreads Total number of threads (ongoing + closed)
-///
-/// \param ongoingThreads Number of ongoing (non-closed) threads
-///
-/// \param closedThreads Number of closed threads
-///
-- (void)LPMessagingSDKWithNumberOfThreadsDidChange:(NSInteger)totalThreads ongoingThreads:(NSInteger)ongoingThreads closedThreads:(NSInteger)closedThreads;
-/// Called when the inbox screen has been shown
-/// note:
-/// This is called on the main thread and safe for UI updates
-- (void)LPMessagingSDKInboxScreenDidShow;
-/// Called when the inbox screen is about to be hidden
-/// note:
-/// This is called on the main thread and safe for UI updates
-- (void)LPMessagingSDKInboxScreenWillHide;
-/// Called when the conversation screen has been shown
-/// note:
-/// This is called on the main thread and safe for UI updates
-/// \param threadId The thread ID of the conversation being shown, or nil if not in threaded mode
-///
-- (void)LPMessagingSDKConversationScreenDidShow:(NSString * _Nullable)threadId;
-/// Called when the conversation screen is about to be hidden
-/// note:
-/// This is called on the main thread and safe for UI updates
-/// \param threadId The thread ID of the conversation being hidden, or nil if not in threaded mode
-///
-- (void)LPMessagingSDKConversationScreenWillHide:(NSString * _Nullable)threadId;
 @end
 
 /// This object contains details about the consumer to LiveEngage.   LPMonitoringIdentity is used to get an Engagement or an SDE to LiveEngage.
@@ -3437,7 +3054,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @property (nonatomic, strong) LPUser * _Nonnull user;
 @property (nonatomic, copy) NSString * _Nonnull accountID;
 @property (nonatomic) BOOL isRemote;
-@property (nonatomic, copy) NSString * _Nullable threadId;
 @property (nonatomic, strong) ProactiveNotificationData * _Nullable proActiveData;
 @property (nonatomic, readonly, copy) NSString * _Nonnull toString;
 @property (nonatomic, readonly) enum LPNotificationType notificationType;
@@ -3749,15 +3365,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 - (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-/// Details representing thread metadata associated with a conversation.
-SWIFT_CLASS("_TtC14LPMessagingSDK15LPThreadDetails")
-@interface LPThreadDetails : NSObject
-/// The unique identifier of the thread.
-@property (nonatomic, copy) NSString * _Nullable id;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 SWIFT_CLASS("_TtC14LPMessagingSDK14LPUIPickerView")
@@ -4149,19 +3756,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL supportsSecureCoding;)
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-/// Contains unread count for a specific thread with its associated conversation ID
-/// Made @objc compatible for delegate callbacks to host apps
-SWIFT_CLASS("_TtC14LPMessagingSDK16ThreadUnreadInfo")
-@interface ThreadUnreadInfo : NSObject
-@property (nonatomic, readonly, copy) NSString * _Nullable threadId;
-@property (nonatomic, readonly, copy) NSString * _Nullable conversationId;
-@property (nonatomic, readonly) NSInteger unreadCount;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly) NSUInteger hash;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
